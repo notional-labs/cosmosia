@@ -1,0 +1,2 @@
+# cosmosia
+Cosmos Infrastructure Automation
