@@ -46,14 +46,15 @@ sed -i.bak -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $HOME/.ju
 sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $HOME/.juno/config/app.toml
 
 
-
 # delete the data folder
 rm -rf $HOME/.juno/data/*
 
 
-# copy addrbook and genesis
+# download genesis file
+curl -s  https://raw.githubusercontent.com/CosmosContracts/mainnet/main/juno-1/genesis.json > $HOME/.juno/config/genesis.json
+
+# copy addrbook
 cp /cosmosia/juno/addrbook.json $HOME/.juno/config/
-cp /cosmosia/juno/genesis.json $HOME/.juno/config/
 
 
 # get data from snapshot
