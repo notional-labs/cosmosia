@@ -25,11 +25,9 @@ Note: need to automate hot reload the config as the backends are containers on t
 
 ### Rpc services
 Each chain needs a rpc service. There are ~50 chains.
-Limit in phrase 1:
-run 2-3 chains only
-replica=1 (no load balancing)
-State Sync only
+Limit in phrase 1: run 2-3 chains only
 
+Use quicksync only. Maybe switch to statesync in later version as statesync does not work reliable atm, it depends on rpc nodes with snapshot enabled. 
 
 
 ### Relay service
