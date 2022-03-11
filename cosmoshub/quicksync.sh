@@ -28,18 +28,20 @@ echo "URL=$URL"
 wget -O - $URL | lz4 -d | tar -xvf -
 
 
-
 # set minimum gas prices
 sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.001uatom\"/" $HOME/.gaia/config/app.toml
 
 # set rpc port
 sed -i.bak '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $HOME/.gaia/config/config.toml
 
+# Prepare genesis file for cosmoshub-4
+wget https://github.com/cosmos/mainnet/raw/master/genesis.cosmoshub-4.json.gz
+gzip -d genesis.cosmoshub-4.json.gz
+mv genesis.cosmoshub-4.json $HOME/.gaia/config/genesis.json
 
-# copy addrbook and genesis
+# copy addrbook
 cp /cosmosia/cosmoshub/addrbook.json $HOME/.gaia/config/
 cp /cosmosia/cosmoshub/genesis.json $HOME/.gaia/config/
-
 
 
 $HOME/go/bin/gaiad start --x-crisis-skip-assert-invariants
