@@ -22,10 +22,11 @@ rm -rf $HOME/.osmosisd/data/*
 # set rpc port
 sed -i.bak -e "s/^laddr *=.*/laddr = \"tcp://0.0.0.0:26657\"/" $HOME/.osmosisd/config/config.toml
 
+# download genesis file
+wget -O $HOME/.osmosisd/config/genesis.json https://github.com/osmosis-labs/networks/raw/main/osmosis-1/genesis.json
 
 # copy addrbook and genesis
 cp /root/cosmosia/osmosis/addrbook.json $HOME/.osmosisd/config/
-cp /root/cosmosia/osmosis/genesis.json $HOME/.osmosisd/config/
 
 
 # get data from quicksync
