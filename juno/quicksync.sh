@@ -8,8 +8,6 @@ git checkout v2.1.0
 make install
 
 
-
-
 # using https://polkachu.com/tendermint_snapshots/juno
 
 # delete All home
@@ -21,7 +19,7 @@ $HOME/go/bin/junod init test --chain-id juno-1
 sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0025ujuno\"/" ~/.juno/config/app.toml
 
 # set rpc port
-sed -i.bak -e "s/^laddr *=.*/laddr = \"tcp://0.0.0.0:26657\"/" $HOME/.juno/config/config.toml
+sed -i.bak '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $HOME/.juno/config/config.toml
 
 # set peers
 CHAIN_REPO="https://raw.githubusercontent.com/CosmosContracts/mainnet/main/juno-1" && \

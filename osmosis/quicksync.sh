@@ -15,6 +15,8 @@ rm -rf $HOME/.osmosisd
 
 $HOME/go/bin/osmosisd init test
 
+# set rpc port
+sed -i.bak '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $HOME/.osmosisd/config/config.toml
 
 # delete the data folder
 rm -rf $HOME/.osmosisd/data/*
