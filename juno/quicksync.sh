@@ -58,7 +58,8 @@ cp /cosmosia/juno/addrbook.json $HOME/.juno/config/
 # get data from snapshot
 cd $HOME/.juno/
 
-URL="http://proxy_cache:8080/https://snapshots2.polkachu.com/snapshots/juno/juno_2191990.tar.lz4"
+URL=`curl https://polkachu.com/tendermint_snapshots/juno | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
+URL="http://proxy_cache:8080/$URL"
 wget -O - $URL | lz4 -d | tar -xvf -
 
 
