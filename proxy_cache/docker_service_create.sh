@@ -8,5 +8,6 @@ docker service create \
   --publish 8080:8080 \
   --mount type=bind,source=$HOME/cosmosia,destination=/cosmosia \
   --mount type=bind,source=$HOME/cosmosia_data/proxy_cache,destination=/root/proxy_cache_data \
+  --network cosmosia \
   python:latest \
   /bin/bash /cosmosia/proxy_cache/start.sh

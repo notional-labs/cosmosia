@@ -8,5 +8,6 @@ docker service create \
   --publish 26659:26657 \
   --mount type=bind,source=$HOME/cosmosia,destination=/cosmosia \
   --mount type=bind,source=$HOME/cosmosia_data/osmosis,destination=/root \
+  --network cosmosia \
   archlinux:latest \
   /bin/bash /cosmosia/osmosis/quicksync.sh

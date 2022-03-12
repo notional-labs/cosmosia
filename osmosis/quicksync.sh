@@ -25,7 +25,7 @@ rm -rf $HOME/.osmosisd/data/*
 sed -i.bak -e "s/^laddr *=.*/laddr = \"tcp://0.0.0.0:26657\"/" $HOME/.osmosisd/config/config.toml
 
 # download genesis file
-wget -O $HOME/.osmosisd/config/genesis.json https://github.com/osmosis-labs/networks/raw/main/osmosis-1/genesis.json
+wget -O $HOME/.osmosisd/config/genesis.json http://proxy_cache:8080/https://github.com/osmosis-labs/networks/raw/main/osmosis-1/genesis.json
 
 # copy addrbook and genesis
 cp /root/cosmosia/osmosis/addrbook.json $HOME/.osmosisd/config/
@@ -36,7 +36,7 @@ cd $HOME/.osmosisd/
 
 URL=`curl https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
 echo "URL=$URL"
-wget -O - $URL | lz4 -d | tar -xvf -
+wget --timeout=0 -O - "http://proxy_cache:8080/$URL" | lz4 -d | tar -xvf -
 
 
 $HOME/go/bin/osmosisd start

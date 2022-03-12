@@ -49,7 +49,7 @@ rm -rf $HOME/.juno/data/*
 
 
 # download genesis file
-curl -s  https://raw.githubusercontent.com/CosmosContracts/mainnet/main/juno-1/genesis.json > $HOME/.juno/config/genesis.json
+curl -s  http://proxy_cache:8080/https://raw.githubusercontent.com/CosmosContracts/mainnet/main/juno-1/genesis.json > $HOME/.juno/config/genesis.json
 
 # copy addrbook
 cp /cosmosia/juno/addrbook.json $HOME/.juno/config/
@@ -58,8 +58,9 @@ cp /cosmosia/juno/addrbook.json $HOME/.juno/config/
 # get data from snapshot
 cd $HOME/.juno/
 
-URL="https://snapshots2.polkachu.com/snapshots/juno/juno_2191990.tar.lz4"
-wget -O - $URL | lz4 -d | tar -xvf -
+URL=`curl https://polkachu.com/tendermint_snapshots/juno | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
+URL="http://proxy_cache:8080/$URL"
+wget --timeout=0 -O - $URL | lz4 -d | tar -xvf -
 
 
 # /cosmosia/juno/junod start
