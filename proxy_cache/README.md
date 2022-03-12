@@ -1,0 +1,1 @@
+Simple http proxy with caching. More: https://github.com/baabeetaa/cosmosia/issues/2
