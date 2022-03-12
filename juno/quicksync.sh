@@ -60,7 +60,7 @@ cd $HOME/.juno/
 
 URL=`curl https://polkachu.com/tendermint_snapshots/juno | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
 URL="http://proxy_cache:8080/$URL"
-wget -O - $URL | lz4 -d | tar -xvf -
+wget --read-timeout=3600 -O - $URL | lz4 -d | tar -xvf -
 
 
 # /cosmosia/juno/junod start
