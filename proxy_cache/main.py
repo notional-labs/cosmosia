@@ -10,6 +10,7 @@ import signal
 import pathlib
 
 cache_base = str(pathlib.Path.home()) + "/proxy_cache_data/"
+buff_length = 2 * 1024 * 1024
 httpd = None
 
 
@@ -41,7 +42,7 @@ class CacheHandler(http.server.SimpleHTTPRequestHandler):
 
                 try:
                     resp = urllib.request.urlopen(req)
-                    shutil.copyfileobj(resp, output)
+                    shutil.copyfileobj(resp, output, buff_length)
                     os.rename(cache_filename + ".temp", cache_filename)
                 except urllib.error.HTTPError as err:
                     self.send_response(err.code)
@@ -52,7 +53,7 @@ class CacheHandler(http.server.SimpleHTTPRequestHandler):
         with open(cache_filename, "rb") as cached:
             self.send_response(200)
             self.end_headers()
-            shutil.copyfileobj(cached, self.wfile)
+            shutil.copyfileobj(cached, self.wfile, buff_length)
 
 
 signal.signal(signal.SIGINT, exit_gracefully)
