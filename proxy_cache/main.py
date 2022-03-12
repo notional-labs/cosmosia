@@ -9,7 +9,7 @@ import hashlib
 import signal
 import pathlib
 
-cache_base = str(pathlib.ath.home()) + "/proxy_cache_data/"
+cache_base = str(pathlib.Path.home()) + "/proxy_cache_data/"
 httpd = None
 
 
