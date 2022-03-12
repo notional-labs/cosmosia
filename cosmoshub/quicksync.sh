@@ -35,7 +35,7 @@ sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.001uatom\"/" 
 sed -i.bak '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $HOME/.gaia/config/config.toml
 
 # Prepare genesis file for cosmoshub-4
-wget http:/proxy_cache:8080/https://github.com/cosmos/mainnet/raw/master/genesis.cosmoshub-4.json.gz
+wget http://proxy_cache:8080/https://github.com/cosmos/mainnet/raw/master/genesis.cosmoshub-4.json.gz
 gzip -d genesis.cosmoshub-4.json.gz
 mv genesis.cosmoshub-4.json $HOME/.gaia/config/genesis.json
 
