@@ -1,0 +1,11 @@
+# delete existing service
+docker service rm proxy_cache
+
+
+docker service create \
+  --name proxy_cache \
+  --replicas 1 \
+  --publish 8080:8080 \
+  --mount type=bind,source=$HOME/cosmosia_data/proxy_cache,destination=/root/cosmosia/proxy_cache/cached \
+  python:latest \
+  /bin/bash /cosmosia/proxy_cache/start.sh
