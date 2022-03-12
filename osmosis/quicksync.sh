@@ -36,7 +36,7 @@ cd $HOME/.osmosisd/
 
 URL=`curl https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
 echo "URL=$URL"
-wget --read-timeout=3600 -O - "http://proxy_cache:8080/$URL" | lz4 -d | tar -xvf -
+wget --timeout=0 -O - "http://proxy_cache:8080/$URL" | lz4 -d | tar -xvf -
 
 
 $HOME/go/bin/osmosisd start
