@@ -1,7 +1,7 @@
 # usage: ./quicksynch.sh chain_name
 # eg., ./quicksynch.sh cosmoshub
 
-chain_name = $1
+chain_name="$1"
 
 if [[ -z $chain_name ]]
 then
