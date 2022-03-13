@@ -7,7 +7,6 @@ cd juno/
 git checkout v2.1.0
 make install
 
-
 # using https://polkachu.com/tendermint_snapshots/juno
 
 # delete All home
@@ -27,12 +26,10 @@ PEERS="$(curl -s "$CHAIN_REPO/persistent_peers.txt")"
 echo "PEERS=$PEERS"
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.juno/config/config.toml
 
-
 # setting for polkachu snapshot
 
 # indexer = "null"
 sed -i.bak -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.juno/config/config.toml
-
 
 # pruning = "custom"
 # pruning-keep-recent = "100"
@@ -43,17 +40,14 @@ sed -i.bak -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME
 sed -i.bak -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $HOME/.juno/config/app.toml
 sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $HOME/.juno/config/app.toml
 
-
 # delete the data folder
 rm -rf $HOME/.juno/data/*
-
 
 # download genesis file
 curl -s  http://proxy_cache:8080/https://raw.githubusercontent.com/CosmosContracts/mainnet/main/juno-1/genesis.json > $HOME/.juno/config/genesis.json
 
-# copy addrbook
-cp /cosmosia/juno/addrbook.json $HOME/.juno/config/
-
+# download addrbook
+curl -s  http://proxy_cache:8080/https://raw.githubusercontent.com/baabeetaa/cosmosia/main/juno/addrbook.json > $HOME/.juno/config/addrbook.json
 
 # get data from snapshot
 cd $HOME/.juno/
@@ -61,7 +55,6 @@ cd $HOME/.juno/
 URL=`curl https://polkachu.com/tendermint_snapshots/juno | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
 URL="http://proxy_cache:8080/$URL"
 wget --timeout=0 -O - $URL | lz4 -d | tar -xvf -
-
 
 # /cosmosia/juno/junod start
 $HOME/go/bin/junod start

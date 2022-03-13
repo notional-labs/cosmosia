@@ -39,8 +39,8 @@ wget --timeout=0 http://proxy_cache:8080/https://github.com/cosmos/mainnet/raw/m
 gzip -d genesis.cosmoshub-4.json.gz
 mv genesis.cosmoshub-4.json $HOME/.gaia/config/genesis.json
 
-# copy addrbook
-cp /cosmosia/cosmoshub/addrbook.json $HOME/.gaia/config/
+# download addrbook
+curl -s  http://proxy_cache:8080/https://raw.githubusercontent.com/baabeetaa/cosmosia/main/cosmoshub/addrbook.json > $HOME/.gaia/config/addrbook.json
 
 
 $HOME/go/bin/gaiad start --x-crisis-skip-assert-invariants
