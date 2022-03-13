@@ -1,3 +1,4 @@
+# Note: statesync isnt reliable, dont use it atm
 
 # delte the data
 rm -rf $HOME/.gaia
