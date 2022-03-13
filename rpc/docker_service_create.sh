@@ -17,6 +17,10 @@ docker service create \
   --name $chain_name \
   --replicas 1 \
   --network cosmosia \
+  --restart-condition any \
+  --restart-delay 3m \
+  --restart-max-attempts 3 \
+  --restart-window 10m \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/rpc/quicksync.sh > ~/quicksync.sh && \
