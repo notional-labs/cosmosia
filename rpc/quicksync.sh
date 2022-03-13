@@ -6,12 +6,30 @@ chain_name="$1"
 if [[ -z $chain_name ]]
 then
   echo "No chain_name. usage eg., ./quicksynch.sh cosmoshub"
+  exit
 fi
+
+########################################################################################################################
+# prepare
+pacman -Syy --noconfirm go git base-devel wget jq
+
 
 ########################################################################################################################
 # read chain info
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
-source <(awk -v TARGET=$chain_name -F ' *= *' '
+
+#source <(awk -v TARGET=$chain_name -F ' *= *' '
+#  {
+#    if ($0 ~ /^\[.*\]$/) {
+#      gsub(/^\[|\]$/, "", $0)
+#      SECTION=$0
+#    } else if (($2 != "") && (SECTION==TARGET)) {
+#      print $1 "=" $2
+#    }
+#  }
+#  ' /cosmosia/data/chain_registry.ini)
+
+eval "$(curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' *= *' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -20,7 +38,7 @@ source <(awk -v TARGET=$chain_name -F ' *= *' '
       print $1 "=" $2
     }
   }
-  ' /cosmosia/data/chain_registry.ini)
+  ')"
 
 # debug chain info
 echo "############################################################################################################"
@@ -37,13 +55,13 @@ echo "snapshot_provider=$snapshot_provider"
 if [[ -z $git_repo ]]
 then
   echo "Not support chain $chain_name"
+  exit
 fi
 
 
 ########################################################################################################################
 # build from source first
 echo "build from source:"
-pacman -Syy --noconfirm go git base-devel wget jq
 
 cd $HOME
 git clone $git_repo
