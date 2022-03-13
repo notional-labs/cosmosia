@@ -24,6 +24,7 @@ source <(awk -v TARGET=$chain_name -F ' *= *' '
 
 # debug chain info
 echo "############################################################################################################"
+echo "read chain info:"
 echo "git_repo=$git_repo"
 echo "version=$version"
 echo "genesis_url=$genesis_url"
@@ -41,6 +42,7 @@ fi
 
 ########################################################################################################################
 # build from source first
+echo "build from source:"
 pacman -Syy --noconfirm go git base-devel wget jq
 
 cd $HOME
@@ -57,6 +59,8 @@ go install ./...
 
 
 ########################################################################################################################
+echo "download snapshot:"
+
 # delete node home
 rm -rf $node_home/*
 
@@ -74,10 +78,10 @@ then
 
   if [[ $chain_name == "cosmoshub" ]]
   then
-    URL=`curl https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="$chain_name-4-pruned")|.url'`
+    URL=`curl https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
   elif [[ $chain_name == "osmosis" ]]
   then
-    URL=`curl https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="$chain_name-1-pruned")|.url'`
+    URL=`curl https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|.url'`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
@@ -107,6 +111,13 @@ else
 fi
 
 echo "URL=$URL"
+
+if [[ -z $URL ]]
+then
+  echo "URL is empty. Pls fix it!"
+  exit
+fi
+
 wget --timeout=0 -O - "http://proxy_cache:8080/$URL" | lz4 -d | tar -xvf -
 
 # set minimum gas prices
