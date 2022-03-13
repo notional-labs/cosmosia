@@ -20,7 +20,7 @@ source <(awk -v TARGET=$chain_name -F ' *= *' '
       print $1 "=" $2
     }
   }
-  ' chain_registry.ini)
+  ' /cosmosia/chain_registry.ini)
 
 # debug chain info
 echo "############################################################################################################"
