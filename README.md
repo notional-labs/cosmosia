@@ -19,7 +19,7 @@ To create a RPC service, execute on Swarm manager node:
 bash ./rpc/docker_service_create.sh cosmoshub
 ```
 
-
+See supported chains in [chain_registry.ini](./data/chain_registry.ini)
 
 
 ### Add a new chain
