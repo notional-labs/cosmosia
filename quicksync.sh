@@ -81,7 +81,7 @@ then
     URL=`curl https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
   elif [[ $chain_name == "osmosis" ]]
   then
-    URL=`curl https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|.url'`
+    URL=`curl https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
