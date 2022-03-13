@@ -19,5 +19,5 @@ docker service create \
   --network cosmosia \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/rpc/quicksync.sh > ~/quicksync.sh && \
+  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/fix_cmd/rpc/quicksync.sh > ~/quicksync.sh && \
   /bin/bash ~/quicksync.sh $chain_name"
