@@ -6,7 +6,7 @@ docker service create \
   --name cosmoshub \
   --replicas 1 \
   --publish 26658:26657 \
-  --mount type=bind,source=$HOME/cosmosia,destination=/cosmosia \
+  --mount type=bind,source=$HOME/cosmosia,destination=/cosmosia:ro \
   --mount type=bind,source=$HOME/cosmosia_data/cosmoshub,destination=/root \
   --network cosmosia \
   archlinux:latest \

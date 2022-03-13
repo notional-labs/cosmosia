@@ -23,14 +23,15 @@ source <(awk -v TARGET=$chain_name -F ' *= *' '
   ' chain_registry.ini)
 
 # debug chain info
-#echo $git_repo
-#echo $version
-#echo $genesis_url
-#echo $daemon_name
-#echo $node_home
-#echo $minimum_gas_prices
-#echo $addrbook_url
-#echo $snapshot_provider
+echo "############################################################################################################"
+echo "git_repo=$git_repo"
+echo "version=$version"
+echo "genesis_url=$genesis_url"
+echo "daemon_name=$daemon_name"
+echo "node_home=$node_home"
+echo "minimum_gas_prices=$minimum_gas_prices"
+echo "addrbook_url=$addrbook_url"
+echo "snapshot_provider=$snapshot_provider"
 
 if [[ -z $git_repo ]]
 then
