@@ -2,11 +2,10 @@
 pacman -Syy --noconfirm go git base-devel wget jq
 
 cd $HOME
-git clone https://github.com/baabeetaa/cosmosia
-cd cosmosia/
-#git checkout main
-
-
+git clone https://github.com/cosmos/gaia
+cd gaia/
+git checkout v6.0.3
+go install ./...
 
 
 # using quicksync.io https://quicksync.io/networks/cosmos.html
