@@ -6,6 +6,7 @@ chain_name="$1"
 if [[ -z $chain_name ]]
 then
   echo "No chain_name. usage eg., ./quicksynch.sh cosmoshub"
+  exit
 fi
 
 ########################################################################################################################
@@ -54,6 +55,7 @@ echo "snapshot_provider=$snapshot_provider"
 if [[ -z $git_repo ]]
 then
   echo "Not support chain $chain_name"
+  exit
 fi
 
 

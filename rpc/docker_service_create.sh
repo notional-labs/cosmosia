@@ -6,6 +6,7 @@ chain_name="$1"
 if [[ -z $chain_name ]]
 then
   echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub"
+  exit
 fi
 
 
@@ -20,6 +21,3 @@ docker service create \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/rpc/quicksync.sh > ~/quicksync.sh && \
   /bin/bash ~/quicksync.sh $chain_name"
-
-
-#  --mount type=bind,source=$HOME/cosmosia_data/$chain_name,destination=/root \
