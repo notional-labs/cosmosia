@@ -20,4 +20,6 @@ docker service create \
   --mount type=bind,source=$HOME/cosmosia_data/$chain_name,destination=/root \
   --network cosmosia \
   archlinux:latest \
-  /bin/bash /cosmosia/quicksync.sh $chain_name
+  /bin/bash -c \
+  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/rpc/quicksync.sh > ~/quicksync.sh && \
+  /bin/bash ~/quicksync.sh $chain_name"
