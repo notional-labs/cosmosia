@@ -7,9 +7,10 @@ docker service create \
   --replicas 1 \
   --publish 80:80 \
   --network cosmosia \
-  nginx:latest
+  archlinux:latest
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf && \
+  "pacman -Syy --noconfirm nginx-mainline && \
+  curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf && \
   curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/html/index.html > /usr/share/nginx/html/index.html && \
   nginx -g \"daemon off;\""
 
