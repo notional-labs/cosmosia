@@ -15,7 +15,7 @@ pacman -Syy --noconfirm go git base-devel wget jq
 
 
 # read config from /data/config.ini
-eval "$(curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/config.ini |sed 's/ *= */=/g')"
+eval "$(curl -Ls https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/config.ini |sed 's/ *= */=/g')"
 
 # debug config params
 echo "############################################################################################################"
@@ -147,7 +147,7 @@ then
   wget -O - $genesis_url | gzip -cd > $node_home/config/genesis.json
 elif [[ $addrbook_url == *.json ]]
 then
-  curl -s $proxy_cache_url$genesis_url > $node_home/config/genesis.json
+  curl -Ls $proxy_cache_url$genesis_url > $node_home/config/genesis.json
 else
   echo "Not support genesis file type"
   exit
@@ -155,7 +155,7 @@ fi
 
 
 # download addrbook
-curl -s  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
+curl -Ls  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
 
 
 $HOME/go/bin/$daemon_name start --x-crisis-skip-assert-invariants
