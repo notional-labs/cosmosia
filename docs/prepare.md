@@ -9,8 +9,9 @@ Follow [Getting started with swarm mode](https://docs.docker.com/engine/swarm/sw
 docker network create -d overlay --attachable cosmosia
 ```
 
-- clone repos to a manager node:
+- clone repos to a manager node to $HOME:
 ```bash
-https://github.com/baabeetaa/cosmosia
+cd $HOME
+git clone https://github.com/baabeetaa/cosmosia
 ```
 
