@@ -10,8 +10,10 @@ https://github.com/cosmos/chain-registry/issues/214
 - Relay service
 - Snapshot service?
 
-
 ---
+### Setup a cluster and cosmosia
+See [prepare.md](./docs/prepare.md)
+
 ### Rpc service
 To create a RPC service, execute on Swarm manager node:
 
