@@ -6,7 +6,15 @@ docker service create \
   --name proxy \
   --replicas 1 \
   --publish 80:80 \
-  --mount type=bind,source=$HOME/cosmosia/proxy/html,destination=/usr/share/nginx/html \
-  --mount type=bind,source=$HOME/cosmosia/proxy/nginx,destination=/etc/nginx \
   --network cosmosia \
   nginx:latest
+  /bin/bash -c \
+  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf && \
+  curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/html/index.html > /usr/share/nginx/html/index.html && \
+  nginx -g \"daemon off;\""
+
+
+
+
+#  --mount type=bind,source=$HOME/cosmosia/proxy/html,destination=/usr/share/nginx/html \
+#  --mount type=bind,source=$HOME/cosmosia/proxy/nginx,destination=/etc/nginx \
