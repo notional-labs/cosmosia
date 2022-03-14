@@ -12,7 +12,7 @@ docker service create \
   "pacman -Syy --noconfirm nginx-mainline && \
   curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf && \
   curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/html/index.html > /usr/share/nginx/html/index.html && \
-  nginx -g \"daemon off;\""
+  /bin/nginx -g \"daemon off;\""
 
 
 
