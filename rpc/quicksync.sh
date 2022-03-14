@@ -14,20 +14,17 @@ fi
 pacman -Syy --noconfirm go git base-devel wget jq
 
 
+# read config from /data/config.ini
+eval "$(curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/config.ini |sed 's/ *= */=/g')"
+
+# debug config params
+echo "############################################################################################################"
+echo "read config:"
+echo "proxy_cache_url=$proxy_cache_url"
+
 ########################################################################################################################
 # read chain info
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
-
-#source <(awk -v TARGET=$chain_name -F ' *= *' '
-#  {
-#    if ($0 ~ /^\[.*\]$/) {
-#      gsub(/^\[|\]$/, "", $0)
-#      SECTION=$0
-#    } else if (($2 != "") && (SECTION==TARGET)) {
-#      print $1 "=" $2
-#    }
-#  }
-#  ' /cosmosia/data/chain_registry.ini)
 
 eval "$(curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' *= *' '
   {
@@ -136,7 +133,7 @@ then
   exit
 fi
 
-wget --timeout=0 -O - "http://proxy_cache:8080/$URL" | lz4 -d | tar -xvf -
+wget --timeout=0 -O - "$proxy_cache_url$URL" | lz4 -d | tar -xvf -
 
 # set minimum gas prices
 sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
@@ -150,7 +147,7 @@ then
   wget -O - $genesis_url | gzip -cd > $node_home/config/genesis.json
 elif [[ $addrbook_url == *.json ]]
 then
-  curl -s http://proxy_cache:8080/$genesis_url > $node_home/config/genesis.json
+  curl -s $proxy_cache_url$genesis_url > $node_home/config/genesis.json
 else
   echo "Not support genesis file type"
   exit
@@ -158,7 +155,7 @@ fi
 
 
 # download addrbook
-curl -s  http://proxy_cache:8080/$addrbook_url > $node_home/config/addrbook.json
+curl -s  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
 
 
 $HOME/go/bin/$daemon_name start --x-crisis-skip-assert-invariants
