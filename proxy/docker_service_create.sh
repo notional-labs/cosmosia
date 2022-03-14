@@ -7,7 +7,7 @@ docker service create \
   --replicas 1 \
   --publish 80:80 \
   --network cosmosia \
-  archlinux:latest \
+  ubuntu:20.04 \
   /bin/bash -c \
   "export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y curl nginx && \
   curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf && \
