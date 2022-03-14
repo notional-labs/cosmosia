@@ -7,12 +7,12 @@ docker service create \
   --replicas 1 \
   --publish 80:80 \
   --network cosmosia \
-  archlinux:latest
+  archlinux:latest \
   /bin/bash -c \
-  "pacman -Syy --noconfirm nginx-mainline && \
+  "export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y curl nginx && \
   curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf && \
   curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/html/index.html > /usr/share/nginx/html/index.html && \
-  /bin/nginx -g \"daemon off;\""
+  usr/sbin/nginx -g \"daemon off;\""
 
 
 
