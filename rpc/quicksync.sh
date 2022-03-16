@@ -11,7 +11,7 @@ fi
 
 echo "#################################################################################################################"
 echo "# prepare"
-pacman -Syy --noconfirm go git base-devel wget jq unzip
+pacman -Syy --noconfirm go git base-devel wget jq
 
 # read config from /data/config.ini
 eval "$(curl -Ls https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/config.ini |sed 's/ *= */=/g')"
@@ -62,6 +62,11 @@ then
   # sentinel requires custom build
   mkdir -p $HOME/go/src/github.com/sentinel-official
   cd $HOME/go/src/github.com/sentinel-official
+
+  export GOROOT=/usr/lib/go
+  export GOPATH=${HOME}/go
+  export GOBIN=${GOPATH}/bin
+  export PATH=${PATH}:${GOROOT}/bin:${GOBIN}
 fi
 
 echo "curren path: $PWD"
