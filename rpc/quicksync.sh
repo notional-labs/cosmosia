@@ -155,6 +155,7 @@ then
   exit
 fi
 
+# extract the snapshot to current path
 if [[ $URL == *.tar.lz4 ]]
 then
   wget --timeout=0 -O - "$proxy_cache_url$URL" | lz4 -d | tar -xvf -
