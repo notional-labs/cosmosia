@@ -119,6 +119,20 @@ then
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
   fi
+elif [[ $snapshot_provider == "alexvalidator.com" ]]
+then
+  # alexvalidator.com snapshot file contains contents of the data folder instead of data folder like other providers.
+  # so need extract to $node_home/data/ instead of $node_home
+  cd $node_home/data/
+
+  if [[ $chain_name == "regen" ]]
+  then
+    URL=$(curl -s https://snapshots.alexvalidator.com/regen/ | egrep -o ">regen-1.*tar" | tr -d ">")
+    URL="https://snapshots.alexvalidator.com/regen/$URL"
+  else
+    echo "Not support $chain_name with snapshot_provider $snapshot_provider"
+    exit
+  fi
 elif [[ $snapshot_provider == "cosmosia" ]]
 then
   if [[ $chain_name == "starname" ]]
@@ -141,7 +155,17 @@ then
   exit
 fi
 
-wget --timeout=0 -O - "$proxy_cache_url$URL" | lz4 -d | tar -xvf -
+if [[ $URL == *.tar.lz4 ]]
+then
+  wget --timeout=0 -O - "$proxy_cache_url$URL" | lz4 -d | tar -xvf -
+elif [[ $URL == *.tar ]]
+then
+  wget --timeout=0 -O - "$proxy_cache_url$URL" | tar -xvf -
+else
+  echo "Not support snapshot file type."
+  exit
+fi
+
 
 # set minimum gas prices
 sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
