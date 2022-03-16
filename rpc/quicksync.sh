@@ -11,7 +11,7 @@ fi
 
 ########################################################################################################################
 # prepare
-pacman -Syy --noconfirm go git base-devel wget jq
+pacman -Syy --noconfirm go git base-devel wget jq unzip
 
 # read config from /data/config.ini
 eval "$(curl -Ls https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/config.ini |sed 's/ *= */=/g')"
@@ -60,6 +60,14 @@ fi
 echo "build from source:"
 
 cd $HOME
+
+if [[ $chain_name == "sentinel" ]]
+then
+  # sentinel requires custom build
+  mkdir -p $HOME/go/src/github.com/sentinel-official
+  cd $HOME/go/src/github.com/sentinel-official
+fi
+
 git clone $git_repo
 
 # find folder name. eg:
@@ -125,10 +133,10 @@ then
   # so need extract to $node_home/data/ instead of $node_home
   cd $node_home/data/
 
-  if [[ $chain_name == "regen" ]]
+  if [[ "regen sentinel" == *"$chain_name"* ]]
   then
-    URL=$(curl -s https://snapshots.alexvalidator.com/regen/ | egrep -o ">regen-1.*tar" | tr -d ">")
-    URL="https://snapshots.alexvalidator.com/regen/$URL"
+    URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ | egrep -o ">$chain_name.*tar" | tr -d ">")
+    URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
