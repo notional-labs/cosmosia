@@ -112,7 +112,7 @@ then
   sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $node_home/config/app.toml
 
 
-  if [[ $chain_name == "juno" ]]
+  if [[ "juno akash" == *"$chain_name"* ]]
   then
     URL=`curl -s https://polkachu.com/tendermint_snapshots/juno | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
   else
