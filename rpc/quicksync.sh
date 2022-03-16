@@ -9,8 +9,8 @@ then
   exit
 fi
 
-########################################################################################################################
-# prepare
+echo "#################################################################################################################"
+echo "# prepare"
 pacman -Syy --noconfirm go git base-devel wget jq unzip
 
 # read config from /data/config.ini
@@ -21,8 +21,8 @@ echo "##########################################################################
 echo "read config:"
 echo "proxy_cache_url=$proxy_cache_url"
 
-########################################################################################################################
-# read chain info
+echo "#################################################################################################################"
+echo "read chain info:"
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
 
 eval "$(curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' *= *' '
@@ -36,9 +36,6 @@ eval "$(curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/c
   }
   ')"
 
-# debug chain info
-echo "############################################################################################################"
-echo "read chain info:"
 echo "git_repo=$git_repo"
 echo "version=$version"
 echo "genesis_url=$genesis_url"
@@ -55,8 +52,7 @@ then
 fi
 
 
-########################################################################################################################
-# build from source first
+echo "#################################################################################################################"
 echo "build from source:"
 
 cd $HOME
@@ -67,6 +63,8 @@ then
   mkdir -p $HOME/go/src/github.com/sentinel-official
   cd $HOME/go/src/github.com/sentinel-official
 fi
+
+echo "curren path: $PWD"
 
 git clone $git_repo
 
@@ -80,7 +78,7 @@ git checkout $version
 make install
 
 
-########################################################################################################################
+echo "#################################################################################################################"
 echo "download snapshot:"
 
 # delete node home
@@ -163,7 +161,7 @@ then
   exit
 fi
 
-# extract the snapshot to current path
+echo "extract the snapshot to current path..."
 if [[ $URL == *.tar.lz4 ]]
 then
   wget --timeout=0 -O - "$proxy_cache_url$URL" | lz4 -d | tar -xvf -
@@ -182,7 +180,7 @@ sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_pr
 # set rpc port
 sed -i.bak '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
 
-# download genesis file
+echo "download genesis file..."
 if [[ $addrbook_url == *.json.gz ]]
 then
   wget -O - $genesis_url | gzip -cd > $node_home/config/genesis.json
@@ -195,7 +193,7 @@ else
 fi
 
 
-# download addrbook
+echo "download addrbook..."
 curl -Ls  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
 
 
