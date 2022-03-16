@@ -123,7 +123,7 @@ elif [[ $snapshot_provider == "cosmosia" ]]
 then
   if [[ $chain_name == "starname" ]]
   then
-    URL=`curl http://65.108.121.153/ | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
+    URL=`curl -s http://65.108.121.153/starname.json|jq -r '.snapshot_url'`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
