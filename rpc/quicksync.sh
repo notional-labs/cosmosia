@@ -114,7 +114,7 @@ then
 
   if [[ "juno akash" == *"$chain_name"* ]]
   then
-    URL=`curl -s https://polkachu.com/tendermint_snapshots/juno | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
+    URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
