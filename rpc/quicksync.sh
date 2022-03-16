@@ -13,7 +13,6 @@ fi
 # prepare
 pacman -Syy --noconfirm go git base-devel wget jq
 
-
 # read config from /data/config.ini
 eval "$(curl -Ls https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/config.ini |sed 's/ *= */=/g')"
 
@@ -70,7 +69,7 @@ repo_name=$(basename $git_repo | cut -d. -f1)
 
 cd $repo_name
 git checkout $version
-go install ./...
+make install
 
 
 ########################################################################################################################
@@ -93,10 +92,10 @@ then
 
   if [[ $chain_name == "cosmoshub" ]]
   then
-    URL=`curl https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
+    URL=`curl -s https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
   elif [[ $chain_name == "osmosis" ]]
   then
-    URL=`curl https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
+    URL=`curl -s https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
@@ -115,7 +114,16 @@ then
 
   if [[ $chain_name == "juno" ]]
   then
-    URL=`curl https://polkachu.com/tendermint_snapshots/juno | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
+    URL=`curl -s https://polkachu.com/tendermint_snapshots/juno | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
+  else
+    echo "Not support $chain_name with snapshot_provider $snapshot_provider"
+    exit
+  fi
+elif [[ $snapshot_provider == "cosmosia" ]]
+then
+  if [[ $chain_name == "starname" ]]
+  then
+    URL=`curl http://65.108.121.153/ | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
