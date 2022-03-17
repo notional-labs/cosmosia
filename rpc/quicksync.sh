@@ -141,6 +141,10 @@ then
   then
     URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ | egrep -o ">$chain_name.*tar" | tr -d ">")
     URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
+  elif [[ "ixo" == *"$chain_name"* ]]
+  then
+    URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ | egrep -o ">impacthub-3.*tar" | tr -d ">")
+    URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
