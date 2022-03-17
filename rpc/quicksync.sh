@@ -158,6 +158,16 @@ then
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
   fi
+elif [[ $snapshot_provider == "staketab.com" ]]
+then
+  if [[ "sifchain" == *"$chain_name"* ]]
+  then
+    URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ | egrep -o ">$chain_name.*tar" | tr -d ">")
+    URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
+  else
+    echo "Not support $chain_name with snapshot_provider $snapshot_provider"
+    exit
+  fi
 else
   echo "Not support snapshot_provider $snapshot_provider"
   exit
