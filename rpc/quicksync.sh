@@ -72,12 +72,7 @@ fi
 echo "curren path: $PWD"
 
 git clone $git_repo
-
-# find folder name. eg:
-# https://github.com/cosmos/gaia => gaia
-# https://github.com/cosmos/gaia.git => gaia
 repo_name=$(basename $git_repo | cut -d. -f1)
-
 cd $repo_name
 git checkout $version
 make install
@@ -110,6 +105,9 @@ then
   elif [[ $chain_name == "emoney" ]]
   then
     URL=`curl https://quicksync.io/emoney.json|jq -r '.[] |select(.file=="emoney-3-default")|.url'`
+  elif [[ $chain_name == "terra" ]]
+  then
+    URL=`curl https://quicksync.io/terra.json|jq -r '.[] |select(.file=="columbus-5-default")|select (.mirror=="Netherlands")|.url'`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
