@@ -133,8 +133,6 @@ then
   fi
 elif [[ $snapshot_provider == "alexvalidator.com" ]]
 then
-  # alexvalidator.com snapshot file contains contents of the data folder instead of data folder like other providers.
-  # so need extract to $node_home/data/ instead of $node_home
   cd $node_home/data/
 
   if [[ "regen sentinel" == *"$chain_name"* ]]
@@ -160,6 +158,8 @@ then
   fi
 elif [[ $snapshot_provider == "staketab.com" ]]
 then
+  cd $node_home/data/
+
   if [[ "sifchain" == *"$chain_name"* ]]
   then
     URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ | egrep -o ">$chain_name.*tar" | tr -d ">")
