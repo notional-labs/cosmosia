@@ -115,7 +115,6 @@ then
 elif [[ $snapshot_provider == "polkachu.com" ]]
 then
   # using https://polkachu.com/tendermint_snapshots/juno
-
   # setting for polkachu snapshot
   sed -i.bak -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
   sed -i.bak -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
@@ -123,51 +122,26 @@ then
   sed -i.bak -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
   sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $node_home/config/app.toml
 
-
-  if [[ "juno akash" == *"$chain_name"* ]]
-  then
-    URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
-  else
-    echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-    exit
-  fi
+  URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
 elif [[ $snapshot_provider == "alexvalidator.com" ]]
 then
   cd $node_home/data/
 
-  if [[ "regen sentinel" == *"$chain_name"* ]]
-  then
-    URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ | egrep -o ">$chain_name.*tar" | tr -d ">")
-    URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
-  elif [[ "ixo" == *"$chain_name"* ]]
-  then
-    URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ | egrep -o ">impacthub-3.*tar" | tr -d ">")
-    URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
-  else
-    echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-    exit
-  fi
+  URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ | egrep -o ">.*tar" | tr -d ">")
+  URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
 elif [[ $snapshot_provider == "cosmosia" ]]
 then
-  if [[ $chain_name == "starname" ]]
-  then
-    URL=`curl -s http://65.108.121.153/starname.json|jq -r '.snapshot_url'`
-  else
-    echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-    exit
-  fi
+  URL=`curl -s http://65.108.121.153/starname.json|jq -r '.snapshot_url'`
 elif [[ $snapshot_provider == "staketab.com" ]]
 then
   cd $node_home/data/
 
-  if [[ "sifchain" == *"$chain_name"* ]]
-  then
-    URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ | egrep -o ">$chain_name.*tar" | tr -d ">")
-    URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
-  else
-    echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-    exit
-  fi
+  URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ | egrep -o ">$chain_name.*tar" | tr -d ">")
+  URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
+elif [[ $snapshot_provider == "custom" ]]
+then
+    # use https://like.rickmak.com/likecoin-snapshots/
+    # alternative: https://public.nnkken.dev/liked-data-archive/
 else
   echo "Not support snapshot_provider $snapshot_provider"
   exit
@@ -177,7 +151,7 @@ echo "URL=$URL"
 
 if [[ -z $URL ]]
 then
-  echo "URL is empty. Pls fix it!"
+  echo "URL to download snapshot is empty. Pls fix it!"
   exit
 fi
 
