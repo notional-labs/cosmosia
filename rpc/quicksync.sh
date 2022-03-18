@@ -72,7 +72,7 @@ fi
 echo "curren path: $PWD"
 
 git clone $git_repo
-repo_name=$(basename $git_repo | cut -d. -f1)
+repo_name=$(basename $git_repo |cut -d. -f1)
 cd $repo_name
 git checkout $version
 make install
@@ -122,26 +122,22 @@ then
   sed -i.bak -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
   sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $node_home/config/app.toml
 
-  URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name | grep -m 1 -Eo "https://\S+?\.tar.lz4"`
+  URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
 elif [[ $snapshot_provider == "alexvalidator.com" ]]
 then
   cd $node_home/data/
 
-  URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ | egrep -o ">.*tar" | tr -d ">")
+  URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ |egrep -o ">.*tar" | tr -d ">")
   URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
 elif [[ $snapshot_provider == "cosmosia" ]]
 then
-  URL=`curl -s http://65.108.121.153/starname.json|jq -r '.snapshot_url'`
+  URL=`curl -s http://65.108.121.153/$chain_name.json |jq -r '.snapshot_url'`
 elif [[ $snapshot_provider == "staketab.com" ]]
 then
   cd $node_home/data/
 
-  URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ | egrep -o ">$chain_name.*tar" | tr -d ">")
+  URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" | tr -d ">")
   URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
-elif [[ $snapshot_provider == "custom" ]]
-then
-    # use https://like.rickmak.com/likecoin-snapshots/
-    # alternative: https://public.nnkken.dev/liked-data-archive/
 else
   echo "Not support snapshot_provider $snapshot_provider"
   exit
@@ -158,10 +154,10 @@ fi
 echo "extract the snapshot to current path..."
 if [[ $URL == *.tar.lz4 ]]
 then
-  wget --timeout=0 -O - "$proxy_cache_url$URL" | lz4 -d | tar -xvf -
+  wget --timeout=0 -O - "$proxy_cache_url$URL" |lz4 -d |tar -xvf -
 elif [[ $URL == *.tar ]]
 then
-  wget --timeout=0 -O - "$proxy_cache_url$URL" | tar -xvf -
+  wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xvf -
 else
   echo "Not support snapshot file type."
   exit
@@ -177,7 +173,7 @@ sed -i.bak '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:266
 echo "download genesis file..."
 if [[ $addrbook_url == *.json.gz ]]
 then
-  wget -O - $genesis_url | gzip -cd > $node_home/config/genesis.json
+  wget -O - $genesis_url |gzip -cd > $node_home/config/genesis.json
 elif [[ $addrbook_url == *.json ]]
 then
   curl -Ls $proxy_cache_url$genesis_url > $node_home/config/genesis.json
@@ -191,7 +187,7 @@ echo "download addrbook..."
 curl -Ls  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
 
 
-$HOME/go/bin/$daemon_name start --x-crisis-skip-assert-invariants
+$HOME/go/bin/$daemon_name start
 
 
 
