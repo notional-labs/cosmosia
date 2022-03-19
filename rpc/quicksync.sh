@@ -128,7 +128,7 @@ elif [[ $snapshot_provider == "alexvalidator.com" ]]
 then
   cd $node_home/data/
 
-  URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ |egrep -o ">.*tar" | tr -d ">")
+  URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ |egrep -o ">.*tar" |tr -d ">")
   URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
 elif [[ $snapshot_provider == "cosmosia" ]]
 then
@@ -139,6 +139,18 @@ then
 
   URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" | tr -d ">")
   URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
+elif [[ $snapshot_provider == "custom" ]]
+then
+  if [[ $chain_name == "cheqd" ]]
+  then
+    cd $node_home/data/
+
+    URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n1 |sed -e 's/<[^>]*>//g')
+    URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
+  else
+    echo "Not support $chain_name with snapshot_provider $snapshot_provider"
+    exit
+  fi
 else
   echo "Not support snapshot_provider $snapshot_provider"
   exit
@@ -156,7 +168,7 @@ echo "extract the snapshot to current path..."
 if [[ $URL == *.tar.lz4 ]]
 then
   wget --timeout=0 -O - "$proxy_cache_url$URL" |lz4 -d |tar -xvf -
-elif [[ $URL == *.tar ]]
+elif [[ $URL == *.tar ]] || [[ $URL == *.tar.gz ]]
 then
   wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xvf -
 else
