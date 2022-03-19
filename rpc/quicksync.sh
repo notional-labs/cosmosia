@@ -168,9 +168,12 @@ echo "extract the snapshot to current path..."
 if [[ $URL == *.tar.lz4 ]]
 then
   wget --timeout=0 -O - "$proxy_cache_url$URL" |lz4 -d |tar -xvf -
-elif [[ $URL == *.tar ]] || [[ $URL == *.tar.gz ]]
+elif [[ $URL == *.tar ]]
 then
   wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xvf -
+elif [[ $URL == *.tar.gz ]]
+  wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xvzf -
+then
 else
   echo "Not support snapshot file type."
   exit
