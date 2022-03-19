@@ -172,8 +172,8 @@ elif [[ $URL == *.tar ]]
 then
   wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xvf -
 elif [[ $URL == *.tar.gz ]]
-  wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xvzf -
 then
+  wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xvzf -
 else
   echo "Not support snapshot file type."
   exit
