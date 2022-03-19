@@ -44,6 +44,7 @@ echo "node_home=$node_home"
 echo "minimum_gas_prices=$minimum_gas_prices"
 echo "addrbook_url=$addrbook_url"
 echo "snapshot_provider=$snapshot_provider"
+echo "start_flags=$start_flags"
 
 if [[ -z $git_repo ]]
 then
@@ -187,7 +188,7 @@ echo "download addrbook..."
 curl -Ls  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
 
 
-$HOME/go/bin/$daemon_name start
+$HOME/go/bin/$daemon_name start $start_flags
 
 
 
