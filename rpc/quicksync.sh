@@ -137,8 +137,14 @@ elif [[ $snapshot_provider == "staketab.com" ]]
 then
   cd $node_home/data/
 
-  URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" | tr -d ">")
+  URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm")
   URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
+
+  if [[ $chain_name == "stargaze" ]]
+  then
+    URL_WASM=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">")
+    URL_WASM="https://cosmos-snap.staketab.com/$chain_name/$URL_WASM"
+  fi
 elif [[ $snapshot_provider == "custom" ]]
 then
   if [[ $chain_name == "cheqd" ]]
@@ -179,17 +185,34 @@ else
   exit
 fi
 
+# download wasm snapshot, for stargaze only atm
+if [[ ! -z $URL_WASM ]]
+then
+  echo "URL_WASM=$URL_WASM"
+  mkdir -p $node_home/wasm
 
-# set minimum gas prices
+  echo "extract the snapshot of wasm..."
+  if [[ $URL_WASM == *.tar ]]
+  then
+    wget --timeout=0 -O - "$proxy_cache_url$URL_WASM" |tar -xvf - -C $node_home/wasm/
+  else
+    echo "Not support snapshot file type."
+    exit
+  fi
+fi
+
+
+# set minimum gas prices & rpc port
 sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
-
-# set rpc port
 sed -i.bak '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
 
 echo "download genesis file..."
 if [[ $addrbook_url == *.json.gz ]]
 then
   wget -O - $genesis_url |gzip -cd > $node_home/config/genesis.json
+elif [[ $addrbook_url == *.json ]]
+then
+  wget -O - $genesis_url |tar -xvzf - -O > $node_hom/config/genesis.json
 elif [[ $addrbook_url == *.json ]]
 then
   curl -Ls $proxy_cache_url$genesis_url > $node_home/config/genesis.json
