@@ -165,6 +165,7 @@ then
   elif [[ $chain_name == "konstellation" ]]
   then
     URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
+    URL="https://mercury-nodes.net/knstl-snapshot/$URL"
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
