@@ -112,7 +112,7 @@ then
     URL=`curl https://quicksync.io/terra.json|jq -r '.[] |select(.file=="columbus-5-pruned")|select (.mirror=="Netherlands")|.url'`
   elif [[ $chain_name == "bandchain" ]]
   then
-    URL=`curl https://quicksync.io/band.json|jq -r '.[] |select(.file=="laozi-mainnet-prune").url'`
+    URL=`curl https://quicksync.io/band.json |jq -r '.[] |select(.file=="laozi-mainnet-pruned")|.url'`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
