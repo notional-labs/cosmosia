@@ -72,10 +72,12 @@ fi
 
 echo "curren path: $PWD"
 
-git clone $git_repo $chain_name
-#repo_name=$(basename $git_repo |cut -d. -f1)
-#cd $repo_name
-cd $chain_name
+# git clone $git_repo $chain_name
+# cd $chain_name
+git clone $git_repo
+repo_name=$(basename $git_repo |cut -d. -f1)
+cd $repo_name
+
 git checkout $version
 make install
 
