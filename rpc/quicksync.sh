@@ -162,6 +162,9 @@ then
 
     URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n1 |sed -e 's/<[^>]*>//g')
     URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
+  elif [[ $chain_name == "konstellation" ]]
+  then
+    URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
