@@ -91,7 +91,7 @@ rm -rf $node_home/*
 $HOME/go/bin/$daemon_name init test
 
 # backup $node_home/data/priv_validator_state.json as it is not included in snapshot from some providers.
-mv $node_home/data/priv_validator_state.json $node_home/config/
+#mv $node_home/data/priv_validator_state.json $node_home/config/
 
 # delete the data folder
 rm -rf $node_home/data/*
@@ -167,6 +167,8 @@ then
     URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
   elif [[ $chain_name == "konstellation" ]]
   then
+    cd $node_home/data/
+
     URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
     URL="https://mercury-nodes.net/knstl-snapshot/$URL"
   else
@@ -218,7 +220,7 @@ then
 fi
 
 # restore priv_validator_state.json if it does not exist in the snapshot
-[ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
+#[ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
 
 
 # set minimum gas prices & rpc port
