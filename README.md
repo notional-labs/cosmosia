@@ -22,28 +22,28 @@ bash ./rpc/docker_service_create.sh cosmoshub
 ```
 
 Supported chains:
-- Osmosis
-- Starname
-- Regen
-- Akash
-- Gaia
-- Sentinel
-- E-Money
-- Ixo
-- Juno
-- Sifchain
-- Likecoin
-- Ki
-- Cyber
-- Cheqd
-- Stargaze
-- Band
-- Chihuahua
-- Kava
-- BitCanna
-- Konstellation
-- Omniflix
-- Terra
+1. Osmosis
+2. Starname
+3. Regen
+4. Akash
+5. Gaia
+6. Sentinel
+7. E-Money
+8. Ixo
+9. Juno
+10. Sifchain
+11. Likecoin
+12. Ki
+13. Cyber
+14. Cheqd
+15. Stargaze
+16. Band
+17. Chihuahua
+18. Kava
+19. BitCanna
+20. Konstellation
+21. Omniflix
+22. Terra
 
 
 ### Add a new chain
