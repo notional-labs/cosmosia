@@ -225,7 +225,7 @@ then
   wget -O - $genesis_url |gzip -cd > $node_home/config/genesis.json
 elif [[ $addrbook_url == *.json ]]
 then
-  wget -O - $genesis_url |tar -xvzf - -O > $node_hom/config/genesis.json
+  wget -O - $genesis_url |tar -xvzf - -O > $node_home/config/genesis.json
 elif [[ $addrbook_url == *.json ]]
 then
   curl -Ls $proxy_cache_url$genesis_url > $node_home/config/genesis.json
