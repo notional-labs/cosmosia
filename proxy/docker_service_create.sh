@@ -12,6 +12,6 @@ docker service create \
   --restart-delay 3s \
   --restart-max-attempts 3 \
   --restart-window 10s \
-  ubuntu:20.04 \
+  archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
