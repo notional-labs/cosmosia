@@ -6,7 +6,7 @@ docker service create \
   --name proxy \
   --replicas 1 \
   --publish 80:80 \
-  --publish 9001:9001 \
+  --publish 9001-9022:9001-9022 \
   --network cosmosia \
   --restart-condition any \
   --restart-delay 3s \
