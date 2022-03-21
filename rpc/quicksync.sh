@@ -223,7 +223,7 @@ echo "download genesis file..."
 if [[ $addrbook_url == *.json.gz ]]
 then
   wget -O - $genesis_url |gzip -cd > $node_home/config/genesis.json
-elif [[ $addrbook_url == *.json ]]
+elif [[ $addrbook_url == *.tar.gz ]]
 then
   wget -O - $genesis_url |tar -xvzf - -O > $node_home/config/genesis.json
 elif [[ $addrbook_url == *.json ]]
