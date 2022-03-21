@@ -14,7 +14,4 @@ docker service create \
   --restart-window 10s \
   ubuntu:20.04 \
   /bin/bash -c \
-  "pacman -Syu --noconfirm && pacman -S --noconfirm nginx curl && \
-  curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/nginx.conf > /etc/nginx/nginx.conf && \
-  curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/index.html > /usr/share/nginx/html/index.html && \
-  /usr/sbin/nginx -g \"daemon off;\""
+  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
