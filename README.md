@@ -21,7 +21,29 @@ To create a RPC service, execute on Swarm manager node:
 bash ./rpc/docker_service_create.sh cosmoshub
 ```
 
-See supported chains in [chain_registry.ini](./data/chain_registry.ini)
+Supported chains:
+- Osmosis
+- Starname
+- Regen
+- Akash
+- Gaia
+- Sentinel
+- E-Money
+- Ixo
+- Juno
+- Sifchain
+- Likecoin
+- Ki
+- Cyber
+- Cheqd
+- Stargaze
+- Band
+- Chihuahua
+- Kava
+- BitCanna
+- Konstellation
+- Omniflix
+- Terra
 
 
 ### Add a new chain
