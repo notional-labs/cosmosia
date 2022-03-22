@@ -44,7 +44,7 @@ Supported chains:
 20. Konstellation
 21. Omniflix
 22. Terra
-
+23. Vidulum
 
 ### Add a new chain
 Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
