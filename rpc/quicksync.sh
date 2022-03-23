@@ -11,7 +11,6 @@ fi
 
 echo "#################################################################################################################"
 echo "# prepare"
-pacman -Syy --noconfirm go git base-devel wget jq
 
 # read config from /data/config.ini
 eval "$(curl -Ls https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/config.ini |sed 's/ *= */=/g')"
@@ -45,6 +44,7 @@ echo "minimum_gas_prices=$minimum_gas_prices"
 echo "addrbook_url=$addrbook_url"
 echo "snapshot_provider=$snapshot_provider"
 echo "start_flags=$start_flags"
+echo "pacman_pkgs=$pacman_pkgs"
 
 if [[ -z $git_repo ]]
 then
@@ -52,6 +52,7 @@ then
   exit
 fi
 
+pacman -Syu --noconfirm go git base-devel wget jq $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "build from source:"
@@ -171,6 +172,9 @@ then
 
     URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
     URL="https://mercury-nodes.net/knstl-snapshot/$URL"
+  elif [[ $chain_name == "konstellation" ]]
+  then
+    URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-data-indexed.tar.gz" |jq -r '.mediaLink')
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
@@ -188,7 +192,7 @@ then
   exit
 fi
 
-echo "extract the snapshot to current path..."
+echo "download and extract the snapshot to current path..."
 if [[ $URL == *.tar.lz4 ]]
 then
   wget --timeout=0 -O - "$proxy_cache_url$URL" |lz4 -dq |tar -xf -

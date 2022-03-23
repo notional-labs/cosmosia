@@ -45,6 +45,7 @@ Supported chains:
 21. Omniflix
 22. Terra
 23. Vidulum
+24. Provenance
 
 ### Add a new chain
 Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
