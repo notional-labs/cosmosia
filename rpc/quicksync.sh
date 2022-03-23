@@ -196,7 +196,7 @@ echo "download and extract the snapshot to current path..."
 
 # remove query params from url so we can figure out the file type
 # latest-data-indexed.tar.gz?generation=1647902753676847&alt=media => latest-data-indexed.tar.gz
-url_stripped = ${URL%%\?*}
+url_stripped=${URL%%\?*}
 echo "url_stripped=$url_stripped"
 
 if [[ $url_stripped == *.tar.lz4 ]]
