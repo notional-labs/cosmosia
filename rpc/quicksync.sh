@@ -130,11 +130,11 @@ elif [[ $snapshot_provider == "polkachu.com" ]]
 then
   # using https://polkachu.com/tendermint_snapshots/juno
   # setting for polkachu snapshot
-  sed -i.bak -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
-  sed -i.bak -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
-  sed -i.bak -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $node_home/config/app.toml
-  sed -i.bak -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
-  sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $node_home/config/app.toml
+#  sed -i.bak -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
+#  sed -i.bak -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
+#  sed -i.bak -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $node_home/config/app.toml
+#  sed -i.bak -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
+#  sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $node_home/config/app.toml
 
   URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
 elif [[ $snapshot_provider == "alexvalidator.com" ]]
