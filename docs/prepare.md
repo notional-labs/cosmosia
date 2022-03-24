@@ -40,3 +40,5 @@ cd $HOME
 git clone https://github.com/baabeetaa/cosmosia
 ```
 
+### LVM
+see [LVM](./lvm.md)
