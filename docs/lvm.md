@@ -25,7 +25,7 @@ mount /dev/vg0/lv_data /mnt/data
 
 add to `/etc/fstab`:
 ```
-/dev/vg0/lv_data /mnt/data defaults 0 0
+/dev/vg0/lv_data /mnt/data ext4 defaults 0 0
 ```
 
 ---
