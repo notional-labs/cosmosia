@@ -82,7 +82,6 @@ cd $repo_name
 git checkout $version
 make install
 
-
 echo "#################################################################################################################"
 echo "download snapshot:"
 
@@ -90,9 +89,6 @@ echo "download snapshot:"
 rm -rf $node_home/*
 
 $HOME/go/bin/$daemon_name init test
-
-# backup $node_home/data/priv_validator_state.json as it is not included in snapshot from some providers.
-#mv $node_home/data/priv_validator_state.json $node_home/config/
 
 # delete the data folder
 rm -rf $node_home/data/*
@@ -128,14 +124,6 @@ then
   fi
 elif [[ $snapshot_provider == "polkachu.com" ]]
 then
-  # using https://polkachu.com/tendermint_snapshots/juno
-  # setting for polkachu snapshot
-#  sed -i.bak -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
-#  sed -i.bak -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
-#  sed -i.bak -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $node_home/config/app.toml
-#  sed -i.bak -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
-#  sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $node_home/config/app.toml
-
   URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
 elif [[ $snapshot_provider == "alexvalidator.com" ]]
 then
@@ -229,10 +217,6 @@ then
   fi
 fi
 
-# restore priv_validator_state.json if it does not exist in the snapshot
-#[ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
-
-
 # set minimum gas prices & rpc port
 sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
 sed -i.bak '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
@@ -256,9 +240,5 @@ fi
 echo "download addrbook..."
 curl -Ls  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
 
-
+# start chain
 $HOME/go/bin/$daemon_name start $start_flags
-
-
-
-
