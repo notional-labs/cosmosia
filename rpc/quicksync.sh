@@ -162,7 +162,7 @@ then
     URL="https://mercury-nodes.net/knstl-snapshot/$URL"
   elif [[ $chain_name == "provenance" ]]
   then
-    URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-data-indexed.tar.gz" |jq -r '.mediaLink')
+    URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-post-green.tar.gz" |jq -r '.mediaLink')
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
