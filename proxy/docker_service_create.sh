@@ -8,6 +8,7 @@ docker service create \
   --publish 80:80 \
   --publish 9001-9099:9001-9099 \
   --network cosmosia \
+  --constraint 'node.role==manager'
   --restart-condition any \
   --restart-delay 3s \
   --restart-max-attempts 3 \
