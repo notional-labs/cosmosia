@@ -52,7 +52,7 @@ then
   exit
 fi
 
-pacman -Syu --noconfirm go git base-devel wget jq $pacman_pkgs
+pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "build from source:"
@@ -242,5 +242,14 @@ fi
 echo "download addrbook..."
 curl -Ls  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
 
-# start chain
+echo "#################################################################################################################"
+echo "start nginx..."
+curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/rpc/nginx.conf" > /etc/nginx/nginx.conf
+curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/rpc/healthcheck.sh" > /usr/share/nginx/html/healthcheck.sh
+chmod +x /usr/share/nginx/html/healthcheck.sh
+spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
+/usr/sbin/nginx
+
+echo "#################################################################################################################"
+echo "start chain..."
 $HOME/go/bin/$daemon_name start $start_flags
