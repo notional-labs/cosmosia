@@ -217,9 +217,11 @@ then
   fi
 fi
 
-# set minimum gas prices & rpc port
-sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
-sed -i.bak '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
+# set minimum gas prices & rpc port...
+sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
+sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
+sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 400/" $node_home/config/config.toml
+sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 100/" $node_home/config/config.toml
 
 echo "download genesis file..."
 if [[ $addrbook_url == *.json.gz ]]
