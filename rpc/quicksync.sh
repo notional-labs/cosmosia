@@ -46,8 +46,7 @@ echo "snapshot_provider=$snapshot_provider"
 echo "start_flags=$start_flags"
 echo "pacman_pkgs=$pacman_pkgs"
 
-if [[ -z $git_repo ]]
-then
+if [[ -z $git_repo ]]; then
   echo "Not support chain $chain_name"
   exit
 fi
@@ -59,8 +58,7 @@ echo "build from source:"
 
 cd $HOME
 
-if [[ $chain_name == "sentinel" ]]
-then
+if [[ $chain_name == "sentinel" ]]; then
   # sentinel requires custom build
   mkdir -p $HOME/go/src/github.com/sentinel-official
   cd $HOME/go/src/github.com/sentinel-official
@@ -97,72 +95,56 @@ rm -rf $node_home/data/*
 
 cd $node_home
 
-if [[ $snapshot_provider == "quicksync.io" ]]
-then
+if [[ $snapshot_provider == "quicksync.io" ]]; then
   # using quicksync.io https://quicksync.io/networks/cosmos.html
 
-  if [[ $chain_name == "cosmoshub" ]]
-  then
+  if [[ $chain_name == "cosmoshub" ]]; then
     URL=`curl -s https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
-  elif [[ $chain_name == "osmosis" ]]
-  then
+  elif [[ $chain_name == "osmosis" ]]; then
     URL=`curl -s https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
-  elif [[ $chain_name == "emoney" ]]
-  then
+  elif [[ $chain_name == "emoney" ]]; then
     URL=`curl https://quicksync.io/emoney.json|jq -r '.[] |select(.file=="emoney-3-default")|.url'`
-  elif [[ $chain_name == "terra" ]]
-  then
+  elif [[ $chain_name == "terra" ]]; then
     URL=`curl https://quicksync.io/terra.json|jq -r '.[] |select(.file=="columbus-5-pruned")|select (.mirror=="Netherlands")|.url'`
-  elif [[ $chain_name == "bandchain" ]]
-  then
+  elif [[ $chain_name == "bandchain" ]]; then
     URL=`curl https://quicksync.io/band.json |jq -r '.[] |select(.file=="laozi-mainnet-pruned")|.url'`
-  elif [[ $chain_name == "kava" ]]
-  then
+  elif [[ $chain_name == "kava" ]]; then
     URL=`curl https://quicksync.io/kava.json |jq -r '.[] |select(.file=="kava-9-pruned")|.url'`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
     exit
   fi
-elif [[ $snapshot_provider == "polkachu.com" ]]
-then
+elif [[ $snapshot_provider == "polkachu.com" ]]; then
   URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
-elif [[ $snapshot_provider == "alexvalidator.com" ]]
-then
+elif [[ $snapshot_provider == "alexvalidator.com" ]]; then
   cd $node_home/data/
 
   URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ |egrep -o ">.*tar" |tr -d ">")
   URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
-elif [[ $snapshot_provider == "cosmosia" ]]
-then
+elif [[ $snapshot_provider == "cosmosia" ]]; then
   URL=`curl -s http://65.108.121.153/$chain_name.json |jq -r '.snapshot_url'`
-elif [[ $snapshot_provider == "staketab.com" ]]
-then
+elif [[ $snapshot_provider == "staketab.com" ]]; then
   cd $node_home/data/
 
   URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm")
   URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
 
-  if [[ $chain_name == "stargaze" ]]
-  then
+  if [[ $chain_name == "stargaze" ]]; then
     URL_WASM=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">")
     URL_WASM="https://cosmos-snap.staketab.com/$chain_name/$URL_WASM"
   fi
-elif [[ $snapshot_provider == "custom" ]]
-then
-  if [[ $chain_name == "cheqd" ]]
-  then
+elif [[ $snapshot_provider == "custom" ]]; then
+  if [[ $chain_name == "cheqd" ]]; then
     cd $node_home/data/
 
     URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n1 |sed -e 's/<[^>]*>//g')
     URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
-  elif [[ $chain_name == "konstellation" ]]
-  then
+  elif [[ $chain_name == "konstellation" ]]; then
     cd $node_home/data/
 
     URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
     URL="https://mercury-nodes.net/knstl-snapshot/$URL"
-  elif [[ $chain_name == "provenance" ]]
-  then
+  elif [[ $chain_name == "provenance" ]]; then
     URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-post-green.tar.gz" |jq -r '.mediaLink')
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
@@ -175,8 +157,7 @@ fi
 
 echo "URL=$URL"
 
-if [[ -z $URL ]]
-then
+if [[ -z $URL ]]; then
   echo "URL to download snapshot is empty. Pls fix it!"
   exit
 fi
@@ -188,14 +169,11 @@ echo "download and extract the snapshot to current path..."
 url_stripped=${URL%%\?*}
 echo "url_stripped=$url_stripped"
 
-if [[ $url_stripped == *.tar.lz4 ]]
-then
+if [[ $url_stripped == *.tar.lz4 ]]; then
   wget --timeout=0 -O - "$proxy_cache_url$URL" |lz4 -dq |tar -xf -
-elif [[ $url_stripped == *.tar ]]
-then
+elif [[ $url_stripped == *.tar ]]; then
   wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xf -
-elif [[ $url_stripped == *.tar.gz ]]
-then
+elif [[ $url_stripped == *.tar.gz ]]; then
   wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xzf -
 else
   echo "Not support snapshot file type."
@@ -203,14 +181,12 @@ else
 fi
 
 # download wasm snapshot, for stargaze only atm
-if [[ ! -z $URL_WASM ]]
-then
+if [[ ! -z $URL_WASM ]]; then
   echo "URL_WASM=$URL_WASM"
   mkdir -p $node_home/wasm
 
   echo "extract the snapshot of wasm..."
-  if [[ $URL_WASM == *.tar ]]
-  then
+  if [[ $URL_WASM == *.tar ]]; then
     wget --timeout=0 -O - "$proxy_cache_url$URL_WASM" |tar -xvf - -C $node_home/wasm/
   else
     echo "Not support snapshot file type."
@@ -225,14 +201,11 @@ sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 400/" $node_hom
 sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 100/" $node_home/config/config.toml
 
 echo "download genesis file..."
-if [[ $addrbook_url == *.json.gz ]]
-then
+if [[ $addrbook_url == *.json.gz ]]; then
   wget -O - $genesis_url |gzip -cd > $node_home/config/genesis.json
-elif [[ $addrbook_url == *.tar.gz ]]
-then
+elif [[ $addrbook_url == *.tar.gz ]]; then
   wget -O - $genesis_url |tar -xvzf - -O > $node_home/config/genesis.json
-elif [[ $addrbook_url == *.json ]]
-then
+elif [[ $addrbook_url == *.json ]]; then
   curl -Ls $proxy_cache_url$genesis_url > $node_home/config/genesis.json
 else
   echo "Not support genesis file type"
