@@ -46,6 +46,7 @@ Supported chains:
 23. Vidulum
 24. Provenance
 25. Dig
+26. Gravity-Bridge
 
 ### Add a new chain
 Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)

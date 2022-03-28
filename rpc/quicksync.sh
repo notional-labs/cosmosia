@@ -10,7 +10,7 @@ then
 fi
 
 echo "#################################################################################################################"
-echo "# prepare"
+echo "#prepare.."
 
 # read config from /data/config.ini
 eval "$(curl -Ls https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/config.ini |sed 's/ *= */=/g')"
@@ -80,6 +80,7 @@ repo_name=$(basename $git_repo |cut -d. -f1)
 cd $repo_name
 
 git checkout $version
+[[ $chain_name == "gravitybridge" ]] && cd module
 make install
 
 echo "#################################################################################################################"
