@@ -73,11 +73,11 @@ echo "curren path: $PWD"
 
 # git clone $git_repo $chain_name
 # cd $chain_name
-git clone $git_repo
+git clone --single-branch --branch $version $git_repo
 repo_name=$(basename $git_repo |cut -d. -f1)
 cd $repo_name
 
-git checkout $version
+# git checkout $version
 [[ $chain_name == "gravitybridge" ]] && cd module
 make install
 
