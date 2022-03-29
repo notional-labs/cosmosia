@@ -7,6 +7,7 @@ docker service create \
   --replicas 1 \
   --publish 80:80 \
   --publish 9001-9099:9001-9099 \
+  --publish 19999:19999 \
   --network cosmosia \
   --constraint 'node.role==manager' \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
