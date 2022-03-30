@@ -45,8 +45,10 @@ generate_new_upstream_config () {
       while read -r ip_addr || [[ -n $ip_addr ]]; do
         status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 "http://$ip_addr/healthcheck")
         if [[ $status_code == "200" ]]; then
-          [[ ! -z $addr_str ]] && addr_str="$addr_str"$'\n'
-          [[ ! -z $addr_str_grpc ]] && addr_str_grpc="$addr_str_grpc"$'\n'
+          if [[ ! -z "$addr_str" ]]; then
+            addr_str="$addr_str"$'\n'
+            addr_str_grpc="$addr_str_grpc"$'\n'
+          fi
           addr_str="$addr_str""    server $ip_addr;"
           addr_str_grpc="$addr_str_grpc""    server $ip_addr:9090;"
 
