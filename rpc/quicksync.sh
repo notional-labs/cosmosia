@@ -89,6 +89,9 @@ rm -rf $node_home/*
 
 $HOME/go/bin/$daemon_name init test
 
+# backup $node_home/data/priv_validator_state.json as it is not included in snapshot from some providers.
+mv $node_home/data/priv_validator_state.json $node_home/config/
+
 # delete the data folder
 rm -rf $node_home/data/*
 
@@ -193,6 +196,9 @@ if [[ ! -z $URL_WASM ]]; then
     exit
   fi
 fi
+
+# restore priv_validator_state.json if it does not exist in the snapshot
+[ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
 
 # set minimum gas prices & rpc port...
 sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
