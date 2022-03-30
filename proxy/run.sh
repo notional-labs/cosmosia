@@ -54,8 +54,10 @@ generate_new_upstream_config () {
         fi
       done < <(echo "$new_ips")
 
-      [[ ! $is_healthy ]] && addr_str="    server 127.0.0.1:1;"
-      [[ ! $is_healthy ]] && addr_str_grpc="    server 127.0.0.1:1;"
+      if [[ "$is_healthy" == "false" ]]; then
+        addr_str="    server 127.0.0.1:1;"
+        addr_str_grpc="    server 127.0.0.1:1;"
+      fi
     fi
 
     echo "upstream lb_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
