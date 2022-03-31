@@ -10,6 +10,10 @@ then
 fi
 
 
+
+git_branch=$(git symbolic-ref --short -q HEAD)
+
+
 # delete existing service
 docker service rm $chain_name
 
@@ -23,5 +27,5 @@ docker service create \
   --restart-window 10m \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/rpc/quicksync.sh > ~/quicksync.sh && \
+  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/rpc/quicksync.sh > ~/quicksync.sh && \
   /bin/bash ~/quicksync.sh $chain_name"

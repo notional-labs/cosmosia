@@ -233,3 +233,7 @@ spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
 echo "#################################################################################################################"
 echo "start chain..."
 $HOME/go/bin/$daemon_name start $start_flags
+
+
+# loop forever for debugging only
+while true; do sleep 5; done
