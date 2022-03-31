@@ -10,6 +10,7 @@ killall netdata
 
 curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/netdata.conf > /opt/netdata/netdata-configs/netdata.conf
 curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/netdata.python.d.nginx.conf > /opt/netdata/netdata-configs/python.d/nginx.conf
+curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/netdata.python.d.web_log.conf > /opt/netdata/etc/netdata/python.d/web_log.conf
 
 /opt/netdata/bin/srv/netdata
 
