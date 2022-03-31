@@ -5,6 +5,7 @@ pacman -S --noconfirm nginx python base-devel dnsutils
 # netdata
 
 bash <(curl -Ss https://my-netdata.io/kickstart.sh)
+sleep 5
 
 killall netdata
 
@@ -13,7 +14,7 @@ curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/netdata.
 curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/netdata.python.d.web_log.conf > /opt/netdata/etc/netdata/python.d/web_log.conf
 
 /opt/netdata/bin/srv/netdata
-
+sleep 5
 
 ########################################################################################################################
 # dynamic upstream
@@ -85,9 +86,18 @@ cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
 
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
+sleep 5
 
 ########################################################################################################################
 # big loop
+
+killall netdata
+killall nginx
+sleep 5
+/usr/sbin/nginx
+sleep 5
+/opt/netdata/bin/srv/netdata
+
 
 while true; do
   generate_new_upstream_config
