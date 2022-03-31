@@ -1,7 +1,10 @@
+
+git_branch=$(git symbolic-ref --short -q HEAD)
+
 # delete existing service
 docker service rm proxy
 
-
+# create new service
 docker service create \
   --name proxy \
   --replicas 1 \
@@ -17,4 +20,4 @@ docker service create \
   --restart-window 10m \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
