@@ -140,7 +140,7 @@ elif [[ $snapshot_provider == "custom" ]]; then
   if [[ $chain_name == "cheqd" ]]; then
     cd $node_home/data/
 
-    URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n1 |sed -e 's/<[^>]*>//g')
+    URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n2| head -n1 |sed -e 's/<[^>]*>//g')
     URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
   elif [[ $chain_name == "konstellation" ]]; then
     cd $node_home/data/
