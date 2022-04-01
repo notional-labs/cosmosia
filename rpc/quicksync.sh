@@ -173,11 +173,11 @@ url_stripped=${URL%%\?*}
 echo "url_stripped=$url_stripped"
 
 if [[ $url_stripped == *.tar.lz4 ]]; then
-  wget --timeout=0 -O - "$proxy_cache_url$URL" |lz4 -dq |tar -xf -
+  wget -O - "$proxy_cache_url$URL" |lz4 -dq |tar -xf -
 elif [[ $url_stripped == *.tar ]]; then
-  wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xf -
+  wget -O - "$proxy_cache_url$URL" |tar -xf -
 elif [[ $url_stripped == *.tar.gz ]]; then
-  wget --timeout=0 -O - "$proxy_cache_url$URL" |tar -xzf -
+  wget -O - "$proxy_cache_url$URL" |tar -xzf -
 else
   echo "Not support snapshot file type."
   exit
@@ -190,7 +190,7 @@ if [[ ! -z $URL_WASM ]]; then
 
   echo "extract the snapshot of wasm..."
   if [[ $URL_WASM == *.tar ]]; then
-    wget --timeout=0 -O - "$proxy_cache_url$URL_WASM" |tar -xvf - -C $node_home/wasm/
+    wget -O - "$proxy_cache_url$URL_WASM" |tar -xvf - -C $node_home/wasm/
   else
     echo "Not support snapshot file type."
     exit
