@@ -235,5 +235,9 @@ echo "start chain..."
 $HOME/go/bin/$daemon_name start $start_flags
 
 
+EXITCODE=$?
+echo "chain stopped with exit code=$EXITCODE"
+
+
 # loop forever for debugging only
 while true; do sleep 5; done
