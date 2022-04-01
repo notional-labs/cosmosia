@@ -33,7 +33,7 @@ generate_new_upstream_config () {
 
   for service_name in $RPC_SERVICES; do
     # use dig to figure out IPs of service
-    new_ips=$(dig +short "tasks.$service_name")
+    new_ips=$(dig +short "tasks.$service_name" |sort)
 
     addr_str=""
     addr_str_grpc=""
