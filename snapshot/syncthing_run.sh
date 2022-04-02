@@ -12,13 +12,13 @@ echo "##########################################################################
 echo "#prepare..."
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm syncthing
+pacman -S --noconfirm syncthing screen
 
 echo "#################################################################################################################"
 echo "#config syncthing..."
 
 echo "run syncthing the 1st time to generate default config"
-syncthing
+screen -S syncthing -dm syncthing
 sleep 30
 
 echo "kill syncthing"
