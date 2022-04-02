@@ -4,7 +4,7 @@
 
 syncthing_name="$1"
 
-if [[ -z $chain_name ]]
+if [[ -z $syncthing_name ]]
 then
   echo "No syncthing_name. usage eg., ./docker_service_create_syncthing.sh syncthing1"
   exit
