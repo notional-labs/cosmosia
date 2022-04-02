@@ -17,16 +17,19 @@ pacman -S --noconfirm syncthing
 echo "#################################################################################################################"
 echo "#config syncthing..."
 
-# run syncthing the 1st time to generate default config
+echo "run syncthing the 1st time to generate default config"
 syncthing
 sleep 30
 
+echo "kill syncthing"
 killall syncthing
+sleep 5
 
-# extract config files from swarm secret
+echo "extract config files from swarm secret"
 tar -xvf "/run/secrets/$syncthing_name.tar.gz" -C $HOME/.config/syncthing/
 
 echo "#################################################################################################################"
+echo "run syncthing"
 syncthing
 
 while true; do
