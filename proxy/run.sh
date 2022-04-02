@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm nginx python base-devel dnsutils
+pacman -S --noconfirm base-devel dnsutils python nginx logrotate
 
 ########################################################################################################################
 # netdata
@@ -89,6 +89,12 @@ cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
 sleep 5
 
 ########################################################################################################################
+# logrotate
+sed -i -e "s/{.*/{\n\tdaily\n\trotate 2/" /etc/logrotate.d/nginx
+sed -i -e "s/create.*/create 0644 root root/" /etc/logrotate.d/nginx
+
+
+########################################################################################################################
 # big loop
 
 killall netdata
@@ -113,6 +119,10 @@ while true; do
 
     echo "found config changes, updating..."
     cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
+
+    # need to use cron job for logrotate
+    logrotate /etc/logrotate.d/nginx
+
     nginx -s reload
   fi
 
