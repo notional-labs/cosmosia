@@ -12,27 +12,58 @@ echo "##########################################################################
 echo "#prepare..."
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm syncthing screen
+pacman -S --noconfirm syncthing screen openssh
+
+
+echo "extract config files from swarm secret..."
+
+mkdir -p $HOME/tmp
+tar -xvf "/run/secrets/$syncthing_name.tar.gz" -C $HOME/tmp/
+
+#content of .tar.gz
+: '
+syncthing1/
+syncthing1/ssh/
+syncthing1/ssh/authorized_keys
+syncthing1/ssh/ssh_host_rsa_key
+syncthing1/ssh/ssh_host_ed25519_key
+syncthing1/ssh/ssh_host_dsa_key.pub
+syncthing1/ssh/ssh_host_dsa_key
+syncthing1/ssh/ssh_host_ecdsa_key.pub
+syncthing1/ssh/ssh_host_rsa_key.pub
+syncthing1/ssh/ssh_host_ed25519_key.pub
+syncthing1/ssh/ssh_host_ecdsa_key
+syncthing1/syncthing/
+syncthing1/syncthing/key.pem
+syncthing1/syncthing/cert.pem
+syncthing1/syncthing/config.xml
+'
 
 echo "#################################################################################################################"
-echo "#config syncthing..."
+echo "openssh..."
 
-echo "run syncthing the 1st time to generate default config"
+mkdir -p $HOME/.ssh
+cp $HOME/tmp/syncthing1/ssh/authorized_keys $HOME/.ssh/
+cp $HOME/tmp/syncthing1/ssh/ssh_host_* /etc/ssh/
+
+# start sshd
+/bin/sshd
+
+
+echo "#################################################################################################################"
+echo "syncthing..."
+
+#run syncthing the 1st time to generate default config
 screen -S syncthing -dm syncthing
 sleep 30
-
-echo "kill syncthing"
 killall syncthing
 sleep 5
+cp $HOME/tmp/syncthing1/syncthing/* $HOME/.config/syncthing/
 
-echo "extract config files from swarm secret"
-tar -xvf "/run/secrets/$syncthing_name.tar.gz" -C $HOME/.config/syncthing/
-
-echo "#################################################################################################################"
-echo "run syncthing"
+# run syncthing again
 syncthing
 
+
 while true; do
-  # sleep 60 seconds...
   sleep 60
 done
