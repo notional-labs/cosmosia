@@ -43,8 +43,8 @@ echo "##########################################################################
 echo "openssh..."
 
 mkdir -p $HOME/.ssh
-cp $HOME/tmp/syncthing1/ssh/authorized_keys $HOME/.ssh/
-cp $HOME/tmp/syncthing1/ssh/ssh_host_* /etc/ssh/
+cp $HOME/tmp/$syncthing_name/ssh/authorized_keys $HOME/.ssh/
+cp $HOME/tmp/$syncthing_name/ssh/ssh_host_* /etc/ssh/
 
 # start sshd
 /bin/sshd
@@ -58,7 +58,7 @@ screen -S syncthing -dm syncthing
 sleep 30
 killall syncthing
 sleep 5
-cp $HOME/tmp/syncthing1/syncthing/* $HOME/.config/syncthing/
+cp $HOME/tmp/$syncthing_name/syncthing/* $HOME/.config/syncthing/
 
 # run syncthing again
 syncthing
