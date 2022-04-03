@@ -12,7 +12,7 @@ echo "##########################################################################
 echo "#prepare..."
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm syncthing screen openssh
+pacman -S --noconfirm syncthing screen openssh nginx
 
 
 echo "extract config files from swarm secret..."
@@ -48,6 +48,12 @@ cp $HOME/tmp/$syncthing_name/ssh/ssh_host_* /etc/ssh/
 
 # start sshd
 /bin/sshd
+
+
+echo "#################################################################################################################"
+echo "nginx..."
+curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/syncthing.nginx.conf" > /etc/nginx/nginx.conf
+/usr/sbin/nginx
 
 
 echo "#################################################################################################################"
