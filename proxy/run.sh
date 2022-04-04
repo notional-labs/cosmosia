@@ -31,13 +31,37 @@ rm -rf "$TMP_DIR/*"
 generate_new_upstream_config () {
   echo "# This file is generated dynamically, dont edit." > $TMP_UPSTREAM_CONFIG_FILE
 
+  # generate upstream for syncthing
+  syncthing1_ip=$(dig +short "tasks.syncthing1")
+  syncthing2_ip=$(dig +short "tasks.syncthing2")
+
+  echo "upstream lb_syncthing {" >> $TMP_UPSTREAM_CONFIG_FILE
+
+  if [[ -z "$syncthing1_ip" ]] && [[ -z "$syncthing2_ip" ]]; then
+    # if both are down, write a dummy address for nginx to work
+    echo "    server 127.0.0.1:1;" >> $TMP_UPSTREAM_CONFIG_FILE
+  elif [[ ! -z "$syncthing1_ip" ]] && [[ ! -z "$syncthing2_ip" ]]; then
+    # both are up, write the first one active and the 2nd one as backup
+    echo "    server $syncthing1_ip;" >> $TMP_UPSTREAM_CONFIG_FILE
+    echo "    server $syncthing2_ip    backup;" >> $TMP_UPSTREAM_CONFIG_FILE
+  else
+    # only one down, write the address up
+    [[ ! -z "$syncthing1_ip" ]] && echo "    server $syncthing1_ip;" >> $TMP_UPSTREAM_CONFIG_FILE
+    [[ ! -z "$syncthing2_ip" ]] && echo "    server $syncthing2_ip;" >> $TMP_UPSTREAM_CONFIG_FILE
+  fi
+
+  echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
+
+  ############
+
+
   for service_name in $RPC_SERVICES; do
     # use dig to figure out IPs of service
     new_ips=$(dig +short "tasks.$service_name" |sort)
 
     addr_str=""
     addr_str_grpc=""
-    if [[ -z $new_ips ]]; then
+    if [[ -z "$new_ips" ]]; then
         # write a dummy address and port so that nginx wont complain
         addr_str="    server 127.0.0.1:1;"
         addr_str_grpc="    server 127.0.0.1:1;"
