@@ -64,6 +64,9 @@ screen -S syncthing -dm syncthing
 sleep 30
 killall syncthing
 sleep 5
+
+# create default folder for syncthing
+mkdir -p /snapshot
 cp $HOME/tmp/$syncthing_name/syncthing/* $HOME/.config/syncthing/
 
 # run syncthing again
