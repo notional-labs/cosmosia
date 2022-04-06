@@ -30,7 +30,7 @@ docker service create \
   --replicas 1 \
   --network cosmosia \
   --publish $SSH_PORT \
-  --constraint 'node.hostname==$HOST' \
+  --constraint "node.hostname==$HOST" \
   --restart-condition any \
   --restart-delay 3m \
   --restart-max-attempts 3 \
