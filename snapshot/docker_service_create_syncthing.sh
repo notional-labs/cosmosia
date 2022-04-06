@@ -18,15 +18,19 @@ docker service rm $syncthing_name
 
 
 SSH_PORT="2022:22"
+HOST="cosmosia2"
 if [[ "$syncthing_name" == "syncthing2" ]]; then
   SSH_PORT="2023:22"
+  HOST="cosmosia3"
 fi
 
 docker service create \
   --name $syncthing_name \
+  --mount type=bind,source=/mnt/data/snapshot,destination=/snapshot \
   --replicas 1 \
   --network cosmosia \
   --publish $SSH_PORT \
+  --constraint 'node.hostname==$HOST' \
   --restart-condition any \
   --restart-delay 3m \
   --restart-max-attempts 3 \
