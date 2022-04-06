@@ -8,11 +8,11 @@ docker service rm proxy
 docker service create \
   --name proxy \
   --replicas 1 \
-  --publish 80:80 \
-  --publish 9001-9099:9001-9099 \
-  --publish 19999:19999 \
+  --publish mode=host,target=80,published=80 \
+  --publish mode=host,target=9001-9099,published=9001-9099 \
+  --publish mode=host,target=19999,published=19999 \
   --network cosmosia \
-  --constraint 'node.role==manager' \
+  --constraint 'node.hostname==cosmosia1' \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   --restart-condition any \
   --restart-delay 3s \
@@ -21,3 +21,5 @@ docker service create \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+
+
