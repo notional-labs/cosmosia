@@ -16,10 +16,17 @@ git_branch=$(git symbolic-ref --short -q HEAD)
 # delete existing service
 docker service rm $syncthing_name
 
+
+SSH_PORT="2022:22"
+if [[ "$syncthing_name" == "syncthing2" ]]; then
+  SSH_PORT="2023:22"
+fi
+
 docker service create \
   --name $syncthing_name \
   --replicas 1 \
   --network cosmosia \
+  --publish $SSH_PORT \
   --restart-condition any \
   --restart-delay 3m \
   --restart-max-attempts 3 \
