@@ -215,4 +215,4 @@ curl -Ls  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
 
 echo "#################################################################################################################"
 echo "start chain script"
-echo "$HOME/go/bin/$daemon_name start $start_flags" > ./start_chain.sh
+echo "$HOME/go/bin/$daemon_name start $start_flags" > $HOME/start_chain.sh

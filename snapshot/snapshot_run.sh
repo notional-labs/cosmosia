@@ -29,7 +29,7 @@ PROGRAM_CONF="/etc/supervisor/conf.d/chain.conf"
 
 cat <<EOT >> $PROGRAM_CONF
 [program:chain]
-command=/root/start_chain.sh
+command=/bin/bash /root/start_chain.sh
 autostart=false
 autorestart=false
 stderr_logfile=/var/log/chain.err.log
