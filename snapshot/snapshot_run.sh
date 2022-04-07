@@ -25,14 +25,18 @@ echo "[include]
 files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 
-PROGRAM_CONF="/etc/supervisor/conf.d/${chain_name}.conf"
+PROGRAM_CONF="/etc/supervisor/conf.d/chain.conf"
 
-echo "[program:chain]" > PROGRAM_CONF
-echo "command=/root/start_chain.sh" >> PROGRAM_CONF
-echo "autostart=false" >> PROGRAM_CONF
-echo "autorestart=false" >> PROGRAM_CONF
-echo "stderr_logfile=/var/log/chain.err.log" >> PROGRAM_CONF
-echo "stdout_logfile=/var/log/chain.out.log" >> PROGRAM_CONF
+cat <<EOT >> $PROGRAM_CONF
+[program:chain]
+command=/root/start_chain.sh
+autostart=false
+autorestart=false
+stderr_logfile=/var/log/chain.err.log
+stdout_logfile=/var/log/chain.out.log
+EOT
+
+
 
 supervisord
 
@@ -48,7 +52,7 @@ supervisord
 #  echo "catching_up=$catching_up"
 #done
 
-supervisorctl start chain:*
+supervisorctl start chain
 
 
 
