@@ -15,9 +15,9 @@ curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/sna
 source ./snapshot_download.sh
 
 
-##########################
+########################################################################################################################
 # supervised
-pacman -Syu --noconfirm python python-pip
+pacman -Syu --noconfirm python python-pip cronie
 pip install supervisor
 mkdir -p /etc/supervisor/conf.d
 echo_supervisord_conf > /etc/supervisor/supervisord.conf
@@ -36,10 +36,20 @@ stderr_logfile=/var/log/chain.err.log
 stdout_logfile=/var/log/chain.out.log
 EOT
 
-
-
 supervisord
 
+########################################################################################################################
+# cron
+
+# test cronjob
+echo "/bin/date --rfc-3339=seconds >> /var/log/cron" > $HOME/snapshot_cronjob.sh
+
+# run every minute
+echo "* * * * * root /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
+
+
+# start crond
+crond
 
 
 #echo "#################################################################################################################"
@@ -52,7 +62,7 @@ supervisord
 #  echo "catching_up=$catching_up"
 #done
 
-supervisorctl start chain
+#supervisorctl start chain
 
 
 
