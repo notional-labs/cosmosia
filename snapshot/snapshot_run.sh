@@ -14,13 +14,42 @@ cd $HOME
 curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
 source ./snapshot_download.sh
 
-echo "#################################################################################################################"
-echo "start chain..."
-source ./start_chain.sh
+
+##########################
+# supervised
+pacman -Syu --noconfirm python python-pip
+pip install supervisor
+mkdir -p /etc/supervisor/conf.d
+echo_supervisord_conf > /etc/supervisor/supervisord.conf
+echo "[include]
+files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 
-EXITCODE=$?
-echo "chain stopped with exit code=$EXITCODE"
+PROGRAM_CONF="/etc/supervisor/conf.d/${chain_name}.conf"
+
+echo "[program:chain]" > PROGRAM_CONF
+echo "command=/root/start_chain.sh" >> PROGRAM_CONF
+echo "autostart=false" >> PROGRAM_CONF
+echo "autorestart=false" >> PROGRAM_CONF
+echo "stderr_logfile=/var/log/chain.err.log" >> PROGRAM_CONF
+echo "stdout_logfile=/var/log/chain.out.log" >> PROGRAM_CONF
+
+supervisord
+
+
+
+#echo "#################################################################################################################"
+#echo "waiting until chain get synced..."
+#
+#catching_up=true
+#while [[ "catching_up" == "true" ]]; do
+#  sleep 60;
+#  catching_up=$(curl --silent --max-time 3 "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
+#  echo "catching_up=$catching_up"
+#done
+
+supervisorctl start chain:*
+
 
 
 # loop forever for debugging only
