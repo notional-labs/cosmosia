@@ -39,8 +39,7 @@ supervisord
 ########################################################################################################################
 # cron
 
-# test cronjob
-echo "/bin/date --rfc-3339=seconds >> /var/log/cron" > $HOME/snapshot_cronjob.sh
+curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
 
 # run at 11am daily
 echo "0 11 * * * root /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
