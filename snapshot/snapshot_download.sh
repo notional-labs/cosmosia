@@ -25,21 +25,28 @@ eval "$(curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/c
   }
   ')"
 
-echo "git_repo=$git_repo"
-echo "version=$version"
-echo "genesis_url=$genesis_url"
-echo "daemon_name=$daemon_name"
-echo "node_home=$node_home"
-echo "minimum_gas_prices=$minimum_gas_prices"
-echo "addrbook_url=$addrbook_url"
-echo "snapshot_provider=$snapshot_provider"
-echo "start_flags=$start_flags"
-echo "pacman_pkgs=$pacman_pkgs"
+
 
 if [[ -z $git_repo ]]; then
   echo "Not support chain $chain_name"
   exit
 fi
+
+# write chain info to bash file, so that cronjob could know
+cat <<EOT >> $HOME/chain_info.sh
+chain_name=$chain_name
+git_repo=$git_repo
+version=$version
+genesis_url=$genesis_url
+daemon_name=$daemon_name
+node_home=$node_home
+minimum_gas_prices=$minimum_gas_prices
+addrbook_url=$addrbook_url
+snapshot_provider=$snapshot_provider
+start_flags=$start_flags
+pacman_pkgs=$pacman_pkgs
+EOT
+
 
 pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap $pacman_pkgs
 

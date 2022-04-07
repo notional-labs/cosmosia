@@ -25,9 +25,7 @@ echo "[include]
 files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 
-PROGRAM_CONF="/etc/supervisor/conf.d/chain.conf"
-
-cat <<EOT >> $PROGRAM_CONF
+cat <<EOT >> /etc/supervisor/conf.d/chain.conf
 [program:chain]
 command=/bin/bash /root/start_chain.sh
 autostart=false
@@ -45,25 +43,11 @@ supervisord
 echo "/bin/date --rfc-3339=seconds >> /var/log/cron" > $HOME/snapshot_cronjob.sh
 
 # run every minute
-echo "* * * * * root /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
+#echo "* * * * * root /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
 
 
 # start crond
 crond
-
-
-#echo "#################################################################################################################"
-#echo "waiting until chain get synced..."
-#
-#catching_up=true
-#while [[ "catching_up" == "true" ]]; do
-#  sleep 60;
-#  catching_up=$(curl --silent --max-time 3 "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
-#  echo "catching_up=$catching_up"
-#done
-
-#supervisorctl start chain
-
 
 
 # loop forever for debugging only
