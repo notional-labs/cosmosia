@@ -42,8 +42,8 @@ supervisord
 # test cronjob
 echo "/bin/date --rfc-3339=seconds >> /var/log/cron" > $HOME/snapshot_cronjob.sh
 
-# run every minute
-#echo "* * * * * root /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
+# run at 11am daily
+echo "0 11 * * * root /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
 
 
 # start crond
