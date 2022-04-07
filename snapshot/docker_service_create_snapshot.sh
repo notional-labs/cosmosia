@@ -1,11 +1,11 @@
-# usage: ./docker_service_create_snaphost.sh chain_name
-# eg., ./docker_service_create_snaphost.sh cosmoshub
+# usage: ./docker_service_create_snapshost.sh chain_name
+# eg., ./docker_service_create_snapshost.sh cosmoshub
 
 chain_name="$1"
 
 if [[ -z $chain_name ]]
 then
-  echo "No chain_name. usage eg., ./docker_service_create_snaphost.sh cosmoshub"
+  echo "No chain_name. usage eg., ./docker_service_create_snapshost.sh cosmoshub"
   exit
 fi
 
@@ -29,5 +29,5 @@ docker service create \
   --restart-window 10m \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/snaphost/snapshot_run.sh > ~/snapshot_run.sh && \
+  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/snapshot/snapshot_run.sh > ~/snapshot_run.sh && \
   /bin/bash ~/snapshot_run.sh $chain_name"

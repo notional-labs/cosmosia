@@ -1,11 +1,11 @@
-# usage: ./snaphost_run.sh chain_name
-# eg., ./quicsnaphost_runksynch.sh cosmoshub
+# usage: ./snapshost_run.sh chain_name
+# eg., ./snapshost_run.sh cosmoshub
 
 chain_name="$1"
 
 if [[ -z $chain_name ]]
 then
-  echo "No chain_name. usage eg., ./snaphost_run.sh cosmoshub"
+  echo "No chain_name. usage eg., ./snapshost_run.sh cosmoshub"
   exit
 fi
 
