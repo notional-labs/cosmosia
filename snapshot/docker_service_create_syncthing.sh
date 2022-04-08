@@ -26,7 +26,7 @@ fi
 
 docker service create \
   --name $syncthing_name \
-  --mount type=bind,source=/mnt/data/snapshot,destination=/snapshot \
+  --mount type=bind,source=/mnt/data/syncthing,destination=/data \
   --replicas 1 \
   --network cosmosia \
   --publish $SSH_PORT \
