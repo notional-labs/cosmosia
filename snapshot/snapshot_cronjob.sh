@@ -31,7 +31,6 @@ TAR_FILE_PATH="$HOME/$TAR_FILENAME"
 tar -czvf $TAR_FILE_PATH ./data
 
 # copy to /snapshot folder
-mkdir -p /snapshot
 mv $TAR_FILE_PATH /snapshot/
 cp $node_home/config/addrbook.json /snapshot/
 

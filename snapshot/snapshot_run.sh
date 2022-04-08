@@ -15,9 +15,17 @@ curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/sna
 source ./snapshot_download.sh
 
 
+pacman -Syu --noconfirm python python-pip cronie nginx
+
+echo "#################################################################################################################"
+echo "nginx..."
+
+curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot.nginx.conf" > /etc/nginx/nginx.conf
+mkdir -p /snapshot
+/usr/sbin/nginx
+
 ########################################################################################################################
 # supervised
-pacman -Syu --noconfirm python python-pip cronie
 pip install supervisor
 mkdir -p /etc/supervisor/conf.d
 echo_supervisord_conf > /etc/supervisor/supervisord.conf
@@ -40,7 +48,6 @@ supervisord
 # cron
 
 curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
-
 
 if [[ -z $snapshot_time ]]; then
   echo "No time setting to take snapshot, please set snapshot_time in chain_registry.ini"
