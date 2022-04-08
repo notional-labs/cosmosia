@@ -41,8 +41,15 @@ supervisord
 
 curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
 
-# run at 11am daily
-echo "0 11 * * * root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
+
+if [[ -z $snapshot_time ]]; then
+  echo "No time setting to take snapshot, please set snapshot_time in chain_registry.ini"
+  exit
+fi
+
+snapshot_time_hour=${snapshot_time%%:*}
+snapshot_time_minute=${snapshot_time##*:}
+echo "$snapshot_time_minute $snapshot_time_hour * * * root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
 
 # start crond
 crond

@@ -45,6 +45,7 @@ addrbook_url=$addrbook_url
 snapshot_provider=$snapshot_provider
 start_flags=$start_flags
 pacman_pkgs=$pacman_pkgs
+snapshot_time=$snapshot_time
 EOT
 
 
