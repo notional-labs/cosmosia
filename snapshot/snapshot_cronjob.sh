@@ -25,7 +25,7 @@ source $HOME/chain_info.sh
 
 cd $node_home
 
-TAR_FILENAME="${chain_name}_$(date +%Y%m%d_%T |sed 's/://g').tar.gz"
+TAR_FILENAME="data_$(date +%Y%m%d_%T |sed 's/://g').tar.gz"
 TAR_FILE_PATH="$HOME/$TAR_FILENAME"
 
 tar -czvf $TAR_FILE_PATH ./data
