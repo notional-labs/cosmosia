@@ -25,6 +25,22 @@ source $HOME/chain_info.sh
 
 cd $node_home
 
-TAR_FILE="$HOME/${chain_name}_$(date +%Y%m%d_%T |sed 's/://g').tar.gz"
+TAR_FILENAME="${chain_name}_$(date +%Y%m%d_%T |sed 's/://g').tar.gz"
+TAR_FILE_PATH="$HOME/$TAR_FILENAME"
 
-tar -czvf $TAR_FILE ./data
+tar -czvf $TAR_FILE_PATH ./data
+
+# copy to /snapshot folder
+mkdir -p /snapshot
+mv $TAR_FILE_PATH /snapshot/
+cp $node_home/config/addrbook.json /snapshot/
+
+cat <<EOT > /snapshot/chain.json
+{
+    "snapshot_url": "http://65.108.136.206:8864/$chain_name/$TAR_FILENAME"
+}
+EOT
+
+
+# delete old snapshots
+cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -1)

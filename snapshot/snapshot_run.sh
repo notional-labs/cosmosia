@@ -42,8 +42,7 @@ supervisord
 curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
 
 # run at 11am daily
-echo "0 11 * * * root /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
-
+echo "0 11 * * * root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
 
 # start crond
 crond
