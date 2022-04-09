@@ -1,26 +1,12 @@
 # cosmosia (Cosmos Infrastructure Automation)
-Build a reliable infrastructure for cosmos/tendermint based chains.
 
-https://github.com/cosmos/chain-registry/issues/214
+Open solution to build a reliable infrastructure for cosmos/tendermint based chains ( see [background](https://github.com/cosmos/chain-registry/issues/214) ):
+- Load balancing for Rpc, Websocket, and [GRPC](docs/grpc.md)
+- Snapshot service
 
----
+See [status page](https://stats.uptimerobot.com/36MEDSX0Jo) of our cluster.
 
-- Use Docker Swarm
-- Rpc service
-- Snapshot service?
-
----
-### Setup a cluster and cosmosia
-See [prepare.md](./docs/prepare.md)
-
-### Rpc service
-To create a RPC service, execute on Swarm manager node:
-
-```bash
-bash ./rpc/docker_service_create.sh cosmoshub
-```
-
-Supported chains:
+### Supported chains:
 1. Osmosis
 2. Starname
 3. Regen
@@ -48,5 +34,7 @@ Supported chains:
 25. Dig
 26. Gravity-Bridge
 
-### Add a new chain
-Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
+Add a new chain? Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
+
+### Docs
+See [Docs](./docs/)
