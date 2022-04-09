@@ -6,7 +6,7 @@ docker service rm proxy_snapshot
 docker service create \
   --name proxy_snapshot \
   --replicas 1 \
-  --publish mode=host,target=8864,published=80 \
+  --publish 8864:80 \
   --network cosmosia \
   --restart-condition any \
   --restart-delay 3s \
