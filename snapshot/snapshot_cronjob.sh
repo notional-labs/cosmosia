@@ -17,9 +17,11 @@ done
 echo "OK, chain get synched, taking snapshot..."
 
 supervisorctl stop chain
+sleep 60
 
+# make sure chain stopped
+killall $chain_name
 sleep 10
-
 
 source $HOME/chain_info.sh
 
