@@ -3,7 +3,7 @@
 BLOCKCHAIN_TIME=$(curl --silent --max-time 3 "http://localhost/status" |jq -r .result.sync_info.latest_block_time)
 THRESHOLD_TIME=120
 
-if [[ ${BLOCKCHAIN_TIME} == "null" ]]; then
+if [[ "${BLOCKCHAIN_TIME}" == "null" ]]; then
   echo Status: 502
   echo Content-type:text/plain
   echo
@@ -11,7 +11,7 @@ if [[ ${BLOCKCHAIN_TIME} == "null" ]]; then
   exit 0
 fi
 
-if [[ ! -z  "$BLOCKCHAIN_TIME" ]]; then
+if [[ ! -z "$BLOCKCHAIN_TIME" ]]; then
   BLOCKCHAIN_SECS=`date -d $BLOCKCHAIN_TIME +%s`
   CURRENT_SECS=`date +%s`
 
