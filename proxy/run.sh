@@ -149,7 +149,7 @@ while true; do
     # need to use cron job for logrotate
     logrotate /etc/logrotate.d/nginx
 
-    nginx -s reload
+    /usr/sbin/nginx -s reload
   fi
 
   # sleep 60 seconds...
