@@ -210,11 +210,11 @@ sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.to
 
 echo "download genesis file..."
 if [[ $addrbook_url == *.json.gz ]]; then
-  wget -O - $genesis_url |gzip -cd > $node_home/config/genesis.json
+  wget -O - "$genesis_url" |gzip -cd > $node_home/config/genesis.json
 elif [[ $addrbook_url == *.tar.gz ]]; then
-  wget -O - $genesis_url |tar -xvzf - -O > $node_home/config/genesis.json
+  wget -O - "$genesis_url" |tar -xvzf - -O > $node_home/config/genesis.json
 elif [[ $addrbook_url == *.json ]]; then
-  curl -Ls $proxy_cache_url$genesis_url > $node_home/config/genesis.json
+  curl -Ls "$proxy_cache_url$genesis_url" > $node_home/config/genesis.json
 else
   echo "Not support genesis file type"
   exit
@@ -222,7 +222,7 @@ fi
 
 
 echo "download addrbook..."
-curl -Ls  $proxy_cache_url$addrbook_url > $node_home/config/addrbook.json
+curl -Ls  "$proxy_cache_url$addrbook_url" > $node_home/config/addrbook.json
 
 echo "#################################################################################################################"
 echo "start nginx..."
