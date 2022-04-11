@@ -173,11 +173,11 @@ url_stripped=${URL%%\?*}
 echo "url_stripped=$url_stripped"
 
 if [[ $url_stripped == *.tar.lz4 ]]; then
-  wget -O - "$proxy_cache_url$URL" |lz4 -dq |tar -xf -
+  wget -O - "$URL" |lz4 -dq |tar -xf -
 elif [[ $url_stripped == *.tar ]]; then
-  wget -O - "$proxy_cache_url$URL" |tar -xf -
+  wget -O - "$URL" |tar -xf -
 elif [[ $url_stripped == *.tar.gz ]]; then
-  wget -O - "$proxy_cache_url$URL" |tar -xzf -
+  wget -O - "$URL" |tar -xzf -
 else
   echo "Not support snapshot file type."
   exit
@@ -190,7 +190,7 @@ if [[ ! -z $URL_WASM ]]; then
 
   echo "extract the snapshot of wasm..."
   if [[ $URL_WASM == *.tar ]]; then
-    wget -O - "$proxy_cache_url$URL_WASM" |tar -xvf - -C $node_home/wasm/
+    wget -O - "$URL_WASM" |tar -xvf - -C $node_home/wasm/
   else
     echo "Not support snapshot file type."
     exit
@@ -209,12 +209,12 @@ sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_h
 sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
 
 echo "download genesis file..."
-if [[ $addrbook_url == *.json.gz ]]; then
+if [[ $genesis_url == *.json.gz ]]; then
   wget -O - "$genesis_url" |gzip -cd > $node_home/config/genesis.json
-elif [[ $addrbook_url == *.tar.gz ]]; then
+elif [[ $genesis_url == *.tar.gz ]]; then
   wget -O - "$genesis_url" |tar -xvzf - -O > $node_home/config/genesis.json
-elif [[ $addrbook_url == *.json ]]; then
-  curl -Ls "$proxy_cache_url$genesis_url" > $node_home/config/genesis.json
+elif [[ $genesis_url == *.json ]]; then
+  curl -Ls "$genesis_url" > $node_home/config/genesis.json
 else
   echo "Not support genesis file type"
   exit
@@ -222,7 +222,7 @@ fi
 
 
 echo "download addrbook..."
-curl -Ls  "$proxy_cache_url$addrbook_url" > $node_home/config/addrbook.json
+curl -Ls  "$addrbook_url" > $node_home/config/addrbook.json
 
 echo "#################################################################################################################"
 echo "start nginx..."
