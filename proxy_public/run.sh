@@ -97,7 +97,7 @@ sleep 5
 ########################################################################################################################
 # big loop
 
-killall netdata
+#killall netdata
 killall nginx
 sleep 5
 /usr/sbin/nginx
