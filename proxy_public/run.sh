@@ -78,7 +78,7 @@ generate_new_upstream_config () {
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy_pubic/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy_public/nginx.conf > /etc/nginx/nginx.conf
 
 # generate new config file and copy to $UPSTREAM_CONFIG_FILE
 generate_new_upstream_config
