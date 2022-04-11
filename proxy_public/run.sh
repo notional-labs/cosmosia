@@ -102,7 +102,7 @@ killall nginx
 sleep 5
 /usr/sbin/nginx
 sleep 5
-/opt/netdata/bin/srv/netdata
+#/opt/netdata/bin/srv/netdata
 
 
 while true; do
