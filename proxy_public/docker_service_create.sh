@@ -13,7 +13,7 @@ docker service create \
   --restart-delay 3s \
   --restart-max-attempts 3 \
   --restart-window 10m \
-  --secret $ssl_notional.ventures.tar.gz \
+  --secret ssl_notional.ventures.tar.gz \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy_public/run.sh > ~/run.sh && /bin/bash ~/run.sh"
