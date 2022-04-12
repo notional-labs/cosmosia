@@ -59,17 +59,20 @@ generate_new_upstream_config () {
     fi
 
     echo "upstream rpc_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    hash '\$http_x_forwarded_for';" >> $TMP_UPSTREAM_CONFIG_FILE
+    # echo "    hash '\$http_x_forwarded_for';" >> $TMP_UPSTREAM_CONFIG_FILE
+    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
 
-    echo "upstream grpc_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    hash '\$http_x_forwarded_for';" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "$addr_str_grpc" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
+#    echo "upstream grpc_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
+#    # echo "    hash '\$http_x_forwarded_for';" >> $TMP_UPSTREAM_CONFIG_FILE
+#    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
+#    echo "$addr_str_grpc" >> $TMP_UPSTREAM_CONFIG_FILE
+#    echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
 
     echo "upstream api_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    hash '\$http_x_forwarded_for';" >> $TMP_UPSTREAM_CONFIG_FILE
+    # echo "    hash '\$http_x_forwarded_for';" >> $TMP_UPSTREAM_CONFIG_FILE
+    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str_api" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
   done
