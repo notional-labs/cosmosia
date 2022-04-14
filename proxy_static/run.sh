@@ -9,7 +9,7 @@ tar -xvf "/run/secrets/ssl_notional.ventures.tar.gz" -C /etc/nginx/
 
 curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy_static/nginx.conf > /etc/nginx/nginx.conf
 
-/usr/sbin/nginx -g "daemon off;"proxy_static
+/usr/sbin/nginx -g "daemon off;"
 
 # loop forever for debugging only
 #while true; do sleep 5; done
