@@ -38,6 +38,8 @@ cat <<EOT >> /etc/supervisor/conf.d/chain.conf
 command=/bin/bash /root/start_chain.sh
 autostart=false
 autorestart=false
+stopasgroup=true
+killasgroup=true
 stderr_logfile=/var/log/chain.err.log
 stdout_logfile=/var/log/chain.out.log
 EOT

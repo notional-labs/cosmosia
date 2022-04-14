@@ -23,10 +23,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --network cosmosia \
-  --restart-condition any \
-  --restart-delay 3m \
-  --restart-max-attempts 3 \
-  --restart-window 10m \
+  --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/snapshot/snapshot_run.sh > ~/snapshot_run.sh && \
