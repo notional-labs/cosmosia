@@ -12,4 +12,4 @@ curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy_static/n
 /usr/sbin/nginx -g "daemon off;"
 
 # loop forever for debugging only
-#while true; do sleep 5; done
+while true; do sleep 5; done
