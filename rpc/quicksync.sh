@@ -136,6 +136,15 @@ elif [[ $snapshot_provider == "staketab.com" ]]; then
     URL_WASM=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">")
     URL_WASM="https://cosmos-snap.staketab.com/$chain_name/$URL_WASM"
   fi
+elif [[ $snapshot_provider == "stake2.me" ]]; then
+  cd $node_home/data/
+
+  URL=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm" |tail -1)
+  URL="https://snapshots.stake2.me/$chain_name/$URL"
+  if [[ $chain_name == "stargaze" ]]; then
+    URL_WASM=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">" |tail -1)
+    URL_WASM="https://snapshots.stake2.me/$chain_name/$URL_WASM"
+  fi
 elif [[ $snapshot_provider == "custom" ]]; then
   if [[ $chain_name == "cheqd" ]]; then
     cd $node_home/data/
