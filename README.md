@@ -4,7 +4,7 @@ Open solution to build a reliable infrastructure for cosmos/tendermint based cha
 - API service: Load balancing for Rpc, Rest, Websocket, and [GRPC](docs/grpc.md)
 - Snapshot service
 
-See [status page](https://stats.uptimerobot.com/36MEDSX0Jo) of our cluster.
+See [status page](https://status.notional.ventures/) of our cluster.
 
 ### Supported chains:
 1. Osmosis
