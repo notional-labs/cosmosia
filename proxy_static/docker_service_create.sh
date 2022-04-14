@@ -1,11 +1,10 @@
 # delete existing service
-docker service rm proxy_public
+docker service rm proxy_static
 
 # create new service
 docker service create \
-  --name proxy_public \
+  --name proxy_static \
   --replicas 1 \
-  --publish mode=host,target=80,published=80 \
   --publish mode=host,target=443,published=443 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia2' \
