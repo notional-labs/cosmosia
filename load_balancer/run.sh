@@ -40,7 +40,7 @@ generate_new_upstream_config () {
       grpc_str="to http://$chain_name:9090"
   else
     while read -r ip_addr || [[ -n $ip_addr ]]; do
-        if [[ ! -z "$rpc_str" ]]; then
+        if [[ -z "$rpc_str" ]]; then
           rpc_str="to"
           api_str="to"
           ws_str="to"
