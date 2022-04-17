@@ -53,7 +53,7 @@ generate_new_upstream_config () {
     done < <(echo "$new_ips")
   fi
 
-cat <<EOT >> $TMP_CONFIG_FILE
+cat <<EOT > $TMP_CONFIG_FILE
 # This file is generated dynamically, dont edit.
 
 {
