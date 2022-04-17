@@ -15,7 +15,7 @@ curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/sna
 source ./snapshot_download.sh
 
 
-pacman -Syu --noconfirm python python-pip cronie nginx
+pacman -Syu --noconfirm python python-pip cronie nginx jq
 
 echo "#################################################################################################################"
 echo "nginx..."
