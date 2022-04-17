@@ -27,7 +27,7 @@ TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
 # functions
 generate_new_upstream_config () {
   # use dig to figure out IPs of service
-  new_ips=$(dig +short "tasks.lb_$chain_name" |sort)
+  new_ips=$(dig +short "tasks.$chain_name" |sort)
 
   rpc_str=""
   api_str=""
