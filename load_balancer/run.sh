@@ -15,7 +15,7 @@ cd $HOME
 
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel dnsutils python caddy logrotate
+pacman -S --noconfirm base-devel dnsutils python caddy logrotate screen
 
 
 ########################################################################################################################
