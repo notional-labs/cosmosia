@@ -34,18 +34,18 @@ fi
 
 # write chain info to bash file, so that cronjob could know
 cat <<EOT >> $HOME/chain_info.sh
-chain_name=$chain_name
-git_repo=$git_repo
-version=$version
-genesis_url=$genesis_url
-daemon_name=$daemon_name
-node_home=$node_home
-minimum_gas_prices=$minimum_gas_prices
-addrbook_url=$addrbook_url
-snapshot_provider=$snapshot_provider
-start_flags=$start_flags
-pacman_pkgs=$pacman_pkgs
-snapshot_time=$snapshot_time
+chain_name="$chain_name"
+git_repo="$git_repo"
+version="$version"
+genesis_url="$genesis_url"
+daemon_name="$daemon_name"
+node_home="$node_home"
+minimum_gas_prices="$minimum_gas_prices"
+addrbook_url="$addrbook_url"
+snapshot_provider="$snapshot_provider"
+start_flags="$start_flags"
+pacman_pkgs="$pacman_pkgs"
+snapshot_time="$snapshot_time"
 EOT
 
 
