@@ -9,6 +9,14 @@ then
   exit
 fi
 
+
+# functions
+loop_forever () {
+  echo "loop forever for debugging only"
+  while true; do sleep 5; done
+}
+
+
 echo "#################################################################################################################"
 echo "#prepare.."
 
@@ -48,7 +56,7 @@ echo "pacman_pkgs=$pacman_pkgs"
 
 if [[ -z $git_repo ]]; then
   echo "Not support chain $chain_name"
-  exit
+  loop_forever
 fi
 
 pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap $pacman_pkgs
@@ -115,7 +123,7 @@ if [[ $snapshot_provider == "quicksync.io" ]]; then
     URL=`curl https://quicksync.io/kava.json |jq -r '.[] |select(.file=="kava-9-pruned")|.url'`
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-    exit
+    loop_forever
   fi
 elif [[ $snapshot_provider == "polkachu.com" ]]; then
   URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
@@ -160,18 +168,40 @@ elif [[ $snapshot_provider == "custom" ]]; then
     URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-post-green.tar.gz" |jq -r '.mediaLink')
   else
     echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-    exit
+    loop_forever
   fi
+elif [[ $snapshot_provider == "notional.ventures" ]]; then
+  BASE_URL="https://snapshot.notional.ventures/"
+  URL="https://snapshot.notional.ventures/$chain_name/chain.json"
+  status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
+  if [[ $status_code == "200" ]]; then
+    URL=`curl -s $URL |jq -r '.snapshot_url'`
+  elif [[ $status_code == "404" ]]; then
+    URL="https://snapshot.notional.ventures/syncthing/$chain_name/chain.json"
+    status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
+    if [[ $status_code == "200" ]]; then
+      URL=`curl -s $URL |jq -r '.snapshot_url'`
+      BASE_URL="https://snapshot.notional.ventures/syncthing/"
+    else
+      echo "Not found snapshot for $chain_name from provider $snapshot_provider"
+      loop_forever
+    fi
+  else
+    echo "Not found snapshot for $chain_name from provider $snapshot_provider"
+    loop_forever
+  fi
+
+  URL="${BASE_URL}${url##*/}"
 else
   echo "Not support snapshot_provider $snapshot_provider"
-  exit
+  loop_forever
 fi
 
 echo "URL=$URL"
 
 if [[ -z $URL ]]; then
   echo "URL to download snapshot is empty. Pls fix it!"
-  exit
+  loop_forever
 fi
 
 echo "download and extract the snapshot to current path..."
@@ -189,7 +219,7 @@ elif [[ $url_stripped == *.tar.gz ]]; then
   wget -O - "$URL" |tar -xzf -
 else
   echo "Not support snapshot file type."
-  exit
+  loop_forever
 fi
 
 # download wasm snapshot, for stargaze only atm
@@ -202,7 +232,7 @@ if [[ ! -z $URL_WASM ]]; then
     wget -O - "$URL_WASM" |tar -xvf - -C $node_home/wasm/
   else
     echo "Not support snapshot file type."
-    exit
+    loop_forever
   fi
 fi
 
@@ -226,7 +256,7 @@ elif [[ $genesis_url == *.json ]]; then
   curl -Ls "$genesis_url" > $node_home/config/genesis.json
 else
   echo "Not support genesis file type"
-  exit
+  loop_forever
 fi
 
 
@@ -250,5 +280,4 @@ EXITCODE=$?
 echo "chain stopped with exit code=$EXITCODE"
 
 
-# loop forever for debugging only
-while true; do sleep 5; done
+loop_forever
