@@ -191,7 +191,7 @@ elif [[ $snapshot_provider == "notional.ventures" ]]; then
     loop_forever
   fi
 
-  URL="${BASE_URL}${url##*/}"
+  URL="${BASE_URL}${URL##*/}"
 else
   echo "Not support snapshot_provider $snapshot_provider"
   loop_forever
