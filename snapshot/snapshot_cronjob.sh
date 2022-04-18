@@ -38,10 +38,15 @@ cp $node_home/config/addrbook.json /snapshot/
 
 cat <<EOT > /snapshot/chain.json
 {
-    "snapshot_url": "http://65.108.136.206:8864/$chain_name/$TAR_FILENAME"
+    "snapshot_url": "./$chain_name/$TAR_FILENAME"
 }
 EOT
 
 
 # delete old snapshots
 cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -1)
+
+
+###########################
+echo "backup to syncthing if needed"
+source snapshot_backup.sh
