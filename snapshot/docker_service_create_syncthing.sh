@@ -18,7 +18,7 @@ docker service rm $syncthing_name
 
 
 SSH_PORT="2022:22"
-HOST="cosmosia2"
+HOST="cosmosia5"
 if [[ "$syncthing_name" == "syncthing2" ]]; then
   SSH_PORT="2023:22"
   HOST="cosmosia3"
