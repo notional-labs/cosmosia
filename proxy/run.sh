@@ -64,12 +64,12 @@ generate_new_upstream_config () {
       fi
     fi
 
-    echo "upstream lb_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
+    echo "upstream upstream_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
 
-    echo "upstream lb_grpc_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
+    echo "upstream upstream_grpc_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str_grpc" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
