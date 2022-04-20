@@ -53,12 +53,10 @@ generate_new_upstream_config () {
     fi
 
     echo "upstream upstream_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
 
     echo "upstream upstream_grpc_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str_grpc" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
   done
@@ -116,6 +114,6 @@ while true; do
     /usr/sbin/nginx -s reload
   fi
 
-  # sleep 60 seconds...
-  sleep 60
+  # sleep 2 mins
+  sleep 120
 done
