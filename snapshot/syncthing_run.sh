@@ -58,26 +58,26 @@ curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/syn
 
 echo "#################################################################################################################"
 echo "syncthing..."
-
-# /data mounted to host, make sure folders exist
-
-# /data/default is default sync folder
-mkdir -p /data/default
-
-# /data/.syncthing is home for syncthing to store config and index files
-mkdir -p /data/.syncthing
-
-#run syncthing the 1st time to generate default config
-screen -S syncthing -dm syncthing --home /data/.syncthing/
-sleep 30
-killall syncthing
-sleep 5
-
-# copy config files
-cp $HOME/tmp/$syncthing_name/syncthing/* /data/.syncthing/
-
-# run syncthing again
-syncthing --home /data/.syncthing/
+#
+## /data mounted to host, make sure folders exist
+#
+## /data/default is default sync folder
+#mkdir -p /data/default
+#
+## /data/.syncthing is home for syncthing to store config and index files
+#mkdir -p /data/.syncthing
+#
+##run syncthing the 1st time to generate default config
+#screen -S syncthing -dm syncthing --home /data/.syncthing/
+#sleep 30
+#killall syncthing
+#sleep 5
+#
+## copy config files
+#cp $HOME/tmp/$syncthing_name/syncthing/* /data/.syncthing/
+#
+## run syncthing again
+#syncthing --home /data/.syncthing/
 
 
 while true; do
