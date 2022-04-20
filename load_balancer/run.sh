@@ -151,6 +151,6 @@ while true; do
     /usr/sbin/caddy reload --config $CONFIG_FILE
   fi
 
-  # sleep 60 seconds...
-  sleep 60
+  # sleep 300 seconds...
+  sleep 300
 done

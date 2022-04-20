@@ -20,6 +20,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --network cosmosia \
+  --constraint 'node.hostname!=cosmosia5' \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
