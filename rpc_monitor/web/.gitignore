@@ -1,0 +1,19 @@
+# Ignore Mac DS_Store files
+.DS_Store
+**/.DS_Store
+
+# project file
+.idea
+*.iml
+
+# dependencies
+/node_modules
+
+
+/dist
+/build
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+.npmrc
