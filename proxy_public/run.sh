@@ -22,7 +22,7 @@ generate_new_upstream_config () {
 
   for service_name in $RPC_SERVICES; do
     # use dig to figure out IPs of service
-    new_ips=$(dig +short "tasks.$service_name" |sort)
+    new_ips=$(dig +short "tasks.lb_$service_name" |sort)
 
     addr_str=""
     addr_str_grpc=""
@@ -33,46 +33,33 @@ generate_new_upstream_config () {
         addr_str_grpc="    server 127.0.0.1:1;"
         addr_str_api="    server 127.0.0.1:1;"
     else
-      is_healthy=false
-
       while read -r ip_addr || [[ -n $ip_addr ]]; do
-        status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 "http://$ip_addr/healthcheck")
-        if [[ $status_code == "200" ]]; then
           if [[ ! -z "$addr_str" ]]; then
             addr_str="$addr_str"$'\n'
             addr_str_grpc="$addr_str_grpc"$'\n'
             addr_str_api="$addr_str_api"$'\n'
           fi
-          addr_str="$addr_str""    server $ip_addr;"
-          addr_str_grpc="$addr_str_grpc""    server $ip_addr:9090;"
-          addr_str_api="$addr_str_api""    server $ip_addr:1317;"
-
-          is_healthy=true
-        fi
+          addr_str="$addr_str""    server $ip_addr:8000;"
+          addr_str_grpc="$addr_str_grpc""    server $ip_addr:8003;"
+          addr_str_api="$addr_str_api""    server $ip_addr:8001;"
       done < <(echo "$new_ips")
-
-      if [[ "$is_healthy" == "false" ]]; then
-        addr_str="    server 127.0.0.1:1;"
-        addr_str_grpc="    server 127.0.0.1:1;"
-        addr_str_api="    server 127.0.0.1:1;"
-      fi
     fi
 
     echo "upstream rpc_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
     # echo "    hash '\$http_x_forwarded_for';" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
+#    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
 
     echo "upstream grpc_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
     # echo "    hash '\$http_x_forwarded_for';" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
+#    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str_grpc" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
 
     echo "upstream api_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
     # echo "    hash '\$http_x_forwarded_for';" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
+#    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str_api" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
   done
