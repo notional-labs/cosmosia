@@ -4,6 +4,8 @@ RPC_SERVICES="osmosis starname regen akash cosmoshub sentinel emoney ixo juno si
 TMP_DIR="$HOME/tmp"
 TMP_STATUS_FILE="$TMP_DIR/status.json"
 
+mkdir -p $TMP_DIR
+
 echo "{" > $TMP_STATUS_FILE
 for service_name in $RPC_SERVICES; do
   echo "\"$service_name\": {" >> $TMP_STATUS_FILE
