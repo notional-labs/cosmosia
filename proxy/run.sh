@@ -32,8 +32,8 @@ generate_new_upstream_config () {
   echo "# This file is generated dynamically, dont edit." > $TMP_UPSTREAM_CONFIG_FILE
 
   for service_name in $RPC_SERVICES; do
-    # use dig to figure out IPs of service
-    new_ips=$(dig +short "tasks.$service_name" |sort)
+    # use dig to figure out IPs of the load_balancer. Dont use slow VIP.
+    new_ips=$(dig +short "tasks.lb_$service_name" |sort)
 
     addr_str=""
     addr_str_grpc=""
@@ -42,35 +42,21 @@ generate_new_upstream_config () {
         addr_str="    server 127.0.0.1:1;"
         addr_str_grpc="    server 127.0.0.1:1;"
     else
-      is_healthy=false
-
       while read -r ip_addr || [[ -n $ip_addr ]]; do
-        status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 "http://$ip_addr/healthcheck")
-        if [[ $status_code == "200" ]]; then
-          if [[ ! -z "$addr_str" ]]; then
-            addr_str="$addr_str"$'\n'
-            addr_str_grpc="$addr_str_grpc"$'\n'
-          fi
-          addr_str="$addr_str""    server $ip_addr;"
-          addr_str_grpc="$addr_str_grpc""    server $ip_addr:9090;"
-
-          is_healthy=true
+        if [[ ! -z "$addr_str" ]]; then
+          addr_str="$addr_str"$'\n'
+          addr_str_grpc="$addr_str_grpc"$'\n'
         fi
+        addr_str="$addr_str""    server $ip_addr:8000;"
+        addr_str_grpc="$addr_str_grpc""    server $ip_addr:8003;"
       done < <(echo "$new_ips")
-
-      if [[ "$is_healthy" == "false" ]]; then
-        addr_str="    server 127.0.0.1:1;"
-        addr_str_grpc="    server 127.0.0.1:1;"
-      fi
     fi
 
     echo "upstream upstream_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
 
     echo "upstream upstream_grpc_$service_name {" >> $TMP_UPSTREAM_CONFIG_FILE
-    echo "    ip_hash;" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "$addr_str_grpc" >> $TMP_UPSTREAM_CONFIG_FILE
     echo "}" >> $TMP_UPSTREAM_CONFIG_FILE
   done
@@ -79,7 +65,7 @@ generate_new_upstream_config () {
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/test_proxy/proxy/nginx.conf > /etc/nginx/nginx.conf
 curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/index.html > /usr/share/nginx/html/index.html
 
 # generate new config file and copy to $UPSTREAM_CONFIG_FILE
@@ -128,6 +114,6 @@ while true; do
     /usr/sbin/nginx -s reload
   fi
 
-  # sleep 60 seconds...
-  sleep 60
+  # sleep 2 mins
+  sleep 120
 done
