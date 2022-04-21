@@ -1,0 +1,25 @@
+[
+  {
+    "service": "osmosis",
+    "containers": [
+      {
+        "ip": "10.0.1.145",
+        "status": 200
+      },
+      {
+        "ip": "10.0.1.155",
+        "status": 502
+      }
+    ]
+  },
+  {
+    "service": "starname",
+    "containers": [
+      {
+        "ip": "10.0.1.150",
+        "status": 200
+      }
+    ]
+  }
+]
+
