@@ -65,7 +65,7 @@ generate_new_upstream_config () {
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/test_proxy/proxy/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/nginx.conf > /etc/nginx/nginx.conf
 curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy/index.html > /usr/share/nginx/html/index.html
 
 # generate new config file and copy to $UPSTREAM_CONFIG_FILE
