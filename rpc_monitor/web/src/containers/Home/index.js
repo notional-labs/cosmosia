@@ -11,46 +11,38 @@ import reducer from './reducer';
 import saga from './saga';
 import { actionMonitorStart, actionMonitorStop } from './actions';
 
-import { Button } from 'antd';
-
-const ContainerItem = (props) => {
-  const {ip, status} = props;
-
-  return (
-    <div>
-      <span>{ip}: </span>
-      <span>{status}</span>
-    </div>
-  );
-};
+import { Button, List, Badge } from 'antd';
 
 const Service = (props) => {
-  const {name, service} = props;
-  const ips = _.keys(service);
+  const {service, containers} = props;
 
   return (
-    <div>
-      <b>{name}</b>
-      <div>
-        {ips.map((ip, idx) => {
+    <div style={{paddingBottom: "10px"}}>
+      <List
+        header={<b>{service}</b>}
+        bordered
+        dataSource={containers}
+        renderItem={ (item) => {
+          const bgColor = item.status == 200 ? "" : "red";
           return (
-            <ContainerItem key={`container_${idx}`} ip={ip} status={service[ip]} />
-          )
-        })}
-      </div>
+            <List.Item style={{background: bgColor}}>
+              {item.ip}: <Badge>{item.status}</Badge>
+            </List.Item>
+          )}
+        }
+      />
     </div>
   );
 };
 
 const Services = (props) => {
   const {services} = props;
-  const keys = _.keys(services);
 
   return (
     <div>
-      {keys.map((service, idx) => {
+      {services.map((service, idx) => {
         return (
-          <Service key={`service_${idx}`} name={service} service={services[service]} />
+          <Service key={`service_${idx}`} {...service} />
         )
       })}
     </div>

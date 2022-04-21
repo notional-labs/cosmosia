@@ -3,7 +3,7 @@ import { ACTION_MONITOR_START, ACTION_MONITOR_STOP, ACTION_UPDATE } from "./cons
 
 export const initialState = {
   monitoring: false, // running or live mode
-  status: {}
+  status: []
 };
 
 const homeReducer = (state = initialState, action) =>

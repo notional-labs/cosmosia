@@ -20,7 +20,7 @@ export class Index extends Component {
             <Route component={Home}/>
           </Switch>
         </main>
-        <Footer/>
+        {/*<Footer/>*/}
       </div>
     );
   }

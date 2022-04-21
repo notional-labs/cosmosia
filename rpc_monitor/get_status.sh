@@ -1,6 +1,7 @@
 
 RPC_SERVICES="osmosis starname regen akash cosmoshub sentinel emoney ixo juno sifchain likecoin kichain cyber cheqd stargaze bandchain chihuahua kava bitcanna konstellation omniflixhub terra vidulum provenance dig gravitybridge"
-TMP_DIR="$HOME/tmp"
+#TMP_DIR="$HOME/tmp"
+TMP_DIR="./build"
 TMP_STATUS_FILE="$TMP_DIR/status.json"
 mkdir -p $TMP_DIR
 
@@ -15,14 +16,14 @@ for service_name in $RPC_SERVICES; do
     if [[ ! -z "$tmp_str" ]]; then
       tmp_str="$tmp_str,"$'\n'
     fi
-    tmp_str="$tmp_str""    \"$ip_addr\": $status_code"
+    tmp_str="$tmp_str""    { \"ip\": \"$ip_addr\", \"status\": $status_code }"
 
   done < <(echo "$ips")
 
   if [[ ! -z "$service_str" ]]; then
     service_str="$service_str,"$'\n'
   fi
-  service_str="$service_str \"$service_name\": { $tmp_str }"
+  service_str="$service_str { \"service\": \"$service_name\", \"containers\": [ $tmp_str ] }"
 done
 
-echo "{ $service_str }" > $TMP_STATUS_FILE
+echo "[ $service_str ]" > $TMP_STATUS_FILE

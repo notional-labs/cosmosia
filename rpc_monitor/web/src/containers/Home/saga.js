@@ -22,7 +22,7 @@ export function* monitorStartTask() {
 
       const status_res =  yield fetch(URL, {compress: false});
       const res_json = yield status_res.json();
-      // console.log(`res_json=${JSON.stringify(res_json)}`);
+      console.log(`res_json=${JSON.stringify(res_json)}`);
 
       yield put(actionUpdate('status', res_json));
     } catch (e) {
