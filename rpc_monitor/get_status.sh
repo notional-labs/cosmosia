@@ -1,9 +1,9 @@
 
 RPC_SERVICES="osmosis starname regen akash cosmoshub sentinel emoney ixo juno sifchain likecoin kichain cyber cheqd stargaze bandchain chihuahua kava bitcanna konstellation omniflixhub terra vidulum provenance dig gravitybridge"
 #TMP_DIR="$HOME/tmp"
-TMP_DIR="./build"
+TMP_DIR="./web/build"
 TMP_STATUS_FILE="$TMP_DIR/status.json"
-mkdir -p $TMP_DIR
+#mkdir -p $TMP_DIR
 
 service_str=""
 for service_name in $RPC_SERVICES; do
