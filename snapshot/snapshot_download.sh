@@ -54,17 +54,17 @@ pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap $pac
 echo "#################################################################################################################"
 echo "build from source:"
 
+export GOPATH="$HOME/go"
+export GOROOT="/usr/lib/go"
+export GOBIN="${GOPATH}/bin"
+export PATH="${PATH}:${GOROOT}/bin:${GOBIN}"
+
 cd $HOME
 
 if [[ $chain_name == "sentinel" ]]; then
   # sentinel requires custom build
   mkdir -p $HOME/go/src/github.com/sentinel-official
   cd $HOME/go/src/github.com/sentinel-official
-
-  export GOROOT=/usr/lib/go
-  export GOPATH=${HOME}/go
-  export GOBIN=${GOPATH}/bin
-  export PATH=${PATH}:${GOROOT}/bin:${GOBIN}
 fi
 
 echo "curren path: $PWD"
