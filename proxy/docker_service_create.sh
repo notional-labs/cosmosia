@@ -37,6 +37,7 @@ docker service create \
   --publish mode=host,target=9026,published=9026 \
   --publish mode=host,target=9027,published=9027 \
   --publish mode=host,target=9028,published=9028 \
+  --publish mode=host,target=9028,published=9029 \
   --publish mode=host,target=19999,published=19999 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia1' \
