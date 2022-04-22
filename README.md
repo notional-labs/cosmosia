@@ -33,6 +33,7 @@ See [status page](https://status.notional.ventures/) of our cluster.
 24. Provenance
 25. Dig
 26. Gravity-Bridge
+27. Comdex
 
 Add a new chain? Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
 
