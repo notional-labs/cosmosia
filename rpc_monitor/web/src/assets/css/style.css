@@ -2,3 +2,43 @@ html {
   position: relative;
   min-height: 100%;
 }
+
+.services {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.services .contents {
+  display:contents;
+}
+
+.services .contents .service {
+  display: block;
+  border: solid 1px black;
+  border-radius: 5px;
+
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+
+  height: 20em;
+  width: 13em;
+  margin: 2em;
+  padding: 1em;
+
+  position: relative;
+  z-index: 1;
+}
+
+.service hr {
+  border: none;
+  background-color: black;
+  width: 80%;
+  height: 2px;
+  border-radius: 5px;
+}
+
+.service-name {
+  font-weight: bold;
+  text-align: center;
+}

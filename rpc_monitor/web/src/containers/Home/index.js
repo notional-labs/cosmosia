@@ -17,10 +17,9 @@ const Service = (props) => {
   const {service, containers} = props;
 
   return (
-    <div style={{paddingBottom: "10px"}}>
+    <div className="service" style={{paddingBottom: "10px"}}>
       <List
-        header={<b>{service}</b>}
-        bordered
+        header={<div><p className="service-name">{service}</p><hr /></div>}
         dataSource={containers}
         renderItem={ (item) => {
           const bgColor = item.status === "200" ? "" : "red";
@@ -39,12 +38,14 @@ const Services = (props) => {
   const {services} = props;
 
   return (
-    <div>
-      {services.map((service, idx) => {
-        return (
-          <Service key={`service_${idx}`} {...service} />
-        )
-      })}
+    <div className="services">
+      <div className="contents">
+        {services.map((service, idx) => {
+          return (
+            <Service key={`service_${idx}`} {...service} />
+          )
+        })}
+      </div>
     </div>
   );
 };
