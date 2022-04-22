@@ -34,6 +34,7 @@ See [status page](https://status.notional.ventures/) of our cluster.
 25. Dig
 26. Gravity-Bridge
 27. Comdex
+28. Cerberus
 
 Add a new chain? Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
 
