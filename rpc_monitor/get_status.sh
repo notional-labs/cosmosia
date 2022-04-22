@@ -16,7 +16,7 @@ for service_name in $RPC_SERVICES; do
     if [[ ! -z "$tmp_str" ]]; then
       tmp_str="$tmp_str,"$'\n'
     fi
-    tmp_str="$tmp_str""    { \"ip\": \"$ip_addr\", \"status\": $status_code }"
+    tmp_str="$tmp_str""    { \"ip\": \"$ip_addr\", \"status\": \"$status_code\" }"
 
   done < <(echo "$ips")
 
