@@ -61,6 +61,9 @@ fi
 
 pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap $pacman_pkgs
 
+export GOPATH="$HOME/go"
+PATH="$GOPATH/bin:$PATH"
+
 echo "#################################################################################################################"
 echo "build from source:"
 
