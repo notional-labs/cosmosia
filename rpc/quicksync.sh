@@ -179,7 +179,7 @@ elif [[ $snapshot_provider == "notional.ventures" ]]; then
   status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
   if [[ $status_code == "200" ]]; then
     URL=`curl -s $URL |jq -r '.snapshot_url'`
-  elif [[ $status_code == "404" ]]; then
+  else
     URL="https://snapshot.notional.ventures/syncthing/$chain_name/chain.json"
     status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
     if [[ $status_code == "200" ]]; then
@@ -189,9 +189,6 @@ elif [[ $snapshot_provider == "notional.ventures" ]]; then
       echo "Not found snapshot for $chain_name from provider $snapshot_provider"
       loop_forever
     fi
-  else
-    echo "Not found snapshot for $chain_name from provider $snapshot_provider"
-    loop_forever
   fi
 
   URL="${BASE_URL}${chain_name}/${URL##*/}"
