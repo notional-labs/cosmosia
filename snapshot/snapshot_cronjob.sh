@@ -30,7 +30,10 @@ cd $node_home
 TAR_FILENAME="data_$(date +%Y%m%d_%T |sed 's/://g').tar.gz"
 TAR_FILE_PATH="$HOME/$TAR_FILENAME"
 
-tar -czvf $TAR_FILE_PATH ./data
+# snapshot file includes ALL dirs in $node_home excluding config dir
+included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
+
+tar -czvf $TAR_FILE_PATH $included_dirs
 
 # copy to /snapshot folder
 mv $TAR_FILE_PATH /snapshot/
