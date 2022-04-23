@@ -28,7 +28,7 @@ export function* monitorStartTask() {
     } catch (e) {
       console.log(e)
     } finally {
-      yield delay(6000);
+      yield delay(60000);
     }
   }
 }
