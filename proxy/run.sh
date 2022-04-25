@@ -19,7 +19,7 @@ sleep 5
 ########################################################################################################################
 # dynamic upstream
 
-RPC_SERVICES="osmosis starname regen akash cosmoshub sentinel emoney ixo juno sifchain likecoin kichain cyber cheqd stargaze bandchain chihuahua kava bitcanna konstellation omniflixhub terra vidulum provenance dig gravitybridge comdex cerberus bitsong"
+RPC_SERVICES="osmosis starname regen akash cosmoshub sentinel emoney ixo juno sifchain likecoin kichain cyber cheqd stargaze bandchain chihuahua kava bitcanna konstellation omniflixhub terra vidulum provenance dig gravitybridge comdex cerberus bitsong assetmantle"
 UPSTREAM_CONFIG_FILE="/etc/nginx/upstream.conf"
 TMP_DIR="$HOME/tmp/upstream"
 TMP_UPSTREAM_CONFIG_FILE="$TMP_DIR/new_upstream_config.conf"
