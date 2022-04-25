@@ -37,6 +37,7 @@ See [status page](https://status.notional.ventures/) of our cluster.
 28. Cerberus
 29. BitSong
 30. AssetMantle
+31. FetchAI
 
 Add a new chain? Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
 
