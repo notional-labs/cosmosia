@@ -20,6 +20,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --network cosmosia \
+  --endpoint-mode dnsrr \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
