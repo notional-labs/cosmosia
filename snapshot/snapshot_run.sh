@@ -19,6 +19,16 @@ source ./snapshot_download.sh
 pacman -Syu --noconfirm python python-pip cronie nginx jq openssh
 
 echo "#################################################################################################################"
+echo "openssh..."
+
+mkdir -p $HOME/.ssh
+curl -Ls http://tasks.web_config/id_rsa/id_rsa.pub > $HOME/.ssh/id_rsa.pub
+curl -Ls http://tasks.web_config/id_rsa/id_rsa > $HOME/.ssh/id_rsa
+
+chmod -R 700 ~/.ssh
+
+
+echo "#################################################################################################################"
 echo "nginx..."
 
 curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot.nginx.conf" > /etc/nginx/nginx.conf
