@@ -29,6 +29,7 @@ docker service create \
   --mount type=bind,source=/mnt/data/syncthing,destination=/data \
   --replicas 1 \
   --network cosmosia \
+  --endpoint-mode dnsrr \
   --publish $SSH_PORT \
   --constraint "node.hostname==$HOST" \
   --restart-condition any \
