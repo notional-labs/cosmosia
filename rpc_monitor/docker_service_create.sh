@@ -9,6 +9,7 @@ docker service create \
   --name rpc_monitor \
   --replicas 1 \
   --network cosmosia \
+  --endpoint-mode dnsrr \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \

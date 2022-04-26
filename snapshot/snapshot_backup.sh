@@ -34,14 +34,14 @@ if [[ $status_code == "200" ]]; then
     fi
 
     # copy new snapshot
-    scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq -i ~/.ssh/cosmosia/id_rsa /snapshot/* root@syncthing1:/data/default/$chain_name/
+    scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq -i ~/.ssh/id_rsa /snapshot/* root@syncthing1:/data/default/$chain_name/
 
     exit 0
   fi
 
 elif [[ $status_code == "404" ]]; then
   # There is no backup on syncthing => need to copy
-  scp -prq -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/cosmosia/id_rsa /snapshot/* root@syncthing1:/data/default/$chain_name/
+  scp -prq -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/id_rsa /snapshot/* root@syncthing1:/data/default/$chain_name/
 
   exit 0
 fi
