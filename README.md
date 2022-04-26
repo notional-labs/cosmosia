@@ -7,37 +7,37 @@ Open solution to build a reliable infrastructure for cosmos/tendermint based cha
 See [status page](https://status.notional.ventures/) of our cluster.
 
 ### Supported chains:
-1. Osmosis
-2. Starname
-3. Regen
-4. Akash
-5. Gaia
-6. Sentinel
-7. E-Money
-8. Ixo
-9. Juno
-10. Sifchain
-11. Likecoin
-12. Ki
-13. Cyber
-14. Cheqd
-15. Stargaze
-16. Band
-17. Chihuahua
-18. Kava
-19. BitCanna
-20. Konstellation
-21. Omniflix
-22. Terra
-23. Vidulum
-24. Provenance
-25. Dig
-26. Gravity-Bridge
-27. Comdex
-28. Cerberus
-29. BitSong
-30. AssetMantle
-31. FetchAI
+1. Osmosis (osmosis)
+2. Starname (starname)
+3. Regen (regen)
+4. Akash (akash)
+5. Gaia (cosmoshub)
+6. Sentinel (sentinel)
+7. E-Money (emoney)
+8. Ixo (ixo)
+9. Juno (juno)
+10. Sifchain (sifchain)
+11. Likecoin (likecoin)
+12. Ki (kichain)
+13. Cyber (cyber)
+14. Cheqd (cheqd)
+15. Stargaze (stargaze)
+16. Band (bandchain)
+17. Chihuahua (chihuahua)
+18. Kava (kava)
+19. BitCanna (bitcanna)
+20. Konstellation (konstellation)
+21. Omniflix (omniflixhub)
+22. Terra (terra)
+23. Vidulum (vidulum)
+24. Provenance (provenance)
+25. Dig (dig)
+26. Gravity-Bridge (gravitybridge)
+27. Comdex (comdex)
+28. Cerberus (cerberus)
+29. BitSong (bitsong)
+30. AssetMantle (assetmantle)
+31. FetchAI (fetchhub)
 
 Add a new chain? Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
 
