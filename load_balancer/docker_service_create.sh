@@ -22,7 +22,7 @@ docker service create \
   --network cosmosia \
   --endpoint-mode dnsrr \
   --constraint 'node.role==manager' \
-  --restart-condition none \
+  --restart-condition any \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/load_balancer/run.sh > ~/run.sh && \
