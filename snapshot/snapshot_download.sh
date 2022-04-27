@@ -249,7 +249,19 @@ fi
 
 
 echo "download addrbook..."
-curl -Ls "$addrbook_url" > $node_home/config/addrbook.json
+# we try notional.ventures first, failed => other providers
+URL="https://snapshot.notional.ventures/$chain_name/addrbook.json"
+status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
+if [[ $status_code != "200" ]]; then
+  URL="https://snapshot.notional.ventures/syncthing/$chain_name/addrbook.json"
+  status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
+  if [[ $status_code != "200" ]]; then
+    echo "Not found snapshot for $chain_name from notional.ventures, continue to try other providers..."
+    URL=$addrbook_url
+  fi
+fi
+
+curl -Ls  "$URL" > $node_home/config/addrbook.json
 
 echo "#################################################################################################################"
 echo "start chain script"
