@@ -38,6 +38,8 @@ See [status page](https://status.notional.ventures/) of our cluster.
 29. BitSong (bitsong)
 30. AssetMantle (assetmantle)
 31. FetchAI (fetchhub)
+32. Evmos (evmos)
+
 
 Add a new chain? Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
 
