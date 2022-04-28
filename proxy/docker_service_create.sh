@@ -43,7 +43,7 @@ docker service create \
   --publish mode=host,target=9032,published=9032 \
   --publish mode=host,target=19999,published=19999 \
   --network cosmosia \
-  --constraint 'node.hostname==cosmosia1' \
+  --constraint 'node.hostname==cosmosia3' \
   --restart-condition any \
   --restart-delay 3s \
   --restart-max-attempts 3 \
