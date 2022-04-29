@@ -1,8 +1,11 @@
 ### setup swarm cluster
 Follow [Getting started with swarm mode](https://docs.docker.com/engine/swarm/swarm-tutorial/) tutorial to setup a swarm cluster
 
-#### set resource limits
 ```bash
+# set utc timezone
+timedatectl set-timezone UTC
+
+# set resource limits
 echo "root hard nofile 150000" >> /etc/security/limits.conf
 echo "root soft nofile 150000" >> /etc/security/limits.conf
 echo "* hard nofile  150000" >> /etc/security/limits.conf
