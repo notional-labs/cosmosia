@@ -21,7 +21,6 @@ docker service create \
   --replicas 1 \
   --network cosmosia \
   --endpoint-mode dnsrr \
-  --constraint 'node.role==manager' \
   --restart-condition any \
   archlinux:latest \
   /bin/bash -c \
