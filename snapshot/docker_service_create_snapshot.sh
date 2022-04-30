@@ -36,7 +36,7 @@ docker service create \
   --replicas 1 \
   --mount type=bind,source=/mnt/data/snapshots/$chain_name,destination=/snapshot \
   --network cosmosia \
-  --constraint 'node.hostname==$snapshot_node' \
+  --constraint "node.hostname==$snapshot_node" \
   --endpoint-mode dnsrr \
   --restart-condition none \
   archlinux:latest \
