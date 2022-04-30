@@ -95,25 +95,17 @@ rm -rf $node_home/data/*
 cd $node_home
 
 
-# always try from our snapshot backup (syncthing) first, if failure => use external providers
-BASE_URL="https://snapshot.notional.ventures/"
-URL="https://snapshot.notional.ventures/$chain_name/chain.json"
+# always try from our snapshot first, if failure => use external providers
+URL="http://tasks.snapshot_$chain_name/chain.json"
 status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
 if [[ $status_code == "200" ]]; then
   URL=`curl -s $URL |jq -r '.snapshot_url'`
-  URL="${BASE_URL}${chain_name}/${URL##*/}"
+  URL="http://tasks.snapshot_$chain_name/${URL##*/}"
 else
-  URL="https://snapshot.notional.ventures/syncthing/$chain_name/chain.json"
-  status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-  if [[ $status_code == "200" ]]; then
-    URL=`curl -s $URL |jq -r '.snapshot_url'`
-    BASE_URL="https://snapshot.notional.ventures/syncthing/"
-    URL="${BASE_URL}${chain_name}/${URL##*/}"
-  else
-    echo "Not found snapshot for $chain_name from notional.ventures, continue to try other providers..."
+  echo "Not found snapshot for $chain_name from notional.ventures, continue to try other providers..."
 
-    echo "Loop forever for debug"
-    loop_forever
+  echo "Loop forever for debug"
+  loop_forever
 
 #    if [[ $snapshot_provider == "quicksync.io" ]]; then
 #      # using quicksync.io https://quicksync.io/networks/cosmos.html
@@ -203,7 +195,6 @@ else
 #      loop_forever
 #    fi
 
-  fi
 fi
 
 echo "URL=$URL"
