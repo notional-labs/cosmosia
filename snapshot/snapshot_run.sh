@@ -12,7 +12,6 @@ fi
 cd $HOME
 
 curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
-curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_backup.sh" > $HOME/snapshot_backup.sh
 source ./snapshot_download.sh
 
 pacman -Syu --noconfirm python python-pip cronie nginx jq
