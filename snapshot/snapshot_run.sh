@@ -10,18 +10,20 @@ then
 fi
 
 cd $HOME
-
-curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
-source ./snapshot_download.sh
-
 pacman -Syu --noconfirm python python-pip cronie nginx jq
 
 echo "#################################################################################################################"
 echo "nginx..."
 
 curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot.nginx.conf" > /etc/nginx/nginx.conf
-mkdir -p /snapshot
+# mkdir -p /snapshot
 /usr/sbin/nginx
+
+sleep 5
+
+########################################################################################################################
+curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
+source ./snapshot_download.sh
 
 ########################################################################################################################
 # supervised

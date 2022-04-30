@@ -16,18 +16,6 @@ loop_forever () {
   while true; do sleep 5; done
 }
 
-
-echo "#################################################################################################################"
-echo "#prepare.."
-
-# read config from /data/config.ini
-eval "$(curl -Ls https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/config.ini |sed 's/ *= */=/g')"
-
-# debug config params
-echo "############################################################################################################"
-echo "read config:"
-echo "proxy_cache_url=$proxy_cache_url"
-
 echo "#################################################################################################################"
 echo "read chain info:"
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
