@@ -91,92 +91,83 @@ rm -rf $node_home/data/*
 
 cd $node_home
 
-# always try from our snapshot backup (syncthing) first, if failure => use external providers
-BASE_URL="https://snapshot.notional.ventures/"
-URL="https://snapshot.notional.ventures/$chain_name/chain.json"
+# always try from our local snapshot first, if failure => use external providers
+BASE_URL="http://localhost/"
+URL="http://localhost/chain.json"
 status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
 if [[ $status_code == "200" ]]; then
   URL=`curl -s $URL |jq -r '.snapshot_url'`
-  URL="${BASE_URL}${chain_name}/${URL##*/}"
+  URL="${BASE_URL}${URL##*/}"
 else
-  URL="https://snapshot.notional.ventures/syncthing/$chain_name/chain.json"
-  status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-  if [[ $status_code == "200" ]]; then
-    URL=`curl -s $URL |jq -r '.snapshot_url'`
-    BASE_URL="https://snapshot.notional.ventures/syncthing/"
-    URL="${BASE_URL}${chain_name}/${URL##*/}"
-  else
-    echo "Not found snapshot for $chain_name from notional.ventures, continue to try other providers..."
+  echo "Not found local snapshot for $chain_name, continue to try other providers..."
 
-    if [[ $snapshot_provider == "quicksync.io" ]]; then
-      # using quicksync.io https://quicksync.io/networks/cosmos.html
+  if [[ $snapshot_provider == "quicksync.io" ]]; then
+    # using quicksync.io https://quicksync.io/networks/cosmos.html
 
-      if [[ $chain_name == "cosmoshub" ]]; then
-        URL=`curl -s https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
-      elif [[ $chain_name == "osmosis" ]]; then
-        URL=`curl -s https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
-      elif [[ $chain_name == "emoney" ]]; then
-        URL=`curl https://quicksync.io/emoney.json|jq -r '.[] |select(.file=="emoney-3-default")|.url'`
-      elif [[ $chain_name == "terra" ]]; then
-        URL=`curl https://quicksync.io/terra.json|jq -r '.[] |select(.file=="columbus-5-pruned")|select (.mirror=="Netherlands")|.url'`
-      elif [[ $chain_name == "bandchain" ]]; then
-        URL=`curl https://quicksync.io/band.json |jq -r '.[] |select(.file=="laozi-mainnet-pruned")|.url'`
-      elif [[ $chain_name == "kava" ]]; then
-        URL=`curl https://quicksync.io/kava.json |jq -r '.[] |select(.file=="kava-9-pruned")|.url'`
-      else
-        echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-        exit
-      fi
-    elif [[ $snapshot_provider == "polkachu.com" ]]; then
-      URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
-    elif [[ $snapshot_provider == "alexvalidator.com" ]]; then
-      cd $node_home/data/
-
-      URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ |egrep -o ">.*tar" |tr -d ">")
-      URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
-    elif [[ $snapshot_provider == "cosmosia" ]]; then
-      URL=`curl -s http://65.108.121.153/$chain_name.json |jq -r '.snapshot_url'`
-    elif [[ $snapshot_provider == "staketab.com" ]]; then
-      cd $node_home/data/
-
-      URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm")
-      URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
-
-      if [[ $chain_name == "stargaze" ]]; then
-        URL_WASM=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">")
-        URL_WASM="https://cosmos-snap.staketab.com/$chain_name/$URL_WASM"
-      fi
-    elif [[ $snapshot_provider == "stake2.me" ]]; then
-      cd $node_home/data/
-
-      URL=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm" |tail -1)
-      URL="https://snapshots.stake2.me/$chain_name/$URL"
-      if [[ $chain_name == "stargaze" ]]; then
-        URL_WASM=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">" |tail -1)
-        URL_WASM="https://snapshots.stake2.me/$chain_name/$URL_WASM"
-      fi
-    elif [[ $snapshot_provider == "custom" ]]; then
-      if [[ $chain_name == "cheqd" ]]; then
-        cd $node_home/data/
-
-        URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n1 |sed -e 's/<[^>]*>//g')
-        URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
-      elif [[ $chain_name == "konstellation" ]]; then
-        cd $node_home/data/
-
-        URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
-        URL="https://mercury-nodes.net/knstl-snapshot/$URL"
-      elif [[ $chain_name == "provenance" ]]; then
-        URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-post-green.tar.gz" |jq -r '.mediaLink')
-      else
-        echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-        exit
-      fi
+    if [[ $chain_name == "cosmoshub" ]]; then
+      URL=`curl -s https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
+    elif [[ $chain_name == "osmosis" ]]; then
+      URL=`curl -s https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
+    elif [[ $chain_name == "emoney" ]]; then
+      URL=`curl https://quicksync.io/emoney.json|jq -r '.[] |select(.file=="emoney-3-default")|.url'`
+    elif [[ $chain_name == "terra" ]]; then
+      URL=`curl https://quicksync.io/terra.json|jq -r '.[] |select(.file=="columbus-5-pruned")|select (.mirror=="Netherlands")|.url'`
+    elif [[ $chain_name == "bandchain" ]]; then
+      URL=`curl https://quicksync.io/band.json |jq -r '.[] |select(.file=="laozi-mainnet-pruned")|.url'`
+    elif [[ $chain_name == "kava" ]]; then
+      URL=`curl https://quicksync.io/kava.json |jq -r '.[] |select(.file=="kava-9-pruned")|.url'`
     else
-      echo "Not support snapshot_provider $snapshot_provider"
+      echo "Not support $chain_name with snapshot_provider $snapshot_provider"
       exit
     fi
+  elif [[ $snapshot_provider == "polkachu.com" ]]; then
+    URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
+  elif [[ $snapshot_provider == "alexvalidator.com" ]]; then
+    cd $node_home/data/
 
+    URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ |egrep -o ">.*tar" |tr -d ">")
+    URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
+  elif [[ $snapshot_provider == "cosmosia" ]]; then
+    URL=`curl -s http://65.108.121.153/$chain_name.json |jq -r '.snapshot_url'`
+  elif [[ $snapshot_provider == "staketab.com" ]]; then
+    cd $node_home/data/
+
+    URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm")
+    URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
+
+    if [[ $chain_name == "stargaze" ]]; then
+      URL_WASM=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">")
+      URL_WASM="https://cosmos-snap.staketab.com/$chain_name/$URL_WASM"
+    fi
+  elif [[ $snapshot_provider == "stake2.me" ]]; then
+    cd $node_home/data/
+
+    URL=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm" |tail -1)
+    URL="https://snapshots.stake2.me/$chain_name/$URL"
+    if [[ $chain_name == "stargaze" ]]; then
+      URL_WASM=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">" |tail -1)
+      URL_WASM="https://snapshots.stake2.me/$chain_name/$URL_WASM"
+    fi
+  elif [[ $snapshot_provider == "custom" ]]; then
+    if [[ $chain_name == "cheqd" ]]; then
+      cd $node_home/data/
+
+      URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n1 |sed -e 's/<[^>]*>//g')
+      URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
+    elif [[ $chain_name == "konstellation" ]]; then
+      cd $node_home/data/
+
+      URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
+      URL="https://mercury-nodes.net/knstl-snapshot/$URL"
+    elif [[ $chain_name == "provenance" ]]; then
+      URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-post-green.tar.gz" |jq -r '.mediaLink')
+    else
+      echo "Not support $chain_name with snapshot_provider $snapshot_provider"
+      exit
+    fi
+  else
+    echo "Not support snapshot_provider $snapshot_provider"
+    exit
   fi
 fi
 
