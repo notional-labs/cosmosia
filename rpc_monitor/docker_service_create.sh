@@ -10,7 +10,7 @@ docker service create \
   --replicas 1 \
   --network cosmosia \
   --endpoint-mode dnsrr \
-  --restart-condition none \
+  --restart-condition any \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/rpc_monitor/run.sh > ~/run.sh && /bin/bash ~/run.sh"
