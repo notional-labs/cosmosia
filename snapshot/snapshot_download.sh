@@ -231,12 +231,8 @@ echo "download addrbook..."
 URL="https://snapshot.notional.ventures/$chain_name/addrbook.json"
 status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
 if [[ $status_code != "200" ]]; then
-  URL="https://snapshot.notional.ventures/syncthing/$chain_name/addrbook.json"
-  status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-  if [[ $status_code != "200" ]]; then
-    echo "Not found snapshot for $chain_name from notional.ventures, continue to try other providers..."
-    URL=$addrbook_url
-  fi
+  echo "Not found snapshot for $chain_name, continue to try other providers..."
+  URL=$addrbook_url
 fi
 
 curl -Ls  "$URL" > $node_home/config/addrbook.json
