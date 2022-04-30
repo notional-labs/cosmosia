@@ -48,8 +48,3 @@ EOT
 
 # delete old snapshots
 cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -1)
-
-
-###########################
-echo "backup to syncthing if needed"
-#source snapshot_backup.sh
