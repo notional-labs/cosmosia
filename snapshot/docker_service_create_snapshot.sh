@@ -25,7 +25,7 @@ echo "snapshot_node=$snapshot_node"
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 
-SERVICE_NAME=test_snapshot_$chain_name
+SERVICE_NAME=snapshot_$chain_name
 
 
 # delete existing service
