@@ -1,5 +1,0 @@
-# GlusterFS
-
-Shared storage...
-
-
