@@ -15,14 +15,14 @@ pacman -Syu --noconfirm python python-pip cronie nginx jq
 echo "#################################################################################################################"
 echo "nginx..."
 
-curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot.nginx.conf" > /etc/nginx/nginx.conf
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot.nginx.conf" > /etc/nginx/nginx.conf
 # mkdir -p /snapshot
 /usr/sbin/nginx
 
 sleep 5
 
 ########################################################################################################################
-curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
 source ./snapshot_download.sh
 
 ########################################################################################################################
@@ -50,7 +50,7 @@ supervisord
 ########################################################################################################################
 # cron
 
-curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
 
 if [[ -z $snapshot_time ]]; then
   echo "No time setting to take snapshot, please set snapshot_time in chain_registry.ini"

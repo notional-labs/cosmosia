@@ -7,7 +7,7 @@ tar -xvf "/run/secrets/ssl_notional.ventures.tar.gz" -C /etc/nginx/
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy_public/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_public/nginx.conf > /etc/nginx/nginx.conf
 
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx

@@ -15,6 +15,6 @@ docker service create \
   --secret ssl_notional.ventures.tar.gz \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/proxy_static/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_static/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 

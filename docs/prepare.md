@@ -40,7 +40,7 @@ docker network create -d overlay --attachable cosmosia
 - clone repos to a manager node to $HOME:
 ```bash
 cd $HOME
-git clone https://github.com/baabeetaa/cosmosia
+git clone https://github.com/notional-labs/cosmosia
 ```
 
 ### LVM

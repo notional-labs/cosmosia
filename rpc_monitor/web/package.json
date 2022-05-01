@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "cosmosia rpc monitor",
   "main": "index.js",
-  "repository": "git@github.com/baabeetaa/cosmosia.git",
+  "repository": "git@github.com/notional-labs/cosmosia.git",
   "author": "Tuan Pham Anh <baabeetaa@gmail.com>",
   "license": "MIT",
   "private": false,
