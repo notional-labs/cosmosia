@@ -23,6 +23,10 @@ curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/da
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/dashboard.yaml > /var/lib/grafana/conf/provisioning/dashboards/dashboard.yaml
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/MyDashboard.json > /var/lib/grafana/dashboards/MyDashboard.json
 
+# change admin password
+default_password="$(cat /run/secrets/grafana_password)"
+sed -i -e "s/^admin_password *=.*/admin_password = $default_password/" /usr/share/grafana/conf/defaults.ini
+
 screen -S grafana -dm /usr/sbin/grafana-server -homepath /usr/share/grafana
 
 

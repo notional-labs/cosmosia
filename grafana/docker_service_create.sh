@@ -10,6 +10,7 @@ docker service create \
   --constraint 'node.hostname==cosmosia7' \
   --endpoint-mode dnsrr \
   --restart-condition any \
+  --secret grafana_password \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/run.sh > ~/run.sh && /bin/bash ~/run.sh"
