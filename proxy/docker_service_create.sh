@@ -50,6 +50,6 @@ docker service create \
   --restart-window 10m \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 

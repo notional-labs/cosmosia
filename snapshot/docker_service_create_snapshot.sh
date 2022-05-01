@@ -41,5 +41,5 @@ docker service create \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/snapshot/snapshot_run.sh > ~/snapshot_run.sh && \
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/snapshot/snapshot_run.sh > ~/snapshot_run.sh && \
   /bin/bash ~/snapshot_run.sh $chain_name"

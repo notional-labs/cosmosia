@@ -25,5 +25,5 @@ docker service create \
   --restart-condition any \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/$git_branch/rpc/quicksync.sh > ~/quicksync.sh && \
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/rpc/quicksync.sh > ~/quicksync.sh && \
   /bin/bash ~/quicksync.sh $chain_name"

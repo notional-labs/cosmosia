@@ -20,7 +20,7 @@ echo "##########################################################################
 echo "read chain info:"
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
 
-eval "$(curl -s https://raw.githubusercontent.com/baabeetaa/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
+eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -242,7 +242,7 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/conf
 sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 0/" $node_home/config/app.toml
 
 
-# https://github.com/baabeetaa/cosmosia/issues/24
+# https://github.com/notional-labs/cosmosia/issues/24
 [ "$chain_name" != "kava" ] && sed -i -e "s/^swagger *=.*/swagger = true/" $node_home/config/app.toml
 
 sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
@@ -276,8 +276,8 @@ curl -Ls  "$URL" > $node_home/config/addrbook.json
 
 echo "#################################################################################################################"
 echo "start nginx..."
-curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/rpc/nginx.conf" > /etc/nginx/nginx.conf
-curl -Ls "https://raw.githubusercontent.com/baabeetaa/cosmosia/main/rpc/healthcheck.sh" > /usr/share/nginx/html/healthcheck.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/nginx.conf" > /etc/nginx/nginx.conf
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/healthcheck.sh" > /usr/share/nginx/html/healthcheck.sh
 chmod +x /usr/share/nginx/html/healthcheck.sh
 spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
 /usr/sbin/nginx

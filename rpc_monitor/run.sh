@@ -3,7 +3,7 @@ pacman -S --noconfirm base-devel dnsutils git nodejs npm yarn python2 screen
 
 cd $HOME
 
-git clone --single-branch --branch main https://github.com/baabeetaa/cosmosia
+git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
 
 cd $HOME/cosmosia/rpc_monitor/web
 
