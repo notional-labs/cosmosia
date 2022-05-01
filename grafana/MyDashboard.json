@@ -21,7 +21,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -30,6 +29,7 @@
         "type": "prometheus",
         "uid": "P7CBE1186F0038668"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -39,7 +39,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -57,7 +57,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -111,7 +111,7 @@
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
+      "title": "Cosmosia API",
       "type": "timeseries"
     }
   ],
@@ -130,6 +130,6 @@
   "timezone": "",
   "title": "MyDashboard",
   "uid": "K2Ka1ml7k",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }
