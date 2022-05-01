@@ -1,15 +1,19 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel screen prometheus grafana
+pacman -S --noconfirm screen
 
 cd $HOME
 
 ############
 # prometheus
+echo "Intalling prometheus..."
+pacman -S --noconfirm prometheus
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/prometheus.yaml > ~/prometheus.yaml
 screen -S prometheus -dm /usr/sbin/prometheus --config.file=$HOME/prometheus.yaml
 
 #################
 # grafana server
+echo "Intalling grafana..."
+pacman -S --noconfirm grafana
 mkdir -p /var/lib/grafana/conf/provisioning/datasources
 mkdir -p /var/lib/grafana/conf/provisioning/dashboards
 mkdir -p /var/lib/grafana/dashboards
