@@ -57,6 +57,7 @@ cat <<EOT > $TMP_CONFIG_FILE
 # This file is generated dynamically, dont edit.
 
 {
+  admin :2019
 	servers {
 		protocol {
 		  	allow_h2c
