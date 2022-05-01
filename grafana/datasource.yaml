@@ -1,4 +1,4 @@
-# grafana/provisioning/datasources/datasource.yml
+# grafana/provisioning/datasources/datasource.yaml
 apiVersion: 1
 
 datasources:

@@ -7,6 +7,7 @@ cd $HOME
 # prometheus
 echo "Intalling prometheus..."
 pacman -S --noconfirm prometheus
+
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/prometheus.yaml > ~/prometheus.yaml
 screen -S prometheus -dm /usr/sbin/prometheus --config.file=$HOME/prometheus.yaml
 
@@ -14,11 +15,12 @@ screen -S prometheus -dm /usr/sbin/prometheus --config.file=$HOME/prometheus.yam
 # grafana server
 echo "Intalling grafana..."
 pacman -S --noconfirm grafana
+
 mkdir -p /var/lib/grafana/conf/provisioning/datasources
 mkdir -p /var/lib/grafana/conf/provisioning/dashboards
 mkdir -p /var/lib/grafana/dashboards
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/datasources.yaml > /var/lib/grafana/conf/provisioning/datasources/datasources.yaml
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/dashboards.yaml > /var/lib/grafana/conf/provisioning/dashboards/dashboards.yaml
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/datasource.yaml > /var/lib/grafana/conf/provisioning/datasources/datasource.yaml
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/dashboard.yaml > /var/lib/grafana/conf/provisioning/dashboards/dashboard.yaml
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/MyDashboard.json > /var/lib/grafana/dashboards/MyDashboard.json
 
 screen -S grafana -dm /usr/sbin/grafana-server -homepath /usr/share/grafana
