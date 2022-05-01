@@ -1,0 +1,100 @@
+global:
+  scrape_interval: 15s # default is 1 minute
+
+scrape_configs:
+  - job_name: lb_osmosis
+    static_configs:
+      - targets: ['tasks.lb_osmosis:2019']
+  - job_name: lb_starname
+    static_configs:
+      - targets: ['tasks.lb_starname:2019']
+  - job_name: lb_regen
+    static_configs:
+      - targets: ['tasks.lb_regen:2019']
+  - job_name: lb_akash
+    static_configs:
+      - targets: ['tasks.lb_akash:2019']
+  - job_name: lb_cosmoshub
+    static_configs:
+      - targets: ['tasks.lb_cosmoshub:2019']
+  - job_name: lb_sentinel
+    static_configs:
+      - targets: ['tasks.lb_sentinel:2019']
+  - job_name: lb_emoney
+    static_configs:
+      - targets: ['tasks.lb_emoney:2019']
+  - job_name: lb_ixo
+    static_configs:
+      - targets: ['tasks.lb_ixo:2019']
+  - job_name: lb_juno
+    static_configs:
+      - targets: ['tasks.lb_juno:2019']
+  - job_name: lb_sifchain
+    static_configs:
+      - targets: ['tasks.lb_sifchain:2019']
+  - job_name: lb_likecoin
+    static_configs:
+      - targets: ['tasks.lb_likecoin:2019']
+  - job_name: lb_kichain
+    static_configs:
+      - targets: ['tasks.lb_kichain:2019']
+  - job_name: lb_cyber
+    static_configs:
+      - targets: ['tasks.lb_cyber:2019']
+  - job_name: lb_cheqd
+    static_configs:
+      - targets: ['tasks.lb_cheqd:2019']
+  - job_name: lb_stargaze
+    static_configs:
+      - targets: ['tasks.lb_stargaze:2019']
+  - job_name: lb_bandchain
+    static_configs:
+      - targets: ['tasks.lb_bandchain:2019']
+  - job_name: lb_chihuahua
+    static_configs:
+      - targets: ['tasks.lb_chihuahua:2019']
+  - job_name: lb_kava
+    static_configs:
+      - targets: ['tasks.lb_kava:2019']
+  - job_name: lb_bitcanna
+    static_configs:
+      - targets: ['tasks.lb_bitcanna:2019']
+  - job_name: lb_konstellation
+    static_configs:
+      - targets: ['tasks.lb_konstellation:2019']
+  - job_name: lb_omniflixhub
+    static_configs:
+      - targets: ['tasks.lb_omniflixhub:2019']
+  - job_name: lb_terra
+    static_configs:
+      - targets: ['tasks.lb_terra:2019']
+  - job_name: lb_vidulum
+    static_configs:
+      - targets: ['tasks.lb_vidulum:2019']
+  - job_name: lb_provenance
+    static_configs:
+      - targets: ['tasks.lb_provenance:2019']
+  - job_name: lb_dig
+    static_configs:
+      - targets: ['tasks.lb_dig:2019']
+  - job_name: lb_gravitybridge
+    static_configs:
+      - targets: ['tasks.lb_gravitybridge:2019']
+  - job_name: lb_comdex
+    static_configs:
+      - targets: ['tasks.lb_comdex:2019']
+  - job_name: lb_cerberus
+    static_configs:
+      - targets: ['tasks.lb_cerberus:2019']
+  - job_name: lb_bitsong
+    static_configs:
+      - targets: ['tasks.lb_bitsong:2019']
+  - job_name: lb_assetmantle
+    static_configs:
+      - targets: ['tasks.lb_assetmantle:2019']
+  - job_name: lb_fetchhub
+    static_configs:
+      - targets: ['tasks.lb_fetchhub:2019']
+  - job_name: lb_evmos
+    static_configs:
+      - targets: ['tasks.lb_evmos:2019']

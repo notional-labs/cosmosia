@@ -1,18 +1,17 @@
 # delete existing service
-docker service rm caddy_monitor_test
+docker service rm grafana
 
 # create new service
 docker service create \
-  --name caddy_monitor_test \
+  --name grafana \
   --replicas 1 \
-  --publish mode=host,target=80,published=80 \
-  --publish mode=host,target=9090,published=9090 \
   --publish mode=host,target=3000,published=3000 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia7' \
   --endpoint-mode dnsrr \
   --restart-condition any \
   archlinux:latest \
-  /bin/bash -c "while true; do sleep 5; done"
+  /bin/bash -c \
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 
