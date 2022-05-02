@@ -5,7 +5,6 @@ docker service rm grafana
 docker service create \
   --name grafana \
   --replicas 1 \
-  --publish mode=host,target=3000,published=3000 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia7' \
   --endpoint-mode dnsrr \
