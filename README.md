@@ -3,6 +3,7 @@
 Open solution to build a reliable infrastructure for cosmos/tendermint based chains ( see [background](https://github.com/cosmos/chain-registry/issues/214) ):
 - API service: Load balancing for Rpc, Rest, Websocket, and [GRPC](docs/grpc.md)
 - Snapshot service
+- Monitoring tools for both [internal](docs/rpc_monitor.md) and [external](https://status.notional.ventures/) view.
 
 See [status page](https://status.notional.ventures/) of our cluster.
 
