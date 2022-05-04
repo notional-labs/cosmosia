@@ -40,6 +40,8 @@ See [status page](https://status.notional.ventures/) of our cluster.
 30. AssetMantle (assetmantle)
 31. FetchAI (fetchhub)
 32. Evmos (evmos)
+33. Persistence (persistent)
+
 
 
 Add a new chain? Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
