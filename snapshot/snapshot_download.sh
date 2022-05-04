@@ -103,6 +103,8 @@ else
       URL=`curl https://quicksync.io/band.json |jq -r '.[] |select(.file=="laozi-mainnet-pruned")|.url'`
     elif [[ $chain_name == "kava" ]]; then
       URL=`curl https://quicksync.io/kava.json |jq -r '.[] |select(.file=="kava-9-pruned")|.url'`
+    elif [[ $chain_name == "cryptoorgchain" ]]; then
+      URL=`curl https://quicksync.io/crypto.json |jq -r '.[] |select(.file=="crypto-org-chain-mainnet-1-pruned")|.url'`
     else
       echo "Not support $chain_name with snapshot_provider $snapshot_provider"
       exit
