@@ -42,7 +42,7 @@ See [status page](https://status.notional.ventures/) of our cluster.
 32. Evmos (evmos)
 33. Persistence (persistent)
 34. Crypto.org (cryptoorgchain)
-34. IRISnet (irisnet)
+35. IRISnet (irisnet)
 
 
 
