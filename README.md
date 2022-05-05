@@ -41,7 +41,8 @@ See [status page](https://status.notional.ventures/) of our cluster.
 31. FetchAI (fetchhub)
 32. Evmos (evmos)
 33. Persistence (persistent)
-33. Crypto.org (cryptoorgchain)
+34. Crypto.org (cryptoorgchain)
+34. IRISnet (irisnet)
 
 
 
