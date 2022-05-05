@@ -46,7 +46,7 @@ See [status page](https://status.notional.ventures/) of our cluster.
 
 
 
-Add a new chain? Create a MR adding it to [chain_registry.ini](./data/chain_registry.ini)
+Add a new chain? Follow this [guide](docs/new_chain.md)
 
 ### Docs
 See [Docs](./docs/)
