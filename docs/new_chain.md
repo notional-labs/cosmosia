@@ -18,16 +18,16 @@ Command executed on a docker swarm manager node
    sh docker_service_create_snapshot.sh chainname
    ```
 
-4. Update proxy_static
+4. Update proxy_public
    
-   append a link to [snapshot.index.html](proxy_static/snapshot.index.html)
+   append a link to [snapshot.index.html](proxy_public/snapshot.index.html)
    ```html
    <p><a href="/chainname/">chainname</a></p>
    ```
 
-   Restart the proxy_static
+   Restart the proxy_public
    ```bash
-   cd proxy_static
+   cd proxy_public
    sh docker_service_create.sh
    ```
 
