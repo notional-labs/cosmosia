@@ -21,6 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -53,7 +54,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -107,7 +108,7 @@
           "exemplar": true,
           "expr": "rate(caddy_http_requests_total{}[5m])",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{instance}}_{{server}}",
           "refId": "A"
         }
       ],
@@ -115,7 +116,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 35,
   "style": "dark",
   "tags": [],
