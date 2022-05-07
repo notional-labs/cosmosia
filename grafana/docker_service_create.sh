@@ -6,7 +6,6 @@ docker service create \
   --name grafana \
   --replicas 1 \
   --network cosmosia \
-  --constraint 'node.hostname==cosmosia7' \
   --endpoint-mode dnsrr \
   --restart-condition any \
   --secret grafana_password \
