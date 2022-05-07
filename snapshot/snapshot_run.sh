@@ -10,7 +10,7 @@ then
 fi
 
 cd $HOME
-pacman -Syu --noconfirm python python-pip cronie nginx jq
+pacman -Syu --noconfirm python python-pip cronie nginx jq cpulimit
 
 echo "#################################################################################################################"
 echo "nginx..."

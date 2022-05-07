@@ -33,7 +33,7 @@ TAR_FILE_PATH="$HOME/$TAR_FILENAME"
 # snapshot file includes ALL dirs in $node_home excluding config dir
 included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
 
-tar -czvf $TAR_FILE_PATH $included_dirs
+tar -czvf $TAR_FILE_PATH $included_dirs & sleep 2 && cpulimit -l 10 -p $(pidof gzip)
 
 # copy to /snapshot folder
 mv $TAR_FILE_PATH /snapshot/
