@@ -15,7 +15,7 @@ This is a sample setup of my cluster, each node has 2 nvme sticks.
 ```bash
 pvcreate -v /dev/nvme0n1p5 /dev/nvme1n1p2
 vgcreate -v vg0 /dev/nvme0n1p5 /dev/nvme1n1p2
-lvcreate -L 100G -i 2 -I 128k -n lv_data vg0 -v
+lvcreate -L 100G -i 2 -I 4k -n lv_data vg0 -v
 lvextend -l +100%FREE /dev/vg0/lv_data
 mkfs.ext4 /dev/vg0/lv_data
 
