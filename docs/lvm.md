@@ -3,7 +3,7 @@
 If your node has more than 1 ssd/nvme. Striped Logical Volume in LVM could improve iops.
 
 ```bash
-fio --randrepeat=1 --name=randrw --rw=randrw --direct=1 --ioengine=libaio --bs=16k --numjobs=10 --size=512M --runtime=60 --time_based --iodepth=64 --group_reporting
+fio --randrepeat=1 --name=randrw --rw=randrw --direct=1 --ioengine=libaio --bs=4k --numjobs=10 --size=512M --runtime=60 --time_based --iodepth=64 --group_reporting
 randrw: (g=0): rw=randrw, bs=(R) 16.0KiB-16.0KiB, (W) 16.0KiB-16.0KiB, (T) 16.0KiB-16.0KiB, ioengine=libaio, iodepth=64
 ```
 
