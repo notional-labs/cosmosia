@@ -5,9 +5,14 @@
 
 <h2><a href="set_config">set_config</a></h2>
 
+<code>
 curl -X POST http://127.0.0.1:5001/set_config \
    -H 'Content-Type: application/json' \
    -d '{"data":"2.2.2.2/24 3.3.3.3"}'
+</code>
 
+<p>data is list of IP or CIDR separated by white space. <br/>
+A successful request still returns error or nothing as the server being restarted/reloaded immediately.
+</p>
 
 <h2><a href="restore_default_config">restore_default_config</a></h2>

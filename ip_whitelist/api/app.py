@@ -1,12 +1,12 @@
 # Json responses follow JSend spec (https://github.com/omniti-labs/jsend)
-import ipaddress
 import flask
 import os.path
 import re
+import subprocess
 
 app = flask.Flask(__name__)
 
-config_file = "./ip_whitelist.cnf"
+config_file = "./ip_whitelist.conf"
 
 
 def get_default_config():
@@ -14,6 +14,11 @@ def get_default_config():
         'status': "success",
         'data': "0.0.0.0"
     }
+
+
+def reload_nginx():
+    rc = subprocess.call("nginx reload", shell=True)
+    print("rc=" + str(rc))
 
 
 @app.route('/', methods=['GET'])
@@ -26,9 +31,12 @@ def get_config():
     if not os.path.exists(config_file):
         return get_default_config()
 
+    with open(config_file, 'r') as file:
+        data = file.read().replace('\n', '')
+
     return {
         'status': "success",
-        'data': "1.1.1.1.1/24 2.2.2.2"
+        'data': data
     }
 
 
@@ -52,7 +60,15 @@ def set_config():
     print("json_content.data=" + json_content['data'])
 
     # validate IP/CIDR
-    cidr_list = json_content['data'].split()
+    data = json_content['data']
+    cidr_list = data.split()
+
+    if len(cidr_list) <= 0:
+        return {
+            "status": "fail",
+            "message": "invalid data"
+        }
+
     for str_cidr in cidr_list:
         if not bool(re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?:/\d{1,2}|)$", str_cidr)):
             return {
@@ -60,7 +76,16 @@ def set_config():
                 "message": "Invalid address " + str_cidr
             }
 
-    return json_content
+    # validated, write to file
+    with open(config_file, 'w') as f:
+        f.write(data)
+
+    reload_nginx()
+
+    return {
+        'status': "success",
+        'data': ""
+    }
 
 
 if __name__ == '__main__':
