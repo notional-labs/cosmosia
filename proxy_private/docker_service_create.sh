@@ -41,9 +41,9 @@ docker service create \
   --publish mode=host,target=9033,published=9033 \
   --publish mode=host,target=9034,published=9034 \
   --publish mode=host,target=9035,published=9035 \
-  --publish mode=host,target=19999,published=19999 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia7' \
+  --secret ssl_notional.ventures.tar.gz \
   --restart-condition any \
   --restart-delay 3s \
   --restart-max-attempts 3 \
