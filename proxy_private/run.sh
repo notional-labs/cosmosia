@@ -18,8 +18,8 @@ screen -S api -dm /usr/sbin/python app.py
 # extract SSL cert (fullchain.pem and privkey.pem files)
 tar -xvf "/run/secrets/ssl_notional.ventures.tar.gz" -C /etc/nginx/
 
-cp $HOME/cosmosia/ip_white_list_api/proxy_private/nginx.conf > /etc/nginx/nginx.conf
-cp $HOME/cosmosia/ip_white_list_api/proxy_private/index.html > /usr/share/nginx/html/index.html
+cp $HOME/cosmosia/ip_white_list_api/proxy_private/nginx.conf /etc/nginx/nginx.conf
+cp $HOME/cosmosia/ip_white_list_api/proxy_private/index.html /usr/share/nginx/html/index.html
 
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
