@@ -6,6 +6,7 @@ docker service create \
   --name proxy_private \
   --replicas 1 \
   --publish mode=host,target=80,published=80 \
+  --publish mode=host,target=443,published=443 \
   --publish mode=host,target=9001,published=9001 \
   --publish mode=host,target=9002,published=9002 \
   --publish mode=host,target=9003,published=9003 \
@@ -50,6 +51,6 @@ docker service create \
   --restart-window 10m \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/proxy_private/proxy_private/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/ip_whitelist_api/proxy_private/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 
