@@ -1,15 +1,27 @@
-# Json responses follow JSend spec (https://github.com/omniti-labs/jsend)
+# - Json responses follow JSend spec (https://github.com/omniti-labs/jsend)
+# - Basic Authentication: use `werkzeug.security.generate_password_hash` to generate password hash
+
 import flask
 import os.path
 import re
 import subprocess
+import flask_httpauth
+import werkzeug
 
 app = flask.Flask(__name__)
+auth = flask_httpauth.HTTPBasicAuth()
+
 config_file = "/etc/nginx/ip_whitelist.conf"
 
+users = {
+    "admin": "pbkdf2:sha256:260000$4uPwR4RdKIP6XaaM$dbb070f74aec45b10e294cccb061274c03de3c1fe5a589d1b899cd0677c44a0f"
+}
 
-def remove_prefix(text, prefix):
-    return text[text.startswith(prefix) and len(prefix):]
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and werkzeug.security.check_password_hash(users.get(username), password):
+        return username
 
 
 @app.route('/', methods=['GET'])
@@ -18,6 +30,7 @@ def default():
 
 
 @app.route('/get_config', methods=['GET'])
+@auth.login_required
 def get_config():
     cidrs = []
 
@@ -43,6 +56,7 @@ def get_config():
 
 # format: {"data":"2.2.2.2/24 3.3.3.3"}
 @app.route('/set_config', methods=['POST'])
+@auth.login_required
 def set_config():
     # validate content_length
     if flask.request.content_length > (4 * 1024):

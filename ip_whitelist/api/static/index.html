@@ -6,12 +6,16 @@
 <h2><a href="set_config">set_config</a></h2>
 
 <code>
-curl -X POST http://127.0.0.1:5001/set_config \
-   -H 'Content-Type: application/json' \
+curl -X POST http://127.0.0.1:5001/set_config \<br />
+   -H 'Content-Type: application/json' \<br />
+   -H 'Authorization: Basic dGVzdF9wYXNzd29yZA==' \<br />
    -d '{"data":"2.2.2.2/24 3.3.3.3"}'
 </code>
 
-<p>data is list of IP or CIDR separated by white space. <br/>
-A successful request still returns error or nothing as the server being restarted/reloaded immediately.
+<p><code>data</code> is list of IP or CIDR separated by white space. <br/>
+    <code>dGVzdF9wYXNzd29yZA==</code> is base64 encoded of your password. You could get it by:<br/>
+    <code>echo -n 'test_password' | base64</code></p>
+
+<p>A successful request still returns error or nothing as the server being restarted/reloaded immediately.
 </p>
 

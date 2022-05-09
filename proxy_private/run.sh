@@ -7,6 +7,8 @@ git clone --single-branch --branch ip_whitelist_api https://github.com/notional-
 ########################################################################################################################
 # ip_whitelist
 pip install Flask
+pip install Flask-HTTPAuth
+
 cd $HOME/cosmosia/ip_whitelist/api
 screen -S api -dm /usr/sbin/python app.py
 
