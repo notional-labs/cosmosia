@@ -12,6 +12,9 @@ pip install Flask-HTTPAuth
 cd $HOME/cosmosia/ip_whitelist/api
 screen -S api -dm /usr/sbin/python app.py
 
+# wait 3s for /etc/nginx/ip_whitelist.conf to be created if not exist yet
+sleep 3
+
 ########################################################################################################################
 # nginx
 
