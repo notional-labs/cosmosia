@@ -22,7 +22,7 @@ const Service = (props) => {
         header={<div><p className="service-name">{service}</p><hr /></div>}
         dataSource={containers}
         renderItem={ (item) => {
-          const bgColor = item.status === "200" ? "" : "red";
+          const bgColor = item.status === "200" ? "" : (item.status === "503" ? "#FFC440" : "#D93026");
           return (
             <List.Item style={{background: bgColor}}>
               {item.ip}: <Badge>{item.status}</Badge>

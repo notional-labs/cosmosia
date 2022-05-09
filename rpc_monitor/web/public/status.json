@@ -1,6 +1,6 @@
 [  { "service": "osmosis", "containers": [     { "ip": "10.0.1.145", "status": "503" },
   { "ip": "10.0.1.155", "status": "200" },
-  { "ip": "10.0.1.241", "status": "200" } ] },
+  { "ip": "10.0.1.241", "status": "000" } ] },
   { "service": "starname", "containers": [     { "ip": "10.0.1.150", "status": "200" } ] },
   { "service": "regen", "containers": [     { "ip": "10.0.1.146", "status": "200" } ] },
   { "service": "akash", "containers": [     { "ip": "10.0.1.70", "status": "200" } ] },
