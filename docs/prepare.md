@@ -6,10 +6,10 @@ Follow [Getting started with swarm mode](https://docs.docker.com/engine/swarm/sw
 timedatectl set-timezone UTC
 
 # set resource limits
-echo "root hard nofile 150000" >> /etc/security/limits.conf
-echo "root soft nofile 150000" >> /etc/security/limits.conf
-echo "* hard nofile  150000" >> /etc/security/limits.conf
-echo "* soft nofile 150000" >> /etc/security/limits.conf
+echo "root hard nofile 500000" >> /etc/security/limits.conf
+echo "root soft nofile 500000" >> /etc/security/limits.conf
+echo "* hard nofile  500000" >> /etc/security/limits.conf
+echo "* soft nofile 500000" >> /etc/security/limits.conf
 ```
 
 #### config log rotation
