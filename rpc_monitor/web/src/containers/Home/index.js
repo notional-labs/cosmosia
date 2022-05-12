@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
@@ -11,7 +10,7 @@ import reducer from './reducer';
 import saga from './saga';
 import { actionMonitorStart, actionMonitorStop } from './actions';
 
-import { Button, List, Badge } from 'antd';
+import { Button, List, Badge, Divider } from 'antd';
 
 const Service = (props) => {
   const {service, containers} = props;
@@ -67,7 +66,15 @@ class Index extends Component {
           ) : (
             <Button type="primary" onClick={() => this.props.monitorStart()}>Resume</Button>
           )}
+          <Divider type="vertical" />
+          <span>
+            <Badge status="default" text="Normal" /><Divider type="vertical" />
+            <Badge status="error" text="Error" /><Divider type="vertical" />
+            <Badge status="warning" text="Not-Synced" />
+          </span>
         </div>
+
+
 
         <hr />
 
