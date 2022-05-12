@@ -35,13 +35,16 @@ included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
 
 tar -czvf $TAR_FILE_PATH $included_dirs & sleep 2 && cpulimit -l 50 -p $(pidof gzip)
 
+FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
+
 # copy to /snapshot folder
 mv $TAR_FILE_PATH /snapshot/
 cp $node_home/config/addrbook.json /snapshot/
 
 cat <<EOT > /snapshot/chain.json
 {
-    "snapshot_url": "./$chain_name/$TAR_FILENAME"
+    "snapshot_url": "./$chain_name/$TAR_FILENAME",
+    "file_size": $FILESIZE
 }
 EOT
 
