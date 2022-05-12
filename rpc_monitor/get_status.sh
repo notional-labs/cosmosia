@@ -1,12 +1,12 @@
 
-RPC_SERVICES="osmosis starname regen akash cosmoshub sentinel emoney ixo juno sifchain likecoin kichain cyber cheqd stargaze bandchain chihuahua kava bitcanna konstellation omniflixhub terra vidulum provenance dig gravitybridge comdex cerberus bitsong assetmantle fetchhub evmos persistent cryptoorgchain irisnet"
+RPC_SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 #TMP_DIR="$HOME/tmp"
 TMP_DIR="./web/build"
 TMP_STATUS_FILE="$TMP_DIR/status.json"
 #mkdir -p $TMP_DIR
 
 service_str=""
-for service_name in $RPC_SERVICES; do
+echo $RPC_SERVICES | while read service_name; do
   ips=$(dig +short "tasks.$service_name" |sort)
 
   tmp_str=""

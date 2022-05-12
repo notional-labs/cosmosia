@@ -3,10 +3,10 @@
 # deploy/re-deploy snapshot service for all chains
 
 
-SERVICES="osmosis starname regen akash cosmoshub sentinel emoney ixo juno sifchain likecoin kichain cyber cheqd stargaze bandchain chihuahua kava bitcanna konstellation omniflixhub terra vidulum provenance dig gravitybridge comdex cerberus bitsong assetmantle fetchhub evmos persistent cryptoorgchain irisnet"
+RPC_SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 
 
-for service_name in $SERVICES; do
+echo $RPC_SERVICES | while read service_name; do
   /bin/bash docker_service_create_snapshot.sh $service_name
 
   sleep 60
