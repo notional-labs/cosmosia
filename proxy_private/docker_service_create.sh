@@ -1,14 +1,12 @@
-
-git_branch=$(git symbolic-ref --short -q HEAD)
-
 # delete existing service
-docker service rm proxy
+docker service rm proxy_private
 
 # create new service
 docker service create \
-  --name proxy \
+  --name proxy_private \
   --replicas 1 \
   --publish mode=host,target=80,published=80 \
+  --publish mode=host,target=443,published=443 \
   --publish mode=host,target=9001,published=9001 \
   --publish mode=host,target=9002,published=9002 \
   --publish mode=host,target=9003,published=9003 \
@@ -45,13 +43,14 @@ docker service create \
   --publish mode=host,target=9034,published=9034 \
   --publish mode=host,target=9035,published=9035 \
   --network cosmosia \
-  --constraint 'node.hostname==cosmosia3' \
+  --constraint 'node.hostname==cosmosia7' \
+  --secret ssl_notional.ventures.tar.gz \
   --restart-condition any \
   --restart-delay 3s \
   --restart-max-attempts 3 \
   --restart-window 10m \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/ip_whitelist_api/proxy_private/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 

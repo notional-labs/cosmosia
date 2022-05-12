@@ -1,0 +1,21 @@
+<h1>ip-whitelist api</h1>
+<hr />
+<h2><a href="get_config">get_config</a></h2>
+
+
+<h2><a href="set_config">set_config</a></h2>
+
+<code>
+curl -X POST https://ip-whitelist.notional.ventures/ip_whitelist/set_config \<br />
+   -H 'Content-Type: application/json' \<br />
+   -H 'Authorization: Basic YWRtaW46dGVzdF9wYXNzd29yZA==' \<br />
+   -d '{"data":"2.2.2.2/24 3.3.3.3"}'
+</code>
+
+<p><code>data</code> is list of IP or CIDR separated by white space. <br/>
+    <code>YWRtaW46dGVzdF9wYXNzd29yZA==</code> is base64 encoded of `user:password` format. Get it by:<br/>
+    <code>echo -n 'admin:test_password' |base64</code></p>
+
+<p>A successful request still returns error or nothing as the server being restarted/reloaded immediately.
+</p>
+
