@@ -8,7 +8,7 @@ TMP_STATUS_FILE="$TMP_DIR/status.json"
 #mkdir -p $TMP_DIR
 
 service_str=""
-echo $RPC_SERVICES | while read service_name; do
+for service_name in $RPC_SERVICES; do
   ips=$(dig +short "tasks.$service_name" |sort)
 
   tmp_str=""
