@@ -11,8 +11,7 @@ export NVM_DIR="$HOME/.nvm"
 nvm install v10.24.1
 
 cd $HOME
-git_branch=$(git symbolic-ref --short -q HEAD)
-git clone --single-branch --branch $git_branch https://github.com/notional-labs/cosmosia
+git clone --single-branch --branch monitor_snapshot_file_size https://github.com/notional-labs/cosmosia
 
 ########################################################################################################################
 # web
