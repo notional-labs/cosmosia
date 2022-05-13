@@ -20,25 +20,10 @@ screen -S server -dm node server.js
 
 ########################################################################################################################
 # cron
-echo "0 * * * * root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
+echo "0 * * * * root /bin/bash $HOME/cronjob_get_status.sh" > /etc/cron.d/cron_get_status
 
 # start crond
 crond
 
-
 # loop forever for debugging only
 while true; do sleep 5; done
-
-
-cd $HOME/cosmosia/rpc_monitor
-
-
-
-
-
-while true; do
-  /bin/bash get_status.sh
-
-  # sleep 120 seconds...
-  sleep 120
-done
