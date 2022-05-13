@@ -20,7 +20,7 @@ screen -S server -dm node server.js
 
 ########################################################################################################################
 # cron
-echo "0 * * * * root /bin/bash $HOME/cronjob_get_status.sh" > /etc/cron.d/cron_get_status
+echo "0 * * * * root /bin/bash $HOME/cosmosia/rpc_monitor/cronjob_get_status.sh" > /etc/cron.d/cron_get_status
 
 # start crond
 crond
