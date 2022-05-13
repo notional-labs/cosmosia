@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel dnsutils git nodejs npm yarn python2 screen
+pacman -S --noconfirm base-devel dnsutils git nodejs npm yarn python2 cronie screen
 
 cd $HOME
 
@@ -16,11 +16,25 @@ nvm install v10.24.1
 
 yarn && yarn build
 
-screen -S caddy -dm node server.js
+screen -S server -dm node server.js
+
+########################################################################################################################
+# cron
+echo "0 * * * * root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
+
+# start crond
+crond
 
 
-#########
+# loop forever for debugging only
+while true; do sleep 5; done
+
+
 cd $HOME/cosmosia/rpc_monitor
+
+
+
+
 
 while true; do
   /bin/bash get_status.sh
