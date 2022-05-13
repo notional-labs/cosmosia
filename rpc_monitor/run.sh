@@ -3,7 +3,9 @@ pacman -S --noconfirm base-devel dnsutils git nodejs npm yarn python2 cronie scr
 
 cd $HOME
 
-git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
+
+git_branch=$(git symbolic-ref --short -q HEAD)
+git clone --single-branch --branch $git_branch https://github.com/notional-labs/cosmosia
 
 cd $HOME/cosmosia/rpc_monitor/web
 
