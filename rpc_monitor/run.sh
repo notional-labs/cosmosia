@@ -11,7 +11,7 @@ export NVM_DIR="$HOME/.nvm"
 nvm install v10.24.1
 
 cd $HOME
-git clone --single-branch --branch monitor_snapshot_file_size https://github.com/notional-labs/cosmosia
+git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
 
 ########################################################################################################################
 # web
