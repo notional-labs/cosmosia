@@ -35,7 +35,7 @@ const SnapshotSizeList = (props) => {
   ];
 
   return (
-    <Table columns={columns} dataSource={snapshot_sizes} />
+    <Table columns={columns} dataSource={snapshot_sizes} pagination={false} />
   );
 };
 
