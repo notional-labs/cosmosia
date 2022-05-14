@@ -23,7 +23,7 @@ screen -S server -dm node server.js
 ########################################################################################################################
 # cron
 echo "*/1 * * * * root /bin/bash $HOME/cosmosia/rpc_monitor/cronjob_get_status.sh" > /etc/cron.d/cron_get_status
-echo "*/1 * * * * root /bin/bash $HOME/cosmosia/rpc_monitor/cronjob_get_snapshot_size.sh" > /etc/cron.d/cron_get_snapshot_size
+echo "*/5 * * * * root /bin/bash $HOME/cosmosia/rpc_monitor/cronjob_get_snapshot_size.sh" > /etc/cron.d/cron_get_snapshot_size
 
 # start crond
 crond
