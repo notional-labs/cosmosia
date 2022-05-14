@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel dnsutils git nodejs npm yarn python2 cronie screen
+pacman -S --noconfirm base-devel jq dnsutils git nodejs npm yarn python2 cronie screen
 
 
 ########################################################################################################################
@@ -23,6 +23,7 @@ screen -S server -dm node server.js
 ########################################################################################################################
 # cron
 echo "*/1 * * * * root /bin/bash $HOME/cosmosia/rpc_monitor/cronjob_get_status.sh" > /etc/cron.d/cron_get_status
+echo "*/1 * * * * root /bin/bash $HOME/cosmosia/rpc_monitor/cronjob_get_snapshot_size.sh" > /etc/cron.d/cron_get_snapshot_size
 
 # start crond
 crond

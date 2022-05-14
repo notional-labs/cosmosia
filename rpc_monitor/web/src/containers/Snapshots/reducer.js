@@ -2,7 +2,8 @@ import produce from 'immer';
 import { ACTION_UPDATE } from "./constants";
 
 export const initialState = {
-  snapshot_sizes: []
+  snapshot_sizes: false,
+  loading: false
 };
 
 const snapshotsReducer = (state = initialState, action) =>

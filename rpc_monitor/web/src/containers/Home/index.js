@@ -58,7 +58,7 @@ class Index extends Component {
   render() {
     return (
       <div className="Home">
-        <h1>Rpc Status</h1>
+        {/*<h1>Rpc Status</h1>*/}
 
         <div>
           {this.props.monitoring ? (
@@ -73,10 +73,6 @@ class Index extends Component {
             <Badge status="warning" text="Not-Synced" />
           </span>
         </div>
-
-
-
-        <hr />
 
         <Services services={this.props.status} />
       </div>
