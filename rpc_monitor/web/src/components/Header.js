@@ -2,28 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Link, withRouter } from 'react-router-dom';
+import { Menu, Layout } from 'antd';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: '',
-      block_num: '',
-    }
   };
 
   render() {
     return (
-      <header className="Topnav">
-        <div className="navbar navbar-dark">
-          <a className="brand" href="###">
-            <span className="sitename">RPC Monitor</span>
-          </a>
-          <nav className="top-menu">
-            <Link to='/test' style={{lineHeight: '32px', color: 'white'}}>Test</Link>
-          </nav>
-        </div>
-      </header>
+      <Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+        <div className="logo"><h3>Rpc Monitor</h3></div>
+        <Menu mode="horizontal" defaultSelectedKeys={['home']}>
+          <Menu.Item key="home">
+            <Link to="/">RPCs</Link>
+          </Menu.Item>
+          <Menu.Item key="snapshots">
+            <Link to="/snapshots">Snapshots</Link>
+          </Menu.Item>
+        </Menu>
+      </Layout.Header>
     )
   }
 }

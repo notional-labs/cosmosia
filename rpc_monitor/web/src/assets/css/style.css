@@ -3,6 +3,29 @@ html {
   min-height: 100%;
 }
 
+body {
+  /*background-color: white; !* #f0f2f5 *!*/
+}
+
+/* Antd */
+
+.ant-layout {
+  background: white;
+}
+
+.ant-layout-header {
+  background: white;
+}
+
+.logo {
+  float: left;
+  width: 120px;
+  margin: auto;
+}
+
+
+
+/*  Home */
 .services {
   display: flex;
   align-items: center;
