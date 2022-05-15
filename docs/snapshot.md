@@ -15,5 +15,10 @@ snapshot_node = "cosmosia1"
 ```
 
 
-
+---
+Cosmosia also uses snapshots from other providers as 1st bootstrap snapshot or backup:
+- [quicksync.io](https://quicksync.io/)
+- [alexvalidator.com](https://snapshots.alexvalidator.com/)
+- [staketab.com](https://cosmos-snap.staketab.com/)
+- [polkachu.com](https://polkachu.com/tendermint_snapshots)
 
