@@ -98,3 +98,12 @@ scrape_configs:
   - job_name: lb_evmos
     static_configs:
       - targets: ['tasks.lb_evmos:2019']
+  - job_name: lb_persistent
+    static_configs:
+      - targets: ['tasks.persistent:2019']
+  - job_name: lb_cryptoorgchain
+    static_configs:
+      - targets: ['tasks.cryptoorgchain:2019']
+  - job_name: lb_irisnet
+    static_configs:
+      - targets: ['tasks.irisnet:2019']
