@@ -6,7 +6,7 @@
 RPC_SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 
 
-echo $RPC_SERVICES | while read service_name; do
+for service_name in $RPC_SERVICES; do
   /bin/bash docker_service_create_snapshot.sh $service_name
 
   sleep 60
