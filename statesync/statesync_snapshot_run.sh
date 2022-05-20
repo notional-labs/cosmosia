@@ -84,13 +84,15 @@ RPC_URL="http://tasks.sss_${chain_name}:26657"
 LATEST_HEIGHT=$(curl -s "$RPC_URL/block" | jq -r .result.block.header.height)
 BLOCK_HEIGHT=$(($LATEST_HEIGHT-2000))
 TRUST_HASH=$(curl -s "$RPC_URL/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+REMOTE_NODE_ID=$(curl -s "$RPC_URL/status" | jq -r .result.node_info.id)
+CHAIN_ID=$(curl -s "$RPC_URL/status" | jq -r .result.node_info.network)
 
 echo "BLOCK_HEIGHT=$BLOCK_HEIGHT"
 echo "TRUST_HASH=$TRUST_HASH"
+echo "REMOTE_NODE_ID=$REMOTE_NODE_ID"
+echo "CHAIN_ID=$CHAIN_ID"
 
 
-REMOTE_NODE_ID=$(curl -s "$RPC_URL/status" | jq -r .result.id)
-CHAIN_ID=$(curl -s "$RPC_URL/status" | jq -r .result.network)
 
 
 # delete node home
@@ -130,6 +132,6 @@ sed -i -e "s/^pex *=.*/pex = false/" $node_home/config/config.toml
 sleep 5
 
 echo "start chain..."
-$HOME/go/bin/$daemon_name start --p2p.persistent_peers=$REMOTE_NODE_ID@tasks.sss_${chain_name}:26656
+$HOME/go/bin/$daemon_name start --p2p.persistent_peers=${REMOTE_NODE_ID}@tasks.sss_${chain_name}:26656
 
 loop_forever
