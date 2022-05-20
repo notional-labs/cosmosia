@@ -37,6 +37,6 @@ This is the result that we test statesync for all chains (https://github.com/not
 30. AssetMantle (assetmantle) :white_check_mark:
 31. FetchAI (fetchhub) :x:
 32. Evmos (evmos) :white_check_mark:
-33. Persistence (persistent) :white_check_mark:
+33. Persistence (persistent) :white_check_mark: Note it works if creating a soft-link `ln -s /root/data/snapshots ~/.persistenceCore/data/snapshots`
 34. Crypto.org (cryptoorgchain) :white_check_mark:
 35. IRISnet (irisnet) :white_check_mark:
