@@ -54,7 +54,7 @@ echo "nginx..."
 # a webserver to fix buggy chains eg., bandchain - missing `files` folder.
 # so this webserver hosting these missing files for client to download
 
-cat <<EOT >> /etc/nginx/nginx.conf
+cat <<EOT > /etc/nginx/nginx.conf
 worker_processes  1;
 
 events {
@@ -90,6 +90,10 @@ http {
 EOT
 
 mkdir -p /statesync
+
+echo "start nginx..."
+/usr/sbin/nginx
+sleep 10
 
 echo "#################################################################################################################"
 echo "build from source:"
@@ -208,11 +212,7 @@ fi
 
 curl -Ls  "$URL" > $node_home/config/addrbook.json
 
-echo "#################################################################################################################"
-echo "start nginx..."
-
-/usr/sbin/nginx
-sleep 10
+########
 
 echo "start chain..."
 $HOME/go/bin/$daemon_name start $start_flags
