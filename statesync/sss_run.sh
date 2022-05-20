@@ -9,7 +9,6 @@ then
   exit
 fi
 
-
 # functions
 loop_forever () {
   echo "loop forever for debugging only"
@@ -47,7 +46,50 @@ if [[ -z $git_repo ]]; then
   loop_forever
 fi
 
-pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap $pacman_pkgs
+pacman -Syu --noconfirm go git base-devel wget jq nginx $pacman_pkgs
+
+echo "#################################################################################################################"
+echo "nginx..."
+
+# a webserver to fix buggy chains eg., bandchain - missing `files` folder.
+# so this webserver hosting these missing files for client to download
+
+cat <<EOT >> /etc/nginx/nginx.conf
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+    keepalive_timeout  65;
+    types_hash_max_size 4096;
+    server_names_hash_bucket_size 128;
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        root   /usr/share/nginx/html;
+
+        location / {
+            root /statesync;
+            autoindex on;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+}
+EOT
+
+mkdir -p /statesync
 
 echo "#################################################################################################################"
 echo "build from source:"
@@ -167,12 +209,15 @@ fi
 curl -Ls  "$URL" > $node_home/config/addrbook.json
 
 echo "#################################################################################################################"
+echo "start nginx..."
+
+/usr/sbin/nginx
+sleep 10
+
 echo "start chain..."
 $HOME/go/bin/$daemon_name start $start_flags
 
-
 EXITCODE=$?
 echo "chain stopped with exit code=$EXITCODE"
-
 
 loop_forever
