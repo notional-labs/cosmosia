@@ -2,7 +2,7 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm git base-devel dnsutils python python-pip nginx screen
 
 cd $HOME
-git clone --single-branch --branch ip_whitelist_api https://github.com/notional-labs/cosmosia
+git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
 
 ########################################################################################################################
 # ip_whitelist
