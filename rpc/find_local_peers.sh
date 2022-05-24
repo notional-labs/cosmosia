@@ -7,19 +7,33 @@ then
 fi
 
 
-# requires to install dnsutils,inetutils
-
-# figure out all container IP of service
-ips=$(dig +short "tasks.$chain_name" |sort)
+# requires to install dnsutils, inetutils, jq
 
 # figure out local IP
 local_ip=$(hostname -i)
 
-# filter out local_ip from $ips
+# figure out all container IP of service
+ips=$(dig +short "tasks.$chain_name" |sort)
 
-local_peers=$(echo "$ips" |grep -v "$local_ip")
+# filter out local IP
+ips=$(echo "$ips" |grep -v "$local_ip")
 
-# show result
-echo "ips=$ips"
-echo "local_ip=$local_ip"
+local_peers=""
+while read -r ip_addr || [[ -n $ip_addr ]]; do
+  # figure out node_id
+  node_id=$(curl -s "http://${ip_addr}:26657/status" |jq -r '.result.node_info.id')
+
+  if [[ ! -z "$node_id" ]]; then
+    peer="${node_id}@${ip_addr}:26656"
+
+    if [[ ! -z "$local_peers" ]]; then
+      local_peers="${local_peers},"
+    fi
+
+    local_peers="${local_peers}${peer}"
+  fi
+done < <(echo "$ips")
+
+
+## show result
 echo "local_peers=$local_peers"
