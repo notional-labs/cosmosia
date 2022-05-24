@@ -8,7 +8,7 @@ docker service create \
   --network cosmosia \
   --constraint 'node.role==manager' \
   --endpoint-mode dnsrr \
-  --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock
+  --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
