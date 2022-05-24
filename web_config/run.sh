@@ -4,6 +4,8 @@ pacman -S --noconfirm nginx
 ########################################################################################################################
 # nginx
 
+chmod 666 /var/run/docker.sock
+
 cat <<EOT > /etc/nginx/nginx.conf
 worker_processes  1;
 
