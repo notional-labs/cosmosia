@@ -4,7 +4,7 @@ pacman -S --noconfirm base-devel dnsutils python nginx logrotate
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/jsonrpc_proxy/proxy/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/nginx.conf > /etc/nginx/nginx.conf
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/index.html > /usr/share/nginx/html/index.html
 
 #/usr/sbin/nginx -g "daemon off;"
