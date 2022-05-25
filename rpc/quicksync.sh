@@ -285,7 +285,9 @@ spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
 
 echo "#################################################################################################################"
 echo "start chain..."
-$HOME/go/bin/$daemon_name start $start_flags
+#$HOME/go/bin/$daemon_name start $start_flags
+# use start_chain.sh to start chain with local peers
+source $HOME/start_chain.sh $chain_name
 
 
 EXITCODE=$?

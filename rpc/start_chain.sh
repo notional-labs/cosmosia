@@ -54,6 +54,12 @@ update_start_flags () {
   start_flags="$1"
   local_peers="$2"
 
+  if [[ -z "$local_peers" ]]; then
+    echo "${start_flags}"
+    exit
+  fi
+
+
   found_p2p_persistent_peers=false
   new_start_flags=""
   for flag in $start_flags; do
