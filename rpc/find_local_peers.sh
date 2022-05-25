@@ -6,37 +6,46 @@ then
   exit
 fi
 
-
+########################################################################################################################
+# functions
 # requires to install dnsutils, inetutils, jq
 
-# figure out local IP
-local_ip=$(hostname -i)
+find_local_peers () {
+  chain_name="$1"
 
-# figure out all container IP of service
-ips=$(dig +short "tasks.$chain_name" |sort)
+  # figure out local IP
+  local_ip=$(hostname -i)
 
-# filter out local IP
-ips=$(echo "$ips" |grep -v "$local_ip")
+  # figure out all container IP of service
+  ips=$(dig +short "tasks.$chain_name" |sort)
 
-local_peers=""
-while read -r ip_addr || [[ -n $ip_addr ]]; do
-  # figure out hostname of peer
-  peer_hostname=$(dig +short -x $ip_addr)
+  # filter out local IP
+  ips=$(echo "$ips" |grep -v "$local_ip")
 
-  # figure out node_id
-  node_id=$(curl -s "http://${ip_addr}:26657/status" |jq -r '.result.node_info.id')
+  local_peers=""
+  while read -r ip_addr || [[ -n $ip_addr ]]; do
+    # figure out hostname of peer
+    peer_hostname=$(dig +short -x $ip_addr)
 
-  if [[ ! -z "$node_id" ]]; then
-    peer="${node_id}@${peer_hostname}:26656"
+    # figure out node_id
+    node_id=$(curl -s "http://${ip_addr}:26657/status" |jq -r '.result.node_info.id')
 
-    if [[ ! -z "$local_peers" ]]; then
-      local_peers="${local_peers},"
+    if [[ ! -z "$node_id" ]]; then
+      peer="${node_id}@${peer_hostname}:26656"
+
+      if [[ ! -z "$local_peers" ]]; then
+        local_peers="${local_peers},"
+      fi
+
+      local_peers="${local_peers}${peer}"
     fi
-
-    local_peers="${local_peers}${peer}"
-  fi
-done < <(echo "$ips")
+  done < <(echo "$ips")
 
 
-## show result
-echo "local_peers=$local_peers"
+  ## show result
+  echo "$local_peers"
+}
+
+
+peers=$(find_local_peers $chain_name)
+echo "peers=$peers"
