@@ -11,12 +11,22 @@ fi
 
 cd $HOME
 
-
-
-
 pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel dnsutils python caddy logrotate screen
 
+echo "read chain info:"
+eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
+  {
+    if ($0 ~ /^\[.*\]$/) {
+      gsub(/^\[|\]$/, "", $0)
+      SECTION=$0
+    } else if (($2 != "") && (SECTION==TARGET)) {
+      print $1 "=" $2
+    }
+  }
+  ')"
+
+echo "json_rpc=$json_rpc"
 
 ########################################################################################################################
 # dynamic upstream
@@ -33,11 +43,13 @@ generate_new_upstream_config () {
   api_str=""
   ws_str=""
   grpc_str=""
+  jsonrpc_str=""
   if [[ -z "$new_ips" ]]; then
       rpc_str="to http://$chain_name"
       api_str="to http://$chain_name:1317"
       ws_str="to http://$chain_name"
       grpc_str="to http://$chain_name:9090"
+      jsonrpc_str="to http://$chain_name:8545"
   else
     while read -r ip_addr || [[ -n $ip_addr ]]; do
         if [[ -z "$rpc_str" ]]; then
@@ -45,13 +57,34 @@ generate_new_upstream_config () {
           api_str="to"
           ws_str="to"
           grpc_str="to"
+          jsonrpc_str="to"
         fi
         rpc_str="$rpc_str http://$ip_addr"
         api_str="$api_str http://$ip_addr:1317"
         ws_str="$ws_str http://$ip_addr"
         grpc_str="$grpc_str h2c://$ip_addr:9090"
+        jsonrpc_str="$jsonrpc_str http://$ip_addr:8545"
     done < <(echo "$new_ips")
   fi
+
+
+JSONRPC_CONFIG=""
+
+if [[ $json_rpc == "true" ]]; then
+  JSONRPC_CONFIG=$( cat <<EOT
+#JSON-RPC
+:8004 {
+  reverse_proxy {
+    $jsonrpc_str
+    health_uri      /healthcheck
+    health_port     80
+    health_interval 30s
+    health_timeout  30s
+  }
+}
+EOT
+  )
+fi
 
 cat <<EOT > $TMP_CONFIG_FILE
 # This file is generated dynamically, dont edit.
@@ -109,6 +142,8 @@ http://:8002 {
     health_timeout  30s
   }
 }
+
+$JSONRPC_CONFIG
 EOT
 
 }
