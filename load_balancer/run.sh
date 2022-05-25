@@ -63,7 +63,7 @@ generate_new_upstream_config () {
         api_str="$api_str http://$ip_addr:1317"
         ws_str="$ws_str http://$ip_addr"
         grpc_str="$grpc_str h2c://$ip_addr:9090"
-        jsonrpc_str="$jsonrpc_str h2c://$ip_addr:8545"
+        jsonrpc_str="$jsonrpc_str http://$ip_addr:8545"
     done < <(echo "$new_ips")
   fi
 
