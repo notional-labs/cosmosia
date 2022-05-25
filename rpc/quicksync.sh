@@ -47,7 +47,7 @@ if [[ -z $git_repo ]]; then
   loop_forever
 fi
 
-pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap $pacman_pkgs
+pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap dnsutils inetutils $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "build from source:"
