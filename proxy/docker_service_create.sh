@@ -2,11 +2,11 @@
 git_branch=$(git symbolic-ref --short -q HEAD)
 
 # delete existing service
-docker service rm proxy
+docker service rm proxy_test
 
 # create new service
 docker service create \
-  --name proxy \
+  --name proxy_test \
   --replicas 1 \
   --publish mode=host,target=80,published=80 \
   --publish mode=host,target=9001,published=9001 \
@@ -45,7 +45,7 @@ docker service create \
   --publish mode=host,target=9034,published=9034 \
   --publish mode=host,target=9035,published=9035 \
   --network cosmosia \
-  --constraint 'node.hostname==cosmosia3' \
+  --constraint 'node.hostname==cosmosia2' \
   --restart-condition any \
   --restart-delay 3s \
   --restart-max-attempts 3 \
