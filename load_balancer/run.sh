@@ -15,7 +15,7 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel dnsutils python caddy logrotate screen
 
 echo "read chain info:"
-eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/json_rpc/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
+eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
