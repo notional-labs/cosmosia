@@ -8,7 +8,35 @@ tar -xvf "/run/secrets/ssl_notional.ventures.tar.gz" -C /etc/nginx/
 # nginx
 
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_public/nginx.conf > /etc/nginx/nginx.conf
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_public/snapshot.index.html > /usr/share/nginx/html/index.html
+
+# generate index.html
+SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
+
+get_links () {
+  for service_name in $SERVICES; do
+    echo "<p><a href=\"/${service_name}/\">$service_name</a></p>"
+  done
+}
+
+links=$(get_links)
+
+cat <<EOT > /usr/share/nginx/html/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cosmosia</title>
+</head>
+
+<body>
+  <h3>Snapshot:</h3>
+  ${links}
+</body>
+</html>
+EOT
+
+
+
 
 /usr/sbin/nginx -g "daemon off;"
 #/usr/sbin/nginx
