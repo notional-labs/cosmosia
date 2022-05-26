@@ -21,8 +21,13 @@ find_local_peers () {
 
   # filter out local IP
   ips=$(echo "$ips" |grep -v "$local_ip")
-
   local_peers=""
+
+  if [[ -z "$ips" ]]; then
+    echo "${local_peers}"
+    exit
+  fi
+
   while read -r ip_addr || [[ -n $ip_addr ]]; do
     # figure out hostname of peer
     peer_hostname=$(dig +short -x $ip_addr)
