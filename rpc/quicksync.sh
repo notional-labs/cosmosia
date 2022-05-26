@@ -287,6 +287,7 @@ echo "##########################################################################
 echo "start chain..."
 #$HOME/go/bin/$daemon_name start $start_flags
 # use start_chain.sh to start chain with local peers
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
 source $HOME/start_chain.sh $chain_name
 
 
