@@ -36,14 +36,7 @@ Command executed on a docker swarm manager node
    sh docker_service_create.sh chainname
    ```
 
-7. Update the proxy
-   
-   append a link to [index.html](proxy/index.html)
-   ```html
-   <p><a href="/chainname/">chainname</a></p>
-   ```
-   
-   Restart the proxy
+7. Restart the proxy
    ```bash
    cd proxy
    sh docker_service_create.sh
