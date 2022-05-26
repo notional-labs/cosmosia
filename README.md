@@ -1,7 +1,7 @@
 # cosmosia (Cosmos Infrastructure Automation)
 
 Open solution to build a reliable infrastructure for cosmos/tendermint based chains ( see [background](https://github.com/cosmos/chain-registry/issues/214) ):
-- API service: Load balancing for Rpc, Rest, Websocket, and [GRPC](docs/grpc.md) with active-healthcheck, rate-limiting and ip-whitelist.
+- API service: Load balancing for Rpc, Rest, Websocket, [GRPC](docs/grpc.md) and JSON-RPC with active-healthcheck, rate-limiting and ip-whitelist.
 - Daily [snapshot service](https://snapshot.notional.ventures/)
 - Monitoring tools for both [internal](docs/rpc_monitor.md) and [external](https://status.notional.ventures/) view.
 
