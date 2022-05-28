@@ -15,10 +15,13 @@ for service_name in $RPC_SERVICES; do
   while read -r ip_addr || [[ -n $ip_addr ]]; do
     status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 "http://$ip_addr/healthcheck")
 
+    # figure out hostname of container
+    hostname=$(dig +short -x $ip_addr)
+
     if [[ ! -z "$tmp_str" ]]; then
       tmp_str="$tmp_str,"$'\n'
     fi
-    tmp_str="$tmp_str""    { \"ip\": \"$ip_addr\", \"status\": \"$status_code\" }"
+    tmp_str="$tmp_str""    { \"ip\": \"$ip_addr\", \"hostname\": $hostname, \"status\": \"$status_code\" }"
 
   done < <(echo "$ips")
 
