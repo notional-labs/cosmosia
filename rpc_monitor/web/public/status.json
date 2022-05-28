@@ -1,18 +1,61 @@
 [
   {
-    "service": "osmosis",
+    "service": "cosmoshub",
     "containers": [
       {
-        "ip": "10.0.1.145",
-        "status": "503"
-      },
-      {
-        "ip": "10.0.1.155",
+        "ip": "10.0.1.151",
+        "hostname": "cosmoshub.1.he0exgh6f5unzvvcf8n5fkdxr.cosmosia.",
         "status": "200"
       },
       {
-        "ip": "10.0.1.241",
-        "status": "000"
+        "ip": "10.0.1.153",
+        "hostname": "cosmoshub.2.hfhcfpb92xwf5cl8yo6gzmlwl.cosmosia.",
+        "status": "200"
+      },
+      {
+        "ip": "10.0.1.160",
+        "hostname": "cosmoshub.3.lbxjxpslypp7nvd82tjj6m7gf.cosmosia.",
+        "status": "200"
+      }
+    ]
+  },
+  {
+    "service": "juno",
+    "containers": [
+      {
+        "ip": "10.0.1.229",
+        "hostname": "juno.1.622rsqr0zj6oocw9d42cxibkf.cosmosia.",
+        "status": "200"
+      },
+      {
+        "ip": "10.0.1.230",
+        "hostname": "juno.2.b59x2cntposv3deq4owjwma85.cosmosia.",
+        "status": "200"
+      }
+    ]
+  },
+  {
+    "service": "osmosis",
+    "containers": [
+      {
+        "ip": "10.0.1.144",
+        "hostname": "osmosis.2.sujosqyxkqinwhas1v8wzm9vx.cosmosia.",
+        "status": "200"
+      },
+      {
+        "ip": "10.0.1.145",
+        "hostname": "osmosis.3.7p26yjzm7xr9ldqk6ub36zw5m.cosmosia.",
+        "status": "200"
+      },
+      {
+        "ip": "10.0.1.187",
+        "hostname": "osmosis.4.iyr3oleurl2czotsnridrt7xz.cosmosia.",
+        "status": "200"
+      },
+      {
+        "ip": "10.0.1.78",
+        "hostname": "osmosis.1.inut7tfbfcjfv9zzr86dlk3fy.cosmosia.",
+        "status": "502"
       }
     ]
   },
@@ -20,7 +63,8 @@
     "service": "starname",
     "containers": [
       {
-        "ip": "10.0.1.150",
+        "ip": "10.0.1.81",
+        "hostname": "starname.1.of8fe0by2n36e0scqci53oww6.cosmosia.",
         "status": "200"
       }
     ]
@@ -29,29 +73,8 @@
     "service": "regen",
     "containers": [
       {
-        "ip": "10.0.1.146",
-        "status": "200"
-      }
-    ]
-  },
-  {
-    "service": "akash",
-    "containers": [
-      {
-        "ip": "10.0.1.70",
-        "status": "200"
-      }
-    ]
-  },
-  {
-    "service": "cosmoshub",
-    "containers": [
-      {
-        "ip": "10.0.1.125",
-        "status": "200"
-      },
-      {
-        "ip": "10.0.1.52",
+        "ip": "10.0.1.132",
+        "hostname": "regen.1.xqfzeyhb8jc56ay7w5qqzq9xr.cosmosia.",
         "status": "200"
       }
     ]

@@ -10,7 +10,9 @@ import reducer from './reducer';
 import saga from './saga';
 import { actionMonitorStart, actionMonitorStop } from './actions';
 
-import { Button, List, Badge, Divider } from 'antd';
+import { Button, List, Badge, Divider, Popover } from 'antd';
+
+import { InfoCircleOutlined } from '@ant-design/icons';
 
 const Service = (props) => {
   const {service, containers} = props;
@@ -24,6 +26,9 @@ const Service = (props) => {
           const bgColor = item.status === "200" ? "" : (item.status === "503" ? "#FFC440" : "#D93026");
           return (
             <List.Item style={{background: bgColor}}>
+              <Popover content={item.hostname}>
+                <InfoCircleOutlined />
+              </Popover>
               {item.ip}: <Badge>{item.status}</Badge>
             </List.Item>
           )}
