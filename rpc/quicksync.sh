@@ -77,7 +77,7 @@ cd $repo_name
 [[ $chain_name == "gravitybridge" ]] && cd module
 
 # fix axelar `make install` doesnt work
-[[ $chain_name == "axelar" ]] && make build && cp ./bin/axelard $HOME/go/bin/
+[[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
 
 make install
 
