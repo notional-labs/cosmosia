@@ -273,7 +273,7 @@ if [[ $status_code != "200" ]]; then
   URL=$addrbook_url
 fi
 
-curl -Ls  "$URL" > $node_home/config/addrbook.json
+curl -fso $node_home/config/addrbook.json "$URL"
 
 echo "#################################################################################################################"
 echo "start nginx..."
