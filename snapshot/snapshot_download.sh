@@ -64,6 +64,10 @@ cd $repo_name
 
 # git checkout $version
 [[ $chain_name == "gravitybridge" ]] && cd module
+
+# fix axelar `make install` doesnt work
+[[ $chain_name == "axelar" ]] && make build && cp ./bin/axelard $HOME/go/bin/
+
 make install
 
 echo "#################################################################################################################"
