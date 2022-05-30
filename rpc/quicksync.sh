@@ -49,7 +49,7 @@ if [[ -z $git_repo ]]; then
   loop_forever
 fi
 
-pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap dnsutils inetutils python python-pip $pacman_pkgs
+pacman -Syu --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "build from source:"
@@ -210,7 +210,7 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/star
 
 cat <<EOT >> /etc/supervisor/conf.d/chain.conf
 [program:chain]
-command=/bin/bash /root/start_chain.sh
+command=/bin/bash /root/start_chain.sh $chain_name
 autostart=false
 autorestart=false
 stopasgroup=true
