@@ -20,7 +20,7 @@ echo "##########################################################################
 echo "read chain info:"
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
 
-eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
+eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/47-rpc-auto-restart-cronjob/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -41,13 +41,15 @@ echo "addrbook_url=$addrbook_url"
 echo "snapshot_provider=$snapshot_provider"
 echo "start_flags=$start_flags"
 echo "pacman_pkgs=$pacman_pkgs"
+echo "json_rpc=$json_rpc"
+echo "restart_interval=$restart_interval"
 
 if [[ -z $git_repo ]]; then
   echo "Not support chain $chain_name"
   loop_forever
 fi
 
-pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap dnsutils inetutils $pacman_pkgs
+pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap dnsutils inetutils python python-pip $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "build from source:"
@@ -95,9 +97,7 @@ mv $node_home/data/priv_validator_state.json $node_home/config/
 # delete the data folder
 rm -rf $node_home/data/*
 
-
 cd $node_home
-
 
 # always try from our snapshot first, if failure => use external providers
 URL="http://tasks.snapshot_$chain_name/chain.json"
@@ -197,6 +197,31 @@ fi
 
 curl -fso $node_home/config/addrbook.json "$URL"
 
+########################################################################################################################
+# supervised
+pip install supervisor
+mkdir -p /etc/supervisor/conf.d
+echo_supervisord_conf > /etc/supervisor/supervisord.conf
+echo "[include]
+files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
+
+# use start_chain.sh to start chain with local peers
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
+
+cat <<EOT >> /etc/supervisor/conf.d/chain.conf
+[program:chain]
+command=/bin/bash /root/start_chain.sh
+autostart=false
+autorestart=false
+stopasgroup=true
+killasgroup=true
+stderr_logfile=/var/log/chain.err.log
+stdout_logfile=/var/log/chain.out.log
+EOT
+
+supervisord
+
+
 echo "#################################################################################################################"
 echo "start nginx..."
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/nginx.conf" > /etc/nginx/nginx.conf
@@ -207,14 +232,19 @@ spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
 
 echo "#################################################################################################################"
 echo "start chain..."
-#$HOME/go/bin/$daemon_name start $start_flags
-# use start_chain.sh to start chain with local peers
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
-source $HOME/start_chain.sh $chain_name
+supervisorctl start chain
 
 
-EXITCODE=$?
-echo "chain stopped with exit code=$EXITCODE"
+########################################################################################################################
+# cron
+
+if [[ ! -z $restart_interval ]]; then
+  echo "0 0/$restart_interval * * * root /bin/bash -c '/usr/sbin/supervisorctl stop chain && sleep 10 && /usr/sbin/supervisorctl start chain'" > /etc/cron.d/cron_restart_chain
+
+  # start crond
+  crond
+fi
+
 
 
 loop_forever
