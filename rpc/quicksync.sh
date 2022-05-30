@@ -208,7 +208,7 @@ files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 # use start_chain.sh to start chain with local peers
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
 
-cat <<EOT >> /etc/supervisor/conf.d/chain.conf
+cat <<EOT > /etc/supervisor/conf.d/chain.conf
 [program:chain]
 command=/bin/bash /root/start_chain.sh $chain_name
 autostart=false
