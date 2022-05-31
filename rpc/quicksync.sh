@@ -41,13 +41,15 @@ echo "addrbook_url=$addrbook_url"
 echo "snapshot_provider=$snapshot_provider"
 echo "start_flags=$start_flags"
 echo "pacman_pkgs=$pacman_pkgs"
+echo "json_rpc=$json_rpc"
+echo "restart_interval=$restart_interval"
 
 if [[ -z $git_repo ]]; then
   echo "Not support chain $chain_name"
   loop_forever
 fi
 
-pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap dnsutils inetutils $pacman_pkgs
+pacman -Syu --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "build from source:"
@@ -95,9 +97,7 @@ mv $node_home/data/priv_validator_state.json $node_home/config/
 # delete the data folder
 rm -rf $node_home/data/*
 
-
 cd $node_home
-
 
 # always try from our snapshot first, if failure => use external providers
 URL="http://tasks.snapshot_$chain_name/chain.json"
@@ -110,88 +110,6 @@ else
 
   echo "Loop forever for debug"
   loop_forever
-
-#    if [[ $snapshot_provider == "quicksync.io" ]]; then
-#      # using quicksync.io https://quicksync.io/networks/cosmos.html
-#
-#      if [[ $chain_name == "cosmoshub" ]]; then
-#        URL=`curl -s https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
-#      elif [[ $chain_name == "osmosis" ]]; then
-#        URL=`curl -s https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
-#      elif [[ $chain_name == "emoney" ]]; then
-#        URL=`curl https://quicksync.io/emoney.json|jq -r '.[] |select(.file=="emoney-3-default")|.url'`
-#      elif [[ $chain_name == "terra" ]]; then
-#        URL=`curl https://quicksync.io/terra.json|jq -r '.[] |select(.file=="columbus-5-pruned")|select (.mirror=="Netherlands")|.url'`
-#      elif [[ $chain_name == "bandchain" ]]; then
-#        URL=`curl https://quicksync.io/band.json |jq -r '.[] |select(.file=="laozi-mainnet-pruned")|.url'`
-#      elif [[ $chain_name == "kava" ]]; then
-#        URL=`curl https://quicksync.io/kava.json |jq -r '.[] |select(.file=="kava-9-pruned")|.url'`
-#      else
-#        echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-#        loop_forever
-#      fi
-#    elif [[ $snapshot_provider == "polkachu.com" ]]; then
-#      URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
-#    elif [[ $snapshot_provider == "alexvalidator.com" ]]; then
-#      cd $node_home/data/
-#
-#      URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ |egrep -o ">.*tar" |tr -d ">")
-#      URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
-#    elif [[ $snapshot_provider == "cosmosia" ]]; then
-#      URL=`curl -s http://65.108.121.153/$chain_name.json |jq -r '.snapshot_url'`
-#    elif [[ $snapshot_provider == "staketab.com" ]]; then
-#      cd $node_home/data/
-#
-#      URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm")
-#      URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
-#
-#      if [[ $chain_name == "stargaze" ]]; then
-#        URL_WASM=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">")
-#        URL_WASM="https://cosmos-snap.staketab.com/$chain_name/$URL_WASM"
-#      fi
-#    elif [[ $snapshot_provider == "stake2.me" ]]; then
-#      cd $node_home/data/
-#
-#      URL=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm" |tail -1)
-#      URL="https://snapshots.stake2.me/$chain_name/$URL"
-#      if [[ $chain_name == "stargaze" ]]; then
-#        URL_WASM=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">" |tail -1)
-#        URL_WASM="https://snapshots.stake2.me/$chain_name/$URL_WASM"
-#      fi
-#    elif [[ $snapshot_provider == "custom" ]]; then
-#      if [[ $chain_name == "cheqd" ]]; then
-#        cd $node_home/data/
-#
-#        URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n1 |sed -e 's/<[^>]*>//g')
-#        URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
-#      elif [[ $chain_name == "konstellation" ]]; then
-#        cd $node_home/data/
-#
-#        URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
-#        URL="https://mercury-nodes.net/knstl-snapshot/$URL"
-#      elif [[ $chain_name == "provenance" ]]; then
-#        URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-post-green.tar.gz" |jq -r '.mediaLink')
-#      else
-#        echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-#        loop_forever
-#      fi
-#    elif [[ $snapshot_provider == "notional.ventures" ]]; then
-#      BASE_URL="https://snapshot.notional.ventures/"
-#      URL="https://snapshot.notional.ventures/$chain_name/chain.json"
-#      status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-#      if [[ $status_code == "200" ]]; then
-#        URL=`curl -s $URL |jq -r '.snapshot_url'`
-#      else
-#        echo "Not found snapshot for $chain_name from provider $snapshot_provider"
-#        loop_forever
-#      fi
-#
-#      URL="${BASE_URL}${chain_name}/${URL##*/}"
-#    else
-#      echo "Not support snapshot_provider $snapshot_provider"
-#      loop_forever
-#    fi
-
 fi
 
 echo "URL=$URL"
@@ -279,6 +197,31 @@ fi
 
 curl -fso $node_home/config/addrbook.json "$URL"
 
+########################################################################################################################
+# supervised
+pip install supervisor
+mkdir -p /etc/supervisor/conf.d
+echo_supervisord_conf > /etc/supervisor/supervisord.conf
+echo "[include]
+files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
+
+# use start_chain.sh to start chain with local peers
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
+
+cat <<EOT > /etc/supervisor/conf.d/chain.conf
+[program:chain]
+command=/bin/bash /root/start_chain.sh $chain_name
+autostart=false
+autorestart=false
+stopasgroup=true
+killasgroup=true
+stderr_logfile=/var/log/chain.err.log
+stdout_logfile=/var/log/chain.out.log
+EOT
+
+supervisord
+
+
 echo "#################################################################################################################"
 echo "start nginx..."
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/nginx.conf" > /etc/nginx/nginx.conf
@@ -289,14 +232,27 @@ spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
 
 echo "#################################################################################################################"
 echo "start chain..."
-#$HOME/go/bin/$daemon_name start $start_flags
-# use start_chain.sh to start chain with local peers
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
-source $HOME/start_chain.sh $chain_name
+supervisorctl start chain
 
 
-EXITCODE=$?
-echo "chain stopped with exit code=$EXITCODE"
+########################################################################################################################
+# cron
+
+cat <<EOT > $HOME/restart_cronjob.sh
+date >> $HOME/cron_restart_chain.log
+/usr/sbin/supervisorctl stop chain
+sleep 10
+/usr/sbin/killall $daemon_name
+/usr/sbin/supervisorctl start chain
+EOT
+
+echo "0 */$restart_interval * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
+
+# start crond only if $restart_interval is set
+if [[ ! -z $restart_interval ]]; then
+  # start crond
+  crond
+fi
 
 
 loop_forever

@@ -20,7 +20,7 @@ supervisorctl stop chain
 sleep 60
 
 # make sure chain stopped
-killall $chain_name
+killall $daemon_name
 sleep 10
 
 source $HOME/chain_info.sh

@@ -34,7 +34,7 @@ echo "[include]
 files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 
-cat <<EOT >> /etc/supervisor/conf.d/chain.conf
+cat <<EOT > /etc/supervisor/conf.d/chain.conf
 [program:chain]
 command=/bin/bash /root/start_chain.sh
 autostart=false
