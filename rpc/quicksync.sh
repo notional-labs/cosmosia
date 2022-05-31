@@ -238,13 +238,21 @@ supervisorctl start chain
 ########################################################################################################################
 # cron
 
-if [[ ! -z $restart_interval ]]; then
-  echo "0 0/$restart_interval * * * root /bin/bash -c 'echo \"cron_restart_chain\" >> ~/.cron_restart_chain.log && /usr/sbin/supervisorctl stop chain && sleep 10 && /usr/sbin/supervisorctl start chain'" > /etc/cron.d/cron_restart_chain
+cat <<EOT > $HOME/restart_cronjob.sh
+date >> $HOME/cron_restart_chain.log
+/usr/sbin/supervisorctl stop chain
+sleep 10
+/usr/sbin/killall $daemon_name
+/usr/sbin/supervisorctl start chain
+EOT
 
+echo "0 */$restart_interval * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
+
+# start crond only if $restart_interval is set
+if [[ ! -z $restart_interval ]]; then
   # start crond
   crond
 fi
-
 
 
 loop_forever
