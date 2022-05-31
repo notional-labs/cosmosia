@@ -239,7 +239,7 @@ supervisorctl start chain
 # cron
 
 if [[ ! -z $restart_interval ]]; then
-  echo "0 0/$restart_interval * * * root /bin/bash -c '/usr/sbin/supervisorctl stop chain && sleep 10 && /usr/sbin/supervisorctl start chain'" > /etc/cron.d/cron_restart_chain
+  echo "0 0/$restart_interval * * * root /bin/bash -c 'echo \"cron_restart_chain\" >> ~/.cron_restart_chain.log /usr/sbin/supervisorctl stop chain && sleep 10 && /usr/sbin/supervisorctl start chain'" > /etc/cron.d/cron_restart_chain
 
   # start crond
   crond
