@@ -212,6 +212,19 @@ fi
 
 curl -Ls  "$URL" > $node_home/config/addrbook.json
 
+
+echo "download genesis file..."
+if [[ $genesis_url == *.json.gz ]]; then
+  wget -O - "$genesis_url" |gzip -cd > $node_home/config/genesis.json
+elif [[ $genesis_url == *.tar.gz ]]; then
+  wget -O - "$genesis_url" |tar -xvzf - -O > $node_home/config/genesis.json
+elif [[ $genesis_url == *.json ]]; then
+  curl -Ls "$genesis_url" > $node_home/config/genesis.json
+else
+  echo "Not support genesis file type"
+  loop_forever
+fi
+
 ########
 
 echo "start chain..."
