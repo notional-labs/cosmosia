@@ -242,7 +242,3 @@ if [[ $status_code != "200" ]]; then
 fi
 
 curl -fso $node_home/config/addrbook.json "$URL"
-
-echo "#################################################################################################################"
-echo "start chain script"
-echo "$HOME/go/bin/$daemon_name start $start_flags" > $HOME/start_chain.sh

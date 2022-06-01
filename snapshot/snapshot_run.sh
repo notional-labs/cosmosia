@@ -22,6 +22,11 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 sleep 5
 
 ########################################################################################################################
+# download snapshot
+
+# use start_chain.sh to start chain with local peers
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
+
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
 source ./snapshot_download.sh
 
@@ -36,7 +41,7 @@ files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 cat <<EOT > /etc/supervisor/conf.d/chain.conf
 [program:chain]
-command=/bin/bash /root/start_chain.sh
+command=/bin/bash /root/start_chain.sh $chain_name
 autostart=false
 autorestart=false
 stopasgroup=true
