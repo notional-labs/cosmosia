@@ -51,17 +51,8 @@ Command executed on a docker swarm manager node
       - rpc-chainname-ia
       - ws-chainname-ia
    
-9. Update rpc_monitor
-   
-   Append new chainname to https://github.com/notional-labs/cosmosia/blob/main/rpc_monitor/get_status.sh#L2
-   
-   Restart rpc_monitor
-   ```bash
-   cd rpc_monitor
-   sh docker_service_create.sh
-   ```
-   
-10. Update [uptime monitor](https://status.notional.ventures/status/cosmosia)
+  
+9. Update [uptime monitor](https://status.notional.ventures/status/cosmosia)
 
       - Api Service
       - Snapshot Service
