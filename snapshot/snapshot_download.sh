@@ -242,9 +242,3 @@ if [[ $status_code != "200" ]]; then
 fi
 
 curl -fso $node_home/config/addrbook.json "$URL"
-
-echo "#################################################################################################################"
-echo "start chain script"
-
-# use start_chain.sh to start chain with local peers
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
