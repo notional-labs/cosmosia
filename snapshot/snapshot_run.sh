@@ -36,7 +36,7 @@ files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 cat <<EOT > /etc/supervisor/conf.d/chain.conf
 [program:chain]
-command=/bin/bash /root/start_chain.sh
+command=/bin/bash /root/start_chain.sh $chain_name
 autostart=false
 autorestart=false
 stopasgroup=true

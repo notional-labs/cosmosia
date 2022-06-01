@@ -245,4 +245,6 @@ curl -fso $node_home/config/addrbook.json "$URL"
 
 echo "#################################################################################################################"
 echo "start chain script"
-echo "$HOME/go/bin/$daemon_name start $start_flags" > $HOME/start_chain.sh
+
+# use start_chain.sh to start chain with local peers
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
