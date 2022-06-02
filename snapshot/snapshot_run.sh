@@ -10,7 +10,7 @@ then
 fi
 
 cd $HOME
-pacman -Syu --noconfirm python python-pip cronie nginx jq cpulimit
+pacman -Syu --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap cpulimit $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "nginx..."
@@ -22,13 +22,20 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 sleep 5
 
 ########################################################################################################################
+echo "install cosmos-pruner"
+git clone https://github.com/binaryholdings/cosmprund
+cd cosmprund
+make install
+
+########################################################################################################################
 # download snapshot
 
 # use start_chain.sh to start chain with local peers
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
 
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
-source ./snapshot_download.sh
+cd $HOME
+source $HOME/snapshot_download.sh
 
 ########################################################################################################################
 # supervised

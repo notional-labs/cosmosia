@@ -33,10 +33,13 @@ snapshot_provider="$snapshot_provider"
 start_flags="$start_flags"
 pacman_pkgs="$pacman_pkgs"
 snapshot_time="$snapshot_time"
+snapshot_prune="$snapshot_prune"
+snapshot_prune_threshold="$snapshot_prune_threshold"
 EOT
 
 
-pacman -Syu --noconfirm go git base-devel wget jq nginx spawn-fcgi fcgiwrap $pacman_pkgs
+# install on snapshot_run.sh instead
+# pacman -Syu --noconfirm go git base-devel wget $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "build from source:"
