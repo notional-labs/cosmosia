@@ -10,7 +10,7 @@ then
 fi
 
 cd $HOME
-pacman -Syu --noconfirm python python-pip cronie nginx jq cpulimit
+pacman -Syu --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap cpulimit $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "nginx..."
@@ -20,6 +20,12 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 /usr/sbin/nginx
 
 sleep 5
+
+########################################################################################################################
+echo "install cosmos-pruner"
+git clone https://github.com/binaryholdings/cosmprund
+cd cosmprund
+make install
 
 ########################################################################################################################
 # download snapshot

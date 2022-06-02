@@ -1,6 +1,41 @@
-echo "#################################################################################################################"
 echo "snapshot_cronjob..."
 
+source $HOME/chain_info.sh
+
+echo "#################################################################################################################"
+echo "pruning..."
+
+echo "snapshot_prune=$snapshot_prune"
+echo "snapshot_prune_threshold=$snapshot_prune_threshold"
+
+if [[ $snapshot_prune == "cosmos-pruner" ]]; then
+  # check snapshot size large than threshold or not
+  SNAPSHOT_THRESHOLD_BYTE=$((${snapshot_prune_threshold} * 1024 * 1024 * 1024))
+  snapshot_file_size=$(curl -s "https://snapshot.notional.ventures/$chain_name/chain.json" |jq -r '.file_size')
+
+  if [[ ${SNAPSHOT_THRESHOLD_BYTE} -le ${snapshot_file_size} ]]; then
+    echo "start prunning..."
+
+    cd $node_home/data
+    echo "Before:"
+    du -h
+
+    $HOME/go/bin/cosmos-pruner prune $node_home/data
+
+    # Delete tx_index.db
+    rm -rf $node_home/data/tx_index.db
+
+    echo "After:"
+    du -h
+  else
+    echo "No need to prune"
+  fi
+
+fi
+
+
+echo "#################################################################################################################"
+echo "creating snapshot file..."
 supervisorctl start chain
 
 ##############
@@ -22,8 +57,6 @@ sleep 60
 # make sure chain stopped
 killall $daemon_name
 sleep 10
-
-source $HOME/chain_info.sh
 
 cd $node_home
 
