@@ -33,7 +33,7 @@ make install
 # use start_chain.sh to start chain with local peers
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/50-auto-prune-snapshot/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
 source ./snapshot_download.sh
 
 ########################################################################################################################
@@ -61,7 +61,7 @@ supervisord
 ########################################################################################################################
 # cron
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/50-auto-prune-snapshot/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
 
 if [[ -z $snapshot_time ]]; then
   echo "No time setting to take snapshot, please set snapshot_time in chain_registry.ini"
