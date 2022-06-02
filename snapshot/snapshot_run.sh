@@ -34,7 +34,8 @@ make install
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
 
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/50-auto-prune-snapshot/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
-source ./snapshot_download.sh
+cd $HOME
+source $HOME/snapshot_download.sh
 
 ########################################################################################################################
 # supervised
