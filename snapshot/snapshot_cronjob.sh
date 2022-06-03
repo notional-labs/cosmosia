@@ -20,7 +20,13 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
     echo "Before:"
     du -h
 
-    $HOME/go/bin/cosmos-pruner prune $node_home/data
+    if [[ $chain_name == "provenance" ]]; then
+      $HOME/go/bin/cosmos-pruner prune $node_home/data --backend=cleveldb
+    elif [[ $chain_name == "osmosis" ]]; then
+      $HOME/go/bin/cosmos-pruner prune $node_home/data --app=osmosis
+    else
+      $HOME/go/bin/cosmos-pruner prune $node_home/data
+    fi
 
     # Delete tx_index.db
     rm -rf $node_home/data/tx_index.db
