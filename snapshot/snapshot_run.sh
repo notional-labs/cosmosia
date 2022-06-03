@@ -10,7 +10,7 @@ then
 fi
 
 cd $HOME
-pacman -Syu --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap cpulimit $pacman_pkgs
+pacman -Syu --noconfirm go git base-devel wget jq dnsutils inetutils python python-pip cronie nginx spawn-fcgi fcgiwrap cpulimit $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "nginx..."
