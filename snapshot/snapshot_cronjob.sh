@@ -1,5 +1,23 @@
 echo "snapshot_cronjob..."
 
+# functions
+find_current_data_version () {
+  ver=0
+  ver=$(cat /snapshot/chain.json |jq -r '.data_version // 0')
+  echo $ver
+}
+
+
+get_next_version () {
+  ver=$(find_current_data_version)
+  ver=$(( ${ver} + 1 ))
+  echo $ver
+}
+
+
+data_version=$(find_current_data_version)
+
+
 source $HOME/chain_info.sh
 
 echo "#################################################################################################################"
@@ -33,6 +51,8 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
 
     echo "After:"
     du -h
+
+    data_version=$(get_next_version)
   else
     echo "No need to prune"
   fi
@@ -56,6 +76,7 @@ done
 
 ##############
 echo "OK, chain get synched, taking snapshot..."
+echo "data_version=$data_version"
 
 supervisorctl stop chain
 sleep 60
@@ -83,10 +104,10 @@ cp $node_home/config/addrbook.json /snapshot/
 cat <<EOT > /snapshot/chain.json
 {
     "snapshot_url": "./$chain_name/$TAR_FILENAME",
-    "file_size": $FILESIZE
+    "file_size": $FILESIZE,
+    "data_version": $data_version
 }
 EOT
-
 
 # delete old snapshots
 cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -1)
