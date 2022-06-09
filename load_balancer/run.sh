@@ -9,10 +9,20 @@ then
   exit
 fi
 
+
+# functions
+find_current_data_version () {
+  ver=0
+  ver=$(curl -s "https://snapshot.notional.ventures/$chain_name/chain.json" |jq -r '.data_version // 0')
+  echo $ver
+}
+
+
+
 cd $HOME
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel dnsutils python caddy logrotate screen
+pacman -S --noconfirm base-devel jq dnsutils python caddy logrotate screen
 
 echo "read chain info:"
 eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
@@ -31,13 +41,18 @@ echo "json_rpc=$json_rpc"
 ########################################################################################################################
 # dynamic upstream
 
+# get the data version from chain.json, service name is rpc_$chain_name_$version
+data_version=$(find_current_data_version)
+rpc_service_name="rpc_${chain_name}_${data_version}"
+echo "rpc_service_name=$rpc_service_name"
+
 CONFIG_FILE="/etc/caddy/Caddyfile"
 TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
 
 # functions
 generate_new_upstream_config () {
   # use dig to figure out IPs of service
-  new_ips=$(dig +short "tasks.$chain_name" |sort)
+  new_ips=$(dig +short "tasks.$rpc_service_name" |sort)
 
   rpc_str=""
   api_str=""
@@ -45,11 +60,11 @@ generate_new_upstream_config () {
   grpc_str=""
   jsonrpc_str=""
   if [[ -z "$new_ips" ]]; then
-      rpc_str="to http://$chain_name"
-      api_str="to http://$chain_name:1317"
-      ws_str="to http://$chain_name"
-      grpc_str="to http://$chain_name:9090"
-      jsonrpc_str="to http://$chain_name:8545"
+      rpc_str="to http://$rpc_service_name"
+      api_str="to http://$rpc_service_name:1317"
+      ws_str="to http://$rpc_service_name"
+      grpc_str="to http://$rpc_service_name:9090"
+      jsonrpc_str="to http://$rpc_service_name:8545"
   else
     while read -r ip_addr || [[ -n $ip_addr ]]; do
         if [[ -z "$rpc_str" ]]; then
