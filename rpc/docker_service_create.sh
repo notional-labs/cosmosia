@@ -31,6 +31,7 @@ docker service create \
   --name $rpc_service_name \
   --replicas 1 \
   --network cosmosia \
+  --label 'cosmosia.service=rpc' \
   --endpoint-mode dnsrr \
   --restart-condition any \
   archlinux:latest \
