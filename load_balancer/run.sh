@@ -22,7 +22,7 @@ find_current_data_version () {
 cd $HOME
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel dnsutils python caddy logrotate screen
+pacman -S --noconfirm base-devel jq dnsutils python caddy logrotate screen
 
 echo "read chain info:"
 eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
