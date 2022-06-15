@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { delay, put, select, takeLatest } from 'redux-saga/effects';
 import { makeSelectHome } from './selectors';
 import { ACTION_MONITOR_START } from './constants';
@@ -24,7 +25,11 @@ export function* monitorStartTask() {
       const res_json = yield status_res.json();
       console.log(`res_json=${JSON.stringify(res_json)}`);
 
-      yield put(actionUpdate('status', res_json));
+      const res_json_filtered = _.filter(res_json, (o) => {
+        return (!o.service.startsWith("rpc_")) && !((o.containers[0].ip === "") && (o.containers[0].hostname === "") && (o.containers[0].status === "000"));
+      });
+
+      yield put(actionUpdate('status', res_json_filtered));
     } catch (e) {
       console.log(e)
     } finally {
