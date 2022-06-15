@@ -26,7 +26,7 @@ export function* monitorStartTask() {
       console.log(`res_json=${JSON.stringify(res_json)}`);
 
       const res_json_filtered = _.filter(res_json, (o) => {
-        return (!o.service.startsWith("rpc_")) && !((o.containers[0].ip === "") && (o.containers[0].hostname === "") && (o.containers[0].status === "000"));
+        return (o.service.startsWith("rpc_")) || !((o.containers[0].ip === "") && (o.containers[0].hostname === "") && (o.containers[0].status === "000"));
       });
 
       yield put(actionUpdate('status', res_json_filtered));
