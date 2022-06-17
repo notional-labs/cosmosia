@@ -1,7 +1,8 @@
-# usage: ./run.sh chain_name
-# eg., ./run.sh cosmoshub
+# usage: ./run.sh chain_name rpc_service_name
+# eg., ./run.sh cosmoshub rpc_cosmoshub_3
 
 chain_name="$1"
+rpc_service_name="$2"
 
 if [[ -z $chain_name ]]
 then
@@ -42,8 +43,11 @@ echo "json_rpc=$json_rpc"
 # dynamic upstream
 
 # get the data version from chain.json, service name is rpc_$chain_name_$version
-data_version=$(find_current_data_version)
-rpc_service_name="rpc_${chain_name}_${data_version}"
+if [[ -z $rpc_service_name ]]
+then
+  data_version=$(find_current_data_version)
+  rpc_service_name="rpc_${chain_name}_${data_version}"
+fi
 echo "rpc_service_name=$rpc_service_name"
 
 CONFIG_FILE="/etc/caddy/Caddyfile"
