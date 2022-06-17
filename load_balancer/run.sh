@@ -59,12 +59,14 @@ generate_new_upstream_config () {
   ws_str=""
   grpc_str=""
   jsonrpc_str=""
+  ws_jsonrpc_str=""
   if [[ -z "$new_ips" ]]; then
       rpc_str="to http://$rpc_service_name"
       api_str="to http://$rpc_service_name:1317"
       ws_str="to http://$rpc_service_name"
       grpc_str="to http://$rpc_service_name:9090"
       jsonrpc_str="to http://$rpc_service_name:8545"
+      ws_jsonrpc_str="to http://$rpc_service_name:8546"
   else
     while read -r ip_addr || [[ -n $ip_addr ]]; do
         if [[ -z "$rpc_str" ]]; then
@@ -79,6 +81,7 @@ generate_new_upstream_config () {
         ws_str="$ws_str http://$ip_addr"
         grpc_str="$grpc_str h2c://$ip_addr:9090"
         jsonrpc_str="$jsonrpc_str http://$ip_addr:8545"
+        ws_jsonrpc_str="$ws_jsonrpc_str http://$ip_addr:8546"
     done < <(echo "$new_ips")
   fi
 
@@ -91,6 +94,17 @@ if [[ $json_rpc == "true" ]]; then
 :8004 {
   reverse_proxy {
     $jsonrpc_str
+    health_uri      /healthcheck
+    health_port     80
+    health_interval 30s
+    health_timeout  30s
+  }
+}
+
+#WS-JSON-RPC
+:8005 {
+  reverse_proxy {
+    $ws_jsonrpc_str
     health_uri      /healthcheck
     health_port     80
     health_interval 30s
