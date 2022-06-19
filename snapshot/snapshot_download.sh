@@ -39,7 +39,7 @@ EOT
 
 
 # install on snapshot_run.sh instead
-# pacman -Syu --noconfirm go git base-devel wget $pacman_pkgs
+pacman -Sy --noconfirm $pacman_pkgs
 
 echo "#################################################################################################################"
 echo "build from source:"
