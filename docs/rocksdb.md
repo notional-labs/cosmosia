@@ -5,7 +5,7 @@ This is result that we [tested](https://github.com/notional-labs/cosmosia/issues
 
 1. Osmosis (osmosis) :x: (didnt test as statesync doesnt work)
 2. Starname (starname) :x: (didnt test as statesync doesnt work)
-3. Regen (regen) :white_check_mark: (v6.15.5)
+3. Regen (regen) :warning: (v6.15.5) application.db still in leveldb
 4. Akash (akash)  :white_check_mark: (v6.24.2)
 5. Gaia (cosmoshub) :white_check_mark: (v6.24.2)
 6. Sentinel (sentinel) :white_check_mark: (v6.15.5)
