@@ -43,7 +43,8 @@ mv $TAR_FILE_PATH /snapshot/
 cat <<EOT > /snapshot/chain.json
 {
     "snapshot_url": "./$chain_name/$TAR_FILENAME",
-    "file_size": $FILESIZE
+    "file_size": $FILESIZE,
+    "data_version": 0
 }
 EOT
 
