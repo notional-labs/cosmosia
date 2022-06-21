@@ -1,10 +1,13 @@
 chain_name="$1"
+db_backend="$2"
 
 if [[ -z $chain_name ]]
 then
   echo "No chain_name. usage eg., ./start_script_gen.sh cosmoshub"
   exit
 fi
+
+[[ -z $db_backend ]] && db_backend="goleveldb"
 
 ########################################################################################################################
 # functions
@@ -118,4 +121,7 @@ new_start_flags=$(update_start_flags "$start_flags" "$local_peers")
 echo "local_peers=$local_peers"
 echo "new_start_flags=$new_start_flags"
 
-$HOME/go/bin/$daemon_name start $new_start_flags
+rocksdb_flag=""
+[[ $db_backend == "rocksdb" ]] && rocksdb_flag="--db_backend=rocksdb"
+
+$HOME/go/bin/$daemon_name start $rocksdb_flag $new_start_flags
