@@ -1,42 +1,4 @@
 echo "#################################################################################################################"
-echo "read chain info:"
-# https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
-
-eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/57-add-rocksdb-snapshot-service/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
-  {
-    if ($0 ~ /^\[.*\]$/) {
-      gsub(/^\[|\]$/, "", $0)
-      SECTION=$0
-    } else if (($2 != "") && (SECTION==TARGET)) {
-      print $1 "=" $2
-    }
-  }
-  ')"
-
-if [[ -z $git_repo ]]; then
-  echo "Not support chain $chain_name"
-  exit
-fi
-
-# write chain info to bash file, so that cronjob could know
-cat <<EOT >> $HOME/chain_info.sh
-chain_name="$chain_name"
-git_repo="$git_repo"
-version="$version"
-genesis_url="$genesis_url"
-daemon_name="$daemon_name"
-node_home="$node_home"
-minimum_gas_prices="$minimum_gas_prices"
-addrbook_url="$addrbook_url"
-snapshot_provider="$snapshot_provider"
-start_flags="$start_flags"
-pacman_pkgs="$pacman_pkgs"
-snapshot_time="$snapshot_time"
-snapshot_prune="$snapshot_prune"
-snapshot_prune_threshold="$snapshot_prune_threshold"
-EOT
-
-echo "#################################################################################################################"
 echo "build chain from source:"
 
 # install on snapshot_run.sh instead
