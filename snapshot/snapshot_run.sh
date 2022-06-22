@@ -109,6 +109,7 @@ fi
 ########################################################################################################################
 # TODO: fix cosmos-pruner with rocksdb
 echo "install cosmos-pruner"
+cd $HOME
 git clone https://github.com/binaryholdings/cosmprund
 cd cosmprund
 make install
