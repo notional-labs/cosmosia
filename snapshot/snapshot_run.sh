@@ -107,13 +107,17 @@ fi
 
 
 ########################################################################################################################
-# TODO: fix cosmos-pruner with rocksdb
 echo "install cosmos-pruner"
 cd $HOME
-git clone --single-branch --branch fix_rocksdb_$rocksdb_version https://github.com/binaryholdings/cosmprund
+git clone https://github.com/binaryholdings/cosmprund
 cd cosmprund
-make install
 
+if [[ $db_backend == "rocksdb" ]]; then
+  git checkout fix_rocksdb_$rocksdb_version
+  go install -ldflags '-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb' -tags rocksdb ./...
+else
+  make install
+fi
 
 ########################################################################################################################
 # download snapshot
@@ -157,8 +161,7 @@ snapshot_time_minute=${snapshot_time##*:}
 echo "$snapshot_time_minute $snapshot_time_hour * * * root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
 
 # start crond
-# TODO: fix rocksdb
-[[ $db_backend == "goleveldb" ]] && crond
+crond
 
 # loop forever for debugging only
 while true; do sleep 5; done
