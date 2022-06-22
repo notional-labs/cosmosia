@@ -1,48 +1,8 @@
-
 echo "#################################################################################################################"
-echo "read chain info:"
-# https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
-
-eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
-  {
-    if ($0 ~ /^\[.*\]$/) {
-      gsub(/^\[|\]$/, "", $0)
-      SECTION=$0
-    } else if (($2 != "") && (SECTION==TARGET)) {
-      print $1 "=" $2
-    }
-  }
-  ')"
-
-if [[ -z $git_repo ]]; then
-  echo "Not support chain $chain_name"
-  exit
-fi
-
-# write chain info to bash file, so that cronjob could know
-cat <<EOT >> $HOME/chain_info.sh
-chain_name="$chain_name"
-git_repo="$git_repo"
-version="$version"
-genesis_url="$genesis_url"
-daemon_name="$daemon_name"
-node_home="$node_home"
-minimum_gas_prices="$minimum_gas_prices"
-addrbook_url="$addrbook_url"
-snapshot_provider="$snapshot_provider"
-start_flags="$start_flags"
-pacman_pkgs="$pacman_pkgs"
-snapshot_time="$snapshot_time"
-snapshot_prune="$snapshot_prune"
-snapshot_prune_threshold="$snapshot_prune_threshold"
-EOT
-
+echo "build chain from source:"
 
 # install on snapshot_run.sh instead
 pacman -Sy --noconfirm $pacman_pkgs
-
-echo "#################################################################################################################"
-echo "build from source:"
 
 export GOPATH="$HOME/go"
 export GOROOT="/usr/lib/go"
@@ -68,10 +28,18 @@ cd $repo_name
 # git checkout $version
 [[ $chain_name == "gravitybridge" ]] && cd module
 
-# fix axelar `make install` doesnt work
-[[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
+if [[ $db_backend == "rocksdb" ]]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(regen|kava|evmos)$" ) -ne 0 ]; then
+    make install COSMOS_BUILD_OPTIONS=rocksdb TENDERMINT_BUILD_OPTIONS=rocksdb BUILD_TAGS=rocksdb
+  else
+    go install -tags rocksdb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb" ./...
+  fi
+else
+  # fix axelar `make install` doesnt work
+  [[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
 
-make install
+  make install
+fi
 
 echo "#################################################################################################################"
 echo "download snapshot:"
@@ -92,79 +60,79 @@ status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-t
 if [[ $status_code == "200" ]]; then
   URL=`curl -s $URL |jq -r '.snapshot_url'`
   URL="${BASE_URL}${URL##*/}"
-else
-  echo "Not found local snapshot for $chain_name, continue to try other providers..."
-
-  if [[ $snapshot_provider == "quicksync.io" ]]; then
-    # using quicksync.io https://quicksync.io/networks/cosmos.html
-
-    if [[ $chain_name == "cosmoshub" ]]; then
-      URL=`curl -s https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
-    elif [[ $chain_name == "osmosis" ]]; then
-      URL=`curl -s https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
-    elif [[ $chain_name == "emoney" ]]; then
-      URL=`curl https://quicksync.io/emoney.json|jq -r '.[] |select(.file=="emoney-3-default")|.url'`
-    elif [[ $chain_name == "terra" ]]; then
-      URL=`curl https://quicksync.io/terra.json|jq -r '.[] |select(.file=="columbus-5-pruned")|select (.mirror=="Netherlands")|.url'`
-    elif [[ $chain_name == "bandchain" ]]; then
-      URL=`curl https://quicksync.io/band.json |jq -r '.[] |select(.file=="laozi-mainnet-pruned")|.url'`
-    elif [[ $chain_name == "kava" ]]; then
-      URL=`curl https://quicksync.io/kava.json |jq -r '.[] |select(.file=="kava-9-pruned")|.url'`
-    elif [[ $chain_name == "cryptoorgchain" ]]; then
-      URL=`curl https://quicksync.io/crypto.json |jq -r '.[] |select(.file=="crypto-org-chain-mainnet-1-pruned")|.url'`
-    else
-      echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-      exit
-    fi
-  elif [[ $snapshot_provider == "polkachu.com" ]]; then
-    URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
-  elif [[ $snapshot_provider == "alexvalidator.com" ]]; then
-    cd $node_home/data/
-
-    URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ |egrep -o ">.*tar" |tr -d ">")
-    URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
-  elif [[ $snapshot_provider == "cosmosia" ]]; then
-    URL=`curl -s http://65.108.121.153/$chain_name.json |jq -r '.snapshot_url'`
-  elif [[ $snapshot_provider == "staketab.com" ]]; then
-    cd $node_home/data/
-
-    URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm")
-    URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
-
-    if [[ $chain_name == "stargaze" ]]; then
-      URL_WASM=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">")
-      URL_WASM="https://cosmos-snap.staketab.com/$chain_name/$URL_WASM"
-    fi
-  elif [[ $snapshot_provider == "stake2.me" ]]; then
-    cd $node_home/data/
-
-    URL=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm" |tail -1)
-    URL="https://snapshots.stake2.me/$chain_name/$URL"
-    if [[ $chain_name == "stargaze" ]]; then
-      URL_WASM=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">" |tail -1)
-      URL_WASM="https://snapshots.stake2.me/$chain_name/$URL_WASM"
-    fi
-  elif [[ $snapshot_provider == "custom" ]]; then
-    if [[ $chain_name == "cheqd" ]]; then
-      cd $node_home/data/
-
-      URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n1 |sed -e 's/<[^>]*>//g')
-      URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
-    elif [[ $chain_name == "konstellation" ]]; then
-      cd $node_home/data/
-
-      URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
-      URL="https://mercury-nodes.net/knstl-snapshot/$URL"
-    elif [[ $chain_name == "provenance" ]]; then
-      URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-post-green.tar.gz" |jq -r '.mediaLink')
-    else
-      echo "Not support $chain_name with snapshot_provider $snapshot_provider"
-      exit
-    fi
-  else
-    echo "Not support snapshot_provider $snapshot_provider"
-    exit
-  fi
+#else
+#  echo "Not found local snapshot for $chain_name, continue to try other providers..."
+#
+#  if [[ $snapshot_provider == "quicksync.io" ]]; then
+#    # using quicksync.io https://quicksync.io/networks/cosmos.html
+#
+#    if [[ $chain_name == "cosmoshub" ]]; then
+#      URL=`curl -s https://quicksync.io/cosmos.json|jq -r '.[] |select(.file=="cosmoshub-4-pruned")|.url'`
+#    elif [[ $chain_name == "osmosis" ]]; then
+#      URL=`curl -s https://quicksync.io/osmosis.json|jq -r '.[] |select(.file=="osmosis-1-pruned")|select (.mirror=="Netherlands")|.url'`
+#    elif [[ $chain_name == "emoney" ]]; then
+#      URL=`curl https://quicksync.io/emoney.json|jq -r '.[] |select(.file=="emoney-3-default")|.url'`
+#    elif [[ $chain_name == "terra" ]]; then
+#      URL=`curl https://quicksync.io/terra.json|jq -r '.[] |select(.file=="columbus-5-pruned")|select (.mirror=="Netherlands")|.url'`
+#    elif [[ $chain_name == "bandchain" ]]; then
+#      URL=`curl https://quicksync.io/band.json |jq -r '.[] |select(.file=="laozi-mainnet-pruned")|.url'`
+#    elif [[ $chain_name == "kava" ]]; then
+#      URL=`curl https://quicksync.io/kava.json |jq -r '.[] |select(.file=="kava-9-pruned")|.url'`
+#    elif [[ $chain_name == "cryptoorgchain" ]]; then
+#      URL=`curl https://quicksync.io/crypto.json |jq -r '.[] |select(.file=="crypto-org-chain-mainnet-1-pruned")|.url'`
+#    else
+#      echo "Not support $chain_name with snapshot_provider $snapshot_provider"
+#      exit
+#    fi
+#  elif [[ $snapshot_provider == "polkachu.com" ]]; then
+#    URL=`curl -s https://polkachu.com/tendermint_snapshots/$chain_name |grep -m 1 -Eo "https://\S+?\.tar.lz4"`
+#  elif [[ $snapshot_provider == "alexvalidator.com" ]]; then
+#    cd $node_home/data/
+#
+#    URL=$(curl -s https://snapshots.alexvalidator.com/$chain_name/ |egrep -o ">.*tar" |tr -d ">")
+#    URL="https://snapshots.alexvalidator.com/$chain_name/$URL"
+#  elif [[ $snapshot_provider == "cosmosia" ]]; then
+#    URL=`curl -s http://65.108.121.153/$chain_name.json |jq -r '.snapshot_url'`
+#  elif [[ $snapshot_provider == "staketab.com" ]]; then
+#    cd $node_home/data/
+#
+#    URL=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm")
+#    URL="https://cosmos-snap.staketab.com/$chain_name/$URL"
+#
+#    if [[ $chain_name == "stargaze" ]]; then
+#      URL_WASM=$(curl -s https://cosmos-snap.staketab.com/$chain_name/ |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">")
+#      URL_WASM="https://cosmos-snap.staketab.com/$chain_name/$URL_WASM"
+#    fi
+#  elif [[ $snapshot_provider == "stake2.me" ]]; then
+#    cd $node_home/data/
+#
+#    URL=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*tar" |tr -d ">" |grep -v "wasm" |tail -1)
+#    URL="https://snapshots.stake2.me/$chain_name/$URL"
+#    if [[ $chain_name == "stargaze" ]]; then
+#      URL_WASM=$(curl -s "https://snapshots.stake2.me/$chain_name/" |egrep -o ">$chain_name.*wasm.*.*tar" | tr -d ">" |tail -1)
+#      URL_WASM="https://snapshots.stake2.me/$chain_name/$URL_WASM"
+#    fi
+#  elif [[ $snapshot_provider == "custom" ]]; then
+#    if [[ $chain_name == "cheqd" ]]; then
+#      cd $node_home/data/
+#
+#      URL=$(curl -Ls "https://cheqd-node-backups.ams3.digitaloceanspaces.com/?list-type=2&delimiter=" |xmllint --format - |egrep -o "<Key>.*tar.gz</Key>" |tail -n1 |sed -e 's/<[^>]*>//g')
+#      URL="https://cheqd-node-backups.ams3.digitaloceanspaces.com/$URL"
+#    elif [[ $chain_name == "konstellation" ]]; then
+#      cd $node_home/data/
+#
+#      URL=$(curl -s https://mercury-nodes.net/knstl-snapshot/ |egrep -o ">knstl.*tar.lz4" |tail -1 |tr -d ">")
+#      URL="https://mercury-nodes.net/knstl-snapshot/$URL"
+#    elif [[ $chain_name == "provenance" ]]; then
+#      URL=$(curl -s "https://storage.googleapis.com/storage/v1/b/provenance-mainnet-backups/o/latest-post-green.tar.gz" |jq -r '.mediaLink')
+#    else
+#      echo "Not support $chain_name with snapshot_provider $snapshot_provider"
+#      exit
+#    fi
+#  else
+#    echo "Not support snapshot_provider $snapshot_provider"
+#    exit
+#  fi
 fi
 
 
@@ -221,6 +189,9 @@ sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/
 sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 1000/" $node_home/config/config.toml
 sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_home/config/config.toml
 sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
+###
+[[ $db_backend == "rocksdb" ]] && sed -i -e "s/^db_backend *=.*/db_backend = \"rocksdb\"/" $node_home/config/config.toml
+
 
 echo "download genesis file..."
 if [[ $genesis_url == *.json.gz ]]; then
