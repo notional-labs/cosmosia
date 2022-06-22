@@ -53,5 +53,5 @@ docker service create \
   --restart-condition any \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/57-add-rocksdb-snapshot-service/statesync/statesync_snapshot_run.sh > ~/statesync_snapshot_run.sh && \
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/statesync/statesync_snapshot_run.sh > ~/statesync_snapshot_run.sh && \
   /bin/bash ~/statesync_snapshot_run.sh $chain_name $db_backend"
