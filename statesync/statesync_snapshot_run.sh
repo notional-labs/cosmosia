@@ -126,7 +126,11 @@ if [[ $db_backend == "rocksdb" ]]; then
   fi
 else
   # fix axelar `make install` doesnt work
-  [[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
+  if [[ $chain_name == "axelar" ]]; then
+    make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
+  else
+    make install
+  fi
 fi
 
 
