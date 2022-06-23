@@ -1,3 +1,10 @@
+### hardware
+Our servers specs:
+- CPU: AMD Ryzen™ 9 5950X
+- RAM: 128 GB
+- Disk: 2 x 3.84 TB NVMe
+
+
 ### setup swarm cluster
 Follow [Getting started with swarm mode](https://docs.docker.com/engine/swarm/swarm-tutorial/) tutorial to setup a swarm cluster
 
