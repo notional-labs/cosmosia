@@ -14,7 +14,7 @@ SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main
 
 get_links () {
   for service_name in $SERVICES; do
-    echo "<p><a href=\"/${service_name}/\">$service_name</a></p>"
+    echo "<p>$service_name <a href=\"/${service_name}/\">goleveldb</a> <a href=\"/${service_name}/rocksdb/\">rocksdb</a></p>"
   done
 }
 
@@ -25,11 +25,11 @@ cat <<EOT > /usr/share/nginx/html/index.html
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cosmosia</title>
+    <title>Cosmosia Snapshots</title>
 </head>
 
 <body>
-  <h3>Snapshot:</h3>
+  <h3>Snapshots:</h3>
   ${links}
 </body>
 </html>
