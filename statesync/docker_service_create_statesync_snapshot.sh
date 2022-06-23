@@ -40,9 +40,6 @@ fi
 echo "HOST=$HOST"
 echo "SERVICE_NAME=$SERVICE_NAME"
 
-# make sure mount source path exists
-mkdir -p $MOUNT_SRC
-
 # delete existing service
 docker service rm $SERVICE_NAME
 
