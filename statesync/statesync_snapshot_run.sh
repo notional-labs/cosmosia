@@ -193,7 +193,7 @@ mkdir -p $node_home/data/snapshots
 
 echo "start chain..."
 if [[ $db_backend == "rocksdb" ]]; then
-$HOME/go/bin/$daemon_name start --db_backend=rocksdb  --p2p.persistent_peers=${REMOTE_NODE_ID}@tasks.sss_${chain_name}:26656
+  $HOME/go/bin/$daemon_name start --db_backend=rocksdb  --p2p.persistent_peers=${REMOTE_NODE_ID}@tasks.sss_${chain_name}:26656
 else
   $HOME/go/bin/$daemon_name start --p2p.persistent_peers=${REMOTE_NODE_ID}@tasks.sss_${chain_name}:26656
 fi
