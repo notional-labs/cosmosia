@@ -14,7 +14,7 @@ This is result that we [tested](https://github.com/notional-labs/cosmosia/issues
 9. Juno (juno) :x: (didnt test as statesync doesnt work)
 10. Sifchain (sifchain) :white_check_mark: (v6.15.5)
 11. Likecoin (likecoin) :white_check_mark: (v6.15.5)
-12. Ki (kichain) :white_check_mark: (v6.15.5)
+12. Ki (kichain) :white_check_mark: (v6.24.2)
 13. Cyber (cyber) :x: (didnt test as statesync doesnt work)
 14. Cheqd (cheqd) :x: (didnt test as statesync doesnt work)
 15. Stargaze (stargaze) :x: (didnt test as statesync doesnt work)
