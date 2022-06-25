@@ -121,6 +121,8 @@ cd $repo_name
 if [[ $db_backend == "rocksdb" ]]; then
   if [ $( echo "${chain_name}" | egrep -c "^(regen|kava|evmos)$" ) -ne 0 ]; then
     make install COSMOS_BUILD_OPTIONS=rocksdb TENDERMINT_BUILD_OPTIONS=rocksdb BUILD_TAGS=rocksdb
+  elif [[ $chain_name == "comdex" ]]; then
+    go install -tags rocksdb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb" ./node
   else
     go install -tags rocksdb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb" ./...
   fi
