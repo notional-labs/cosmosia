@@ -123,6 +123,7 @@ if [[ $db_backend == "rocksdb" ]]; then
     make install COSMOS_BUILD_OPTIONS=rocksdb TENDERMINT_BUILD_OPTIONS=rocksdb BUILD_TAGS=rocksdb
   elif [[ $chain_name == "comdex" ]]; then
     go install -tags rocksdb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb" ./node
+    mv $HOME/go/bin/node $HOME/go/bin/$daemon_name
   else
     go install -tags rocksdb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb" ./...
   fi
