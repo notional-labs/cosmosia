@@ -1,7 +1,9 @@
-# usage: ./quicksynch.sh chain_name
-# eg., ./quicksynch.sh cosmoshub
+# usage: ./quicksynch.sh chain_name [db_backend]
+# eg., ./quicksynch.sh cosmoshub goleveldb
+# db_backend: goleveldb rocksdb, default is goleveldb
 
 chain_name="$1"
+db_backend="$2"
 
 if [[ -z $chain_name ]]
 then
@@ -9,6 +11,7 @@ then
   exit
 fi
 
+[[ -z $db_backend ]] && db_backend="goleveldb"
 
 # functions
 loop_forever () {
@@ -51,6 +54,43 @@ fi
 
 pacman -Syu --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils $pacman_pkgs
 
+
+if [[ $db_backend == "rocksdb" ]]; then
+  echo "#################################################################################################################"
+  echo "install rocksdb"
+
+  pacman -Sy --noconfirm cmake python snappy zlib bzip2 lz4 zstd
+
+  # ===============================================
+  # install gflags
+  cd $HOME
+  git clone https://github.com/gflags/gflags.git
+  cd gflags
+  mkdir build
+  cd build
+  cmake -DBUILD_SHARED_LIBS=1 -DGFLAGS_INSTALL_SHARED_LIBS=1 ..
+  make install
+
+
+  # ===============================================
+  # installing rocksdb from source
+  cd $HOME
+  git clone --single-branch --branch $rocksdb_version https://github.com/facebook/rocksdb
+  cd rocksdb
+  make -j4 install-shared
+  ldconfig
+
+  # ===============
+  cp --preserve=links /usr/local/lib/libgflags* /usr/lib/
+  cp --preserve=links /usr/local/lib/librocksdb.so* /usr/lib/
+  cp -r /usr/local/include/rocksdb /usr/include/rocksdb
+
+  # ===========
+  export CGO_CFLAGS="-I/usr/local/include"
+  export CGO_LDFLAGS="-L/usr/local/lib -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
+fi
+
+
 echo "#################################################################################################################"
 echo "build from source:"
 
@@ -78,10 +118,18 @@ cd $repo_name
 # git checkout $version
 [[ $chain_name == "gravitybridge" ]] && cd module
 
-# fix axelar `make install` doesnt work
-[[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
+if [[ $db_backend == "rocksdb" ]]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(regen|kava|evmos)$" ) -ne 0 ]; then
+    make install COSMOS_BUILD_OPTIONS=rocksdb TENDERMINT_BUILD_OPTIONS=rocksdb BUILD_TAGS=rocksdb
+  else
+    go install -tags rocksdb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb" ./...
+  fi
+else
+  # fix axelar `make install` doesnt work
+  [[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
 
-make install
+  make install
+fi
 
 echo "#################################################################################################################"
 echo "download snapshot:"
@@ -164,7 +212,6 @@ sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/co
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/config/app.toml
 sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 0/" $node_home/config/app.toml
 
-
 # https://github.com/notional-labs/cosmosia/issues/24
 [ "$chain_name" != "kava" ] && sed -i -e "s/^swagger *=.*/swagger = true/" $node_home/config/app.toml
 
@@ -172,6 +219,8 @@ sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/
 sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 1000/" $node_home/config/config.toml
 sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_home/config/config.toml
 sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
+###
+[[ $db_backend == "rocksdb" ]] && sed -i -e "s/^db_backend *=.*/db_backend = \"rocksdb\"/" $node_home/config/config.toml
 
 echo "download genesis file..."
 if [[ $genesis_url == *.json.gz ]]; then
@@ -210,7 +259,7 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/star
 
 cat <<EOT > /etc/supervisor/conf.d/chain.conf
 [program:chain]
-command=/bin/bash /root/start_chain.sh $chain_name
+command=/bin/bash /root/start_chain.sh $chain_name $db_backend
 autostart=false
 autorestart=false
 stopasgroup=true
