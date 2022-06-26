@@ -39,11 +39,11 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
     du -h
 
     if [[ $chain_name == "provenance" ]]; then
-      $HOME/go/bin/cosmos-pruner prune $node_home/data --backend=cleveldb --blocks=362880 --versions=362880
+      $HOME/go/bin/cosmos-pruner prune $node_home/data --backend=cleveldb --blocks=201600 --versions=362880
     elif [[ $chain_name == "osmosis" ]]; then
-      $HOME/go/bin/cosmos-pruner prune $node_home/data --app=osmosis --blocks=362880 --versions=362880
+      $HOME/go/bin/cosmos-pruner prune $node_home/data --app=osmosis --blocks=201600 --versions=362880
     else
-      $HOME/go/bin/cosmos-pruner prune $node_home/data --blocks=362880 --versions=362880
+      $HOME/go/bin/cosmos-pruner prune $node_home/data --blocks=201600 --versions=362880
     fi
 
     # Delete tx_index.db
