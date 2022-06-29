@@ -158,7 +158,7 @@ fi
 
 snapshot_time_hour=${snapshot_time%%:*}
 snapshot_time_minute=${snapshot_time##*:}
-echo "$snapshot_time_minute $snapshot_time_hour * * * root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
+echo "$snapshot_time_minute $snapshot_time_hour * * * root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh $db_backend" > /etc/cron.d/cron_snapshot
 
 # start crond
 crond
