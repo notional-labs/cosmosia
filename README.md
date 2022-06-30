@@ -46,6 +46,7 @@ See [status page](https://status.notional.ventures/) of our cluster.
 35. IRISnet (irisnet)
 36. Axelar (axelar)
 37. Pylons Testnet (pylons)
+38. Umee (umee)
 
 
 
