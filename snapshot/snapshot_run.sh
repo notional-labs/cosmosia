@@ -5,10 +5,16 @@
 chain_name="$1"
 db_backend="$2"
 
+# functions
+loop_forever () {
+  echo "loop forever for debugging only"
+  while true; do sleep 5; done
+}
+
 if [[ -z $chain_name ]]
 then
   echo "No chain_name. usage eg., ./snapshost_run.sh cosmoshub"
-  exit
+  loop_forever
 fi
 
 [[ -z $db_backend ]] && db_backend="goleveldb"
@@ -30,7 +36,7 @@ eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/63-add-
 
 if [[ -z $git_repo ]]; then
   echo "Not support chain $chain_name"
-  exit
+  loop_forever
 fi
 
 # write chain info to bash file, so that cronjob could know
@@ -153,7 +159,7 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 
 if [[ -z $snapshot_time ]]; then
   echo "No time setting to take snapshot, please set snapshot_time in chain_registry.ini"
-  exit
+  loop_forever
 fi
 
 snapshot_time_hour=${snapshot_time%%:*}
@@ -163,5 +169,4 @@ echo "$snapshot_time_minute $snapshot_time_hour * * * root /usr/bin/flock -n /va
 # start crond
 crond
 
-# loop forever for debugging only
-while true; do sleep 5; done
+loop_forever
