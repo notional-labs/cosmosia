@@ -45,6 +45,7 @@ See [status page](https://status.notional.ventures/) of our cluster.
 34. Crypto.org (cryptoorgchain)
 35. IRISnet (irisnet)
 36. Axelar (axelar)
+37. Pylons Testnet (pylons)
 
 
 
