@@ -39,5 +39,5 @@ included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
 tar -czvf $TAR_FILE_PATH $included_dirs
 
 # delete old snapshots
-cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -3)
+cd /snapshot/statesync/ && rm $(ls *.tar.gz |sort |head -n -3)
 
