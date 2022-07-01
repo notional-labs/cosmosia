@@ -20,6 +20,8 @@ loop_forever () {
   while true; do sleep 5; done
 }
 
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/statesync/create_statesync_snapshot.sh" > $HOME/create_statesync_snapshot.sh
+
 echo "#################################################################################################################"
 echo "read chain info:"
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
