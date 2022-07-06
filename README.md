@@ -38,7 +38,7 @@ See [status page](https://status.notional.ventures/) of our cluster.
 27. Comdex (comdex)
 28. Cerberus (cerberus)
 29. BitSong (bitsong)
-30. AssetMantle (assetmantle)
+30. ~~AssetMantle (assetmantle)~~
 31. FetchAI (fetchhub)
 32. Evmos (evmos)
 33. Persistence (persistent)
