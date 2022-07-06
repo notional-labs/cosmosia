@@ -140,7 +140,7 @@ echo "URL=$URL"
 
 if [[ -z $URL ]]; then
   echo "URL to download snapshot is empty. Pls fix it!"
-  exit
+  loop_forever
 fi
 
 echo "download and extract the snapshot to current path..."
@@ -158,7 +158,7 @@ elif [[ $url_stripped == *.tar.gz ]]; then
   wget -O - "$URL" |tar -xzf -
 else
   echo "Not support snapshot file type."
-  exit
+  loop_forever
 fi
 
 # download wasm snapshot, for stargaze only atm
@@ -171,7 +171,7 @@ if [[ ! -z $URL_WASM ]]; then
     wget -O - "$URL_WASM" |tar -xvf - -C $node_home/wasm/
   else
     echo "Not support snapshot file type."
-    exit
+    loop_forever
   fi
 fi
 
@@ -202,7 +202,7 @@ elif [[ $genesis_url == *.json ]]; then
   curl -Ls "$genesis_url" > $node_home/config/genesis.json
 else
   echo "Not support genesis file type"
-  exit
+  loop_forever
 fi
 
 

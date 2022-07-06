@@ -231,6 +231,9 @@ fi
 
 ########
 
+# fix Persistence (persistent) chain creating a soft-link ln -s /root/data/snapshots ~/.persistenceCore/data/snapshots
+[[ $chain_name == "persistent" ]] && mkdir -p /root/data/snapshots && ln -s /root/data/snapshots $node_home/data/snapshots
+
 echo "start chain..."
 $HOME/go/bin/$daemon_name start $start_flags
 

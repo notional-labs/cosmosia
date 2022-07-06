@@ -45,6 +45,8 @@ docker service create \
   --publish mode=host,target=9034,published=9034 \
   --publish mode=host,target=9035,published=9035 \
   --publish mode=host,target=9036,published=9036 \
+  --publish mode=host,target=9037,published=9037 \
+  --publish mode=host,target=9038,published=9038 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia3' \
   --restart-condition any \

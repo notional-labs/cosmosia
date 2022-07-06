@@ -1,4 +1,11 @@
+# usage: ./snapshot_cronjob.sh [db_backend]
+# eg., ./snapshot_cronjob.sh goleveldb
+# db_backend: goleveldb rocksdb, default is goleveldb
+
 echo "snapshot_cronjob..."
+
+db_backend="$1"
+[[ -z $db_backend ]] && db_backend="goleveldb"
 
 # functions
 find_current_data_version () {
@@ -29,22 +36,35 @@ echo "snapshot_prune_threshold=$snapshot_prune_threshold"
 if [[ $snapshot_prune == "cosmos-pruner" ]]; then
   # check snapshot size large than threshold or not
   SNAPSHOT_THRESHOLD_BYTE=$((${snapshot_prune_threshold} * 1024 * 1024 * 1024))
-  snapshot_file_size=$(curl -s "https://snapshot.notional.ventures/$chain_name/chain.json" |jq -r '.file_size')
+  chain_json_url="https://snapshot.notional.ventures/$chain_name/chain.json"
+  [[ $db_backend == "rocksdb" ]] && chain_json_url="https://snapshot.notional.ventures/$chain_name/rocksdb/chain.json"
+
+  snapshot_file_size=$(curl -s "$chain_json_url" |jq -r '.file_size')
 
   if [[ ${SNAPSHOT_THRESHOLD_BYTE} -le ${snapshot_file_size} ]]; then
-    echo "start prunning..."
+    echo "start pruning..."
 
     cd $node_home/data
     echo "Before:"
     du -h
 
-    if [[ $chain_name == "provenance" ]]; then
-      $HOME/go/bin/cosmos-pruner prune $node_home/data --backend=cleveldb --blocks=201600 --versions=362880
-    elif [[ $chain_name == "osmosis" ]]; then
-      $HOME/go/bin/cosmos-pruner prune $node_home/data --app=osmosis --blocks=201600 --versions=362880
+
+    if [[ $db_backend == "rocksdb" ]]; then
+        if [ $( echo "${chain_name}" | egrep -c "^(osmosis|cosmoshub|kava|terra)$" ) -ne 0 ]; then
+          $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$chain_name --backend=rocksdb --blocks=201600 --versions=362880
+        else
+          $HOME/go/bin/cosmos-pruner prune $node_home/data --backend=rocksdb --blocks=201600 --versions=362880
+        fi
     else
-      $HOME/go/bin/cosmos-pruner prune $node_home/data --blocks=201600 --versions=362880
+      if [ $( echo "${chain_name}" | egrep -c "^(osmosis|cosmoshub|kava|terra)$" ) -ne 0 ]; then
+        $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$chain_name --blocks=201600 --versions=362880
+      elif [[ $chain_name == "provenance" ]]; then
+        $HOME/go/bin/cosmos-pruner prune $node_home/data --backend=cleveldb --blocks=201600 --versions=362880
+      else
+        $HOME/go/bin/cosmos-pruner prune $node_home/data --blocks=201600 --versions=362880
+      fi
     fi
+
 
     # Delete tx_index.db
     rm -rf $node_home/data/tx_index.db

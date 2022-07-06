@@ -41,3 +41,5 @@ This is the result that we test statesync for all chains (https://github.com/not
 34. Crypto.org (cryptoorgchain) :white_check_mark:
 35. IRISnet (irisnet) :white_check_mark:
 36. Axelar (axelar) :white_check_mark:
+37. Pylons Testnet (pylons) :white_check_mark:
+38. Umee (umee) :white_check_mark:
