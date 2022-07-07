@@ -1,8 +1,11 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel dnsutils python nginx logrotate
+pacman -S --noconfirm base-devel wget dnsutils python nginx logrotate
 
-# extract SSL cert (fullchain.pem and privkey.pem files)
-tar -xvf "/run/secrets/ssl_notional.ventures.tar.gz" -C /etc/nginx/
+########################################################################################################################
+# SSL for notional.ventures (fullchain.pem and privkey.pem files)
+# tar -xvf "/run/secrets/ssl_notional.ventures.tar.gz" -C /etc/nginx/
+wget "http://tasks.web_config/config/fullchain.pem" -O /etc/nginx/fullchain.pem
+wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 
 ########################################################################################################################
 # nginx
