@@ -1,7 +1,18 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm nginx
+pacman -S --noconfirm git base-devel python python-pip nginx screen
 
-########################################################################################################################
+################################################################################
+# web_config
+cd $HOME
+git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
+cd $HOME/cosmosia/web_config
+pip install requirements.txt
+
+screen -S web_config -dm /usr/sbin/python app.py
+
+sleep 3
+
+################################################################################
 # nginx
 
 chmod 666 /var/run/docker.sock
@@ -37,9 +48,13 @@ http {
         #access_log  logs/host.access.log  main;
         root   /usr/share/nginx/html;
 
-        location / {
-            root /data/web_config;
-            autoindex on;
+        # location / {
+        #    root /data/web_config;
+        #    autoindex on;
+        # }
+
+        location ~* ^/(.*) {
+            proxy_pass http://127.0.0.1:5001/$1$is_args$args;
         }
 
         #error_page  404              /404.html;
