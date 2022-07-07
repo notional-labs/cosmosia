@@ -53,7 +53,7 @@ http {
         #    autoindex on;
         # }
 
-        location/ {
+        location / {
             proxy_pass http://127.0.0.1:5001/;
         }
 
