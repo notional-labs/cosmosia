@@ -6,7 +6,7 @@ pacman -S --noconfirm git base-devel python python-pip nginx screen
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
 cd $HOME/cosmosia/web_config
-pip install requirements.txt
+pip install -r requirements.txt
 
 screen -S web_config -dm /usr/sbin/python app.py
 
@@ -53,8 +53,8 @@ http {
         #    autoindex on;
         # }
 
-        location ~* ^/(.*) {
-            proxy_pass http://127.0.0.1:5001/$1$is_args$args;
+        location/ {
+            proxy_pass http://127.0.0.1:5001/;
         }
 
         #error_page  404              /404.html;
