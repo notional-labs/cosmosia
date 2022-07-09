@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm git base-devel dnsutils python python-pip nginx screen
+pacman -S --noconfirm git base-devel wget dnsutils python python-pip nginx screen
 
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
@@ -18,8 +18,10 @@ sleep 3
 ########################################################################################################################
 # nginx
 
-# extract SSL cert (fullchain.pem and privkey.pem files)
-tar -xvf "/run/secrets/ssl_notional.ventures.tar.gz" -C /etc/nginx/
+# SSL for notional.ventures (fullchain.pem and privkey.pem files)
+# tar -xvf "/run/secrets/ssl_notional.ventures.tar.gz" -C /etc/nginx/
+wget "http://tasks.web_config/config/fullchain.pem" -O /etc/nginx/fullchain.pem
+wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 
 cp $HOME/cosmosia/proxy_private/nginx.conf /etc/nginx/nginx.conf
 

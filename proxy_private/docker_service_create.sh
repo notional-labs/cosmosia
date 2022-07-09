@@ -80,13 +80,10 @@ docker service create \
   --publish mode=host,target=9135,published=9135 \
   --publish mode=host,target=9136,published=9136 \
   --publish mode=host,target=9137,published=9137 \
+  --publish mode=host,target=9138,published=9138 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia7' \
-  --secret ssl_notional.ventures.tar.gz \
-  --restart-condition any \
-  --restart-delay 3s \
-  --restart-max-attempts 3 \
-  --restart-window 10m \
+  --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_private/run.sh > ~/run.sh && /bin/bash ~/run.sh"
