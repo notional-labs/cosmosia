@@ -47,6 +47,7 @@ See [status page](https://status.notional.ventures/) of our cluster.
 36. Axelar (axelar)
 37. Pylons Testnet (pylons)
 38. Umee (umee)
+39. Sei-Chain Testnet (sei)
 
 
 
