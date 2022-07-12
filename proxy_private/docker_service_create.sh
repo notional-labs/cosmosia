@@ -81,6 +81,7 @@ docker service create \
   --publish mode=host,target=9136,published=9136 \
   --publish mode=host,target=9137,published=9137 \
   --publish mode=host,target=9138,published=9138 \
+  --publish mode=host,target=9139,published=9139 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia7' \
   --restart-condition none \
