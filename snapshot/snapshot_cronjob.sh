@@ -50,13 +50,13 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
 
 
     if [[ $db_backend == "rocksdb" ]]; then
-        if [ $( echo "${chain_name}" | egrep -c "^(osmosis|cosmoshub|kava|terra|evmos)$" ) -ne 0 ]; then
+        if [ $( echo "${chain_name}" | egrep -c "^(osmosis|cosmoshub|kava|terra|evmos|sifchain|gravitybridge)$" ) -ne 0 ]; then
           $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$chain_name --backend=rocksdb --blocks=201600 --versions=362880
         else
           $HOME/go/bin/cosmos-pruner prune $node_home/data --backend=rocksdb --blocks=201600 --versions=362880
         fi
     else
-      if [ $( echo "${chain_name}" | egrep -c "^(osmosis|cosmoshub|kava|terra|evmos)$" ) -ne 0 ]; then
+      if [ $( echo "${chain_name}" | egrep -c "^(osmosis|cosmoshub|kava|terra|evmos|sifchain|gravitybridge)$" ) -ne 0 ]; then
         $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$chain_name --blocks=201600 --versions=362880
       elif [[ $chain_name == "provenance" ]]; then
         $HOME/go/bin/cosmos-pruner prune $node_home/data --backend=cleveldb --blocks=201600 --versions=362880
