@@ -115,7 +115,7 @@ fi
 ########################################################################################################################
 echo "install cosmos-pruner"
 cd $HOME
-git clone https://github.com/baabeetaa/cosmprund
+git clone https://github.com/notional-labs/cosmprund
 cd cosmprund
 
 if [[ $db_backend == "rocksdb" ]]; then
