@@ -9,47 +9,47 @@ Open solution to build a reliable infrastructure for cosmos/tendermint based cha
 See [status page](https://status.notional.ventures/) of our cluster.
 
 ### Supported chains:
-| No  | Chain | Public RPC | [Statesync](docs/statesync.md) | [RocksDB](docs/rocksdb.md)
-|:--- |:------|:----------:|:------------------------------:|:-------------------------:|
-| 1. | Osmosis (osmosis)       | :link: | :x: | 
-| 2. | Starname (starname)     | :link: |  :x: | 
-| 3. | Regen (regen)           | :link: |  :white_check_mark: | :warning:
-| 4. | Akash (akash)           | :link: |  :white_check_mark: | :white_check_mark:
-| 5. | Gaia (cosmoshub)        | :link: |  :white_check_mark: | :white_check_mark:
-| 6. | Sentinel (sentinel)     | :link: |  :white_check_mark: | :white_check_mark:
-| 7. | E-Money (emoney)        | :link: |  :white_check_mark: | :white_check_mark:
-| 8. | Ixo (ixo)               | :link: |  :white_check_mark: | :white_check_mark:
-| 9. | Juno (juno)             | :link: |  :x: | 
-| 10. | Sifchain (sifchain)    | :link: |  :white_check_mark: | :white_check_mark:
-| 11. | Likecoin (likecoin)    | :link: |  :white_check_mark: | :white_check_mark:
-| 12. | Ki (kichain)           | :link: |  :white_check_mark: | :white_check_mark:
-| 13. | Cyber (cyber)          | :link: |  :x: | 
-| 14. | Cheqd (cheqd)          | :link: |  :x: | 
-| 15. | Stargaze (stargaze)    | :link: |  :x: | 
-| 16. | Band (bandchain)       | :link: |  :white_check_mark: | :white_check_mark:
-| 17. | Chihuahua (chihuahua)  | :link: |  :white_check_mark: | :white_check_mark:
-| 18. | Kava (kava)            | :link: |  :white_check_mark: | :white_check_mark:
-| 19. | BitCanna (bitcanna)    | :link: |  :white_check_mark: | :white_check_mark:
-| 20. | Konstellation (konstellation) | :link: |  :white_check_mark: | :white_check_mark:
-| 21. | Omniflix (omniflixhub) | :link: |  :white_check_mark: | :white_check_mark:
-| 22. | Terra (terra)          | :link: |  :x: | 
-| 23. | Vidulum (vidulum)      | :link: |  :white_check_mark: | :white_check_mark:
-| 24. | Provenance (provenance) | :link: |  :white_check_mark: | :white_check_mark:
-| 25. | Dig (dig)               | :link: |  :white_check_mark: | :white_check_mark:
-| 26. | Gravity-Bridge (gravitybridge) | :link: |  :white_check_mark: | :white_check_mark:  
-| 27. | Comdex (comdex)        | :link: |  :white_check_mark: | :white_check_mark:
-| 28. | Cerberus (cerberus)    | :link: |  :white_check_mark: | :white_check_mark:
-| 29. | BitSong (bitsong)      | :link: |  :white_check_mark: | :white_check_mark:
-| 30. | ~~AssetMantle (assetmantle)~~ | :link: |  :white_check_mark: | :white_check_mark: 
-| 31. | FetchAI (fetchhub)     | :link: |  :x: | 
-| 32. | Evmos (evmos)          | :link: |  :white_check_mark: | :white_check_mark: 
-| 33. | Persistence (persistent) | :link: |  :white_check_mark: | :warning:
-| 34. | Crypto.org (cryptoorgchain) | :link: |  :white_check_mark: | :white_check_mark:
-| 35. | IRISnet (irisnet)      | :link: |  :white_check_mark: | :white_check_mark:
-| 36. | Axelar (axelar)        | :link: |  :white_check_mark: | :warning:
-| 37. | Pylons Testnet (pylons) | :link: |  :white_check_mark: | 
-| 38. | Umee (umee)            | :link: |  :white_check_mark: | 
-| 39. | Sei-Chain Testnet (sei) | :link: |   | 
+| No  | Chain                          | Go LevelDB<br>Snapshot                                       | RocksDB<br>Snapshot                                                  | Public<br>RPC                                              | Public<br>API                                              | [Statesync](docs/statesync.md) | [RocksDB](docs/rocksdb.md)
+|----:|:-------------------------------|:------------------------------------------------------------:|:--------------------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|:------------------------------:|:------------------:|
+| 1. | Osmosis (osmosis)               | [:link:](https://snapshot.notional.ventures/osmosis/)        | [:link:](https://snapshot.notional.ventures/osmosis/rocksdb/)        | [:link:](https://rpc-osmosis-ia.notional.ventures/)        | [:link:](https://api-osmosis-ia.notional.ventures/)        | :x:                            | 
+| 2. | Starname (starname)             | [:link:](https://snapshot.notional.ventures/starname/)       | [:link:](https://snapshot.notional.ventures/starname/rocksdb/)       | [:link:](https://rpc-starname-ia.notional.ventures/)       | [:link:](https://api-starname-ia.notional.ventures/)       | :x:                            | 
+| 3. | Regen (regen)                   | [:link:](https://snapshot.notional.ventures/regen/)          | [:link:](https://snapshot.notional.ventures/regen/rocksdb/)          | [:link:](https://rpc-regen-ia.notional.ventures/)          | [:link:](https://api-regen-ia.notional.ventures/)          | :white_check_mark:             | :warning:
+| 4. | Akash (akash)                   | [:link:](https://snapshot.notional.ventures/akash/)          | [:link:](https://snapshot.notional.ventures/akash/rocksdb/)          | [:link:](https://rpc-akash-ia.notional.ventures/)          | [:link:](https://api-akash-ia.notional.ventures/)          | :white_check_mark:             | :white_check_mark:
+| 5. | Gaia (cosmoshub)                | [:link:](https://snapshot.notional.ventures/cosmoshub/)      | [:link:](https://snapshot.notional.ventures/cosmoshub/rocksdb/)      | [:link:](https://rpc-cosmoshub-ia.notional.ventures/)      | [:link:](https://api-cosmoshub-ia.notional.ventures/)      | :white_check_mark:             | :white_check_mark:
+| 6. | Sentinel (sentinel)             | [:link:](https://snapshot.notional.ventures/sentinel/)       | [:link:](https://snapshot.notional.ventures/sentinel/rocksdb/)       | [:link:](https://rpc-sentinel-ia.notional.ventures/)       | [:link:](https://api-sentinel-ia.notional.ventures/)       | :white_check_mark:             | :white_check_mark:
+| 7. | E-Money (emoney)                | [:link:](https://snapshot.notional.ventures/emoney/)         | [:link:](https://snapshot.notional.ventures/emoney/rocksdb/)         | [:link:](https://rpc-emoney-ia.notional.ventures/)         | [:link:](https://api-emoney-ia.notional.ventures/)         | :white_check_mark:             | :white_check_mark:
+| 8. | Ixo (ixo)                       | [:link:](https://snapshot.notional.ventures/ixo/)            | [:link:](https://snapshot.notional.ventures/ixo/rocksdb/)            | [:link:](https://rpc-ixo-ia.notional.ventures/)            | [:link:](https://api-ixo-ia.notional.ventures/)            | :white_check_mark:             | :white_check_mark:
+| 9. | Juno (juno)                     | [:link:](https://snapshot.notional.ventures/juno/)           | [:link:](https://snapshot.notional.ventures/juno/rocksdb/)           | [:link:](https://rpc-juno-ia.notional.ventures/)           | [:link:](https://api-juno-ia.notional.ventures/)           | :x:                            | 
+| 10. | Sifchain (sifchain)            | [:link:](https://snapshot.notional.ventures/sifchain/)       | [:link:](https://snapshot.notional.ventures/sifchain/rocksdb/)       | [:link:](https://rpc-sifchain-ia.notional.ventures/)       | [:link:](https://api-sifchain-ia.notional.ventures/)       | :white_check_mark:             | :white_check_mark:
+| 11. | Likecoin (likecoin)            | [:link:](https://snapshot.notional.ventures/likecoin/)       | [:link:](https://snapshot.notional.ventures/likecoin/rocksdb/)       | [:link:](https://rpc-likecoin-ia.notional.ventures/)       | [:link:](https://api-likecoin-ia.notional.ventures/)       | :white_check_mark:             | :white_check_mark:
+| 12. | Ki (kichain)                   | [:link:](https://snapshot.notional.ventures/kichain/)        | [:link:](https://snapshot.notional.ventures/kichain/rocksdb/)        | [:link:](https://rpc-kichain-ia.notional.ventures/)        | [:link:](https://api-kichain-ia.notional.ventures/)        | :white_check_mark:             | :white_check_mark:
+| 13. | Cyber (cyber)                  | [:link:](https://snapshot.notional.ventures/cyber/)          | [:link:](https://snapshot.notional.ventures/cyber/rocksdb/)          | [:link:](https://rpc-cyber-ia.notional.ventures/)          | [:link:](https://api-cyber-ia.notional.ventures/)          | :x:                            | 
+| 14. | Cheqd (cheqd)                  | [:link:](https://snapshot.notional.ventures/cheqd/)          | [:link:](https://snapshot.notional.ventures/cheqd/rocksdb/)          | [:link:](https://rpc-cheqd-ia.notional.ventures/)          | [:link:](https://api-cheqd-ia.notional.ventures/)          | :x:                            | 
+| 15. | Stargaze (stargaze)            | [:link:](https://snapshot.notional.ventures/stargaze/)       | [:link:](https://snapshot.notional.ventures/stargaze/rocksdb/)       | [:link:](https://rpc-stargaze-ia.notional.ventures/)       | [:link:](https://api-stargaze-ia.notional.ventures/)       | :x:                            | 
+| 16. | Band (bandchain)               | [:link:](https://snapshot.notional.ventures/bandchain/)      | [:link:](https://snapshot.notional.ventures/bandchain/rocksdb/)      | [:link:](https://rpc-bandchain-ia.notional.ventures/)      | [:link:](https://api-bandchain-ia.notional.ventures/)      | :white_check_mark:             | :white_check_mark:
+| 17. | Chihuahua (chihuahua)          | [:link:](https://snapshot.notional.ventures/chihuahua/)      | [:link:](https://snapshot.notional.ventures/chihuahua/rocksdb/)      | [:link:](https://rpc-chihuahua-ia.notional.ventures/)      | [:link:](https://api-chihuahua-ia.notional.ventures/)      | :white_check_mark:             | :white_check_mark:
+| 18. | Kava (kava)                    | [:link:](https://snapshot.notional.ventures/kava/)           | [:link:](https://snapshot.notional.ventures/kava/rocksdb/)           | [:link:](https://rpc-kava-ia.notional.ventures/)           | [:link:](https://api-kava-ia.notional.ventures/)           | :white_check_mark:             | :white_check_mark:
+| 19. | BitCanna (bitcanna)            | [:link:](https://snapshot.notional.ventures/bitcanna/)       | [:link:](https://snapshot.notional.ventures/bitcanna/rocksdb/)       | [:link:](https://rpc-bitcanna-ia.notional.ventures/)       | [:link:](https://api-bitcanna-ia.notional.ventures/)       | :white_check_mark:             | :white_check_mark:
+| 20. | Konstellation (konstellation)  | [:link:](https://snapshot.notional.ventures/konstellation/)  | [:link:](https://snapshot.notional.ventures/konstellation/rocksdb/)  | [:link:](https://rpc-konstellation-ia.notional.ventures/)  | [:link:](https://api-konstellation-ia.notional.ventures/)  | :white_check_mark:             | :white_check_mark:
+| 21. | Omniflix (omniflixhub)         | [:link:](https://snapshot.notional.ventures/omniflixhub/)    | [:link:](https://snapshot.notional.ventures/omniflixhub/rocksdb/)    | [:link:](https://rpc-omniflixhub-ia.notional.ventures/)    | [:link:](https://api-omniflixhub-ia.notional.ventures/)    | :white_check_mark:             | :white_check_mark:
+| 22. | Terra (terra)                  | [:link:](https://snapshot.notional.ventures/terra/)          | [:link:](https://snapshot.notional.ventures/terra/rocksdb/)          | [:link:](https://rpc-terra-ia.notional.ventures/)          | [:link:](https://api-terra-ia.notional.ventures/)          | :x:                            | 
+| 23. | Vidulum (vidulum)              | [:link:](https://snapshot.notional.ventures/vidulum/)        | [:link:](https://snapshot.notional.ventures/vidulum/rocksdb/)        | [:link:](https://rpc-vidulum-ia.notional.ventures/)        | [:link:](https://api-vidulum-ia.notional.ventures/)        | :white_check_mark:             | :white_check_mark:
+| 24. | Provenance (provenance)        | [:link:](https://snapshot.notional.ventures/provenance/)     | [:link:](https://snapshot.notional.ventures/provenance/rocksdb/)     | [:link:](https://rpc-provenance-ia.notional.ventures/)     | [:link:](https://api-provenance-ia.notional.ventures/)     | :white_check_mark:             | :white_check_mark:
+| 25. | Dig (dig)                      | [:link:](https://snapshot.notional.ventures/dig/)            | [:link:](https://snapshot.notional.ventures/dig/rocksdb/)            | [:link:](https://rpc-dig-ia.notional.ventures/)            | [:link:](https://api-dig-ia.notional.ventures/)            | :white_check_mark:             | :white_check_mark:
+| 26. | Gravity-Bridge (gravitybridge) | [:link:](https://snapshot.notional.ventures/gravitybridge/)  | [:link:](https://snapshot.notional.ventures/gravitybridge/rocksdb/)  | [:link:](https://rpc-gravitybridge-ia.notional.ventures/)  | [:link:](https://api-gravitybridge-ia.notional.ventures/)  | :white_check_mark:             | :white_check_mark:  
+| 27. | Comdex (comdex)                | [:link:](https://snapshot.notional.ventures/comdex/)         | [:link:](https://snapshot.notional.ventures/comdex/rocksdb/)         | [:link:](https://rpc-comdex-ia.notional.ventures/)         | [:link:](https://api-comdex-ia.notional.ventures/)         | :white_check_mark:             | :white_check_mark:
+| 28. | Cerberus (cerberus)            | [:link:](https://snapshot.notional.ventures/cerberus/)       | [:link:](https://snapshot.notional.ventures/cerberus/rocksdb/)       | [:link:](https://rpc-cerberus-ia.notional.ventures/)       | [:link:](https://api-cerberus-ia.notional.ventures/)       | :white_check_mark:             | :white_check_mark:
+| 29. | BitSong (bitsong)              | [:link:](https://snapshot.notional.ventures/bitsong/)        | [:link:](https://snapshot.notional.ventures/bitsong/rocksdb/)        | [:link:](https://rpc-bitsong-ia.notional.ventures/)        | [:link:](https://api-bitsong-ia.notional.ventures/)        | :white_check_mark:             | :white_check_mark:
+| 30. | ~~AssetMantle (assetmantle)~~  | [:link:](https://snapshot.notional.ventures/assetmantle/)    | [:link:](https://snapshot.notional.ventures/assetmantle/rocksdb/)    | [:link:](https://rpc-assetmantle-ia.notional.ventures/)    | [:link:](https://api-assetmantle-ia.notional.ventures/)    | :white_check_mark:             | :white_check_mark: 
+| 31. | FetchAI (fetchhub)             | [:link:](https://snapshot.notional.ventures/fetchhub/)       | [:link:](https://snapshot.notional.ventures/fetchhub/rocksdb/)       | [:link:](https://rpc-fetchhub-ia.notional.ventures/)       | [:link:](https://api-fetchhub-ia.notional.ventures/)       | :x:                            | 
+| 32. | Evmos (evmos)                  | [:link:](https://snapshot.notional.ventures/evmos/)          | [:link:](https://snapshot.notional.ventures/evmos/rocksdb/)          | [:link:](https://rpc-evmos-ia.notional.ventures/)          | [:link:](https://api-evmos-ia.notional.ventures/)          | :white_check_mark:             | :white_check_mark: 
+| 33. | Persistence (persistent)       | [:link:](https://snapshot.notional.ventures/persistent/)     | [:link:](https://snapshot.notional.ventures/persistent/rocksdb/)     | [:link:](https://rpc-persistent-ia.notional.ventures/)     | [:link:](https://api-persistent-ia.notional.ventures/)     | :white_check_mark:             | :warning:
+| 34. | Crypto.org (cryptoorgchain)    | [:link:](https://snapshot.notional.ventures/cryptoorgchain/) | [:link:](https://snapshot.notional.ventures/cryptoorgchain/rocksdb/) | [:link:](https://rpc-cryptoorgchain-ia.notional.ventures/) | [:link:](https://api-cryptoorgchain-ia.notional.ventures/) | :white_check_mark:             | :white_check_mark:
+| 35. | IRISnet (irisnet)              | [:link:](https://snapshot.notional.ventures/irisnet/)        | [:link:](https://snapshot.notional.ventures/irisnet/rocksdb/)        | [:link:](https://rpc-irisnet-ia.notional.ventures/)        | [:link:](https://api-irisnet-ia.notional.ventures/)           | :white_check_mark:             | :white_check_mark:
+| 36. | Axelar (axelar)                | [:link:](https://snapshot.notional.ventures/axelar/)         | [:link:](https://snapshot.notional.ventures/axelar/rocksdb/)         | [:link:](https://rpc-axelar-ia.notional.ventures/)         | [:link:](https://api-axelar-ia.notional.ventures/)           | :white_check_mark:             | :warning:
+| 37. | Pylons Testnet (pylons)        | [:link:](https://snapshot.notional.ventures/pylons/)         | [:link:](https://snapshot.notional.ventures/pylons/rocksdb/)         | [:link:](https://rpc-pylons-ia.notional.ventures/)         | [:link:](https://api-pylons-ia.notional.ventures/)           | :white_check_mark:             | 
+| 38. | Umee (umee)                    | [:link:](https://snapshot.notional.ventures/umee/)           | [:link:](https://snapshot.notional.ventures/umee/rocksdb/)           | [:link:](https://rpc-umee-ia.notional.ventures/)           | [:link:](https://api-umee-ia.notional.ventures/)           | :white_check_mark:             | 
+| 39. | Sei-Chain Testnet (sei)        | [:link:](https://snapshot.notional.ventures/sei/)            | [:link:](https://snapshot.notional.ventures/sei/rocksdb/)            | [:link:](https://rpc-sei-ia.notional.ventures/)            | [:link:](https://api-sei-ia.notional.ventures/)           |                                | 
 
 
 
