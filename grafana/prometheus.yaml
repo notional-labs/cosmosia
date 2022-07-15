@@ -89,9 +89,9 @@ scrape_configs:
   - job_name: lb_bitsong
     static_configs:
       - targets: ['tasks.lb_bitsong:2019']
-  - job_name: lb_assetmantle
-    static_configs:
-      - targets: ['tasks.lb_assetmantle:2019']
+#  - job_name: lb_assetmantle
+#    static_configs:
+#      - targets: ['tasks.lb_assetmantle:2019']
   - job_name: lb_fetchhub
     static_configs:
       - targets: ['tasks.lb_fetchhub:2019']
@@ -110,3 +110,12 @@ scrape_configs:
   - job_name: lb_axelar
     static_configs:
       - targets: ['tasks.lb_axelar:2019']
+  - job_name: lb_pylons
+    static_configs:
+      - targets: ['tasks.lb_pylons:2019']
+  - job_name: lb_umee
+    static_configs:
+      - targets: ['tasks.lb_umee:2019']
+  - job_name: lb_sei
+    static_configs:
+      - targets: ['tasks.lb_sei:2019']
