@@ -4,7 +4,7 @@ Open solution to build a reliable infrastructure for cosmos/tendermint based cha
 - API service: Load balancing for Rpc, Rest, Websocket, [GRPC](docs/grpc.md) and JSON-RPC with active-healthcheck, rate-limiting and ip-whitelist.
 - Daily [snapshot service](https://snapshot.notional.ventures/) for goleveldb and [rocksdb](/docs/rocksdb.md)
 - Monitoring tools for both [internal](docs/rpc_monitor.md) and [external](https://status.notional.ventures/) view.
-- Auto pruning and rpc service with snapshot/data versioning
+- Auto [pruning](https://github.com/notional-labs/cosmprund) and rpc service with snapshot/data versioning
 
 See [status page](https://status.notional.ventures/) of our cluster.
 
