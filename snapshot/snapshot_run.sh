@@ -122,6 +122,7 @@ if [[ $db_backend == "rocksdb" ]]; then
   git checkout fix_rocksdb_$rocksdb_version
   go install -ldflags '-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb' -tags rocksdb ./...
 else
+  git checkout add_apps
   make install
 fi
 
