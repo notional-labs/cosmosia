@@ -28,7 +28,7 @@ This is result that we [tested](https://github.com/notional-labs/cosmosia/issues
 23. Vidulum (vidulum) :white_check_mark: (v6.15.5)
 24. Provenance (provenance) :white_check_mark: (v6.24.2)
 25. Dig (dig) :white_check_mark: (v6.24.2)
-26. Gravity-Bridge (gravitybridge) :white_check_mark: (v6.15.5)
+26. Gravity-Bridge (gravitybridge) :white_check_mark: (v6.24.2)
 27. Comdex (comdex) :white_check_mark: (v6.15.5)
 28. Cerberus (cerberus) :white_check_mark: (v6.15.5)
 29. BitSong (bitsong) :white_check_mark: (v6.15.5)
