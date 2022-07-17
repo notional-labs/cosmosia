@@ -19,7 +19,7 @@ This is result that we [tested](https://github.com/notional-labs/cosmosia/issues
 14. Cheqd (cheqd) :x: (didnt test as statesync doesnt work)
 15. Stargaze (stargaze) :x: (didnt test as statesync doesnt work)
 16. Band (bandchain)  :white_check_mark: (v6.15.5)
-17. Chihuahua (chihuahua) :white_check_mark: (v6.15.5)
+17. Chihuahua (chihuahua) :white_check_mark: (v6.24.2)
 18. Kava (kava) :white_check_mark: (v7.1.2)
 19. BitCanna (bitcanna) :white_check_mark: (v6.24.2)
 20. Konstellation (konstellation) :white_check_mark: (v6.15.5)
