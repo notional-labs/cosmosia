@@ -119,3 +119,6 @@ scrape_configs:
   - job_name: lb_sei
     static_configs:
       - targets: ['tasks.lb_sei:2019']
+  - job_name: lb_evmos-testnet-archive
+    static_configs:
+      - targets: ['tasks.lb_evmos-testnet-archive:2019']
