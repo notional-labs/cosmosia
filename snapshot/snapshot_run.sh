@@ -165,7 +165,11 @@ fi
 
 snapshot_time_hour=${snapshot_time%%:*}
 snapshot_time_minute=${snapshot_time##*:}
-echo "$snapshot_time_minute $snapshot_time_hour * * * root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh $db_backend" > /etc/cron.d/cron_snapshot
+
+# weekly snapshot if it is archive node
+snapshot_day="*"
+[[ -z $snapshot_prune ]] && snapshot_day=$(( ${snapshot_time_hour} % 6 ))
+echo "$snapshot_time_minute $snapshot_time_hour * * $snapshot_day root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh $db_backend" > /etc/cron.d/cron_snapshot
 
 # start crond
 crond
