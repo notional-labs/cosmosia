@@ -1,4 +1,4 @@
-pacman -Syu --noconfirm
+pacman -Sy --noconfirm
 pacman -S --noconfirm git base-devel python python-pip nginx screen
 
 ################################################################################

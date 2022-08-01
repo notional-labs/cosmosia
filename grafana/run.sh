@@ -1,4 +1,4 @@
-pacman -Syu --noconfirm
+pacman -Sy --noconfirm
 pacman -S --noconfirm screen
 
 cd $HOME
