@@ -4,14 +4,15 @@
 
 chain_name="$1"
 db_backend="$2"
+rpc_service_name="$3"
 
-if [[ -z $chain_name ]]
-then
+if [[ -z $chain_name ]]; then
   echo "No chain_name. usage eg., ./quicksynch.sh cosmoshub"
   exit
 fi
 
 [[ -z $db_backend ]] && db_backend="goleveldb"
+[[ -z $rpc_service_name ]] && rpc_service_name="$chain_name"
 
 # functions
 loop_forever () {

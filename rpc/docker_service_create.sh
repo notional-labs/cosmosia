@@ -41,4 +41,4 @@ docker service create \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/rpc/quicksync.sh > ~/quicksync.sh && \
-  /bin/bash ~/quicksync.sh $chain_name $db_backend"
+  /bin/bash ~/quicksync.sh $chain_name $db_backend $rpc_service_name"

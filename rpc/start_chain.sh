@@ -1,13 +1,14 @@
 chain_name="$1"
 db_backend="$2"
+rpc_service_name"$3"
 
-if [[ -z $chain_name ]]
-then
+if [[ -z $chain_name ]]; then
   echo "No chain_name. usage eg., ./start_script_gen.sh cosmoshub"
   exit
 fi
 
 [[ -z $db_backend ]] && db_backend="goleveldb"
+[[ -z $rpc_service_name ]] && rpc_service_name="$chain_name"
 
 ########################################################################################################################
 # functions
@@ -20,7 +21,7 @@ find_local_peers () {
   local_ip=$(hostname -i)
 
   # figure out all container IP of service
-  ips=$(dig +short "tasks.$chain_name" |sort)
+  ips=$(dig +short "tasks.$rpc_service_name" |sort)
 
   # filter out local IP
   ips=$(echo "$ips" |grep -v "$local_ip")
