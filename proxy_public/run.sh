@@ -1,4 +1,4 @@
-pacman -Sy --noconfirm
+pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel wget dnsutils python nginx logrotate
 
 ########################################################################################################################

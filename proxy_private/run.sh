@@ -1,4 +1,4 @@
-pacman -Sy --noconfirm
+pacman -Syu --noconfirm
 pacman -S --noconfirm git base-devel wget dnsutils python python-pip nginx screen
 
 cd $HOME

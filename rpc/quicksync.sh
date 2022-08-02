@@ -53,6 +53,7 @@ if [[ -z $git_repo ]]; then
   loop_forever
 fi
 
+pacman -Syu --noconfirm
 pacman -Sy --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils $pacman_pkgs
 
 

@@ -22,7 +22,7 @@ find_current_data_version () {
 
 cd $HOME
 
-pacman -Sy --noconfirm
+pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel jq dnsutils python caddy logrotate screen wget
 
 echo "read chain info:"
