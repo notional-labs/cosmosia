@@ -1,9 +1,7 @@
-# usage: ./snapshost_run.sh chain_name [db_backend]
-# eg., ./snapshost_run.sh cosmoshub goleveldb
-# db_backend: goleveldb rocksdb, default is goleveldb
+# usage: ./snapshost_run.sh chain_name
+# eg., ./snapshost_run.sh cosmoshub
 
 chain_name="$1"
-db_backend="$2"
 
 # functions
 loop_forever () {
@@ -16,8 +14,6 @@ then
   echo "No chain_name. usage eg., ./snapshost_run.sh cosmoshub"
   loop_forever
 fi
-
-[[ -z $db_backend ]] && db_backend="goleveldb"
 
 echo "#################################################################################################################"
 echo "read chain info:"
@@ -75,57 +71,22 @@ sleep 5
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/rpc/start_chain.sh" > $HOME/start_chain.sh
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
 
-
-
-if [[ $db_backend == "rocksdb" ]]; then
-  echo "#################################################################################################################"
-  echo "install rocksdb"
-
-  pacman -Sy --noconfirm cmake python snappy zlib bzip2 lz4 zstd
-
-  # ===============================================
-  # install gflags
-  cd $HOME
-  git clone https://github.com/gflags/gflags.git
-  cd gflags
-  mkdir build
-  cd build
-  cmake -DBUILD_SHARED_LIBS=1 -DGFLAGS_INSTALL_SHARED_LIBS=1 ..
-  make install
-
-
-  # ===============================================
-  # installing rocksdb from source
-  cd $HOME
-  git clone --single-branch --branch $rocksdb_version https://github.com/facebook/rocksdb
-  cd rocksdb
-  make -j4 install-shared
-  ldconfig
-
-  # ===============
-  cp --preserve=links /usr/local/lib/libgflags* /usr/lib/
-  cp --preserve=links /usr/local/lib/librocksdb.so* /usr/lib/
-  cp -r /usr/local/include/rocksdb /usr/include/rocksdb
-
-  # ===========
-  export CGO_CFLAGS="-I/usr/local/include"
-  export CGO_LDFLAGS="-L/usr/local/lib -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
-fi
-
-
 ########################################################################################################################
 echo "install cosmos-pruner"
 cd $HOME
 git clone https://github.com/notional-labs/cosmprund
 cd cosmprund
+git checkout pebble
+go install -ldflags '-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb' -tags pebbledb ./...
 
-if [[ $db_backend == "rocksdb" ]]; then
-  git checkout fix_rocksdb_$rocksdb_version
-  go install -ldflags '-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb' -tags rocksdb ./...
-else
-  git checkout add_apps
-  make install
-fi
+########################################################################################################################
+echo "install pebblecompact"
+cd $HOME
+git clone https://github.com/notional-labs/pebblecompact
+cd pebblecompact
+make install
+
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/snapshot/scripts/pebblecompact_data.sh" > $HOME/pebblecompact_data.sh
 
 ########################################################################################################################
 # download snapshot
@@ -143,7 +104,7 @@ files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 cat <<EOT > /etc/supervisor/conf.d/chain.conf
 [program:chain]
-command=/bin/bash /root/start_chain.sh $chain_name $db_backend
+command=/bin/bash /root/start_chain.sh $chain_name
 autostart=false
 autorestart=false
 stopasgroup=true
@@ -170,7 +131,7 @@ snapshot_time_minute=${snapshot_time##*:}
 # weekly snapshot if it is archive node
 snapshot_day="*"
 [[ -z $snapshot_prune ]] && snapshot_day=$(( ${snapshot_time_hour} % 6 ))
-echo "$snapshot_time_minute $snapshot_time_hour * * $snapshot_day root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh $db_backend" > /etc/cron.d/cron_snapshot
+echo "$snapshot_time_minute $snapshot_time_hour * * $snapshot_day root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
 
 # start crond
 crond
