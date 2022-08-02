@@ -59,6 +59,7 @@ EOT
 
 
 cd $HOME
+pacman -Syu --noconfirm
 pacman -Sy --noconfirm go git base-devel wget jq dnsutils inetutils python python-pip cronie nginx spawn-fcgi fcgiwrap cpulimit
 
 echo "#################################################################################################################"

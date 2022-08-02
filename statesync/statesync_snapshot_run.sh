@@ -54,6 +54,7 @@ if [[ -z $git_repo ]]; then
   loop_forever
 fi
 
+pacman -Syu --noconfirm
 pacman -Sy --noconfirm go git base-devel wget jq $pacman_pkgs
 
 if [[ $db_backend == "rocksdb" ]]; then
