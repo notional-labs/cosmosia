@@ -19,7 +19,7 @@ echo "##########################################################################
 echo "read chain info:"
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
 
-eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
+eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -61,15 +61,15 @@ pacman -Sy --noconfirm go git base-devel wget jq dnsutils inetutils python pytho
 echo "#################################################################################################################"
 echo "nginx..."
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/snapshot/snapshot.nginx.conf" > /etc/nginx/nginx.conf
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot.nginx.conf" > /etc/nginx/nginx.conf
 # mkdir -p /snapshot
 /usr/sbin/nginx
 
 sleep 5
 
 # use start_chain.sh to start chain with local peers
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/rpc/start_chain.sh" > $HOME/start_chain.sh
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
 
 ########################################################################################################################
 echo "install cosmos-pruner"
@@ -86,7 +86,7 @@ git clone https://github.com/notional-labs/pebblecompact
 cd pebblecompact
 make install
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/snapshot/scripts/pebblecompact_data.sh" > $HOME/pebblecompact_data.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/scripts/pebblecompact_data.sh" > $HOME/pebblecompact_data.sh
 
 ########################################################################################################################
 # download snapshot
@@ -118,7 +118,7 @@ supervisord
 ########################################################################################################################
 # cron
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
 
 if [[ -z $snapshot_time ]]; then
   echo "No time setting to take snapshot, please set snapshot_time in chain_registry.ini"

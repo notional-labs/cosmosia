@@ -21,7 +21,7 @@ echo "##########################################################################
 echo "read chain info:"
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
 
-eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
+eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -215,7 +215,7 @@ echo "[include]
 files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 # use start_chain.sh to start chain with local peers
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/rpc/start_chain.sh" > $HOME/start_chain.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
 
 cat <<EOT > /etc/supervisor/conf.d/chain.conf
 [program:chain]
@@ -233,8 +233,8 @@ supervisord
 
 echo "#################################################################################################################"
 echo "start nginx..."
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/rpc/nginx.conf" > /etc/nginx/nginx.conf
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/rpc/healthcheck.sh" > /usr/share/nginx/html/healthcheck.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/nginx.conf" > /etc/nginx/nginx.conf
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/healthcheck.sh" > /usr/share/nginx/html/healthcheck.sh
 chmod +x /usr/share/nginx/html/healthcheck.sh
 spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
 /usr/sbin/nginx
