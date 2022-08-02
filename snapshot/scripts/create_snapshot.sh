@@ -10,7 +10,7 @@ then
 fi
 
 
-eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
+eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/86-move-service-to-use-pebble/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
