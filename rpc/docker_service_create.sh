@@ -1,17 +1,13 @@
-# usage: ./docker_service_create.sh chain_name [db_backend]
-# eg., ./docker_service_create.sh cosmoshub goleveldb
-# db_backend: goleveldb rocksdb, default is goleveldb
+# usage: ./docker_service_create.sh chain_name
+# eg., ./docker_service_create.sh cosmoshub
 
 chain_name="$1"
-db_backend="$2"
 
 if [[ -z $chain_name ]]
 then
   echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub"
   exit
 fi
-
-[[ -z $db_backend ]] && db_backend="goleveldb"
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 
@@ -41,4 +37,4 @@ docker service create \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/rpc/quicksync.sh > ~/quicksync.sh && \
-  /bin/bash ~/quicksync.sh $chain_name $db_backend $rpc_service_name"
+  /bin/bash ~/quicksync.sh $chain_name $rpc_service_name"
