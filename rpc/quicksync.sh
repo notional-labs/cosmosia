@@ -85,7 +85,11 @@ go mod tidy
 
 ## fix axelar `make install` doesnt work
 #[[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
-go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
+if [[ $chain_name == "starname" ]]; then
+  go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/starnamed
+else
+  go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
+fi
 
 echo "#################################################################################################################"
 echo "download snapshot:"
