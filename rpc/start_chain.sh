@@ -1,5 +1,5 @@
 chain_name="$1"
-rpc_service_name"$2"
+rpc_service_name="$2"
 
 if [[ -z $chain_name ]]; then
   echo "No chain_name. usage eg., ./start_script_gen.sh cosmoshub"
