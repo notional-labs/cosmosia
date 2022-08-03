@@ -230,6 +230,14 @@ EOT
 
 supervisord
 
+########################################################################################################################
+echo "install pebblecompact"
+cd $HOME
+git clone https://github.com/notional-labs/pebblecompact
+cd pebblecompact
+make install
+
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/scripts/pebblecompact_data.sh" > $HOME/pebblecompact_data.sh
 
 echo "#################################################################################################################"
 echo "start nginx..."
@@ -243,25 +251,24 @@ echo "##########################################################################
 echo "start chain..."
 supervisorctl start chain
 
-
 ########################################################################################################################
 # cron
+
+# pick a random hour to compact and restart service
+random_hour=$(( ${RANDOM} % 24 ))
 
 cat <<EOT > $HOME/restart_cronjob.sh
 date >> $HOME/cron_restart_chain.log
 /usr/sbin/supervisorctl stop chain
-sleep 10
+sleep 60
 /usr/sbin/killall $daemon_name
+sleep 10
+echo "compacting..."
+cd $HOME && sh pebblecompact_data.sh $node_home/data
 /usr/sbin/supervisorctl start chain
 EOT
 
-echo "0 */$restart_interval * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
-
-# start crond only if $restart_interval is set
-if [[ ! -z $restart_interval ]]; then
-  # start crond
-  crond
-fi
-
+echo "0 $random_hour * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
+crond
 
 loop_forever
