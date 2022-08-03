@@ -47,12 +47,6 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
     echo "After prune:"
     du -h
 
-    # compact
-    sh pebblecompact_data.sh $node_home/data
-
-    echo "After compact:"
-    du -h
-
     data_version=$(get_next_version)
   else
     echo "No need to prune"
@@ -76,7 +70,7 @@ while [[ "$catching_up" != "false" ]]; do
 done
 
 ##############
-echo "OK, chain get synched, taking snapshot..."
+echo "OK, chain get synched"
 echo "data_version=$data_version"
 
 supervisorctl stop chain
@@ -86,6 +80,10 @@ sleep 60
 killall $daemon_name
 sleep 10
 
+echo "compacting..."
+cd $HOME && sh pebblecompact_data.sh $node_home/data
+
+echo "creating snapshot..."
 cd $node_home
 
 TAR_FILENAME="data_$(date +%Y%m%d_%T |sed 's/://g').tar.gz"
