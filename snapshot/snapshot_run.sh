@@ -74,9 +74,8 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 ########################################################################################################################
 echo "install cosmos-pruner"
 cd $HOME
-git clone https://github.com/notional-labs/cosmprund
+git clone --single-branch --branch pebbledb https://github.com/notional-labs/cosmprund
 cd cosmprund
-git checkout pebble
 go install -ldflags '-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb' -tags pebbledb ./...
 
 ########################################################################################################################
