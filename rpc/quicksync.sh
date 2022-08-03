@@ -77,8 +77,11 @@ git clone --single-branch --branch $version $git_repo
 repo_name=$(basename $git_repo |cut -d. -f1)
 cd $repo_name
 
-# git checkout $version
-[[ $chain_name == "gravitybridge" ]] && cd module
+if [[ $chain_name == "cosmoshub" ]]; then
+  go mod edit -dropreplace github.com/tecbot/gorocksdb
+elif [[ $chain_name == "gravitybridge" ]]; then
+  cd module
+fi
 
 go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
 go mod tidy
