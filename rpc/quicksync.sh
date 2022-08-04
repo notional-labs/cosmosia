@@ -84,7 +84,11 @@ elif [[ $chain_name == "gravitybridge" ]]; then
 fi
 
 go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
-go mod tidy
+if [[ $chain_name == "cyber" ]]; then
+  go mod tidy -compat=1.17
+else
+  go mod tidy
+fi
 
 ## fix axelar `make install` doesnt work
 #[[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
