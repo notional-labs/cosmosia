@@ -122,7 +122,11 @@ sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 1000/" $node_ho
 sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_home/config/config.toml
 sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
 ###
-sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
+if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
+  sed -i -e "s/^db_backend *=.*/db_backend = \"goleveldb\"/" $node_home/config/config.toml
+else
+  sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
+fi
 
 echo "download genesis file..."
 if [[ $genesis_url == *.json.gz ]]; then
