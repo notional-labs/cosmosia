@@ -84,7 +84,7 @@ elif [[ $chain_name == "gravitybridge" ]]; then
 fi
 
 go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
-if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance$" ) -ne 0 ]; then
+if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance)$" ) -ne 0 ]; then
   go mod tidy -compat=1.17
 else
   go mod tidy
