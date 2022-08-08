@@ -27,6 +27,8 @@ cd $repo_name
 
 if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra)$" ) -ne 0 ]; then
   go mod edit -dropreplace github.com/tecbot/gorocksdb
+elif [[ $chain_name == "comdex" ]]; then
+  go mod edit -go=1.18
 elif [[ $chain_name == "gravitybridge" ]]; then
   cd module
 fi
@@ -42,6 +44,8 @@ fi
 #[[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
 if [[ $chain_name == "starname" ]]; then
   go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/starnamed
+elif [[ $chain_name == "comdex" ]]; then
+  go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o /root/go/bin/comdex ./node
 else
   go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
 fi
