@@ -17,7 +17,7 @@ SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main
 
 get_links () {
   for service_name in $SERVICES; do
-    echo "<p>$service_name <a href=\"/${service_name}/\">goleveldb</a> <a href=\"/${service_name}/rocksdb/\">rocksdb</a></p>"
+    echo "<p><a href=\"/${service_name}/\">$service_name</a></p>"
   done
 }
 
