@@ -2,7 +2,7 @@
 
 Just like goleveldb, go-sqlite; PebbleDB is RocksDB in golang to avoid CGO overhead.
 
-After [migrating 40 chains from goleveldb to rocksdb](https://github.com/notional-labs/cosmosia/issues/86), performance 
+After [migrating 40 chains from goleveldb to pebbledb](https://github.com/notional-labs/cosmosia/issues/86), performance 
 is about the same to goleveldb but [disk io](https://github.com/notional-labs/cosmosia/issues/81) is very much lower.
 ( Why diskio matters? I see bottleneck of the chain is iavl, and bottleneck of iavl is diskio ) 
 
