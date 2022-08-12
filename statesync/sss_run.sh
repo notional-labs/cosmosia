@@ -38,7 +38,6 @@ echo "node_home=$node_home"
 echo "minimum_gas_prices=$minimum_gas_prices"
 echo "addrbook_url=$addrbook_url"
 echo "start_flags=$start_flags"
-echo "pacman_pkgs=$pacman_pkgs"
 
 if [[ -z $git_repo ]]; then
   echo "Not support chain $chain_name"
@@ -46,7 +45,7 @@ if [[ -z $git_repo ]]; then
 fi
 
 pacman -Syu --noconfirm
-pacman -Sy --noconfirm go git base-devel wget jq nginx $pacman_pkgs
+pacman -Sy --noconfirm go git base-devel wget jq nginx
 
 echo "#################################################################################################################"
 echo "nginx..."

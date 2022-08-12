@@ -1,9 +1,6 @@
 echo "#################################################################################################################"
 echo "build chain from source:"
 
-# install on snapshot_run.sh instead
-pacman -Sy --noconfirm $pacman_pkgs
-
 export GOPATH="$HOME/go"
 export GOROOT="/usr/lib/go"
 export GOBIN="${GOPATH}/bin"
