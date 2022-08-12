@@ -289,7 +289,7 @@ cd $HOME && sh pebblecompact_data.sh $node_home/data
 /usr/sbin/supervisorctl start chain
 EOT
 
-echo "0 $random_hour * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
+echo "0 $random_hour 1/2 * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
 crond
 
 loop_forever
