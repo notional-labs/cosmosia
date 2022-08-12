@@ -22,6 +22,6 @@ docker service create \
   --mount type=bind,source=/proc,destination=/host/proc,readonly \
   --mount type=bind,source=/sys,destination=/host/sys,readonly \
   --mount type=bind,source=/etc/os-release,destination=/host/etc/os-release,readonly \
-  --constraint 'node.hostname==${swarm_node}' \
+  --constraint "node.hostname==${swarm_node}" \
   --restart-condition none \
   netdata/netdata
