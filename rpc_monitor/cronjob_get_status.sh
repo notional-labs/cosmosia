@@ -1,10 +1,8 @@
 
 cd $HOME/cosmosia/rpc_monitor
 
-RPC_SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
-
 rpc_service_verions=$(curl -sG -XGET http://tasks.web_config:2375/services --data-urlencode 'filters={"label":["cosmosia.service=rpc"]}' |jq -r '.[].Spec.Name')
-RPC_SERVICES="${RPC_SERVICES}"$'\n'"${rpc_service_verions}"
+RPC_SERVICES="${rpc_service_verions}"
 # echo "RPC_SERVICES=$RPC_SERVICES"
 
 
