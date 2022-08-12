@@ -42,7 +42,6 @@ echo "addrbook_url=$addrbook_url"
 echo "start_flags=$start_flags"
 echo "pacman_pkgs=$pacman_pkgs"
 echo "json_rpc=$json_rpc"
-echo "restart_interval=$restart_interval"
 
 if [[ -z $git_repo ]]; then
   echo "Not support chain $chain_name"
