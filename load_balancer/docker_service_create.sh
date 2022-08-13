@@ -22,7 +22,8 @@ docker service create \
   --replicas 1 \
   --network cosmosia \
   --endpoint-mode dnsrr \
-  --restart-condition any \
+  --sysctl 'net.ipv4.tcp_tw_reuse=1' \
+  --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/run.sh > ~/run.sh && \

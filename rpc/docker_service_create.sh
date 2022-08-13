@@ -33,7 +33,8 @@ docker service create \
   --network cosmosia \
   --label 'cosmosia.service=rpc' \
   --endpoint-mode dnsrr \
-  --restart-condition any \
+  --sysctl 'net.ipv4.tcp_tw_reuse=1' \
+  --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/rpc/quicksync.sh > ~/quicksync.sh && \
