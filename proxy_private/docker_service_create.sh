@@ -77,7 +77,6 @@ docker service create \
   --publish mode=host,target=9133,published=9133 \
   --publish mode=host,target=9134,published=9134 \
   --publish mode=host,target=9135,published=9135 \
-  --publish mode=host,target=9135,published=9135 \
   --publish mode=host,target=9136,published=9136 \
   --publish mode=host,target=9137,published=9137 \
   --publish mode=host,target=9138,published=9138 \
