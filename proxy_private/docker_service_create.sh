@@ -42,6 +42,42 @@ docker service create \
   --publish mode=host,target=9033,published=9033 \
   --publish mode=host,target=9034,published=9034 \
   --publish mode=host,target=9035,published=9035 \
+  --publish mode=host,target=9101,published=9101 \
+  --publish mode=host,target=9102,published=9102 \
+  --publish mode=host,target=9103,published=9103 \
+  --publish mode=host,target=9104,published=9104 \
+  --publish mode=host,target=9105,published=9105 \
+  --publish mode=host,target=9106,published=9106 \
+  --publish mode=host,target=9107,published=9107 \
+  --publish mode=host,target=9108,published=9108 \
+  --publish mode=host,target=9109,published=9109 \
+  --publish mode=host,target=9110,published=9110 \
+  --publish mode=host,target=9111,published=9111 \
+  --publish mode=host,target=9112,published=9112 \
+  --publish mode=host,target=9113,published=9113 \
+  --publish mode=host,target=9114,published=9114 \
+  --publish mode=host,target=9115,published=9115 \
+  --publish mode=host,target=9116,published=9116 \
+  --publish mode=host,target=9117,published=9117 \
+  --publish mode=host,target=9118,published=9118 \
+  --publish mode=host,target=9119,published=9119 \
+  --publish mode=host,target=9120,published=9120 \
+  --publish mode=host,target=9121,published=9121 \
+  --publish mode=host,target=9122,published=9122 \
+  --publish mode=host,target=9123,published=9123 \
+  --publish mode=host,target=9124,published=9124 \
+  --publish mode=host,target=9125,published=9125 \
+  --publish mode=host,target=9126,published=9126 \
+  --publish mode=host,target=9127,published=9127 \
+  --publish mode=host,target=9128,published=9128 \
+  --publish mode=host,target=9129,published=9129 \
+  --publish mode=host,target=9130,published=9130 \
+  --publish mode=host,target=9131,published=9131 \
+  --publish mode=host,target=9132,published=9132 \
+  --publish mode=host,target=9133,published=9133 \
+  --publish mode=host,target=9134,published=9134 \
+  --publish mode=host,target=9135,published=9135 \
+  --publish mode=host,target=9135,published=9135 \
   --publish mode=host,target=9136,published=9136 \
   --publish mode=host,target=9137,published=9137 \
   --publish mode=host,target=9138,published=9138 \
