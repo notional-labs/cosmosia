@@ -84,6 +84,7 @@ docker service create \
   --publish mode=host,target=9139,published=9139 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia7' \
+  --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
