@@ -252,13 +252,13 @@ EOT
 supervisord
 
 ########################################################################################################################
-echo "install pebblecompact"
-cd $HOME
-git clone https://github.com/notional-labs/pebblecompact
-cd pebblecompact
-make install
-
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/scripts/pebblecompact_data.sh" > $HOME/pebblecompact_data.sh
+#echo "install pebblecompact"
+#cd $HOME
+#git clone https://github.com/notional-labs/pebblecompact
+#cd pebblecompact
+#make install
+#
+#curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/scripts/pebblecompact_data.sh" > $HOME/pebblecompact_data.sh
 
 echo "#################################################################################################################"
 echo "start nginx..."
@@ -281,11 +281,7 @@ random_hour=$(( ${RANDOM} % 24 ))
 cat <<EOT > $HOME/restart_cronjob.sh
 date >> $HOME/cron_restart_chain.log
 /usr/sbin/supervisorctl stop chain
-sleep 60
-/usr/sbin/killall $daemon_name
 sleep 10
-echo "compacting..."
-cd $HOME && sh pebblecompact_data.sh $node_home/data
 /usr/sbin/supervisorctl start chain
 EOT
 
