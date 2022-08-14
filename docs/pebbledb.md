@@ -7,13 +7,13 @@ is about the same to goleveldb but [disk io](https://github.com/notional-labs/co
 ( Why diskio matters? I see bottleneck of the chain is iavl, and bottleneck of iavl is diskio ) 
 
 
-However, there are some known issues and workarounds:
+However, there are 2 issues and workarounds:
 
 Both issues are not the database issue but bugs of the sdk and the chain.
 
 ---
 
-### Chain Upgrade Error
+### Issue 1: Chain Upgrade Error
 Node will panic at the upgrade-block and dbs are not closed properly, so data is not saved to disk.
 
 After see `UPGRADE "xxxx" NEED at height....`
@@ -27,7 +27,7 @@ Then you restart with the new version, and see error `BINARY UPDATED BEFORE TRIG
 
 ---
 
-### Large Size on Disk Data
+### Issue 2: Large Size on Disk Data
 The large data growing on disk issue happens on buggy chain only (eg., there are unclosed iterators)
 
 https://github.com/notional-labs/cosmosia/issues/94
