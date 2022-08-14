@@ -9,10 +9,12 @@ is about the same to goleveldb but [disk io](https://github.com/notional-labs/co
 
 However, there are some known issues and workarounds:
 
+Both issues are not the database issue but bugs of the sdk and the chain.
+
 ---
 
 ### Chain Upgrade Error
-Node will panic at the upgrade-block, for some reasons: maybe dbs are not closed properly, so data is not saved to disk.
+Node will panic at the upgrade-block and dbs are not closed properly, so data is not saved to disk.
 
 After see `UPGRADE "xxxx" NEED at height....`
 Then you restart with the new version, and see error `BINARY UPDATED BEFORE TRIGGER!`
@@ -26,13 +28,10 @@ Then you restart with the new version, and see error `BINARY UPDATED BEFORE TRIG
 ---
 
 ### Large Size on Disk Data
-PebbleDB grows much faster than goleveldb. Idk because i use default config when creating dbs or not.
-Eg., It grows about few hundreds GBs in a few days for osmosis chain.
+The large data growing on disk issue happens on buggy chain only (eg., there are unclosed iterators)
+
+https://github.com/notional-labs/cosmosia/issues/94
 
 **Workaround:**
 
-Use [pebblecompact_data.sh](https://github.com/notional-labs/cosmosia/blob/main/snapshot/scripts/pebblecompact_data.sh) script to compact it daily or few days.
-
-The compaction takes about 13 min for ~650 GB data on fast NVME.
-
-Put it to a cronjob so it will run automatically.
+Just restart the chain
