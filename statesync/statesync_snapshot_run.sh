@@ -113,8 +113,6 @@ sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
 sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"362880\"/" $node_home/config/app.toml
 sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/config/app.toml
-sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 2000/" $node_home/config/app.toml
-sed -i -e "s/^snapshot-keep-recent *=.*/snapshot-keep-recent = 10/" $node_home/config/app.toml
 sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
 sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 1000/" $node_home/config/config.toml
 sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_home/config/config.toml
@@ -122,6 +120,7 @@ sed -i -e "s/^log_level *=.*/log_level = \"info\"/" $node_home/config/config.tom
 ######
 sed -i -e "s/^chunk_fetchers *=.*/chunk_fetchers = 1/" $node_home/config/config.toml
 sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 1000/" $node_home/config/app.toml
+sed -i -e "s/^snapshot-keep-recent *=.*/snapshot-keep-recent = 10/" $node_home/config/app.toml
 sed -i '/^\[statesync]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/config.toml
 sed -i -e "s/^addr_book_strict *=.*/addr_book_strict = false/" $node_home/config/config.toml
 sed -i -e "s|^rpc_servers *=.*|rpc_servers = \"$RPC_URL,$RPC_URL\"|" $node_home/config/config.toml
