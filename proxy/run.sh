@@ -41,7 +41,7 @@ source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
 echo "UPSTREAM_CONFIG_FILE_TMP=$UPSTREAM_CONFIG_FILE_TMP"
 sleep 1
-cat $UPSTREAM_CONFIG_FILE_TMP > $UPSTREAM_CONFIG_FILE
+cat "$UPSTREAM_CONFIG_FILE_TMP" > "$UPSTREAM_CONFIG_FILE"
 sleep 1
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
