@@ -32,19 +32,23 @@ cat <<EOT > /usr/share/nginx/html/index.html
 </html>
 EOT
 
+########################################################################################################################
+#/usr/sbin/nginx -g "daemon off;"
+/usr/sbin/nginx
+
 # generate config for the first time
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/cron_update_upstream.sh" > $HOME/cron_update_upstream.sh
 
 /bin/bash $HOME/cron_update_upstream.sh
-cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
+#sleep 5
+#UPSTREAM_CONFIG_FILE="/etc/nginx/upstream.conf"
+#UPSTREAM_CONFIG_FILE_TMP="/etc/nginx/upstream.conf.tmp"
+#cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
 
 ########################################################################################################################
 # cron
 echo "0/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
 crond
-
-#/usr/sbin/nginx -g "daemon off;"
-/usr/sbin/nginx
 
 ########################################################################################################################
 ## logrotate

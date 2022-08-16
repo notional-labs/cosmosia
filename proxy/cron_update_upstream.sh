@@ -58,7 +58,6 @@ EOT
 fi
 
 
-
 if cmp -s "$UPSTREAM_CONFIG_FILE" "$TMP_UPSTREAM_CONFIG_FILE"; then
   # the same => do nothing
   echo "no config change, do nothing..."
