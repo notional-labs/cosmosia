@@ -40,7 +40,7 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx
 source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
 echo "UPSTREAM_CONFIG_FILE_TMP=$UPSTREAM_CONFIG_FILE_TMP"
-cat $UPSTREAM_CONFIG_FILE_TMP > $$UPSTREAM_CONFIG_FILE
+cat $UPSTREAM_CONFIG_FILE_TMP > $UPSTREAM_CONFIG_FILE
 
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
@@ -76,6 +76,8 @@ crond
 
 ########################################################################################################################
 # big loop
+
+echo "Done!"
 
 while true; do
 #  # need to use cron job for logrotate
