@@ -4,7 +4,7 @@ pacman -S --noconfirm base-devel dnsutils nginx cronie
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/nginx.conf > /etc/nginx/nginx.conf
 
 # generate index.html
 SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
@@ -35,7 +35,7 @@ EOT
 ########################################################################################################################
 
 # generate config for the first time
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/generate_upstream.sh" > $HOME/generate_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/generate_upstream.sh" > $HOME/generate_upstream.sh
 sleep 1
 source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
