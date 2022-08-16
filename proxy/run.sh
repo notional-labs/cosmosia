@@ -38,6 +38,8 @@ EOT
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/generate_upstream.sh" > $HOME/generate_upstream.sh
 
 source $HOME/generate_upstream.sh
+echo "TMP_UPSTREAM_CONFIG_FILE=$TMP_UPSTREAM_CONFIG_FILE"
+echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
 cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
 
 #/usr/sbin/nginx -g "daemon off;"
