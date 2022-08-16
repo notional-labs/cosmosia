@@ -56,18 +56,3 @@ if [[ ! -z "$lb_ip" ]]; then
 
 EOT
 fi
-
-
-if cmp -s "$UPSTREAM_CONFIG_FILE" "$TMP_UPSTREAM_CONFIG_FILE"; then
-  # the same => do nothing
-  echo "no config change, do nothing..."
-else
-  # different
-
-  # show the diff
-  diff -c "$UPSTREAM_CONFIG_FILE" "$TMP_UPSTREAM_CONFIG_FILE"
-
-  echo "found config changes, updating..."
-  cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
-  /usr/sbin/nginx -s reload
-fi
