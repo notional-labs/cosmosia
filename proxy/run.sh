@@ -36,12 +36,13 @@ EOT
 
 # generate config for the first time
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/generate_upstream.sh" > $HOME/generate_upstream.sh
-
+sleep 1
 source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
 echo "UPSTREAM_CONFIG_FILE_TMP=$UPSTREAM_CONFIG_FILE_TMP"
+sleep 1
 cat $UPSTREAM_CONFIG_FILE_TMP > $UPSTREAM_CONFIG_FILE
-
+sleep 1
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
 
