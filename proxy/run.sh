@@ -48,9 +48,43 @@ for service_name in $SERVICES; do
           keepalive 32;
           server tasks.lb_$service_name:8003;
       }
+
 EOT
   fi
 done
+
+# jsonrpc for evmos and evmos-testnet-archive
+lb_ip=$(dig +short "tasks.lb_evmos")
+if [[ ! -z "$lb_ip" ]]; then
+  cat <<EOT >> /etc/nginx/upstream.conf
+    upstream backend_jsonrpc_evmos {
+        keepalive 32;
+        server tasks.lb_evmos:8004;
+    }
+
+    upstream backend_wsjsonrpc_evmos {
+        keepalive 32;
+        server tasks.lb_evmos:8005;
+    }
+
+EOT
+fi
+
+lb_ip=$(dig +short "tasks.lb_evmos-testnet-archive")
+if [[ ! -z "$lb_ip" ]]; then
+  cat <<EOT >> /etc/nginx/upstream.conf
+    upstream backend_jsonrpc_evmos-testnet-archive {
+        keepalive 32;
+        server tasks.lb_evmos-testnet-archive:8004;
+    }
+
+    upstream backend_wsjsonrpc_evmos-testnet-archive {
+        keepalive 32;
+        server tasks.lb_evmos-testnet-archive:8005;
+    }
+
+EOT
+fi
 
 
 #/usr/sbin/nginx -g "daemon off;"

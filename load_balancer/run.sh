@@ -65,9 +65,9 @@ generate_new_upstream_config () {
   jsonrpc_str=""
   ws_jsonrpc_str=""
   if [[ -z "$new_ips" ]]; then
-      rpc_str="to http://$rpc_service_name"
+      rpc_str="to http://$rpc_service_name:26657"
       api_str="to http://$rpc_service_name:1317"
-      ws_str="to http://$rpc_service_name"
+      ws_str="to http://$rpc_service_name:26657"
       grpc_str="to http://$rpc_service_name:9090"
       jsonrpc_str="to http://$rpc_service_name:8545"
       ws_jsonrpc_str="to http://$rpc_service_name:8546"
