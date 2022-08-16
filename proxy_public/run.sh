@@ -10,7 +10,7 @@ wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_public/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/98-keepalive-connections-to-upstream-servers/proxy_public/nginx.conf > /etc/nginx/nginx.conf
 
 # generate index.html
 SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
@@ -39,6 +39,64 @@ cat <<EOT > /usr/share/nginx/html/index.html
 EOT
 
 
+
+# generate upstream.conf
+echo "" > /etc/nginx/upstream.conf
+for service_name in $SERVICES; do
+  lb_ip=$(dig +short "tasks.lb_$service_name")
+  if [[ ! -z "$lb_ip" ]]; then
+    cat <<EOT >> /etc/nginx/upstream.conf
+      upstream backend_rpc_$service_name {
+          keepalive 32;
+          server tasks.lb_$service_name:8000;
+      }
+
+      upstream backend_api_$service_name {
+          keepalive 32;
+          server tasks.lb_$service_name:8001;
+      }
+
+      upstream backend_grpc_$service_name {
+          keepalive 32;
+          server tasks.lb_$service_name:8003;
+      }
+
+EOT
+  fi
+done
+
+# jsonrpc for evmos and evmos-testnet-archive
+lb_ip=$(dig +short "tasks.lb_evmos")
+if [[ ! -z "$lb_ip" ]]; then
+  cat <<EOT >> /etc/nginx/upstream.conf
+    upstream backend_jsonrpc_evmos {
+        keepalive 32;
+        server tasks.lb_evmos:8004;
+    }
+
+    upstream backend_wsjsonrpc_evmos {
+        keepalive 32;
+        server tasks.lb_evmos:8005;
+    }
+
+EOT
+fi
+
+lb_ip=$(dig +short "tasks.lb_evmos-testnet-archive")
+if [[ ! -z "$lb_ip" ]]; then
+  cat <<EOT >> /etc/nginx/upstream.conf
+    upstream backend_jsonrpc_evmos-testnet-archive {
+        keepalive 32;
+        server tasks.lb_evmos-testnet-archive:8004;
+    }
+
+    upstream backend_wsjsonrpc_evmos-testnet-archive {
+        keepalive 32;
+        server tasks.lb_evmos-testnet-archive:8005;
+    }
+
+EOT
+fi
 
 
 /usr/sbin/nginx -g "daemon off;"
