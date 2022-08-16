@@ -33,21 +33,36 @@ cat <<EOT > /usr/share/nginx/html/index.html
 EOT
 
 ########################################################################################################################
-#/usr/sbin/nginx -g "daemon off;"
-/usr/sbin/nginx
-sleep 10
 
 # generate config for the first time
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/cron_update_upstream.sh" > $HOME/cron_update_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/generate_upstream.sh" > $HOME/generate_upstream.sh
 
-/bin/bash $HOME/cron_update_upstream.sh
-#sleep 5
-#UPSTREAM_CONFIG_FILE="/etc/nginx/upstream.conf"
-#UPSTREAM_CONFIG_FILE_TMP="/etc/nginx/upstream.conf.tmp"
-#cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
+source $HOME/generate_upstream.sh
+
+#/usr/sbin/nginx -g "daemon off;"
+/usr/sbin/nginx
 
 ########################################################################################################################
 # cron
+cat <<'EOT' >  $HOME/cron_update_upstream.sh
+source $HOME/generate_upstream.sh
+
+if cmp -s "$UPSTREAM_CONFIG_FILE" "$TMP_UPSTREAM_CONFIG_FILE"; then
+  # the same => do nothing
+  echo "no config change, do nothing..."
+else
+  # different
+
+  # show the diff
+  diff -c "$UPSTREAM_CONFIG_FILE" "$TMP_UPSTREAM_CONFIG_FILE"
+
+  echo "found config changes, updating..."
+  cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
+  /usr/sbin/nginx -s reload
+fi
+EOT
+
+
 echo "0/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
 crond
 
