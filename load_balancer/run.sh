@@ -81,9 +81,9 @@ generate_new_upstream_config () {
           jsonrpc_str="to"
           ws_jsonrpc_str="to"
         fi
-        rpc_str="$rpc_str http://$ip_addr"
+        rpc_str="$rpc_str http://$ip_addr:26657"
         api_str="$api_str http://$ip_addr:1317"
-        ws_str="$ws_str http://$ip_addr"
+        ws_str="$ws_str http://$ip_addr:26657"
         grpc_str="$grpc_str h2c://$ip_addr:9090"
         jsonrpc_str="$jsonrpc_str http://$ip_addr:8545"
         ws_jsonrpc_str="$ws_jsonrpc_str http://$ip_addr:8546"
