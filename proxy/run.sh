@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel dnsutils nginx logrotate
+pacman -S --noconfirm base-devel dnsutils nginx cronie
 
 ########################################################################################################################
 # nginx
@@ -32,63 +32,46 @@ cat <<EOT > /usr/share/nginx/html/index.html
 </html>
 EOT
 
+########################################################################################################################
 
-# generate upstream.conf
-echo "" > /etc/nginx/upstream.conf
-for service_name in $SERVICES; do
-  lb_ip=$(dig +short "tasks.lb_$service_name")
-  if [[ ! -z "$lb_ip" ]]; then
-    cat <<EOT >> /etc/nginx/upstream.conf
-      upstream backend_rpc_$service_name {
-          keepalive 32;
-          server tasks.lb_$service_name:8000;
-      }
-
-      upstream backend_grpc_$service_name {
-          keepalive 32;
-          server tasks.lb_$service_name:8003;
-      }
-
-EOT
-  fi
-done
-
-# jsonrpc for evmos and evmos-testnet-archive
-lb_ip=$(dig +short "tasks.lb_evmos")
-if [[ ! -z "$lb_ip" ]]; then
-  cat <<EOT >> /etc/nginx/upstream.conf
-    upstream backend_jsonrpc_evmos {
-        keepalive 32;
-        server tasks.lb_evmos:8004;
-    }
-
-    upstream backend_wsjsonrpc_evmos {
-        keepalive 32;
-        server tasks.lb_evmos:8005;
-    }
-
-EOT
-fi
-
-lb_ip=$(dig +short "tasks.lb_evmos-testnet-archive")
-if [[ ! -z "$lb_ip" ]]; then
-  cat <<EOT >> /etc/nginx/upstream.conf
-    upstream backend_jsonrpc_evmos-testnet-archive {
-        keepalive 32;
-        server tasks.lb_evmos-testnet-archive:8004;
-    }
-
-    upstream backend_wsjsonrpc_evmos-testnet-archive {
-        keepalive 32;
-        server tasks.lb_evmos-testnet-archive:8005;
-    }
-
-EOT
-fi
-
-
+# generate config for the first time
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/generate_upstream.sh" > $HOME/generate_upstream.sh
+sleep 1
+source $HOME/generate_upstream.sh
+echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
+echo "UPSTREAM_CONFIG_FILE_TMP=$UPSTREAM_CONFIG_FILE_TMP"
+sleep 1
+cat "$UPSTREAM_CONFIG_FILE_TMP" > "$UPSTREAM_CONFIG_FILE"
+sleep 1
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
+
+########################################################################################################################
+# cron
+cat <<'EOT' >  $HOME/cron_update_upstream.sh
+source $HOME/generate_upstream.sh
+sleep 1
+
+if cmp -s "$UPSTREAM_CONFIG_FILE" "$UPSTREAM_CONFIG_FILE_TMP"; then
+  # the same => do nothing
+  echo "no config change, do nothing..."
+else
+  # different
+
+  # show the diff
+  diff -c "$UPSTREAM_CONFIG_FILE" "$UPSTREAM_CONFIG_FILE_TMP"
+
+  echo "found config changes, updating..."
+  cat "$UPSTREAM_CONFIG_FILE_TMP" > "$UPSTREAM_CONFIG_FILE"
+  sleep 1
+  /usr/sbin/nginx -s reload
+fi
+EOT
+
+sleep 1
+echo "0/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
+sleep 1
+crond
 
 ########################################################################################################################
 ## logrotate
@@ -97,6 +80,8 @@ fi
 
 ########################################################################################################################
 # big loop
+
+echo "Done!"
 
 while true; do
 #  # need to use cron job for logrotate
