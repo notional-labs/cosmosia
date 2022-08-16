@@ -12,12 +12,12 @@ for service_name in $SERVICES; do
     cat <<EOT >> $UPSTREAM_CONFIG_FILE_TMP
       upstream backend_rpc_$service_name {
           keepalive 32;
-          server tasks.lb_$service_name:8000;
+          server $lb_ip:8000;
       }
 
       upstream backend_grpc_$service_name {
           keepalive 32;
-          server tasks.lb_$service_name:8003;
+          server $lb_ip:8003;
       }
 
 EOT
@@ -32,12 +32,12 @@ if [[ ! -z "$lb_ip" ]]; then
   cat <<EOT >> $UPSTREAM_CONFIG_FILE_TMP
     upstream backend_jsonrpc_evmos {
         keepalive 32;
-        server tasks.lb_evmos:8004;
+        server $lb_ip:8004;
     }
 
     upstream backend_wsjsonrpc_evmos {
         keepalive 32;
-        server tasks.lb_evmos:8005;
+        server $lb_ip:8005;
     }
 
 EOT
@@ -50,12 +50,12 @@ if [[ ! -z "$lb_ip" ]]; then
   cat <<EOT >> $UPSTREAM_CONFIG_FILE_TMP
     upstream backend_jsonrpc_evmos-testnet-archive {
         keepalive 32;
-        server tasks.lb_evmos-testnet-archive:8004;
+        server $lb_ip:8004;
     }
 
     upstream backend_wsjsonrpc_evmos-testnet-archive {
         keepalive 32;
-        server tasks.lb_evmos-testnet-archive:8005;
+        server $lb_ip:8005;
     }
 
 EOT

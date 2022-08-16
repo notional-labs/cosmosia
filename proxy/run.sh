@@ -69,7 +69,7 @@ fi
 EOT
 
 sleep 1
-echo "0/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
+echo "*/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
 sleep 1
 crond
 
