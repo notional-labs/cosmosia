@@ -35,6 +35,7 @@ EOT
 ########################################################################################################################
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
+sleep 10
 
 # generate config for the first time
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/cron_update_upstream.sh" > $HOME/cron_update_upstream.sh
