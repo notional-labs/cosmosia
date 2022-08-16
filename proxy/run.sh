@@ -1,10 +1,10 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel dnsutils nginx logrotate
+pacman -S --noconfirm base-devel dnsutils nginx cronie
 
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/nginx.conf > /etc/nginx/nginx.conf
 
 # generate index.html
 SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
@@ -32,60 +32,16 @@ cat <<EOT > /usr/share/nginx/html/index.html
 </html>
 EOT
 
+# generate config for the first time
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/cron_update_upstream.sh" > $HOME/cron_update_upstream.sh
 
-# generate upstream.conf
-echo "" > /etc/nginx/upstream.conf
-for service_name in $SERVICES; do
-  lb_ip=$(dig +short "tasks.lb_$service_name")
-  if [[ ! -z "$lb_ip" ]]; then
-    cat <<EOT >> /etc/nginx/upstream.conf
-      upstream backend_rpc_$service_name {
-          keepalive 32;
-          server tasks.lb_$service_name:8000;
-      }
+/bin/bash $HOME/cron_update_upstream.sh
+cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
 
-      upstream backend_grpc_$service_name {
-          keepalive 32;
-          server tasks.lb_$service_name:8003;
-      }
-
-EOT
-  fi
-done
-
-# jsonrpc for evmos and evmos-testnet-archive
-lb_ip=$(dig +short "tasks.lb_evmos")
-if [[ ! -z "$lb_ip" ]]; then
-  cat <<EOT >> /etc/nginx/upstream.conf
-    upstream backend_jsonrpc_evmos {
-        keepalive 32;
-        server tasks.lb_evmos:8004;
-    }
-
-    upstream backend_wsjsonrpc_evmos {
-        keepalive 32;
-        server tasks.lb_evmos:8005;
-    }
-
-EOT
-fi
-
-lb_ip=$(dig +short "tasks.lb_evmos-testnet-archive")
-if [[ ! -z "$lb_ip" ]]; then
-  cat <<EOT >> /etc/nginx/upstream.conf
-    upstream backend_jsonrpc_evmos-testnet-archive {
-        keepalive 32;
-        server tasks.lb_evmos-testnet-archive:8004;
-    }
-
-    upstream backend_wsjsonrpc_evmos-testnet-archive {
-        keepalive 32;
-        server tasks.lb_evmos-testnet-archive:8005;
-    }
-
-EOT
-fi
-
+########################################################################################################################
+# cron
+echo "0/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
+crond
 
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
