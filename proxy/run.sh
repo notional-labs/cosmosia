@@ -38,9 +38,9 @@ EOT
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/100-fix-nginx-to-update-upstream-dynamically/proxy/generate_upstream.sh" > $HOME/generate_upstream.sh
 
 source $HOME/generate_upstream.sh
-echo "TMP_UPSTREAM_CONFIG_FILE=$TMP_UPSTREAM_CONFIG_FILE"
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
-cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
+echo "UPSTREAM_CONFIG_FILE_TMP=$UPSTREAM_CONFIG_FILE_TMP"
+cat $UPSTREAM_CONFIG_FILE_TMP > $$UPSTREAM_CONFIG_FILE
 
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
@@ -50,17 +50,17 @@ cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
 source $HOME/generate_upstream.sh
 
-if cmp -s "$UPSTREAM_CONFIG_FILE" "$TMP_UPSTREAM_CONFIG_FILE"; then
+if cmp -s "$UPSTREAM_CONFIG_FILE" "$UPSTREAM_CONFIG_FILE_TMP"; then
   # the same => do nothing
   echo "no config change, do nothing..."
 else
   # different
 
   # show the diff
-  diff -c "$UPSTREAM_CONFIG_FILE" "$TMP_UPSTREAM_CONFIG_FILE"
+  diff -c "$UPSTREAM_CONFIG_FILE" "$UPSTREAM_CONFIG_FILE_TMP"
 
   echo "found config changes, updating..."
-  cat $TMP_UPSTREAM_CONFIG_FILE > $UPSTREAM_CONFIG_FILE
+  cat $UPSTREAM_CONFIG_FILE_TMP > $UPSTREAM_CONFIG_FILE
   /usr/sbin/nginx -s reload
 fi
 EOT
