@@ -50,6 +50,7 @@ sleep 1
 # cron
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
 source $HOME/generate_upstream.sh
+sleep 1
 
 if cmp -s "$UPSTREAM_CONFIG_FILE" "$UPSTREAM_CONFIG_FILE_TMP"; then
   # the same => do nothing
@@ -61,13 +62,15 @@ else
   diff -c "$UPSTREAM_CONFIG_FILE" "$UPSTREAM_CONFIG_FILE_TMP"
 
   echo "found config changes, updating..."
-  cat $UPSTREAM_CONFIG_FILE_TMP > $UPSTREAM_CONFIG_FILE
+  cat "$UPSTREAM_CONFIG_FILE_TMP" > "$UPSTREAM_CONFIG_FILE"
+  sleep 1
   /usr/sbin/nginx -s reload
 fi
 EOT
 
-
+sleep 1
 echo "0/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
+sleep 1
 crond
 
 ########################################################################################################################

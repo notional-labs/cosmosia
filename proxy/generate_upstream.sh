@@ -24,6 +24,8 @@ EOT
   fi
 done
 
+sleep 1
+
 # jsonrpc for evmos and evmos-testnet-archive
 lb_ip=$(dig +short "tasks.lb_evmos")
 if [[ ! -z "$lb_ip" ]]; then
@@ -40,6 +42,8 @@ if [[ ! -z "$lb_ip" ]]; then
 
 EOT
 fi
+
+sleep 1
 
 lb_ip=$(dig +short "tasks.lb_evmos-testnet-archive")
 if [[ ! -z "$lb_ip" ]]; then
