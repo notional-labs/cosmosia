@@ -48,6 +48,8 @@ docker service create \
   --publish mode=host,target=9037,published=9037 \
   --publish mode=host,target=9038,published=9038 \
   --publish mode=host,target=9039,published=9039 \
+  --publish mode=host,target=9040,published=9040 \
+  --publish mode=host,target=9041,published=9041 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia3' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
