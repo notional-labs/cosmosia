@@ -4,7 +4,7 @@ pacman -S --noconfirm base-devel dnsutils nginx logrotate
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/98-keepalive-connections-to-upstream-servers/proxy/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/nginx.conf > /etc/nginx/nginx.conf
 
 # generate index.html
 SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
@@ -34,30 +34,22 @@ EOT
 
 
 # generate upstream.conf
+echo "" > /etc/nginx/upstream.conf
 for service_name in $SERVICES; do
-  echo "<p><a href=\"/${service_name}/\">$service_name</a></p>"
-  cat <<EOT >> /etc/nginx/upstream.conf
-    upstream backend_rpc_$service_name {
-        keepalive 32;
-        server tasks.lb_$service_name:8000;
-    }
+  lb_ip=$(dig +short "tasks.lb_$service_name")
+  if [[ ! -z "$lb_ip" ]]; then
+    cat <<EOT >> /etc/nginx/upstream.conf
+      upstream backend_rpc_$service_name {
+          keepalive 32;
+          server tasks.lb_$service_name:8000;
+      }
 
-    upstream backend_jsonrpc_$service_name {
-        keepalive 32;
-        server tasks.lb_$service_name:8004;
-    }
-
-    upstream backend_wsjsonrpc_$service_name {
-        keepalive 32;
-        server tasks.lb_$service_name:8005;
-    }
-
-    upstream backend_grpc_$service_name {
-        keepalive 32;
-        server tasks.lb_$service_name:8003;
-    }
+      upstream backend_grpc_$service_name {
+          keepalive 32;
+          server tasks.lb_$service_name:8003;
+      }
 EOT
-
+  fi
 done
 
 
