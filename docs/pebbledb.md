@@ -12,6 +12,28 @@ or closing dbs properly.
 
 **Workaround:**
 
-1. After seeing `UPGRADE "xxxx" NEED at height....`, restart current version with `-X github.com/tendermint/tm-db/db.ForceSync=1`
-2. Restart new version with `-X github.com/tendermint/tm-db/db.ForceSync=1`, wait for new blocks
-3. Restart new version with `-X github.com/tendermint/tm-db/db.ForceSync=0` as normal
+1. After seeing `UPGRADE "xxxx" NEED at height....`, restart current version with `-X github.com/tendermint/tm-db.ForceSync=1`
+2. Restart new version as normal
+
+Example: Upgrading sifchain
+
+```bash
+# step1
+git reset --hard
+git checkout v0.14.0
+go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod tidy
+go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./cmd/sifnoded
+
+$HOME/go/bin/sifnoded start --db_backend=pebbledb
+
+
+# step 2
+git reset --hard
+git checkout v0.15.0
+go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod tidy
+go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/sifnoded
+
+$HOME/go/bin/sifnoded start --db_backend=pebbledb
+```
