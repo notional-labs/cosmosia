@@ -118,13 +118,39 @@ git clone --single-branch --branch $version $git_repo
 repo_name=$(basename $git_repo |cut -d. -f1)
 cd $repo_name
 
-# git checkout $version
-[[ $chain_name == "gravitybridge" ]] && cd module
+if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra)$" ) -ne 0 ]; then
+  go mod edit -dropreplace github.com/tecbot/gorocksdb
+elif [[ $chain_name == "comdex" ]]; then
+  go mod edit -go=1.18
+elif [[ $chain_name == "gravitybridge" ]]; then
+  cd module
+fi
 
-# fix axelar `make install` doesnt work
-[[ $chain_name == "axelar" ]] && make build && mkdir -p $HOME/go/bin && cp ./bin/axelard $HOME/go/bin/
+if [[ $chain_name == "emoney" ]]; then
+  go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble-sync-all
+else
+  go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+fi
 
-make install
+if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance)$" ) -ne 0 ]; then
+  go mod tidy -compat=1.17
+else
+  go mod tidy
+fi
+
+if [ $( echo "${chain_name}" | egrep -c "^(starname|sifchain)$" ) -ne 0 ]; then
+  go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
+elif [ $( echo "${chain_name}" | egrep -c "^(comdex|persistent)$" ) -ne 0 ]; then
+  go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o /root/go/bin/$daemon_name ./node
+elif [[ $chain_name == "axelar" ]]; then
+  axelard_version=${version##*v}
+  go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version" -o /root/go/bin/$daemon_name ./cmd/axelard
+elif [[ $chain_name == "emoney" ]]; then
+  sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
+  go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb" ./...
+else
+  go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
+fi
 
 echo "#################################################################################################################"
 echo "download snapshot:"
@@ -190,7 +216,7 @@ sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices
 sed -i '/^\[api]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
 sed -i '/^\[grpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:9090"/}' $node_home/config/app.toml
 sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"362880\"/" $node_home/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $node_home/config/app.toml
 sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/config/app.toml
 sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 14400/" $node_home/config/app.toml
@@ -203,6 +229,8 @@ sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/
 sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 1000/" $node_home/config/config.toml
 sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_home/config/config.toml
 sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
+###
+sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
 
 echo "download addrbook..."
 # we try notional.ventures first, failed => other providers
@@ -234,7 +262,7 @@ fi
 [[ $chain_name == "persistent" ]] && mkdir -p /root/data/snapshots && ln -s /root/data/snapshots $node_home/data/snapshots
 
 echo "start chain..."
-$HOME/go/bin/$daemon_name start $start_flags
+$HOME/go/bin/$daemon_name start --db_backend=pebbledb $start_flags
 
 EXITCODE=$?
 echo "chain stopped with exit code=$EXITCODE"
