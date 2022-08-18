@@ -192,7 +192,7 @@ sed -i '/^\[grpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:9090"/}' $
 
 if [[ $chain_name == "injective" ]]; then
   sed -i '/^\[evm-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
-  sed -i '/^\[evm-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/address = "0.0.0.0:8546"/}' $node_home/config/app.toml
+  sed -i '/^\[evm-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
 fi
 
 sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
