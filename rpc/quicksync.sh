@@ -58,6 +58,7 @@ cd $HOME
 # empty $git_repo means close source and download the binaries instead of building from source
 if [[ -z $git_repo ]]; then
   BINARY_URL="https://snapshot.notional.ventures/injective/releases/${version}/${daemon_name}"
+  mkdir -p $GOBIN
   wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
   chmod +x "${GOBIN}/${daemon_name}"
 
