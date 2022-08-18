@@ -30,10 +30,6 @@ eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/da
   }
   ')"
 
-if [[ -z $git_repo ]]; then
-  echo "Not support chain $chain_name"
-  loop_forever
-fi
 
 # write chain info to bash file, so that cronjob could know
 cat <<EOT >> $HOME/chain_info.sh
@@ -50,7 +46,6 @@ snapshot_time="$snapshot_time"
 snapshot_prune="$snapshot_prune"
 snapshot_prune_threshold="$snapshot_prune_threshold"
 EOT
-
 
 cd $HOME
 pacman -Syu --noconfirm
