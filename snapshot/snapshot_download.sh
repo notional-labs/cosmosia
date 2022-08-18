@@ -30,7 +30,7 @@ else
   repo_name=$(basename $git_repo |cut -d. -f1)
   cd $repo_name
 
-  if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra|assetmantle)$" ) -ne 0 ]; then
     go mod edit -dropreplace github.com/tecbot/gorocksdb
   elif [[ $chain_name == "comdex" ]]; then
     go mod edit -go=1.18
