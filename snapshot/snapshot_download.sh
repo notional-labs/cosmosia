@@ -12,6 +12,8 @@ cd $HOME
 if [[ -z $git_repo ]]; then
   BINARY_URL="https://snapshot.notional.ventures/injective/releases/${version}/${daemon_name}"
   wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
+  chmod +x "${GOBIN}/${daemon_name}"
+
   wget -P /usr/lib https://github.com/CosmWasm/wasmvm/raw/main/api/libwasmvm.x86_64.so
 else
   if [[ $chain_name == "sentinel" ]]; then
