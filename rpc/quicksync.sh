@@ -42,11 +42,6 @@ echo "addrbook_url=$addrbook_url"
 echo "start_flags=$start_flags"
 echo "json_rpc=$json_rpc"
 
-if [[ -z $git_repo ]]; then
-  echo "Not support chain $chain_name"
-  loop_forever
-fi
-
 pacman -Syu --noconfirm
 pacman -Sy --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils
 
@@ -60,52 +55,61 @@ export PATH="${PATH}:${GOROOT}/bin:${GOBIN}"
 
 cd $HOME
 
-if [[ $chain_name == "sentinel" ]]; then
-  # sentinel requires custom build
-  mkdir -p $HOME/go/src/github.com/sentinel-official
-  cd $HOME/go/src/github.com/sentinel-official
-fi
+# empty $git_repo means close source and download the binaries instead of building from source
+if [[ -z $git_repo ]]; then
+  BINARY_URL="https://snapshot.notional.ventures/injective/releases/${version}/${daemon_name}"
+  wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
+  chmod +x "${GOBIN}/${daemon_name}"
 
-echo "curren path: $PWD"
-
-# git clone $git_repo $chain_name
-# cd $chain_name
-git clone --single-branch --branch $version $git_repo
-repo_name=$(basename $git_repo |cut -d. -f1)
-cd $repo_name
-
-if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra)$" ) -ne 0 ]; then
-  go mod edit -dropreplace github.com/tecbot/gorocksdb
-elif [[ $chain_name == "comdex" ]]; then
-  go mod edit -go=1.18
-elif [[ $chain_name == "gravitybridge" ]]; then
-  cd module
-fi
-
-if [[ $chain_name == "emoney" ]]; then
-  go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble-sync-all
+  wget -P /usr/lib https://github.com/CosmWasm/wasmvm/raw/main/api/libwasmvm.x86_64.so
 else
-  go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
-fi
+  if [[ $chain_name == "sentinel" ]]; then
+    # sentinel requires custom build
+    mkdir -p $HOME/go/src/github.com/sentinel-official
+    cd $HOME/go/src/github.com/sentinel-official
+  fi
 
-if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance)$" ) -ne 0 ]; then
-  go mod tidy -compat=1.17
-else
-  go mod tidy
-fi
+  echo "curren path: $PWD"
 
-if [ $( echo "${chain_name}" | egrep -c "^(starname|sifchain)$" ) -ne 0 ]; then
-  go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
-elif [ $( echo "${chain_name}" | egrep -c "^(comdex|persistent)$" ) -ne 0 ]; then
-  go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o /root/go/bin/$daemon_name ./node
-elif [[ $chain_name == "axelar" ]]; then
-  axelard_version=${version##*v}
-  go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version" -o /root/go/bin/$daemon_name ./cmd/axelard
-elif [[ $chain_name == "emoney" ]]; then
-  sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
-  go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb" ./...
-else
-  go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
+  # git clone $git_repo $chain_name
+  # cd $chain_name
+  git clone --single-branch --branch $version $git_repo
+  repo_name=$(basename $git_repo |cut -d. -f1)
+  cd $repo_name
+
+  if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra)$" ) -ne 0 ]; then
+    go mod edit -dropreplace github.com/tecbot/gorocksdb
+  elif [[ $chain_name == "comdex" ]]; then
+    go mod edit -go=1.18
+  elif [[ $chain_name == "gravitybridge" ]]; then
+    cd module
+  fi
+
+  if [[ $chain_name == "emoney" ]]; then
+    go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble-sync-all
+  else
+    go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+  fi
+
+  if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance)$" ) -ne 0 ]; then
+    go mod tidy -compat=1.17
+  else
+    go mod tidy
+  fi
+
+  if [ $( echo "${chain_name}" | egrep -c "^(starname|sifchain)$" ) -ne 0 ]; then
+    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
+  elif [ $( echo "${chain_name}" | egrep -c "^(comdex|persistent)$" ) -ne 0 ]; then
+    go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o /root/go/bin/$daemon_name ./node
+  elif [[ $chain_name == "axelar" ]]; then
+    axelard_version=${version##*v}
+    go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version" -o /root/go/bin/$daemon_name ./cmd/axelard
+  elif [[ $chain_name == "emoney" ]]; then
+    sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
+    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb" ./...
+  else
+    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
+  fi
 fi
 
 echo "#################################################################################################################"
