@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel wget dnsutils python nginx logrotate
+pacman -S --noconfirm base-devel wget dnsutils nginx cronie
 
 ########################################################################################################################
 # SSL for notional.ventures (fullchain.pem and privkey.pem files)
