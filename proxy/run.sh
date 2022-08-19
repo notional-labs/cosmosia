@@ -82,11 +82,5 @@ crond
 # big loop
 
 echo "Done!"
-
-while true; do
-#  # need to use cron job for logrotate
-#  logrotate /etc/logrotate.d/nginx
-
-  # sleep 1 day
-  sleep 86400
-done
+# loop forever for debugging only
+while true; do sleep 5; done
