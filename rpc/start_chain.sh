@@ -1,13 +1,6 @@
 chain_name="$1"
 rpc_service_name="$2"
 
-if [[ -z $chain_name ]]; then
-  echo "No chain_name. usage eg., ./start_script_gen.sh cosmoshub"
-  exit
-fi
-
-[[ -z $rpc_service_name ]] && rpc_service_name="$chain_name"
-
 ########################################################################################################################
 # functions
 # requires to install dnsutils, inetutils, jq
@@ -96,8 +89,24 @@ update_start_flags () {
   echo "${new_start_flags}"
 }
 
+find_current_data_version () {
+  ver=0
+  ver=$(curl -s "https://snapshot.notional.ventures/$chain_name/chain.json" |jq -r '.data_version // 0')
+  echo $ver
+}
+
 ########################################################################################################################
 # main
+
+if [[ -z $chain_name ]]; then
+  echo "No chain_name. usage eg., ./start_script_gen.sh cosmoshub"
+  exit
+fi
+
+# get the data version from chain.json, service name is rpc_$chain_name_$version
+data_version=$(find_current_data_version)
+if [[ -z $rpc_service_name ]] && rpc_service_name="rpc_${chain_name}_${data_version}"
+
 
 echo "read chain info:"
 eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
