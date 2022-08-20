@@ -38,11 +38,7 @@ else
     cd module
   fi
 
-  if [[ $chain_name == "emoney" ]]; then
-    go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble-sync-all
-  else
-    go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
-  fi
+  go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
 
   if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance)$" ) -ne 0 ]; then
     go mod tidy -compat=1.17
@@ -50,7 +46,9 @@ else
     go mod tidy
   fi
 
-  if [ $( echo "${chain_name}" | egrep -c "^(starname|sifchain)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
+    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
+  elif [ $( echo "${chain_name}" | egrep -c "^(starname|sifchain)$" ) -ne 0 ]; then
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
   elif [ $( echo "${chain_name}" | egrep -c "^(comdex|persistent)$" ) -ne 0 ]; then
     go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o /root/go/bin/$daemon_name ./node
