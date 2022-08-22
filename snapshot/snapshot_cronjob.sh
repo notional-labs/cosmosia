@@ -79,10 +79,6 @@ echo "data_version=$data_version"
 supervisorctl stop chain
 sleep 60
 
-# make sure chain stopped
-killall $daemon_name
-sleep 10
-
 echo "creating snapshot..."
 cd $node_home
 
