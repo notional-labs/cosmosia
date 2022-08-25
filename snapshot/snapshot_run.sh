@@ -74,7 +74,7 @@ echo "install cosmos-pruner"
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/cosmprund
 cd cosmprund
-go install -ldflags '-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb' -tags pebbledb ./...
+make install
 
 ########################################################################################################################
 # download snapshot
