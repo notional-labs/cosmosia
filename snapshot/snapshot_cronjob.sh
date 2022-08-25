@@ -47,9 +47,6 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
     echo "After prune:"
     du -h
 
-    #echo "compacting..."
-    #cd $HOME && sh pebblecompact_data.sh $node_home/data
-
     data_version=$(get_next_version)
   else
     echo "No need to prune"

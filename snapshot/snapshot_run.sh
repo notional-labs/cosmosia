@@ -77,15 +77,6 @@ cd cosmprund
 go install -ldflags '-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb' -tags pebbledb ./...
 
 ########################################################################################################################
-echo "install pebblecompact"
-cd $HOME
-git clone https://github.com/notional-labs/pebblecompact
-cd pebblecompact
-make install
-
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/scripts/pebblecompact_data.sh" > $HOME/pebblecompact_data.sh
-
-########################################################################################################################
 # download snapshot
 cd $HOME
 source $HOME/snapshot_download.sh
