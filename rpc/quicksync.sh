@@ -38,7 +38,6 @@ echo "genesis_url=$genesis_url"
 echo "daemon_name=$daemon_name"
 echo "node_home=$node_home"
 echo "minimum_gas_prices=$minimum_gas_prices"
-echo "addrbook_url=$addrbook_url"
 echo "start_flags=$start_flags"
 echo "json_rpc=$json_rpc"
 
@@ -225,17 +224,8 @@ else
   loop_forever
 fi
 
-
 echo "download addrbook..."
-# we try notional.ventures first, failed => other providers
-URL="https://snapshot.notional.ventures/$chain_name/addrbook.json"
-status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-if [[ $status_code != "200" ]]; then
-  echo "Not found snapshot for $chain_name from snapshot, continue to try other providers..."
-  URL=$addrbook_url
-fi
-
-curl -fso $node_home/config/addrbook.json "$URL"
+curl -fso $node_home/config/addrbook.json "https://snapshot.notional.ventures/$chain_name/addrbook.json"
 
 ########################################################################################################################
 # supervised

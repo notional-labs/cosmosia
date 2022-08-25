@@ -36,7 +36,6 @@ echo "genesis_url=$genesis_url"
 echo "daemon_name=$daemon_name"
 echo "node_home=$node_home"
 echo "minimum_gas_prices=$minimum_gas_prices"
-echo "addrbook_url=$addrbook_url"
 echo "start_flags=$start_flags"
 
 if [[ -z $git_repo ]]; then
@@ -231,16 +230,7 @@ sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.to
 sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
 
 echo "download addrbook..."
-# we try notional.ventures first, failed => other providers
-URL="https://snapshot.notional.ventures/$chain_name/addrbook.json"
-status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-if [[ $status_code != "200" ]]; then
-  echo "Not found snapshot for $chain_name from snapshot, continue to try other providers..."
-  URL=$addrbook_url
-fi
-
-curl -Ls  "$URL" > $node_home/config/addrbook.json
-
+curl -fso $node_home/config/addrbook.json "https://snapshot.notional.ventures/$chain_name/addrbook.json"
 
 echo "download genesis file..."
 if [[ $genesis_url == *.json.gz ]]; then

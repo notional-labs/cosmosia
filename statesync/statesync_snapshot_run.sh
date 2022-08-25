@@ -37,7 +37,6 @@ echo "genesis_url=$genesis_url"
 echo "daemon_name=$daemon_name"
 echo "node_home=$node_home"
 echo "minimum_gas_prices=$minimum_gas_prices"
-echo "addrbook_url=$addrbook_url"
 echo "start_flags=$start_flags"
 
 if [[ -z $git_repo ]]; then
