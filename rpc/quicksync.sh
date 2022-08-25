@@ -261,15 +261,6 @@ EOT
 
 supervisord
 
-########################################################################################################################
-#echo "install pebblecompact"
-#cd $HOME
-#git clone https://github.com/notional-labs/pebblecompact
-#cd pebblecompact
-#make install
-#
-#curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/scripts/pebblecompact_data.sh" > $HOME/pebblecompact_data.sh
-
 echo "#################################################################################################################"
 echo "start nginx..."
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/nginx.conf" > /etc/nginx/nginx.conf
