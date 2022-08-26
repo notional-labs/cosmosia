@@ -39,7 +39,8 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
     echo "Before:"
     du -h
 
-    $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$chain_name --backend=pebbledb --blocks=201600 --versions=362880
+    # no need to compact, pebble will auto-compact after starting the chain again in few mins.
+    $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$chain_name --backend=pebbledb --blocks=201600 --versions=362880 --compact=false
 
     # Delete tx_index.db
 #    rm -rf $node_home/data/tx_index.db
