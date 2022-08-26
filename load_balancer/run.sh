@@ -24,17 +24,17 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/118-put-updat
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
 source $HOME/generate_upstream.sh
 
-if cmp -s "$UPSTREAM_CONFIG_FILE" "$UPSTREAM_CONFIG_FILE_TMP"; then
+if cmp -s "$CONFIG_FILE" "$TMP_CONFIG_FILE"; then
   # the same => do nothing
   echo "no config change, do nothing..."
 else
   # different
 
   # show the diff
-  diff -c "$UPSTREAM_CONFIG_FILE" "$UPSTREAM_CONFIG_FILE_TMP"
+  diff -c "$CONFIG_FILE" "$TMP_CONFIG_FILE"
 
   echo "found config changes, updating..."
-  cat "$UPSTREAM_CONFIG_FILE_TMP" > "$UPSTREAM_CONFIG_FILE"
+  cat "$TMP_CONFIG_FILE" > "$CONFIG_FILE"
   /usr/sbin/caddy reload --config $CONFIG_FILE
 fi
 EOT
