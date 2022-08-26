@@ -76,6 +76,15 @@ echo "data_version=$data_version"
 supervisorctl stop chain
 sleep 60
 
+# need for osmosis only, will be removed in the future versions
+if [[ $chain_name == "osmosis" ]]; then
+  supervisorctl start chain
+  sleep 60
+  supervisorctl stop chain
+  sleep 60
+fi
+
+
 echo "creating snapshot..."
 cd $node_home
 
