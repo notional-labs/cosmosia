@@ -26,7 +26,7 @@ docker service create \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/118-put-update-upstream-for-load-balancer-into-a-cronjob/load_balancer/run.sh > ~/run.sh && \
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/run.sh > ~/run.sh && \
    /bin/bash ~/run.sh $rpc_service_name"
 
 

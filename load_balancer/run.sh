@@ -19,7 +19,7 @@ TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
 ########################################################################################################################
 # cron
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/118-put-update-upstream-for-load-balancer-into-a-cronjob/load_balancer/generate_upstream.sh" > $HOME/generate_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/generate_upstream.sh" > $HOME/generate_upstream.sh
 
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
 source $HOME/generate_upstream.sh
