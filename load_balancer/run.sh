@@ -13,8 +13,14 @@ cd $HOME
 pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel jq dnsutils python caddy screen wget cronie
 
+# write env vars to bash file, so that cronjobs or other scripts could know
+cat <<EOT >> $HOME/env.sh
 CONFIG_FILE="/etc/caddy/Caddyfile"
 TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
+rpc_service_name="$rpc_service_name"
+EOT
+
+source $HOME/env.sh
 
 ########################################################################################################################
 # cron
@@ -22,7 +28,8 @@ TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/generate_upstream.sh" > $HOME/generate_upstream.sh
 
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
-source $HOME/generate_upstream.sh
+source $HOME/env.sh
+source $HOME/generate_upstream.sh $rpc_service_name
 
 if cmp -s "$CONFIG_FILE" "$TMP_CONFIG_FILE"; then
   # the same => do nothing
@@ -39,9 +46,7 @@ else
 fi
 EOT
 
-sleep 1
 echo "*/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
-sleep 1
 crond
 
 ########################################################################################################################

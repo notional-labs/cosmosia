@@ -11,7 +11,6 @@ fi
 CONFIG_FILE="/etc/caddy/Caddyfile"
 TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
 
-
 # use dig to figure out IPs of service
 new_ips=$(dig +short "tasks.$rpc_service_name" |sort)
 
