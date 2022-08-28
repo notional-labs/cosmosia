@@ -33,7 +33,6 @@ eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/da
 
 echo "git_repo=$git_repo"
 echo "version=$version"
-echo "genesis_url=$genesis_url"
 echo "daemon_name=$daemon_name"
 echo "node_home=$node_home"
 echo "minimum_gas_prices=$minimum_gas_prices"

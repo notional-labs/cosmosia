@@ -36,7 +36,6 @@ cat <<EOT >> $HOME/chain_info.sh
 chain_name="$chain_name"
 git_repo="$git_repo"
 version="$version"
-genesis_url="$genesis_url"
 daemon_name="$daemon_name"
 node_home="$node_home"
 minimum_gas_prices="$minimum_gas_prices"
