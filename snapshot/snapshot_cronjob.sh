@@ -24,35 +24,28 @@ echo "##########################################################################
 echo "pruning..."
 
 echo "snapshot_prune=$snapshot_prune"
-echo "snapshot_prune_threshold=$snapshot_prune_threshold"
 
 if [[ $snapshot_prune == "cosmos-pruner" ]]; then
   # check snapshot size large than threshold or not
-  SNAPSHOT_THRESHOLD_BYTE=$((${snapshot_prune_threshold} * 1024 * 1024 * 1024))
   chain_json_url="https://snapshot.notional.ventures/$chain_name/chain.json"
-  snapshot_file_size=$(curl -s "$chain_json_url" |jq -r '.file_size')
 
-  if [[ ${SNAPSHOT_THRESHOLD_BYTE} -le ${snapshot_file_size} ]]; then
-    echo "start pruning..."
+  echo "start pruning..."
 
-    cd $node_home/data
-    echo "Before:"
-    du -h
+  cd $node_home/data
+  echo "Before:"
+  du -h
 
-    # no need to compact, pebble will auto-compact after starting the chain again in few mins.
-    $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$chain_name --backend=pebbledb --blocks=201600 --versions=362880 --compact=false
+  # no need to compact, pebble will auto-compact after starting the chain again in few mins.
+  # Note that size after pruning is not smaller, however it'wll be compacted and smaller next time restarting
+  $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$chain_name --backend=pebbledb --blocks=201600 --versions=362880 --compact=false
 
-    # Delete tx_index.db
+  # Delete tx_index.db
 #    rm -rf $node_home/data/tx_index.db
 
-    echo "After prune:"
-    du -h
+  echo "After prune:"
+  du -h
 
-    data_version=$(get_next_version)
-  else
-    echo "No need to prune"
-  fi
-
+  data_version=$(get_next_version)
 fi
 
 
