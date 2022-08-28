@@ -20,7 +20,6 @@ loop_forever () {
 echo "#################################################################################################################"
 echo "read chain info:"
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
-
 eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
@@ -32,13 +31,16 @@ eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/da
   }
   ')"
 
-echo "git_repo=$git_repo"
-echo "version=$version"
-echo "daemon_name=$daemon_name"
-echo "node_home=$node_home"
-echo "minimum_gas_prices=$minimum_gas_prices"
-echo "start_flags=$start_flags"
-echo "json_rpc=$json_rpc"
+# write env vars to bash file, so that cronjobs or other scripts could know
+cat <<EOT >> $HOME/env.sh
+git_repo="$git_repo"
+version="$version"
+daemon_name="$daemon_name"
+node_home="$node_home"
+minimum_gas_prices="$minimum_gas_prices"
+start_flags="$start_flags"
+json_rpc="$json_rpc"
+EOT
 
 pacman -Syu --noconfirm
 pacman -Sy --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils
