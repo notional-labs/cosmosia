@@ -9,6 +9,5 @@ Each swarm node stores snapshots for several chains.
 ```bash
 [cosmoshub]
 ...
-snapshot_time = "1:0"
 snapshot_node = "cosmosia1"
 ```
