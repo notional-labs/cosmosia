@@ -41,7 +41,6 @@ daemon_name="$daemon_name"
 node_home="$node_home"
 minimum_gas_prices="$minimum_gas_prices"
 start_flags="$start_flags"
-snapshot_time="$snapshot_time"
 snapshot_prune="$snapshot_prune"
 EOT
 
@@ -106,13 +105,9 @@ supervisord
 
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_cronjob.sh" > $HOME/snapshot_cronjob.sh
 
-if [[ -z $snapshot_time ]]; then
-  echo "No time setting to take snapshot, please set snapshot_time in chain_registry.ini"
-  loop_forever
-fi
-
-snapshot_time_hour=${snapshot_time%%:*}
-snapshot_time_minute=${snapshot_time##*:}
+# pick a random hour and minute to take snapshot
+snapshot_time_hour=$(( ${RANDOM} % 24 ))
+snapshot_time_minute=$(( ${RANDOM} % 60 ))
 
 # weekly snapshot if it is archive node
 snapshot_day="*"
