@@ -43,7 +43,6 @@ minimum_gas_prices="$minimum_gas_prices"
 start_flags="$start_flags"
 snapshot_time="$snapshot_time"
 snapshot_prune="$snapshot_prune"
-snapshot_prune_threshold="$snapshot_prune_threshold"
 EOT
 
 if [[ -z $version ]]; then
