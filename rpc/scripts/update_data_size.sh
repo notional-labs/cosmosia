@@ -35,7 +35,7 @@ EOT
 
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/126-rpc_monitor-display-size-of-rpc-data/rpc/data_size.sh" > /usr/share/nginx/html/data_size.sh
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/126-rpc_monitor-display-size-of-rpc-data/rpc/nginx.conf" > /etc/nginx/nginx.conf
-
+chmod +x /usr/share/nginx/html/data_size.sh
 
 
 /usr/sbin/nginx -s reload
