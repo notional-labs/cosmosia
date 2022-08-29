@@ -27,7 +27,7 @@ const Service = (props) => {
               <Popover content={item.hostname}>
                 <Icon type="info-circle" />
               </Popover>
-              {item.ip}: <Badge>{item.status}</Badge>
+              {item.ip}: <Badge>{item.data_size}</Badge>
             </List.Item>
           )}
         }
