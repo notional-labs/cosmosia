@@ -18,6 +18,7 @@ for service_name in $RPC_SERVICES; do
   tmp_str=""
   while read -r ip_addr || [[ -n $ip_addr ]]; do
     status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 "http://$ip_addr/healthcheck")
+    data_size=$(curl -s "http://$ip_addr/data_size" |jq -r .data_size)
 
     # figure out hostname of container
     hostname=$(dig +short -x $ip_addr)
@@ -25,7 +26,7 @@ for service_name in $RPC_SERVICES; do
     if [[ ! -z "$tmp_str" ]]; then
       tmp_str="$tmp_str,"$'\n'
     fi
-    tmp_str="$tmp_str""    { \"ip\": \"$ip_addr\", \"hostname\": \"$hostname\", \"status\": \"$status_code\" }"
+    tmp_str="$tmp_str""    { \"ip\": \"$ip_addr\", \"hostname\": \"$hostname\", \"status\": \"$status_code\", "data_size": "$data_size" }"
 
   done < <(echo "$ips")
 
