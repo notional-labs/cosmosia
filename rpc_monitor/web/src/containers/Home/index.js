@@ -24,10 +24,15 @@ const Service = (props) => {
           const bgColor = item.status === "200" ? "" : (item.status === "503" ? "#FFC440" : "#D93026");
           return (
             <List.Item style={{background: bgColor}}>
-              <Popover content={item.hostname}>
-                <Icon type="info-circle" />
-              </Popover>
-              {item.ip}: <Badge>{item.status}</Badge>
+              <div style={{width: "100%"}}>
+                <span style={{float: "left"}}>
+                  <Popover content={item.hostname}>
+                    <Icon type="info-circle" />
+                  </Popover>
+                  {item.ip}
+                </span>
+                <span style={{float: "right"}}>{item.data_size}</span>
+              </div>
             </List.Item>
           )}
         }
