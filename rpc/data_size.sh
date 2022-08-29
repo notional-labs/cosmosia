@@ -10,6 +10,6 @@ Content-type:application/json
 
 {
   "data_size": "$data_size",
-  "date_time": "current_date"
+  "date_time": "$current_date"
 }
 EOT
