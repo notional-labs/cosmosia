@@ -8,9 +8,9 @@ docker service create \
   --publish mode=host,target=80,published=80 \
   --publish mode=host,target=443,published=443 \
   --network cosmosia \
-  --constraint 'node.hostname==cosmosia4' \
+  --constraint 'node.hostname==cosmosia5' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_public/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/112-wildcard-dns-records/proxy_public/run.sh > ~/run.sh && /bin/bash ~/run.sh"
