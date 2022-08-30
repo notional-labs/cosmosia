@@ -87,6 +87,6 @@ docker service create \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_private/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/update_private_proxy/proxy_private/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 
