@@ -122,3 +122,12 @@ scrape_configs:
   - job_name: lb_evmos-testnet-archive
     static_configs:
       - targets: ['tasks.lb_evmos-testnet-archive:2019']
+  - job_name: lb_injective
+    static_configs:
+      - targets: ['tasks.lb_injective:2019']
+  - job_name: lb_kujira
+    static_configs:
+      - targets: ['tasks.lb_kujira:2019']
+  - job_name: lb_passage
+    static_configs:
+      - targets: ['tasks.lb_passage:2019']
