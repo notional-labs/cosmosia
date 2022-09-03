@@ -28,7 +28,6 @@ daemon_name="$daemon_name"
 node_home="$node_home"
 minimum_gas_prices="$minimum_gas_prices"
 start_flags="$start_flags"
-json_rpc="$json_rpc"
 EOT
 
 
