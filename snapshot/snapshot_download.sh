@@ -75,16 +75,11 @@ rm -rf $node_home/data/*
 
 cd $node_home
 
-# always try from our local snapshot first, if failure => use external providers
+
 BASE_URL="http://localhost/"
 URL="http://localhost/chain.json"
-status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-if [[ $status_code == "200" ]]; then
-  URL=`curl -s $URL |jq -r '.snapshot_url'`
-  URL="${BASE_URL}${URL##*/}"
-fi
-
-
+URL=`curl -s $URL |jq -r '.snapshot_url'`
+URL="${BASE_URL}${URL##*/}"
 echo "URL=$URL"
 
 if [[ -z $URL ]]; then
