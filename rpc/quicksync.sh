@@ -139,20 +139,6 @@ fi
 echo "download and extract the snapshot to current path..."
 wget -O - "$URL" |tar -xzf -
 
-# download wasm snapshot, for stargaze only atm
-if [[ ! -z $URL_WASM ]]; then
-  echo "URL_WASM=$URL_WASM"
-  mkdir -p $node_home/wasm
-
-  echo "extract the snapshot of wasm..."
-  if [[ $URL_WASM == *.tar ]]; then
-    wget -O - "$URL_WASM" |tar -xvf - -C $node_home/wasm/
-  else
-    echo "Not support snapshot file type."
-    loop_forever
-  fi
-fi
-
 # restore priv_validator_state.json if it does not exist in the snapshot
 [ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
 
