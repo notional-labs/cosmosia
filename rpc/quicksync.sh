@@ -137,22 +137,7 @@ if [[ -z $URL ]]; then
 fi
 
 echo "download and extract the snapshot to current path..."
-
-# remove query params from url so we can figure out the file type
-# latest-data-indexed.tar.gz?generation=1647902753676847&alt=media => latest-data-indexed.tar.gz
-url_stripped=${URL%%\?*}
-echo "url_stripped=$url_stripped"
-
-if [[ $url_stripped == *.tar.lz4 ]]; then
-  wget -O - "$URL" |lz4 -dq |tar -xf -
-elif [[ $url_stripped == *.tar ]]; then
-  wget -O - "$URL" |tar -xf -
-elif [[ $url_stripped == *.tar.gz ]]; then
-  wget -O - "$URL" |tar -xzf -
-else
-  echo "Not support snapshot file type."
-  loop_forever
-fi
+wget -O - "$URL" |tar -xzf -
 
 # download wasm snapshot, for stargaze only atm
 if [[ ! -z $URL_WASM ]]; then
