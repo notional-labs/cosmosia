@@ -126,19 +126,9 @@ rm -rf $node_home/data/*
 
 cd $node_home
 
-# always try from our snapshot first, if failure => use external providers
 URL="http://tasks.snapshot_$chain_name/chain.json"
-status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-if [[ $status_code == "200" ]]; then
-  URL=`curl -s $URL |jq -r '.snapshot_url'`
-  URL="http://tasks.snapshot_$chain_name/${URL##*/}"
-else
-  echo "Not found snapshot for $chain_name from notional.ventures, continue to try other providers..."
-
-  echo "Loop forever for debug"
-  loop_forever
-fi
-
+URL=`curl -s $URL |jq -r '.snapshot_url'`
+URL="http://tasks.snapshot_$chain_name/${URL##*/}"
 echo "URL=$URL"
 
 if [[ -z $URL ]]; then
