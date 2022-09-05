@@ -8,13 +8,13 @@ export PATH="${PATH}:${GOROOT}/bin:${GOBIN}"
 
 cd $HOME
 
-# empty $git_repo means close source and download the binaries instead of building from source
+# empty $git_repo means closed source and need downloading the binaries instead of building from source
 if [[ -z $git_repo ]]; then
-  BINARY_URL="https://snapshot.notional.ventures/injective/releases/${version}/${daemon_name}"
+  BINARY_URL="https://snapshot.notional.ventures/$chain_name/releases/${version}/${daemon_name}"
   wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
   chmod +x "${GOBIN}/${daemon_name}"
 
-  wget -P /usr/lib https://github.com/CosmWasm/wasmvm/raw/main/api/libwasmvm.x86_64.so
+  wget -P /usr/lib https://github.com/CosmWasm/wasmvm/raw/main/internal/api/libwasmvm.x86_64.so
 else
   if [[ $chain_name == "sentinel" ]]; then
     # sentinel requires custom build
