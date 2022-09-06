@@ -1,5 +1,7 @@
+# This is common file used for rpc and snapshot services
+
 echo "#################################################################################################################"
-echo "build chain from source:"
+echo "build from source:"
 
 export GOPATH="$HOME/go"
 export GOROOT="/usr/lib/go"
@@ -11,6 +13,7 @@ cd $HOME
 # empty $git_repo means closed source and need downloading the binaries instead of building from source
 if [[ -z $git_repo ]]; then
   BINARY_URL="https://snapshot.notional.ventures/$chain_name/releases/${version}/${daemon_name}"
+  mkdir -p $GOBIN
   wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
   chmod +x "${GOBIN}/${daemon_name}"
 
@@ -66,20 +69,22 @@ fi
 echo "#################################################################################################################"
 echo "download snapshot:"
 
+# delete node home
 rm -rf $node_home/*
+
 $HOME/go/bin/$daemon_name init test
 
 # backup $node_home/data/priv_validator_state.json as it is not included in snapshot from some providers.
 mv $node_home/data/priv_validator_state.json $node_home/config/
+
+# delete the data folder
 rm -rf $node_home/data/*
 
 cd $node_home
 
-
-BASE_URL="http://localhost/"
-URL="http://localhost/chain.json"
+URL="http://tasks.snapshot_$chain_name/chain.json"
 URL=`curl -s $URL |jq -r '.snapshot_url'`
-URL="${BASE_URL}${URL##*/}"
+URL="http://tasks.snapshot_$chain_name/${URL##*/}"
 echo "URL=$URL"
 
 if [[ -z $URL ]]; then
@@ -95,8 +100,17 @@ wget -O - "$URL" |tar -xzf -
 
 # set minimum gas prices & rpc port...
 sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
+sed -i '/^\[api]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
+sed -i '/^\[grpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:9090"/}' $node_home/config/app.toml
+
+if [[ $chain_name == "injective" ]]; then
+  sed -i '/^\[api]/,/^\[/{s/^address[[:space:]]*=.*/address = "tcp:\/\/0.0.0.0:1317"/}' $node_home/config/app.toml
+  sed -i '/^\[evm-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
+  sed -i '/^\[evm-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
+fi
+
+sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
 if [[ $snapshot_prune == "cosmos-pruner" ]]; then
-  sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
   sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"362880\"/" $node_home/config/app.toml
   sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
   sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/config/app.toml
@@ -104,16 +118,16 @@ else
    sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $node_home/config/app.toml
 fi
 sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 0/" $node_home/config/app.toml
+
+# https://github.com/notional-labs/cosmosia/issues/24
+[ "$chain_name" != "kava" ] && sed -i -e "s/^swagger *=.*/swagger = true/" $node_home/config/app.toml
+
 sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
 sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 1000/" $node_home/config/config.toml
 sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_home/config/config.toml
 sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
 ###
-if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
-  sed -i -e "s/^db_backend *=.*/db_backend = \"goleveldb\"/" $node_home/config/config.toml
-else
-  sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
-fi
+sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
 
 echo "download genesis..."
 curl -Ls "https://snapshot.notional.ventures/$chain_name/genesis.json" > $node_home/config/genesis.json
