@@ -63,7 +63,7 @@ sleep 5
 
 # use start_chain.sh to start chain with local peers
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_download.sh" > $HOME/snapshot_download.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/restore_snapshot.sh" > $HOME/restore_snapshot.sh
 
 ########################################################################################################################
 echo "install cosmos-pruner"
@@ -73,9 +73,9 @@ cd cosmprund
 make install
 
 ########################################################################################################################
-# download snapshot
+# restore snapshot
 cd $HOME
-source $HOME/snapshot_download.sh
+source $HOME/restore_snapshot.sh
 
 ########################################################################################################################
 # supervised
