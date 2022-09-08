@@ -1,5 +1,15 @@
+# usage: ./docker_service_create.sh chain_name
+# eg., ./docker_service_create.sh juno
 
-SERVICE_NAME="psql_juno"
+chain_name="$1"
+
+if [[ -z $chain_name ]]
+then
+  echo "No chain_name. usage eg., ./docker_service_create.sh juno"
+  exit
+fi
+
+SERVICE_NAME="psql_${chain_name}"
 
 # delete existing service
 docker service rm $SERVICE_NAME
