@@ -10,5 +10,5 @@ docker service create \
   --network cosmosia \
   --endpoint-mode dnsrr \
   --restart-condition none \
-  --env MYVAR=mysecretpassword \
+  --env POSTGRES_PASSWORD=mysecretpassword \
   postgres:latest
