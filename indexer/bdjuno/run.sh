@@ -44,10 +44,10 @@ echo "download config"
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/indexer/indexer/bdjuno/config.${chain_name}.yaml" > $HOME/.bdjuno/config.yaml
 
 echo "create database bdjuno"
-psql postgresql://postgres:mysecretpassword@tasks.psql_${chain_name}:5432/bdjuno -c "CREATE DATABASE bdjuno;"
+psql postgresql://postgres:mysecretpassword@tasks.psql_${chain_name}:5432 -c "CREATE DATABASE bdjuno;"
 
 echo "create database hasura for metadata"
-psql postgresql://postgres:mysecretpassword@tasks.psql_${chain_name}:5432/bdjuno -c "CREATE DATABASE hasura;"
+psql postgresql://postgres:mysecretpassword@tasks.psql_${chain_name}:5432 -c "CREATE DATABASE hasura;"
 
 echo "create schema"
 cd $HOME/bdjuno/database/schema/
