@@ -86,11 +86,11 @@ done
 echo "hasura is up, continue..."
 
 echo "clear metadata"
-hasura metadata clear --endpoint http://tasks.hasura_${chain_name}:8080 --admin-secret myadminsecretkey
+/usr/local/bin/hasura metadata clear --endpoint http://tasks.hasura_${chain_name}:8080 --admin-secret myadminsecretkey
 
 echo "apply the metadata"
 cd /root/bdjuno/hasura
-hasura metadata apply --endpoint http://tasks.hasura_${chain_name}:8080 --admin-secret myadminsecretkey
+/usr/local/bin/hasura metadata apply --endpoint http://tasks.hasura_${chain_name}:8080 --admin-secret myadminsecretkey
 
 
 echo "start bdjuno"
