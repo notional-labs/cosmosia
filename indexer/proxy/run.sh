@@ -23,9 +23,9 @@ cat <<'EOT' > /usr/share/nginx/html/index.html
 
 <body>
   <h3>Chains:</h3>
-  <p><a href="/hasura_juno">hasura_juno</a></p>
-  <p><a href="/hasura_cosmoshub">hasura_cosmoshub</a></p>
-  <p><a href="/hasura_stargaze">hasura_stargaze</a></p>
+  <p><a href="/hasura_juno/">hasura_juno</a></p>
+  <p><a href="/hasura_cosmoshub/">hasura_cosmoshub</a></p>
+  <p><a href="/hasura_stargaze/">hasura_stargaze</a></p>
 </body>
 </html>
 EOT
