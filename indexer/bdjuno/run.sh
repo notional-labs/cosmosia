@@ -25,7 +25,14 @@ cd $HOME
 git clone https://github.com/baabeetaa/bdjuno
 cd bdjuno/
 git fetch --all --tags
-git checkout chains/${chain_name}/mainnet
+
+branch="${chain_name}"
+if [[ $chain_name == "cosmoshub" ]]; then
+  branch="cosmos"
+fi
+
+
+git checkout chains/${branch}/mainnet
 make install
 
 ########################################################################################################################
