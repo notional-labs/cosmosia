@@ -1,9 +1,9 @@
 # delete existing service
-docker service rm proxy_public
+docker service rm proxy_custom_sifchain
 
 # create new service
 docker service create \
-  --name proxy_public \
+  --name proxy_custom_sifchain \
   --replicas 1 \
   --publish mode=host,target=80,published=80 \
   --publish mode=host,target=443,published=443 \
