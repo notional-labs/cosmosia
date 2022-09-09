@@ -22,4 +22,4 @@ docker service create \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/indexer/indexer/bdjuno/run.sh > ~/run.sh && /bin/bash ~/run.sh $chain_name"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/indexer/bdjuno/run.sh > ~/run.sh && /bin/bash ~/run.sh $chain_name"

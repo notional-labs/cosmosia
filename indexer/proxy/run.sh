@@ -4,7 +4,7 @@ pacman -S --noconfirm base-devel dnsutils nginx
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/indexer/indexer/proxy/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/indexer/proxy/nginx.conf > /etc/nginx/nginx.conf
 /usr/sbin/nginx
 
 ########################################################################################################################
