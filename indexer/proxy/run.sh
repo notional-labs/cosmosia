@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel dnsutils nginx
+pacman -S --noconfirm base-devel wget dnsutils nginx
 
 ########################################################################################################################
 # nginx
