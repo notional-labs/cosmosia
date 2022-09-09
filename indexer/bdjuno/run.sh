@@ -83,11 +83,12 @@ while [[ "$is_OK" != "OK" ]]; do
   echo "waiting for hasura up.....is_OK=$is_OK"
 done
 
+echo "hasura is up, continue..."
 
 echo "clear metadata"
 hasura metadata clear --endpoint http://tasks.hasura_${chain_name}:8080 --admin-secret myadminsecretkey
 
-echo "pply the metadata"
+echo "apply the metadata"
 cd /root/bdjuno/hasura
 hasura metadata apply --endpoint http://tasks.hasura_${chain_name}:8080 --admin-secret myadminsecretkey
 
