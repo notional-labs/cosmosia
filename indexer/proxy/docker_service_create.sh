@@ -2,11 +2,11 @@
 git_branch=$(git symbolic-ref --short -q HEAD)
 
 # delete existing service
-docker service rm proxy
+docker service rm proxy_indexer
 
 # create new service
 docker service create \
-  --name proxy \
+  --name proxy_indexer \
   --replicas 1 \
   --publish mode=host,target=80,published=80 \
   --network cosmosia \
