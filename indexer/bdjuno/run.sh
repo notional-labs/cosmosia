@@ -66,15 +66,23 @@ $HOME/go/bin/bdjuno parse genesis-file --genesis-file-path $HOME/.bdjuno/genesis
 echo "install hasura-cli"
 curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
 
+
+echo "wait for hasura up"
+
+is_OK=""
+while [[ "$is_OK" != "OK" ]]; do
+  sleep 60;
+  is_OK =$(curl --silent --max-time 3 "http://tasks.hasura_${chain_name}:8080/healthz")
+  echo "waiting for hasura up.....is_OK=$is_OK"
+done
+
+
 echo "clear metadata"
-hasura metadata clear --endpoint http://tasks.hasura_juno:8080 --admin-secret myadminsecretkey
+hasura metadata clear --endpoint http://tasks.hasura_${chain_name}:8080 --admin-secret myadminsecretkey
 
 echo "pply the metadata"
 cd /root/bdjuno/hasura
-hasura metadata apply --endpoint http://tasks.hasura_juno:8080 --admin-secret myadminsecretkey
-
-
-
+hasura metadata apply --endpoint http://tasks.hasura_${chain_name}:8080 --admin-secret myadminsecretkey
 
 
 echo "start bdjuno"
