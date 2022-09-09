@@ -8,7 +8,7 @@ docker service rm proxy_indexer
 docker service create \
   --name proxy_indexer \
   --replicas 1 \
-  --publish mode=host,target=80,published=80 \
+  --publish mode=host,target=443,published=443 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia9' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
