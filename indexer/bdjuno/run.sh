@@ -79,7 +79,7 @@ echo "wait for hasura up"
 is_OK=""
 while [[ "$is_OK" != "OK" ]]; do
   sleep 60;
-  is_OK =$(curl --silent --max-time 3 "http://tasks.hasura_${chain_name}:8080/healthz")
+  is_OK=$(curl --silent --max-time 3 "http://tasks.hasura_${chain_name}:8080/healthz")
   echo "waiting for hasura up.....is_OK=$is_OK"
 done
 
