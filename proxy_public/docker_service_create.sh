@@ -8,6 +8,7 @@ docker service create \
   --publish mode=host,target=80,published=80 \
   --publish mode=host,target=443,published=443 \
   --network cosmosia \
+  --network snapshot \
   --constraint 'node.hostname==cosmosia4' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
