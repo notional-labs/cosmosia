@@ -48,8 +48,7 @@ fi
 
 
 JSONRPC_CONFIG=""
-
-if [[ $json_rpc == "true" ]]; then
+if [[ $rpc_service_name == rpc_evmos* ]]; then
   JSONRPC_CONFIG=$( cat <<EOT
 #JSON-RPC
 :8004 {

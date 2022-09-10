@@ -1,5 +1,7 @@
+# This is common file used for rpc and snapshot services
+
 echo "#################################################################################################################"
-echo "build chain from source:"
+echo "build from source:"
 
 export GOPATH="$HOME/go"
 export GOROOT="/usr/lib/go"
@@ -8,13 +10,14 @@ export PATH="${PATH}:${GOROOT}/bin:${GOBIN}"
 
 cd $HOME
 
-# empty $git_repo means close source and download the binaries instead of building from source
+# empty $git_repo means closed source and need downloading the binaries instead of building from source
 if [[ -z $git_repo ]]; then
-  BINARY_URL="https://snapshot.notional.ventures/injective/releases/${version}/${daemon_name}"
+  BINARY_URL="https://snapshot.notional.ventures/$chain_name/releases/${version}/${daemon_name}"
+  mkdir -p $GOBIN
   wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
   chmod +x "${GOBIN}/${daemon_name}"
 
-  wget -P /usr/lib https://github.com/CosmWasm/wasmvm/raw/main/api/libwasmvm.x86_64.so
+  wget -P /usr/lib https://github.com/CosmWasm/wasmvm/raw/main/internal/api/libwasmvm.x86_64.so
 else
   if [[ $chain_name == "sentinel" ]]; then
     # sentinel requires custom build
@@ -42,6 +45,11 @@ else
 
   if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance)$" ) -ne 0 ]; then
     go mod tidy -compat=1.17
+  elif [ $( echo "${chain_name}" | egrep -c "^(evmos)$" ) -ne 0 ]; then
+    # this is a temporary fix for evmos ethermint jsonrpc Batch request over websocket
+    go mod tidy
+    go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.18.0_fix_ws
+    go mod tidy
   else
     go mod tidy
   fi
@@ -50,7 +58,7 @@ else
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
   elif [ $( echo "${chain_name}" | egrep -c "^(starname|sifchain)$" ) -ne 0 ]; then
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
-  elif [ $( echo "${chain_name}" | egrep -c "^(comdex|persistent)$" ) -ne 0 ]; then
+  elif [ $( echo "${chain_name}" | egrep -c "^(comdex)$" ) -ne 0 ]; then
     go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o /root/go/bin/$daemon_name ./node
   elif [[ $chain_name == "axelar" ]]; then
     axelard_version=${version##*v}
@@ -66,25 +74,22 @@ fi
 echo "#################################################################################################################"
 echo "download snapshot:"
 
+# delete node home
 rm -rf $node_home/*
+
 $HOME/go/bin/$daemon_name init test
 
 # backup $node_home/data/priv_validator_state.json as it is not included in snapshot from some providers.
 mv $node_home/data/priv_validator_state.json $node_home/config/
+
+# delete the data folder
 rm -rf $node_home/data/*
 
 cd $node_home
 
-# always try from our local snapshot first, if failure => use external providers
-BASE_URL="http://localhost/"
-URL="http://localhost/chain.json"
-status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-if [[ $status_code == "200" ]]; then
-  URL=`curl -s $URL |jq -r '.snapshot_url'`
-  URL="${BASE_URL}${URL##*/}"
-fi
-
-
+URL="https://snapshot.notional.ventures/$chain_name/chain.json"
+URL=`curl -s $URL |jq -r '.snapshot_url'`
+URL="https://snapshot.notional.ventures/$chain_name/${URL##*/}"
 echo "URL=$URL"
 
 if [[ -z $URL ]]; then
@@ -93,44 +98,24 @@ if [[ -z $URL ]]; then
 fi
 
 echo "download and extract the snapshot to current path..."
-
-# remove query params from url so we can figure out the file type
-# latest-data-indexed.tar.gz?generation=1647902753676847&alt=media => latest-data-indexed.tar.gz
-url_stripped=${URL%%\?*}
-echo "url_stripped=$url_stripped"
-
-if [[ $url_stripped == *.tar.lz4 ]]; then
-  wget -O - "$URL" |lz4 -dq |tar -xf -
-elif [[ $url_stripped == *.tar ]]; then
-  wget -O - "$URL" |tar -xf -
-elif [[ $url_stripped == *.tar.gz ]]; then
-  wget -O - "$URL" |tar -xzf -
-else
-  echo "Not support snapshot file type."
-  loop_forever
-fi
-
-# download wasm snapshot, for stargaze only atm
-if [[ ! -z $URL_WASM ]]; then
-  echo "URL_WASM=$URL_WASM"
-  mkdir -p $node_home/wasm
-
-  echo "extract the snapshot of wasm..."
-  if [[ $URL_WASM == *.tar ]]; then
-    wget -O - "$URL_WASM" |tar -xvf - -C $node_home/wasm/
-  else
-    echo "Not support snapshot file type."
-    loop_forever
-  fi
-fi
+wget -O - "$URL" |tar -xzf -
 
 # restore priv_validator_state.json if it does not exist in the snapshot
 [ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
 
 # set minimum gas prices & rpc port...
 sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
+sed -i '/^\[api]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
+sed -i '/^\[grpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:9090"/}' $node_home/config/app.toml
+
+if [[ $chain_name == "injective" ]]; then
+  sed -i '/^\[api]/,/^\[/{s/^address[[:space:]]*=.*/address = "tcp:\/\/0.0.0.0:1317"/}' $node_home/config/app.toml
+  sed -i '/^\[evm-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
+  sed -i '/^\[evm-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
+fi
+
+sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
 if [[ $snapshot_prune == "cosmos-pruner" ]]; then
-  sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
   sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"362880\"/" $node_home/config/app.toml
   sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
   sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/config/app.toml
@@ -138,16 +123,16 @@ else
    sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $node_home/config/app.toml
 fi
 sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 0/" $node_home/config/app.toml
+
+# https://github.com/notional-labs/cosmosia/issues/24
+[ "$chain_name" != "kava" ] && sed -i -e "s/^swagger *=.*/swagger = true/" $node_home/config/app.toml
+
 sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
 sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 1000/" $node_home/config/config.toml
 sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_home/config/config.toml
 sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
 ###
-if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
-  sed -i -e "s/^db_backend *=.*/db_backend = \"goleveldb\"/" $node_home/config/config.toml
-else
-  sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
-fi
+sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
 
 echo "download genesis..."
 curl -Ls "https://snapshot.notional.ventures/$chain_name/genesis.json" > $node_home/config/genesis.json

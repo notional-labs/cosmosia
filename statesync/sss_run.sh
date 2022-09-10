@@ -162,23 +162,12 @@ mv $node_home/data/priv_validator_state.json $node_home/config/
 # delete the data folder
 rm -rf $node_home/data/*
 
-
 cd $node_home
 
 
-# always try from our snapshot first, if failure => use external providers
-URL="http://tasks.snapshot_$chain_name/chain.json"
-status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 $URL)
-if [[ $status_code == "200" ]]; then
-  URL=`curl -s $URL |jq -r '.snapshot_url'`
-  URL="http://tasks.snapshot_$chain_name/${URL##*/}"
-else
-  echo "Not found snapshot for $chain_name from notional.ventures, continue to try other providers..."
-
-  echo "Loop forever for debug"
-  loop_forever
-fi
-
+URL="https://snapshot.notional.ventures/$chain_name/chain.json"
+URL=`curl -s $URL |jq -r '.snapshot_url'`
+URL="https://snapshot.notional.ventures/$chain_name/${URL##*/}"
 echo "URL=$URL"
 
 if [[ -z $URL ]]; then
@@ -187,22 +176,7 @@ if [[ -z $URL ]]; then
 fi
 
 echo "download and extract the snapshot to current path..."
-
-# remove query params from url so we can figure out the file type
-# latest-data-indexed.tar.gz?generation=1647902753676847&alt=media => latest-data-indexed.tar.gz
-url_stripped=${URL%%\?*}
-echo "url_stripped=$url_stripped"
-
-if [[ $url_stripped == *.tar.lz4 ]]; then
-  wget -O - "$URL" |lz4 -dq |tar -xf -
-elif [[ $url_stripped == *.tar ]]; then
-  wget -O - "$URL" |tar -xf -
-elif [[ $url_stripped == *.tar.gz ]]; then
-  wget -O - "$URL" |tar -xzf -
-else
-  echo "Not support snapshot file type."
-  loop_forever
-fi
+wget -O - "$URL" |tar -xzf -
 
 # restore priv_validator_state.json if it does not exist in the snapshot
 [ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
