@@ -61,8 +61,12 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 
 sleep 5
 
-# use start_chain.sh to start chain with local peers
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
+# start_chain.sh script
+cat <<EOT >> $HOME/start_chain.sh
+source $HOME/chain_info.sh
+$HOME/go/bin/$daemon_name start --db_backend=pebbledb $start_flags
+EOT
+
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/restore_snapshot.sh" > $HOME/restore_snapshot.sh
 
 ########################################################################################################################
@@ -88,7 +92,7 @@ files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
 
 cat <<EOT > /etc/supervisor/conf.d/chain.conf
 [program:chain]
-command=/bin/bash /root/start_chain.sh $chain_name
+command=/bin/bash /root/start_chain.sh
 autostart=false
 autorestart=false
 stopasgroup=true
