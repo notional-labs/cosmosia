@@ -19,6 +19,11 @@ echo "* hard nofile  500000" >> /etc/security/limits.conf
 echo "* soft nofile 500000" >> /etc/security/limits.conf
 ```
 
+Settings
+```bash
+docker swarm update --task-history-limit 0
+```
+
 #### config log rotation
 - config log rotation on all swarm nodes by editing (creating if not exist) the file `/etc/docker/daemon.json` with the content bellow.
 ```json
