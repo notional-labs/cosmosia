@@ -50,5 +50,5 @@ EOT
 
 
 # delete old snapshots
-cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -1)
+cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)
 
