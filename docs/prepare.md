@@ -38,10 +38,15 @@ systemctl restart docker
 
 ### setup cosmosia
 
-- create `cosmosia` overlay network:
+- create overlay networks:
 
 ```bash
 docker network create -d overlay --attachable cosmosia
+
+# create an overlay network for snapshot service
+# https://github.com/notional-labs/cosmosia/issues/134
+docker network create -d overlay --attachable snapshot
+
 ```
 
 - clone repos to a manager node to $HOME:
