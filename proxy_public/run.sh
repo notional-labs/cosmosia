@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel wget dnsutils nginx cronie
+pacman -S --noconfirm base-devel wget dnsutils nginx cronie screen
 
 ########################################################################################################################
 # SSL for notional.ventures (fullchain.pem and privkey.pem files)
@@ -49,9 +49,9 @@ echo "UPSTREAM_CONFIG_FILE_TMP=$UPSTREAM_CONFIG_FILE_TMP"
 sleep 1
 cat "$UPSTREAM_CONFIG_FILE_TMP" > "$UPSTREAM_CONFIG_FILE"
 sleep 1
-#/usr/sbin/nginx -g "daemon off;"
-/usr/sbin/nginx
 
+# run nginx with screen to avoid log to docker
+screen -S nginx -dm /usr/sbin/nginx -g "daemon off;"
 
 ########################################################################################################################
 # cron
