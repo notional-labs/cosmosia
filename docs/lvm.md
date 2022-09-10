@@ -28,6 +28,8 @@ add to `/etc/fstab`:
 /dev/vg0/lv_data /mnt/data ext4 defaults 0 0
 ```
 
+See [Full log of install LVM on Hezner Ax101](ref_hetzner_ax101.md)
+
 ---
 ### Change docker data location to use the striped volume
 
