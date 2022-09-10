@@ -38,7 +38,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --mount type=bind,source=$MOUNT_SRC,destination=/snapshot \
-  --network cosmosia \
+  --network snapshot \
   --constraint "node.hostname==$HOST" \
   --endpoint-mode dnsrr \
   --restart-condition none \
