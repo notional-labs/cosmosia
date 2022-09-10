@@ -1,7 +1,7 @@
 
 # Ref install LVM on Hetzner Ax101
 
-### rescureimage:
+### installimage:
 
 ```
 SWRAID 0
