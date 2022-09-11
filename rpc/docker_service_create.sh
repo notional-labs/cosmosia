@@ -9,6 +9,19 @@ then
   exit
 fi
 
+eval "$(awk -v TARGET=$chain_name -F ' = ' '
+  {
+    if ($0 ~ /^\[.*\]$/) {
+      gsub(/^\[|\]$/, "", $0)
+      SECTION=$0
+    } else if (($2 != "") && (SECTION==TARGET)) {
+      print $1 "=" $2
+    }
+  }
+  ' ../data/chain_registry.ini )"
+
+echo "network=$network"
+
 git_branch=$(git symbolic-ref --short -q HEAD)
 
 # functions
@@ -30,7 +43,7 @@ docker service rm $rpc_service_name
 docker service create \
   --name $rpc_service_name \
   --replicas 1 \
-  --network cosmosia \
+  --network $network \
   --label 'cosmosia.service=rpc' \
   --endpoint-mode dnsrr \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
