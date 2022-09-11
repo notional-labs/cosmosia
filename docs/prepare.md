@@ -46,12 +46,23 @@ systemctl restart docker
 - create overlay networks:
 
 ```bash
+# to be removed later
 docker network create -d overlay --attachable cosmosia
 
 # create an overlay network for snapshot service
 # https://github.com/notional-labs/cosmosia/issues/134
 docker network create -d overlay --attachable snapshot
 
+
+# create 8 overlay networks for rpc services
+docker network create -d overlay --attachable net1
+docker network create -d overlay --attachable net2
+docker network create -d overlay --attachable net3
+docker network create -d overlay --attachable net4
+docker network create -d overlay --attachable net5
+docker network create -d overlay --attachable net6
+docker network create -d overlay --attachable net7
+docker network create -d overlay --attachable net8
 ```
 
 - clone repos to a manager node to $HOME:
