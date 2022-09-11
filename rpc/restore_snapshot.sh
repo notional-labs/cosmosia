@@ -87,9 +87,9 @@ rm -rf $node_home/data/*
 
 cd $node_home
 
-URL="https://tasks.snapshot_$chain_name/chain.json"
+URL="http://tasks.snapshot_$chain_name/chain.json"
 URL=`curl -s $URL |jq -r '.snapshot_url'`
-URL="https://tasks.snapshot_$chain_name/${URL##*/}"
+URL="http://tasks.snapshot_$chain_name/${URL##*/}"
 echo "URL=$URL"
 
 if [[ -z $URL ]]; then
