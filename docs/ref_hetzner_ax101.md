@@ -3,7 +3,7 @@
 
 ### installimage:
 
-```
+```console
 SWRAID 0
 
 PART swap swap 4G
@@ -14,7 +14,7 @@ PART / ext4 32G
 
 ### fdisk
 
-```
+```console
 [root@cosmosia10 ~]# fdisk -l
 Disk /dev/nvme1n1: 3.49 TiB, 3840755982336 bytes, 7501476528 sectors
 Disk model: SAMSUNG MZQL23T8HCLS-00A07
@@ -204,7 +204,7 @@ Partition table entries are not in disk order.
 
 ### LVM
 
-```
+```console
 [root@cosmosia10 ~]# pvcreate -v /dev/nvme0n1p5 /dev/nvme1n1p1
   Wiping signatures on new PV /dev/nvme0n1p5.
   Wiping signatures on new PV /dev/nvme1n1p1.
@@ -286,9 +286,6 @@ Writing superblocks and filesystem accounting information: done
       Physical extents	0 to 906233
 
 
-[root@cosmosia10 ~]# mount /dev/vg0/lv_data /mnt/data
-mount: /mnt/data: mount point does not exist.
-       dmesg(1) may have more information after failed mount system call.
 [root@cosmosia10 ~]# mkdir -p /mnt/data
 [root@cosmosia10 ~]# mount /dev/vg0/lv_data /mnt/data
 [root@cosmosia10 ~]#
