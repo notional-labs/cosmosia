@@ -46,13 +46,13 @@ systemctl restart docker
 - create overlay networks:
 
 ```bash
-# to be removed later
+# https://github.com/notional-labs/cosmosia/issues/134
+
+# cosmosia overlay network used for loadbalance and proxy
 docker network create -d overlay --attachable cosmosia
 
 # create an overlay network for snapshot service
-# https://github.com/notional-labs/cosmosia/issues/134
 docker network create -d overlay --attachable snapshot
-
 
 # create 8 overlay networks for rpc services
 docker network create -d overlay --attachable net1

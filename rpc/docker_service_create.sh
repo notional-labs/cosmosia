@@ -43,7 +43,6 @@ docker service rm $rpc_service_name
 docker service create \
   --name $rpc_service_name \
   --replicas 1 \
-  --network cosmosia \
   --network $network \
   --label 'cosmosia.service=rpc' \
   --endpoint-mode dnsrr \
