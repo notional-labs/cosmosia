@@ -8,7 +8,7 @@ Our servers specs:
 ### setup swarm cluster
 Follow [Getting started with swarm mode](https://docs.docker.com/engine/swarm/swarm-tutorial/) tutorial to setup a swarm cluster
 
-```bash
+```console
 # set utc timezone
 timedatectl set-timezone UTC
 
@@ -45,7 +45,28 @@ systemctl restart docker
 
 - create overlay networks:
 
-```bash
+```
+  proxy           proxy             proxy
+  public          private           snapshot
+    |                |                 |
+    |                |                 |
++---+----------------+-----------------+---------------------------+
+|                          cosmosia(x1)                            |
++---+--------------------------------------------------------+-----+
+    |                                                        |
++---+---+                   +------+                    +----+----+
+| snap- +<---snapshot------>| net1 +<---loadbalancer--->+ load-   |
+| shot  |    chain1         | (xn) |     chain1         | balance |
+| (x1)  |                   |      |                    |  (x1)   |
++-------+    rpc1 chain1--->+      |                    +---------+ 
+             rpcn chain8--->+      |                             
+                            +------+                            
+```
+
+
+
+
+```console
 # https://github.com/notional-labs/cosmosia/issues/134
 
 # cosmosia overlay network used for loadbalance and proxy
@@ -66,7 +87,7 @@ docker network create -d overlay --attachable net8
 ```
 
 - clone repos to a manager node to $HOME:
-```bash
+```console
 cd $HOME
 git clone https://github.com/notional-labs/cosmosia
 ```
