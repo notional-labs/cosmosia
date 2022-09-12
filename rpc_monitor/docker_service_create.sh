@@ -9,6 +9,14 @@ docker service create \
   --name rpc_monitor \
   --replicas 1 \
   --network cosmosia \
+  --network net1 \
+  --network net2 \
+  --network net3 \
+  --network net4 \
+  --network net5 \
+  --network net6 \
+  --network net7 \
+  --network net8 \
   --endpoint-mode dnsrr \
   --restart-condition any \
   archlinux:latest \
