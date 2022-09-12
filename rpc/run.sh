@@ -1,11 +1,11 @@
-# usage: ./quicksynch.sh chain_name
-# eg., ./quicksynch.sh cosmoshub
+# usage: ./run.sh chain_name
+# eg., ./run.sh cosmoshub
 
 chain_name="$1"
 rpc_service_name="$2"
 
 if [[ -z $chain_name ]]; then
-  echo "No chain_name. usage eg., ./quicksynch.sh cosmoshub"
+  echo "No chain_name. usage eg., ./run.sh cosmoshub"
   exit
 fi
 
