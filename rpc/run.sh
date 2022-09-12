@@ -1,11 +1,11 @@
-# usage: ./quicksynch.sh chain_name
-# eg., ./quicksynch.sh cosmoshub
+# usage: ./run.sh chain_name
+# eg., ./run.sh cosmoshub
 
 chain_name="$1"
 rpc_service_name="$2"
 
 if [[ -z $chain_name ]]; then
-  echo "No chain_name. usage eg., ./quicksynch.sh cosmoshub"
+  echo "No chain_name. usage eg., ./run.sh cosmoshub"
   exit
 fi
 
@@ -46,9 +46,9 @@ pacman -Sy --noconfirm go git base-devel wget jq python python-pip cronie nginx 
 
 ########################################################################################################################
 # restore snapshot
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/restore_snapshot.sh" > $HOME/restore_snapshot.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_restore.sh" > $HOME/snapshot_restore.sh
 cd $HOME
-source $HOME/restore_snapshot.sh
+source $HOME/snapshot_restore.sh
 
 ########################################################################################################################
 # supervised
