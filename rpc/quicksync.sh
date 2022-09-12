@@ -46,7 +46,7 @@ pacman -Sy --noconfirm go git base-devel wget jq python python-pip cronie nginx 
 
 ########################################################################################################################
 # restore snapshot
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/restore_snapshot.sh" > $HOME/restore_snapshot.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/restore_snapshot.sh" > $HOME/restore_snapshot.sh
 cd $HOME
 source $HOME/restore_snapshot.sh
 

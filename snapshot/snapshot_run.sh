@@ -67,7 +67,7 @@ source $HOME/chain_info.sh
 $HOME/go/bin/$daemon_name start --db_backend=pebbledb $start_flags
 EOT
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/restore_snapshot.sh" > $HOME/restore_snapshot.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/restore_snapshot.sh" > $HOME/restore_snapshot.sh
 
 ########################################################################################################################
 echo "install cosmos-pruner"
