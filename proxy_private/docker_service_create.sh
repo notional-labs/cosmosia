@@ -50,6 +50,7 @@ docker service create \
   --publish mode=host,target=9041,published=9041 \
   --publish mode=host,target=9042,published=9042 \
   --publish mode=host,target=9043,published=9043 \
+  --publish mode=host,target=9043,published=9044 \
   --publish mode=host,target=9101,published=9101 \
   --publish mode=host,target=9102,published=9102 \
   --publish mode=host,target=9103,published=9103 \
@@ -93,6 +94,7 @@ docker service create \
   --publish mode=host,target=9141,published=9141 \
   --publish mode=host,target=9142,published=9142 \
   --publish mode=host,target=9143,published=9143 \
+  --publish mode=host,target=9143,published=9144 \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia7' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
