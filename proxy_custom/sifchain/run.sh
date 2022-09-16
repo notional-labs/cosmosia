@@ -9,13 +9,13 @@ wget "http://tasks.web_config/config/star.sifchain.io-key.pem" -O /etc/nginx/pri
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/custom_proxy_sifchain/proxy_custom/sifchain/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_custom/sifchain/nginx.conf > /etc/nginx/nginx.conf
 
 
 ########################################################################################################################
 
 # generate config for the first time
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/custom_proxy_sifchain/proxy_custom/sifchain/generate_upstream.sh" > $HOME/generate_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_custom/sifchain/generate_upstream.sh" > $HOME/generate_upstream.sh
 sleep 1
 source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"

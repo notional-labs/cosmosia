@@ -13,4 +13,4 @@ docker service create \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/custom_proxy_sifchain/proxy_custom/sifchain/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_custom/sifchain/run.sh > ~/run.sh && /bin/bash ~/run.sh"
