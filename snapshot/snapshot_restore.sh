@@ -87,15 +87,9 @@ rm -rf $node_home/data/*
 
 cd $node_home
 
-<<<<<<<< HEAD:rpc/restore_snapshot.sh
-URL="https://snapshot.notional.ventures/$chain_name/chain.json"
-URL=`curl -s $URL |jq -r '.snapshot_url'`
-URL="https://snapshot.notional.ventures/$chain_name/${URL##*/}"
-========
 URL="http://tasks.snapshot_$chain_name/chain.json"
 URL=`curl -s $URL |jq -r '.snapshot_url'`
 URL="http://tasks.snapshot_$chain_name/${URL##*/}"
->>>>>>>> main:snapshot/snapshot_restore.sh
 echo "URL=$URL"
 
 if [[ -z $URL ]]; then
