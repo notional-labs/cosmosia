@@ -89,7 +89,7 @@ EOT
         location ~* ^/(.*) {
             $HEADER_OPTIONS
             $HEADER_WS
-            proxy_pass http://backend_api_${service_name}/$1$is_args$args;
+            proxy_pass http://backend_api_${service_name}/\$1\$is_args$args;
         }
     }
 EOT
