@@ -35,7 +35,7 @@ END
 )
 
 HEADER_OPTIONS=$(cat <<-END
-            if ($request_method = 'OPTIONS') {
+            if (\$request_method = 'OPTIONS') {
                 add_header 'Access-Control-Allow-Origin' '*';
                 add_header 'Access-Control-Allow-Credentials' 'true';
                 add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
@@ -51,11 +51,11 @@ END
 
 HEADER_WS=$(cat <<-END
             proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Upgrade \$http_upgrade;
             proxy_set_header Connection "upgrade";
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP \$remote_addr;
+            proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+            proxy_set_header Host \$http_host;
             proxy_set_header X-NginX-Proxy true;
 END
 )
@@ -63,9 +63,7 @@ END
 COUNTER=0
 for service_name in $SERVICES; do
   varname="token_$COUNTER"
-
   service_with_token="$service_name-${!varname}"
-  # echo "$service_with_token"
 
   cat <<EOT >> /etc/nginx/endpoints.conf
     # RPC
@@ -113,30 +111,34 @@ EOT
 done
 
 
+SERVICES_JSONRPC="evmos evmos-testnet-archive"
 
-cat <<EOT >> /etc/nginx/endpoints.conf
+for service_name in $SERVICES; do
+  varname="token_$COUNTER"
+  service_with_token="$service_name-${!varname}"
+
+  cat <<EOT >> /etc/nginx/endpoints.conf
     # JSON-RPC
     server {
         listen 443 ssl http2;
-        server_name ~^jsonrpc-(?<chain_name>.+)-ia\.cosmosia\.notional\.ventures$;
-
+        server_name jsonrpc-${service_with_token}-ie.internalendpoints.notional.ventures;
         $HEADER_CORS
 
         # WS-JSON-RPC
         location ~* ^/websocket/(.*) {
             $HEADER_OPTIONS
             $HEADER_WS
-
-            proxy_pass http://backend_wsjsonrpc_${chain_name}/$1$is_args$args;
+            proxy_pass http://backend_wsjsonrpc_${service_name}/\$1\$is_args\$args;
         }
 
         location ~* ^/(.*) {
             $HEADER_OPTIONS
-
-            proxy_pass http://backend_jsonrpc_${chain_name}/$1$is_args$args;
+            proxy_pass http://backend_jsonrpc_${service_name}/\$1\$is_args\$args;
         }
     }
 EOT
+  COUNTER=$(( COUNTER + 1 ))
+done
 
 ########################################################################################################################
 
