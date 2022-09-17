@@ -22,4 +22,4 @@ docker service create \
   --env EVMOS_DNS_SECRET_TOKEN=${evmos_dns_secret_token} \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/custom_proxy_evmos/proxy_custom/evmos/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_custom/evmos/run.sh > ~/run.sh && /bin/bash ~/run.sh"

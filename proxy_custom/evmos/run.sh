@@ -8,12 +8,12 @@ wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 
 ########################################################################################################################
 # nginx
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/custom_proxy_evmos/proxy_custom/evmos/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_custom/evmos/nginx.conf > /etc/nginx/nginx.conf
 sed -i "s/cdxhgkxw7bd8w767/$EVMOS_DNS_SECRET_TOKEN/" /etc/nginx/nginx.conf
 
 ########################################################################################################################
 # generate config for the first time
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/custom_proxy_evmos/proxy_custom/evmos/generate_upstream.sh" > $HOME/generate_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_custom/evmos/generate_upstream.sh" > $HOME/generate_upstream.sh
 sleep 1
 source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
