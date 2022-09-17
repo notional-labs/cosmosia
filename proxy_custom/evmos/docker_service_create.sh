@@ -16,7 +16,7 @@ docker service create \
   --publish mode=host,target=80,published=80 \
   --publish mode=host,target=443,published=443 \
   --network cosmosia \
-  --constraint 'node.hostname==cosmosia7' \
+  --constraint 'node.hostname==cosmosia10' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
   --env EVMOS_DNS_SECRET_TOKEN=${evmos_dns_secret_token} \
