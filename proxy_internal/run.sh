@@ -12,7 +12,7 @@ wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/internal_proxy_widecard_dns/proxy_internal/nginx.conf > /etc/nginx/nginx.conf
 
 # get tokens
-wget "http://tasks.web_config/config/internal_proxy_secret_tokens.txt" -O > $HOME/internal_proxy_secret_tokens.txt
+wget "http://tasks.web_config/config/internal_proxy_secret_tokens.txt" -O $HOME/internal_proxy_secret_tokens.txt
 
 TOKENS=$(cat $HOME/internal_proxy_secret_tokens.txt)
 COUNTER=0
