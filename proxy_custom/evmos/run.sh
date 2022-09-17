@@ -2,20 +2,18 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel wget dnsutils nginx cronie
 
 ########################################################################################################################
-# SSL for sifchain.io (fullchain.pem and privkey.pem files)
-wget "http://tasks.web_config/config/star.sifchain.io-cert.pem" -O /etc/nginx/fullchain.pem
-wget "http://tasks.web_config/config/star.sifchain.io-key.pem" -O /etc/nginx/privkey.pem
+# SSL for notional.ventures (fullchain.pem and privkey.pem files)
+wget "http://tasks.web_config/config/fullchain.pem" -O /etc/nginx/fullchain.pem
+wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 
 ########################################################################################################################
 # nginx
-
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_custom/sifchain/nginx.conf > /etc/nginx/nginx.conf
-
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/custom_proxy_evmos/proxy_custom/evmos/nginx.conf > /etc/nginx/nginx.conf
+sed -i "s/cdxhgkxw7bd8w767/$EVMOS_DNS_SECRET_TOKEN/" /etc/nginx/nginx.conf
 
 ########################################################################################################################
-
 # generate config for the first time
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_custom/sifchain/generate_upstream.sh" > $HOME/generate_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/custom_proxy_evmos/proxy_custom/evmos/generate_upstream.sh" > $HOME/generate_upstream.sh
 sleep 1
 source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
@@ -25,7 +23,6 @@ cat "$UPSTREAM_CONFIG_FILE_TMP" > "$UPSTREAM_CONFIG_FILE"
 sleep 1
 #/usr/sbin/nginx -g "daemon off;"
 /usr/sbin/nginx
-
 
 ########################################################################################################################
 # cron

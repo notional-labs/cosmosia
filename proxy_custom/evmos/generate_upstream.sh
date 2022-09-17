@@ -1,4 +1,4 @@
-SERVICES="sifchain"
+SERVICES="evmos evmos-testnet-archive"
 
 UPSTREAM_CONFIG_FILE="/etc/nginx/upstream.conf"
 UPSTREAM_CONFIG_FILE_TMP="/etc/nginx/upstream.conf.tmp"
