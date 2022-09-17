@@ -24,6 +24,15 @@ for service_name in $SERVICES; do
           server $lb_ip:8003;
       }
 
+      upstream backend_jsonrpc_$service_name {
+          keepalive 16;
+          server $lb_ip:8004;
+      }
+
+      upstream backend_wsjsonrpc_$service_name {
+          keepalive 16;
+          server $lb_ip:8005;
+      }
 EOT
   fi
 done
