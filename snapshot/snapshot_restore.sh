@@ -55,7 +55,8 @@ else
   fi
 
   if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
-    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
+    sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
+    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
   elif [ $( echo "${chain_name}" | egrep -c "^(starname|sifchain)$" ) -ne 0 ]; then
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
   elif [ $( echo "${chain_name}" | egrep -c "^(comdex)$" ) -ne 0 ]; then
@@ -63,9 +64,8 @@ else
   elif [[ $chain_name == "axelar" ]]; then
     axelard_version=${version##*v}
     go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version" -o /root/go/bin/$daemon_name ./cmd/axelard
-  elif [[ $chain_name == "emoney" ]]; then
-    sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
-    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb" ./...
+  elif [[ $chain_name == "pylons" ]]; then
+    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
   else
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
   fi
@@ -87,9 +87,15 @@ rm -rf $node_home/data/*
 
 cd $node_home
 
+<<<<<<<< HEAD:rpc/restore_snapshot.sh
 URL="https://snapshot.notional.ventures/$chain_name/chain.json"
 URL=`curl -s $URL |jq -r '.snapshot_url'`
 URL="https://snapshot.notional.ventures/$chain_name/${URL##*/}"
+========
+URL="http://tasks.snapshot_$chain_name/chain.json"
+URL=`curl -s $URL |jq -r '.snapshot_url'`
+URL="http://tasks.snapshot_$chain_name/${URL##*/}"
+>>>>>>>> main:snapshot/snapshot_restore.sh
 echo "URL=$URL"
 
 if [[ -z $URL ]]; then

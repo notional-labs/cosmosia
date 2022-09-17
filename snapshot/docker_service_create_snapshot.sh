@@ -20,7 +20,7 @@ eval "$(awk -v TARGET=$chain_name -F ' = ' '
   }
   ' ../data/chain_registry.ini )"
 
-
+echo "network=$network"
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 
@@ -31,6 +31,7 @@ SERVICE_NAME="snapshot_$chain_name"
 echo "HOST=$HOST"
 echo "SERVICE_NAME=$SERVICE_NAME"
 
+
 # delete existing service
 docker service rm $SERVICE_NAME
 
@@ -38,6 +39,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --mount type=bind,source=$MOUNT_SRC,destination=/snapshot \
+  --network $network \
   --network snapshot \
   --constraint "node.hostname==$HOST" \
   --endpoint-mode dnsrr \

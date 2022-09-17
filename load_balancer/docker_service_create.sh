@@ -10,6 +10,18 @@ then
   exit
 fi
 
+eval "$(awk -v TARGET=$chain_name -F ' = ' '
+  {
+    if ($0 ~ /^\[.*\]$/) {
+      gsub(/^\[|\]$/, "", $0)
+      SECTION=$0
+    } else if (($2 != "") && (SECTION==TARGET)) {
+      print $1 "=" $2
+    }
+  }
+  ' ../data/chain_registry.ini )"
+
+echo "network=$network"
 
 SERVICE_NAME=lb_$chain_name
 
@@ -20,6 +32,7 @@ docker service rm $SERVICE_NAME
 docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
+  --network $network \
   --network cosmosia \
   --endpoint-mode dnsrr \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
