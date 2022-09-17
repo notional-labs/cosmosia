@@ -5,7 +5,7 @@ docker service rm proxy_custom_evmos
 evmos_dns_secret_token=$(docker config inspect evmos_dns_secret_token.txt |jq -r '.[0].Spec.Data' |base64 --decode)
 
 if [[ -z evmos_dns_secret_token ]]; then
-  echo "No evmos_dns_secret_token, Pls set password to docker config named evmos_dns_secret_token.txt and try again!"
+  echo "No evmos_dns_secret_token, Pls set docker config named evmos_dns_secret_token.txt and try again!"
   exit
 fi
 
