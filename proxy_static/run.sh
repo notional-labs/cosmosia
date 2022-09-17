@@ -36,6 +36,9 @@ cat <<EOT > /usr/share/nginx/html/index.html
 </html>
 EOT
 
+# run nginx with screen to avoid log to docker
+screen -S nginx -dm /usr/sbin/nginx -g "daemon off;"
+
 ########################################################################################################################
 echo "Done!"
 # loop forever for debugging only
