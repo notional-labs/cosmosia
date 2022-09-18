@@ -132,6 +132,12 @@ for service_name in $SERVICES_JSONRPC; do
         location ~* ^/websocket/(.*) {
             $HEADER_OPTIONS
             $HEADER_WS
+
+            # fix Disconnected code 1006
+            proxy_read_timeout 86400;
+            proxy_send_timeout 86400;
+            keepalive_timeout  86400;
+
             proxy_pass http://backend_wsjsonrpc_${service_name}/\$1\$is_args\$args;
         }
 
