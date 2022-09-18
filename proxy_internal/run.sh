@@ -79,6 +79,8 @@ for service_name in $SERVICES; do
     }
 EOT
   COUNTER=$(( COUNTER + 1 ))
+  varname="token_$COUNTER"
+  service_with_token="$service_name-${!varname}"
 
   cat <<EOT >> /etc/nginx/endpoints.conf
     # REST/API
@@ -94,6 +96,8 @@ EOT
     }
 EOT
   COUNTER=$(( COUNTER + 1 ))
+  varname="token_$COUNTER"
+  service_with_token="$service_name-${!varname}"
 
   cat <<EOT >> /etc/nginx/endpoints.conf
     # gRPC
