@@ -113,7 +113,7 @@ done
 
 SERVICES_JSONRPC="evmos evmos-testnet-archive"
 
-for service_name in $SERVICES; do
+for service_name in $SERVICES_JSONRPC; do
   varname="token_$COUNTER"
   service_with_token="$service_name-${!varname}"
 
