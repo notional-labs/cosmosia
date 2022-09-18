@@ -65,7 +65,7 @@ http {
     sendfile        on;
     keepalive_timeout  65;
     types_hash_max_size 4096;
-    server_names_hash_bucket_size 128;
+    server_names_hash_bucket_size 512;
 
     server {
         listen       80;
