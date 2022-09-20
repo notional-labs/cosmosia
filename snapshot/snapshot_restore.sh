@@ -48,7 +48,12 @@ else
   elif [ $( echo "${chain_name}" | egrep -c "^(evmos)$" ) -ne 0 ]; then
     # this is a temporary fix for evmos ethermint jsonrpc Batch request over websocket
     go mod tidy
-    go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.18.0_fix_ws
+    version = "v8.1.0"
+    if [[ $version == "v8.1.0" ]]; then
+      go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.19.2_fix_ws
+    else
+      go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.18.0_fix_ws
+    fi
     go mod tidy
   else
     go mod tidy
