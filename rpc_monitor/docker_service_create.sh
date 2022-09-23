@@ -8,6 +8,7 @@ docker service rm rpc_monitor
 docker service create \
   --name rpc_monitor \
   --replicas 1 \
+  --constraint 'node.hostname!=cosmosia16' \
   --network cosmosia \
   --network net1 \
   --network net2 \
