@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel jq dnsutils git nodejs npm yarn python2 cronie screen
+pacman -S --noconfirm base-devel jq dnsutils git nodejs npm yarn cronie screen
 
 
 ########################################################################################################################
