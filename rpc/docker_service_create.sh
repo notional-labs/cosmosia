@@ -43,6 +43,7 @@ docker service rm $rpc_service_name
 docker service create \
   --name $rpc_service_name \
   --replicas 1 \
+  --constraint 'node.hostname!=cosmosia16' \
   --network $network \
   --label 'cosmosia.service=rpc' \
   --endpoint-mode dnsrr \
