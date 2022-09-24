@@ -94,7 +94,16 @@ cd /root/bdjuno/hasura
 
 
 echo "start bdjuno"
-screen -S bdjuno -dm $HOME/go/bin/bdjuno start
+
+cat <<'EOT' > $HOME/start_bdjuno.sh
+while true; do
+  $HOME/go/bin/bdjuno start
+  sleep 30
+done
+EOT
+
+
+screen -S bdjuno -dm $HOME/start_bdjuno.sh
 
 ########################################################################################################################
 echo "Done!"
