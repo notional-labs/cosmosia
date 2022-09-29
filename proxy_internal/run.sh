@@ -114,7 +114,8 @@ EOT
   COUNTER=$(( COUNTER + 1 ))
 done
 
-
+# generate for jsonrpc start from COUNTER 500
+COUNTER=500
 SERVICES_JSONRPC="evmos evmos-testnet-archive"
 
 for service_name in $SERVICES_JSONRPC; do
