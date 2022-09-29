@@ -1,7 +1,7 @@
 
 cd $HOME/cosmosia/rpc_monitor
 
-RPC_SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |egrep -o "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
+RPC_SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 #TMP_DIR="$HOME/tmp"
 TMP_DIR="./web/build"
 TMP_STATUS_FILE="$TMP_DIR/snapshot_sizes.json"
