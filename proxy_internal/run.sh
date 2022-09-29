@@ -23,7 +23,7 @@ done
 
 # generate endpoints.conf
 SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
-
+echo "" > /etc/nginx/endpoints.conf
 
 HEADER_CORS=$(cat <<-END
         proxy_hide_header 'Access-Control-Allow-Origin';
