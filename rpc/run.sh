@@ -88,23 +88,5 @@ echo "##########################################################################
 echo "start chain..."
 supervisorctl start chain
 
-########################################################################################################################
-# cron
-
-# pick a random hour to restart service
-random_hour=$(( ${RANDOM} % 24 ))
-
-cat <<EOT > $HOME/restart_cronjob.sh
-/usr/sbin/supervisorctl stop chain
-sleep 20
-/usr/sbin/supervisorctl start chain
-EOT
-
-# need for osmosis and osmosis-testnet only, will be removed in the future versions
-if [ $( echo "${chain_name}" | egrep -c "^(osmosis|osmosis-testnet)$" ) -ne 0 ]; then
-  echo "0 $random_hour * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
-
-  crond
-fi
 
 loop_forever

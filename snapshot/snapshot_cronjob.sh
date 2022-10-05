@@ -35,14 +35,6 @@ echo "data_version=$data_version"
 supervisorctl stop chain
 sleep 60
 
-# need for osmosis only, will be removed in the future versions
-if [ $( echo "${chain_name}" | egrep -c "^(osmosis|osmosis-testnet)$" ) -ne 0 ]; then
-  supervisorctl start chain
-  sleep 60
-  supervisorctl stop chain
-  sleep 60
-fi
-
 echo "#################################################################################################################"
 echo "pruning..."
 echo "snapshot_prune=$snapshot_prune"
