@@ -37,13 +37,18 @@ data_version=$(find_current_data_version)
 
 rpc_service_name="rpc_${chain_name}_${data_version}"
 
+constraint="node.labels.cosmosia.archive!=true"
+if [ -z "${chain_name##*$archive*}" ]; then
+  constraint='node.labels.cosmosia.archive==true'
+fi
+
 # delete existing service
 docker service rm $rpc_service_name
 
 docker service create \
   --name $rpc_service_name \
   --replicas 1 \
-  --constraint 'node.hostname!=cosmosia16' \
+  --constraint $constraint \
   --network $network \
   --label 'cosmosia.service=rpc' \
   --endpoint-mode dnsrr \
