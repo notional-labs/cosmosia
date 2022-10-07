@@ -131,3 +131,12 @@ scrape_configs:
   - job_name: lb_passage
     static_configs:
       - targets: ['tasks.lb_passage:2019']
+  - job_name: lb_osmosis-testnet
+    static_configs:
+      - targets: ['tasks.lb_osmosis-testnet:2019']
+  - job_name: lb_evmos-archive
+    static_configs:
+      - targets: ['tasks.lb_evmos-archive:2019']
+  - job_name: lb_stride
+    static_configs:
+      - targets: ['tasks.lb_stride:2019']
