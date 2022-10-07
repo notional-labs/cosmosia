@@ -38,7 +38,7 @@ data_version=$(find_current_data_version)
 rpc_service_name="rpc_${chain_name}_${data_version}"
 
 constraint="node.labels.cosmosia.archive!=true"
-if [ -z "${chain_name##*$archive*}" ]; then
+if [[ $chain_name =~ "archive" ]]; then
   constraint='node.labels.cosmosia.archive==true'
 fi
 
