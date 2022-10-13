@@ -44,7 +44,7 @@ body {
 
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
 
-  height: 20em;
+  min-height: 10em;
   width: 13em;
   margin: 2em;
   padding: 1em;
