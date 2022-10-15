@@ -24,7 +24,7 @@ nvm install v10.24.1
 yarn set version 1.22.1
 
 cd $HOME
-git clone --single-branch --branch custom_rpcmonitor_evmos https://github.com/notional-labs/cosmosia
+git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
 
 ########################################################################################################################
 # web
