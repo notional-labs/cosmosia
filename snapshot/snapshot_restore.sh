@@ -59,7 +59,7 @@ else
       go mod tidy
     elif [[ $version == "v8.2.3" ]]; then
       go mod tidy
-      go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.19.3-fix-ws
+      go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.19.3-fix_ws
       go mod tidy
     fi
   else
