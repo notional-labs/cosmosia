@@ -47,11 +47,17 @@ else
     go mod tidy -compat=1.17
   elif [ $( echo "${chain_name}" | egrep -c "^(evmos|evmos-archive)$" ) -ne 0 ]; then
     # this is a temporary fix for evmos ethermint jsonrpc Batch request over websocket
-    go mod tidy
-    go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.19.2_fix_ws
-    go mod tidy
-    go mod edit -replace github.com/cosmos/cosmos-sdk=github.com/baabeetaa/cosmos-sdk@v0.45.8_fix_cannot_delete_latest_saved_version
-    go mod tidy
+    if [[ $version == "v8.2.0" ]]; then
+      go mod tidy
+      go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.19.2_fix_ws
+      go mod tidy
+      go mod edit -replace github.com/cosmos/cosmos-sdk=github.com/baabeetaa/cosmos-sdk@v0.45.8_fix_cannot_delete_latest_saved_version
+      go mod tidy
+    elif [[ $version == "v8.2.3" ]]; then
+      go mod tidy
+      go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.19.3-fix-ws
+      go mod tidy
+    fi
   else
     go mod tidy
   fi
