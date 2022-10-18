@@ -116,7 +116,7 @@ done
 
 # generate for jsonrpc start from COUNTER 500
 COUNTER=500
-SERVICES_JSONRPC="evmos evmos-testnet-archive"
+SERVICES_JSONRPC="evmos evmos-testnet-archive evmos-archive"
 
 for service_name in $SERVICES_JSONRPC; do
   varname="token_$COUNTER"
