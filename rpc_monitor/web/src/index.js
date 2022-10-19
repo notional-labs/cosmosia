@@ -6,7 +6,7 @@ import App from './containers/App';
 import configureStore from './configureStore';
 import history from './utils/history';
 import appSaga from './containers/App/saga';
-import './style.scss';
+import './style.css';
 
 // Create redux store with history
 const initialState = {};
