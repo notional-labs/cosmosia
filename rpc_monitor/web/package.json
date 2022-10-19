@@ -15,7 +15,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "antd": "^3.19.3",
+    "antd": "^4.23.6",
     "assert": "^2.0.0",
     "connected-react-router": "^6.4.0",
     "dotenv": "4.0.0",
