@@ -1,27 +1,15 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel jq dnsutils git yarn cronie screen
+pacman -S --noconfirm base-devel jq dnsutils git yarn cronie screen python
 
-
-########################################################################################################################
-# Prepare
-
-# install python2 from source as its no longer available
-cd $HOME
-curl -o Python-2.7.10.tgz https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
-tar -zxf Python-2.7.10.tgz
-cd Python-2.7.10
-./configure
-make
-make install
 
 # install nodejs
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-nvm install v10.24.1
+nvm install v16.16.0
 
-yarn set version 1.22.1
+yarn set version v16.16.0
 
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
