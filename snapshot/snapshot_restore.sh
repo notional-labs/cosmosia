@@ -89,7 +89,11 @@ echo "download snapshot:"
 # delete node home
 rm -rf $node_home/*
 
-$HOME/go/bin/$daemon_name init test
+chain_id_arg=""
+if [[ $chain_name == "evmos-testnet-archive" ]]; then
+  chain_id_arg="--chain-id=evmos_9000-4"
+fi
+$HOME/go/bin/$daemon_name init $chain_id_arg test
 
 # backup $node_home/data/priv_validator_state.json as it is not included in snapshot from some providers.
 mv $node_home/data/priv_validator_state.json $node_home/config/
