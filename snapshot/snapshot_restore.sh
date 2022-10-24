@@ -45,7 +45,7 @@ else
 
   if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance)$" ) -ne 0 ]; then
     go mod tidy -compat=1.17
-  elif [ $( echo "${chain_name}" | egrep -c "^(evmos|evmos-archive)$" ) -ne 0 ]; then
+  elif [ $( echo "${chain_name}" | egrep -c "^(evmos|evmos-archive|evmos-testnet-archive)$" ) -ne 0 ]; then
     # this is a temporary fix for evmos ethermint jsonrpc Batch request over websocket
     if [[ $version == "v8.1.0" ]]; then
       go mod tidy
