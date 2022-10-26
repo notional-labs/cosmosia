@@ -32,7 +32,7 @@ docker service rm $SERVICE_NAME
 docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
-  --constraint 'node.hostname!=cosmosia0' \
+  --constraint "node.labels.cosmosia.lb.${chain_name}==true" \
   --network $network \
   --network cosmosia \
   --endpoint-mode dnsrr \
