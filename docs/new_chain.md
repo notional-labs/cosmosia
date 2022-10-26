@@ -42,17 +42,7 @@ Command executed on a docker swarm manager node
    sh docker_service_create.sh
    ```
    
-8. Update DNS record
-   
-   Add 4 CNAME records with value `cosmosia.notional.ventures`
-
-      - api-chainname-ia
-      - grpc-chainname-ia
-      - rpc-chainname-ia
-      - ws-chainname-ia
-   
-  
-9. Update [uptime monitor](https://status.notional.ventures/status/cosmosia)
+8. Update [uptime monitor](https://status.notional.ventures/status/cosmosia)
 
       - Api Service
       - Snapshot Service
