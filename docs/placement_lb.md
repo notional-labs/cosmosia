@@ -2,6 +2,7 @@
 
 https://github.com/notional-labs/cosmosia/issues/197
 
+Need at least 2 nodes in case one node down.
 
 | No | Chain                 | Node1       | Node 2      |
 |---:|:----------------------|:-----------:|:-----------:|
@@ -48,7 +49,7 @@ https://github.com/notional-labs/cosmosia/issues/197
 | 41 | injective             | cosmosia5   | cosmosia6   |
 | 42 | kujira                | cosmosia6   | cosmosia7   |
 | 43 | passage               | cosmosia7   | cosmosia8   |
-| 44 | osmosis-testnet       | cosmosia8   | cosmosia8   |
+| 44 | osmosis-testnet       | cosmosia8   | cosmosia9   |
 | 45 | evmos-archive         | cosmosia9   | cosmosia10  |
 | 46 | stride                | cosmosia10  | cosmosia11  |
 | 47 | dig-archive           | cosmosia11  | cosmosia12  |
@@ -58,15 +59,15 @@ https://github.com/notional-labs/cosmosia/issues/197
 
 To add label to a node:
 ```console
-docker node update --label-add cosmosia.lb=osmosis cosmosia1
+docker node update --label-add cosmosia.lb.osmosis=true cosmosia1
 ```
 
 To remove label to a node:
 ```console
-docker node update --label-rm cosmosia.lb cosmosia1
+docker node update --label-rm cosmosia.lb.osmosis cosmosia1
 ```
 
 To list node with label:
 ```console
-docker node ls -f node.label=cosmosia.lb=osmosis
+docker node ls -f node.label=cosmosia.lb.osmosis=true
 ```
