@@ -37,10 +37,7 @@ data_version=$(find_current_data_version)
 
 rpc_service_name="rpc_${chain_name}_${data_version}"
 
-constraint="node.hostname!=cosmosia0"
-if [[ $chain_name =~ "evmos-archive" ]]; then
-  constraint='node.labels.cosmosia.archive==true'
-fi
+constraint="node.labels.cosmosia.rpc.${chain_name}==true"
 
 # delete existing service
 docker service rm $rpc_service_name
