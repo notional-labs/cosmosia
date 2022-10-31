@@ -61,6 +61,10 @@ else
       go mod tidy
       go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.19.3-fix_ws
       go mod tidy
+    elif [[ $version == "v9.1.0" ]]; then
+      go mod tidy
+      go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.19.3-fix_ws
+      go mod tidy
     fi
   else
     go mod tidy
