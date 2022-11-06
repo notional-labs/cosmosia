@@ -27,7 +27,7 @@ get_links () {
       }
       ')"
 
-    echo "<p><a href=\"/${service_name}/\">$service_name</a> <a href=\"/http://${snapshot_node}.notional.ventures:11111/$service_name/\">[direct link]</a></p>"
+    echo "<p><a href=\"/${service_name}/\">$service_name</a> <a href=\"http://${snapshot_node}.notional.ventures:11111/$service_name/\">[direct link]</a></p>"
   done
 }
 
