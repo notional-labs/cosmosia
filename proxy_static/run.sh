@@ -8,14 +8,26 @@ wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 
 ########################################################################################################################
 # nginx
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_static/nginx.conf > /etc/nginx/nginx.conf
+curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_static/nginx.conf" > /etc/nginx/nginx.conf
 
 # generate index.html
-SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
+curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini" > $HOME/chain_registry.ini
+SERVICES=$(cat $HOME/chain_registry.ini |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 
 get_links () {
   for service_name in $SERVICES; do
-    echo "<p><a href=\"/${service_name}/\">$service_name</a></p>"
+    eval "$(cat $HOME/chain_registry.ini |awk -v TARGET=$service_name -F ' = ' '
+      {
+        if ($0 ~ /^\[.*\]$/) {
+          gsub(/^\[|\]$/, "", $0)
+          SECTION=$0
+        } else if (($2 != "") && (SECTION==TARGET)) {
+          print $1 "=" $2
+        }
+      }
+      ')"
+
+    echo "<p><a href=\"/${service_name}/\">$service_name</a> <a href=\"/http://${snapshot_node}.notional.ventures:11111/$service_name/\">[direct link]</a></p>"
   done
 }
 
@@ -31,6 +43,8 @@ cat <<EOT > /usr/share/nginx/html/index.html
 
 <body>
   <h3>Snapshots:</h3>
+  <p>Use direct link for faster download</p>
+
   ${links}
 </body>
 </html>
