@@ -1,6 +1,7 @@
 - [Home](/)
   
 - Guide
+  - [Overview](overview.md)
   - Snapshots
     - [PebbleDB](pebbledb.md)
   
