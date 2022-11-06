@@ -65,4 +65,4 @@ See [status page](https://status.notional.ventures/) of our cluster.
 Add a new chain? Follow this [guide](docs/new_chain.md)
 
 ### Docs
-See [Docs](./docs/)
+See [Docs](https://notional-labs.github.io/cosmosia/#/)
