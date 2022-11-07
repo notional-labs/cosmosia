@@ -77,7 +77,7 @@ cp $node_home/config/addrbook.json /snapshot/
 
 cat <<EOT > /snapshot/chain.json
 {
-    "snapshot_url": "./$chain_name/$TAR_FILENAME",
+    "snapshot_url": "http://${snapshot_node}.notional.ventures:11111/$chain_name/$TAR_FILENAME",
     "file_size": $FILESIZE,
     "data_version": $data_version
 }
