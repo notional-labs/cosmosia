@@ -3,7 +3,8 @@
 - Guide
   - [Overview](overview.md)
   - Snapshots
-    - [PebbleDB](pebbledb.md)
+    - [Usage](snapshot_usage.md)
+    - [Workaround upgarding with PebbleDB](pebbledb.md)
   
   - RPCs
     - [PRCs](rpc.md)
