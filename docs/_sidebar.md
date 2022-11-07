@@ -7,6 +7,7 @@
   
   - RPCs
     - [PRCs](rpc.md)
+    - [Testing an Endpoint](rpc_testing_endpoints.md)
 
   - Cluster Setup
     - [Prepare](prepare.md)
