@@ -1,4 +1,4 @@
-## PebbleDB
+## Workaround when upgrading a chain running PebbleDB
 
 Just like goleveldb, go-sqlite; PebbleDB is RocksDB in golang to avoid CGO overhead.
 
