@@ -11,6 +11,7 @@
     - [Testing an Endpoint](rpc_testing_endpoints.md)
 
   - Admin
+    - [Upgrade a chain](admin_upgrade_a_chain.md)
     - [Re-deploy a Pruned RPC](admin_redploy_rpc.md)
     - Cluster Setup
       - [Prepare](prepare.md)
