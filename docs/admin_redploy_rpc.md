@@ -4,7 +4,7 @@ How to re-deploy a rpc service from start to finish" for Cosmosia sysadmin to ma
 
 ### Video Log
 
-[Cosmosia Video Log - Re-deploy a pruned Rpc](http://www.youtube.com/embed/IhbecUMjSdQ ':include :type=iframe width=100% height=400px')
+[Cosmosia Video Log - Re-deploy a pruned Rpc](https://www.youtube.com/embed/IhbecUMjSdQ ':include :type=iframe width=100% height=400px')
 
 
 ### Guide
