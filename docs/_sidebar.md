@@ -4,7 +4,7 @@
   - [Overview](overview.md)
   - Snapshots
     - [Usage](snapshot_usage.md)
-    - [Workaround upgarding with PebbleDB](pebbledb.md)
+    - [PebbleDB Notes](pebbledb.md)
   
   - RPCs
     - [PRCs](rpc.md)
