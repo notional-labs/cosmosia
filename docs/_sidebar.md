@@ -10,10 +10,12 @@
     - [PRCs](rpc.md)
     - [Testing an Endpoint](rpc_testing_endpoints.md)
 
-  - Cluster Setup
-    - [Prepare](prepare.md)
-    - [LVM](lvm.md)
-    - [Service Placement](service_placement.md)  
+  - Admin
+    - [Re-deploy a Pruned RPC](admin_redploy_rpc.md)
+    - Cluster Setup
+      - [Prepare](prepare.md)
+      - [LVM](lvm.md)
+      - [Service Placement](service_placement.md)  
 
 - Links
   - [Uptime](https://status.notional.ventures/status/cosmosia)
