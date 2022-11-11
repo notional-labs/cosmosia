@@ -77,10 +77,68 @@ How to upgrade a chain including RPC service and snapshot service.
    
    
 ### Upgrade Snapshot
-TODO...
+#### A. Get into snapshot container console:
+1. Figure out which swarm node running the snapshot service by running this command in a swarm manager node:
+    
+    ```console
+    docker service ps snapshot_chihuahua
+    ```
+
+    ![upgrade_chain_7.png](upgrade_chain_7.png)
+   
+    Its in `cosmosia4` node in this example.
+
+2. Then get into `cosmosia4` console and run this command to figure out which container running the snapshot service:
+
+    ```console
+    docker ps -a |grep snapshot_chihuahua
+    ```
+
+    ![upgrade_chain_8.png](upgrade_chain_8.png)
+   
+    Its `f52500b02cac` in this example.
+
+
+3. Now, get into the container console by running this command on `cosmosia4` node:
+
+    ```console
+    docker exec -it f52500b02cac /bin/bash
+    ```
+
+    ![upgrade_chain_9.png](upgrade_chain_9.png)
+
+#### B. Do the upgrade
+The process is similar to [Upgrade RPCs / Do the upgrade](https://notional-labs.github.io/cosmosia/#/admin_upgrade_a_chain?id=b-do-the-upgrade)
+
+**Note**: There is a cron job to take snapshot daily, disable it while doing the upgrade to void cronjob running during the upgrading process then remember to enable it back when done.
+
+Disable crond command:
+```console
+killall crond
+```
+
+Enable crond command:
+```console
+crond
+```
 
 ### Create a new snapshot (post-upgrade)
-TODO...
+After upgrading rpc for snapshot service in step above, we'll like to take a post-upgrading snapshot manually.
+
+crond should be disabled in the process.
+
+Run the `snapshot_cronjob.sh` to create the new snapshot. Should be run with `screen` to avoid interrupting like losing network connection.
+
+```console
+screen -S snapshot
+
+# in screen
+sh snapshot_cronjob.sh
+```
+
+![upgrade_chain_10.png](upgrade_chain_10.png)
+
 
 ### Create a Pull Request to update `chain-registry.ini`
-TODO...
+
+![upgrade_chain_11.png](upgrade_chain_11.png)
