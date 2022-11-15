@@ -10,11 +10,14 @@ is about the same to goleveldb but [disk io](https://github.com/notional-labs/co
 
 However, there is an issue when upgrading chain (`BINARY UPDATED BEFORE TRIGGER!`).
 This is not a database issue but bugs of the sdk. At the upgrade-block, the sdk will panic without flushing data to disk 
-or closing dbs properly.
+or closing dbs properly. You will properly see this common error:
+> ```bash
+> panic: runtime error: invalid memory address or nil pointer dereference
+> [signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x160652d]
 
 **Workaround:**
 
-1. After seeing `UPGRADE "xxxx" NEED at height....`, restart current version with `-X github.com/tendermint/tm-db.ForceSync=1`
+1. After seeing `panic: UPGRADE "xxxx" NEED at height....`, restart current version with `-X github.com/tendermint/tm-db.ForceSync=1`
 2. Restart new version as normal
 
 Example: Upgrading sifchain
@@ -27,17 +30,18 @@ go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebb
 go mod tidy
 go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./cmd/sifnoded
 
-$HOME/go/bin/sifnoded start --db_backend=pebbledb
+$HOME/go/bin/sifnoded start --db_backend=pebbledb # or supervisorctl start chain
 
 
 # step 2
+## Stop the node again
 git reset --hard
 git checkout v0.15.0
 go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
 go mod tidy
 go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/sifnoded
 
-$HOME/go/bin/sifnoded start --db_backend=pebbledb
+$HOME/go/bin/sifnoded start --db_backend=pebbledb # or supervisorctl start chain
 ```
 
 ## Converting LevelDB to PebbleDB
