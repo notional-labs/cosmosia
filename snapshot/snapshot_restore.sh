@@ -94,7 +94,7 @@ rm -rf $node_home/data/*
 cd $node_home
 
 URL="http://tasks.snapshot_$chain_name/chain.json"
-URL=`curl -s $URL |jq -r '.snapshot_url'`
+URL=`curl -Ls $URL |jq -r '.snapshot_url'`
 URL="http://tasks.snapshot_$chain_name/${URL##*/}"
 echo "URL=$URL"
 
@@ -146,4 +146,4 @@ echo "download genesis..."
 curl -Ls "https://snapshot.notional.ventures/$chain_name/genesis.json" > $node_home/config/genesis.json
 
 echo "download addrbook..."
-curl -fso $node_home/config/addrbook.json "https://snapshot.notional.ventures/$chain_name/addrbook.json"
+curl -Lfso $node_home/config/addrbook.json "https://snapshot.notional.ventures/$chain_name/addrbook.json"

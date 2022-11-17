@@ -9,7 +9,7 @@ TMP_STATUS_FILE="$TMP_DIR/snapshot_sizes.json"
 
 service_str=""
 for service_name in $RPC_SERVICES; do
-  file_size=$(curl -s "https://snapshot.notional.ventures/$service_name/chain.json" |jq -r '.file_size')
+  file_size=$(curl -Ls "https://snapshot.notional.ventures/$service_name/chain.json" |jq -r '.file_size')
   if [[ ! -z "$service_str" ]]; then
     service_str="$service_str,"$'\n'
   fi

@@ -27,7 +27,7 @@ git_branch=$(git symbolic-ref --short -q HEAD)
 # functions
 find_current_data_version () {
   ver=0
-  ver=$(curl -s "https://snapshot.notional.ventures/$chain_name/chain.json" |jq -r '.data_version // 0')
+  ver=$(curl -Ls "https://snapshot.notional.ventures/$chain_name/chain.json" |jq -r '.data_version // 0')
   echo $ver
 }
 
