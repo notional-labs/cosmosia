@@ -27,7 +27,7 @@ get_links () {
       }
       ')"
 
-    echo "<p><a href=\"/${service_name}/\">$service_name</a> <a href=\"http://${snapshot_node}.notional.ventures:11111/$service_name/\">[direct link]</a></p>"
+    echo "<p><a href=\"http://${snapshot_node}.notional.ventures:11111/$service_name/\">$service_name</a></p>"
   done
 }
 
@@ -43,12 +43,33 @@ cat <<EOT > /usr/share/nginx/html/index.html
 
 <body>
   <h3>Snapshots:</h3>
-  <p>Use direct link for faster download</p>
 
   ${links}
 </body>
 </html>
 EOT
+
+
+REDIRECT_CONFIG_FILE="/etc/nginx/redirect_snapshots.conf"
+# generate upstream.conf
+echo "" > $REDIRECT_CONFIG_FILE
+for service_name in $SERVICES; do
+  eval "$(cat $HOME/chain_registry.ini |awk -v TARGET=$service_name -F ' = ' '
+      {
+        if ($0 ~ /^\[.*\]$/) {
+          gsub(/^\[|\]$/, "", $0)
+          SECTION=$0
+        } else if (($2 != "") && (SECTION==TARGET)) {
+          print $1 "=" $2
+        }
+      }
+      ')"
+
+    cat <<EOT >> $REDIRECT_CONFIG_FILE
+        rewrite ^/${service_name}/(.*)$ http://${snapshot_node}.notional.ventures:11111/${service_name}/\$1\$is_args\$args redirect;
+EOT
+done
+
 
 # run nginx with screen to avoid log to docker
 screen -S nginx -dm /usr/sbin/nginx -g "daemon off;"
