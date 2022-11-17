@@ -203,7 +203,7 @@ sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.to
 sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
 
 echo "download addrbook..."
-curl -fso $node_home/config/addrbook.json "https://snapshot.notional.ventures/$chain_name/addrbook.json"
+curl -Lfso $node_home/config/addrbook.json "https://snapshot.notional.ventures/$chain_name/addrbook.json"
 
 echo "download genesis..."
 curl -Ls "https://snapshot.notional.ventures/$chain_name/genesis.json" > $node_home/config/genesis.json
