@@ -43,7 +43,7 @@ else
 
   go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
 
-  if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|akash)$" ) -ne 0 ]; then
     go mod tidy -compat=1.17
   elif [ $( echo "${chain_name}" | egrep -c "^(evmos|evmos-archive|evmos-testnet-archive)$" ) -ne 0 ]; then
     # this is a temporary fix for evmos ethermint jsonrpc Batch request over websocket
