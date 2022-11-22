@@ -132,6 +132,7 @@ sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_h
 sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
 ###
 sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
+sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/config/app.toml
 
 echo "download genesis..."
 curl -Ls "https://snapshot.notional.ventures/$chain_name/genesis.json" > $node_home/config/genesis.json
