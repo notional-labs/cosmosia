@@ -11,6 +11,7 @@
 - Admin
   - [Upgrade a chain](admin_upgrade_a_chain.md)
   - [Re-deploy a Pruned RPC](admin_redploy_rpc.md)
+  - [SSL](ssl.md)   
   - Cluster Setup
     - [Prepare](prepare.md)
     - [LVM](lvm.md)
