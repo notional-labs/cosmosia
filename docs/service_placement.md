@@ -63,7 +63,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 45 | evmos-archive         | cosmosia9   | cosmosia10  | cosmosia16  | cosmosia17  | cosmosia18  |
 | 46 | stride                | cosmosia10  | cosmosia11  |             |             |             |
 | 47 | dig-archive           | cosmosia11  | cosmosia12  |             |             |             |
-| 48 | osmosis-archive       | cosmosia4   | cosmosia10  |             |             |             |
+| 48 | osmosis-archive       | cosmosia19   |            |             |             |             |
 
 
 #### Docker commands
