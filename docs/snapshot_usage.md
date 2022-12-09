@@ -39,13 +39,6 @@ go mod tidy
 go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
 ```
 
-**comdex**
-```console
-go mod edit -go=1.18
-go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
-go mod tidy
-go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o /root/go/bin/comdex ./node
-```
 
 **cyber | provenance**
 ```console

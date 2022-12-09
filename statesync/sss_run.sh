@@ -118,8 +118,6 @@ cd $repo_name
 
 if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra)$" ) -ne 0 ]; then
   go mod edit -dropreplace github.com/tecbot/gorocksdb
-elif [[ $chain_name == "comdex" ]]; then
-  go mod edit -go=1.18
 elif [[ $chain_name == "gravitybridge" ]]; then
   cd module
 fi
