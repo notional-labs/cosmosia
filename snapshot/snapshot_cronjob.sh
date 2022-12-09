@@ -66,9 +66,7 @@ TAR_FILE_PATH="/snapshot/$TAR_FILENAME"
 
 # snapshot file includes ALL dirs in $node_home excluding config dir
 included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
-
-#tar -czvf $TAR_FILE_PATH $included_dirs
-tar -cvf - $included_dirs |gzip --fast > $TAR_FILE_PATH
+tar -cvf - $included_dirs |pigz --best -p8 > $TAR_FILE_PATH
 
 FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
 
