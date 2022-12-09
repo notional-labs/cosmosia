@@ -104,7 +104,7 @@ if [[ -z $URL ]]; then
 fi
 
 echo "download and extract the snapshot to current path..."
-wget -O - "$URL" |tar -xzf -
+wget -O - "$URL" |pigz -dc |tar -xf -
 
 # restore priv_validator_state.json if it does not exist in the snapshot
 [ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
