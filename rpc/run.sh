@@ -42,7 +42,7 @@ start_flags="$start_flags"
 EOT
 
 pacman -Syu --noconfirm
-pacman -Sy --noconfirm go git base-devel wget jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils
+pacman -Sy --noconfirm go git base-devel wget pigz jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils
 
 ########################################################################################################################
 # restore snapshot
