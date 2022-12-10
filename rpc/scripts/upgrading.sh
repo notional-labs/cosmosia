@@ -50,7 +50,6 @@ step_6 () {
 
 cd $HOME
 source $HOME/env.sh
-source $HOME/chain_info.sh
 
 step_1
 
