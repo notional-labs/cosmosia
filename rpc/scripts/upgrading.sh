@@ -68,8 +68,6 @@ buid_chain () {
   fi
 }
 
-
-
 ########################################################################################################################
 # main
 
@@ -84,7 +82,6 @@ fi
 
 ##################
 # 1. stop chain & delete /var/log/chain.err.log
-
 echo "step 1"
 supervisorctl stop chain
 sleep 5;
@@ -94,27 +91,24 @@ rm "/var/log/chain.err.log"
 ##################
 # 2. build an run old version with "-X github.com/tendermint/tm-db.ForceSync=1"
 echo "step 2"
-
 buid_chain "$version" "true"
-
+sleep 5;
 supervisorctl start chain
 
 ##################
 # 3. watch for "panic: UPGRADE" in /var/log/chain.err.log
 echo "step 3"
-
 tail -f /var/log/chain.err.log |sed '/^panic: UPGRADE / q'
-
+sleep 5;
 ##################
 # 4. stop chain & build and run new version
 echo "step 4"
-
 supervisorctl stop chain
-
-buid_chain "version_new" "false"
-
+sleep 5;
+buid_chain "$version_new" "false"
+sleep 5;
 supervisorctl start chain
-
+sleep 5;
 ##################
 # 5. check synced
 echo "step 5"
