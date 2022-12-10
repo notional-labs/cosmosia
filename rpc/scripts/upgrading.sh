@@ -1,4 +1,4 @@
-set +x
+set -x
 
 version_new="v6.0.1"
 
