@@ -103,7 +103,7 @@ supervisorctl start chain
 # 3. watch for "panic: UPGRADE" in /var/log/chain.err.log
 echo "step 3"
 
-tail -f /var/log/chain.err.log |sed '/^panic: UPGRADE$/ q'
+tail -f /var/log/chain.err.log |sed '/^panic: UPGRADE / q'
 
 ##################
 # 4. stop chain & build and run new version
