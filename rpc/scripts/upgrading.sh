@@ -13,6 +13,11 @@ echo "version_new=$version_new"
 cd $HOME
 source $HOME/env.sh
 
+if [[ -z $chain_name ]]; then
+  echo "No chain_name"
+  exit
+fi
+
 ########################################################################################################################
 # functions
 
