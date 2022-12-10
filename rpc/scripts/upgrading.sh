@@ -1,6 +1,12 @@
-set -x
+# usage: ./upgrading.sh <new_version>
+# eg., ./upgrading.sh v6.0.1
 
-version_new="v6.0.1"
+version_new="$2"
+
+if [[ -z version_new ]]; then
+  echo "No version_new"
+  exit
+fi
 
 ########################################################################################################################
 # functions
