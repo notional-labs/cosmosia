@@ -97,7 +97,7 @@ echo "step 2"
 
 buid_chain "$version" "true"
 
-systemctl start chain
+supervisorctl start chain
 
 ##################
 # 3. watch for "panic: UPGRADE" in /var/log/chain.err.log
@@ -109,11 +109,11 @@ tail -f /var/log/chain.err.log |sed '/^panic: UPGRADE$/ q'
 # 4. stop chain & build and run new version
 echo "step 4"
 
-systemctl stop chain
+supervisorctl stop chain
 
 buid_chain "version_new" "false"
 
-systemctl start chain
+supervisorctl start chain
 
 ##################
 # 5. check synced
