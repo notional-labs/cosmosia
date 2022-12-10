@@ -33,6 +33,7 @@ eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/da
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
+chain_name="$chain_name"
 git_repo="$git_repo"
 version="$version"
 daemon_name="$daemon_name"
