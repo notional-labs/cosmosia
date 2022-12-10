@@ -15,7 +15,7 @@ get_next_version () {
 }
 
 data_version=$(find_current_data_version)
-source $HOME/chain_info.sh
+source $HOME/env.sh
 
 ##############
 echo "wait till chain get synched..."

@@ -32,7 +32,7 @@ eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/da
 
 
 # write chain info to bash file, so that cronjob could know
-cat <<EOT >> $HOME/chain_info.sh
+cat <<EOT >> $HOME/env.sh
 chain_name="$chain_name"
 git_repo="$git_repo"
 version="$version"
@@ -64,7 +64,7 @@ sleep 5
 
 # start_chain.sh script
 cat <<EOT >> $HOME/start_chain.sh
-source $HOME/chain_info.sh
+source $HOME/env.sh
 $HOME/go/bin/$daemon_name start --db_backend=pebbledb $start_flags
 EOT
 
