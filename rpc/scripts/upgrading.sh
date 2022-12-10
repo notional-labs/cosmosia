@@ -3,7 +3,7 @@
 
 version_new="$2"
 
-if [[ -z version_new ]]; then
+if [[ -z $version_new ]]; then
   echo "No version_new"
   exit
 fi
@@ -120,7 +120,7 @@ sleep 5;
 # 5. check synced
 echo "step 5"
 
-catching_up=true
+catching_up="true"
 while [[ "$catching_up" != "false" ]]; do
   sleep 60;
   catching_up=$(curl --silent --max-time 3 "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
