@@ -1,15 +1,8 @@
 # PebbleDB Notes
 
 ## Workaround when upgrading a chain running PebbleDB
-
-Just like goleveldb, go-sqlite; PebbleDB is RocksDB in golang to avoid CGO overhead.
-
-After [migrating 40 chains from goleveldb to pebbledb](https://github.com/notional-labs/cosmosia/issues/86), performance 
-is about the same to goleveldb but [disk io](https://github.com/notional-labs/cosmosia/issues/81) is very much lower.
-( Why diskio matters? I see bottleneck of the chain is iavl, and bottleneck of iavl is diskio ) 
-
-However, there is an issue when upgrading chain (`BINARY UPDATED BEFORE TRIGGER!`).
-This is not a database issue but bugs of the sdk. At the upgrade-block, the sdk will panic without flushing data to disk 
+There is an issue when upgrading chain (`BINARY UPDATED BEFORE TRIGGER!`).
+This is not a PebbleDB issue but like a bug of the sdk. At the upgrade-block, the sdk will panic without flushing data to disk 
 or closing dbs properly.
 
 **Workaround:**
