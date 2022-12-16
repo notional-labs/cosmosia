@@ -389,6 +389,14 @@
 | API      | https://api-osmosis-archive-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-osmosis-archive-ia.cosmosia.notional.ventures/ |
 
+### 49. Quicksilver
+
+| Protocol | Endpoint                                                    |
+|----------|:------------------------------------------------------------|
+| RPC      | https://rpc-quicksilver-ia.cosmosia.notional.ventures/  |
+| API      | https://api-quicksilver-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-quicksilver-ia.cosmosia.notional.ventures/ |
+
 
 ### Design
 Flow: Proxy (Nginx) => Load Balancer (Caddy) => Rpc nodes
