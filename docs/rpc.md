@@ -391,8 +391,8 @@
 
 ### 49. Quicksilver
 
-| Protocol | Endpoint                                                    |
-|----------|:------------------------------------------------------------|
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
 | RPC      | https://rpc-quicksilver-ia.cosmosia.notional.ventures/  |
 | API      | https://api-quicksilver-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-quicksilver-ia.cosmosia.notional.ventures/ |
