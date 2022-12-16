@@ -140,3 +140,9 @@ scrape_configs:
   - job_name: lb_stride
     static_configs:
       - targets: ['tasks.lb_stride:2019']
+  - job_name: lb_osmosis-archive
+    static_configs:
+      - targets: ['tasks.lb_osmosis-archive:2019']
+  - job_name: lb_quicksilver
+    static_configs:
+      - targets: ['tasks.lb_quicksilver:2019']
