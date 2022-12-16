@@ -36,7 +36,7 @@
 | API      | https://api-akash-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-akash-ia.cosmosia.notional.ventures/ |
 
-### 5. Gaia
+### 5. Gaia / Cosmoshub
 
 | Protocol | Endpoint                                              |
 |----------|:------------------------------------------------------|
@@ -389,7 +389,16 @@
 | API      | https://api-osmosis-archive-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-osmosis-archive-ia.cosmosia.notional.ventures/ |
 
-### 49. Quicksilver
+
+### 49. Gaia / Cosmoshub Archive
+
+| Protocol | Endpoint                                              |
+|----------|:------------------------------------------------------|
+| RPC      | https://rpc-cosmoshub-archive-ia.cosmosia.notional.ventures/  |
+| API      | https://api-cosmoshub-archive-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-cosmoshub-archive-ia.cosmosia.notional.ventures/ |
+
+### 50. Quicksilver
 
 | Protocol | Endpoint                                                |
 |----------|:--------------------------------------------------------|
