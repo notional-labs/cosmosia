@@ -19,10 +19,6 @@ for service_name in $SERVICES; do
           server $lb_ip:8001;
       }
 
-      upstream backend_grpc_$service_name {
-          keepalive 16;
-          server $lb_ip:8003;
-      }
 EOT
   fi
 done
