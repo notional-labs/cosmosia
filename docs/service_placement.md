@@ -64,7 +64,8 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 46 | stride                | cosmosia10  | cosmosia11  |             |             |             |
 | 47 | dig-archive           | cosmosia11  | cosmosia12  |             |             |             |
 | 48 | osmosis-archive       | cosmosia16  |             |             |             |             |
-| 49 | quicksilver           | cosmosia6   | cosmosia8   |             |             |             |
+| 49 | cosmoshub-archive     |             |             |             |             |             |
+| 50 | quicksilver           | cosmosia6   | cosmosia8   |             |             |             |
 
 
 #### Docker commands
@@ -141,7 +142,8 @@ Need at least 2 nodes in case one node down.
 | 46 | stride                | cosmosia10  | cosmosia11  |
 | 47 | dig-archive           | cosmosia11  | cosmosia12  |
 | 48 | osmosis-archive       | cosmosia12  | cosmosia13  |
-| 49 | quicksilver           | cosmosia13  | cosmosia14  |
+| 48 | cosmoshub-archive     |             |             |
+| 50 | quicksilver           | cosmosia13  | cosmosia14  |
 
 
 #### Docker commands
