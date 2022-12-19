@@ -25,7 +25,7 @@ node:
 parsing:
     workers: 1
     listen_new_blocks: true
-    parse_old_blocks: true
+    parse_old_blocks: false
     parse_genesis: true
     start_height: 4595409
     average_block_time: 5s
