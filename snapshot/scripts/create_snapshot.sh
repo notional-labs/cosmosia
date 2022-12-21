@@ -30,16 +30,13 @@ cd $node_home
 rm -rf $node_home/data/snapshots/*
 
 TAR_FILENAME="data_$(date +%Y%m%d_%T |sed 's/://g').tar.gz"
-TAR_FILE_PATH="$HOME/$TAR_FILENAME"
+TAR_FILE_PATH="/snapshot/$TAR_FILENAME"
 
 # snapshot file includes ALL dirs in $node_home excluding config dir
 included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
 tar -cvf - $included_dirs |pigz --best -p8 > $TAR_FILE_PATH
 
 FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
-
-# copy to /snapshot folder
-mv $TAR_FILE_PATH /snapshot/
 
 cat <<EOT > /snapshot/chain.json
 {
