@@ -103,6 +103,9 @@ if [[ -z $chain_name ]]; then
   exit
 fi
 
+# fix supervisorctl creates a dbus-daemon process everytime starting chain
+killall dbus-daemon
+
 # get the data version from chain.json, service name is rpc_$chain_name_$version
 data_version=$(find_current_data_version)
 [[ -z $rpc_service_name ]] && rpc_service_name="rpc_${chain_name}_${data_version}"
