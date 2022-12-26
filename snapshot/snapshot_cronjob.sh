@@ -57,6 +57,9 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
   data_version=$(get_next_version)
 fi
 
+# delete old snapshots before creating new snapshot to save disk space
+cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)
+
 echo "#################################################################################################################"
 echo "creating snapshot file..."
 cd $node_home
@@ -81,5 +84,3 @@ cat <<EOT > /snapshot/chain.json
 }
 EOT
 
-# delete old snapshots
-cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)

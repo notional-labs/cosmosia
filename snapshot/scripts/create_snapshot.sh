@@ -25,6 +25,9 @@ eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/da
 
 echo "node_home=$node_home"
 
+# delete old snapshots before creating new snapshot to save disk space
+cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)
+
 cd $node_home
 
 rm -rf $node_home/data/snapshots/*
@@ -45,8 +48,3 @@ cat <<EOT > /snapshot/chain.json
     "data_version": 0
 }
 EOT
-
-
-# delete old snapshots
-cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)
-
