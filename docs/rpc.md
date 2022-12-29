@@ -418,9 +418,9 @@
 
 | Protocol | Endpoint                                                        |
 |----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-terra-archive-archive-ia.cosmosia.notional.ventures/  |
-| API      | https://api-terra-archive-archive-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-terra-archive-archive-ia.cosmosia.notional.ventures/ |
+| RPC      | https://rpc-terra-archive-ia.cosmosia.notional.ventures/  |
+| API      | https://api-terra-archive-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-terra-archive-ia.cosmosia.notional.ventures/ |
 
 ### Design
 Flow: Proxy (Nginx) => Load Balancer (Caddy) => Rpc nodes
