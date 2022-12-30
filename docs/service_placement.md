@@ -62,7 +62,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 44 | osmosis-testnet       | cosmosia8   | cosmosia9   |             |             |             |
 | 45 | evmos-archive         | cosmosia9   | cosmosia10  | cosmosia16  | cosmosia17  | cosmosia18  |
 | 46 | stride                | cosmosia10  | cosmosia11  |             |             |             |
-| 47 | dig-archive           | cosmosia11  | cosmosia12  |             |             |             |
+| 47 | dig-archive           | cosmosia5   | cosmosia6   |             |             |             |
 | 48 | osmosis-archive       | cosmosia16  |             |             |             |             |
 | 49 | cosmoshub-archive     | cosmosia21  |             |             |             |             |
 | 50 | quicksilver           | cosmosia6   | cosmosia8   |             |             |             |
