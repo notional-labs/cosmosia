@@ -24,7 +24,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 6  | sentinel              | cosmosia5   | cosmosia6   |             |             |             |
 | 7  | emoney                | cosmosia7   | cosmosia8   |             |             |             |
 | 8  | ixo                   | cosmosia8   | cosmosia9   |             |             |             |
-| 9  | juno                  | cosmosia9   | cosmosia10  | cosmosia11  |             |             |
+| 9  | juno                  | cosmosia2   | cosmosia3   |             |             |             |
 | 10 | sifchain              | cosmosia10  | cosmosia11  | cosmosia12  |             |             |
 | 11 | likecoin              | cosmosia11  | cosmosia12  |             |             |             |
 | 12 | kichain               | cosmosia12  | cosmosia13  |             |             |             |
