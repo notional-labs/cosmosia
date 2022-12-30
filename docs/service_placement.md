@@ -43,7 +43,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 25 | dig                   | cosmosia7   | cosmosia8   |             |             |             |
 | 26 | gravitybridge         | cosmosia8   | cosmosia9   |             |             |             |
 | 27 | comdex                | cosmosia9   | cosmosia10  |             |             |             |
-| 28 | cerberus              | cosmosia10  | cosmosia11  |             |             |             |
+| 28 | cerberus              | cosmosia2   | cosmosia3   |             |             |             |
 | 29 | bitsong               | cosmosia2   | cosmosia3   |             |             |             |
 | 30 | assetmantle           | cosmosia12  | cosmosia13  |             |             |             |
 | 31 | fetchhub              | cosmosia13  | cosmosia14  |             |             |             |
