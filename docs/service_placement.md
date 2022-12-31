@@ -27,7 +27,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 9  | juno                  | cosmosia2   | cosmosia3   |             |             |             |
 | 10 | sifchain              | cosmosia7   | cosmosia9   |             |             |             |
 | 11 | likecoin              | cosmosia7   | cosmosia9   |             |             |             |
-| 12 | kichain               | cosmosia7   | cosmosia7=8 |             |             |             |
+| 12 | kichain               | cosmosia7   | cosmosia8   |             |             |             |
 | 13 | cyber                 | cosmosia13  | cosmosia14  |             |             |             |
 | 14 | cheqd                 | cosmosia14  | cosmosia15  |             |             |             |
 | 15 | stargaze              | cosmosia15  | cosmosia16  |             |             |             |
