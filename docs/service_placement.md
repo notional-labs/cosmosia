@@ -16,7 +16,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 
 | No | Chain                 | Node1       | Node 2      | Node3       | Node 4      | Node 5      |
 |---:|:----------------------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
-| 1  | osmosis               | cosmosia1   | cosmosia2   | cosmosia3   | cosmosia4   | cosmosia5   |
+| 1  | osmosis               | cosmosia1   | cosmosia4   |             |             |             |
 | 2  | starname              | cosmosia2   | cosmosia3   |             |             |             |
 | 3  | regen                 | cosmosia3   | cosmosia4   |             |             |             |
 | 4  | akash                 | cosmosia4   | cosmosia5   |             |             |             |
