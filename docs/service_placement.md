@@ -60,7 +60,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 42 | kujira                | cosmosia6   | cosmosia7   |             |             |             |
 | 43 | passage               | cosmosia7   | cosmosia8   |             |             |             |
 | 44 | osmosis-testnet       | cosmosia8   | cosmosia9   |             |             |             |
-| 45 | evmos-archive         | cosmosia11   | cosmosia18 |             |             |             |
+| 45 | evmos-archive         | cosmosia11  | cosmosia12  | cosmosia13  |             |             |
 | 46 | stride                | cosmosia10  | cosmosia11  |             |             |             |
 | 47 | dig-archive           | cosmosia5   | cosmosia6   |             |             |             |
 | 48 | osmosis-archive       | cosmosia16  |             |             |             |             |
