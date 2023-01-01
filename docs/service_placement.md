@@ -29,7 +29,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 11 | likecoin              | cosmosia7   | cosmosia9   |             |             |             |
 | 12 | kichain               | cosmosia7   | cosmosia8   |             |             |             |
 | 13 | cyber                 | cosmosia13  | cosmosia14  |             |             |             |
-| 14 | cheqd                 | cosmosia14  | cosmosia15  |             |             |             |
+| 14 | cheqd                 | cosmosia7   | cosmosia8   |             |             |             |
 | 15 | stargaze              | cosmosia15  | cosmosia16  |             |             |             |
 | 16 | bandchain             | cosmosia16  | cosmosia17  |             |             |             |
 | 17 | chihuahua             | cosmosia17  | cosmosia18  |             |             |             |
