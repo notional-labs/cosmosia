@@ -52,7 +52,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 34 | cryptoorgchain        | cosmosia16  | cosmosia17  |             |             |             |
 | 35 | irisnet               | cosmosia17  | cosmosia18  |             |             |             |
 | 36 | axelar                | cosmosia18  | cosmosia1   |             |             |             |
-| 37 | pylons                | cosmosia1   | cosmosia2   |             |             |             |
+| 37 | pylons                |             |             |             |             |             |
 | 38 | umee                  | cosmosia2   | cosmosia3   |             |             |             |
 | 39 | sei                   | cosmosia3   | cosmosia4   |             |             |             |
 | 40 | evmos-testnet-archive | cosmosia4   | cosmosia5   |             |             |             |
