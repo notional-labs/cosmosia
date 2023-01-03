@@ -6,6 +6,7 @@ docker service create \
   --name web_config \
   --replicas 1 \
   --network cosmosia \
+  --network snapshot \
   --constraint 'node.role==manager' \
   --endpoint-mode dnsrr \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
