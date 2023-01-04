@@ -52,7 +52,7 @@ fi
 
 cd $HOME
 pacman -Syu --noconfirm
-pacman -Sy --noconfirm go git base-devel wget pigz jq dnsutils inetutils python python-pip cronie nginx spawn-fcgi fcgiwrap openssh
+pacman -Sy --noconfirm go git base-devel wget pigz jq dnsutils inetutils python python-pip cronie spawn-fcgi fcgiwrap openssh
 
 echo "#################################################################################################################"
 echo "openssh..."
@@ -64,12 +64,6 @@ curl -Ls http://tasks.web_config/config/cosmosia.id_rsa > $HOME/.ssh/id_rsa
 chmod -R 700 ~/.ssh
 
 echo "#################################################################################################################"
-echo "nginx..."
-
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot.nginx.conf" > /etc/nginx/nginx.conf
-# mkdir -p /snapshot
-/usr/sbin/nginx
-
 sleep 5
 
 # start_chain.sh script
