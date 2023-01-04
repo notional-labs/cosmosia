@@ -1,9 +1,11 @@
 echo "snapshot_cronjob..."
 
+source $HOME/env.sh
+
 # functions
 find_current_data_version () {
   ver=0
-  ver=$(cat /snapshot/chain.json |jq -r '.data_version // 0')
+  ver=$(curl -Ls "https://snapshot.notional.ventures/$chain_name/chain.json" |jq -r '.data_version // 0')
   echo $ver
 }
 
@@ -15,7 +17,6 @@ get_next_version () {
 }
 
 data_version=$(find_current_data_version)
-source $HOME/env.sh
 
 ##############
 echo "wait till chain get synched..."
@@ -69,14 +70,26 @@ TAR_FILE_PATH="/snapshot/$TAR_FILENAME"
 
 # snapshot file includes ALL dirs in $node_home excluding config dir
 included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
-tar -cvf - $included_dirs |pigz --best -p8 > $TAR_FILE_PATH
 
-FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
+if [[ -z $snapshot_storage_node ]]; then
+  tar -cvf - $included_dirs |pigz --best -p8 > $TAR_FILE_PATH
+else
+  tar -cvf - $included_dirs |pigz --best -p8 |ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures "cat > /mnt/data/snapshots/${chain_name}/${TAR_FILENAME}"
+fi
 
-# copy to /snapshot folder
-cp $node_home/config/addrbook.json /snapshot/
+# FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
+FILESIZE=0
 
-cat <<EOT > /snapshot/chain.json
+# addrbook.json
+if [[ -z $snapshot_storage_node ]]; then
+  cp $node_home/config/addrbook.json /snapshot/
+else
+  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${node_home}/config/addrbook.json" "root@${snapshot_storage_node}.notional.ventures:/mnt/data/snapshots/${chain_name}/"
+fi
+
+
+# chain.json file
+cat <<EOT > $HOME/chain.json
 {
     "snapshot_url": "http://${snapshot_node}.notional.ventures:11111/$chain_name/$TAR_FILENAME",
     "file_size": $FILESIZE,
@@ -84,3 +97,8 @@ cat <<EOT > /snapshot/chain.json
 }
 EOT
 
+if [[ -z $snapshot_storage_node ]]; then
+  cp $HOME/chain.json /snapshot/
+else
+  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "$HOME/chain.json" "root@${snapshot_storage_node}.notional.ventures:/mnt/data/snapshots/${chain_name}/"
+fi
