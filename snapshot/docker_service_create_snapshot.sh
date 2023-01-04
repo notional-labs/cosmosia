@@ -37,8 +37,6 @@ docker service rm $SERVICE_NAME
 
 docker service create \
   --name $SERVICE_NAME \
-  --cap-add SYS_ADMIN \
-  --device /dev/fuse \
   --replicas 1 \
   --mount type=bind,source=$MOUNT_SRC,destination=/snapshot \
   --network $network \
