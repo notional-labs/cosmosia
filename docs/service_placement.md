@@ -19,7 +19,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 1  | osmosis               | cosmosia1   | cosmosia4   |             |             |             |
 | 2  | starname              | cosmosia2   | cosmosia3   |             |             |             |
 | 3  | regen                 | cosmosia3   | cosmosia4   |             |             |             |
-| 4  | akash                 | cosmosia4   | cosmosia5   |             |             |             |
+| 4  | akash                 | cosmosia9   | cosmosia10  |             |             |             |
 | 5  | cosmoshub             | cosmosia3   | cosmosia5   |             |             |             |
 | 6  | sentinel              | cosmosia5   | cosmosia6   |             |             |             |
 | 7  | emoney                | cosmosia7   | cosmosia8   |             |             |             |
