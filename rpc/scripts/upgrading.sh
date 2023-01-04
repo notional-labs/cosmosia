@@ -56,15 +56,6 @@ buid_chain () {
 
   if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|akash)$" ) -ne 0 ]; then
     go mod tidy -compat=1.17
-  elif [ $( echo "${chain_name}" | egrep -c "^(evmos|evmos-archive|evmos-testnet-archive)$" ) -ne 0 ]; then
-    # this is a temporary fix for evmos ethermint jsonrpc Batch request over websocket
-    if [[ $version == "v9.1.0" ]]; then
-      go mod tidy
-      go mod edit -replace github.com/evmos/ethermint=github.com/notional-labs/ethermint@v0.19.3-fix_ws
-      go mod tidy
-    else
-      go mod tidy
-    fi
   else
     go mod tidy
   fi
