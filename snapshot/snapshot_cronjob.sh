@@ -89,9 +89,14 @@ fi
 
 
 # chain.json file
+node="$snapshot_storage_node"
+if [[ -z $node ]]; then
+  node="$snapshot_node"
+fi
+
 cat <<EOT > $HOME/chain.json
 {
-    "snapshot_url": "http://${snapshot_node}.notional.ventures:11111/$chain_name/$TAR_FILENAME",
+    "snapshot_url": "http://${node}.notional.ventures:11111/$chain_name/$TAR_FILENAME",
     "file_size": $FILESIZE,
     "data_version": $data_version
 }
