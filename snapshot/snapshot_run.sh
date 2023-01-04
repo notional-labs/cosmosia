@@ -41,6 +41,7 @@ node_home="$node_home"
 minimum_gas_prices="$minimum_gas_prices"
 start_flags="$start_flags"
 snapshot_node="$snapshot_node"
+snapshot_storage_node="$snapshot_storage_node"
 snapshot_prune="$snapshot_prune"
 EOT
 
