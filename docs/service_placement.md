@@ -54,7 +54,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 36 | axelar                | cosmosia18  | cosmosia1   |             |             |             |
 | 37 | pylons                |             |             |             |             |             |
 | 38 | umee                  | cosmosia2   | cosmosia3   |             |             |             |
-| 39 | sei                   | cosmosia3   | cosmosia4   |             |             |             |
+| 39 | sei                   | cosmosia9   | cosmosia10  |             |             |             |
 | 40 | evmos-testnet-archive | cosmosia4   | cosmosia5   |             |             |             |
 | 41 | injective             | cosmosia5   | cosmosia6   |             |             |             |
 | 42 | kujira                | cosmosia6   | cosmosia7   |             |             |             |
