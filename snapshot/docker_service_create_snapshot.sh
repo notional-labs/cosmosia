@@ -27,9 +27,14 @@ git_branch=$(git symbolic-ref --short -q HEAD)
 HOST="$snapshot_node"
 MOUNT_SRC="/mnt/data/snapshots/$chain_name"
 SERVICE_NAME="snapshot_$chain_name"
+MOUNT_OPT=""
+if [[ -z $snapshot_storage_node ]]; then
+  MOUNT_OPT="--mount type=bind,source=$MOUNT_SRC,destination=/snapshot"
+fi
 
 echo "HOST=$HOST"
 echo "SERVICE_NAME=$SERVICE_NAME"
+echo "MOUNT_OPT=$MOUNT_OPT"
 
 
 # delete existing service
@@ -37,8 +42,7 @@ docker service rm $SERVICE_NAME
 
 docker service create \
   --name $SERVICE_NAME \
-  --replicas 1 \
-  --mount type=bind,source=$MOUNT_SRC,destination=/snapshot \
+  --replicas 1 $MOUNT_OPT \
   --network $network \
   --network snapshot \
   --constraint "node.hostname==$HOST" \
