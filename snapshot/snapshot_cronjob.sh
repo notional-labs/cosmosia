@@ -109,5 +109,5 @@ fi
 if [[ -z $snapshot_storage_node ]]; then
   cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)
 else
-  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures "cd /mnt/data/snapshots/${chain_name}/ && rm $(ls *.tar.gz |sort |head -n -2)"
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures "cd /mnt/data/snapshots/${chain_name}/ && rm \$(ls *.tar.gz |sort |head -n -2)"
 fi
