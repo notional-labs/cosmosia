@@ -82,10 +82,11 @@ rm -rf $node_home/data/*
 
 cd $node_home
 
-URL="http://tasks.snapshot_$chain_name/chain.json"
+URL="https://snapshot.notional.ventures/$chain_name/chain.json"
 URL=`curl -Ls $URL |jq -r '.snapshot_url'`
-URL="http://tasks.snapshot_$chain_name/${URL##*/}"
+URL="https://snapshot.notional.ventures/$chain_name/${URL##*/}"
 echo "URL=$URL"
+
 
 if [[ -z $URL ]]; then
   echo "URL to download snapshot is empty. Pls fix it!"
