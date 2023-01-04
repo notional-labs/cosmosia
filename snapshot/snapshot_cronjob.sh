@@ -58,9 +58,6 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
   data_version=$(get_next_version)
 fi
 
-# delete old snapshots before creating new snapshot to save disk space
-cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)
-
 echo "#################################################################################################################"
 echo "creating snapshot file..."
 cd $node_home
@@ -106,4 +103,11 @@ if [[ -z $snapshot_storage_node ]]; then
   cp $HOME/chain.json /snapshot/
 else
   scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "$HOME/chain.json" "root@${snapshot_storage_node}.notional.ventures:/mnt/data/snapshots/${chain_name}/"
+fi
+
+# delete old snapshots before creating new snapshot to save disk space
+if [[ -z $snapshot_storage_node ]]; then
+  cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)
+else
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures "cd /mnt/data/snapshots/${chain_name}/ && rm $(ls *.tar.gz |sort |head -n -2)"
 fi
