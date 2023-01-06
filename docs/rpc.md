@@ -418,9 +418,17 @@
 
 | Protocol | Endpoint                                                        |
 |----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-terra-archive-ia.cosmosia.notional.ventures/  |
-| API      | https://api-terra-archive-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-terra-archive-ia.cosmosia.notional.ventures/ |
+| RPC      | https://rpc-terra-archive-ia.cosmosia.notional.ventures/        |
+| API      | https://api-terra-archive-ia.cosmosia.notional.ventures/        |
+| GRPC     | https://grpc-terra-archive-ia.cosmosia.notional.ventures/       |
+
+### 53. Juno Archive
+
+| Protocol | Endpoint                                                        |
+|----------|:----------------------------------------------------------------|
+| RPC      | https://rpc-juno-archive-ia.cosmosia.notional.ventures/         |
+| API      | https://api-juno-archive-ia.cosmosia.notional.ventures/         |
+| GRPC     | https://grpc-juno-archive-ia.cosmosia.notional.ventures/        |
 
 ### Design
 Flow: Proxy (Nginx) => Load Balancer (Caddy) => Rpc nodes
