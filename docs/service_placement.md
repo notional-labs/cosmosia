@@ -33,7 +33,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 15 | stargaze              | cosmosia15  | cosmosia16  |             |             |             |
 | 16 | bandchain             | cosmosia16  | cosmosia17  |             |             |             |
 | 17 | chihuahua             | cosmosia17  | cosmosia18  |             |             |             |
-| 18 | kava                  | cosmosia18  | cosmosia1   |             |             |             |
+| 18 | kava                  | cosmosia1   | cosmosia2   |             |             |             |
 | 19 | bitcanna              | cosmosia1   | cosmosia2   |             |             |             |
 | 20 | konstellation         | cosmosia2   | cosmosia3   |             |             |             |
 | 21 | omniflixhub           | cosmosia3   | cosmosia4   |             |             |             |
