@@ -65,7 +65,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 47 | dig-archive           | cosmosia5   | cosmosia6   |             |             |             |
 | 48 | osmosis-archive       | cosmosia16  |             |             |             |             |
 | 49 | cosmoshub-archive     | cosmosia14  |             |             |             |             |
-| 50 | quicksilver           | cosmosia6   | cosmosia8   |             |             |             |
+| 50 | quicksilver           | cosmosia7   | cosmosia8   |             |             |             |
 | 51 | quicksilver-archive   | cosmosia12  | cosmosia14  |             |             |             |
 | 52 | terra-archive         | cosmosia20  |             |             |             |             |
 | 53 | juno-archive          | cosmosia21  |             |
