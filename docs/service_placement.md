@@ -21,7 +21,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 3  | regen                 | cosmosia3   | cosmosia4   |             |             |             |
 | 4  | akash                 | cosmosia9   | cosmosia10  |             |             |             |
 | 5  | cosmoshub             | cosmosia3   | cosmosia5   |             |             |             |
-| 6  | sentinel              | cosmosia5   | cosmosia6   |             |             |             |
+| 6  | sentinel              | cosmosia5   | cosmosia7   |             |             |             |
 | 7  | emoney                | cosmosia7   | cosmosia8   |             |             |             |
 | 8  | ixo                   | cosmosia7   | cosmosia8   |             |             |             |
 | 9  | juno                  | cosmosia2   | cosmosia3   |             |             |             |
@@ -62,7 +62,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 44 | osmosis-testnet       | cosmosia8   | cosmosia9   |             |             |             |
 | 45 | evmos-archive         | cosmosia11  | cosmosia12  | cosmosia13  |             |             |
 | 46 | stride                | cosmosia9   | cosmosia10  |             |             |             |
-| 47 | dig-archive           | cosmosia5   | cosmosia6   |             |             |             |
+| 47 | dig-archive           | cosmosia5   | cosmosia7   |             |             |             |
 | 48 | osmosis-archive       | cosmosia16  |             |             |             |             |
 | 49 | cosmoshub-archive     | cosmosia14  |             |             |             |             |
 | 50 | quicksilver           | cosmosia7   | cosmosia8   |             |             |             |
