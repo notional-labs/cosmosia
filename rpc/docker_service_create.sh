@@ -37,7 +37,7 @@ data_version=$(find_current_data_version)
 
 rpc_service_name="rpc_${chain_name}_${data_version}"
 
-constraint="node.labels.cosmosia.rpc.pruned=true"
+constraint="node.labels.cosmosia.rpc.pruned==true"
 if [ $( echo "${chain_name}" | egrep -c "archive" ) -ne 0 ]; then
 	constraint="node.labels.cosmosia.rpc.${chain_name}==true"
 fi
