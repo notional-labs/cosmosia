@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel wget dnsutils nginx cronie screen
+pacman -S --noconfirm base-devel wget dnsutils nginx cronie screen logrotate
 
 ########################################################################################################################
 # SSL for notional.ventures (fullchain.pem and privkey.pem files)
@@ -167,6 +167,13 @@ sleep 1
 screen -S nginx -dm /usr/sbin/nginx -g "daemon off;"
 
 ########################################################################################################################
+# logrotate
+sed -i -e "s/{.*/{\n\tdaily\n\trotate 2/" /etc/logrotate.d/nginx
+sed -i -e "s/create.*/create 0644 root root/" /etc/logrotate.d/nginx
+
+echo "0 0 * * * root logrotate /etc/logrotate.d/nginx" > /etc/cron.d/cron_logrotate
+
+########################################################################################################################
 # cron
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
 source $HOME/generate_upstream.sh
@@ -192,11 +199,6 @@ sleep 1
 echo "*/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
 sleep 1
 crond
-
-########################################################################################################################
-## logrotate
-#sed -i -e "s/{.*/{\n\tdaily\n\trotate 2/" /etc/logrotate.d/nginx
-#sed -i -e "s/create.*/create 0644 root root/" /etc/logrotate.d/nginx
 
 ########################################################################################################################
 echo "Done!"
