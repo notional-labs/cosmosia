@@ -31,7 +31,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 13 | cyber                 | cosmosia13  | cosmosia14  |             |             |             |
 | 14 | cheqd                 | cosmosia7   | cosmosia8   |             |             |             |
 | 15 | stargaze              | cosmosia9   | cosmosia10  |             |             |             |
-| 16 | bandchain             | cosmosia16  | cosmosia17  |             |             |             |
+| 16 | bandchain             | cosmosia9   | cosmosia10  |             |             |             |
 | 17 | chihuahua             | cosmosia17  | cosmosia18  |             |             |             |
 | 18 | kava                  | cosmosia1   | cosmosia2   |             |             |             |
 | 19 | bitcanna              | cosmosia1   | cosmosia2   |             |             |             |
