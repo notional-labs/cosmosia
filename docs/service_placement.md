@@ -48,7 +48,7 @@ https://github.com/notional-labs/cosmosia/issues/195
 | 30 | assetmantle           | cosmosia7   | cosmosia9   |             |             |             |
 | 31 | fetchhub              | cosmosia13  | cosmosia14  |             |             |             |
 | 32 | evmos                 | cosmosia8   | cosmosia9   | cosmosia10  |             |             |
-| 33 | persistent            | cosmosia15  | cosmosia16  |             |             |             |
+| 33 | persistent            | cosmosia9   | cosmosia10  |             |             |             |
 | 34 | cryptoorgchain        | cosmosia16  | cosmosia17  |             |             |             |
 | 35 | irisnet               | cosmosia17  | cosmosia18  |             |             |             |
 | 36 | axelar                | cosmosia18  | cosmosia1   |             |             |             |
