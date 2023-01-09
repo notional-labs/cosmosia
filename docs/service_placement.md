@@ -12,60 +12,18 @@ See more on [snapshot doc](snapshot.md).
 ---
 ## RPC Service Placement
 
-https://github.com/notional-labs/cosmosia/issues/195
+Pruned-rpc services run on swarm nodes with label `cosmosia.rpc.pruned=true`.
+
+While archive rpc services run on specific swarm node with label eg `cosmosia.rpc.osmosis-archive=true`.
+
 
 | No | Chain                 | Node1       | Node 2      | Node3       | Node 4      | Node 5      |
 |---:|:----------------------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
-| 1  | osmosis               | cosmosia1   | cosmosia4   |             |             |             |
-| 2  | starname              | cosmosia2   | cosmosia3   |             |             |             |
-| 3  | regen                 | cosmosia3   | cosmosia4   |             |             |             |
-| 4  | akash                 | cosmosia9   | cosmosia10  |             |             |             |
-| 5  | cosmoshub             | cosmosia3   | cosmosia5   |             |             |             |
-| 6  | sentinel              | cosmosia5   | cosmosia7   |             |             |             |
-| 7  | emoney                | cosmosia7   | cosmosia8   |             |             |             |
-| 8  | ixo                   | cosmosia7   | cosmosia8   |             |             |             |
-| 9  | juno                  | cosmosia2   | cosmosia3   |             |             |             |
-| 10 | sifchain              | cosmosia7   | cosmosia9   |             |             |             |
-| 11 | likecoin              | cosmosia7   | cosmosia9   |             |             |             |
-| 12 | kichain               | cosmosia7   | cosmosia8   |             |             |             |
-| 13 | cyber                 | cosmosia13  | cosmosia14  |             |             |             |
-| 14 | cheqd                 | cosmosia7   | cosmosia8   |             |             |             |
-| 15 | stargaze              | cosmosia9   | cosmosia10  |             |             |             |
-| 16 | bandchain             | cosmosia9   | cosmosia10  |             |             |             |
-| 17 | chihuahua             | cosmosia17  | cosmosia18  |             |             |             |
-| 18 | kava                  | cosmosia1   | cosmosia2   |             |             |             |
-| 19 | bitcanna              | cosmosia1   | cosmosia2   |             |             |             |
-| 20 | konstellation         | cosmosia2   | cosmosia3   |             |             |             |
-| 21 | omniflixhub           | cosmosia3   | cosmosia4   |             |             |             |
-| 22 | terra                 | cosmosia4   | cosmosia5   |             |             |             |
-| 23 | vidulum               | cosmosia5   | cosmosia6   |             |             |             |
-| 24 | provenance            | cosmosia6   | cosmosia7   |             |             |             |
-| 25 | dig                   | cosmosia7   | cosmosia8   |             |             |             |
-| 26 | gravitybridge         | cosmosia8   | cosmosia9   |             |             |             |
-| 27 | comdex                | cosmosia9   | cosmosia10  |             |             |             |
-| 28 | cerberus              | cosmosia2   | cosmosia3   |             |             |             |
-| 29 | bitsong               | cosmosia2   | cosmosia3   |             |             |             |
-| 30 | assetmantle           | cosmosia7   | cosmosia9   |             |             |             |
-| 31 | fetchhub              | cosmosia13  | cosmosia14  |             |             |             |
-| 32 | evmos                 | cosmosia8   | cosmosia9   | cosmosia10  |             |             |
-| 33 | persistent            | cosmosia9   | cosmosia10  |             |             |             |
-| 34 | cryptoorgchain        | cosmosia16  | cosmosia17  |             |             |             |
-| 35 | irisnet               | cosmosia17  | cosmosia18  |             |             |             |
-| 36 | axelar                | cosmosia18  | cosmosia1   |             |             |             |
-| 37 | pylons                |             |             |             |             |             |
-| 38 | umee                  | cosmosia2   | cosmosia3   |             |             |             |
-| 39 | sei                   | cosmosia9   | cosmosia10  |             |             |             |
 | 40 | evmos-testnet-archive | cosmosia4   | cosmosia5   |             |             |             |
-| 41 | injective             | cosmosia5   | cosmosia6   |             |             |             |
-| 42 | kujira                | cosmosia6   | cosmosia7   |             |             |             |
-| 43 | passage               | cosmosia7   | cosmosia8   |             |             |             |
-| 44 | osmosis-testnet       | cosmosia8   | cosmosia9   |             |             |             |
 | 45 | evmos-archive         | cosmosia11  | cosmosia12  | cosmosia13  |             |             |
-| 46 | stride                | cosmosia9   | cosmosia10  |             |             |             |
 | 47 | dig-archive           | cosmosia5   | cosmosia7   |             |             |             |
 | 48 | osmosis-archive       | cosmosia16  |             |             |             |             |
 | 49 | cosmoshub-archive     | cosmosia14  |             |             |             |             |
-| 50 | quicksilver           | cosmosia7   | cosmosia8   |             |             |             |
 | 51 | quicksilver-archive   | cosmosia12  | cosmosia14  |             |             |             |
 | 52 | terra-archive         | cosmosia20  |             |             |             |             |
 | 53 | juno-archive          | cosmosia21  |             |
