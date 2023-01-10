@@ -22,7 +22,7 @@ While archive rpc services run on specific swarm node with label eg `cosmosia.rp
 | 40 | evmos-testnet-archive | cosmosia4   | cosmosia5   |             |             |             |
 | 45 | evmos-archive         | cosmosia11  | cosmosia12  | cosmosia13  |             |             |
 | 47 | dig-archive           | cosmosia5   | cosmosia7   |             |             |             |
-| 48 | osmosis-archive       | cosmosia16  |             |             |             |             |
+| 48 | osmosis-archive       | cosmosia21  |             |             |             |             |
 | 49 | cosmoshub-archive     | cosmosia14  |             |             |             |             |
 | 51 | quicksilver-archive   | cosmosia12  | cosmosia14  |             |             |             |
 | 52 | terra-archive         | cosmosia20  |             |             |             |             |
