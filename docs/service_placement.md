@@ -68,9 +68,9 @@ Need at least 2 nodes in case one node down.
 | 11 | likecoin              | cosmosia11  | cosmosia12  |
 | 12 | kichain               | cosmosia12  | cosmosia13  |
 | 13 | cyber                 | cosmosia13  | cosmosia14  |
-| 14 | cheqd                 | cosmosia14  | cosmosia15  |
-| 15 | stargaze              | cosmosia15  | cosmosia16  |
-| 16 | bandchain             | cosmosia16  | cosmosia17  |
+| 14 | cheqd                 | cosmosia14  | cosmosia17  |
+| 15 | stargaze              | cosmosia14  | cosmosia17  |
+| 16 | bandchain             | cosmosia14  | cosmosia17  |
 | 17 | chihuahua             | cosmosia17  | cosmosia18  |
 | 18 | kava                  | cosmosia18  | cosmosia1   |
 | 19 | bitcanna              | cosmosia1   | cosmosia2   |
@@ -86,9 +86,9 @@ Need at least 2 nodes in case one node down.
 | 29 | bitsong               | cosmosia11  | cosmosia12  |
 | 30 | assetmantle           | cosmosia12  | cosmosia13  | 
 | 31 | fetchhub              | cosmosia13  | cosmosia14  |
-| 32 | evmos                 | cosmosia14  | cosmosia15  | 
-| 33 | persistent            | cosmosia15  | cosmosia16  |
-| 34 | cryptoorgchain        | cosmosia16  | cosmosia17  |
+| 32 | evmos                 | cosmosia14  | cosmosia17  |
+| 33 | persistent            | cosmosia14  | cosmosia17  |
+| 34 | cryptoorgchain        | cosmosia14  | cosmosia17  |
 | 35 | irisnet               | cosmosia17  | cosmosia18  |
 | 36 | axelar                | cosmosia18  | cosmosia1   |
 | 37 | pylons                | cosmosia1   | cosmosia2   |
@@ -103,10 +103,10 @@ Need at least 2 nodes in case one node down.
 | 46 | stride                | cosmosia10  | cosmosia11  |
 | 47 | dig-archive           | cosmosia11  | cosmosia12  |
 | 48 | osmosis-archive       | cosmosia12  | cosmosia13  |
-| 48 | cosmoshub-archive     | cosmosia15  | cosmosia16  |
+| 48 | cosmoshub-archive     | cosmosia14  | cosmosia17  |
 | 50 | quicksilver           | cosmosia13  | cosmosia14  |
-| 51 | quicksilver-archive   | cosmosia14  | cosmosia15  |
-| 52 | terra-archive         | cosmosia16  | cosmosia17  |
+| 51 | quicksilver-archive   | cosmosia14  | cosmosia17  |
+| 52 | terra-archive         | cosmosia14  | cosmosia17  |
 | 53 | juno-archive          | cosmosia17  | cosmosia18  |
 
 
