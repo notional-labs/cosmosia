@@ -430,6 +430,14 @@
 | API      | https://api-juno-archive-ia.cosmosia.notional.ventures/         |
 | GRPC     | https://grpc-juno-archive-ia.cosmosia.notional.ventures/        |
 
+### 54. Terra2
+
+| Protocol | Endpoint                                                        |
+|----------|:----------------------------------------------------------------|
+| RPC      | https://rpc-terra2-ia.cosmosia.notional.ventures/         |
+| API      | https://api-terra2-ia.cosmosia.notional.ventures/         |
+| GRPC     | https://grpc-terra2-ia.cosmosia.notional.ventures/        |
+
 ### Design
 Flow: Proxy (Nginx) => Load Balancer (Caddy) => Rpc nodes
 
