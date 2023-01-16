@@ -74,8 +74,12 @@ else
   tar -cvf - $included_dirs |pigz --best -p8 |ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures "cat > /mnt/data/snapshots/${chain_name}/${TAR_FILENAME}"
 fi
 
-# FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
 FILESIZE=0
+if [[ -z $snapshot_storage_node ]]; then
+  FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
+else
+  FILESIZE=$(ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures stat -c%s "/mnt/data/snapshots/${chain_name}/${TAR_FILENAME}")
+fi
 
 # addrbook.json
 if [[ -z $snapshot_storage_node ]]; then
@@ -104,6 +108,8 @@ if [[ -z $snapshot_storage_node ]]; then
 else
   scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "$HOME/chain.json" "root@${snapshot_storage_node}.notional.ventures:/mnt/data/snapshots/${chain_name}/"
 fi
+
+
 
 # delete old snapshots before creating new snapshot to save disk space
 if [[ -z $snapshot_storage_node ]]; then
