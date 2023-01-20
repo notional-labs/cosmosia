@@ -1,0 +1,16 @@
+GENESIS_PATH="$HOME/.mantlemint/config/genesis.json" \
+MANTLEMINT_HOME="$HOME/.mantlemint" \
+CHAIN_ID="columbus-5" \
+RPC_ENDPOINTS="http://tasks.lb_terra-archive:8000,http://tasks.lb_terra-archive:8000" \
+WS_ENDPOINTS="ws://tasks.lb_terra-archive:8000/websocket,ws://tasks.lb_terra-archive:8000/websocket" \
+LCD_ENDPOINTS="http://tasks.lb_terra-archive:8001,http://tasks.lb_terra-archive:8001" \
+MANTLEMINT_DB="mantlemint" \
+INDEXER_DB="indexer" \
+DISABLE_SYNC="false" \
+RUST_BACKTRACE="full" \
+ENABLE_EXPORT_MODULE="true" \
+RICHLIST_LENGTH="100" \
+RICHLIST_THRESHOLD="10000000000uluna" \
+ACCOUNT_ADDRESS_PREFIX="terra" \
+BOND_DENOM="uluna" \
+$HOME/go/bin/mantlemint --x-crisis-skip-assert-invariants
