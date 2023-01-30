@@ -17,7 +17,7 @@ if [[ -z $git_repo ]]; then
   wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
   chmod +x "${GOBIN}/${daemon_name}"
 
-  wget -P /usr/lib https://github.com/CosmWasm/wasmvm/raw/main/internal/api/libwasmvm.x86_64.so
+  wget -P /usr/lib https://github.com/CosmWasm/wasmvm/raw/v1.1.1/internal/api/libwasmvm.x86_64.so
 else
   if [[ $chain_name == "sentinel" ]]; then
     # sentinel requires custom build
