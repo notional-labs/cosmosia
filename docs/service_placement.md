@@ -108,7 +108,7 @@ Need at least 2 nodes in case one node down.
 | 51 | quicksilver-archive   | cosmosia14  | cosmosia17  |
 | 52 | terra-archive         | cosmosia14  | cosmosia17  |
 | 53 | juno-archive          | cosmosia17  | cosmosia18  |
-| 54 | terra2                | cosmosia18  | cosmosia20  |
+| 54 | terra2                | cosmosia18  | cosmosia19  |
 
 
 
