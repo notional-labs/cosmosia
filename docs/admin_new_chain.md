@@ -2,8 +2,10 @@
 
 ### Video Log
 
-[Cosmosia Video Log - How to add a new chain](https://www.youtube.com/watch?v=AXyyAp6op7E ':include :type=iframe width=100% height=400px')
+[Cosmosia Video Log - How to add a new chain](https://www.youtube.com/embed/AXyyAp6op7E ':include :type=iframe width=100% height=400px')
 
+
+### Steps
 
 Command executed on a docker swarm manager node
 
