@@ -1,5 +1,10 @@
 ## Add a new chain
 
+### Video Log
+
+[Cosmosia Video Log - How to add a new chain](https://www.youtube.com/watch?v=AXyyAp6op7E ':include :type=iframe width=100% height=400px')
+
+
 Command executed on a docker swarm manager node
 
 1. Add info of the new chain to [chain_registry.ini](../data/chain_registry.ini)
