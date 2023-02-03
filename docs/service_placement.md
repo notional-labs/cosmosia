@@ -109,6 +109,7 @@ Need at least 2 nodes in case one node down.
 | 52 | terra-archive         | cosmosia14  | cosmosia17  |
 | 53 | juno-archive          | cosmosia17  | cosmosia18  |
 | 54 | terra2                | cosmosia18  | cosmosia19  |
+| 55 | mars                  | cosmosia19  | cosmosia21  |
 
 
 
