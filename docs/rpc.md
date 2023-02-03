@@ -434,9 +434,17 @@
 
 | Protocol | Endpoint                                                        |
 |----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-terra2-ia.cosmosia.notional.ventures/         |
-| API      | https://api-terra2-ia.cosmosia.notional.ventures/         |
-| GRPC     | https://grpc-terra2-ia.cosmosia.notional.ventures/        |
+| RPC      | https://rpc-terra2-ia.cosmosia.notional.ventures/               |
+| API      | https://api-terra2-ia.cosmosia.notional.ventures/               |
+| GRPC     | https://grpc-terra2-ia.cosmosia.notional.ventures/              |
+
+### 55. Mars
+
+| Protocol | Endpoint                                                        |
+|----------|:----------------------------------------------------------------|
+| RPC      | https://rpc-mars-ia.cosmosia.notional.ventures/               |
+| API      | https://api-mars-ia.cosmosia.notional.ventures/               |
+| GRPC     | https://grpc-mars-ia.cosmosia.notional.ventures/              |
 
 ### Design
 Flow: Proxy (Nginx) => Load Balancer (Caddy) => Rpc nodes
