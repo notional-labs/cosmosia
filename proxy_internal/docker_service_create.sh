@@ -9,7 +9,7 @@ docker service create \
   --publish mode=host,target=443,published=443 \
   --network cosmosia \
   --network snapshot \
-  --constraint 'node.hostname==cosmosia12' \
+  --constraint 'node.hostname==cosmosia30' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
   archlinux:latest \
