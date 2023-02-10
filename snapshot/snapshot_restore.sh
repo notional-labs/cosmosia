@@ -33,7 +33,7 @@ else
   repo_name=$(basename $git_repo |cut -d. -f1)
   cd $repo_name
 
-  if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra|terra-archive|assetmantle)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra|terra-archive|assetmantle|osmosis-archive-sub1)$" ) -ne 0 ]; then
     go mod edit -dropreplace github.com/tecbot/gorocksdb
   elif [[ $chain_name == "gravitybridge" ]]; then
     cd module
