@@ -33,17 +33,17 @@ While archive rpc services run on specific swarm node with label eg `cosmosia.rp
 
 To add label to a node:
 ```console
-docker node update --label-add cosmosia.rpc.osmosis=true cosmosia1
+docker node update --label-add cosmosia.rpc.osmosis-archive=true cosmosia21
 ```
 
 To remove label to a node:
 ```console
-docker node update --label-rm cosmosia.rpc.osmosis cosmosia1
+docker node update --label-rm cosmosia.rpc.osmosis-archive cosmosia21
 ```
 
 To list node with label:
 ```console
-docker node ls -f node.label=cosmosia.rpc.osmosis=true
+docker node ls -f node.label=cosmosia.rpc.osmosis-archive=true
 ```
 
 ---
