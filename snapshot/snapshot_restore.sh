@@ -112,6 +112,11 @@ if [[ $chain_name == "injective" ]]; then
   sed -i '/^\[evm-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
 fi
 
+if [ $( echo "${chain_name}" | egrep -c "^(evmos|evmos-archive|evmos-testnet-archive)$" ) -ne 0 ]; then
+  sed -i '/^\[json-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
+  sed -i '/^\[json-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
+fi
+
 sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
 if [[ $snapshot_prune == "cosmos-pruner" ]]; then
   sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"362880\"/" $node_home/config/app.toml
