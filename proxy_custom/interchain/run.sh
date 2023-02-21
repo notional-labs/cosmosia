@@ -115,42 +115,42 @@ EOT
   COUNTER=$(( COUNTER + 1 ))
 done
 
-# generate for jsonrpc start from COUNTER 250
-COUNTER=250
-SERVICES_JSONRPC="evmos evmos-testnet-archive evmos-archive"
-
-for service_name in $SERVICES_JSONRPC; do
-  varname="token_$COUNTER"
-  service_with_token="$service_name-${!varname}"
-
-  cat <<EOT >> /etc/nginx/endpoints.conf
-    # JSON-RPC
-    server {
-        listen 443 ssl http2;
-        server_name jsonrpc-${service_with_token}-ie.interchain.notional.ventures;
-        $HEADER_CORS
-
-        # WS-JSON-RPC
-        location ~* ^/websocket/(.*) {
-            $HEADER_OPTIONS
-            $HEADER_WS
-
-            # fix Disconnected code 1006
-            proxy_read_timeout 86400;
-            proxy_send_timeout 86400;
-            keepalive_timeout  86400;
-
-            proxy_pass http://backend_wsjsonrpc_${service_name}/\$1\$is_args\$args;
-        }
-
-        location ~* ^/(.*) {
-            $HEADER_OPTIONS
-            proxy_pass http://backend_jsonrpc_${service_name}/\$1\$is_args\$args;
-        }
-    }
-EOT
-  COUNTER=$(( COUNTER + 1 ))
-done
+## generate for jsonrpc start from COUNTER 250
+#COUNTER=250
+#SERVICES_JSONRPC="evmos evmos-testnet-archive evmos-archive"
+#
+#for service_name in $SERVICES_JSONRPC; do
+#  varname="token_$COUNTER"
+#  service_with_token="$service_name-${!varname}"
+#
+#  cat <<EOT >> /etc/nginx/endpoints.conf
+#    # JSON-RPC
+#    server {
+#        listen 443 ssl http2;
+#        server_name jsonrpc-${service_with_token}-ie.interchain.notional.ventures;
+#        $HEADER_CORS
+#
+#        # WS-JSON-RPC
+#        location ~* ^/websocket/(.*) {
+#            $HEADER_OPTIONS
+#            $HEADER_WS
+#
+#            # fix Disconnected code 1006
+#            proxy_read_timeout 86400;
+#            proxy_send_timeout 86400;
+#            keepalive_timeout  86400;
+#
+#            proxy_pass http://backend_wsjsonrpc_${service_name}/\$1\$is_args\$args;
+#        }
+#
+#        location ~* ^/(.*) {
+#            $HEADER_OPTIONS
+#            proxy_pass http://backend_jsonrpc_${service_name}/\$1\$is_args\$args;
+#        }
+#    }
+#EOT
+#  COUNTER=$(( COUNTER + 1 ))
+#done
 
 ########################################################################################################################
 
