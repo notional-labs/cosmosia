@@ -446,6 +446,22 @@
 | API      | https://api-mars-ia.cosmosia.notional.ventures/               |
 | GRPC     | https://grpc-mars-ia.cosmosia.notional.ventures/              |
 
+### 56. Whitewhale Testnet
+
+| Protocol | Endpoint                                                        |
+|----------|:----------------------------------------------------------------|
+| RPC      | https://rpc-whitewhale-testnet-ia.cosmosia.notional.ventures/               |
+| API      | https://api-whitewhale-testnet-ia.cosmosia.notional.ventures/               |
+| GRPC     | https://grpc-whitewhale-testnet-ia.cosmosia.notional.ventures/              |
+
+### 57. Whitewhale
+
+| Protocol | Endpoint                                                        |
+|----------|:----------------------------------------------------------------|
+| RPC      | https://rpc-whitewhale-ia.cosmosia.notional.ventures/               |
+| API      | https://api-whitewhale-ia.cosmosia.notional.ventures/               |
+| GRPC     | https://grpc-whitewhale-ia.cosmosia.notional.ventures/              |
+
 ### Design
 Flow: Proxy (Nginx) => Load Balancer (Caddy) => Rpc nodes
 
