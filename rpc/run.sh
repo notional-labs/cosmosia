@@ -51,6 +51,12 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 cd $HOME
 source $HOME/snapshot_restore.sh
 
+# enable statesync for pruned rpc node only
+if [ $( echo "${chain_name}" | egrep -c "archive" ) -eq 0 ]; then
+  sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 14400/" $node_home/config/app.toml
+  sed -i -e "s/^snapshot-keep-recent *=.*/snapshot-keep-recent = 2/" $node_home/config/app.toml
+fi
+
 ########################################################################################################################
 # supervised
 pip install supervisor
