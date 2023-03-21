@@ -143,3 +143,9 @@ curl -Ls "https://snapshot.notional.ventures/$chain_name/genesis.json" > $node_h
 
 echo "download addrbook..."
 curl -Lfso $node_home/config/addrbook.json "https://snapshot.notional.ventures/$chain_name/addrbook.json"
+
+# no seeds and persistent_peers for read-only subnode
+if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
+  sed -i -e "s/^seeds *=.*/seeds = \"\"/" $node_home/config/config.toml
+  sed -i -e "s/^persistent_peers *=.*/persistent_peers = \"\"/" $node_home/config/config.toml
+fi
