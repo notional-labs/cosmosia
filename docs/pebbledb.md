@@ -33,10 +33,12 @@ go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.
 $HOME/go/bin/sifnoded start --db_backend=pebbledb
 ```
 
-## New issue with comebft db, the node still starts but will stuck forever at 
+## New issue with comebft db
+
+The node still starts but will stuck forever at 
 
 ```
-5:07PM INF starting node with ABCI Tendermint in-process
+INF starting node with ABCI Tendermint in-process
 
 ```
 
