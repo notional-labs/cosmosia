@@ -18,7 +18,7 @@ git reset --hard
 git checkout v0.14.0
 go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
 go mod tidy
-go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./cmd/sifnoded
+go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
 
 $HOME/go/bin/sifnoded start --db_backend=pebbledb
 
@@ -28,9 +28,25 @@ git reset --hard
 git checkout v0.15.0
 go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
 go mod tidy
-go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/sifnoded
+go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
 
 $HOME/go/bin/sifnoded start --db_backend=pebbledb
+```
+
+## New issue with comebft db, the node still starts but will stuck forever at 
+
+```
+5:07PM INF starting node with ABCI Tendermint in-process
+
+```
+
+This is updated script that should fix the problem:
+
+```
+go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod tidy
+go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
+go mod tidy
 ```
 
 ## Converting LevelDB to PebbleDB
