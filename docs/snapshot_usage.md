@@ -23,6 +23,7 @@ go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.
 ### Run with PebbleDB backend
 ```console
 sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
+sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/config/app.toml
 ```
 
 ### Note
