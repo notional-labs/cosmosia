@@ -68,6 +68,7 @@ for service_name in $SERVICES; do
   cat <<EOT >> /etc/nginx/endpoints.conf
     # RPC
     server {
+        listen 80;
         listen 443 ssl http2;
         server_name rpc-${service_with_token}-ie.internalendpoints.notional.ventures;
         $HEADER_CORS
@@ -85,6 +86,7 @@ EOT
   cat <<EOT >> /etc/nginx/endpoints.conf
     # REST/API
     server {
+        listen 80;
         listen 443 ssl http2;
         server_name api-${service_with_token}-ie.internalendpoints.notional.ventures;
         $HEADER_CORS
@@ -102,6 +104,7 @@ EOT
   cat <<EOT >> /etc/nginx/endpoints.conf
     # gRPC
     server {
+        listen 80 http2;
         listen 443 ssl http2;
         server_name grpc-${service_with_token}-ie.internalendpoints.notional.ventures;
 
@@ -125,6 +128,7 @@ for service_name in $SERVICES_JSONRPC; do
   cat <<EOT >> /etc/nginx/endpoints.conf
     # JSON-RPC
     server {
+        listen 80;
         listen 443 ssl http2;
         server_name jsonrpc-${service_with_token}-ie.internalendpoints.notional.ventures;
         $HEADER_CORS
