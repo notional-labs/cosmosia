@@ -1,5 +1,25 @@
 #!/bin/bash
 
+source $HOME/env.sh
+
+if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
+  http_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:26657/health)
+  if [[ $http_code == "200"  ]]; then
+    echo Status: 200
+    echo Content-type:text/plain
+    echo
+    echo This node is considered healthy.
+  else
+    echo Status: 502
+    echo Content-type:text/plain
+    echo
+    echo The node is currently not responding.
+  fi
+
+  exit 0
+fi
+
+
 BLOCKCHAIN_TIME=$(curl --silent --max-time 3 "http://localhost/status" |jq -r .result.sync_info.latest_block_time)
 THRESHOLD_TIME=120
 
