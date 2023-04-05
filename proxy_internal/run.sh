@@ -104,7 +104,7 @@ EOT
   cat <<EOT >> /etc/nginx/endpoints.conf
     # gRPC
     server {
-        listen 80 http2;
+        listen 9090 http2;
         listen 443 ssl http2;
         server_name grpc-${service_with_token}-ie.internalendpoints.notional.ventures;
 
