@@ -54,13 +54,13 @@ buid_chain () {
 
   go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
 
-  if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|akash|regen)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|akash)$" ) -ne 0 ]; then
     go mod tidy -compat=1.17
   else
     go mod tidy
   fi
   
-  if [ $( echo "${chain_name}" | egrep -c "^(umee|kujira|whitewhale|quicksilver|evmos)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(umee|kujira|whitewhale|quicksilver|evmos|regen)$" ) -ne 0 ]; then
     go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
     go mod tidy
   fi
