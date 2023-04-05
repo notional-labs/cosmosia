@@ -54,7 +54,7 @@ buid_chain () {
 
   go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
 
-  if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|akash)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|akash|regen)$" ) -ne 0 ]; then
     go mod tidy -compat=1.17
   else
     go mod tidy
