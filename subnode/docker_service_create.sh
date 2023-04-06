@@ -3,7 +3,7 @@ docker service rm osmosis-subnode
 
 # create new service
 docker service create \
-  --name proxy_interchain \
+  --name osmosis-subnode \
   --replicas 1 \
   --publish mode=host,target=80,published=80 \
   --publish mode=host,target=443,published=443 \
