@@ -25,7 +25,7 @@ curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/286-deploy-osmo
 
 # run subnode with screen to avoid log to docker
 cd $HOME
-screen -S nginx -dm /root/go/bin/subnode start --conf=/root/subnode.yaml
+screen -S subnode -dm /root/go/bin/subnode start --conf=/root/subnode.yaml
 
 ########################################################################################################################
 echo "Done!"
