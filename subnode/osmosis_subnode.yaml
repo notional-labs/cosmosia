@@ -1,0 +1,13 @@
+upstream:
+  - rpc: "http://tasks.lb_osmosis:8000"
+    api: "http://tasks.lb_osmosis:8001"
+    grpc: "tasks.lb_osmosis:8003"
+    blocks: [362880]
+  - rpc: "http://tasks.lb_osmosis-archive-sub:8000"
+    api: "http://tasks.lb_osmosis-archive-sub:8001"
+    grpc: "tasks.lb_osmosis-archive-sub:8003"
+    blocks: [5599641,0]
+  - rpc: "http://tasks.lb_osmosis-archive-sub1:8000"
+    api: "http://tasks.lb_osmosis-archive-sub1:8001"
+    grpc: "tasks.lb_osmosis-archive-sub1:8003"
+    blocks: [1,5599640]

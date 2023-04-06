@@ -20,8 +20,8 @@ cd subnode
 make install
 
 
-# copy sample config
-cp subnode.yaml $HOME/
+# get config
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/286-deploy-osmosis-subnode-for-testing/subnode/osmosis_subnode.yaml > ~/subnode.yaml
 
 # run subnode with screen to avoid log to docker
 cd $HOME

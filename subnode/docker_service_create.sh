@@ -10,6 +10,8 @@ docker service create \
   --publish mode=host,target=26657,published=26657 \
   --publish mode=host,target=1337,published=1337 \
   --publish mode=host,target=9090,published=9090 \
+  --network net1 \
+  --network net6 \
   --constraint 'node.hostname==cosmosia32' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
