@@ -26,3 +26,8 @@ cp subnode.yaml $HOME/
 # run subnode with screen to avoid log to docker
 cd $HOME
 screen -S nginx -dm /root/go/bin/subnode --conf=/root/subnode.yaml
+
+########################################################################################################################
+echo "Done!"
+# loop forever for debugging only
+while true; do sleep 5; done
