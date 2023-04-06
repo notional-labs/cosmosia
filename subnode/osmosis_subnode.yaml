@@ -10,4 +10,4 @@ upstream:
   - rpc: "http://tasks.lb_osmosis-archive-sub1:8000"
     api: "http://tasks.lb_osmosis-archive-sub1:8001"
     grpc: "tasks.lb_osmosis-archive-sub1:8003"
-    blocks: [1,5599640]
+    blocks: [0,5599640]
