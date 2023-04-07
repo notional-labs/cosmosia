@@ -62,7 +62,7 @@ for service_name in $SERVICES_SUBNODE; do
   cat <<EOT >> $UPSTREAM_CONFIG_FILE_TMP
     upstream backend_rpc_sub_$service_name {
         keepalive 16;
-        server $lb_ip:26656;
+        server $lb_ip:26657;
     }
 
     upstream backend_api_sub_$service_name {
