@@ -1,7 +1,6 @@
 # RPC service
 
 
-
 ## Public Endpoints
 
 ### 1. Osmosis
@@ -321,9 +320,9 @@
 
 | Protocol | Endpoint                                                          |
 |----------|:------------------------------------------------------------------|
-| RPC      | https://rpc-evmos-testnet-archive-ia.cosmosia.notional.ventures/  |
-| API      | https://api-evmos-testnet-archive-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-evmos-testnet-archive-ia.cosmosia.notional.ventures/ |
+| RPC      |   |
+| API      |   |
+| GRPC     |   |
 
 ### 41. Injective
 
@@ -363,7 +362,7 @@
 |----------|:------------------------------------------------------------|
 | RPC      |   |
 | API      |   |
-| GRPC     |  |
+| GRPC     |   |
 
 ### 46. Stride
 
@@ -382,6 +381,8 @@
 | GRPC     | https://grpc-dig-archive-ia.cosmosia.notional.ventures/ |
 
 ### 48. Osmosis Archive
+
+Use Subnode instead
 
 | Protocol | Endpoint                                                    |
 |----------|:------------------------------------------------------------|
@@ -410,73 +411,69 @@
 
 | Protocol | Endpoint                                                        |
 |----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-quicksilver-archive-ia.cosmosia.notional.ventures/  |
-| API      | https://api-quicksilver-archive-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-quicksilver-archive-ia.cosmosia.notional.ventures/ |
+| RPC      |   |
+| API      |   |
+| GRPC     |   |
 
 ### 52. Terra Archive
 
 | Protocol | Endpoint                                                        |
 |----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-terra-archive-ia.cosmosia.notional.ventures/        |
-| API      | https://api-terra-archive-ia.cosmosia.notional.ventures/        |
-| GRPC     | https://grpc-terra-archive-ia.cosmosia.notional.ventures/       |
+| RPC      |        |
+| API      |         |
+| GRPC     |        |
 
 ### 53. Juno Archive
 
-| Protocol | Endpoint                                                        |
-|----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-juno-archive-ia.cosmosia.notional.ventures/         |
-| API      | https://api-juno-archive-ia.cosmosia.notional.ventures/         |
-| GRPC     | https://grpc-juno-archive-ia.cosmosia.notional.ventures/        |
+| Protocol | Endpoint                                                  |
+|----------|:----------------------------------------------------------|
+| RPC      | https://rpc-juno-archive-ia.cosmosia.notional.ventures/   |
+| API      | https://api-juno-archive-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-juno-archive-ia.cosmosia.notional.ventures/  |
 
 ### 54. Terra2
 
-| Protocol | Endpoint                                                        |
-|----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-terra2-ia.cosmosia.notional.ventures/               |
-| API      | https://api-terra2-ia.cosmosia.notional.ventures/               |
-| GRPC     | https://grpc-terra2-ia.cosmosia.notional.ventures/              |
+| Protocol | Endpoint                                            |
+|----------|:----------------------------------------------------|
+| RPC      | https://rpc-terra2-ia.cosmosia.notional.ventures/   |
+| API      | https://api-terra2-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-terra2-ia.cosmosia.notional.ventures/  |
 
 ### 55. Mars
 
-| Protocol | Endpoint                                                        |
-|----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-mars-ia.cosmosia.notional.ventures/               |
-| API      | https://api-mars-ia.cosmosia.notional.ventures/               |
-| GRPC     | https://grpc-mars-ia.cosmosia.notional.ventures/              |
+| Protocol | Endpoint                                          |
+|----------|:--------------------------------------------------|
+| RPC      | https://rpc-mars-ia.cosmosia.notional.ventures/   |
+| API      | https://api-mars-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-mars-ia.cosmosia.notional.ventures/  |
 
 ### 56. Whitewhale Testnet
 
 | Protocol | Endpoint                                                        |
 |----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-whitewhale-testnet-ia.cosmosia.notional.ventures/               |
-| API      | https://api-whitewhale-testnet-ia.cosmosia.notional.ventures/               |
-| GRPC     | https://grpc-whitewhale-testnet-ia.cosmosia.notional.ventures/              |
+| RPC      | https://rpc-whitewhale-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-whitewhale-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-whitewhale-testnet-ia.cosmosia.notional.ventures/  |
 
 ### 57. Whitewhale
 
-| Protocol | Endpoint                                                        |
-|----------|:----------------------------------------------------------------|
-| RPC      | https://rpc-whitewhale-ia.cosmosia.notional.ventures/               |
-| API      | https://api-whitewhale-ia.cosmosia.notional.ventures/               |
-| GRPC     | https://grpc-whitewhale-ia.cosmosia.notional.ventures/              |
-
-### Design
-Flow: Proxy (Nginx) => Load Balancer (Caddy) => Rpc nodes
-
-Everything run on Docker Swarm.
-Proxy and Load Balancer can be one software but in our design we use as 2 separated softwares as
-- nginx doesnt support active healthcheck with the free opensource version. Caddy does support active healthcheck
-- The system provides services for multiple chains (35 at the time of writing). Each chain can scale up/down, so 
-  load-balancer needs auto-discovery and that requires reload config => a bit heavy for proxy, load-balancers help to handle this.
-- The system is being used by multiple purpose: for public, private, partners... So having separated proxy is more flexible
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-whitewhale-ia.cosmosia.notional.ventures/   |
+| API      | https://api-whitewhale-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-whitewhale-ia.cosmosia.notional.ventures/  |
 
 
-There is a load-balance service for each chain.
-There are 2 proxy service:
-- Public proxy: used for public and has rate-limiting
-- Private proxy: used server-to-server, no rate-limiting
+## Subnode Public Endpoints
+[subnode](subnode.md) is the alternative to archive node
+
+### 1. Osmosis
+
+| Protocol | Endpoint                                             |
+|----------|:-----------------------------------------------------|
+| RPC      | https://rpc-osmosis-sub.cosmosia.notional.ventures/  |
+| API      | https://api-osmosis-sub.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-osmosis-sub.cosmosia.notional.ventures/ |
 
 
 

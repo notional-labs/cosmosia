@@ -6,6 +6,7 @@
 
 - RPCs
   - [PRCs](rpc.md)
+  - [Subnode](subnode.md)
   - [Testing an Endpoint](rpc_testing_endpoints.md)
 
 - Admin
