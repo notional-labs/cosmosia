@@ -117,7 +117,71 @@ EOT
   COUNTER=$(( COUNTER + 1 ))
 done
 
+# ###############################################################################
+# generate for subnode from COUNTER 432
+# ##########
+SERVICES_SUBNODE="osmosis"
+COUNTER=432
+for service_name in $SERVICES_SUBNODE; do
+  varname="token_$COUNTER"
+  service_with_token="$service_name-${!varname}"
+
+  cat <<EOT >> /etc/nginx/endpoints.conf
+    # RPC
+    server {
+        listen 80;
+        listen 443 ssl http2;
+        server_name rpc-${service_with_token}-sub.internalendpoints.notional.ventures;
+        $HEADER_CORS
+        location ~* ^/(.*) {
+            $HEADER_OPTIONS
+            $HEADER_WS
+            proxy_pass http://backend_rpc_sub_${service_name}/\$1\$is_args\$args;
+        }
+    }
+EOT
+  COUNTER=$(( COUNTER + 1 ))
+  varname="token_$COUNTER"
+  service_with_token="$service_name-${!varname}"
+
+  cat <<EOT >> /etc/nginx/endpoints.conf
+    # REST/API
+    server {
+        listen 80;
+        listen 443 ssl http2;
+        server_name api-${service_with_token}-sub.internalendpoints.notional.ventures;
+        $HEADER_CORS
+        location ~* ^/(.*) {
+            $HEADER_OPTIONS
+            $HEADER_WS
+            proxy_pass http://backend_api_sub_${service_name}/\$1\$is_args\$args;
+        }
+    }
+EOT
+  COUNTER=$(( COUNTER + 1 ))
+  varname="token_$COUNTER"
+  service_with_token="$service_name-${!varname}"
+
+  cat <<EOT >> /etc/nginx/endpoints.conf
+    # gRPC
+    server {
+        listen 9090 http2;
+        listen 443 ssl http2;
+        server_name grpc-${service_with_token}-sub.internalendpoints.notional.ventures;
+
+        location / {
+            grpc_pass grpc://backend_grpc_sub_${service_name};
+        }
+    }
+EOT
+
+  COUNTER=$(( COUNTER + 1 ))
+done
+
+
+# ###############################################################################
 # generate for jsonrpc start from COUNTER 500
+# ##########
 COUNTER=500
 SERVICES_JSONRPC="evmos evmos-testnet-archive evmos-archive"
 
