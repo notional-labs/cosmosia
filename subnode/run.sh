@@ -1,8 +1,18 @@
+# usage: ./run.sh subnode_name
+# eg., ./run.sh osmosis
+
+subnode_name="$1"
+
+if [[ -z $subnode_name ]]; then
+  echo "No subnode_name. usage eg., ./run.sh osmosis"
+  exit
+fi
+
 pacman -Syu --noconfirm
 pacman -Sy --noconfirm go git base-devel wget jq inetutils screen
 
 echo "#################################################################################################################"
-echo "go..."
+echo "install go..."
 
 export GOPATH="$HOME/go"
 export GOROOT="/usr/lib/go"
@@ -21,7 +31,7 @@ make install
 
 
 # get config
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/286-deploy-osmosis-subnode-for-testing/subnode/osmosis_subnode.yaml > ~/subnode.yaml
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/subnode/${subnode_name}_subnode.yaml > ~/subnode.yaml
 
 # run subnode with screen to avoid log to docker
 cd $HOME
