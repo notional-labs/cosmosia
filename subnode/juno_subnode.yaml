@@ -1,7 +1,7 @@
 upstream:
   - rpc: "http://tasks.lb_juno:8000"
     api: "http://tasks.lb_juno:8001"
-    grpc: "tasks.lb_osmosis:8003"
+    grpc: "tasks.lb_juno:8003"
     blocks: [362880]
   - rpc: "http://tasks.lb_juno-archive-sub:8000"
     api: "http://tasks.lb_juno-archive-sub:8001"
