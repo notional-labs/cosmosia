@@ -120,7 +120,7 @@ done
 # ###############################################################################
 # generate for subnode from COUNTER 432
 # ##########
-SERVICES_SUBNODE="osmosis"
+SERVICES_SUBNODE="osmosis juno"
 COUNTER=432
 for service_name in $SERVICES_SUBNODE; do
   varname="token_$COUNTER"
