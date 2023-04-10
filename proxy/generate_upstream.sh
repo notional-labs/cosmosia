@@ -53,7 +53,7 @@ done
 
 sleep 1
 ########################################################################################################################
-SERVICES_SUBNODE="osmosis"
+SERVICES_SUBNODE="osmosis juno"
 for service_name in $SERVICES_SUBNODE; do
   lb_ip=$(dig +short "tasks.sub_$service_name")
   if [[ -z "$lb_ip" ]]; then
