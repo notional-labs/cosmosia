@@ -1,0 +1,17 @@
+upstream:
+  - rpc: "http://tasks.lb_juno:8000"
+    api: "http://tasks.lb_juno:8001"
+    grpc: "tasks.lb_juno:8003"
+    blocks: [362880]
+  - rpc: "http://tasks.lb_juno-archive-sub:8000"
+    api: "http://tasks.lb_juno-archive-sub:8001"
+    grpc: "tasks.lb_juno-archive-sub:8003"
+    blocks: [4136531,0]
+  - rpc: "http://tasks.lb_juno-archive-sub1:8000"
+    api: "http://tasks.lb_juno-archive-sub1:8001"
+    grpc: "tasks.lb_juno-archive-sub1:8003"
+    blocks: [2578099,4136530]
+  - rpc: "http://tasks.lb_juno-archive-sub2:8000"
+    api: "http://tasks.lb_juno-archive-sub2:8001"
+    grpc: "tasks.lb_juno-archive-sub2:8003"
+    blocks: [0,2578097]
