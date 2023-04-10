@@ -6,7 +6,7 @@ upstream:
   - rpc: "http://tasks.lb_juno-archive-sub:8000"
     api: "http://tasks.lb_juno-archive-sub:8001"
     grpc: "tasks.lb_juno-archive-sub:8003"
-    blocks: [4136531,0]
+    blocks: [4136532,0]
   - rpc: "http://tasks.lb_juno-archive-sub2:8000"
     api: "http://tasks.lb_juno-archive-sub2:8001"
     grpc: "tasks.lb_juno-archive-sub1:8003"
