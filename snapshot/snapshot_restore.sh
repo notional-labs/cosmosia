@@ -76,6 +76,8 @@ rm -rf $node_home/*
 chain_id_arg=""
 if [[ $chain_name == "evmos-testnet-archive" ]]; then
   chain_id_arg="--chain-id=evmos_9000-4"
+elif [[ $chain_name == "sei-testnet" ]]; then
+  chain_id_arg="--chain-id=atlantic-2"
 fi
 $HOME/go/bin/$daemon_name init $chain_id_arg test
 
