@@ -30,7 +30,7 @@ buid_chain () {
 
   opt_forcesync=""
   if [[ $p_isforcesync == "true" ]]; then
-    opt_forcesync="-X github.com/tendermint/tm-db.ForceSync=1"
+    opt_forcesync="-X github.com/tendermint/tm-db.ForceSync=1 -X github.com/cometbft/cometbft-db.ForceSync=1"
   fi
 
   if [[ $chain_name == "sentinel" ]]; then
