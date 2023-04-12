@@ -143,9 +143,6 @@ sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_h
 sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
 ###
 sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
-if [ $( echo "${chain_name}" | egrep -c "^(sei-testnet)$" ) -ne 0 ]; then
-  sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
-fi
 sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/config/app.toml
 
 echo "download genesis..."
@@ -158,4 +155,10 @@ curl -Lfso $node_home/config/addrbook.json "https://snapshot.notional.ventures/$
 if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
   sed -i -e "s/^seeds *=.*/seeds = \"\"/" $node_home/config/config.toml
   sed -i -e "s/^persistent_peers *=.*/persistent_peers = \"\"/" $node_home/config/config.toml
+fi
+
+# fix for sei
+if [ $( echo "${chain_name}" | egrep -c "^(sei-testnet)$" ) -ne 0 ]; then
+  sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
+  sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
 fi
