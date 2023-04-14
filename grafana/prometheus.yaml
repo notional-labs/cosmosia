@@ -2,6 +2,12 @@ global:
   scrape_interval: 15s # default is 1 minute
 
 scrape_configs:
+  - job_name: lb_cosmoshub
+    static_configs:
+      - targets: ['tasks.lb_cosmoshub:2019']
+  - job_name: lb_juno
+    static_configs:
+      - targets: ['tasks.lb_juno:2019']
   - job_name: lb_osmosis
     static_configs:
       - targets: ['tasks.lb_osmosis:2019']
@@ -14,21 +20,18 @@ scrape_configs:
   - job_name: lb_akash
     static_configs:
       - targets: ['tasks.lb_akash:2019']
-  - job_name: lb_cosmoshub
-    static_configs:
-      - targets: ['tasks.lb_cosmoshub:2019']
   - job_name: lb_sentinel
     static_configs:
       - targets: ['tasks.lb_sentinel:2019']
   - job_name: lb_emoney
     static_configs:
       - targets: ['tasks.lb_emoney:2019']
+  - job_name: lb_terra
+    static_configs:
+      - targets: ['tasks.lb_terra:2019']
   - job_name: lb_ixo
     static_configs:
       - targets: ['tasks.lb_ixo:2019']
-  - job_name: lb_juno
-    static_configs:
-      - targets: ['tasks.lb_juno:2019']
   - job_name: lb_sifchain
     static_configs:
       - targets: ['tasks.lb_sifchain:2019']
@@ -65,9 +68,6 @@ scrape_configs:
   - job_name: lb_omniflixhub
     static_configs:
       - targets: ['tasks.lb_omniflixhub:2019']
-  - job_name: lb_terra
-    static_configs:
-      - targets: ['tasks.lb_terra:2019']
   - job_name: lb_vidulum
     static_configs:
       - targets: ['tasks.lb_vidulum:2019']
@@ -80,12 +80,6 @@ scrape_configs:
   - job_name: lb_gravitybridge
     static_configs:
       - targets: ['tasks.lb_gravitybridge:2019']
-  - job_name: lb_comdex
-    static_configs:
-      - targets: ['tasks.lb_comdex:2019']
-  - job_name: lb_cerberus
-    static_configs:
-      - targets: ['tasks.lb_cerberus:2019']
   - job_name: lb_bitsong
     static_configs:
       - targets: ['tasks.lb_bitsong:2019']
@@ -110,18 +104,12 @@ scrape_configs:
   - job_name: lb_axelar
     static_configs:
       - targets: ['tasks.lb_axelar:2019']
-  - job_name: lb_pylons
-    static_configs:
-      - targets: ['tasks.lb_pylons:2019']
   - job_name: lb_umee
     static_configs:
       - targets: ['tasks.lb_umee:2019']
   - job_name: lb_sei
     static_configs:
       - targets: ['tasks.lb_sei:2019']
-  - job_name: lb_evmos-testnet-archive
-    static_configs:
-      - targets: ['tasks.lb_evmos-testnet-archive:2019']
   - job_name: lb_injective
     static_configs:
       - targets: ['tasks.lb_injective:2019']
@@ -134,27 +122,57 @@ scrape_configs:
   - job_name: lb_osmosis-testnet
     static_configs:
       - targets: ['tasks.lb_osmosis-testnet:2019']
-  - job_name: lb_evmos-archive
-    static_configs:
-      - targets: ['tasks.lb_evmos-archive:2019']
   - job_name: lb_stride
     static_configs:
       - targets: ['tasks.lb_stride:2019']
-  - job_name: lb_osmosis-archive
+  - job_name: lb_dig-archive
     static_configs:
-      - targets: ['tasks.lb_osmosis-archive:2019']
+      - targets: ['tasks.lb_dig-archive:2019']
   - job_name: lb_quicksilver
     static_configs:
       - targets: ['tasks.lb_quicksilver:2019']
-  - job_name: lb_quicksilver-archive
+  - job_name: lb_juno-archive-sub
     static_configs:
-      - targets: ['tasks.lb_quicksilver-archive:2019']
-  - job_name: lb_terra-archive
-    static_configs:
-      - targets: ['tasks.lb_terra-archive:2019']
-  - job_name: lb_juno-archive
-    static_configs:
-      - targets: ['tasks.lb_juno-archive:2019']
+      - targets: ['tasks.lb_juno-archive-sub:2019']
   - job_name: lb_terra2
     static_configs:
       - targets: ['tasks.lb_terra2:2019']
+  - job_name: lb_osmosis-archive-sub1
+    static_configs:
+      - targets: ['tasks.lb_osmosis-archive-sub1:2019']
+  - job_name: lb_mars
+    static_configs:
+      - targets: ['tasks.lb_mars:2019']
+  - job_name: lb_whitewhale-testnet
+    static_configs:
+      - targets: ['tasks.lb_whitewhale-testnet:2019']
+  - job_name: lb_noble
+    static_configs:
+      - targets: ['tasks.lb_noble:2019']
+  - job_name: lb_whitewhale
+    static_configs:
+      - targets: ['tasks.lb_whitewhale:2019']
+  - job_name: lb_quasar
+    static_configs:
+      - targets: ['tasks.lb_quasar:2019']
+  - job_name: lb_osmosis-archive-sub
+    static_configs:
+      - targets: ['tasks.lb_osmosis-archive-sub:2019']
+  - job_name: lb_celestia-testnet
+    static_configs:
+      - targets: ['tasks.lb_celestia-testnet:2019']
+  - job_name: lb_juno-archive-sub1
+    static_configs:
+      - targets: ['tasks.lb_juno-archive-sub1:2019']
+  - job_name: lb_juno-archive-sub2
+    static_configs:
+      - targets: ['tasks.lb_juno-archive-sub2:2019']
+  - job_name: lb_sei-testnet
+    static_configs:
+      - targets: ['tasks.lb_sei-testnet:2019']
+  - job_name: lb_cosmoshub-archive-sub1
+    static_configs:
+      - targets: ['tasks.lb_cosmoshub-archive-sub1:2019']
+  - job_name: lb_cosmoshub-archive-sub
+    static_configs:
+      - targets: ['tasks.lb_cosmoshub-archive-sub:2019']
