@@ -1,0 +1,13 @@
+upstream:
+  - rpc: "http://tasks.lb_cosmoshub:8000"
+    api: "http://tasks.lb_cosmoshub:8001"
+    grpc: "tasks.lb_cosmoshub:8003"
+    blocks: [362880]
+  - rpc: "http://tasks.lb_cosmoshub-archive-sub:8000"
+    api: "http://tasks.lb_cosmoshub-archive-sub:8001"
+    grpc: "tasks.lb_cosmoshub-archive-sub:8003"
+    blocks: [14867908,0]
+  - rpc: "http://tasks.lb_cosmoshub-archive-sub1:8000"
+    api: "http://tasks.lb_cosmoshub-archive-sub1:8001"
+    grpc: "tasks.lb_cosmoshub-archive-sub1:8003"
+    blocks: [0,14867907]
