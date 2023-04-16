@@ -10,4 +10,4 @@ upstream:
   - rpc: "http://tasks.lb_cosmoshub-archive-sub1:8000"
     api: "http://tasks.lb_cosmoshub-archive-sub1:8001"
     grpc: "tasks.lb_cosmoshub-archive-sub1:8003"
-    blocks: [0,14867907]
+    blocks: [5200791,14867907]
