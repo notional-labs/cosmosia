@@ -111,7 +111,7 @@ sleep 20
 EOT
 
 # need for evmos https://github.com/notional-labs/cosmosia/issues/192
-if [ $( echo "${chain_name}" | egrep -c "^(akash|bandchain|evmos|evmos-archive|evmos-testnet-archive|kava|provenance|persistent|quicksilver|regen|sei|terra|umee|kujira|stride)$" ) -ne 0 ]; then
+if [ $( echo "${chain_name}" | egrep -c "^(akash|bandchain|evmos|evmos-archive|evmos-testnet-archive|kava|provenance|persistent|quicksilver|regen|sei|terra|umee|kujira|stride|whitewhale)$" ) -ne 0 ]; then
   echo "0 $random_hour * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
 
   crond
