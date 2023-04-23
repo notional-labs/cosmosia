@@ -101,8 +101,8 @@ supervisorctl start chain
 ########################################################################################################################
 # cron
 
-# pick a random hour to restart service
-random_hour=$(( ${RANDOM} % 24 ))
+# pick a random minute to restart service
+random_minute=$(( ${RANDOM} % 59 ))
 
 cat <<EOT > $HOME/restart_cronjob.sh
 /usr/sbin/supervisorctl stop chain
@@ -112,7 +112,7 @@ EOT
 
 # need for evmos https://github.com/notional-labs/cosmosia/issues/192
 if [ $( echo "${chain_name}" | egrep -c "^(akash|bandchain|evmos|evmos-archive|evmos-testnet-archive|kava|provenance|persistent|quicksilver|regen|sei|terra|umee|kujira|stride|whitewhale|injective)$" ) -ne 0 ]; then
-  echo "0 $random_hour * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
+  echo "$random_minute */7 * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
 
   crond
 fi
