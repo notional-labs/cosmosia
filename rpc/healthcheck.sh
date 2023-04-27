@@ -19,8 +19,11 @@ if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
   exit 0
 fi
 
-
 BLOCKCHAIN_TIME=$(curl --silent --max-time 3 "http://localhost/status" |jq -r .result.sync_info.latest_block_time)
+if [[ $chain_name == "sei-testnet" ]]; then
+  BLOCKCHAIN_TIME=$(curl --silent --max-time 3 "http://localhost/status" |jq -r .sync_info.latest_block_time)
+fi
+
 THRESHOLD_TIME=120
 
 if [[ "${BLOCKCHAIN_TIME}" == "null" ]]; then
