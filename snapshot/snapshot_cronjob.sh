@@ -25,7 +25,13 @@ supervisorctl start chain
 catching_up=true
 while [[ "$catching_up" != "false" ]]; do
   sleep 60;
-  catching_up=$(curl --silent --max-time 3 "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
+
+  if [[ $chain_name == "sei-testnet" ]]; then
+    catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .sync_info.catching_up)
+  else
+    catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
+  fi
+
   echo "catching_up=$catching_up"
 done
 
