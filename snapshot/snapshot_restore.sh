@@ -19,12 +19,12 @@ if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) 
   use_gvm=true
 fi
 
+mkdir -p $GOBIN
 cd $HOME
 
 # empty $git_repo means closed source and need downloading the binaries instead of building from source
 if [[ -z $git_repo ]]; then
   BINARY_URL="https://snapshot.notional.ventures/$chain_name/releases/${version}/${daemon_name}"
-  mkdir -p $GOBIN
   wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
   chmod +x "${GOBIN}/${daemon_name}"
 
@@ -79,7 +79,6 @@ else
 
   # copy binary from gvm to $HOME/go/bin/
   if [ "$use_gvm" = true ]; then
-    mkdir -p /root/go/bin
     cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
   fi
 fi
