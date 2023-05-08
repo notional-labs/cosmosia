@@ -48,6 +48,9 @@ echo "snapshot_prune=$snapshot_prune"
 
 if [[ $snapshot_prune == "cosmos-pruner" ]]; then
   day_of_month=$( date +%d )
+  # remove the leading zero, eg 08 => 8
+  day_of_month=$(echo $day_of_month | sed 's/^0*//')
+
   if [[ $((day_of_month%3)) -eq 0 ]]; then
     cd $node_home/data
     echo "Before:"
