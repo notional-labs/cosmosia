@@ -9,6 +9,8 @@ export GOBIN="${GOPATH}/bin"
 export PATH="${PATH}:${GOROOT}/bin:${GOBIN}"
 export GOROOT_BOOTSTRAP=$GOROOT
 
+mkdir -p $GOBIN
+
 use_gvm=false
 # use gvm for cosmoshub for go1.18
 if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
