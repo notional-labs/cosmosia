@@ -9,8 +9,6 @@ export GOBIN="${GOPATH}/bin"
 export PATH="${PATH}:${GOROOT}/bin:${GOBIN}"
 export GOROOT_BOOTSTRAP=$GOROOT
 
-mkdir -p $GOBIN
-
 use_gvm=false
 # use gvm for cosmoshub for go1.18
 if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
@@ -82,6 +80,7 @@ fi
 
 # copy binary from gvm to $HOME/go/bin/
 if [ "$use_gvm" = true ]; then
+  mkdir -p /root/go/bin
   cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
 fi
 
