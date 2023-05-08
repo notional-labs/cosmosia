@@ -7,6 +7,17 @@ export GOPATH="$HOME/go"
 export GOROOT="/usr/lib/go"
 export GOBIN="${GOPATH}/bin"
 export PATH="${PATH}:${GOROOT}/bin:${GOBIN}"
+export GOROOT_BOOTSTRAP=$GOROOT
+
+use_gvm=false
+# use gvm for cosmoshub for go1.18
+if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
+  bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+  source /root/.gvm/scripts/gvm
+  gvm install go1.18.10
+  gvm use go1.18.10 --default
+  use_gvm=true
+fi
 
 cd $HOME
 
@@ -65,6 +76,11 @@ else
   else
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
   fi
+fi
+
+# copy binary from gvm to $HOME/go/bin/
+if [ "$use_gvm" = true ]; then
+  cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
 fi
 
 echo "#################################################################################################################"
