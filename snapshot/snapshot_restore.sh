@@ -76,12 +76,12 @@ else
   else
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
   fi
-fi
 
-# copy binary from gvm to $HOME/go/bin/
-if [ "$use_gvm" = true ]; then
-  mkdir -p /root/go/bin
-  cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
+  # copy binary from gvm to $HOME/go/bin/
+  if [ "$use_gvm" = true ]; then
+    mkdir -p /root/go/bin
+    cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
+  fi
 fi
 
 echo "#################################################################################################################"
