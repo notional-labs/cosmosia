@@ -1,4 +1,5 @@
-SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
+source ../env.sh
+SERVICES=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 
 
 UPSTREAM_CONFIG_FILE="/etc/nginx/upstream.conf"
