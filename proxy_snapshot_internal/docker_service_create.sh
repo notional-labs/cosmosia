@@ -20,6 +20,7 @@ docker service create \
   --replicas 1 \
   --mount type=bind,source=/mnt/data/snapshots,destination=/snapshots,readonly \
   --constraint "node.hostname==${swarm_node}" \
+  --network snapshot \
   --network net1 \
   --network net2 \
   --network net3 \
