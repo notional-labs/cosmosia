@@ -112,7 +112,7 @@ data_version=$(find_current_data_version)
 
 
 echo "read chain info:"
-eval "$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |awk -v TARGET=$chain_name -F ' = ' '
+eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)

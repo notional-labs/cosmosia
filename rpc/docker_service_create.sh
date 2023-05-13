@@ -2,14 +2,14 @@
 # eg., ./docker_service_create.sh cosmoshub
 
 chain_name="$1"
+source ../env.sh
 
-if [[ -z $chain_name ]]
-then
+if [[ -z $chain_name ]]; then
   echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub"
   exit
 fi
 
-eval "$(awk -v TARGET=$chain_name -F ' = ' '
+eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -18,7 +18,7 @@ eval "$(awk -v TARGET=$chain_name -F ' = ' '
       print $1 "=" $2
     }
   }
-  ' ../data/chain_registry.ini )"
+  ')"
 
 echo "network=$network"
 
@@ -56,6 +56,7 @@ docker service create \
   --endpoint-mode dnsrr \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
+  --env-file ../env.sh \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/rpc/run.sh > ~/run.sh && \

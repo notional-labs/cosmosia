@@ -38,6 +38,7 @@ docker service create \
   --constraint 'node.hostname==cosmosia32' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
+  --env-file ../env.sh \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/subnode/run.sh > ~/run.sh && \

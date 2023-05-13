@@ -22,6 +22,7 @@ docker service create \
   --network cosmosia \
   --endpoint-mode dnsrr \
   --restart-condition any \
+  --env-file ../env.sh \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/statesync/sss_run.sh > ~/sss_run.sh && \
