@@ -11,7 +11,7 @@ wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_static/nginx.conf" > /etc/nginx/nginx.conf
 
 # generate index.html
-curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini" > $HOME/chain_registry.ini
+curl -s "$CHAIN_REGISTRY_INI_URL" > $HOME/chain_registry.ini
 SERVICES=$(cat $HOME/chain_registry.ini |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 
 get_links () {

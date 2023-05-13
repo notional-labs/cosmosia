@@ -22,6 +22,7 @@ docker service create \
   --mount type=bind,source=/mnt/data/snapshots,destination=/snapshots,readonly \
   --constraint "node.hostname==${swarm_node}" \
   --restart-condition none \
+  --env-file ../env.sh \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_snapshot/run.sh > ~/run.sh && \

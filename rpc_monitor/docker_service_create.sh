@@ -20,6 +20,7 @@ docker service create \
   --network net8 \
   --endpoint-mode dnsrr \
   --restart-condition any \
+  --env-file ../env.sh \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/rpc_monitor/run.sh > ~/run.sh && /bin/bash ~/run.sh"

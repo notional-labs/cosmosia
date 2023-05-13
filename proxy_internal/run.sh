@@ -22,7 +22,7 @@ for token in $TOKENS; do
 done
 
 # generate endpoints.conf
-SERVICES=$(curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
+SERVICES=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 echo "" > /etc/nginx/endpoints.conf
 
 HEADER_CORS=$(cat <<-END
