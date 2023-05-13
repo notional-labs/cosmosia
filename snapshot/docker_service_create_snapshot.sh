@@ -48,6 +48,7 @@ docker service create \
   --constraint "node.hostname==$HOST" \
   --endpoint-mode dnsrr \
   --restart-condition none \
+  --env-file ../env.sh \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/snapshot/snapshot_run.sh > ~/snapshot_run.sh && \
