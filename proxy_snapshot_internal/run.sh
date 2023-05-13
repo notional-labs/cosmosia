@@ -11,7 +11,7 @@ pacman -Sy --noconfirm nginx
 echo "#################################################################################################################"
 echo "nginx..."
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_snapshot/nginx.conf" > /etc/nginx/nginx.conf
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_snapshot_internal/nginx.conf" > /etc/nginx/nginx.conf
 /usr/sbin/nginx
 
 loop_forever
