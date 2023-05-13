@@ -1,3 +1,4 @@
 .idea
 .fleet
 **/.DS_Store
+env.sh
