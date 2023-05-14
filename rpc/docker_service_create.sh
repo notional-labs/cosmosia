@@ -49,7 +49,7 @@ data_version=$(find_current_data_version)
 
 rpc_service_name="rpc_${chain_name}_${data_version}"
 
-
+echo $rpc_service_name
 # exit to debug
 exit
 
