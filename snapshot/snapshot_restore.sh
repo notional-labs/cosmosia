@@ -1,5 +1,7 @@
 # This is common file used for rpc and snapshot services
 
+source $HOME/env.sh
+
 echo "#################################################################################################################"
 echo "build from source:"
 
@@ -23,9 +25,17 @@ fi
 
 cd $HOME
 
+# 1. build the snapshot base url
+node="$snapshot_storage_node"
+if [[ -z $node ]]; then
+  node="$snapshot_node"
+fi
+SNAPSHOT_BASE_URL="http://tasks.proxysnapshotinternal_${node}:11111/$chain_name"
+echo "SNAPSHOT_BASE_URL=$SNAPSHOT_BASE_URL"
+
 # empty $git_repo means closed source and need downloading the binaries instead of building from source
 if [[ -z $git_repo ]]; then
-  BINARY_URL="https://snapshot.notional.ventures/$chain_name/releases/${version}/${daemon_name}"
+  BINARY_URL="${SNAPSHOT_BASE_URL}/releases/${version}/${daemon_name}"
   wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
   chmod +x "${GOBIN}/${daemon_name}"
 
@@ -106,9 +116,9 @@ rm -rf $node_home/data/*
 
 cd $node_home
 
-URL="https://snapshot.notional.ventures/$chain_name/chain.json"
+URL="${SNAPSHOT_BASE_URL}/chain.json"
 URL=`curl -Ls $URL |jq -r '.snapshot_url'`
-URL="https://snapshot.notional.ventures/$chain_name/${URL##*/}"
+URL="${SNAPSHOT_BASE_URL}/${URL##*/}"
 echo "URL=$URL"
 
 
@@ -163,10 +173,10 @@ sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/conf
 sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/config/app.toml
 
 echo "download genesis..."
-curl -Ls "https://snapshot.notional.ventures/$chain_name/genesis.json" > $node_home/config/genesis.json
+curl -Ls "${SNAPSHOT_BASE_URL}/genesis.json" > $node_home/config/genesis.json
 
 echo "download addrbook..."
-curl -Lfso $node_home/config/addrbook.json "https://snapshot.notional.ventures/$chain_name/addrbook.json"
+curl -Lfso $node_home/config/addrbook.json "${SNAPSHOT_BASE_URL}/addrbook.json"
 
 # no seeds and persistent_peers for read-only subnode
 if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
