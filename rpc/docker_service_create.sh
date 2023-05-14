@@ -21,13 +21,25 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   ')"
 
 echo "network=$network"
+echo "snapshot_node=$snapshot_node"
+echo "snapshot_storage_node=$snapshot_storage_node"
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 
 # functions
 find_current_data_version () {
+  # 1. figure out the snapshot node
+  node="$snapshot_storage_node"
+  if [[ -z $node ]]; then
+    node="$snapshot_node"
+  fi
+
+  # 2. figure out container id of agent
+  agent_id=$(docker ps -aqf "name=agent")
+
+  # 3. execute command in agent container to get data version
   ver=0
-  ver=$(curl -Ls "https://snapshot.notional.ventures/$chain_name/chain.json" |jq -r '.data_version // 0')
+  ver=$(docker exec $agent_id curl -Ls "http://tasks.${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
   echo $ver
 }
 
@@ -36,6 +48,11 @@ find_current_data_version () {
 data_version=$(find_current_data_version)
 
 rpc_service_name="rpc_${chain_name}_${data_version}"
+
+
+# exit to debug
+exit
+
 
 constraint="node.labels.cosmosia.rpc.pruned==true"
 if [ $( echo "${chain_name}" | egrep -c "archive" ) -ne 0 ]; then
