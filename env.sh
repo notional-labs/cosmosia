@@ -1,1 +1,1 @@
-CHAIN_REGISTRY_INI_URL="https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini"
+CHAIN_REGISTRY_INI_URL=https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini
