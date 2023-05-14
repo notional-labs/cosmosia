@@ -4,11 +4,17 @@ source $HOME/env.sh
 
 # functions
 find_current_data_version () {
+  # 1. figure out the snapshot node
+  node="$snapshot_storage_node"
+  if [[ -z $node ]]; then
+    node="$snapshot_node"
+  fi
+
+  # 2. get data version
   ver=0
-  ver=$(curl -Ls "https://snapshot.notional.ventures/$chain_name/chain.json" |jq -r '.data_version // 0')
+  ver=$(curl -Ls "http://tasks.proxysnapshotinternal_${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
   echo $ver
 }
-
 
 get_next_version () {
   ver=$(find_current_data_version)
