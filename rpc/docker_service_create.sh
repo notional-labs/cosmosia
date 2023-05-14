@@ -39,7 +39,7 @@ find_current_data_version () {
 
   # 3. execute command in agent container to get data version
   ver=0
-  ver=$(docker exec $agent_id curl -Ls "http://tasks.${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
+  ver=$(docker exec $agent_id curl -Ls "http://tasks.proxysnapshotinternal_${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
   echo $ver
 }
 
