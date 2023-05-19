@@ -9,9 +9,9 @@ upstream:
     blocks: [11030186,0]
   - rpc: "http://tasks.lb_evmos-archive-sub2:8000"
     api: "http://tasks.lb_evmos-archive-sub2:8001"
-    grpc: "tasks.lb_evmos-archive-sub1:8003"
+    grpc: "tasks.lb_evmos-archive-sub2:8003"
     blocks: [4990535,11030185]
   - rpc: "http://tasks.lb_evmos-archive-sub1:8000"
     api: "http://tasks.lb_evmos-archive-sub1:8001"
-    grpc: "tasks.lb_evmos-archive-sub2:8003"
+    grpc: "tasks.lb_evmos-archive-sub1:8003"
     blocks: [58701,4990534]
