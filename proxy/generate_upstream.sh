@@ -32,7 +32,7 @@ done
 
 sleep 1
 ########################################################################################################################
-SERVICES_JSONRPC="evmos evmos-testnet-archive evmos-archive"
+SERVICES_JSONRPC="evmos evmos-testnet-archive evmos-archive evmos-archive-sub1 evmos-archive-sub2 evmos-archive-sub"
 
 for service_name in $SERVICES_JSONRPC; do
   lb_ip=$(dig +short "tasks.lb_$service_name")
