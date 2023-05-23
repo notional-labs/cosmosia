@@ -80,6 +80,9 @@ cat <<EOT > $TMP_CONFIG_FILE
 
 {
   admin :2019
+  servers {
+    metrics
+  }
   servers :8003 {
       protocols h1 h2c
   }
