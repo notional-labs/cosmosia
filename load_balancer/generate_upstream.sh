@@ -80,11 +80,9 @@ cat <<EOT > $TMP_CONFIG_FILE
 
 {
   admin :2019
-	servers {
-		protocol {
-		  	allow_h2c
-		}
-	}
+  servers :8003 {
+      protocols h1 h2c
+  }
 }
 
 # RPC
@@ -125,10 +123,6 @@ http://:8002 {
 :8003 {
   reverse_proxy {
     $grpc_str
-    health_uri      /healthcheck
-    health_port     80
-    health_interval 30s
-    health_timeout  30s
   }
 }
 

@@ -56,9 +56,6 @@ crond
 source $HOME/cron_update_upstream.sh
 cat $TMP_CONFIG_FILE > $CONFIG_FILE
 
-# replace version v2.5.1 (https://github.com/notional-labs/cosmosia/issues/79)
-wget -O - "https://github.com/notional-labs/cosmosia/files/9185123/caddy_v2.5.1.tar.gz" |tar -xzf - -C /usr/sbin/
-
 screen -S caddy -dm /usr/sbin/caddy run --config $CONFIG_FILE
 sleep 5
 
