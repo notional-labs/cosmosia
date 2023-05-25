@@ -27,7 +27,16 @@ sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/con
 ```
 
 ### Note
-Using this [workaround](pebbledb.md) when upgrading a node running PebbleDB
+
+- upgrading a node running PebbleDB
+  
+    Using this [workaround](pebbledb.md) when upgrading a node running PebbleDB
+
+- wasm cache in snapshot
+
+    there is `MsgExecuteContract Non-determinism` bug on different CPUs. See [more](https://injective.notion.site/Injective-MsgExecuteContract-Non-determinism-ac4411a44e3e4f2aa33e7fe5d8f0db30).
+    Fix it by removing the wasm cache from snapshot
+
 
 ### Special chains
 Some chains require building differently
