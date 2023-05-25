@@ -84,7 +84,8 @@ cat <<EOT > $TMP_CONFIG_FILE
     metrics
   }
   servers :8003 {
-      protocols h1 h2c
+    metrics
+    protocols h1 h2c
   }
 }
 
