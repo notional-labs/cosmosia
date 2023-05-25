@@ -1,4 +1,3 @@
-source ../env.sh
 SERVICES=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 
 

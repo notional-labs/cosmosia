@@ -2,7 +2,12 @@
 # eg., ./docker_service_create.sh cosmoshub
 
 chain_name="$1"
-source ../env.sh
+if [ -f "../env.sh" ]; then
+  source ../env.sh
+else
+    echo "../env.sh file does not exist."
+    exit
+fi
 
 if [[ -z $chain_name ]]; then
   echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub"
