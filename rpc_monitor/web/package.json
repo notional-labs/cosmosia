@@ -19,7 +19,8 @@
     "react-dom": "18.2.0",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1",
-    "swr": "^2.0.3"
+    "swr": "^2.0.3",
+    "underscore": "^1.13.6"
   },
   "devDependencies": {
     "@cosmjs/stargate": "^0.29.5",

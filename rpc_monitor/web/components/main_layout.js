@@ -1,21 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 const {Header, Content, Footer} = Layout;
-import { ShoppingOutlined, KeyOutlined } from '@ant-design/icons';
-
-// const MainNav = () => {
-//   return (
-//     <Menu mode='horizontal'>
-//       <Menu.Item key='apikeys' icon={<KeyOutlined/>}>
-//         <Link href='/apikeys'> Api-Keys </Link>
-//       </Menu.Item>
-//       <Menu.Item key='points' icon={<ShoppingOutlined/>}>
-//         <Link href='/points'> Points </Link>
-//       </Menu.Item>
-//     </Menu>
-//   )
-// }
 
 export default function MainLayout({children}) {
   return (
@@ -36,7 +22,6 @@ export default function MainLayout({children}) {
 
       <Header style={{background: "white"}}>
         <div style={{ float: 'left', width: '120px', height: '31px', fontSize: 'large'}}><Link href='/'>Rpc Monitor</Link></div>
-        {/*<MainNav />*/}
       </Header>
 
       <Content style={{padding: '0'}}>
