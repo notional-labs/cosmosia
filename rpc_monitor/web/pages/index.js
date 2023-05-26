@@ -1,7 +1,6 @@
 import * as _ from 'underscore';
-import React from 'react';
-import useSWR from 'swr';
-import { Button, List, Badge, Divider, Popover } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { List, Badge, Divider, Popover } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
 const Service = (props) => {
@@ -40,7 +39,7 @@ const Services = (props) => {
 
   const {services} = props;
 
-  if (_.isUndefined(services)) {
+  if (_.isUndefined(services) || (_.isArray(services) === false)) {
     return null;
   }
 
@@ -57,10 +56,25 @@ const Services = (props) => {
   );
 };
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
-
 export default function Home() {
-  const { data, error, isLoading, mutate } = useSWR('/rpc_status.json', fetcher);
+  const [data, setData] = useState({services: []});
+
+  useEffect( () => {
+    const load_data = async () => {
+      const response = await fetch(`/rpc_status.json`);
+      const data = await response.json();
+
+      setData(data);
+    };
+
+    load_data().catch(console.error);
+
+    const interval = setInterval(async () => {
+      await load_data()
+
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="Home">
