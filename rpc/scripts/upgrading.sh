@@ -67,7 +67,7 @@ buid_chain () {
     go mod tidy
   fi
   
-  if [ $( echo "${chain_name}" | egrep -c "^(umee|kujira|whitewhale|quicksilver|evmos|regen|juno|juno-archive-sub|omniflixhub|bandchain|cosmoshub|cosmoshub-archive-sub|kava)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(umee|kujira|whitewhale|quicksilver|evmos|regen|juno|juno-archive-sub|omniflixhub|bandchain|cosmoshub|cosmoshub-archive-sub|kava|bitcanna)$" ) -ne 0 ]; then
     go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
     go mod tidy
   fi
