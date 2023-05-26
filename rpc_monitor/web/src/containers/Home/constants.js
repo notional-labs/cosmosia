@@ -1,4 +1,0 @@
-
-export const ACTION_UPDATE = 'home/ACTION_UPDATE';
-export const ACTION_MONITOR_START = 'home/ACTION_MONITOR_START';
-export const ACTION_MONITOR_STOP = 'home/ACTION_MONITOR_STOP';
