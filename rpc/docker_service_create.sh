@@ -39,15 +39,23 @@ find_current_data_version () {
     node="$snapshot_node"
   fi
 
-  # 2. figure out container id of agent
-  agent_id=$(docker ps -aqf "name=agent")
-
-  # 3. execute command in agent container to get data version
   ver=0
-  ver=$(docker exec $agent_id curl -Ls "http://tasks.proxysnapshotinternal_${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
+
+  if [ -f /.dockerenv ]; then
+    # inside container
+    ver=$(curl -Ls "http://tasks.proxysnapshotinternal_${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
+  else
+    # inside host
+
+    # figure out container id of agent
+    agent_id=$(docker ps -aqf "name=agent")
+
+    # execute command in agent container to get data version
+    ver=$(docker exec $agent_id curl -Ls "http://tasks.proxysnapshotinternal_${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
+  fi
+
   echo $ver
 }
-
 
 # get the data version from chain.json, service name is rpc_$chain_name_$version
 data_version=$(find_current_data_version)
