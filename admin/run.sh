@@ -17,6 +17,15 @@ git clone --single-branch --branch main https://github.com/notional-labs/cosmosi
 ########################################################################################################################
 # web
 cd $HOME/cosmosia/admin/web
+
+# create .env.local file
+cat <<EOT >> .env.local
+NEXTAUTH_URL="$COSMOSIA_ADMIN_NEXTAUTH_URL"
+NEXTAUTH_SECRET="$COSMOSIA_ADMIN_NEXTAUTH_SECRET"
+ADMIN_PASSWORD="$COSMOSIA_ADMIN_PASSWORD"
+EOT
+
+
 yarn && yarn build
 
 screen -S server -dm yarn start
