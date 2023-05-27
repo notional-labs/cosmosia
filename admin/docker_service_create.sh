@@ -14,7 +14,6 @@ docker service rm admin
 docker service create \
   --name admin \
   --replicas 1 \
-  --constraint 'node.hostname!=cosmosia16' \
   --network cosmosia \
   --network net1 \
   --network net2 \
