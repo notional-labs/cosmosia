@@ -27,6 +27,8 @@ for service_name in $SERVICES; do
         server $lb_ip:8003;
     }
 EOT
+
+  sleep 0.5
 done
 
 sleep 1

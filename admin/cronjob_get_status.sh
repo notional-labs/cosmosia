@@ -5,12 +5,6 @@ rpc_service_verions=$(curl -sG -XGET http://tasks.web_config:2375/services --dat
 RPC_SERVICES="${rpc_service_verions}"
 # echo "RPC_SERVICES=$RPC_SERVICES"
 
-
-#TMP_DIR="$HOME/tmp"
-TMP_DIR="./web/public"
-TMP_STATUS_FILE="$TMP_DIR/rpc_status.json"
-#mkdir -p $TMP_DIR
-
 service_str=""
 for service_name in $RPC_SERVICES; do
   ips=$(dig +short "tasks.$service_name" |sort)
@@ -34,6 +28,8 @@ for service_name in $RPC_SERVICES; do
     service_str="$service_str,"$'\n'
   fi
   service_str="$service_str { \"service\": \"$service_name\", \"containers\": [ $tmp_str ] }"
+
+  sleep 0.5
 done
 
-echo "[ $service_str ]" > $TMP_STATUS_FILE
+echo "[ $service_str ]" > ./web/public/rpc_status.json
