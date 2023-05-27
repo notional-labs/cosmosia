@@ -1,3 +1,9 @@
+if [ -f "../env.sh" ]; then
+  source ../env.sh
+else
+    echo "../env.sh file does not exist."
+    exit
+fi
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 
