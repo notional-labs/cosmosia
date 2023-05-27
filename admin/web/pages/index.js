@@ -65,6 +65,9 @@ export default function Home() {
     const load_data = async () => {
       const response = await fetch(`/rpc_status.json`);
       const data = await response.json();
+      data.sort((a, b) => {
+        return (a.service < b.service) ? -1 : (a.service > b.service) ? 1 : 0;
+      });
 
       setData(data);
     };
