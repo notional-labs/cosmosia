@@ -7,8 +7,8 @@ RPC_SERVICES="${rpc_service_verions}"
 
 
 #TMP_DIR="$HOME/tmp"
-TMP_DIR="./web/build"
-TMP_STATUS_FILE="$TMP_DIR/status.json"
+TMP_DIR="./web/public"
+TMP_STATUS_FILE="$TMP_DIR/rpc_status.json"
 #mkdir -p $TMP_DIR
 
 service_str=""

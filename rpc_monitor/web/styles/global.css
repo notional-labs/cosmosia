@@ -1,29 +1,8 @@
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+html,
 body {
-  /*background-color: white; !* #f0f2f5 *!*/
+  padding: 0;
+  margin: 0;
 }
-
-/* Antd */
-
-.ant-layout {
-  background: white;
-}
-
-.ant-layout-header {
-  background: white;
-}
-
-.logo {
-  float: left;
-  width: 120px;
-  margin: auto;
-}
-
-
 
 /*  Home */
 .services {
@@ -64,4 +43,12 @@ body {
 .service-name {
   font-weight: bold;
   text-align: center;
+}
+
+.service .ant-list-item {
+  padding: 12px 0px;
+}
+
+.service .ant-list-header {
+  padding-block: 0px;
 }
