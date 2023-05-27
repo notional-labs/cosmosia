@@ -10,18 +10,18 @@ export default function MainLayout({children}) {
         <link rel="icon" href="/favicon.ico"/>
         <meta
           name="description"
-          content="Rpc Monitor"
+          content="Cosmosia"
         />
         <meta
           property="og:image"
           content="test content"
         />
-        <meta name="og:title" content="Rpc Monitor"/>
+        <meta name="og:title" content="Cosmosia"/>
         <meta name="twitter:card" content="summary_large_image"/>
       </Head>
 
       <Header style={{background: "white"}}>
-        <div style={{ float: 'left', width: '120px', height: '31px', fontSize: 'large'}}><Link href='/'>Rpc Monitor</Link></div>
+        <div style={{ float: 'left', width: '120px', height: '31px', fontSize: 'large'}}><Link href='/'>Cosmosia</Link></div>
       </Header>
 
       <Content style={{padding: '0'}}>

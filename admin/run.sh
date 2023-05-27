@@ -16,15 +16,15 @@ git clone --single-branch --branch main https://github.com/notional-labs/cosmosi
 
 ########################################################################################################################
 # web
-cd $HOME/cosmosia/rpc_monitor/web
+cd $HOME/cosmosia/admin/web
 yarn && yarn build
 
 screen -S server -dm yarn start
 
 ########################################################################################################################
 # cron
-echo "*/1 * * * * root /bin/bash $HOME/cosmosia/rpc_monitor/cronjob_get_status.sh" > /etc/cron.d/cron_get_status
-echo "*/5 * * * * root /bin/bash $HOME/cosmosia/rpc_monitor/cronjob_get_snapshot_size.sh" > /etc/cron.d/cron_get_snapshot_size
+echo "*/1 * * * * root /bin/bash $HOME/cosmosia/admin/cronjob_get_status.sh" > /etc/cron.d/cron_get_status
+echo "*/5 * * * * root /bin/bash $HOME/cosmosia/admin/cronjob_get_snapshot_size.sh" > /etc/cron.d/cron_get_snapshot_size
 
 # start crond
 crond

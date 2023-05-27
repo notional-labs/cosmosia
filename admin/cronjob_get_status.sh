@@ -1,5 +1,5 @@
 
-cd $HOME/cosmosia/rpc_monitor
+cd $HOME/cosmosia/admin
 
 rpc_service_verions=$(curl -sG -XGET http://tasks.web_config:2375/services --data-urlencode 'filters={"label":["cosmosia.service=rpc"]}' |jq -r '.[].Spec.Name')
 RPC_SERVICES="${rpc_service_verions}"
