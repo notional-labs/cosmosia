@@ -1,4 +1,5 @@
 import * as _ from 'underscore';
+import { useSession } from "next-auth/react";
 import React, { useState, useEffect } from 'react';
 import { List, Badge, Divider, Popover } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
@@ -57,6 +58,7 @@ const Services = (props) => {
 };
 
 export default function Home() {
+  const {data: session, status} = useSession();
   const [data, setData] = useState({services: []});
 
   useEffect( () => {
@@ -75,6 +77,8 @@ export default function Home() {
     }, 60000);
     return () => clearInterval(interval);
   }, []);
+
+  if (status === "unauthenticated") return <p>Access Denied.</p>
 
   return (
     <div className="Home">

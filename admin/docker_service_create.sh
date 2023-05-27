@@ -1,12 +1,18 @@
+if [ -f "../env.sh" ]; then
+  source ../env.sh
+else
+    echo "../env.sh file does not exist."
+    exit
+fi
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 
 # delete existing service
-docker service rm rpc_monitor
+docker service rm admin
 
 # create new service
 docker service create \
-  --name rpc_monitor \
+  --name admin \
   --replicas 1 \
   --constraint 'node.hostname!=cosmosia16' \
   --network cosmosia \
@@ -23,6 +29,6 @@ docker service create \
   --env-file ../env.sh \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/rpc_monitor/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/admin/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 

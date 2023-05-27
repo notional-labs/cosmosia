@@ -1,5 +1,5 @@
 
-cd $HOME/cosmosia/rpc_monitor
+cd $HOME/cosmosia/admin
 
 RPC_SERVICES=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 #TMP_DIR="$HOME/tmp"
