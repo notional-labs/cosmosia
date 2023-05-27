@@ -1,6 +1,11 @@
 pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel dnsutils nginx cronie
 
+# write env vars to bash file, so that cronjobs or other scripts could know
+cat <<EOT >> $HOME/env.sh
+CHAIN_REGISTRY_INI_URL="$CHAIN_REGISTRY_INI_URL"
+EOT
+
 ########################################################################################################################
 # nginx
 
@@ -33,6 +38,7 @@ cat <<EOT > /usr/share/nginx/html/index.html
 EOT
 
 ########################################################################################################################
+source $HOME/env.sh
 
 # generate config for the first time
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/generate_upstream.sh" > $HOME/generate_upstream.sh
@@ -49,6 +55,7 @@ sleep 1
 ########################################################################################################################
 # cron
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
+source $HOME/env.sh
 source $HOME/generate_upstream.sh
 sleep 1
 

@@ -15,6 +15,7 @@ pacman -S --noconfirm base-devel jq dnsutils python caddy screen wget cronie
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
+CHAIN_REGISTRY_INI_URL="$CHAIN_REGISTRY_INI_URL"
 CONFIG_FILE="/etc/caddy/Caddyfile"
 TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
 rpc_service_name="$rpc_service_name"

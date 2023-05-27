@@ -1,6 +1,13 @@
 pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel wget dnsutils nginx cronie screen logrotate
 
+# write env vars to bash file, so that cronjobs or other scripts could know
+cat <<EOT >> $HOME/env.sh
+CHAIN_REGISTRY_INI_URL="$CHAIN_REGISTRY_INI_URL"
+EOT
+
+source $HOME/env.sh
+
 ########################################################################################################################
 # SSL for notional.ventures (fullchain.pem and privkey.pem files)
 wget "http://tasks.web_config/config/fullchain.pem" -O /etc/nginx/fullchain.pem
@@ -244,6 +251,7 @@ echo "0 0 * * * root logrotate /etc/logrotate.d/nginx" > /etc/cron.d/cron_logrot
 ########################################################################################################################
 # cron
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
+source $HOME/env.sh
 source $HOME/generate_upstream.sh
 sleep 1
 
