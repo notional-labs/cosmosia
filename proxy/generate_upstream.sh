@@ -1,3 +1,8 @@
+if [[ -z "$CHAIN_REGISTRY_INI_URL" ]]; then
+  echo "no env var CHAIN_REGISTRY_INI_URL. Make sure put it into \$HOME/env.sh"
+  exit
+fi
+
 SERVICES=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
 
 

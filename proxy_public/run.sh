@@ -1,6 +1,11 @@
 pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel wget dnsutils nginx cronie screen
 
+# write env vars to bash file, so that cronjobs or other scripts could know
+cat <<EOT >> $HOME/env.sh
+CHAIN_REGISTRY_INI_URL="$CHAIN_REGISTRY_INI_URL"
+EOT
+
 ########################################################################################################################
 # SSL for notional.ventures (fullchain.pem and privkey.pem files)
 # tar -xvf "/run/secrets/ssl_notional.ventures.tar.gz" -C /etc/nginx/
@@ -56,6 +61,7 @@ screen -S nginx -dm /usr/sbin/nginx -g "daemon off;"
 ########################################################################################################################
 # cron
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
+source $HOME/env.sh
 source $HOME/generate_upstream.sh
 sleep 1
 
