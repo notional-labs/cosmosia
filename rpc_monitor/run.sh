@@ -7,9 +7,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-nvm install v16.16.0
+nvm install v18.14.0
 
-yarn set version v16.16.0
+yarn set version v18.14.0
 
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
@@ -19,7 +19,7 @@ git clone --single-branch --branch main https://github.com/notional-labs/cosmosi
 cd $HOME/cosmosia/rpc_monitor/web
 yarn && yarn build
 
-screen -S server -dm node server.js
+screen -S server -dm yarn start
 
 ########################################################################################################################
 # cron
