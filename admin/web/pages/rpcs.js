@@ -1,14 +1,36 @@
 import * as _ from 'underscore';
 import { useSession } from "next-auth/react";
 import React, { useState, useEffect } from 'react';
-import { List, Badge, Divider, Popover } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
+import { List, Badge, Divider, Popover, Space, Button, Tooltip } from 'antd';
+import { InfoCircleOutlined, ColumnWidthOutlined, DeleteOutlined } from '@ant-design/icons';
 
 const Service = (props) => {
+  const [isHovering, setIsHovering] = useState(false);
   const {service, containers} = props;
 
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
   return (
-    <div className="service" style={{paddingBottom: "10px"}}>
+    <div className="service" style={{paddingBottom: "10px"}} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+      {isHovering && (
+        <div className="service_buttons">
+          <Space>
+            <Tooltip title="Scale">
+              <Button icon={<ColumnWidthOutlined />} />
+            </Tooltip>
+            <Tooltip title="Remove">
+              <Button icon={<DeleteOutlined />} />
+            </Tooltip>
+          </Space>
+        </div>
+      )}
+
       <List
         header={<div><p className="service-name">{service}</p><hr /></div>}
         dataSource={containers}
