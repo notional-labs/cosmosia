@@ -57,7 +57,7 @@ const Services = (props) => {
   );
 };
 
-export default function Rpcs() {
+export default () => {
   const {data: session, status} = useSession();
   const [data, setData] = useState({services: []});
 

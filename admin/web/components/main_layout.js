@@ -1,24 +1,28 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Button, Layout, Space, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Button, Layout, Space, Avatar, Menu } from 'antd';
+import { DesktopOutlined, UserOutlined, CloudServerOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import React from "react";
 const {Header, Content, Footer} = Layout;
 
-const SessionTest = () => {
+const MainNav = () => {
   const {data: session} = useSession()
-
   if (session) {
     return (
-      <>Signed in as {session.user.email} <br/> session: {JSON.stringify(session)}</>
+      <Menu mode='horizontal'>
+        <Menu.SubMenu key='rpcs' title="Rpcs" icon={<CloudServerOutlined />}>
+          <Menu.Item key='rpc_monitor' icon={<DesktopOutlined />}>
+            <Link href='/rpcs'>Monitor</Link>
+          </Menu.Item>
+          <Menu.Item key='rpc_deploy' icon={<PlusCircleOutlined />}>
+            <Link href='/rpc_deploy'>Deploy</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+      </Menu>
     )
   }
-  return (
-    <header>
-      Not signed in!
-    </header>
-  )
+  return (null)
 }
 
 const HeaderLoginButtons = () => {
@@ -55,6 +59,7 @@ export default function MainLayout({children}) {
       <Header style={{background: "white"}}>
         <div style={{ float: 'left', width: '120px', height: '31px', fontSize: 'large'}}><Link href='/'>Cosmosia</Link></div>
         <div style={{ float: 'right'}}><HeaderLoginButtons /></div>
+        <MainNav />
       </Header>
 
       <Content style={{padding: '0'}}>
@@ -63,7 +68,7 @@ export default function MainLayout({children}) {
         </div>
       </Content>
 
-      <Footer style={{textAlign: 'center', background: 'white'}}>notional.ventures <br /><SessionTest /></Footer>
+      <Footer style={{textAlign: 'center', background: 'white'}}>notional.ventures</Footer>
     </Layout>
   );
 }
