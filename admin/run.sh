@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel jq dnsutils git yarn cronie screen python
+pacman -S --noconfirm base-devel jq dnsutils git yarn cronie screen python docker
 
 
 # install nodejs

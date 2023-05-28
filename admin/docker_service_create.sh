@@ -23,7 +23,9 @@ docker service create \
   --network net6 \
   --network net7 \
   --network net8 \
+  --constraint 'node.role==manager' \
   --endpoint-mode dnsrr \
+  --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   --restart-condition any \
   --env-file ../env.sh \
   archlinux:latest \
