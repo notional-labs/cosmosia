@@ -42,6 +42,7 @@ docker service create \
   --constraint "node.labels.cosmosia.lb==true" \
   --network $network \
   --network cosmosia \
+  --label 'cosmosia.service=lb' \
   --endpoint-mode dnsrr \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition any \
