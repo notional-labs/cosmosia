@@ -52,3 +52,10 @@ body {
 .service .ant-list-header {
   padding-block: 0px;
 }
+
+.service .service_buttons {
+  /*text-align: right;*/
+  position: absolute;
+  top: -20px;
+  right: 10px;
+}
