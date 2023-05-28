@@ -28,7 +28,9 @@ const Service = (props) => {
               </Link>
             </Tooltip>
             <Tooltip title="Remove">
+              <Link href={`/rpc_remove?id=${service}`}>
               <Button icon={<DeleteOutlined />} />
+              </Link>
             </Tooltip>
           </Space>
         </div>
