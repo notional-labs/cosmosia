@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import React, { useState, useEffect } from 'react';
 import { List, Badge, Divider, Popover, Space, Button, Tooltip } from 'antd';
 import { InfoCircleOutlined, ColumnWidthOutlined, DeleteOutlined } from '@ant-design/icons';
+import Link from 'next/link';
 
 const Service = (props) => {
   const [isHovering, setIsHovering] = useState(false);
@@ -22,7 +23,9 @@ const Service = (props) => {
         <div className="service_buttons">
           <Space>
             <Tooltip title="Scale">
-              <Button icon={<ColumnWidthOutlined />} />
+              <Link href={`/rpc_scale?id=${service}&rep=${containers.length}`}>
+                <Button icon={<ColumnWidthOutlined />} />
+              </Link>
             </Tooltip>
             <Tooltip title="Remove">
               <Button icon={<DeleteOutlined />} />
