@@ -14,6 +14,14 @@ yarn set version v18.14.0
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
 
+# create env.sh for cosmosia
+cat <<EOT >> $HOME/cosmosia/env.sh
+CHAIN_REGISTRY_INI_URL=$CHAIN_REGISTRY_INI_URL
+COSMOSIA_ADMIN_NEXTAUTH_URL=$COSMOSIA_ADMIN_NEXTAUTH_URL
+COSMOSIA_ADMIN_NEXTAUTH_SECRET=$COSMOSIA_ADMIN_NEXTAUTH_SECRET
+COSMOSIA_ADMIN_PASSWORD=$COSMOSIA_ADMIN_PASSWORD
+EOT
+
 ########################################################################################################################
 # web
 cd $HOME/cosmosia/admin/web
@@ -23,6 +31,7 @@ cat <<EOT >> .env.local
 NEXTAUTH_URL="$COSMOSIA_ADMIN_NEXTAUTH_URL"
 NEXTAUTH_SECRET="$COSMOSIA_ADMIN_NEXTAUTH_SECRET"
 ADMIN_PASSWORD="$COSMOSIA_ADMIN_PASSWORD"
+CHAIN_REGISTRY_INI_URL="$CHAIN_REGISTRY_INI_URL"
 EOT
 
 
