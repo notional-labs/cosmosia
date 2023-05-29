@@ -50,6 +50,7 @@ docker service create \
   --replicas 1 $MOUNT_OPT \
   --network $network \
   --network snapshot \
+  --label 'cosmosia.service=snapshot' \
   --constraint "node.hostname==$HOST" \
   --endpoint-mode dnsrr \
   --restart-condition none \
