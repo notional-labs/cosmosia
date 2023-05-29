@@ -117,7 +117,8 @@ export default function LbDeploy({chainOptions, rpcServiceOptions}) {
             onChange={handleChainChange}
           />
         </Form.Item>
-        <Form.Item label="Rpc Service" name="rpc_service" rules={[{required: true, message: 'Please select Rpc Service'}]}>
+        <Form.Item label="Rpc Service" name="rpc_service"
+                   rules={[{required: true, message: 'Please select Rpc Service'}]}>
           <Select
             showSearch
             allowClear

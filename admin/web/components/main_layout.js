@@ -39,6 +39,9 @@ const MainNav = () => {
           <Menu.Item key='snap_list' icon={<FileOutlined />}>
             <Link href='/snapshots'>List</Link>
           </Menu.Item>
+          <Menu.Item key='snap_deploy' icon={<PlusCircleOutlined />}>
+            <Link href='/snap_deploy'>Deploy</Link>
+          </Menu.Item>
         </Menu.SubMenu>
       </Menu>
     )

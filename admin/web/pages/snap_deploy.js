@@ -15,7 +15,7 @@ export async function getServerSideProps() {
   return {props: {chainOptions}};
 }
 
-export default function RpcDeploy({chainOptions}) {
+export default function SnapDeploy({chainOptions}) {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
@@ -29,7 +29,7 @@ export default function RpcDeploy({chainOptions}) {
     const {chain} = values;
     setFormState(1);
 
-    const apiRes = await fetch('/api/rpc_deploy', {
+    const apiRes = await fetch('/api/snap_deploy', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -49,8 +49,8 @@ export default function RpcDeploy({chainOptions}) {
   };
 
   return (
-    <div className="RpcDeploy">
-      <h3>Deploy a Rpc Service</h3>
+    <div className="SanpDeploy">
+      <h3>Deploy a Snapshot Service</h3>
 
       {formState === 0 &&
       <Form
