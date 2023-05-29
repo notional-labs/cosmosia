@@ -22,7 +22,7 @@ const WEB_CONFIG_URL = "http://tasks.web_config:2375";
  * @param filter example: {"label":["cosmosia.service=rpc"]}
  */
 export const dockerApiServices = async (filter) => {
-  const url = `${WEB_CONFIG_URL}/services??filters=${encodeURIComponent(filter)}`;
+  const url = `${WEB_CONFIG_URL}/services?filters=${encodeURIComponent(filter)}`;
   console.log(`dockerApiServices: url=${url}`);
   const response = await fetch(url);
   const data = await response.json();
