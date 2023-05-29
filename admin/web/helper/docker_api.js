@@ -14,6 +14,7 @@
  */
 
 import fetch from 'node-fetch';
+const { readFileSync } = require('fs');
 
 const WEB_CONFIG_URL = "http://tasks.web_config:2375";
 
@@ -32,8 +33,26 @@ export const dockerApiServices = async (filter) => {
 /**********************************************************************************************************************/
 
 export const listRpcs = async () => {
-  const data = await dockerApiServices(`{"label":["cosmosia.service=rpc"]}`);
-  return data;
+  const rpcList = [];
+
+  if (process.env.NODE_ENV === "development") {
+    const txt = readFileSync('./public/rpc_status.json');
+    const data = JSON.parse(txt);
+
+    for (const lb of data) {
+      const {service} = lb;
+      rpcList.push(service);
+    }
+  } else { // production
+    const data = await dockerApiServices(`{"label":["cosmosia.service=rpc"]}`);
+    for (const lb of data) {
+      const {Spec} = lb;
+      const {Name} = Spec;
+      rpcList.push(Name);
+    }
+  }
+
+  return rpcList;
 }
 
 

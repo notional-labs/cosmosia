@@ -2,30 +2,51 @@ import React, { useState } from 'react';
 import { Button, Form, Select, Spin, Alert } from 'antd';
 import { useSession } from "next-auth/react";
 import { getChainList } from '/helper/chain_registry';
+import { listRpcs } from "../helper/docker_api";
 
-export async function getServerSideProps() {
+const getChainOptions = async () => {
   const chainList = await getChainList();
-
   const chainOptions = [];
   for (const chain of chainList) {
     const opt = {value: chain, label: chain};
     chainOptions.push(opt);
   }
 
-  return {props: {chainOptions}};
+  return chainOptions;
 }
 
-export default function LbDeploy({chainOptions}) {
+const getRpcServiceOptions = async () => {
+  const rpcServiceOptions = [];
+  const rpcList = await listRpcs();
+  for (const rpcService of rpcList) {
+    const opt = {value: rpcService, label: rpcService};
+    rpcServiceOptions.push(opt);
+  }
+
+  return rpcServiceOptions;
+}
+
+export async function getServerSideProps() {
+  const chainOptions = await getChainOptions();
+  const rpcServiceOptions = await getRpcServiceOptions();
+
+  return {props: {chainOptions, rpcServiceOptions}};
+}
+
+export default function LbDeploy({chainOptions, rpcServiceOptions}) {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
   const [formState, setFormState] = useState(0);
-
+  const [filteredRpcServiceOptions, setFilteredRpcServiceOptions] = useState(rpcServiceOptions);
   const [responseText, setResponseText] = useState("");
+
+  const formRef = React.useRef(null);
 
   if (status === "unauthenticated") return <p>Access Denied.</p>
 
   const onFinish = async (values) => {
+    // console.log(JSON.stringify(values));
     const {chain} = values;
     setFormState(1);
 
@@ -48,6 +69,24 @@ export default function LbDeploy({chainOptions}) {
     console.log('Failed:', errorInfo);
   };
 
+  const handleChainChange = (value) => {
+    console.log(`handleChainChange: value=${value}`);
+
+    const newOptions = [];
+
+    for (const item of rpcServiceOptions) {
+      if (item.value.startsWith(`rpc_${value}_`)) {
+        newOptions.push(item);
+      }
+    }
+
+    setFilteredRpcServiceOptions(newOptions);
+
+    formRef.current?.setFieldsValue({
+      rpc_service: null,
+    });
+  }
+
   return (
     <div className="LbDeploy">
       <h3>Deploy a Load Balancer</h3>
@@ -62,6 +101,7 @@ export default function LbDeploy({chainOptions}) {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        ref={formRef}
       >
         <Form.Item label="Chain" name="chain" rules={[{required: true, message: 'Please select chain'}]}>
           <Select
@@ -74,9 +114,25 @@ export default function LbDeploy({chainOptions}) {
               (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
             }
             options={chainOptions}
+            onChange={handleChainChange}
           />
         </Form.Item>
-
+        <Form.Item label="Rpc Service" name="rpc_service" rules={[{required: true, message: 'Please select Rpc Service'}]}>
+          <Select
+            showSearch
+            allowClear
+            style={{width: 200}}
+            placeholder="Search to Select"
+            optionFilterProp="children"
+            filterOption={(input, option) => (option?.label ?? '').includes(input)}
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+            }
+            options={filteredRpcServiceOptions}
+            disabled={filteredRpcServiceOptions.length <= 0}
+            value={null}
+          />
+        </Form.Item>
         <Form.Item wrapperCol={{offset: 8, span: 16}}>
           <Button type="primary" htmlType="submit">Submit</Button>
         </Form.Item>
