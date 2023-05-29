@@ -6,7 +6,7 @@ export async function getServerSideProps() {
   let snapList = [];
   try {
     snapList = await listSnapshots();
-  } catch(err) {
+  } catch (err) {
     // do nothing
   }
 
@@ -46,7 +46,7 @@ export default function Snapshots({snapList}) {
     <div className="Snapshots">
       <h3>Snapshots</h3>
 
-      <SnapshotTable data={snapList} />
+      <SnapshotTable data={snapList}/>
     </div>
   )
 }

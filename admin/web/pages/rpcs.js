@@ -24,12 +24,12 @@ const Service = (props) => {
           <Space>
             <Tooltip title="Scale">
               <Link href={`/rpc_scale?id=${service}&rep=${containers.length}`}>
-                <Button icon={<ColumnWidthOutlined />} />
+                <Button icon={<ColumnWidthOutlined/>}/>
               </Link>
             </Tooltip>
             <Tooltip title="Remove">
               <Link href={`/rpc_remove?id=${service}`}>
-              <Button icon={<DeleteOutlined />} />
+                <Button icon={<DeleteOutlined/>}/>
               </Link>
             </Tooltip>
           </Space>
@@ -37,23 +37,26 @@ const Service = (props) => {
       )}
 
       <List
-        header={<div><p className="service-name">{service}</p><hr /></div>}
+        header={<div><p className="service-name">{service}</p>
+          <hr/>
+        </div>}
         dataSource={containers}
-        renderItem={ (item) => {
+        renderItem={(item) => {
           const bgColor = item.status === "200" ? "" : (item.status === "503" ? "#FFC440" : "#D93026");
           return (
             <List.Item style={{background: bgColor}}>
               <div style={{width: "100%"}}>
                 <span style={{float: "left"}}>
                   <Popover content={item.hostname}>
-                    <InfoCircleOutlined />
+                    <InfoCircleOutlined/>
                   </Popover>
                   {item.ip}
                 </span>
                 <span style={{float: "right"}}>{item.data_size}</span>
               </div>
             </List.Item>
-          )}
+          )
+        }
         }
       />
     </div>
@@ -88,7 +91,7 @@ export default () => {
   const {data: session, status} = useSession();
   const [data, setData] = useState({services: []});
 
-  useEffect( () => {
+  useEffect(() => {
     const load_data = async () => {
       const response = await fetch(`/rpc_status.json`);
       const data = await response.json();
@@ -113,15 +116,15 @@ export default () => {
   return (
     <div className="Rpcs">
       <div>
-        <Divider type="vertical" />
+        <Divider type="vertical"/>
         <span>
-            <Badge status="default" text="Normal" /><Divider type="vertical" />
-            <Badge status="error" text="Error" /><Divider type="vertical" />
-            <Badge status="warning" text="Not-Synced" />
+            <Badge status="default" text="Normal"/><Divider type="vertical"/>
+            <Badge status="error" text="Error"/><Divider type="vertical"/>
+            <Badge status="warning" text="Not-Synced"/>
           </span>
       </div>
 
-      <Services services={data} />
+      <Services services={data}/>
     </div>
   )
 }

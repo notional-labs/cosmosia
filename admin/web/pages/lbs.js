@@ -6,7 +6,7 @@ export async function getServerSideProps() {
   let lbList = [];
   try {
     lbList = await listLoadBalancers();
-  } catch(err) {
+  } catch (err) {
     // do nothing
   }
 
@@ -46,7 +46,7 @@ export default function LoadBalancers({lbList}) {
     <div className="LoadBalancers">
       <h3>Load Balancers</h3>
 
-      <LoadBalancerTable data={lbList} />
+      <LoadBalancerTable data={lbList}/>
     </div>
   )
 }
