@@ -24,18 +24,30 @@ const ServerTable = (props) => {
           dataIndex: 'Hostname',
           key: 'Hostname',
           render: (text) => <a>{text}</a>,
+          sorter: (a, b) => {
+            return (a.Hostname < b.Hostname) ? -1 : (a.Hostname > b.Hostname) ? 1 : 0;
+          },
+          sortDirections: ['ascend', 'descend'],
         },
         {
           title: 'Addr',
           dataIndex: 'Addr',
           key: 'Addr',
           render: (text) => <a>{text}</a>,
+          sorter: (a, b) => {
+            return (a.Addr < b.Addr) ? -1 : (a.Addr > b.Addr) ? 1 : 0;
+          },
+          sortDirections: ['ascend', 'descend'],
         },
         {
           title: 'State',
           dataIndex: 'State',
           key: 'State',
           render: (text) => <a>{text}</a>,
+          sorter: (a, b) => {
+            return (a.State < b.State) ? -1 : (a.State > b.State) ? 1 : 0;
+          },
+          sortDirections: ['ascend', 'descend'],
         },
       ]}
       dataSource={data}

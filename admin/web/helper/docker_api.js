@@ -95,42 +95,7 @@ export const listServers = async () => {
   let data = [];
 
   if (process.env.NODE_ENV === "development") {
-    data = [{
-      "ID": "wrm8uee8vqrhkgb0047y870py",
-      "CreatedAt": "2022-09-10T21:31:32.567026483Z",
-      "UpdatedAt": "2023-05-26T08:53:22.499157797Z",
-      "Spec": {
-        "Labels": {
-          "cosmosia.archive": "true",
-          "cosmosia.rpc.dig-archive": "true",
-          "cosmosia.rpc.evmos-archive": "true",
-          "cosmosia.rpc.juno-archive-sub1": "true",
-          "cosmosia.rpc.juno-archive-sub2": "true"
-        },
-        "Role": "worker",
-        "Availability": "active"
-      },
-      "Description": {
-        "Hostname": "cosmosia11",
-        "Platform": {
-          "Architecture": "x86_64",
-          "OS": "linux"
-        },
-        "Resources": {
-          "NanoCPUs": 32000000000,
-          "MemoryBytes": 134996893696
-        },
-        "Engine": {
-          "EngineVersion": "20.10.18",
-          "Plugins": []
-        },
-        "TLSInfo": {}
-      },
-      "Status": {
-        "State": "ready",
-        "Addr": "65.108.237.230"
-      }
-    },
+    data = [
       {
         "ID": "ypvfybi5brl1rtbqwbtjpcibr",
         "CreatedAt": "2023-01-22T11:06:06.265746447Z",
@@ -162,7 +127,44 @@ export const listServers = async () => {
           "State": "ready",
           "Addr": "65.109.34.161"
         }
-      }];
+      },
+      {
+        "ID": "wrm8uee8vqrhkgb0047y870py",
+        "CreatedAt": "2022-09-10T21:31:32.567026483Z",
+        "UpdatedAt": "2023-05-26T08:53:22.499157797Z",
+        "Spec": {
+          "Labels": {
+            "cosmosia.archive": "true",
+            "cosmosia.rpc.dig-archive": "true",
+            "cosmosia.rpc.evmos-archive": "true",
+            "cosmosia.rpc.juno-archive-sub1": "true",
+            "cosmosia.rpc.juno-archive-sub2": "true"
+          },
+          "Role": "worker",
+          "Availability": "active"
+        },
+        "Description": {
+          "Hostname": "cosmosia11",
+          "Platform": {
+            "Architecture": "x86_64",
+            "OS": "linux"
+          },
+          "Resources": {
+            "NanoCPUs": 32000000000,
+            "MemoryBytes": 134996893696
+          },
+          "Engine": {
+            "EngineVersion": "20.10.18",
+            "Plugins": []
+          },
+          "TLSInfo": {}
+        },
+        "Status": {
+          "State": "ready",
+          "Addr": "65.108.237.230"
+        }
+      },
+    ];
   } else { // production
     const url = `${WEB_CONFIG_URL}/nodes`;
     const response = await fetch(url);
