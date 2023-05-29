@@ -39,6 +39,7 @@ const ServerTable = (props) => {
         },
       ]}
       dataSource={data}
+      pagination={false}
     />
   );
 }

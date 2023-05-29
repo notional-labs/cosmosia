@@ -176,7 +176,7 @@ export const listServers = async () => {
     const {Hostname} = Description;
     const {State, Addr} = Status;
 
-    servers.push({Hostname, Addr, State});
+    servers.push({key: Hostname, Hostname, Addr, State});
   }
 
   return servers;
