@@ -2,7 +2,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Button, Layout, Space, Avatar, Menu } from 'antd';
-import { DesktopOutlined, UserOutlined, CloudServerOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import {
+  DesktopOutlined,
+  UserOutlined,
+  CloudServerOutlined,
+  PlusCircleOutlined,
+  PartitionOutlined
+} from '@ant-design/icons';
 import React from "react";
 const {Header, Content, Footer} = Layout;
 
@@ -17,6 +23,11 @@ const MainNav = () => {
           </Menu.Item>
           <Menu.Item key='rpc_deploy' icon={<PlusCircleOutlined />}>
             <Link href='/rpc_deploy'>Deploy</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu key='lbs' title="Load Balancers" icon={<CloudServerOutlined />}>
+          <Menu.Item key='lb_list' icon={<PartitionOutlined />}>
+            <Link href='/lbs'>List</Link>
           </Menu.Item>
         </Menu.SubMenu>
       </Menu>

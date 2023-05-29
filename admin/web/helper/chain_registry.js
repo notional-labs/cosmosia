@@ -1,6 +1,6 @@
 var request = require('request');
 
-let chainList = [];
+let chainList = []; // to cache result
 
 const read_chain_registry_ini = (url) => new Promise((resolve, reject) => {
   request(url, (error, response, data) => {
