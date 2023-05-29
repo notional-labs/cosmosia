@@ -1,5 +1,5 @@
-# usage: ./docker_service_create_snapshost.sh chain_name
-# eg., ./docker_service_create_snapshost.sh cosmoshub
+# usage: ./docker_service_create.sh chain_name
+# eg., ./docker_service_create.sh cosmoshub
 
 chain_name="$1"
 if [ -f "../env.sh" ]; then
@@ -10,7 +10,7 @@ else
 fi
 
 if [[ -z $chain_name ]]; then
-  echo "No chain_name. usage eg., ./docker_service_create_snapshost.sh cosmoshub"
+  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub"
   exit
 fi
 
