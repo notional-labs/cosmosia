@@ -47,7 +47,7 @@ export default function LbDeploy({chainOptions, rpcServiceOptions}) {
 
   const onFinish = async (values) => {
     // console.log(JSON.stringify(values));
-    const {chain} = values;
+    const {chain, rpc_service} = values;
     setFormState(1);
 
     const apiRes = await fetch('/api/lb_deploy', {
@@ -56,7 +56,7 @@ export default function LbDeploy({chainOptions, rpcServiceOptions}) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({chain}),
+      body: JSON.stringify({chain, rpc_service}),
     });
     const {data: apiResText} = await apiRes.json();
 
