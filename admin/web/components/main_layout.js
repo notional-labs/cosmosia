@@ -29,6 +29,9 @@ const MainNav = () => {
           <Menu.Item key='lb_list' icon={<PartitionOutlined />}>
             <Link href='/lbs'>List</Link>
           </Menu.Item>
+          <Menu.Item key='lb_deploy' icon={<PlusCircleOutlined />}>
+            <Link href='/lb_deploy'>Deploy</Link>
+          </Menu.Item>
         </Menu.SubMenu>
       </Menu>
     )
