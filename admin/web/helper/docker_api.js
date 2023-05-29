@@ -67,3 +67,23 @@ export const listLoadBalancers = async () => {
   }
   return loadBalancerList;
 }
+
+export const listSnapshots = async () => {
+  const snapshotList = [];
+
+  if (process.env.NODE_ENV === "development") {
+    // put some dummy data here
+    snapshotList.push(`snapshot_starname`);
+    snapshotList.push(`snapshot_osmosis-testnet`);
+    snapshotList.push(`snapshot_quasar`);
+  } else { // production
+    const data = await dockerApiServices(`{"label":["cosmosia.service=snapshot"]}`);
+    for (const snap of data) {
+      const {Spec} = snap;
+      const {Name} = Spec;
+      snapshotList.push(Name);
+    }
+  }
+
+  return snapshotList;
+}

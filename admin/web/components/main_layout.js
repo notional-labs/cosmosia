@@ -7,7 +7,9 @@ import {
   UserOutlined,
   CloudServerOutlined,
   PlusCircleOutlined,
-  PartitionOutlined
+  PartitionOutlined,
+  FileSyncOutlined,
+  FileOutlined
 } from '@ant-design/icons';
 import React from "react";
 const {Header, Content, Footer} = Layout;
@@ -31,6 +33,11 @@ const MainNav = () => {
           </Menu.Item>
           <Menu.Item key='lb_deploy' icon={<PlusCircleOutlined />}>
             <Link href='/lb_deploy'>Deploy</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu key='snapshots' title="Snapshots" icon={<FileSyncOutlined />}>
+          <Menu.Item key='snap_list' icon={<FileOutlined />}>
+            <Link href='/snapshots'>List</Link>
           </Menu.Item>
         </Menu.SubMenu>
       </Menu>
