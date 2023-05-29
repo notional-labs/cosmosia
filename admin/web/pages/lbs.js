@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import { listLoadBalancers } from '/helper/docker_api';
+import { Table } from 'antd';
 
 export async function getServerSideProps() {
   let lbList = [];
@@ -12,6 +13,30 @@ export async function getServerSideProps() {
   return {props: {lbList}};
 }
 
+const LoadBalancerTable = (props) => {
+  const {data} = props;
+
+  const dataSrc = [];
+  for (const lb of data) {
+    dataSrc.push({key: lb, name: lb})
+  }
+
+  return (
+    <Table
+      columns={[
+        {
+          title: 'Name',
+          dataIndex: 'name',
+          key: 'name',
+          render: (text) => <a>{text}</a>,
+        },
+      ]}
+      dataSource={dataSrc}
+    />
+  );
+}
+
+
 export default function LoadBalancers({lbList}) {
   const {data: session, status} = useSession();
 
@@ -21,7 +46,7 @@ export default function LoadBalancers({lbList}) {
     <div className="LoadBalancers">
       <h3>Load Balancers</h3>
 
-      {JSON.stringify(lbList)}
+      <LoadBalancerTable data={lbList} />
     </div>
   )
 }
