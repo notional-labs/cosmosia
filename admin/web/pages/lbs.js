@@ -29,9 +29,14 @@ const LoadBalancerTable = (props) => {
           dataIndex: 'name',
           key: 'name',
           render: (text) => <a>{text}</a>,
+          sorter: (a, b) => {
+            return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0;
+          },
+          sortDirections: ['ascend', 'descend'],
         },
       ]}
       dataSource={dataSrc}
+      pagination={false}
     />
   );
 }
