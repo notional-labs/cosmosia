@@ -18,7 +18,7 @@ body {
 
 .services .contents .service {
   display: block;
-  border: solid 1px black;
+  border: solid 1px #8b8b8b;
   border-radius: 5px;
 
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
