@@ -174,11 +174,17 @@ export const listServers = async () => {
   /////
   const servers = [];
   for (const server of data) {
-    const {Description, Status} = server;
+    const {Spec, Description, Status} = server;
+    const {Labels} = Spec;
     const {Hostname} = Description;
     const {State, Addr} = Status;
 
-    servers.push({key: Hostname, Hostname, Addr, State});
+    servers.push({
+      key: Hostname,
+      Hostname,
+      Addr, State,
+      Tags: Object.keys(Labels),
+    });
   }
 
   return servers;
