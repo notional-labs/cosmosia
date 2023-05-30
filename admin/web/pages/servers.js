@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { listServers } from '/helper/docker_api';
-import { Table } from 'antd';
+import { Table, Tag } from 'antd';
 
 export async function getServerSideProps() {
   let serverList = [];
@@ -48,6 +48,16 @@ const ServerTable = (props) => {
             return (a.State < b.State) ? -1 : (a.State > b.State) ? 1 : 0;
           },
           sortDirections: ['ascend', 'descend'],
+        },
+        {
+          title: 'Tags',
+          key: 'Tags',
+          dataIndex: 'Tags',
+          render: (_, { Tags }) => (
+            <>
+              {Tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+            </>
+          ),
         },
       ]}
       dataSource={data}
