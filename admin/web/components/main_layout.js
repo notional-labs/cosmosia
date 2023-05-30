@@ -93,7 +93,7 @@ export default function MainLayout({children}) {
       </Head>
 
       <Header style={{background: "white"}}>
-        <div style={{ float: 'left', width: '120px', height: '31px', fontSize: 'large'}}><Link href='/'>Cosmosia</Link></div>
+        <div style={{ float: 'left', width: '120px', height: '31px', fontSize: 'large'}}><Link href='/' style={{ color: '#c4181a' }}>Cosmosia</Link></div>
         <div style={{ float: 'right'}}><HeaderLoginButtons /></div>
         <MainNav />
       </Header>

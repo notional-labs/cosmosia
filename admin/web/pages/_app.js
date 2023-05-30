@@ -7,7 +7,13 @@ import { App as AntdApp } from 'antd';
 export default ({Component, pageProps: {session, ...pageProps}}) => {
   return (
     <SessionProvider session={session}>
-      <ConfigProvider>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: '#c4181a',
+          },
+        }}
+      >
         <AntdApp>
           <MainLayout>
             <Component {...pageProps} />
