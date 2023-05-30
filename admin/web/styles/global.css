@@ -35,6 +35,7 @@ body {
 .service-name {
   font-weight: bold;
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 .service .ant-list-item {
