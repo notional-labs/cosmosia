@@ -10,7 +10,8 @@ import {
   PartitionOutlined,
   FileSyncOutlined,
   FileOutlined,
-  ClusterOutlined
+  ClusterOutlined,
+  DatabaseOutlined
 } from '@ant-design/icons';
 import React from "react";
 const {Header, Content, Footer} = Layout;
@@ -47,6 +48,11 @@ const MainNav = () => {
         <Menu.SubMenu key='servers' title="Servers" icon={<ClusterOutlined />}>
           <Menu.Item key='server_list' icon={<ClusterOutlined />}>
             <Link href='/servers'>Swarm Nodes</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu key='subnodes' title="Subnodes" icon={<DatabaseOutlined />}>
+          <Menu.Item key='subnode_list' icon={<DatabaseOutlined />}>
+            <Link href='/subnodes'>Subnodes</Link>
           </Menu.Item>
         </Menu.SubMenu>
       </Menu>
