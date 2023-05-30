@@ -18,7 +18,7 @@ const Service = (props) => {
   };
 
   return (
-    <div className="service" style={{paddingBottom: "10px"}} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <div className="service" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       {isHovering && (
         <div className="service_buttons">
           <Space>
@@ -37,9 +37,7 @@ const Service = (props) => {
       )}
 
       <List
-        header={<div><p className="service-name">{service}</p>
-          <hr/>
-        </div>}
+        header={<h4 className="service-name">{service}</h4>}
         dataSource={containers}
         renderItem={(item) => {
           const bgColor = item.status === "200" ? "" : (item.status === "503" ? "#FFC440" : "#D93026");

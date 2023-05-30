@@ -32,14 +32,6 @@ body {
   z-index: 1;
 }
 
-.service hr {
-  border: none;
-  background-color: black;
-  width: 80%;
-  height: 2px;
-  border-radius: 5px;
-}
-
 .service-name {
   font-weight: bold;
   text-align: center;
