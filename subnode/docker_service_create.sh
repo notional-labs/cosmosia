@@ -34,6 +34,7 @@ docker service create \
   --replicas 1 \
   --network $network \
   --network cosmosia \
+  --label 'cosmosia.service=subnode' \
   --endpoint-mode dnsrr \
   --constraint 'node.hostname==cosmosia32' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \

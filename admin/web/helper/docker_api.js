@@ -183,3 +183,159 @@ export const listServers = async () => {
 
   return servers;
 }
+
+
+/**
+ * List all subnode services
+ * @returns {Promise<unknown>}
+ */
+export const listSubnodes = async () => {
+  let data = [];
+
+  if (process.env.NODE_ENV === "development") {
+    data = [
+      {
+        "ID": "s5qssuzyl5kldh292eqn3prwu",
+        "Version": {
+          "Index": 1429828
+        },
+        "CreatedAt": "2023-04-07T15:58:19.827205108Z",
+        "UpdatedAt": "2023-05-30T00:46:03.138776379Z",
+        "Spec": {
+          "Name": "sub_osmosis",
+          "Labels": {
+            "cosmosia.service": "subnode"
+          },
+          "TaskTemplate": {
+            "ContainerSpec": {
+              "Image": "archlinux:latest@sha256:95024c8e97d6ef47c27960263a5c314196feef40a20b1a0c3f0419920492fb0f",
+              "Args": [
+                "/bin/bash",
+                "-c",
+                "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/subnode/run.sh > ~/run.sh &&    /bin/bash ~/run.sh osmosis"
+              ],
+              "Init": false,
+              "DNSConfig": {},
+              "Isolation": "default",
+              "Sysctls": {
+                "net.ipv4.tcp_tw_reuse": "1"
+              }
+            },
+            "Resources": {
+              "Limits": {},
+              "Reservations": {}
+            },
+            "RestartPolicy": {
+              "Condition": "none",
+              "Delay": 5000000000,
+              "MaxAttempts": 0
+            },
+            "Placement": {
+              "Constraints": [
+                "node.hostname==cosmosia32"
+              ],
+              "Platforms": [
+                {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              ]
+            },
+            "Networks": [],
+            "ForceUpdate": 0,
+            "Runtime": "container"
+          },
+          "Mode": {
+            "Replicated": {
+              "Replicas": 1
+            }
+          },
+          "EndpointSpec": {
+            "Mode": "dnsrr"
+          }
+        },
+        "PreviousSpec": {},
+        "Endpoint": {
+          "Spec": {}
+        }
+      },
+      {
+        "ID": "tiu1fp4p3lo6kgs0ga9zv5bs6",
+        "Version": {
+          "Index": 1429825
+        },
+        "CreatedAt": "2023-04-16T18:15:54.798090816Z",
+        "UpdatedAt": "2023-05-30T00:45:39.329612997Z",
+        "Spec": {
+          "Name": "sub_cosmoshub",
+          "Labels": {
+            "cosmosia.service": "subnode"
+          },
+          "TaskTemplate": {
+            "ContainerSpec": {
+              "Image": "archlinux:latest@sha256:6199cf75da82918db13bbbeef7463e52f1f92b0533187f07632d3676276a64a0",
+              "Args": [
+                "/bin/bash",
+                "-c",
+                "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/subnode/run.sh > ~/run.sh &&    /bin/bash ~/run.sh cosmoshub"
+              ],
+              "Init": false,
+              "DNSConfig": {},
+              "Isolation": "default",
+              "Sysctls": {
+                "net.ipv4.tcp_tw_reuse": "1"
+              }
+            },
+            "Resources": {
+              "Limits": {},
+              "Reservations": {}
+            },
+            "RestartPolicy": {
+              "Condition": "none",
+              "Delay": 5000000000,
+              "MaxAttempts": 0
+            },
+            "Placement": {
+              "Constraints": [
+                "node.hostname==cosmosia32"
+              ],
+              "Platforms": [
+                {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              ]
+            },
+            "Networks": [],
+            "ForceUpdate": 0,
+            "Runtime": "container"
+          },
+          "Mode": {
+            "Replicated": {
+              "Replicas": 1
+            }
+          },
+          "EndpointSpec": {
+            "Mode": "dnsrr"
+          }
+        },
+        "PreviousSpec": {},
+        "Endpoint": {
+          "Spec": {}
+        }
+      }
+    ];
+  } else { // production
+    data = await dockerApiServices(`{"label":["cosmosia.service=subnode"]}`);
+  }
+
+  /////
+  const items = [];
+  for (const service of data) {
+    const {Spec} = service;
+    const {Name} = Spec;
+    items.push(Name);
+  }
+
+  return items;
+}
