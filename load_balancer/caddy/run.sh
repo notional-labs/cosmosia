@@ -26,7 +26,7 @@ source $HOME/env.sh
 ########################################################################################################################
 # cron
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/generate_upstream.sh" > $HOME/generate_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/caddy/generate_upstream.sh" > $HOME/generate_upstream.sh
 
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
 source $HOME/env.sh
