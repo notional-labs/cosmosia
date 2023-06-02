@@ -11,8 +11,6 @@ fi
 
 echo "lb_type=${lb_type}"
 
-exit
-
 if [ -f "../env.sh" ]; then
   source ../env.sh
 else
