@@ -1,19 +1,33 @@
-# usage: ./docker_service_create.sh chain_name [rpc_service_name]
-# eg., ./docker_service_create.sh cosmoshub [rpc_cosmoshub_3]
+# usage: ./docker_service_create.sh chain_name rpc_service_name [lb_type]
+# eg., ./docker_service_create.sh cosmoshub rpc_cosmoshub_3 caddy
 
 chain_name="$1"
 rpc_service_name="$2"
+lb_type="$3" # lb_type could be caddy or haproxy, default is caddy
+
+if [[ $lb_type != "haproxy" ]]; then
+  lb_type="caddy"
+fi
+
+echo "lb_type=${lb_type}"
+
+exit
 
 if [ -f "../env.sh" ]; then
   source ../env.sh
 else
-    echo "../env.sh file does not exist."
-    exit
+  echo "../env.sh file does not exist."
+  exit
 fi
 
 
 if [[ -z $chain_name ]]; then
-  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub"
+  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub rpc_cosmoshub_1 caddy"
+  exit
+fi
+
+if [[ -z $rpc_service_name ]]; then
+  echo "No rpc_service_name. usage eg., ./docker_service_create.sh cosmoshub rpc_cosmoshub_1 caddy"
   exit
 fi
 
@@ -48,7 +62,7 @@ docker service create \
   --restart-condition any \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/run.sh > ~/run.sh && \
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/${lb_type}/run.sh > ~/run.sh && \
    /bin/bash ~/run.sh $rpc_service_name"
 
 

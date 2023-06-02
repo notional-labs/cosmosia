@@ -11,7 +11,7 @@ fi
 cd $HOME
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel jq dnsutils python caddy screen wget cronie
+pacman -S --noconfirm base-devel jq dnsutils python haproxy screen wget cronie
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
@@ -25,8 +25,6 @@ source $HOME/env.sh
 
 ########################################################################################################################
 # cron
-
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/generate_upstream.sh" > $HOME/generate_upstream.sh
 
 cat <<'EOT' >  $HOME/cron_update_upstream.sh
 source $HOME/env.sh
