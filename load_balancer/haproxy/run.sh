@@ -24,11 +24,11 @@ source $HOME/env.sh
 ########################################################################################################################
 # haproxy
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/haproxy.cfg" > /etc/haproxy/haproxy.cfg
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/haproxy.cfg" > $HOME/haproxy.cfg
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/start.sh" > $HOME/start.sh
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/reload.sh" > $HOME/reload.sh
 
-source $HOME/start.sh
+source $HOME/reload.sh
 
 ########################################################################################################################
 # cron
