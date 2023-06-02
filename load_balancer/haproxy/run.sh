@@ -16,47 +16,22 @@ pacman -S --noconfirm base-devel jq dnsutils python haproxy screen wget cronie
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
 CHAIN_REGISTRY_INI_URL="$CHAIN_REGISTRY_INI_URL"
-CONFIG_FILE="/etc/caddy/Caddyfile"
-TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
 rpc_service_name="$rpc_service_name"
 EOT
 
 source $HOME/env.sh
 
 ########################################################################################################################
-# cron
+# haproxy
 
-cat <<'EOT' >  $HOME/cron_update_upstream.sh
-source $HOME/env.sh
-source $HOME/generate_upstream.sh $rpc_service_name
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/haproxy.cfg" > /etc/haproxy/haproxy.cfg
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/start.sh" > $HOME/start.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/reload.sh" > $HOME/reload.sh
 
-if cmp -s "$CONFIG_FILE" "$TMP_CONFIG_FILE"; then
-  # the same => do nothing
-  echo "no config change, do nothing..."
-else
-  # different
-
-  # show the diff
-  diff -c "$CONFIG_FILE" "$TMP_CONFIG_FILE"
-
-  echo "found config changes, updating..."
-  cat "$TMP_CONFIG_FILE" > "$CONFIG_FILE"
-  /usr/sbin/caddy reload --config $CONFIG_FILE
-fi
-EOT
-
-echo "*/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
-crond
+source $HOME/start.sh
 
 ########################################################################################################################
-# caddy
-
-# generate new config file and copy to $CONFIG_FILE
-source $HOME/cron_update_upstream.sh
-cat $TMP_CONFIG_FILE > $CONFIG_FILE
-
-screen -S caddy -dm /usr/sbin/caddy run --config $CONFIG_FILE
-sleep 5
+# cron
 
 ########################################################################################################################
 echo "Done!"
