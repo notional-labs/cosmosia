@@ -1,8 +1,8 @@
 import { useSession } from "next-auth/react";
 import { listServers } from '/helper/docker_api';
-import { Table, Tag, Progress } from 'antd';
+import { Table, Tag, Progress, Dropdown } from 'antd';
 import { format2Decimal } from "/helper/utils";
-import { CheckCircleOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, DownOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 
 export async function getServerSideProps() {
@@ -21,7 +21,6 @@ const ServerTable = (props) => {
   const {data} = props;
 
   const tagCloseHandler = ({Hostname, tag}) => {
-    console.log(`Hostname=${Hostname}, tag=${tag}`);
     router.push(`/node_label_remove?swarm_node=${Hostname}&label=${tag}`);
   };
 
@@ -40,7 +39,7 @@ const ServerTable = (props) => {
           sortDirections: ['ascend', 'descend'],
         },
         {
-          title: 'Addr',
+          title: 'IP',
           dataIndex: 'Addr',
           key: 'Addr',
           width: 150,
@@ -97,7 +96,7 @@ const ServerTable = (props) => {
           },
         },
         {
-          title: 'Tags',
+          title: 'Labels',
           key: 'Tags',
           dataIndex: 'Tags',
           render: (_, { Hostname, Tags }) => (
@@ -107,6 +106,30 @@ const ServerTable = (props) => {
                 tagCloseHandler({Hostname, tag});
               }}>{tag}</Tag>)}
             </>
+          ),
+        },
+        {
+          title: 'Action',
+          dataIndex: 'operation',
+          key: 'operation',
+          render: (_, { Hostname }) => (
+            <Dropdown
+              menu={{
+                items: [
+                  {
+                    key: 'node_label_add',
+                    label: 'Add Label',
+                  },
+                ],
+                onClick: ({key}) => {
+                  if (key === 'node_label_add') {
+                    router.push(`/node_label_add?swarm_node=${Hostname}`);
+                  }
+                },
+              }}
+            >
+              <a onClick={(e) => e.preventDefault()}>More <DownOutlined /></a>
+            </Dropdown>
           ),
         },
       ]}
