@@ -1,6 +1,8 @@
 import { useSession } from "next-auth/react";
 import { listServers } from '/helper/docker_api';
-import { Table, Tag } from 'antd';
+import { Table, Tag, Progress } from 'antd';
+import { format2Decimal } from "/helper/utils";
+import { CheckCircleOutlined } from '@ant-design/icons';
 
 export async function getServerSideProps() {
   let serverList = [];
@@ -23,7 +25,8 @@ const ServerTable = (props) => {
           title: 'Hostname',
           dataIndex: 'Hostname',
           key: 'Hostname',
-          render: (text) => <a>{text}</a>,
+          width: 150,
+          // render: (text) => <a>{text}</a>,
           sorter: (a, b) => {
             return (a.Hostname < b.Hostname) ? -1 : (a.Hostname > b.Hostname) ? 1 : 0;
           },
@@ -33,7 +36,8 @@ const ServerTable = (props) => {
           title: 'Addr',
           dataIndex: 'Addr',
           key: 'Addr',
-          render: (text) => <a>{text}</a>,
+          width: 150,
+          // render: (text) => <a>{text}</a>,
           sorter: (a, b) => {
             return (a.Addr < b.Addr) ? -1 : (a.Addr > b.Addr) ? 1 : 0;
           },
@@ -43,11 +47,34 @@ const ServerTable = (props) => {
           title: 'State',
           dataIndex: 'State',
           key: 'State',
-          render: (text) => <a>{text}</a>,
-          sorter: (a, b) => {
-            return (a.State < b.State) ? -1 : (a.State > b.State) ? 1 : 0;
+          width: 60,
+          render: (text) => {
+            if (text === "ready") {
+              return <CheckCircleOutlined style={{color: 'green'}}/>;
+            }
+
+            return <>{text}</>
           },
-          sortDirections: ['ascend', 'descend'],
+        },
+        {
+          title: 'Resource',
+          dataIndex: 'resource',
+          key: 'resource',
+          width: 200,
+          render: (resource) => {
+            const {cpu_usage, ram_total, ram_usage, disk_size, disk_usage} = resource;
+            let cpuUsageValue = parseFloat(cpu_usage);
+            let ramUsageValue = parseFloat(ram_usage);
+            let diskUsageValue = parseFloat(disk_usage);
+
+            return (
+              <>
+                <small>CPU</small> <Progress percent={format2Decimal(cpuUsageValue)} size="small" />
+                <small>RAM ({ram_total})</small> <Progress percent={format2Decimal(ramUsageValue)} size="small" />
+                  <small>HDD ({disk_size})</small> <Progress percent={format2Decimal(diskUsageValue)} size="small" />
+              </>
+            );
+          },
         },
         {
           title: 'Tags',
