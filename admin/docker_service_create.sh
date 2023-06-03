@@ -15,6 +15,7 @@ docker service create \
   --name admin \
   --replicas 1 \
   --network cosmosia \
+  --network agent \
   --network net1 \
   --network net2 \
   --network net3 \

@@ -75,6 +75,9 @@ docker network create -d overlay --attachable cosmosia
 # create an overlay network for snapshot service
 docker network create -d overlay --attachable snapshot
 
+# create an overlay network for agent service
+docker network create -d overlay --attachable agent
+
 # create 8 overlay networks for rpc services
 docker network create -d overlay --attachable net1
 docker network create -d overlay --attachable net2
