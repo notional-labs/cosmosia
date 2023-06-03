@@ -14,6 +14,7 @@
  */
 
 import fetch from 'node-fetch';
+import { getHostResourceUsage } from "./agent";
 const { readFileSync } = require('fs');
 
 const WEB_CONFIG_URL = "http://tasks.web_config:2375";
@@ -125,7 +126,7 @@ export const listServers = async () => {
         },
         "Status": {
           "State": "ready",
-          "Addr": "65.109.34.161"
+          "Addr": "11.22.33.44"
         }
       },
       {
@@ -161,7 +162,7 @@ export const listServers = async () => {
         },
         "Status": {
           "State": "ready",
-          "Addr": "65.108.237.230"
+          "Addr": "55.66.77.88"
         }
       },
     ];
@@ -179,11 +180,14 @@ export const listServers = async () => {
     const {Hostname} = Description;
     const {State, Addr} = Status;
 
+    const resourceUsage = await getHostResourceUsage(Hostname);
+
     servers.push({
       key: Hostname,
       Hostname,
       Addr, State,
       Tags: Object.keys(Labels),
+      resource: resourceUsage
     });
   }
 
