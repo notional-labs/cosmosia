@@ -62,6 +62,10 @@ const ServerTable = (props) => {
           key: 'resource',
           width: 200,
           render: (resource) => {
+            if (resource === null) {
+              return null;
+            }
+
             const {cpu_usage, ram_total, ram_usage, disk_size, disk_usage} = resource;
             let cpuUsageValue = parseFloat(cpu_usage);
             let ramUsageValue = parseFloat(ram_usage);
