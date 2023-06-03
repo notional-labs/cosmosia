@@ -3,15 +3,15 @@ import { useSession } from "next-auth/react";
 import { Button, Form, InputNumber, Input, Spin, Alert } from "antd";
 
 export async function getServerSideProps({query}) {
-  // rpc service name and replicas
-  const {id, rep} = query;
+  // swarm_node and label
+  const {swarm_node, label} = query;
 
-  console.log(`id=${id}, rep=${rep}`);
+  console.log(`swarm_node=${swarm_node}, label=${label}`);
 
-  return {props: {id, rep}};
+  return {props: {swarm_node, label}};
 }
 
-export default function RpcScale({id, rep}) {
+export default function NodeLabelRemove({swarm_node, label}) {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
@@ -24,13 +24,17 @@ export default function RpcScale({id, rep}) {
   const onFinish = async (values) => {
     setFormState(1);
 
-    const apiRes = await fetch('/api/rpc_scale', {
+    const {f_swarm_node, f_label} = values;
+    const bodyJson = {swarm_node: f_swarm_node, label: f_label};
+
+
+    const apiRes = await fetch('/api/node_label_remove', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify(bodyJson),
     });
     const {data: apiResText} = await apiRes.json();
     setResponseText(apiResText);
@@ -43,8 +47,8 @@ export default function RpcScale({id, rep}) {
   };
 
   return (
-    <div className="RpcScale">
-      <h3>Scale a Rpc Service</h3>
+    <div className="NodeLabelRemove">
+      <h3>Remove label from Swarm Node</h3>
 
       {formState === 0 &&
       <Form
@@ -52,17 +56,18 @@ export default function RpcScale({id, rep}) {
         labelCol={{span: 8}}
         wrapperCol={{span: 16}}
         style={{maxWidth: 600}}
-        initialValues={{rpc_service_name: id, replicas: rep}}
+        initialValues={{f_swarm_node: swarm_node, f_label: label}}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item label="Rpc Service" name="rpc_service_name"
-                   rules={[{required: true, message: 'Rpc Service is required'}]}>
+        <Form.Item label="Swarm Node" name="f_swarm_node"
+                   rules={[{required: true, message: 'Swarm Node is required'}]}>
           <Input disabled></Input>
         </Form.Item>
-        <Form.Item label="Replicas" name="replicas" rules={[{required: true, message: 'Please set replicas'}]}>
-          <InputNumber min={0} max={3}/>
+        <Form.Item label="Label to Remove" name="f_label"
+                   rules={[{required: true, message: 'Label is required'}]}>
+          <Input disabled></Input>
         </Form.Item>
         <Form.Item wrapperCol={{offset: 8, span: 16}}>
           <Button type="primary" htmlType="submit">Submit</Button>

@@ -3,6 +3,7 @@ import { listServers } from '/helper/docker_api';
 import { Table, Tag, Progress } from 'antd';
 import { format2Decimal } from "/helper/utils";
 import { CheckCircleOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps() {
   let serverList = [];
@@ -16,7 +17,13 @@ export async function getServerSideProps() {
 }
 
 const ServerTable = (props) => {
+  const router = useRouter();
   const {data} = props;
+
+  const tagCloseHandler = ({Hostname, tag}) => {
+    console.log(`Hostname=${Hostname}, tag=${tag}`);
+    router.push(`/node_label_remove?swarm_node=${Hostname}&label=${tag}`);
+  };
 
   return (
     <Table
@@ -93,9 +100,12 @@ const ServerTable = (props) => {
           title: 'Tags',
           key: 'Tags',
           dataIndex: 'Tags',
-          render: (_, { Tags }) => (
+          render: (_, { Hostname, Tags }) => (
             <>
-              {Tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+              {Tags.map((tag) => <Tag key={tag} closable onClose={(e) => {
+                e.preventDefault();
+                tagCloseHandler({Hostname, tag});
+              }}>{tag}</Tag>)}
             </>
           ),
         },
