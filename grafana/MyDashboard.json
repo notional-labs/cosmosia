@@ -108,7 +108,7 @@
             "uid": "P7CBE1186F0038668"
           },
           "exemplar": true,
-          "expr": "rate(caddy_http_requests_total{server='srv0'}[5m])",
+          "expr": "rate(caddy_http_requests_total{server='srv0'}[5m]) or rate(haproxy_frontend_http_requests_total{proxy=\"fe_rpc\"}[5m])",
           "interval": "",
           "legendFormat": "{{instance}}_{{server}}",
           "refId": "A"
@@ -197,7 +197,7 @@
             "uid": "P7CBE1186F0038668"
           },
           "exemplar": true,
-          "expr": "histogram_quantile(0.5, sum by (le) (rate(caddy_http_response_duration_seconds_bucket[5m])))",
+          "expr": "histogram_quantile(0.5, sum by (le) (rate(caddy_http_response_duration_seconds_bucket[5m]) or rate(haproxy_backend_response_time_average_seconds{proxy=\"be_rpc\"}[5m]) ))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -287,7 +287,7 @@
             "uid": "P7CBE1186F0038668"
           },
           "exemplar": true,
-          "expr": "rate(caddy_http_requests_total{server='srv3'}[5m])",
+          "expr": "rate(caddy_http_requests_total{server='srv3'}[5m]) or rate(haproxy_frontend_http_requests_total{proxy=\"fe_grpc\"}[5m])",
           "interval": "",
           "legendFormat": "{{instance}}_{{server}}",
           "refId": "A"
@@ -377,7 +377,7 @@
             "uid": "P7CBE1186F0038668"
           },
           "exemplar": true,
-          "expr": "rate(caddy_http_requests_total{server='srv1'}[5m])",
+          "expr": "rate(caddy_http_requests_total{server='srv1'}[5m]) or rate(haproxy_frontend_http_requests_total{proxy=\"fe_api\"}[5m])",
           "interval": "",
           "legendFormat": "{{instance}}_{{server}}",
           "refId": "A"
@@ -542,8 +542,9 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "multi",
@@ -567,8 +568,8 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 36,
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
