@@ -6,7 +6,6 @@ docker service create \
   --name agent \
   --network snapshot \
   --mode global \
-  --constraint 'node.role==manager' \
   --network agent \
   --endpoint-mode dnsrr \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
