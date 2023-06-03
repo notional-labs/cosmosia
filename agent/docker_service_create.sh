@@ -7,6 +7,7 @@ docker service create \
   --network snapshot \
   --mode global \
   --network agent \
+  --hostname="{{.Service.Name}}.{{.Node.Hostname}}" \
   --endpoint-mode dnsrr \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
   --restart-condition none \
