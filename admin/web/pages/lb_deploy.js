@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Select, Spin, Alert } from 'antd';
+import { Button, Form, Select, Spin, Alert, Radio } from 'antd';
 import { useSession } from "next-auth/react";
 import { getChainList } from '/helper/chain_registry';
 import { listRpcs } from "../helper/docker_api";
@@ -47,7 +47,7 @@ export default function LbDeploy({chainOptions, rpcServiceOptions}) {
 
   const onFinish = async (values) => {
     // console.log(JSON.stringify(values));
-    const {chain, rpc_service} = values;
+    const {chain, rpc_service, lb_type} = values;
     setFormState(1);
 
     const apiRes = await fetch('/api/lb_deploy', {
@@ -56,7 +56,7 @@ export default function LbDeploy({chainOptions, rpcServiceOptions}) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({chain, rpc_service}),
+      body: JSON.stringify({chain, rpc_service, lb_type}),
     });
     const {data: apiResText} = await apiRes.json();
 
@@ -97,7 +97,7 @@ export default function LbDeploy({chainOptions, rpcServiceOptions}) {
         labelCol={{span: 8}}
         wrapperCol={{span: 16}}
         style={{maxWidth: 600}}
-        initialValues={{}}
+        initialValues={{lb_type: "caddy"}}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
@@ -133,6 +133,12 @@ export default function LbDeploy({chainOptions, rpcServiceOptions}) {
             disabled={filteredRpcServiceOptions.length <= 0}
             value={null}
           />
+        </Form.Item>
+        <Form.Item name="lb_type" label="Load-Balancer Type">
+          <Radio.Group>
+            <Radio value="caddy">Caddy</Radio>
+            <Radio value="haproxy">HaProxy</Radio>
+          </Radio.Group>
         </Form.Item>
         <Form.Item wrapperCol={{offset: 8, span: 16}}>
           <Button type="primary" htmlType="submit">Submit</Button>
