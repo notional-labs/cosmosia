@@ -52,3 +52,10 @@ body {
   top: -20px;
   right: 10px;
 }
+
+
+/** /servers page */
+.resourceLabel {
+  font-size: smaller;
+  margin-bottom: -10px;
+}

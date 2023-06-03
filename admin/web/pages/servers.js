@@ -73,9 +73,18 @@ const ServerTable = (props) => {
 
             return (
               <>
-                <small>CPU</small> <Progress percent={format2Decimal(cpuUsageValue)} size="small" />
-                <small>RAM ({ram_total})</small> <Progress percent={format2Decimal(ramUsageValue)} size="small" />
-                  <small>HDD ({disk_size})</small> <Progress percent={format2Decimal(diskUsageValue)} size="small" />
+                <div>
+                  <div className="resourceLabel">CPU</div>
+                  <Progress percent={format2Decimal(cpuUsageValue)} size="small"/>
+                </div>
+                <div>
+                  <div className="resourceLabel">RAM ({ram_total})</div>
+                  <Progress percent={format2Decimal(ramUsageValue)} size="small"/>
+                </div>
+                <div>
+                  <div className="resourceLabel">HDD ({disk_size})</div>
+                  <Progress percent={format2Decimal(diskUsageValue)} size="small"/>
+                </div>
               </>
             );
           },
