@@ -1,7 +1,8 @@
 import { useSession } from "next-auth/react";
 import { listSnapshots } from '/helper/docker_api';
-import { Table } from 'antd';
-import { GlobalOutlined } from "@ant-design/icons";
+import { Dropdown, Table } from 'antd';
+import { DownOutlined, GlobalOutlined } from "@ant-design/icons";
+import Link from 'next/link';
 
 export async function getServerSideProps() {
   let snapList = [];
@@ -54,6 +55,30 @@ const SnapshotTable = (props) => {
             const chain_name = Name.slice(9); // remove snapshot_ prefix
             return (
               <a href={`https://snapshot.notional.ventures/${chain_name}/`} target="_blank"><GlobalOutlined /></a>
+            )
+          },
+        },
+        {
+          title: 'Action',
+          dataIndex: 'operation',
+          key: 'operation',
+          render: (_, {Name}) => {
+            const chain_name = Name.slice(9); // remove snapshot_ prefix
+            return (
+              <Dropdown
+                menu={{
+                  items: [
+                    {
+                      key: 'snapshot_redeploy',
+                      label: (
+                        <Link href={`/snap_deploy?chain=${chain_name}`}>ReDeploy</Link>
+                      ),
+                    },
+                  ],
+                }}
+              >
+                <a onClick={(e) => e.preventDefault()}>More <DownOutlined/></a>
+              </Dropdown>
             )
           },
         },

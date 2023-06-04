@@ -3,7 +3,7 @@ import { Button, Form, Select, Spin, Alert } from 'antd';
 import { useSession } from "next-auth/react";
 import { getChainList } from '/helper/chain_registry';
 
-export async function getServerSideProps() {
+export async function getServerSideProps({query}) {
   const chainList = await getChainList();
 
   const chainOptions = [];
@@ -12,10 +12,15 @@ export async function getServerSideProps() {
     chainOptions.push(opt);
   }
 
-  return {props: {chainOptions}};
+  //////
+  // chainInitialValue
+  const {chain} = query;
+  console.log(`chain=${chain}`);
+
+  return {props: {chainOptions, chainInitialValue: chain}};
 }
 
-export default function SnapDeploy({chainOptions}) {
+export default function SnapDeploy({chainOptions, chainInitialValue}) {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
@@ -58,7 +63,7 @@ export default function SnapDeploy({chainOptions}) {
         labelCol={{span: 8}}
         wrapperCol={{span: 16}}
         style={{maxWidth: 600}}
-        initialValues={{}}
+        initialValues={{chain: chainInitialValue}}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
