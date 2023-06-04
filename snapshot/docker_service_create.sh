@@ -27,8 +27,6 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
 
 echo "network=$network"
 
-git_branch=$(git symbolic-ref --short -q HEAD)
-
 HOST="$snapshot_node"
 MOUNT_SRC="/mnt/data/snapshots/$chain_name"
 SERVICE_NAME="snapshot_$chain_name"
@@ -37,7 +35,13 @@ if [[ -z $snapshot_storage_node ]]; then
   MOUNT_OPT="--mount type=bind,source=$MOUNT_SRC,destination=/snapshot"
 fi
 
-echo "HOST=$HOST"
+constraint="node.hostname==$HOST"
+if [ $( echo "${chain_name}" | egrep -c "archive" ) -eq 0 ]; then
+  # if pruned node, place on node with cosmosia.snapshot.pruned label, see https://github.com/notional-labs/cosmosia/issues/375
+	constraint="node.labels.cosmosia.snapshot.pruned==true"
+fi
+
+echo "constraint= ${constraint}"
 echo "SERVICE_NAME=$SERVICE_NAME"
 echo "MOUNT_OPT=$MOUNT_OPT"
 
@@ -51,11 +55,11 @@ docker service create \
   --network $network \
   --network snapshot \
   --label 'cosmosia.service=snapshot' \
-  --constraint "node.hostname==$HOST" \
+  --constraint $constraint \
   --endpoint-mode dnsrr \
   --restart-condition none \
   --env-file ../env.sh \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/snapshot/snapshot_run.sh > ~/snapshot_run.sh && \
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_run.sh > ~/snapshot_run.sh && \
   /bin/bash ~/snapshot_run.sh $chain_name"
