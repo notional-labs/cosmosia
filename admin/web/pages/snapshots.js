@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { listSnapshots } from '/helper/docker_api';
 import { Table } from 'antd';
+import { GlobalOutlined } from "@ant-design/icons";
 
 export async function getServerSideProps() {
   let snapList = [];
@@ -44,6 +45,17 @@ const SnapshotTable = (props) => {
             return (a.CreatedAt < b.CreatedAt) ? -1 : (a.CreatedAt > b.CreatedAt) ? 1 : 0;
           },
           sortDirections: ['ascend', 'descend'],
+        },
+        {
+          title: 'Download',
+          dataIndex: 'public_link',
+          key: 'public_link',
+          render: (_, { Name }) => {
+            const chain_name = Name.slice(9); // remove snapshot_ prefix
+            return (
+              <a href={`https://snapshot.notional.ventures/${chain_name}/`} target="_blank"><GlobalOutlined /></a>
+            )
+          },
         },
       ]}
       dataSource={dataSrc}
