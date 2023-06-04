@@ -3,6 +3,7 @@ import { listSnapshots } from '/helper/docker_api';
 import { Dropdown, Table } from 'antd';
 import { DownOutlined, GlobalOutlined } from "@ant-design/icons";
 import Link from 'next/link';
+import { timeAgoFormat } from "../helper/utils";
 
 export async function getServerSideProps() {
   let snapList = [];
@@ -41,7 +42,7 @@ const SnapshotTable = (props) => {
           title: 'CreatedAt',
           dataIndex: 'CreatedAt',
           key: 'CreatedAt',
-          render: (text) => <>{text}</>,
+          render: (text) => <>{timeAgoFormat(text)}</>,
           sorter: (a, b) => {
             return (a.CreatedAt < b.CreatedAt) ? -1 : (a.CreatedAt > b.CreatedAt) ? 1 : 0;
           },
