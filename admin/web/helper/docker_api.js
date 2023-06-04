@@ -69,20 +69,152 @@ export const listLoadBalancers = async () => {
 }
 
 export const listSnapshots = async () => {
+  let data = [];
   const snapshotList = [];
 
   if (process.env.NODE_ENV === "development") {
-    // put some dummy data here
-    snapshotList.push(`snapshot_starname`);
-    snapshotList.push(`snapshot_osmosis-testnet`);
-    snapshotList.push(`snapshot_quasar`);
+    data = [
+      {
+        "ID": "06mlazh6zx0tyhq26jni3xaho",
+        "Version": {
+          "Index": 1429785
+        },
+        "CreatedAt": "2023-05-25T18:22:57.281089623Z",
+        "UpdatedAt": "2023-05-29T21:09:37.798676973Z",
+        "Spec": {
+          "Name": "snapshot_dig",
+          "Labels": {
+            "cosmosia.service": "snapshot"
+          },
+          "TaskTemplate": {
+            "ContainerSpec": {
+              "Image": "archlinux:latest@sha256:275fb964508b7a2812f43a4dfa2cfa27cb06a4a453d72675270e2222b43f2a82",
+              "Args": [
+                "/bin/bash",
+                "-c",
+                "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_run.sh > ~/snapshot_run.sh &&   /bin/bash ~/snapshot_run.sh dig"
+              ],
+              "Env": [
+                "CHAIN_REGISTRY_INI_URL=https://raw.githubusercontent.com/notional-labs/cosmosia/main/data/chain_registry.ini"
+              ],
+              "Init": false,
+              "DNSConfig": {},
+              "Isolation": "default"
+            },
+            "Resources": {
+              "Limits": {},
+              "Reservations": {}
+            },
+            "RestartPolicy": {
+              "Condition": "none",
+              "Delay": 5000000000,
+              "MaxAttempts": 0
+            },
+            "Placement": {
+              "Constraints": [
+                "node.hostname==cosmosia20"
+              ],
+              "Platforms": [
+                {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              ]
+            },
+            "Networks": [],
+            "ForceUpdate": 0,
+            "Runtime": "container"
+          },
+          "Mode": {
+            "Replicated": {
+              "Replicas": 1
+            }
+          },
+          "EndpointSpec": {
+            "Mode": "dnsrr"
+          }
+        },
+        "Endpoint": {
+          "Spec": {}
+        }
+      },
+      {
+        "ID": "1dyed9hgy2sbm9z0pj30mqk9t",
+        "Version": {
+          "Index": 1429778
+        },
+        "CreatedAt": "2022-09-11T20:34:03.767030113Z",
+        "UpdatedAt": "2023-05-29T21:08:07.68439254Z",
+        "Spec": {
+          "Name": "snapshot_cerberus",
+          "Labels": {
+            "cosmosia.service": "snapshot"
+          },
+          "TaskTemplate": {
+            "ContainerSpec": {
+              "Image": "archlinux:latest@sha256:3b698b409dcb528682d337b872e0b463753885e8adf246dc4d1b15ea3ec3ff15",
+              "Args": [
+                "/bin/bash",
+                "-c",
+                "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_run.sh > ~/snapshot_run.sh &&   /bin/bash ~/snapshot_run.sh cerberus"
+              ],
+              "Init": false,
+              "Mounts": [
+                {
+                  "Type": "bind",
+                  "Source": "/mnt/data/snapshots/cerberus",
+                  "Target": "/snapshot"
+                }
+              ],
+              "DNSConfig": {},
+              "Isolation": "default"
+            },
+            "Resources": {
+              "Limits": {},
+              "Reservations": {}
+            },
+            "RestartPolicy": {
+              "Condition": "none",
+              "Delay": 5000000000,
+              "MaxAttempts": 0
+            },
+            "Placement": {
+              "Constraints": [
+                "node.hostname==cosmosia7"
+              ],
+              "Platforms": [
+                {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              ]
+            },
+            "Networks": [],
+            "ForceUpdate": 0,
+            "Runtime": "container"
+          },
+          "Mode": {
+            "Replicated": {
+              "Replicas": 1
+            }
+          },
+          "EndpointSpec": {
+            "Mode": "dnsrr"
+          }
+        },
+        "Endpoint": {
+          "Spec": {}
+        }
+      },
+    ];
   } else { // production
-    const data = await dockerApiServices(`{"label":["cosmosia.service=snapshot"]}`);
-    for (const snap of data) {
-      const {Spec} = snap;
-      const {Name} = Spec;
-      snapshotList.push(Name);
-    }
+    data = await dockerApiServices(`{"label":["cosmosia.service=snapshot"]}`);
+  }
+
+  for (const snap of data) {
+    const {CreatedAt, Spec} = snap;
+    const {Name} = Spec;
+    snapshotList.push({Name, CreatedAt});
   }
 
   return snapshotList;

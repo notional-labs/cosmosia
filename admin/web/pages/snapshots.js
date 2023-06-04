@@ -17,8 +17,9 @@ const SnapshotTable = (props) => {
   const {data} = props;
 
   const dataSrc = [];
-  for (const lb of data) {
-    dataSrc.push({key: lb, name: lb})
+  for (const item of data) {
+    const {Name} = item;
+    dataSrc.push({key: Name, ...item});
   }
 
   return (
@@ -26,11 +27,21 @@ const SnapshotTable = (props) => {
       columns={[
         {
           title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-          render: (text) => <a>{text}</a>,
+          dataIndex: 'Name',
+          key: 'Name',
+          render: (text) => <>{text}</>,
           sorter: (a, b) => {
             return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0;
+          },
+          sortDirections: ['ascend', 'descend'],
+        },
+        {
+          title: 'CreatedAt',
+          dataIndex: 'CreatedAt',
+          key: 'CreatedAt',
+          render: (text) => <>{text}</>,
+          sorter: (a, b) => {
+            return (a.CreatedAt < b.CreatedAt) ? -1 : (a.CreatedAt > b.CreatedAt) ? 1 : 0;
           },
           sortDirections: ['ascend', 'descend'],
         },
