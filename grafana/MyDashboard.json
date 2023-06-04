@@ -558,7 +558,7 @@
             "uid": "P7CBE1186F0038668"
           },
           "exemplar": true,
-          "expr": "rate(caddy_http_requests_total{server='srv4'}[5m])",
+          "expr": "rate(caddy_http_requests_total{server='srv4'}[5m]) or rate(haproxy_frontend_http_requests_total{proxy=\"fe_eth\"}[5m])",
           "interval": "",
           "legendFormat": "{{instance}}_{{server}}",
           "refId": "A"
