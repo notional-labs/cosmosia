@@ -18,6 +18,10 @@ wget -O - "$URL" |tar -xzf -
 go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
 go mod tidy
 go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
+
+# for cometbft
+go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
+go mod tidy
 ```
 
 ### Run with PebbleDB backend
@@ -85,9 +89,3 @@ go mod tidy
 go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version" -o /root/go/bin/axelard ./cmd/axelard
 ```
 
-**pylons**
-```console
-go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
-go mod tidy
-go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
-```

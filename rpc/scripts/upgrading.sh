@@ -66,11 +66,9 @@ buid_chain () {
   else
     go mod tidy
   fi
-  
-  if [ $( echo "${chain_name}" | egrep -c "^(umee|kujira|whitewhale|quicksilver|evmos|regen|juno|juno-archive-sub|omniflixhub|bandchain|cosmoshub|cosmoshub-archive-sub|kava|bitcanna)$" ) -ne 0 ]; then
-    go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
-    go mod tidy
-  fi
+
+  go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
+  go mod tidy
 
   if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
     sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
