@@ -34,7 +34,7 @@ const SnapshotTable = (props) => {
           key: 'Name',
           render: (text) => <>{text}</>,
           sorter: (a, b) => {
-            return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0;
+            return (a.Name < b.Name) ? -1 : (a.Name > b.Name) ? 1 : 0;
           },
           sortDirections: ['ascend', 'descend'],
         },
