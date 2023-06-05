@@ -36,7 +36,7 @@ docker service create \
   --network cosmosia \
   --label 'cosmosia.service=subnode' \
   --endpoint-mode dnsrr \
-  --constraint 'node.hostname==cosmosia32' \
+  --constraint 'node.labels.cosmosia.subnode==true' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
   --env-file ../env.sh \
