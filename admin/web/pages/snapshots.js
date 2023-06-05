@@ -55,7 +55,7 @@ const SnapshotTable = (props) => {
           render: (_, { Name }) => {
             const chain_name = Name.slice(9); // remove snapshot_ prefix
             return (
-              <a href={`https://snapshot.notional.ventures/${chain_name}/`} target="_blank"><GlobalOutlined /></a>
+              <a href={`https://snapshot.notional.ventures/${chain_name}/`} target="_blank" rel="noopener noreferrer"><GlobalOutlined /></a>
             )
           },
         },
