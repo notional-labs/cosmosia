@@ -8,7 +8,7 @@ cd $HOME
 echo "Intalling prometheus..."
 pacman -S --noconfirm prometheus
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/prometheus.yaml > ~/prometheus.yaml
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/monitor/grafana/prometheus.yaml > ~/prometheus.yaml
 screen -S prometheus -dm /usr/sbin/prometheus --config.file=$HOME/prometheus.yaml
 
 #################
@@ -19,9 +19,9 @@ pacman -S --noconfirm grafana
 mkdir -p /var/lib/grafana/conf/provisioning/datasources
 mkdir -p /var/lib/grafana/conf/provisioning/dashboards
 mkdir -p /var/lib/grafana/dashboards
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/datasource.yaml > /var/lib/grafana/conf/provisioning/datasources/datasource.yaml
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/dashboard.yaml > /var/lib/grafana/conf/provisioning/dashboards/dashboard.yaml
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/grafana/MyDashboard.json > /var/lib/grafana/dashboards/MyDashboard.json
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/monitor/grafana/datasource.yaml > /var/lib/grafana/conf/provisioning/datasources/datasource.yaml
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/monitor/grafana/dashboard.yaml > /var/lib/grafana/conf/provisioning/dashboards/dashboard.yaml
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/monitor/grafana/MyDashboard.json > /var/lib/grafana/dashboards/MyDashboard.json
 
 # change admin password
 default_password="$(cat /run/secrets/grafana_password)"
