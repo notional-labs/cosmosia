@@ -54,6 +54,9 @@ const MainNav = () => {
           <Menu.Item key='subnode_list' icon={<DatabaseOutlined />}>
             <Link href='/subnodes'>Subnodes</Link>
           </Menu.Item>
+          <Menu.Item key='sub_deploy' icon={<PlusCircleOutlined />}>
+            <Link href='/subnode_deploy'>Deploy</Link>
+          </Menu.Item>
         </Menu.SubMenu>
       </Menu>
     )

@@ -24,3 +24,13 @@ export const getChainList = async () => {
   return chainList;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// subnode_registry
+// https://github.com/notional-labs/cosmosia/blob/main/data/subnode_registry.ini
+
+export const getSubnodeList = async () => {
+  // need update to make it dynamic, use static for now
+  const lst = ["osmosis", "juno", "cosmoshub", "evmos"];
+
+  return lst;
+}
