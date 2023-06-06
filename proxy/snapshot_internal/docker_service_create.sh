@@ -31,8 +31,8 @@ docker service create \
   --network net8 \
   --endpoint-mode dnsrr \
   --restart-condition none \
-  --env-file ../env.sh \
+  --env-file ../../env.sh \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_snapshot_internal/run.sh > ~/run.sh && \
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/snapshot_internal/run.sh > ~/run.sh && \
   /bin/bash ~/run.sh"
