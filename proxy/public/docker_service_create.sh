@@ -13,7 +13,7 @@ docker service create \
   --constraint 'node.hostname==cosmosia29' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
-  --env-file ../env.sh \
+  --env-file ../../env.sh \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy_public/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/public/run.sh > ~/run.sh && /bin/bash ~/run.sh"
