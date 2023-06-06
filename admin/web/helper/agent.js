@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { getRandomFloat } from "./utils";
 
 /**
  *
@@ -8,11 +9,11 @@ import fetch from "node-fetch";
 export const getHostResourceUsage = async (hostname) => {
   if (process.env.NODE_ENV === "development") {
     return {
-      "cpu_usage": "1.234%",
+      "cpu_usage": `${getRandomFloat(0, 100, 2)}%`,
       "ram_total": "16G",
-      "ram_usage": "3.456%",
+      "ram_usage": `${getRandomFloat(0, 100, 2)}%`,
       "disk_size": "1.2T",
-      "disk_usage": "34%"
+      "disk_usage": `${getRandomFloat(0, 100, 2)}%`
     };
   }
 

@@ -63,37 +63,97 @@ const ServerTable = (props) => {
           },
         },
         {
-          title: 'Resource',
-          dataIndex: 'resource',
-          key: 'resource',
-          width: 200,
-          render: (resource) => {
+          title: 'CPU',
+          dataIndex: 'cpu',
+          key: 'cpu',
+          width: 150,
+          render: (_, {resource}) => {
             if (resource === null) {
               return null;
             }
 
-            const {cpu_usage, ram_total, ram_usage, disk_size, disk_usage} = resource;
-            let cpuUsageValue = parseFloat(cpu_usage);
-            let ramUsageValue = parseFloat(ram_usage);
-            let diskUsageValue = parseFloat(disk_usage);
+            const {cpu_usage } = resource;
+            const cpuUsageValue = parseFloat(cpu_usage);
 
             return (
-              <>
-                <div>
-                  <div className="resourceLabel">CPU</div>
-                  <Progress percent={format2Decimal(cpuUsageValue)} size="small"/>
-                </div>
-                <div>
-                  <div className="resourceLabel">RAM ({ram_total})</div>
-                  <Progress percent={format2Decimal(ramUsageValue)} size="small"/>
-                </div>
-                <div>
-                  <div className="resourceLabel">HDD ({disk_size})</div>
-                  <Progress percent={format2Decimal(diskUsageValue)} size="small"/>
-                </div>
-              </>
+              <div>
+                <div className="resourceLabel">Avg</div>
+                <Progress percent={format2Decimal(cpuUsageValue)} size="small"/>
+              </div>
             );
           },
+          sorter: (a, b) => {
+            try {
+              const aCPU = parseFloat(a.resource.cpu_usage);
+              const bCPU = parseFloat(b.resource.cpu_usage);
+              return (aCPU < bCPU) ? -1 : (aCPU > bCPU) ? 1 : 0;
+            } catch (err) {
+              return 0;
+            }
+          },
+          sortDirections: ['ascend', 'descend'],
+        },
+        {
+          title: 'RAM',
+          dataIndex: 'ram',
+          key: 'ram',
+          width: 150,
+          render: (_, {resource}) => {
+            if (resource === null) {
+              return null;
+            }
+
+            const {ram_total, ram_usage} = resource;
+            const ramUsageValue = parseFloat(ram_usage);
+
+            return (
+              <div>
+                <div className="resourceLabel">Size: {ram_total}</div>
+                <Progress percent={format2Decimal(ramUsageValue)} size="small"/>
+              </div>
+            );
+          },
+          sorter: (a, b) => {
+            try {
+              const aRAM = parseFloat(a.resource.ram_usage);
+              const bRAM = parseFloat(b.resource.ram_usage);
+              return (aRAM < bRAM) ? -1 : (aRAM > bRAM) ? 1 : 0;
+            } catch (err) {
+              return 0;
+            }
+          },
+          sortDirections: ['ascend', 'descend'],
+        },
+        {
+          title: 'HDD',
+          dataIndex: 'hdd',
+          key: 'hdd',
+          width: 150,
+          render: (_, {resource}) => {
+            if (resource === null) {
+              return null;
+            }
+
+            const {disk_size, disk_usage} = resource;
+            const diskUsageValue = parseFloat(disk_usage);
+
+            return (
+              <div>
+                <div className="resourceLabel">Size: {disk_size}</div>
+                <Progress percent={format2Decimal(diskUsageValue)} size="small"/>
+              </div>
+            );
+          },
+          sorter: (a, b) => {
+            try {
+              const aHDD = parseFloat(a.resource.disk_usage);
+              const bHDD = parseFloat(b.resource.disk_usage);
+              return (aHDD < bHDD) ? -1 : (aHDD > bHDD) ? 1 : 0;
+            } catch (err) {
+              return 0;
+            }
+          },
+          sortDirections: ['ascend', 'descend'],
         },
         {
           title: 'Labels',
