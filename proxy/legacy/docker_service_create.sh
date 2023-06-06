@@ -1,6 +1,4 @@
 
-git_branch=$(git symbolic-ref --short -q HEAD)
-
 # delete existing service
 docker service rm proxy
 
@@ -56,9 +54,9 @@ docker service create \
   --constraint 'node.hostname==cosmosia3' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
-  --env-file ../env.sh \
+  --env-file ../../env.sh \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/$git_branch/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/legacy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 
