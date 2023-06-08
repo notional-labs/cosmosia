@@ -1,6 +1,6 @@
 
 pacman -Syu --noconfirm
-pacman -Sy --noconfirm nginx spawn-fcgi fcgiwrap screen
+pacman -Sy --noconfirm nginx spawn-fcgi fcgiwrap screen docker
 
 # functions
 loop_forever () {
