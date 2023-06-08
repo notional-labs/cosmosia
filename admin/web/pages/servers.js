@@ -4,6 +4,7 @@ import { Table, Tag, Progress, Dropdown } from 'antd';
 import { format2Decimal } from "/helper/utils";
 import { CheckCircleOutlined, DownOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
+import Link from "next/link";
 
 export async function getServerSideProps() {
   let serverList = [];
@@ -178,14 +179,13 @@ const ServerTable = (props) => {
                 items: [
                   {
                     key: 'node_label_add',
-                    label: 'Add Label',
+                    label: (<Link href={`/node_label_add?swarm_node=${Hostname}`}>Add Label</Link>),
+                  },
+                  {
+                    key: 'docker_stats',
+                    label: (<Link href={`/node_containers_resource_usage?swarm_node=${Hostname}`}>Containers Resource Usage</Link>),
                   },
                 ],
-                onClick: ({key}) => {
-                  if (key === 'node_label_add') {
-                    router.push(`/node_label_add?swarm_node=${Hostname}`);
-                  }
-                },
               }}
             >
               <a onClick={(e) => e.preventDefault()}>More <DownOutlined /></a>
