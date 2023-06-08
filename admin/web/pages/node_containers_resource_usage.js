@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { listServersName } from "../helper/docker_api";
 import { Button, Form, Select, Spin, Alert, Radio } from 'antd';
 import { useSession } from "next-auth/react";
-import { listRpcs } from "../helper/docker_api";
 
-const getServerOptions = async () => {
+export const getServerSideProps= async () => {
   // const listServersName = await listServersName();
   const serverOptions = [];
   // for (const srv of listServersName) {
@@ -11,17 +11,10 @@ const getServerOptions = async () => {
   //   serverOptions.push(opt);
   // }
 
-  return serverOptions;
-}
-
-
-export async function getServerSideProps() {
-  const serverOptions = await getServerOptions();
-
   return {props: {serverOptions}};
 }
 
-export default function ServerDockerStatsPage() {
+export default function Page() {
   return "aaa";
 
   // const {data: session, status} = useSession();
