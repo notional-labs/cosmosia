@@ -3,7 +3,15 @@ import { listServersName } from "../helper/docker_api";
 import { Button, Form, Select, Spin, Alert, Radio } from 'antd';
 import { useSession } from "next-auth/react";
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({query}) => {
+  // swarm_node
+  let {swarm_node} = query;
+  if (!swarm_node) {
+    swarm_node = "";
+  }
+  console.log(`[/node_containers_resource_usage.js] swarm_node=${swarm_node}`);
+
+  // serverOptions
   const srvs = await listServersName();
   const serverOptions = [];
   for (const srv of srvs) {
@@ -11,10 +19,10 @@ export const getServerSideProps = async () => {
     serverOptions.push(opt);
   }
 
-  return {props: {serverOptions}};
+  return {props: {serverOptions, swarm_node}};
 }
 
-export default ({serverOptions}) => {
+export default ({serverOptions, swarm_node}) => {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
@@ -27,7 +35,7 @@ export default ({serverOptions}) => {
 
   const onFinish = async (values) => {
     // console.log(JSON.stringify(values));
-    const {swarm_node} = values;
+    const {f_swarm_node} = values;
     setFormState(1);
 
     const apiRes = await fetch('/api/node_docker_stats', {
@@ -36,7 +44,7 @@ export default ({serverOptions}) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({swarm_node}),
+      body: JSON.stringify({swarm_node: f_swarm_node}),
     });
     const {data: apiResText} = await apiRes.json();
 
@@ -59,13 +67,13 @@ export default ({serverOptions}) => {
         labelCol={{span: 8}}
         wrapperCol={{span: 16}}
         style={{maxWidth: 600}}
-        initialValues={{}}
+        initialValues={{f_swarm_node: swarm_node}}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
         ref={formRef}
       >
-        <Form.Item label="Swarm node" name="swarm_node" rules={[{required: true, message: 'Please select a node'}]}>
+        <Form.Item label="Swarm node" name="f_swarm_node" rules={[{required: true, message: 'Please select a node'}]}>
           <Select
             showSearch
             style={{width: 200}}
