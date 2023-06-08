@@ -1,6 +1,6 @@
 
 pacman -Syu --noconfirm
-pacman -Sy --noconfirm nginx spawn-fcgi fcgiwrap screen
+pacman -Sy --noconfirm nginx spawn-fcgi fcgiwrap screen docker
 
 # functions
 loop_forever () {
@@ -14,6 +14,7 @@ loop_forever () {
 
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/agent/nginx.conf" > /etc/nginx/nginx.conf
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/agent/host_resource_usage.sh" > /usr/share/nginx/html/host_resource_usage.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/agent/containers_resource_usage.sh" > /usr/share/nginx/html/containers_resource_usage.sh
 
 chmod +x /usr/share/nginx/html/host_resource_usage.sh
 spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
