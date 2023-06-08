@@ -264,7 +264,7 @@ export const listServersName = async () => {
 
   if (process.env.NODE_ENV === "development") {
     const data = [ "cosmosia25", "cosmosia11" ];
-    servers.push(data);
+    servers.push(...data);
   } else {
     // production
     const url = `${WEB_CONFIG_URL}/nodes`;
