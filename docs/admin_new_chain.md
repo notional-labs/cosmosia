@@ -7,19 +7,49 @@
 
 ### Steps
 
-Command executed on a docker swarm manager node
+Command executed on a docker swarm manager node. In this example, we will add `cosmoshub` chain
 
 1. Add info of the new chain to [chain_registry.ini](../data/chain_registry.ini)
-2. Prepare 1st snapshot and copy to a `snapshot_node` (eg., https://github.com/notional-labs/cosmosia/blob/main/data/chain_registry.ini#L13). 
-   
-    Each snapshot has 3 files:
-   
-    - chain.json
-    - data_datetime.tar.gz
-    - addrbook.json
-   
 
-3. Start the snapshot service:
+   > Note: The params
+   > - `snapshot_node`: Old
+   > - `snapshot_storage_node`: Storage node 
+   > - `snapshot_prune`: prune strategy. Default `cosmos-pruner`
+   > - `network`: 
+
+2. Prepare 1st snapshot and copy to a `snapshot_storage_node` included in [`chain_registry.ini`](https://github.com/notional-labs/cosmosia/blob/main/data/chain_registry.ini#L8). 
+   
+   The snapshot data for each chain is located at `/mnt/data/<chain-name>`. Normally, each snapshot should have 4 files:
+   
+    - `chain.json`: Contain information of the chain
+    - `data_<date-time>.tar.gz`: Snapshot data, up to the time of generation
+    - `genesis.json`
+    - `addrbook.json`
+
+   To create a new chain, create a folder `` in `/mnt/data/snapshots` and add basic data in the folder:
+    - Copy `chain.json` from other chains, and replace `file_size` and `data_version` to default value `0`. Change old `<chain-name>` in `snapshot_url` to the new chain name `cosmoshub`, and copy `.tar.gz` file name.
+    - Create new snapshot file with the name copied above: `touch data_<date-time>.tar.gz`
+   
+3. Go to `proxy_static` and start the snapshot service:
+
+   - Edit `/usr/share/nginx/html/index.html`:
+      ```bash
+      nano /usr/share/nginx/html/index.html
+      ```
+      Add new entry of snapshot url, in this format:
+      ```html
+      <p><a href="http://<snapshot_storage_node>.notional.ventures:11111/cosmoshub/">cosmoshub</a></p>
+      ```
+   - Edit `/etc/nginx/redirect_snapshots.conf`:
+      ```
+      rewrite ^/cosmoshub/(.*)$ http://<snapshot_storage_node>.notional.ventures:11111/cosmoshub/$1$is_args$args redirect;
+      ```
+   - Test nginx and reload:
+      ```bash
+      nginx -t
+      nginx -s reload
+      ```
+
    ```bash
    cd snapshot
    sh docker_service_create_snapshot.sh chainname
