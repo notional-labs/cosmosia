@@ -9,7 +9,7 @@ disk_size=$(df --output=size -h / |sed 1d |sed 's/ //g')
 disk_usage=$(df --output=pcent / |sed 1d |sed 's/ //g')
 
 
-echo "Status: 502"
+echo "Status: 200"
 echo "Content-type:application/json"
 echo ""
 echo "{"
