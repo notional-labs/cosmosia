@@ -49,6 +49,9 @@ const MainNav = () => {
           <Menu.Item key='server_list' icon={<ClusterOutlined />}>
             <Link href='/servers'>Swarm Nodes</Link>
           </Menu.Item>
+          <Menu.Item key='docker_stats' icon={<DesktopOutlined />}>
+            <Link href='/node_containers_resource_usage'>Containers Resource Usage</Link>
+          </Menu.Item>
         </Menu.SubMenu>
         <Menu.SubMenu key='subnodes' title="Subnodes" icon={<DatabaseOutlined />}>
           <Menu.Item key='subnode_list' icon={<DatabaseOutlined />}>

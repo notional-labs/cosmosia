@@ -220,6 +220,35 @@ export const listSnapshots = async () => {
   return snapshotList;
 }
 
+
+/**
+ * List all all node names in swarm cluster
+ * @returns {Promise<unknown>}
+ */
+export const listServersName = async () => {
+  const servers = [];
+
+  if (process.env.NODE_ENV === "development") {
+    const data = [ "cosmosia25", "cosmosia11" ];
+    servers.push(data);
+  } else {
+    // production
+    const url = `${WEB_CONFIG_URL}/nodes`;
+    const response = await fetch(url);
+    const dataJson = await response.json();
+
+    /////
+
+    for (const server of dataJson) {
+      const {Description} = server;
+      const {Hostname} = Description;
+      servers.push(Hostname);
+    }
+  }
+
+  return servers;
+}
+
 /**
  * List all all nodes in swarm cluster
  * @returns {Promise<unknown>}

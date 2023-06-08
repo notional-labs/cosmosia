@@ -27,3 +27,29 @@ export const getHostResourceUsage = async (hostname) => {
     return null;
   }
 }
+
+
+/**
+ * Run `docker stats --no-stream` on host to check containers resource usage.
+ * @param hostname
+ * @returns {Promise<unknown>}
+ */
+export const getContainersResourceUsage = async (hostname) => {
+  if (process.env.NODE_ENV === "development") {
+    const stats_txt = "CONTAINER ID   NAME                                                        CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS\n" +
+      "9102c20087bd   rpc_quicksilver_141.1.hmmmjcfp5lclo1ry1xct3d1tv             135.90%   19.2GiB / 125.7GiB    15.27%    4.92TB / 5.37TB   2.45TB / 14.1TB   96\n" +
+      "3b8d576247ea   rpc_axelar_128.1.yc3z2tmaj6ltitm0h7ti7i409                  6.21%     26.26GiB / 125.7GiB   20.89%    12.6TB / 13.3TB   16.8TB / 82.4TB   51\n";
+
+    return stats_txt;
+  }
+
+  //////
+  try {
+    const url = `http://agent.${hostname}/containers_resource_usage`;
+    const response = await fetch(url);
+    const data = await response.text();
+    return data;
+  } catch (err) {
+    return null;
+  }
+}
