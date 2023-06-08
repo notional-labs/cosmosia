@@ -17,6 +17,8 @@ Command executed on a docker swarm manager node. In this example, we will add `c
    > - `snapshot_prune`: prune strategy. Default `cosmos-pruner`
    > - `network`: 
 
+   When finished adding, create a commit and push to notional-labs/cosmosia.
+
 2. Prepare 1st snapshot and copy to a `snapshot_storage_node` included in [`chain_registry.ini`](https://github.com/notional-labs/cosmosia/blob/main/data/chain_registry.ini#L8). 
    
    The snapshot data for each chain is located at `/mnt/data/<chain-name>`. Normally, each snapshot should have 4 files:
@@ -49,10 +51,10 @@ Command executed on a docker swarm manager node. In this example, we will add `c
       nginx -t
       nginx -s reload
       ```
-
+4. Create docker service
    ```bash
    cd snapshot
-   sh docker_service_create_snapshot.sh chainname
+   sh docker_service_create.sh <chain-name>
    ```
 
 4. Restart proxy_public
