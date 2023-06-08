@@ -57,6 +57,11 @@ Command executed on a docker swarm manager node. In this example, we will add `c
    sh docker_service_create.sh <chain-name>
    ```
 
+   It will create a container in `<snapshot_storage_node>` and setup basic tools. Head over the container and stop `crond`
+   ```bash
+   killall crond
+   ```
+
 4. Restart proxy_public
    ```bash
    cd proxy_public
