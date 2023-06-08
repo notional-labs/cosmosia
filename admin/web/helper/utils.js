@@ -1,11 +1,10 @@
 import TimeAgo from 'javascript-time-ago';
 
 // English.
-import en from 'javascript-time-ago/locale/en'
+import en from 'javascript-time-ago/locale/en';
 
-TimeAgo.addDefaultLocale(en)
-// Create formatter (English).
-const timeAgo = new TimeAgo('en-US');
+let timeAgo = null;
+
 
 
 export const format2Decimal = (num) => {
@@ -13,6 +12,15 @@ export const format2Decimal = (num) => {
 }
 
 export const timeAgoFormat = (dt) => {
+  if (!timeAgo) {
+    // init TimeAgo if needed
+    TimeAgo.addDefaultLocale(en);
+    TimeAgo.addLocale(en);
+
+    // Create formatter (English).
+    timeAgo = new TimeAgo('en-US');
+  }
+
   if (typeof dt === 'string' || dt instanceof String) {
     const d = Date.parse(dt);
     return timeAgo.format(d, 'mini');
