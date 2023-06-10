@@ -128,6 +128,12 @@ Command executed on a docker swarm manager node. In this example, we will add `c
    ```
    You can check if the endpoint is working: `https://rpc-<chain-name>-ia.cosmosia.notional.ventures`
 
+7. [Optional] `proxy_internal`
+   ```bash
+   cd cosmosia/proxy/internal
+   git pull # Updated latest data
+   bash docker_service_create.sh
+   ```
 8. Update [uptime monitor](https://status.notional.ventures/status/cosmosia)
 
       - Api Service
