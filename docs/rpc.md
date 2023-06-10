@@ -463,6 +463,14 @@ Use Subnode instead
 | API      | https://api-whitewhale-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-whitewhale-ia.cosmosia.notional.ventures/  |
 
+### 58. Composable
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-composable-ia.cosmosia.notional.ventures/   |
+| API      | https://api-composable-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-composable-ia.cosmosia.notional.ventures/  |
+
 
 ## Subnode Public Endpoints
 [subnode](subnode.md) is the alternative to archive node

@@ -12,7 +12,7 @@ Command executed on a docker swarm manager node. In this example, we will add `c
 1. Add info of the new chain to [chain_registry.ini](../data/chain_registry.ini)
 
    > Note: The params
-   > - `snapshot_node`: Old
+   > - `snapshot_node`: Snapshot running node. The generated snapshot data will be transfered to `snapshot_storage_node`.
    > - `snapshot_storage_node`: Storage node 
    > - `snapshot_prune`: prune strategy. Default `cosmos-pruner`
    > - `network`: 
@@ -51,41 +51,83 @@ Command executed on a docker swarm manager node. In this example, we will add `c
       nginx -t
       nginx -s reload
       ```
-4. Create docker service
-   ```bash
-   cd snapshot
-   sh docker_service_create.sh <chain-name>
-   ```
+4. Go to swarm manager server and create docker service for snapshot
+   - Create docker service
+      ```bash
+      cd cosmosia/snapshot
+      git pull # Updated latest data
+      sh docker_service_create.sh <chain-name>
+      ```
+      It will create a container in `<snapshot_node>` and setup basic tools. 
 
-   It will create a container in `<snapshot_storage_node>` and setup basic tools. Head over the container and stop `crond`
-   ```bash
-   killall crond
-   ```
+   - Head over the container and stop `crond`
+      ```bash
+      killall crond
+      ```
+   - Download Golevel snapshot, and extract to data folder
+   - Convert to PebbleDB with [Cosmosia convert script](https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/scripts/level2pebble_data.sh):
+      - Install `level2pebble`:
+         ```bash
+         cd ~ && wget https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/scripts/level2pebble_data.sh
+         git clone https://github.com/notional-labs/level2pebble
+         cd level2pebble && make install
+         ```
+      - Convert Golevel data to PebbleDB:
+         ```bash
+         cd ~ && sh level2pebble_data.sh $HOME/<chain-home>/data
+         ```
+   - Start chain:
+      ```bash
+      supervisorctl start chain
+      ```
+   - Query status with:
+      ```bash
+      curl localhost:26657/status
+      ```
+      or check error log:
+      ```bash
+      tail -n1000 /var/log/chain.error.log
+      ```
+   - When the chain is caught up, stop and create a snapshot:
+      ```bash
+      supervisorctl stop chain
+      screen -S snapshot # create a new screen
+      # While in the screen
+      bash snapshot_cronjob.sh && crond
+      ```
+      and wait for the script to finish. After script finished, `crond` will start.
 
-4. Restart proxy_public
-   ```bash
-   cd proxy_public
-   sh docker_service_create.sh
-   ```
+5. Go to swarm manager server and create docker service for RPC
+   - Create docker service
+      ```bash
+      cd cosmosia/rpc
+      git pull # Updated latest data
+      sh docker_service_create.sh <chain-name>
+      ```
+      Get `rpc_chain-name_version` from this line of output:
+      ```
+      Error: No such service: <rpc_chain-name_version>
+      ```
+   - Create load balancer with `rpc_chain-name_version`:
+      ```bash
+      cd ../load_balancer/
+      bash docker_service_create.sh <chain-name> <rpc_chain-name_version>
+      ```
+      <!-- Get `lb_chain-name` from this line of output: -->
+      <!-- ``` -->
+      <!-- Error: No such service: <lb_chain-name> -->
+      <!-- ``` -->
+   <!-- - Depend on how many nodes we want to run, we can define it in `docs/service_placement.md` -->
 
-5. Start the rpc
-   ```bash
-   cd rpc
-   sh docker_service_create.sh chainname
-   ```
-
-6. Start the load-balancer
-   ```bash
-   cd load_balancer
-   sh docker_service_create.sh chainname
-   ```
-
-7. Restart the proxy
-   ```bash
-   cd proxy
-   sh docker_service_create.sh
-   ```
    
+6. Go to swarm manager server and restart `proxy_public`
+   ```bash
+   cd cosmosia/proxy/public
+   git pull # Updated latest data
+   bash docker_service_create.sh
+   ```
+   You can check if the endpoint is working: `https://rpc-<chain-name>-ia.cosmosia.notional.ventures`
+
 8. Update [uptime monitor](https://status.notional.ventures/status/cosmosia)
 
       - Api Service
