@@ -5,7 +5,6 @@ import { Button, Form, InputNumber, Input, Spin, Alert } from "antd";
 export async function getServerSideProps({query}) {
   // swarm_node
   const {swarm_node} = query;
-
   console.log(`swarm_node=${swarm_node}`);
 
   return {props: {swarm_node}};

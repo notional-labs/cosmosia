@@ -17,6 +17,8 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/agent/ho
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/agent/containers_resource_usage.sh" > /usr/share/nginx/html/containers_resource_usage.sh
 
 chmod +x /usr/share/nginx/html/host_resource_usage.sh
+chmod +x /usr/share/nginx/html/containers_resource_usage.sh
+
 spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
 
 # run nginx with screen to avoid log to docker
