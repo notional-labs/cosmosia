@@ -37,11 +37,6 @@ echo "node_home=$node_home"
 echo "minimum_gas_prices=$minimum_gas_prices"
 echo "start_flags=$start_flags"
 
-if [[ -z $git_repo ]]; then
-  echo "Not support chain $chain_name"
-  loop_forever
-fi
-
 pacman -Syu --noconfirm
 pacman -Sy --noconfirm go git base-devel wget jq nginx
 
