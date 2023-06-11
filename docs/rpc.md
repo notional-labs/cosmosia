@@ -292,14 +292,6 @@
 | API      | https://api-axelar-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-axelar-ia.cosmosia.notional.ventures/ |
 
-### 37. Pylons Testnet
-
-| Protocol | Endpoint                                           |
-|----------|:---------------------------------------------------|
-| RPC      | https://rpc-pylons-ia.cosmosia.notional.ventures/  |
-| API      | https://api-pylons-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-pylons-ia.cosmosia.notional.ventures/ |
-
 ### 38. Umee
 
 | Protocol | Endpoint                                         |
