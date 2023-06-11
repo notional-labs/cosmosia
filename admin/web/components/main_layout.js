@@ -11,7 +11,9 @@ import {
   FileSyncOutlined,
   FileOutlined,
   ClusterOutlined,
-  DatabaseOutlined
+  DatabaseOutlined,
+  ApiOutlined,
+  GlobalOutlined
 } from '@ant-design/icons';
 import React from "react";
 const {Header, Content, Footer} = Layout;
@@ -59,6 +61,11 @@ const MainNav = () => {
           </Menu.Item>
           <Menu.Item key='sub_deploy' icon={<PlusCircleOutlined />}>
             <Link href='/subnode_deploy'>Deploy</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu key='proxies' title="Proxies" icon={<ApiOutlined />}>
+          <Menu.Item key='proxy_public_list' icon={<GlobalOutlined />}>
+            <Link href='/proxy_public_list'>Public Endpoints</Link>
           </Menu.Item>
         </Menu.SubMenu>
       </Menu>
