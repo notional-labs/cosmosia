@@ -555,7 +555,7 @@ export const getInternalProxySecretTokens = async () => {
       data.push(randomToken);
     }
   } else {
-    const url = `"http://tasks.web_config/config/internal_proxy_secret_tokens.txt"`;
+    const url = "http://tasks.web_config/config/internal_proxy_secret_tokens.txt";
     const response = await fetch(url);
     const txt = await response.text();
     data = txt.split(/\r?\n/);
