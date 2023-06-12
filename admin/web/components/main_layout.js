@@ -67,6 +67,9 @@ const MainNav = () => {
           <Menu.Item key='proxy_public_list' icon={<GlobalOutlined />}>
             <Link href='/proxy_public_list'>Public Endpoints</Link>
           </Menu.Item>
+          <Menu.Item key='proxy_internal_list' icon={<GlobalOutlined />}>
+            <Link href='/proxy_internal_list'>Internal Endpoints</Link>
+          </Menu.Item>
         </Menu.SubMenu>
       </Menu>
     )

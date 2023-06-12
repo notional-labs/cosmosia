@@ -544,3 +544,22 @@ export const listSubnodes = async () => {
 
   return items;
 }
+
+
+export const getInternalProxySecretTokens = async () => {
+  let data = [];
+
+  if (process.env.NODE_ENV === "development") {
+    for (let i = 0; i < 512; i++) {
+      const randomToken = Math.random().toString(36).substr(2, 18);
+      data.push(randomToken);
+    }
+  } else {
+    const url = `"http://tasks.web_config/config/internal_proxy_secret_tokens.txt"`;
+    const response = await fetch(url);
+    const txt = await response.text();
+    data = txt.split(/\r?\n/);
+  }
+
+  return data
+}
