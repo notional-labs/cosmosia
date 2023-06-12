@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Button, Form, Select, Spin, Alert } from 'antd';
 import { useSession } from "next-auth/react";
-import { getSubnodeList } from '/helper/chain_registry';
+import { getChainList } from '/src/helper/chain_registry';
 
-export async function getServerSideProps({query}) {
-  const subnodeList = await getSubnodeList();
+export async function getServerSideProps() {
+  const chainList = await getChainList();
 
-  const subnodeOptions = [];
-  for (const sn of subnodeList) {
-    const opt = {value: sn, label: sn};
-    subnodeOptions.push(opt);
+  const chainOptions = [];
+  for (const chain of chainList) {
+    const opt = {value: chain, label: chain};
+    chainOptions.push(opt);
   }
 
-  return {props: {subnodeOptions}};
+  return {props: {chainOptions}};
 }
 
-export default function SubnodeDeploy({subnodeOptions}) {
+export default function RpcDeploy({chainOptions}) {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
@@ -29,7 +29,7 @@ export default function SubnodeDeploy({subnodeOptions}) {
     const {chain} = values;
     setFormState(1);
 
-    const apiRes = await fetch('/api/subnode_deploy', {
+    const apiRes = await fetch('/api/rpc_deploy', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -49,8 +49,8 @@ export default function SubnodeDeploy({subnodeOptions}) {
   };
 
   return (
-    <div className="SubnodeDeploy">
-      <h3>Deploy a Subnode Service</h3>
+    <div className="RpcDeploy">
+      <h3>Deploy a Rpc Service</h3>
 
       {formState === 0 &&
       <Form
@@ -63,7 +63,7 @@ export default function SubnodeDeploy({subnodeOptions}) {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item label="Chain" name="chain" rules={[{required: true, message: 'Please select a chain'}]}>
+        <Form.Item label="Chain" name="chain" rules={[{required: true, message: 'Please select chain'}]}>
           <Select
             showSearch
             style={{
@@ -75,7 +75,7 @@ export default function SubnodeDeploy({subnodeOptions}) {
             filterSort={(optionA, optionB) =>
               (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
             }
-            options={subnodeOptions}
+            options={chainOptions}
           />
         </Form.Item>
 

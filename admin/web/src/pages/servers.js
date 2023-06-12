@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
-import { listServers } from '/helper/docker_api';
+import { listServers } from '/src/helper/docker_api';
 import { Table, Tag, Progress, Dropdown } from 'antd';
-import { format2Decimal } from "/helper/utils";
+import { format2Decimal } from "/src/helper/utils";
 import { CheckCircleOutlined, DownOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import Link from "next/link";

@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
 import { Button, Form, Select, Spin, Alert } from 'antd';
 import { useSession } from "next-auth/react";
-import { getChainList } from '/helper/chain_registry';
+import { getSubnodeList } from '/src/helper/chain_registry';
 
 export async function getServerSideProps({query}) {
-  const chainList = await getChainList();
+  const subnodeList = await getSubnodeList();
 
-  const chainOptions = [];
-  for (const chain of chainList) {
-    const opt = {value: chain, label: chain};
-    chainOptions.push(opt);
+  const subnodeOptions = [];
+  for (const sn of subnodeList) {
+    const opt = {value: sn, label: sn};
+    subnodeOptions.push(opt);
   }
 
-  //////
-  // chainInitialValue
-  const {chain} = query;
-  console.log(`chain=${chain}`);
-
-  return {props: {chainOptions, chainInitialValue: chain}};
+  return {props: {subnodeOptions}};
 }
 
-export default function SnapDeploy({chainOptions, chainInitialValue}) {
+export default function SubnodeDeploy({subnodeOptions}) {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
@@ -34,7 +29,7 @@ export default function SnapDeploy({chainOptions, chainInitialValue}) {
     const {chain} = values;
     setFormState(1);
 
-    const apiRes = await fetch('/api/snap_deploy', {
+    const apiRes = await fetch('/api/subnode_deploy', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -54,8 +49,8 @@ export default function SnapDeploy({chainOptions, chainInitialValue}) {
   };
 
   return (
-    <div className="SanpDeploy">
-      <h3>Deploy a Snapshot Service</h3>
+    <div className="SubnodeDeploy">
+      <h3>Deploy a Subnode Service</h3>
 
       {formState === 0 &&
       <Form
@@ -63,12 +58,12 @@ export default function SnapDeploy({chainOptions, chainInitialValue}) {
         labelCol={{span: 8}}
         wrapperCol={{span: 16}}
         style={{maxWidth: 600}}
-        initialValues={{chain: chainInitialValue}}
+        initialValues={{}}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item label="Chain" name="chain" rules={[{required: true, message: 'Please select chain'}]}>
+        <Form.Item label="Chain" name="chain" rules={[{required: true, message: 'Please select a chain'}]}>
           <Select
             showSearch
             style={{
@@ -80,7 +75,7 @@ export default function SnapDeploy({chainOptions, chainInitialValue}) {
             filterSort={(optionA, optionB) =>
               (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
             }
-            options={chainOptions}
+            options={subnodeOptions}
           />
         </Form.Item>
 

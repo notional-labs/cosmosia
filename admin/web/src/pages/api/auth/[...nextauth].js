@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { checkAuth } from '/helper/basic_auth';
+import { checkAuth } from '/src/helper/basic_auth';
 
 export const authOptions = {
   providers: [

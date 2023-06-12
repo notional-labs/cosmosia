@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Form, Select, Spin, Alert } from 'antd';
 import { useSession } from "next-auth/react";
-import { getChainList } from '/helper/chain_registry';
+import { getChainList } from '/src/helper/chain_registry';
 
-export async function getServerSideProps() {
+export async function getServerSideProps({query}) {
   const chainList = await getChainList();
 
   const chainOptions = [];
@@ -12,10 +12,15 @@ export async function getServerSideProps() {
     chainOptions.push(opt);
   }
 
-  return {props: {chainOptions}};
+  //////
+  // chainInitialValue
+  const {chain} = query;
+  console.log(`chain=${chain}`);
+
+  return {props: {chainOptions, chainInitialValue: chain}};
 }
 
-export default function RpcDeploy({chainOptions}) {
+export default function SnapDeploy({chainOptions, chainInitialValue}) {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
@@ -29,7 +34,7 @@ export default function RpcDeploy({chainOptions}) {
     const {chain} = values;
     setFormState(1);
 
-    const apiRes = await fetch('/api/rpc_deploy', {
+    const apiRes = await fetch('/api/snap_deploy', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -49,8 +54,8 @@ export default function RpcDeploy({chainOptions}) {
   };
 
   return (
-    <div className="RpcDeploy">
-      <h3>Deploy a Rpc Service</h3>
+    <div className="SanpDeploy">
+      <h3>Deploy a Snapshot Service</h3>
 
       {formState === 0 &&
       <Form
@@ -58,7 +63,7 @@ export default function RpcDeploy({chainOptions}) {
         labelCol={{span: 8}}
         wrapperCol={{span: 16}}
         style={{maxWidth: 600}}
-        initialValues={{}}
+        initialValues={{chain: chainInitialValue}}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"

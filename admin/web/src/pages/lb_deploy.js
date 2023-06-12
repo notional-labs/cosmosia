@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Select, Spin, Alert, Radio } from 'antd';
 import { useSession } from "next-auth/react";
-import { getChainList } from '/helper/chain_registry';
+import { getChainList } from '/src/helper/chain_registry';
 import { listRpcs } from "../helper/docker_api";
 
 const getChainOptions = async () => {

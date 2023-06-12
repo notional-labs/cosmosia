@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import { listSnapshots } from '/helper/docker_api';
+import { listSnapshots } from '/src/helper/docker_api';
 import { Dropdown, Table } from 'antd';
 import { DownOutlined, GlobalOutlined } from "@ant-design/icons";
 import Link from 'next/link';

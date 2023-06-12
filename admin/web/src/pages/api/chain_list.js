@@ -1,4 +1,4 @@
-import { getChainList } from '/helper/chain_registry';
+import { getChainList } from '/src/helper/chain_registry';
 
 export default async (req, res) => {
   const chainList = await getChainList();

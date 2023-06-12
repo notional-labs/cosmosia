@@ -1,19 +1,19 @@
 import { useSession } from "next-auth/react";
-import { listSubnodes } from '/helper/docker_api';
+import { listLoadBalancers } from '/src/helper/docker_api';
 import { Table } from 'antd';
 
 export async function getServerSideProps() {
-  let subnodeList = [];
+  let lbList = [];
   try {
-    subnodeList = await listSubnodes();
+    lbList = await listLoadBalancers();
   } catch (err) {
     // do nothing
   }
 
-  return {props: {subnodeList}};
+  return {props: {lbList}};
 }
 
-const SubnodeTable = (props) => {
+const LoadBalancerTable = (props) => {
   const {data} = props;
 
   const dataSrc = [];
@@ -42,16 +42,16 @@ const SubnodeTable = (props) => {
 }
 
 
-export default function Subnodes({subnodeList}) {
+export default function LoadBalancers({lbList}) {
   const {data: session, status} = useSession();
 
   if (status === "unauthenticated") return <p>Access Denied.</p>
 
   return (
-    <div className="Subnodes">
-      <h3>Subnodes</h3>
+    <div className="LoadBalancers">
+      <h3>Load Balancers</h3>
 
-      <SubnodeTable data={subnodeList}/>
+      <LoadBalancerTable data={lbList}/>
     </div>
   )
 }

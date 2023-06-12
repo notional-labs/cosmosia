@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
-import { execute_bash } from '/helper/bash';
+import { execute_bash } from '/src/helper/bash';
 
 export default async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
