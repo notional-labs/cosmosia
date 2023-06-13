@@ -20,6 +20,14 @@ docker service create \
   --replicas 1 \
   --publish mode=host,target=80,published=11111 \
   --network snapshot \
+  --network net1 \
+  --network net2 \
+  --network net3 \
+  --network net4 \
+  --network net5 \
+  --network net6 \
+  --network net7 \
+  --network net8 \
   --mount type=bind,source=/mnt/data/snapshots,destination=/snapshots,readonly \
   --constraint "node.hostname==${swarm_node}" \
   --restart-condition none \
