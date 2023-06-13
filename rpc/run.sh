@@ -62,16 +62,16 @@ fi
 
 ########################################################################################################################
 # supervised
-pip install supervisor
-mkdir -p /etc/supervisor/conf.d
-echo_supervisord_conf > /etc/supervisor/supervisord.conf
+pacman -Sy --noconfirm supervisor
+mkdir -p /etc/supervisor.d
+echo_supervisord_conf > /etc/supervisord.conf
 echo "[include]
-files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
+files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisord.conf
 
 # use start_chain.sh to start chain with local peers
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
 
-cat <<EOT > /etc/supervisor/conf.d/chain.conf
+cat <<EOT > /etc/supervisor.d/chain.conf
 [program:chain]
 command=/bin/bash /root/start_chain.sh $chain_name $rpc_service_name
 autostart=false

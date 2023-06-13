@@ -90,14 +90,14 @@ source $HOME/snapshot_restore.sh
 
 ########################################################################################################################
 # supervised
-pip install supervisor
-mkdir -p /etc/supervisor/conf.d
-echo_supervisord_conf > /etc/supervisor/supervisord.conf
+pacman -Sy --noconfirm supervisor
+mkdir -p /etc/supervisor.d
+echo_supervisord_conf > /etc/supervisord.conf
 echo "[include]
-files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisor/supervisord.conf
+files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisord.conf
 
 
-cat <<EOT > /etc/supervisor/conf.d/chain.conf
+cat <<EOT > /etc/supervisor.d/chain.conf
 [program:chain]
 command=/bin/bash /root/start_chain.sh
 autostart=false
