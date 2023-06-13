@@ -94,7 +94,7 @@ pacman -Sy --noconfirm supervisor
 mkdir -p /etc/supervisor.d
 echo_supervisord_conf > /etc/supervisord.conf
 echo "[include]
-files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisord.conf
+files = /etc/supervisor.d/*.conf" >> /etc/supervisord.conf
 
 
 cat <<EOT > /etc/supervisor.d/chain.conf

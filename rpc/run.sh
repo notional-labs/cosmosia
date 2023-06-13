@@ -66,7 +66,7 @@ pacman -Sy --noconfirm supervisor
 mkdir -p /etc/supervisor.d
 echo_supervisord_conf > /etc/supervisord.conf
 echo "[include]
-files = /etc/supervisor/conf.d/*.conf" >> /etc/supervisord.conf
+files = /etc/supervisor.d/*.conf" >> /etc/supervisord.conf
 
 # use start_chain.sh to start chain with local peers
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
