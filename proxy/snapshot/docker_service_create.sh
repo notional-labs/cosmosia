@@ -19,6 +19,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --publish mode=host,target=80,published=11111 \
+  --network snapshot \
   --mount type=bind,source=/mnt/data/snapshots,destination=/snapshots,readonly \
   --constraint "node.hostname==${swarm_node}" \
   --restart-condition none \
