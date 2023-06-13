@@ -68,12 +68,19 @@ echo_supervisord_conf > /etc/supervisord.conf
 echo "[include]
 files = /etc/supervisor.d/*.conf" >> /etc/supervisord.conf
 
-# use start_chain.sh to start chain with local peers
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/start_chain.sh" > $HOME/start_chain.sh
+
+# start_chain.sh script
+cat <<EOT >> $HOME/start_chain.sh
+source $HOME/env.sh
+# fix supervisorctl creates a dbus-daemon process everytime starting chain
+killall dbus-daemon
+$HOME/go/bin/$daemon_name start --db_backend=pebbledb $start_flags
+EOT
+
 
 cat <<EOT > /etc/supervisor.d/chain.conf
 [program:chain]
-command=/bin/bash /root/start_chain.sh $chain_name $rpc_service_name
+command=/bin/bash /root/start_chain.sh
 autostart=false
 autorestart=false
 stopasgroup=true
