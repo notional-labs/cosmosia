@@ -30,7 +30,7 @@ node="$snapshot_storage_node"
 if [[ -z $node ]]; then
   node="$snapshot_node"
 fi
-SNAPSHOT_BASE_URL="http://tasks.proxysnapshot_${node}:11111/$chain_name"
+SNAPSHOT_BASE_URL="http://proxysnapshot.${node}:11111/$chain_name"
 echo "SNAPSHOT_BASE_URL=$SNAPSHOT_BASE_URL"
 
 if [[ $chain_name == "sentinel" ]]; then

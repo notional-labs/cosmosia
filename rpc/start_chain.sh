@@ -100,7 +100,7 @@ find_current_data_version () {
 
   # 2. get data version
   ver=0
-  ver=$(curl -Ls "http://tasks.proxysnapshot_${node}/$chain_name/chain.json" |jq -r '.data_version // 0')
+  ver=$(curl -Ls "http://proxysnapshot.${node}/$chain_name/chain.json" |jq -r '.data_version // 0')
   echo $ver
 }
 

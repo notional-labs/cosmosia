@@ -1,15 +1,4 @@
-# usage: ./docker_service_create.sh swarm_node
-# eg., ./docker_service_create.sh cosmosia1
-
-swarm_node="$1"
-
-if [[ -z $swarm_node ]]
-then
-  echo "No swarm_node. usage eg., ./docker_service_create.sh cosmosia1"
-  exit
-fi
-
-SERVICE_NAME="proxysnapshot_$swarm_node"
+SERVICE_NAME="proxysnapshot"
 
 # delete existing service
 docker service rm $SERVICE_NAME
@@ -17,8 +6,11 @@ docker service rm $SERVICE_NAME
 # create new service
 docker service create \
   --name $SERVICE_NAME \
-  --replicas 1 \
+  --mode global \
+  --constraint "node.labels.cosmosia.storage==true" \
   --publish mode=host,target=80,published=11111 \
+  --endpoint-mode dnsrr \
+  --hostname="{{.Service.Name}}.{{.Node.Hostname}}" \
   --network snapshot \
   --network net1 \
   --network net2 \
@@ -29,8 +21,7 @@ docker service create \
   --network net7 \
   --network net8 \
   --mount type=bind,source=/mnt/data/snapshots,destination=/snapshots,readonly \
-  --constraint "node.hostname==${swarm_node}" \
-  --restart-condition none \
+  --restart-condition any \
   --env-file ../../env.sh \
   archlinux:latest \
   /bin/bash -c \
