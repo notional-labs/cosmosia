@@ -33,25 +33,32 @@ git_branch=$(git symbolic-ref --short -q HEAD)
 
 # functions
 find_current_data_version () {
-  # 1. figure out the snapshot node
-  node="$snapshot_storage_node"
-  if [[ -z $node ]]; then
-    node="$snapshot_node"
-  fi
-
   ver=0
 
-  if [ -f /.dockerenv ]; then
-    # inside container
-    ver=$(curl -Ls "http://proxysnapshot.${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
+  if [[ -z $USE_SNAPSHOT_PROXY_URL ]]; then
+    # use internal snapshot proxy
+
+    # 1. figure out the snapshot node
+    node="$snapshot_storage_node"
+    if [[ -z $node ]]; then
+      node="$snapshot_node"
+    fi
+
+    if [ -f /.dockerenv ]; then
+      # inside container
+      ver=$(curl -Ls "http://proxysnapshot.${node}:11111/${chain_name}/chain.json" |jq -r '.data_version // 0')
+    else
+      # inside host
+
+      # figure out container id of agent
+      agent_id=$(docker ps -aqf "name=agent")
+
+      # execute command in agent container to get data version
+      ver=$(docker exec $agent_id curl -Ls "http://proxysnapshot.${node}:11111/${chain_name}/chain.json" |jq -r '.data_version // 0')
+    fi
   else
-    # inside host
-
-    # figure out container id of agent
-    agent_id=$(docker ps -aqf "name=agent")
-
-    # execute command in agent container to get data version
-    ver=$(docker exec $agent_id curl -Ls "http://proxysnapshot.${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
+    # use public snapshot proxy
+    ver=$(curl -Ls "${USE_SNAPSHOT_PROXY_URL}/${chain_name}/chain.json" |jq -r '.data_version // 0')
   fi
 
   echo $ver

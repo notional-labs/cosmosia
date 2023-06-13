@@ -26,11 +26,20 @@ fi
 cd $HOME
 
 # 1. build the snapshot base url
-node="$snapshot_storage_node"
-if [[ -z $node ]]; then
-  node="$snapshot_node"
+
+SNAPSHOT_BASE_URL="${$USE_SNAPSHOT_PROXY_URL}/${chain_name}"
+
+if [[ -z $USE_SNAPSHOT_PROXY_URL ]]; then
+  # internal snapshot proxy
+
+  node="$snapshot_storage_node"
+  if [[ -z $node ]]; then
+    node="$snapshot_node"
+  fi
+
+  SNAPSHOT_BASE_URL="http://proxysnapshot.${node}:11111/$chain_name"
 fi
-SNAPSHOT_BASE_URL="http://proxysnapshot.${node}:11111/$chain_name"
+
 echo "SNAPSHOT_BASE_URL=$SNAPSHOT_BASE_URL"
 
 if [[ $chain_name == "sentinel" ]]; then

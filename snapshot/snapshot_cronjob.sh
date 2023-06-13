@@ -4,15 +4,22 @@ source $HOME/env.sh
 
 # functions
 find_current_data_version () {
-  # 1. figure out the snapshot node
-  node="$snapshot_storage_node"
-  if [[ -z $node ]]; then
-    node="$snapshot_node"
-  fi
-
-  # 2. get data version
   ver=0
-  ver=$(curl -Ls "http://proxysnapshot.${node}:11111/$chain_name/chain.json" |jq -r '.data_version // 0')
+
+  if [[ -z $USE_SNAPSHOT_PROXY_URL ]]; then
+    # use internal snapshot proxy
+
+    # 1. figure out the snapshot node
+    node="$snapshot_storage_node"
+    if [[ -z $node ]]; then
+      node="$snapshot_node"
+    fi
+
+    # 2. get data version
+    ver=$(curl -Ls "http://proxysnapshot.${node}:11111/${chain_name}/chain.json" |jq -r '.data_version // 0')
+  else
+    # use public snapshot proxy
+    ver=$(curl -Ls "${USE_SNAPSHOT_PROXY_URL}/${chain_name}/chain.json" |jq -r '.data_version // 0')
   echo $ver
 }
 
