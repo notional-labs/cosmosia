@@ -16,6 +16,7 @@
   - [SSL](ssl.md)
   - [Handle a Swarm Node down](swarm_node_down.md)
   - Cluster Setup
+    - [Getting Started](getting_started.md)
     - [Prepare](prepare.md)
     - [LVM](lvm.md)
     - [Service Placement](service_placement.md)
