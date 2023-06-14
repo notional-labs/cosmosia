@@ -26,8 +26,7 @@ fi
 cd $HOME
 
 # 1. build the snapshot base url
-
-SNAPSHOT_BASE_URL="${$USE_SNAPSHOT_PROXY_URL}/${chain_name}"
+SNAPSHOT_BASE_URL="${USE_SNAPSHOT_PROXY_URL}/${chain_name}"
 
 if [[ -z $USE_SNAPSHOT_PROXY_URL ]]; then
   # internal snapshot proxy
