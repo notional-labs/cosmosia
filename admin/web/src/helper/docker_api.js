@@ -15,6 +15,7 @@
 
 import fetch from 'node-fetch';
 import { getHostResourceUsage } from "./agent";
+import { randomString } from "./utils";
 
 const WEB_CONFIG_URL = "http://tasks.web_config:2375";
 
@@ -551,7 +552,7 @@ export const getInternalProxySecretTokens = async () => {
 
   if (process.env.NODE_ENV === "development") {
     for (let i = 0; i < 512; i++) {
-      const randomToken = Math.random().toString(36).substr(2, 18);
+      const randomToken = randomString(16);
       data.push(randomToken);
     }
   } else {
