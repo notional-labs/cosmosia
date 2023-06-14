@@ -78,7 +78,9 @@ EOT
 sleep 1
 echo "*/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
 sleep 1
-crond
+
+# do not run cronjob for legacy proxy to make it simpler for getting started.
+# crond
 
 ########################################################################################################################
 ## logrotate
