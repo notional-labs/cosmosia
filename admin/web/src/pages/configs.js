@@ -1,6 +1,9 @@
 import { useSession } from "next-auth/react";
 import { getDockerConfigs } from '/src/helper/docker_api';
-import { Table } from 'antd';
+import { Dropdown, Table, Popover, Button } from 'antd';
+import { timeAgoFormat } from "../helper/utils";
+import Link from "next/link";
+import { DownOutlined, EyeOutlined } from "@ant-design/icons";
 
 export async function getServerSideProps() {
   let configList = [];
@@ -33,6 +36,53 @@ const ConfigTable = (props) => {
             return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0;
           },
           sortDirections: ['ascend', 'descend'],
+        },
+        {
+          title: 'Data',
+          dataIndex: 'Data',
+          key: 'Data',
+          render: (text) => {
+            const content = <pre>{text}</pre>;
+            return content;
+            // return (
+            //   <Popover content={content} title="Data" trigger="click">
+            //     <Button type="link" icon={<EyeOutlined/>}/>
+            //   </Popover>
+            // );
+          },
+        },
+        {
+          title: 'CreatedAt',
+          dataIndex: 'CreatedAt',
+          key: 'CreatedAt',
+          render: (text) => <>{timeAgoFormat(text)}</>,
+          sorter: (a, b) => {
+            return (a.CreatedAt < b.CreatedAt) ? -1 : (a.CreatedAt > b.CreatedAt) ? 1 : 0;
+          },
+          sortDirections: ['ascend', 'descend'],
+        },
+        {
+          title: 'Action',
+          dataIndex: 'operation',
+          key: 'operation',
+          render: (_, {Name}) => {
+            return (
+              <Dropdown
+                menu={{
+                  items: [
+                    {
+                      key: 'snapshot_redeploy',
+                      label: (
+                        <Link href={`/xxx?name=${Name}`}>XXX</Link>
+                      ),
+                    },
+                  ],
+                }}
+              >
+                <a onClick={(e) => e.preventDefault()}>More <DownOutlined/></a>
+              </Dropdown>
+            )
+          },
         },
       ]}
       dataSource={dataSrc}

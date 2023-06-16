@@ -15,7 +15,7 @@
 
 import fetch from 'node-fetch';
 import { getHostResourceUsage } from "./agent";
-import { randomString } from "./utils";
+import { base64UrlSafeDecode, randomString } from "./utils";
 
 const WEB_CONFIG_URL = "http://tasks.web_config:2375";
 
@@ -593,12 +593,13 @@ export const getDockerConfigs = async () => {
   const items = [];
   for (const item of data) {
     const {ID, CreatedAt, UpdatedAt, Spec} = item;
-    const {Name} = Spec;
+    const {Name, Data} = Spec;
     items.push({
       ID,
       Name,
+      Data: base64UrlSafeDecode(Data),
       CreatedAt,
-      UpdatedAt
+      UpdatedAt,
     });
   }
 
