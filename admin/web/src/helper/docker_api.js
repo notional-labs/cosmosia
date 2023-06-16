@@ -564,3 +564,43 @@ export const getInternalProxySecretTokens = async () => {
 
   return data
 }
+
+
+export const getDockerConfigs = async () => {
+  let data = []
+  if (process.env.NODE_ENV === "development") {
+    data = [
+      {
+        "ID": "25wiordfw0mhjc9tabn6u15p1",
+        "Version": {
+          "Index": 20881
+        },
+        "CreatedAt": "2022-05-23T23:29:54.801938908Z",
+        "UpdatedAt": "2022-05-23T23:29:54.801938908Z",
+        "Spec": {
+          "Name": "test.txt",
+          "Labels": {},
+          "Data": "dGVzdCBjb25maWcgdmFsdWU="
+        }
+      }
+    ];
+  } else {
+    const url = "http://tasks.web_config:2375/configs";
+    const response = await fetch(url);
+    data = await response.json();
+  }
+
+  const items = [];
+  for (const item of data) {
+    const {ID, CreatedAt, UpdatedAt, Spec} = item;
+    const {Name} = Spec;
+    items.push({
+      ID,
+      Name,
+      CreatedAt,
+      UpdatedAt
+    });
+  }
+
+  return items;
+}

@@ -13,7 +13,8 @@ import {
   ClusterOutlined,
   DatabaseOutlined,
   ApiOutlined,
-  GlobalOutlined
+  GlobalOutlined,
+  SettingOutlined
 } from '@ant-design/icons';
 import React from "react";
 const {Header, Content, Footer} = Layout;
@@ -66,6 +67,11 @@ const MainNav = () => {
         <Menu.SubMenu key='proxies' title="Proxies" icon={<ApiOutlined />}>
           <Menu.Item key='endpoints' icon={<GlobalOutlined />}>
             <Link href='/endpoints'>Endpoints</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu key='configs' title="Configs" icon={<SettingOutlined />}>
+          <Menu.Item key='config_list' icon={<SettingOutlined />}>
+            <Link href='/configs'>List</Link>
           </Menu.Item>
         </Menu.SubMenu>
       </Menu>
