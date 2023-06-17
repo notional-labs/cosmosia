@@ -42,7 +42,7 @@ const ConfigTable = (props) => {
           dataIndex: 'Data',
           key: 'Data',
           render: (text) => {
-            const content = <pre>{text}</pre>;
+            const content = <pre style={{maxHeight: '8pc', overflowY: "scroll" }}>{text}</pre>;
             return content;
             // return (
             //   <Popover content={content} title="Data" trigger="click">
