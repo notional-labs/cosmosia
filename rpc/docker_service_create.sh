@@ -49,7 +49,6 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   ')"
 
 eval "${str_snapshot_cfg}"
-echo "network=$network"
 
 echo "network=$network"
 echo "snapshot_node=$snapshot_node"
