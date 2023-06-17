@@ -631,12 +631,14 @@ export const getDockerConfig = async (id) => {
 export const updateDockerConfig = async ({id, name, data}) => {
   // Note: updating is actually 2 steps: 1) remove and 2) create new
 
-  const apiResJsonRemove = await removeDockerConfig(id);
-  console.log(`[updateDockerConfig]: apiResJsonRemove=${JSON.stringify(apiResJsonRemove)}`);
+  console.log(`updateDockerConfig: id=${id}, name=${name}, data=${data}`);
 
-  const apiResJsonCreate = await createDockerConfig({name, data});
-  console.log(`[updateDockerConfig]: apiResJsonCreate=${JSON.stringify(apiResJsonCreate)}`);
-  return apiResJsonCreate;
+  // const apiResJsonRemove = await removeDockerConfig(id);
+  // console.log(`[updateDockerConfig]: apiResJsonRemove=${JSON.stringify(apiResJsonRemove)}`);
+  //
+  // const apiResJsonCreate = await createDockerConfig({name, data});
+  // console.log(`[updateDockerConfig]: apiResJsonCreate=${JSON.stringify(apiResJsonCreate)}`);
+  // return apiResJsonCreate;
 }
 
 export const removeDockerConfig = async (id) => {

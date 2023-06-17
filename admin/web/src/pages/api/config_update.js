@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
-import { execute_bash } from '/src/helper/bash';
 import { updateDockerConfig } from "../../helper/docker_api";
 
 export default async (req, res) => {
@@ -17,7 +16,7 @@ export default async (req, res) => {
   try {
     const apiRes = await updateDockerConfig({id, name, data});
     res.status(200).json({status: "success", data: apiRes});
-  } catch ({error, stdout, stderr}) {
-    res.status(200).json({status: "error", message: error});
+  } catch (err) {
+    res.status(200).json({status: "error", message: err.message});
   }
 }
