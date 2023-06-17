@@ -59,3 +59,11 @@ body {
   font-size: smaller;
   margin-bottom: -10px;
 }
+
+.Configs .Data {
+  max-height: 150px;
+  max-width: 800px;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}

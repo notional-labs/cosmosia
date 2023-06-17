@@ -15,7 +15,7 @@
 
 import fetch from 'node-fetch';
 import { getHostResourceUsage } from "./agent";
-import { randomString } from "./utils";
+import { base64UrlSafeDecode, base64UrlSafeEncode, randomString, sleep } from "./utils";
 
 const WEB_CONFIG_URL = "http://tasks.web_config:2375";
 
@@ -563,4 +563,119 @@ export const getInternalProxySecretTokens = async () => {
   }
 
   return data
+}
+
+
+export const getDockerConfigs = async () => {
+  let data = []
+  if (process.env.NODE_ENV === "development") {
+    data = [
+      {
+        "ID": "25wiordfw0mhjc9tabn6u15p1",
+        "Version": {
+          "Index": 20881
+        },
+        "CreatedAt": "2022-05-23T23:29:54.801938908Z",
+        "UpdatedAt": "2022-05-23T23:29:54.801938908Z",
+        "Spec": {
+          "Name": "test.txt",
+          "Labels": {},
+          "Data": "dGVzdCBjb25maWcgdmFsdWU="
+        }
+      },
+      {
+        "ID": "ttatnrsa46xf7w2pbmlzhqbca",
+        "Version": {
+          "Index": 43055
+        },
+        "CreatedAt": "2023-01-03T15:05:26.799662823Z",
+        "UpdatedAt": "2023-01-03T15:05:26.799662823Z",
+        "Spec": {
+          "Name": "cosmosia.id_rsa.pub",
+          "Labels": {},
+          "Data": "c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCZ1FERy9ybDZFRDl5ejZvR0lCa2RzNkQ3SDNycCtrY2J3UEtpSkovUWliOVIyQ25SYmdSbk9JRE9UYWp4S2o0Tkt5RThENDRUY0dPMjRJUzdmUHJTYWZ0MTZnQzJrbm9Zd2tROE5DVWgyelROZjl0UnhyMU55aGNQTURqMGxsRDNjTkUzWTRlNTFnNUM2S0xlUjJmdnJ1U1ZRaG5oc0VaQVRRSGo4VlBkZjZTR1NkNC9jTkZBUlpvMW1EQXYzdVNkaGIrUVJHMmg5ZDNuRHN3VitveDhBZmxXN0p5Q0txZjNsQ05PaU1ZS2x3WWkrU2M0Y2JrTi9mY3N4UzNmSUVoVXEvRmdaRlBTeDE5K2JBS2NZVG5tZ2lZU0F4b1JJSWNOTzhsLytGa3VJYVJpWUdHQmIvOHY1Zi9SSzVNY0ExWHhoRFo1MGRBYXNSTk5hTGV4dDZ2T2FWUHh2cWV2WElkSTBzSyt6Z2UvbmFGNkVEcFN6TG5HWHVpcXVWZlQ3Ui9qMnFuUkxOYWxhSjBuRmZiZ2FxVlRQQS9SR1VEcGVvMUdnMW1QdnRnQ3A3bE1YeSs0UEk0WFJTSzBja2tjTTV4QmpBVDNSQnVlQUVJbWxoRVJ6UG9icVVIU2tXWm8yUjZUb2x0c2hWUDk0Wm92R2Q5ME5vakNSZWRYemNOODVXb2x6d3M9IHJvb3RAY29zbW9zaWEK"
+        }
+      },
+    ];
+  } else {
+    const url = "http://tasks.web_config:2375/configs";
+    const response = await fetch(url);
+    data = await response.json();
+  }
+
+  const items = [];
+  for (const item of data) {
+    const {ID, Version, CreatedAt, UpdatedAt, Spec} = item;
+    const {Index} = Version;
+    const {Name, Data} = Spec;
+    items.push({
+      ID,
+      Name,
+      Data: base64UrlSafeDecode(Data),
+      CreatedAt,
+      UpdatedAt,
+      Version: Index,
+    });
+  }
+
+  return items;
+}
+
+export const getDockerConfig = async (id) => {
+  const url = `http://tasks.web_config:2375/configs/${id}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+export const updateDockerConfig = async ({id, name, data}) => {
+  // Note: updating is actually 2 steps: 1) remove and 2) create new
+
+  // try {
+    await removeDockerConfig(id);
+    await sleep(1000);
+    await createDockerConfig({name, data});
+  // } catch(err) {
+  //   return {status: "error", message: err.message}
+  // }
+}
+
+export const removeDockerConfig = async (id) => {
+  const url = `http://tasks.web_config:2375/configs/${id}`;
+  const apiRes = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({}),
+    });
+
+  if (!apiRes.ok) {
+    const apiResJson = await apiRes.json();
+    throw new Error(`removeDockerConfig Failed. (${apiResJson.message})`);
+  }
+}
+
+export const createDockerConfig = async ({name, data}) => {
+  const jsonData = {
+    Name: name,
+    Data: base64UrlSafeEncode(data),
+  };
+
+  console.log(`createDockerConfig: json=${JSON.stringify(jsonData)}`);
+
+  const apiRes = await fetch(`http://tasks.web_config:2375/configs/create`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(jsonData),
+  });
+
+  if (!apiRes.ok) {
+    const apiResJson = await apiRes.json();
+    throw new Error(`createDockerConfig Failed. (${apiResJson.message})`);
+  }
 }
