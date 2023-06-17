@@ -39,8 +39,6 @@ get_docker_snapshot_config () {
 str_snapshot_cfg=$(get_docker_snapshot_config)
 echo "str_snapshot_cfg=${str_snapshot_cfg}"
 
-exit
-
 eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
@@ -51,6 +49,9 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
     }
   }
   ')"
+
+
+eval "${str_snapshot_cfg}"
 
 echo "network=$network"
 
