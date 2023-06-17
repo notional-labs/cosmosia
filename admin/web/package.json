@@ -18,7 +18,7 @@
     "underscore": "^1.13.6"
   },
   "devDependencies": {
-    "js-base64": "^3.7.5",
+    "base64url": "^3.0.1",
     "node-fetch": "^2.6.1",
     "request": "^2.88.2"
   }

@@ -1,4 +1,4 @@
-import { Base64 } from 'js-base64';
+import base64url from "base64url";
 import TimeAgo from 'javascript-time-ago';
 
 // English.
@@ -48,5 +48,9 @@ export const randomString = (length) => {
 }
 
 export const base64UrlSafeDecode = (v) => {
-  return Base64.decode(v);
+  return base64url.decode(v);
+}
+
+export const base64UrlSafeEncode = (v) => {
+  return base64url.encode(v);
 }

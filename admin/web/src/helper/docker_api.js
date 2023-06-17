@@ -15,7 +15,7 @@
 
 import fetch from 'node-fetch';
 import { getHostResourceUsage } from "./agent";
-import { base64UrlSafeDecode, randomString } from "./utils";
+import { base64UrlSafeDecode, base64UrlSafeEncode, randomString } from "./utils";
 
 const WEB_CONFIG_URL = "http://tasks.web_config:2375";
 
@@ -592,7 +592,8 @@ export const getDockerConfigs = async () => {
 
   const items = [];
   for (const item of data) {
-    const {ID, CreatedAt, UpdatedAt, Spec} = item;
+    const {ID, Version, CreatedAt, UpdatedAt, Spec} = item;
+    const {Index} = Version;
     const {Name, Data} = Spec;
     items.push({
       ID,
@@ -600,8 +601,55 @@ export const getDockerConfigs = async () => {
       Data: base64UrlSafeDecode(Data),
       CreatedAt,
       UpdatedAt,
+      Version: Index,
     });
   }
 
   return items;
+}
+
+export const getDockerConfig = async (id) => {
+  const url = `http://tasks.web_config:2375/configs/${id}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+export const updateDockerConfig = async ({id, name, data}) => {
+  // Note: updating is actually 2 steps: 1) remove and 2) create new
+
+  await removeDockerConfig(id);
+
+  const apiResJson = await createDockerConfig({name, data});
+  return apiResJson;
+}
+
+export const removeDockerConfig = async (id) => {
+  const url = `http://tasks.web_config:2375/configs/${id}`;
+  const apiRes = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({}),
+    });
+    const apiResJson = await apiRes.json();
+    return apiResJson;
+}
+
+export const createDockerConfig = async ({name, data}) => {
+  const apiRes = await fetch(`http://tasks.web_config:2375/configs/create`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      Name: name,
+      Data: base64UrlSafeEncode(data),
+    }),
+  });
+  const apiResJson = await apiRes.json();
+  return apiResJson;
 }
