@@ -631,18 +631,13 @@ export const getDockerConfig = async (id) => {
 export const updateDockerConfig = async ({id, name, data}) => {
   // Note: updating is actually 2 steps: 1) remove and 2) create new
 
-  try {
+  // try {
     await removeDockerConfig(id);
-
     await sleep(1000);
-
-    const apiResJsonCreate = await createDockerConfig({name, data});
-    console.log(`[updateDockerConfig]: apiResJsonCreate=${JSON.stringify(apiResJsonCreate)}`);
-
-    return apiResJsonCreate;
-  } catch(err) {
-    return {status: "error", message: err.message}
-  }
+    await createDockerConfig({name, data});
+  // } catch(err) {
+  //   return {status: "error", message: err.message}
+  // }
 }
 
 export const removeDockerConfig = async (id) => {
@@ -657,7 +652,8 @@ export const removeDockerConfig = async (id) => {
     });
 
   if (!apiRes.ok) {
-    throw new Error("removeDockerConfig Failed!");
+    const apiResJson = await apiRes.json();
+    throw new Error(`removeDockerConfig Failed. (${apiResJson.message})`);
   }
 }
 
@@ -677,6 +673,9 @@ export const createDockerConfig = async ({name, data}) => {
     },
     body: JSON.stringify(jsonData),
   });
-  const apiResJson = await apiRes.json();
-  return apiResJson;
+
+  if (!apiRes.ok) {
+    const apiResJson = await apiRes.json();
+    throw new Error(`createDockerConfig Failed. (${apiResJson.message})`);
+  }
 }
