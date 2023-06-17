@@ -54,3 +54,7 @@ export const base64UrlSafeDecode = (v) => {
 export const base64UrlSafeEncode = (v) => {
   return base64url.encode(v);
 }
+
+export const sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

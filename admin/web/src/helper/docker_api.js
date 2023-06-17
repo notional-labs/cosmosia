@@ -15,7 +15,7 @@
 
 import fetch from 'node-fetch';
 import { getHostResourceUsage } from "./agent";
-import { base64UrlSafeDecode, base64UrlSafeEncode, randomString } from "./utils";
+import { base64UrlSafeDecode, base64UrlSafeEncode, randomString, sleep } from "./utils";
 
 const WEB_CONFIG_URL = "http://tasks.web_config:2375";
 
@@ -632,13 +632,10 @@ export const updateDockerConfig = async ({id, name, data}) => {
   // Note: updating is actually 2 steps: 1) remove and 2) create new
 
   try {
-    console.log(`updateDockerConfig: id=${id}, name=${name}, data=${data}`);
+    await removeDockerConfig(id);
 
-    console.log(`[updateDockerConfig]: removeDockerConfig...`);
-    const apiResJsonRemove = await removeDockerConfig(id);
-    console.log(`[updateDockerConfig]: apiResJsonRemove=${JSON.stringify(apiResJsonRemove)}`);
+    await sleep(1000);
 
-    console.log(`[updateDockerConfig]: createDockerConfig...`);
     const apiResJsonCreate = await createDockerConfig({name, data});
     console.log(`[updateDockerConfig]: apiResJsonCreate=${JSON.stringify(apiResJsonCreate)}`);
 
@@ -658,8 +655,10 @@ export const removeDockerConfig = async (id) => {
       },
       body: JSON.stringify({}),
     });
-    const apiResJson = await apiRes.json();
-    return apiResJson;
+
+  if (!apiRes.ok) {
+    throw new Error("removeDockerConfig Failed!");
+  }
 }
 
 export const createDockerConfig = async ({name, data}) => {
