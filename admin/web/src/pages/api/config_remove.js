@@ -14,7 +14,7 @@ export default async (req, res) => {
   const {id} = body;
 
   try {
-    await removeDockerConfig({id, name, data});
+    await removeDockerConfig({id, data});
     res.status(200).json({status: "success", data: null});
   } catch (err) {
     res.status(200).json({status: "error", message: err.message});
