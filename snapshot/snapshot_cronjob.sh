@@ -20,6 +20,8 @@ find_current_data_version () {
   else
     # use public snapshot proxy
     ver=$(curl -Ls "${USE_SNAPSHOT_PROXY_URL}/${chain_name}/chain.json" |jq -r '.data_version // 0')
+  fi
+
   echo $ver
 }
 
