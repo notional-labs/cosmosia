@@ -50,6 +50,7 @@ const ConfigTable = (props) => {
             //   </Popover>
             // );
           },
+          width: 600,
         },
         {
           title: 'CreatedAt',
