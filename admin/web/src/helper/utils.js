@@ -52,7 +52,7 @@ export const base64UrlSafeDecode = (v) => {
 }
 
 export const base64UrlSafeEncode = (v) => {
-  return Base64.encode(v, true);
+  return Base64.encode(v, false);
 }
 
 export const sleep = (ms) => {
