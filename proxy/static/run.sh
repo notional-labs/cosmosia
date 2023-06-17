@@ -16,16 +16,7 @@ SERVICES=$(cat $HOME/chain_registry.ini |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/
 
 get_links () {
   for service_name in $SERVICES; do
-    eval "$(cat $HOME/chain_registry.ini |awk -v TARGET=$service_name -F ' = ' '
-      {
-        if ($0 ~ /^\[.*\]$/) {
-          gsub(/^\[|\]$/, "", $0)
-          SECTION=$0
-        } else if (($2 != "") && (SECTION==TARGET)) {
-          print $1 "=" $2
-        }
-      }
-      ')"
+    eval "$(curl -s "http://tasks.web_config/config/cosmosia.snapshot.${service_name}" |sed 's/ = /=/g')"
 
     node="$snapshot_storage_node"
     if [[ -z $node ]]; then
@@ -58,23 +49,14 @@ REDIRECT_CONFIG_FILE="/etc/nginx/redirect_snapshots.conf"
 # generate upstream.conf
 echo "" > $REDIRECT_CONFIG_FILE
 for service_name in $SERVICES; do
-  eval "$(cat $HOME/chain_registry.ini |awk -v TARGET=$service_name -F ' = ' '
-      {
-        if ($0 ~ /^\[.*\]$/) {
-          gsub(/^\[|\]$/, "", $0)
-          SECTION=$0
-        } else if (($2 != "") && (SECTION==TARGET)) {
-          print $1 "=" $2
-        }
-      }
-      ')"
+  eval "$(curl -s "http://tasks.web_config/config/cosmosia.snapshot.${service_name}" |sed 's/ = /=/g')"
 
-    node="$snapshot_storage_node"
-    if [[ -z $node ]]; then
-      node="$snapshot_node"
-    fi
+  node="$snapshot_storage_node"
+  if [[ -z $node ]]; then
+    node="$snapshot_node"
+  fi
 
-    cat <<EOT >> $REDIRECT_CONFIG_FILE
+  cat <<EOT >> $REDIRECT_CONFIG_FILE
         rewrite ^/${service_name}/(.*)$ http://${node}.notional.ventures:11111/${service_name}/\$1\$is_args\$args redirect;
 EOT
 done
