@@ -31,9 +31,9 @@ const ConfigTable = (props) => {
           title: 'Name',
           dataIndex: 'Name',
           key: 'Name',
-          render: (text) => <a>{text}</a>,
+          render: (text) => <>{text}</>,
           sorter: (a, b) => {
-            return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0;
+            return (a.Name < b.Name) ? -1 : (a.Name > b.Name) ? 1 : 0;
           },
           sortDirections: ['ascend', 'descend'],
         },

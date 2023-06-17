@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
 import { execute_bash } from '/src/helper/bash';
+import { updateDockerConfig } from "../../helper/docker_api";
 
 export default async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
@@ -14,9 +15,9 @@ export default async (req, res) => {
   const {id, name, data} = body;
 
   try {
-    const {stdout, stderr} = await execute_bash(`docker node update --label-add ${label} ${swarm_node}`);
-    res.status(200).json({status: "success", data: stdout});
+    const apiRes = await updateDockerConfig({id, name, data});
+    res.status(200).json({status: "success", data: apiRes});
   } catch ({error, stdout, stderr}) {
-    res.status(200).json({status: "error", message: error, data: stdout});
+    res.status(200).json({status: "error", message: error});
   }
 }
