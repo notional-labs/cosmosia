@@ -66,7 +66,7 @@ const ConfigTable = (props) => {
           title: 'Action',
           dataIndex: 'operation',
           key: 'operation',
-          render: (_, {ID, Version}) => {
+          render: (_, {ID}) => {
             return (
               <Dropdown
                 menu={{
@@ -74,7 +74,13 @@ const ConfigTable = (props) => {
                     {
                       key: 'config_update',
                       label: (
-                        <Link href={`/config_update?id=${ID}&version=${Version}`}>Update</Link>
+                        <Link href={`/config_update?id=${ID}`}>Update</Link>
+                      ),
+                    },
+                    {
+                      key: 'config_remove',
+                      label: (
+                        <Link href={`/config_remove?id=${ID}`}>Remove</Link>
                       ),
                     },
                   ],
