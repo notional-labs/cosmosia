@@ -633,12 +633,12 @@ export const updateDockerConfig = async ({id, name, data}) => {
 
   console.log(`updateDockerConfig: id=${id}, name=${name}, data=${data}`);
 
-  // const apiResJsonRemove = await removeDockerConfig(id);
-  // console.log(`[updateDockerConfig]: apiResJsonRemove=${JSON.stringify(apiResJsonRemove)}`);
-  //
-  // const apiResJsonCreate = await createDockerConfig({name, data});
-  // console.log(`[updateDockerConfig]: apiResJsonCreate=${JSON.stringify(apiResJsonCreate)}`);
-  // return apiResJsonCreate;
+  const apiResJsonRemove = await removeDockerConfig(id);
+  console.log(`[updateDockerConfig]: apiResJsonRemove=${JSON.stringify(apiResJsonRemove)}`);
+
+  const apiResJsonCreate = await createDockerConfig({name, data});
+  console.log(`[updateDockerConfig]: apiResJsonCreate=${JSON.stringify(apiResJsonCreate)}`);
+  return apiResJsonCreate;
 }
 
 export const removeDockerConfig = async (id) => {
@@ -656,16 +656,20 @@ export const removeDockerConfig = async (id) => {
 }
 
 export const createDockerConfig = async ({name, data}) => {
+  const jsonData = {
+    Name: name,
+    Data: base64UrlSafeEncode(data),
+  };
+
+  console.log(`createDockerConfig: json=${JSON.stringify(jsonData)}`);
+
   const apiRes = await fetch(`http://tasks.web_config:2375/configs/create`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      Name: name,
-      Data: base64UrlSafeEncode(data),
-    }),
+    body: JSON.stringify(jsonData),
   });
   const apiResJson = await apiRes.json();
   return apiResJson;
