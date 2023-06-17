@@ -14,8 +14,8 @@ export default async (req, res) => {
   const {id, name, data} = body;
 
   try {
-    const apiRes = await updateDockerConfig({id, name, data});
-    res.status(200).json({status: "success", data: apiRes});
+    await updateDockerConfig({id, name, data});
+    res.status(200).json({status: "success", data: null});
   } catch (err) {
     res.status(200).json({status: "error", message: err.message});
   }

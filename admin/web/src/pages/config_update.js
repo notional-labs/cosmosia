@@ -41,9 +41,14 @@ export default function ConfigUpdate({id, name, data}) {
       },
       body: JSON.stringify(bodyJson),
     });
-    const {data: apiResText} = await apiRes.json();
-    console.log(`apiResText=${JSON.stringify(apiResText)}`);
-    setFormState(2);
+    const apiResJson = await apiRes.json();
+    console.log(`apiResJson=${JSON.stringify(apiResJson)}`);
+
+    if (apiResJson.status === "success") {
+      setFormState(2);
+    } else {
+      setFormState(3);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
