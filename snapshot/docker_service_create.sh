@@ -18,7 +18,6 @@ fi
 get_docker_snapshot_config () {
   str_snapshot_cfg=""
 
-
   if [ -f /.dockerenv ]; then
     # inside container
     str_snapshot_cfg="$(curl -s "http://tasks.web_config/config/cosmosia.snapshot.${chain_name}" |sed 's/ = /=/g')"
@@ -31,7 +30,6 @@ get_docker_snapshot_config () {
     # execute command in agent container to get data version
     str_snapshot_cfg=$(docker exec $agent_id curl -s "http://tasks.web_config/config/cosmosia.snapshot.${chain_name}" |sed 's/ = /=/g')
   fi
-
 
   echo $str_snapshot_cfg
 }
@@ -52,7 +50,6 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
 
 
 eval "${str_snapshot_cfg}"
-
 echo "network=$network"
 
 HOST="$snapshot_node"
