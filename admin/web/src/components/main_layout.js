@@ -73,6 +73,9 @@ const MainNav = () => {
           <Menu.Item key='config_list' icon={<SettingOutlined />}>
             <Link href='/configs'>List</Link>
           </Menu.Item>
+          <Menu.Item key='config_create' icon={<PlusCircleOutlined />}>
+            <Link href='/config_create'>Create Config</Link>
+          </Menu.Item>
         </Menu.SubMenu>
       </Menu>
     )
