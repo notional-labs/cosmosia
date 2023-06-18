@@ -140,16 +140,16 @@ sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices
 sed -i '/^\[api]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
 sed -i '/^\[grpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:9090"/}' $node_home/config/app.toml
 
-if [[ $chain_name == "injective" ]]; then
+#if [[ $chain_name == "injective" ]]; then
   sed -i '/^\[api]/,/^\[/{s/^address[[:space:]]*=.*/address = "tcp:\/\/0.0.0.0:1317"/}' $node_home/config/app.toml
   sed -i '/^\[evm-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
   sed -i '/^\[evm-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
-fi
+#fi
 
-if [[ $chain_name == evmos* ]]; then
+#if [[ $chain_name == evmos* ]]; then
   sed -i '/^\[json-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
   sed -i '/^\[json-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
-fi
+#fi
 
 sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
 if [[ $snapshot_prune == "cosmos-pruner" ]]; then
