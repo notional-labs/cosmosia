@@ -26,5 +26,16 @@ def get_config(name):
     return "Config not found", 404
 
 
+@app.route('/node_ip/<name>', methods=['GET'])
+def get_node_ip(name):
+    nodes = client.nodes.list(filters={"name": [name]})
+    if len(nodes) > 0:
+        node = nodes[0].attrs
+        node_ip = node['Status']['Addr']
+        return node_ip, 200
+
+    return "node not found", 404
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001)
