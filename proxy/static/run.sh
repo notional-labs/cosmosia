@@ -22,7 +22,10 @@ get_links () {
     if [[ -z $node ]]; then
       node="$snapshot_node"
     fi
-    echo "<p><a href=\"http://${node}.notional.ventures:11111/$service_name/\">$service_name</a></p>"
+
+    # figure out IP of node
+    node_ip=$(curl -s "http://tasks.web_config/node_ip/${node}")
+    echo "<p><a href=\"http://${node_ip}:11111/$service_name/\">$service_name</a></p>"
   done
 }
 
@@ -56,8 +59,11 @@ for service_name in $SERVICES; do
     node="$snapshot_node"
   fi
 
+  # figure out IP of node
+  node_ip=$(curl -s "http://tasks.web_config/node_ip/${node}")
+
   cat <<EOT >> $REDIRECT_CONFIG_FILE
-        rewrite ^/${service_name}/(.*)$ http://${node}.notional.ventures:11111/${service_name}/\$1\$is_args\$args redirect;
+        rewrite ^/${service_name}/(.*)$ http://${node_ip}:11111/${service_name}/\$1\$is_args\$args redirect;
 EOT
 done
 
