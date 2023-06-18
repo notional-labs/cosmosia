@@ -11,7 +11,14 @@ then
   exit
 fi
 
+get_docker_snapshot_config () {
+  str_snapshot_cfg="$(curl -s "http://tasks.web_config/config/cosmosia.snapshot.${chain_name}" |sed 's/ = /=/g')"
+  echo $str_snapshot_cfg
+}
 
+source $HOME/env.sh
+
+# to get the url to the config file
 eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
@@ -23,28 +30,60 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   }
   ')"
 
+echo "config=$config"
+# load config
+eval "$(curl -s "$config" |sed 's/ = /=/g')"
+
+str_snapshot_cfg=$(get_docker_snapshot_config)
+echo "str_snapshot_cfg=${str_snapshot_cfg}"
+eval "${str_snapshot_cfg}"
+
 echo "node_home=$node_home"
-
-# delete old snapshots before creating new snapshot to save disk space
-cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)
-
 cd $node_home
-
-rm -rf $node_home/data/snapshots/*
 
 TAR_FILENAME="data_$(date +%Y%m%d_%T |sed 's/://g').tar.gz"
 TAR_FILE_PATH="/snapshot/$TAR_FILENAME"
 
 # snapshot file includes ALL dirs in $node_home excluding config dir
 included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
-tar -cvf - $included_dirs |pigz --best -p8 > $TAR_FILE_PATH
 
-FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
+if [[ -z $snapshot_storage_node ]]; then
+  tar -cvf - $included_dirs |pigz --best -p8 > $TAR_FILE_PATH
+else
+  tar -cvf - $included_dirs |pigz --best -p8 |ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures "cat > /mnt/data/snapshots/${chain_name}/${TAR_FILENAME}"
+fi
 
-cat <<EOT > /snapshot/chain.json
+FILESIZE=0
+if [[ -z $snapshot_storage_node ]]; then
+  FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
+else
+  FILESIZE=$(ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures stat -c%s "/mnt/data/snapshots/${chain_name}/${TAR_FILENAME}")
+fi
+
+# addrbook.json
+if [[ -z $snapshot_storage_node ]]; then
+  cp $node_home/config/addrbook.json /snapshot/
+else
+  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${node_home}/config/addrbook.json" "root@${snapshot_storage_node}.notional.ventures:/mnt/data/snapshots/${chain_name}/"
+fi
+
+
+# chain.json file
+node="$snapshot_storage_node"
+if [[ -z $node ]]; then
+  node="$snapshot_node"
+fi
+
+cat <<EOT > $HOME/chain.json
 {
-    "snapshot_url": "http://${snapshot_node}.notional.ventures:11111/$chain_name/$TAR_FILENAME",
+    "snapshot_url": "http://${node}.notional.ventures:11111/$chain_name/$TAR_FILENAME",
     "file_size": $FILESIZE,
-    "data_version": 0
+    "data_version": $data_version
 }
 EOT
+
+if [[ -z $snapshot_storage_node ]]; then
+  cp $HOME/chain.json /snapshot/
+else
+  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "$HOME/chain.json" "root@${snapshot_storage_node}.notional.ventures:/mnt/data/snapshots/${chain_name}/"
+fi

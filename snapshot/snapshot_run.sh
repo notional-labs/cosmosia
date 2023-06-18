@@ -3,22 +3,28 @@
 
 chain_name="$1"
 
-# functions
-loop_forever () {
-  echo "loop forever for debugging only"
-  while true; do sleep 5; done
-}
-
 if [[ -z $chain_name ]]
 then
   echo "No chain_name. usage eg., ./snapshost_run.sh cosmoshub"
   loop_forever
 fi
 
+# functions
+loop_forever () {
+  echo "loop forever for debugging only"
+  while true; do sleep 5; done
+}
+
+get_docker_snapshot_config () {
+  str_snapshot_cfg="$(curl -s "http://tasks.web_config/config/cosmosia.snapshot.${chain_name}" |sed 's/ = /=/g')"
+  echo $str_snapshot_cfg
+}
+
 echo "#################################################################################################################"
 echo "read chain info:"
 # https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
 
+# to get the url to the config file
 eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
@@ -30,6 +36,13 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   }
   ')"
 
+echo "config=$config"
+# load config
+eval "$(curl -s "$config" |sed 's/ = /=/g')"
+
+str_snapshot_cfg=$(get_docker_snapshot_config)
+echo "str_snapshot_cfg=${str_snapshot_cfg}"
+eval "${str_snapshot_cfg}"
 
 # write chain info to bash file, so that cronjob could know
 cat <<EOT >> $HOME/env.sh
