@@ -29,6 +29,7 @@ if [[ -z $rpc_service_name ]]; then
   exit
 fi
 
+# to get the url to the config file
 eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
@@ -39,6 +40,11 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
     }
   }
   ')"
+
+echo "config=$config"
+
+# load config
+eval "$(curl -s "$config" |sed 's/ = /=/g')"
 
 echo "network=$network"
 
