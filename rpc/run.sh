@@ -19,7 +19,8 @@ loop_forever () {
 
 echo "#################################################################################################################"
 echo "read chain info:"
-# https://www.medo64.com/2018/12/extracting-single-ini-section-via-bash/
+
+# to get the url to the config file
 eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
@@ -30,6 +31,10 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
     }
   }
   ')"
+
+echo "config=$config"
+# load config
+eval "$(curl -s "$config" |sed 's/ = /=/g')"
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
