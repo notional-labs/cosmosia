@@ -6,7 +6,9 @@ pacman -S --noconfirm git base-devel python python-pip nginx screen
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
 cd $HOME/cosmosia/web_config
-pip install -r requirements.txt
+
+# add --break-system-packages to fix error: externally-managed-environment
+pip install -r requirements.txt --break-system-packages
 
 screen -S web_config -dm /usr/sbin/python app.py
 
