@@ -34,9 +34,7 @@ get_docker_snapshot_config () {
   echo $str_snapshot_cfg
 }
 
-str_snapshot_cfg=$(get_docker_snapshot_config)
-echo "str_snapshot_cfg=${str_snapshot_cfg}"
-
+# to get the url to the config file
 eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
@@ -48,6 +46,12 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   }
   ')"
 
+echo "config=$config"
+# load config
+eval "$(curl -s "$config" |sed 's/ = /=/g')"
+
+str_snapshot_cfg=$(get_docker_snapshot_config)
+echo "str_snapshot_cfg=${str_snapshot_cfg}"
 eval "${str_snapshot_cfg}"
 
 echo "network=$network"
