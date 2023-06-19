@@ -122,7 +122,7 @@ fi
 
 cat <<EOT > $HOME/chain.json
 {
-    "snapshot_url": "http://${node}.notional.ventures:11111/$chain_name/$TAR_FILENAME",
+    "snapshot_url": "http://${snapshot_storage_node_ip}:11111/$chain_name/$TAR_FILENAME",
     "file_size": $FILESIZE,
     "data_version": $data_version
 }
