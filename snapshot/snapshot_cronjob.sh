@@ -96,21 +96,21 @@ included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
 if [[ -z $snapshot_storage_node ]]; then
   tar -cvf - $included_dirs |pigz --best -p8 > $TAR_FILE_PATH
 else
-  tar -cvf - $included_dirs |pigz --best -p8 |ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures "cat > /mnt/data/snapshots/${chain_name}/${TAR_FILENAME}"
+  tar -cvf - $included_dirs |pigz --best -p8 |ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node_ip} "cat > /mnt/data/snapshots/${chain_name}/${TAR_FILENAME}"
 fi
 
 FILESIZE=0
 if [[ -z $snapshot_storage_node ]]; then
   FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
 else
-  FILESIZE=$(ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures stat -c%s "/mnt/data/snapshots/${chain_name}/${TAR_FILENAME}")
+  FILESIZE=$(ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node_ip} stat -c%s "/mnt/data/snapshots/${chain_name}/${TAR_FILENAME}")
 fi
 
 # addrbook.json
 if [[ -z $snapshot_storage_node ]]; then
   cp $node_home/config/addrbook.json /snapshot/
 else
-  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${node_home}/config/addrbook.json" "root@${snapshot_storage_node}.notional.ventures:/mnt/data/snapshots/${chain_name}/"
+  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${node_home}/config/addrbook.json" "root@${snapshot_storage_node_ip}:/mnt/data/snapshots/${chain_name}/"
 fi
 
 
@@ -131,14 +131,12 @@ EOT
 if [[ -z $snapshot_storage_node ]]; then
   cp $HOME/chain.json /snapshot/
 else
-  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "$HOME/chain.json" "root@${snapshot_storage_node}.notional.ventures:/mnt/data/snapshots/${chain_name}/"
+  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "$HOME/chain.json" "root@${snapshot_storage_node_ip}:/mnt/data/snapshots/${chain_name}/"
 fi
-
-
 
 # delete old snapshots before creating new snapshot to save disk space
 if [[ -z $snapshot_storage_node ]]; then
   cd /snapshot/ && rm $(ls *.tar.gz |sort |head -n -2)
 else
-  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node}.notional.ventures "cd /mnt/data/snapshots/${chain_name}/ && rm \$(ls *.tar.gz |sort |head -n -2)"
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node_ip} "cd /mnt/data/snapshots/${chain_name}/ && rm \$(ls *.tar.gz |sort |head -n -2)"
 fi
