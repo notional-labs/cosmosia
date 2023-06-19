@@ -44,6 +44,9 @@ str_snapshot_cfg=$(get_docker_snapshot_config)
 echo "str_snapshot_cfg=${str_snapshot_cfg}"
 eval "${str_snapshot_cfg}"
 
+# figure out IP of the snapshot_storage_node
+snapshot_storage_node_ip=$(curl -s "http://tasks.web_config/node_ip/${snapshot_storage_node}")
+
 # write chain info to bash file, so that cronjob could know
 cat <<EOT >> $HOME/env.sh
 chain_name="$chain_name"
@@ -55,6 +58,7 @@ minimum_gas_prices="$minimum_gas_prices"
 start_flags="$start_flags"
 snapshot_node="$snapshot_node"
 snapshot_storage_node="$snapshot_storage_node"
+snapshot_storage_node_ip="$snapshot_storage_node_ip"
 snapshot_prune="$snapshot_prune"
 EOT
 
