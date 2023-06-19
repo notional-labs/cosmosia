@@ -1,74 +1,17 @@
 # RPC service
 
 
-## Public Endpoints
+## Notional Public Endpoints
 
-### 1. Osmosis
-
-| Protocol | Endpoint                                            |
-|----------|:----------------------------------------------------|
-| RPC      | https://rpc-osmosis-ia.cosmosia.notional.ventures/  |
-| API      | https://api-osmosis-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-osmosis-ia.cosmosia.notional.ventures/ |
-
-### 2. Starname
-
-| Protocol | Endpoint                                             |
-|----------|:-----------------------------------------------------|
-| RPC      | https://rpc-starname-ia.cosmosia.notional.ventures/  |
-| API      | https://api-starname-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-starname-ia.cosmosia.notional.ventures/ |
-
-### 3. Regen
-
-| Protocol | Endpoint                                          |
-|----------|:--------------------------------------------------|
-| RPC      | https://rpc-regen-ia.cosmosia.notional.ventures/  |
-| API      | https://api-regen-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-regen-ia.cosmosia.notional.ventures/ |
-
-### 4. Akash
-
-| Protocol | Endpoint                                          |
-|----------|:--------------------------------------------------|
-| RPC      | https://rpc-akash-ia.cosmosia.notional.ventures/  |
-| API      | https://api-akash-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-akash-ia.cosmosia.notional.ventures/ |
-
-### 5. Gaia / Cosmoshub
+### 01. Cosmoshub
 
 | Protocol | Endpoint                                              |
 |----------|:------------------------------------------------------|
 | RPC      | https://rpc-cosmoshub-ia.cosmosia.notional.ventures/  |
 | API      | https://api-cosmoshub-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-cosmoshub-ia.cosmosia.notional.ventures/ |
+| GRPC     | https://grpc-cosmoshub-ia.cosmosia.notional.ventures/ |    
 
-### 6. Sentinel
-
-| Protocol | Endpoint                                             |
-|----------|:-----------------------------------------------------|
-| RPC      | https://rpc-sentinel-ia.cosmosia.notional.ventures/  |
-| API      | https://api-sentinel-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-sentinel-ia.cosmosia.notional.ventures/ |
-
-
-### 7. E-Money
-
-| Protocol | Endpoint                                           |
-|----------|:---------------------------------------------------|
-| RPC      | https://rpc-emoney-ia.cosmosia.notional.ventures/  |
-| API      | https://api-emoney-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-emoney-ia.cosmosia.notional.ventures/ |
-
-### 8. Ixo
-
-| Protocol | Endpoint                                        |
-|----------|:------------------------------------------------|
-| RPC      | https://rpc-ixo-ia.cosmosia.notional.ventures/  |
-| API      | https://api-ixo-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-ixo-ia.cosmosia.notional.ventures/ |
-
-### 9. Juno
+### 02. Juno
 
 | Protocol | Endpoint                                         |
 |----------|:-------------------------------------------------|
@@ -76,7 +19,71 @@
 | API      | https://api-juno-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-juno-ia.cosmosia.notional.ventures/ |
 
-### 10. Sifchain
+### 03. Osmosis
+
+| Protocol | Endpoint                                            |
+|----------|:----------------------------------------------------|
+| RPC      | https://rpc-osmosis-ia.cosmosia.notional.ventures/  |
+| API      | https://api-osmosis-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-osmosis-ia.cosmosia.notional.ventures/ |
+
+### 04. Starname
+
+| Protocol | Endpoint                                             |
+|----------|:-----------------------------------------------------|
+| RPC      | https://rpc-starname-ia.cosmosia.notional.ventures/  |
+| API      | https://api-starname-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-starname-ia.cosmosia.notional.ventures/ |
+
+### 05. Regen
+
+| Protocol | Endpoint                                          |
+|----------|:--------------------------------------------------|
+| RPC      | https://rpc-regen-ia.cosmosia.notional.ventures/  |
+| API      | https://api-regen-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-regen-ia.cosmosia.notional.ventures/ |
+
+### 06. Akash
+
+| Protocol | Endpoint                                          |
+|----------|:--------------------------------------------------|
+| RPC      | https://rpc-akash-ia.cosmosia.notional.ventures/  |
+| API      | https://api-akash-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-akash-ia.cosmosia.notional.ventures/ |
+
+### 07. Sentinel
+
+| Protocol | Endpoint                                             |
+|----------|:-----------------------------------------------------|
+| RPC      | https://rpc-sentinel-ia.cosmosia.notional.ventures/  |
+| API      | https://api-sentinel-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-sentinel-ia.cosmosia.notional.ventures/ |
+
+### 08. E-Money
+
+| Protocol | Endpoint                                           |
+|----------|:---------------------------------------------------|
+| RPC      | https://rpc-emoney-ia.cosmosia.notional.ventures/  |
+| API      | https://api-emoney-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-emoney-ia.cosmosia.notional.ventures/ |
+
+### 09. Terra
+
+| Protocol | Endpoint                                          |
+|----------|:--------------------------------------------------|
+| RPC      | https://rpc-terra-ia.cosmosia.notional.ventures/  |
+| API      | https://api-terra-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-terra-ia.cosmosia.notional.ventures/ |
+
+### 10. Ixo
+
+| Protocol | Endpoint                                        |
+|----------|:------------------------------------------------|
+| RPC      | https://rpc-ixo-ia.cosmosia.notional.ventures/  |
+| API      | https://api-ixo-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-ixo-ia.cosmosia.notional.ventures/ |
+
+### 11. Sifchain
 
 | Protocol | Endpoint                                             |
 |----------|:-----------------------------------------------------|
@@ -84,7 +91,7 @@
 | API      | https://api-sifchain-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-sifchain-ia.cosmosia.notional.ventures/ |
 
-### 11. Likecoin
+### 12. Likecoin
 
 | Protocol | Endpoint                                             |
 |----------|:-----------------------------------------------------|
@@ -92,7 +99,7 @@
 | API      | https://api-likecoin-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-likecoin-ia.cosmosia.notional.ventures/ |
 
-### 12. Ki
+### 13. Ki
 
 | Protocol | Endpoint                                            |
 |----------|:----------------------------------------------------|
@@ -100,7 +107,7 @@
 | API      | https://api-kichain-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-kichain-ia.cosmosia.notional.ventures/ |
 
-### 13. Cyber
+### 14. Cyber
 
 | Protocol | Endpoint                                          |
 |----------|:--------------------------------------------------|
@@ -108,7 +115,7 @@
 | API      | https://api-cyber-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-cyber-ia.cosmosia.notional.ventures/ |
 
-### 14. Cheqd
+### 15. Cheqd
 
 | Protocol | Endpoint                                          |
 |----------|:--------------------------------------------------|
@@ -116,7 +123,7 @@
 | API      | https://api-cheqd-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-cheqd-ia.cosmosia.notional.ventures/ |
 
-### 15. Stargaze
+### 16. Stargaze
 
 | Protocol | Endpoint                                             |
 |----------|:-----------------------------------------------------|
@@ -124,7 +131,7 @@
 | API      | https://api-stargaze-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-stargaze-ia.cosmosia.notional.ventures/ |
 
-### 16. Band
+### 17. Band
 
 | Protocol | Endpoint                                              |
 |----------|:------------------------------------------------------|
@@ -132,7 +139,7 @@
 | API      | https://api-bandchain-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-bandchain-ia.cosmosia.notional.ventures/ |
 
-### 17. Chihuahua
+### 18. Chihuahua
 
 | Protocol | Endpoint                                              |
 |----------|:------------------------------------------------------|
@@ -140,7 +147,7 @@
 | API      | https://api-chihuahua-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-chihuahua-ia.cosmosia.notional.ventures/ |
 
-### 18. Kava
+### 19. Kava
 
 | Protocol | Endpoint                                         |
 |----------|:-------------------------------------------------|
@@ -148,7 +155,7 @@
 | API      | https://api-kava-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-kava-ia.cosmosia.notional.ventures/ |
 
-### 19. BitCanna
+### 20. BitCanna
 
 | Protocol | Endpoint                                             |
 |----------|:-----------------------------------------------------|
@@ -156,7 +163,7 @@
 | API      | https://api-bitcanna-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-bitcanna-ia.cosmosia.notional.ventures/ |
 
-### 20. Konstellation
+### 21. Konstellation
 
 | Protocol | Endpoint                                                  |
 |----------|:----------------------------------------------------------|
@@ -164,21 +171,13 @@
 | API      | https://api-konstellation-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-konstellation-ia.cosmosia.notional.ventures/ |
 
-### 21. Omniflix
+### 22. Omniflix
 
 | Protocol | Endpoint                                                |
 |----------|:--------------------------------------------------------|
 | RPC      | https://rpc-omniflixhub-ia.cosmosia.notional.ventures/  |
 | API      | https://api-omniflixhub-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-omniflixhub-ia.cosmosia.notional.ventures/ |
-
-### 22. Terra
-
-| Protocol | Endpoint                                          |
-|----------|:--------------------------------------------------|
-| RPC      | https://rpc-terra-ia.cosmosia.notional.ventures/  |
-| API      | https://api-terra-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-terra-ia.cosmosia.notional.ventures/ |
 
 ### 23. Vidulum
 
@@ -292,6 +291,14 @@
 | API      | https://api-axelar-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-axelar-ia.cosmosia.notional.ventures/ |
 
+### 37. pylons
+
+| Protocol | Endpoint                                           |
+|----------|:---------------------------------------------------|
+| RPC      | https://rpc-pylons-ia.cosmosia.notional.ventures/  |
+| API      | https://api-pylons-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-pylons-ia.cosmosia.notional.ventures/ |
+
 ### 38. Umee
 
 | Protocol | Endpoint                                         |
@@ -308,13 +315,13 @@
 | API      | https://api-sei-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-sei-ia.cosmosia.notional.ventures/ |
 
-### 40. Evmos Testnet Archive
+### 40. evmos-testnet-archive
 
-| Protocol | Endpoint                                                          |
-|----------|:------------------------------------------------------------------|
-| RPC      |   |
-| API      |   |
-| GRPC     |   |
+| Protocol | Endpoint                                        |
+|----------|:------------------------------------------------|
+| RPC      | https://rpc-evmos-testnet-archive-ia.cosmosia.notional.ventures/  |
+| API      | https://api-evmos-testnet-archive-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-evmos-testnet-archive-ia.cosmosia.notional.ventures/ |
 
 ### 41. Injective
 
@@ -348,13 +355,13 @@
 | API      | https://api-osmosis-testnet-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-osmosis-testnet-ia.cosmosia.notional.ventures/ |
 
-### 45. Evmos Archive
+### 45. evmos-archive
 
 | Protocol | Endpoint                                                    |
 |----------|:------------------------------------------------------------|
-| RPC      |   |
-| API      |   |
-| GRPC     |   |
+| RPC      | https://rpc-evmos-archive-ia.cosmosia.notional.ventures/  |
+| API      | https://api-evmos-archive-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-evmos-archive-ia.cosmosia.notional.ventures/ |
 
 ### 46. Stride
 
@@ -374,16 +381,13 @@
 
 ### 48. Osmosis Archive
 
-Use Subnode instead
-
 | Protocol | Endpoint                                                    |
 |----------|:------------------------------------------------------------|
 | RPC      | https://rpc-osmosis-archive-ia.cosmosia.notional.ventures/  |
 | API      | https://api-osmosis-archive-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-osmosis-archive-ia.cosmosia.notional.ventures/ |
 
-
-### 49. Gaia / Cosmoshub Archive
+### 49. Cosmoshub Archive
 
 | Protocol | Endpoint                                              |
 |----------|:------------------------------------------------------|
@@ -399,29 +403,29 @@ Use Subnode instead
 | API      | https://api-quicksilver-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-quicksilver-ia.cosmosia.notional.ventures/ |
 
-### 51. Quicksilver Archive
+### 51. quicksilver-archive
 
-| Protocol | Endpoint                                                        |
-|----------|:----------------------------------------------------------------|
-| RPC      |   |
-| API      |   |
-| GRPC     |   |
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-quicksilver-archive-ia.cosmosia.notional.ventures/  |
+| API      | https://api-quicksilver-archive-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-quicksilver-archive-ia.cosmosia.notional.ventures/ |
 
-### 52. Terra Archive
+### 52. terra-archive
 
-| Protocol | Endpoint                                                        |
-|----------|:----------------------------------------------------------------|
-| RPC      |        |
-| API      |         |
-| GRPC     |        |
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-terra-archive-ia.cosmosia.notional.ventures/  |
+| API      | https://api-terra-archive-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-terra-archive-ia.cosmosia.notional.ventures/ |
 
-### 53. Juno Archive
+### 53. juno-archive-sub
 
-| Protocol | Endpoint                                                  |
-|----------|:----------------------------------------------------------|
-| RPC      | https://rpc-juno-archive-ia.cosmosia.notional.ventures/   |
-| API      | https://api-juno-archive-ia.cosmosia.notional.ventures/   |
-| GRPC     | https://grpc-juno-archive-ia.cosmosia.notional.ventures/  |
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-juno-archive-sub-ia.cosmosia.notional.ventures/  |
+| API      | https://api-juno-archive-sub-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-juno-archive-sub-ia.cosmosia.notional.ventures/ |
 
 ### 54. Terra2
 
@@ -431,7 +435,15 @@ Use Subnode instead
 | API      | https://api-terra2-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-terra2-ia.cosmosia.notional.ventures/  |
 
-### 55. Mars
+### 55. osmosis-archive-sub1
+
+| Protocol | Endpoint                                            |
+|----------|:----------------------------------------------------|
+| RPC      | https://rpc-osmosis-archive-sub1-ia.cosmosia.notional.ventures/   |
+| API      | https://api-osmosis-archive-sub1-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-osmosis-archive-sub1-ia.cosmosia.notional.ventures/  |
+
+### 56. Mars
 
 | Protocol | Endpoint                                          |
 |----------|:--------------------------------------------------|
@@ -439,7 +451,7 @@ Use Subnode instead
 | API      | https://api-mars-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-mars-ia.cosmosia.notional.ventures/  |
 
-### 56. Whitewhale Testnet
+### 57. Whitewhale Testnet
 
 | Protocol | Endpoint                                                        |
 |----------|:----------------------------------------------------------------|
@@ -447,7 +459,15 @@ Use Subnode instead
 | API      | https://api-whitewhale-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-whitewhale-testnet-ia.cosmosia.notional.ventures/  |
 
-### 57. Whitewhale
+### 58. noble
+
+| Protocol | Endpoint                                                        |
+|----------|:----------------------------------------------------------------|
+| RPC      | https://rpc-noble-ia.cosmosia.notional.ventures/   |
+| API      | https://api-noble-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-noble-ia.cosmosia.notional.ventures/  |
+
+### 59. Whitewhale
 
 | Protocol | Endpoint                                                |
 |----------|:--------------------------------------------------------|
@@ -455,25 +475,99 @@ Use Subnode instead
 | API      | https://api-whitewhale-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-whitewhale-ia.cosmosia.notional.ventures/  |
 
-### 58. Composable
+### 60. quasar
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-quasar-ia.cosmosia.notional.ventures/   |
+| API      | https://api-quasar-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-quasar-ia.cosmosia.notional.ventures/  |
+
+### 61. osmosis-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-osmosis-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-osmosis-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-osmosis-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 62. celestia-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-celestia-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-celestia-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-celestia-testnet-ia.cosmosia.notional.ventures/  |
+
+### 63. juno-archive-sub1
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-juno-archive-sub1-ia.cosmosia.notional.ventures/   |
+| API      | https://api-juno-archive-sub1-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-juno-archive-sub1-ia.cosmosia.notional.ventures/  |
+
+### 64. juno-archive-sub2
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-juno-archive-sub2-ia.cosmosia.notional.ventures/   |
+| API      | https://api-juno-archive-sub2-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-juno-archive-sub2-ia.cosmosia.notional.ventures/  |
+
+### 65. sei-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-sei-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-sei-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-sei-testnet-ia.cosmosia.notional.ventures/  |
+
+### 66. cosmoshub-archive-sub1
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-cosmoshub-archive-sub1-ia.cosmosia.notional.ventures/   |
+| API      | https://api-cosmoshub-archive-sub1-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-cosmoshub-archive-sub1-ia.cosmosia.notional.ventures/  |
+
+### 67. cosmoshub-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-cosmoshub-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-cosmoshub-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-cosmoshub-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 68. evmos-archive-sub1
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-evmos-archive-sub1-ia.cosmosia.notional.ventures/   |
+| API      | https://api-evmos-archive-sub1-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-evmos-archive-sub1-ia.cosmosia.notional.ventures/  |
+
+### 69. evmos-archive-sub2
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-evmos-archive-sub2-ia.cosmosia.notional.ventures/   |
+| API      | https://api-evmos-archive-sub2-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-evmos-archive-sub2-ia.cosmosia.notional.ventures/  |
+
+### 70. evmos-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-evmos-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-evmos-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-evmos-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 71. composable
 
 | Protocol | Endpoint                                                |
 |----------|:--------------------------------------------------------|
 | RPC      | https://rpc-composable-ia.cosmosia.notional.ventures/   |
 | API      | https://api-composable-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-composable-ia.cosmosia.notional.ventures/  |
-
-
-## Subnode Public Endpoints
-[subnode](subnode.md) is the alternative to archive node
-
-### 1. Osmosis
-
-| Protocol | Endpoint                                             |
-|----------|:-----------------------------------------------------|
-| RPC      | https://rpc-osmosis-sub.cosmosia.notional.ventures/  |
-| API      | https://api-osmosis-sub.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-osmosis-sub.cosmosia.notional.ventures/ |
-
-
 
