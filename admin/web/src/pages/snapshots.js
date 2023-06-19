@@ -5,6 +5,8 @@ import { DownOutlined, GlobalOutlined } from "@ant-design/icons";
 import Link from 'next/link';
 import { timeAgoFormat } from "../helper/utils";
 
+const domain = process.env.NEXT_PUBLIC_USE_DOMAIN_NAME;
+
 export async function getServerSideProps() {
   let snapList = [];
   try {
@@ -55,7 +57,7 @@ const SnapshotTable = (props) => {
           render: (_, { Name }) => {
             const chain_name = Name.slice(9); // remove snapshot_ prefix
             return (
-              <a href={`https://snapshot.notional.ventures/${chain_name}/`} target="_blank" rel="noopener noreferrer"><GlobalOutlined /></a>
+              <a href={`https://snapshot.${domain}/${chain_name}/`} target="_blank" rel="noopener noreferrer"><GlobalOutlined /></a>
             )
           },
         },

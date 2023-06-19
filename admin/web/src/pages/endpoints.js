@@ -15,17 +15,19 @@ export async function getServerSideProps() {
   for (let i = 0; i < chainList.length; i++) {
     const chain = chainList[i];
 
+    const domain = process.env.NEXT_PUBLIC_USE_DOMAIN_NAME;
+
     // public endpoints
-    const public_rpc = `https://rpc-${chain}-ia.cosmosia.notional.ventures/`;
-    const public_api = `https://api-${chain}-ia.cosmosia.notional.ventures/`;
-    const public_grpc = `grpc-${chain}-ia.cosmosia.notional.ventures:433`;
+    const public_rpc = `https://rpc-${chain}-ia.cosmosia.${domain}/`;
+    const public_api = `https://api-${chain}-ia.cosmosia.${domain}/`;
+    const public_grpc = `grpc-${chain}-ia.cosmosia.${domain}:433`;
 
     // internal endpoints
-    const internal_rpc = `https://rpc-${chain}-${secretTokens[counter]}-ie.internalendpoints.notional.ventures`;
+    const internal_rpc = `https://rpc-${chain}-${secretTokens[counter]}-ie.internalendpoints.${domain}`;
     counter++;
-    const internal_api = `https://api-${chain}-${secretTokens[counter]}-ie.internalendpoints.notional.ventures`;
+    const internal_api = `https://api-${chain}-${secretTokens[counter]}-ie.internalendpoints.${domain}`;
     counter++;
-    const internal_grpc = `grpc-${chain}-${secretTokens[counter]}-ie.internalendpoints.notional.ventures:433`;
+    const internal_grpc = `grpc-${chain}-${secretTokens[counter]}-ie.internalendpoints.${domain}:433`;
     counter++;
 
     endpoints.push({
