@@ -9,14 +9,15 @@ EOT
 source $HOME/env.sh
 
 ########################################################################################################################
-# SSL for notional.ventures (fullchain.pem and privkey.pem files)
+# SSL (fullchain.pem and privkey.pem files)
 wget "http://tasks.web_config/config/fullchain.pem" -O /etc/nginx/fullchain.pem
 wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/internal/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/internal/nginx.conf > $HOME/nginx.conf.template
+cat $HOME/nginx.conf.template |envsubst '$USE_DOMAIN_NAME' > /etc/nginx/nginx.conf
 
 # get tokens
 wget "http://tasks.web_config/config/internal_proxy_secret_tokens.txt" -O $HOME/internal_proxy_secret_tokens.txt
@@ -77,7 +78,7 @@ for service_name in $SERVICES; do
     server {
         listen 80;
         listen 443 ssl http2;
-        server_name rpc-${service_with_token}-ie.internalendpoints.notional.ventures;
+        server_name rpc-${service_with_token}-ie.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
         location ~* ^/(.*) {
             $HEADER_OPTIONS
@@ -95,7 +96,7 @@ EOT
     server {
         listen 80;
         listen 443 ssl http2;
-        server_name api-${service_with_token}-ie.internalendpoints.notional.ventures;
+        server_name api-${service_with_token}-ie.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
         location ~* ^/(.*) {
             $HEADER_OPTIONS
@@ -113,7 +114,7 @@ EOT
     server {
         listen 9090 http2;
         listen 443 ssl http2;
-        server_name grpc-${service_with_token}-ie.internalendpoints.notional.ventures;
+        server_name grpc-${service_with_token}-ie.internalendpoints.$USE_DOMAIN_NAME;
 
         location / {
             grpc_pass grpc://backend_grpc_${service_name};
@@ -138,7 +139,7 @@ for service_name in $SERVICES_SUBNODE; do
     server {
         listen 80;
         listen 443 ssl http2;
-        server_name rpc-${service_with_token}-sub.internalendpoints.notional.ventures;
+        server_name rpc-${service_with_token}-sub.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
         location ~* ^/(.*) {
             $HEADER_OPTIONS
@@ -156,7 +157,7 @@ EOT
     server {
         listen 80;
         listen 443 ssl http2;
-        server_name api-${service_with_token}-sub.internalendpoints.notional.ventures;
+        server_name api-${service_with_token}-sub.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
         location ~* ^/(.*) {
             $HEADER_OPTIONS
@@ -174,7 +175,7 @@ EOT
     server {
         listen 9090 http2;
         listen 443 ssl http2;
-        server_name grpc-${service_with_token}-sub.internalendpoints.notional.ventures;
+        server_name grpc-${service_with_token}-sub.internalendpoints.$USE_DOMAIN_NAME;
 
         location / {
             grpc_pass grpc://backend_grpc_sub_${service_name};
@@ -201,7 +202,7 @@ for service_name in $SERVICES_JSONRPC; do
     server {
         listen 80;
         listen 443 ssl http2;
-        server_name jsonrpc-${service_with_token}-ie.internalendpoints.notional.ventures;
+        server_name jsonrpc-${service_with_token}-ie.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
 
         # WS-JSON-RPC
