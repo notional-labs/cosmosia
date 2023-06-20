@@ -11,17 +11,16 @@
   - [Service Status](https://status.notional.ventures/status/cosmosia)
 
 - Admin
+  - [Admin](admin.md)
   - Cluster Setup
     - [Getting Started](getting_started.md)
     - [Prepare](prepare.md)
     - [LVM](lvm.md)
     - [Service Placement](service_placement.md)
   - Monitoring Tools
-    - [Admin](admin.md)
     - [Grafana Dashboard](grafana.md)
   - Howto
     - [Add a new chain](admin_new_chain.md)
     - [Upgrade a chain](admin_upgrade_a_chain.md)
     - [SSL](ssl.md)
-
-
+  
