@@ -1,13 +1,6 @@
 # Note:
 # set grafana admin default password by using docker swarm config with key GRAFANA_PASSWORD
 
-if [ -f "../env.sh" ]; then
-  source ../env.sh
-else
-    echo "../env.sh file does not exist."
-    exit
-fi
-
 # delete existing service
 docker service rm grafana
 
