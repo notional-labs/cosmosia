@@ -46,6 +46,7 @@ sed -i -e "s/^admin_password *=.*/admin_password = $default_password/" /usr/shar
 
 screen -S grafana -dm /usr/sbin/grafana-server -homepath /usr/share/grafana
 
-
+########################################################################################################################
+echo "Done!"
 # loop forever for debugging
 while true; do sleep 5; done

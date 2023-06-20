@@ -1,3 +1,10 @@
+if [ -f "../env.sh" ]; then
+  source ../env.sh
+else
+    echo "../env.sh file does not exist."
+    exit
+fi
+
 # delete existing service
 docker service rm grafana
 
