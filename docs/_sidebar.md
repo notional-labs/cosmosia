@@ -1,13 +1,14 @@
 - [Home](/)
   
-- Snapshots
-  - [Usage](snapshot_usage.md)
-  - [PebbleDB Notes](pebbledb.md)
-
-- RPCs
-  - [PRCs](rpc.md)
-  - [Subnode](subnode.md)
-  - [Testing an Endpoint](rpc_testing_endpoints.md)
+- Usage
+  - RPCs
+    - [PRCs](rpc.md)
+    - [Subnode](subnode.md)
+    - [Testing an Endpoint](rpc_testing_endpoints.md)
+  - Snapshots
+    - [Usage](snapshot_usage.md)
+    - [PebbleDB Notes](pebbledb.md)
+  - [Service Status](https://status.notional.ventures/status/cosmosia)
 
 - Admin
   - Cluster Setup
@@ -17,7 +18,6 @@
     - [Service Placement](service_placement.md)
   - Monitoring Tools
     - [Admin](admin.md)
-    - [Uptime](https://status.notional.ventures/status/cosmosia)
     - [Grafana Dashboard](grafana.md)
   - Howto
     - [Add a new chain](admin_new_chain.md)
