@@ -8,7 +8,24 @@ cd $HOME
 echo "Intalling prometheus..."
 pacman -S --noconfirm prometheus
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/monitor/grafana/prometheus.yaml > ~/prometheus.yaml
+# generate prometheus.yaml
+chain_list=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
+
+cat <<EOT > $HOME/prometheus.yaml
+global:
+  scrape_interval: 15s # default is 1 minute
+
+scrape_configs:
+EOT
+
+for chain in $chain_list; do
+  cat <<EOT >> $HOME/prometheus.yaml
+  - job_name: lb_${chain}
+    static_configs:
+      - targets: ['tasks.lb_${chain}:2019']
+EOT
+done
+
 screen -S prometheus -dm /usr/sbin/prometheus --config.file=$HOME/prometheus.yaml
 
 #################
