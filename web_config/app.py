@@ -23,7 +23,7 @@ def get_config(name):
         base64_decode = base64.decodebytes(base64_bytes)
         return flask.send_file(io.BytesIO(base64_decode), attachment_filename=name)
 
-    return "CONFIG_NOT_FOUND", 404
+    return "NOT_FOUND", 404
 
 
 @app.route('/node_ip/<name>', methods=['GET'])
@@ -34,7 +34,7 @@ def get_node_ip(name):
         node_ip = node['Status']['Addr']
         return node_ip, 200
 
-    return "NODE_NOT_FOUND", 404
+    return "NOT_FOUND", 404
 
 
 if __name__ == '__main__':

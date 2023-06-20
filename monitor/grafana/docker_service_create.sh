@@ -1,3 +1,6 @@
+# Note:
+# set grafana admin default password by using docker swarm config with key GRAFANA_PASSWORD
+
 if [ -f "../env.sh" ]; then
   source ../env.sh
 else
@@ -15,7 +18,6 @@ docker service create \
   --network cosmosia \
   --endpoint-mode dnsrr \
   --restart-condition any \
-  --secret grafana_password \
   --env-file ../../env.sh \
   archlinux:latest \
   /bin/bash -c \
