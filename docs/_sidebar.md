@@ -21,9 +21,8 @@
     - [LVM](lvm.md)
     - [Service Placement](service_placement.md)
   - Monitoring Tools
-    - [RPC Monitor](rpc_monitor.md)
+    - [Admin](admin.md)
+    - [Uptime](https://status.notional.ventures/status/cosmosia)
     - [Grafana Dashboard](grafana.md)
-  
-- Misc
-  - [Uptime](https://status.notional.ventures/status/cosmosia)
-  - [Notional Validators](https://status.notional.ventures/status/validators)
+
+
