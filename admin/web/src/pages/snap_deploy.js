@@ -14,7 +14,10 @@ export async function getServerSideProps({query}) {
 
   //////
   // chainInitialValue
-  const {chain} = query;
+  let {chain} = query;
+  if (chain === undefined) {
+    chain = "";
+  }
   console.log(`chain=${chain}`);
 
   return {props: {chainOptions, chainInitialValue: chain}};
