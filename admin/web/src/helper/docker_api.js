@@ -731,9 +731,9 @@ export const listSubnodes = async () => {
   /////
   const items = [];
   for (const service of data) {
-    const {Spec} = service;
+    const {CreatedAt, Spec} = service;
     const {Name} = Spec;
-    items.push(Name);
+    items.push({Name, CreatedAt});
   }
 
   return items;
