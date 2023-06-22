@@ -10,6 +10,7 @@ const read_chain_registry_ini = (url) => new Promise((resolve, reject) => {
 });
 
 export const getChainList = async () => {
+  // console.log(`CHAIN_REGISTRY_INI_URL=${process.env.CHAIN_REGISTRY_INI_URL}`);
   if (chainList.length <= 0) {
     const data = await read_chain_registry_ini(process.env.CHAIN_REGISTRY_INI_URL);
     const lines = data.toString().split(/(?:\r\n|\r|\n)/g);
@@ -19,6 +20,8 @@ export const getChainList = async () => {
         chainList.push(chain);
       }
     }
+
+    // console.log(`chainList=${JSON.stringify(chainList)}`);
   }
 
   return chainList;

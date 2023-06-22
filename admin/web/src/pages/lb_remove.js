@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Form, Select, Spin, Alert } from 'antd';
 import { useSession } from "next-auth/react";
+import { Button, Form, Select, Spin, Alert, Result } from "antd";
 import { getChainList } from '/src/helper/chain_registry';
 
 export async function getServerSideProps({query}) {
@@ -23,21 +23,21 @@ export async function getServerSideProps({query}) {
   return {props: {chainOptions, chainInitialValue: chain}};
 }
 
-export default function SnapDeploy({chainOptions, chainInitialValue}) {
+export default function LbRemove({chainOptions, chainInitialValue}) {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
   const [formState, setFormState] = useState(0);
 
-  const [responseText, setResponseText] = useState("");
-
   if (status === "unauthenticated") return <p>Access Denied.</p>
 
   const onFinish = async (values) => {
-    const {chain} = values;
     setFormState(1);
 
-    const apiRes = await fetch('/api/snap_deploy', {
+    const {chain} = values;
+
+
+    const apiRes = await fetch('/api/lb_remove', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -45,11 +45,14 @@ export default function SnapDeploy({chainOptions, chainInitialValue}) {
       },
       body: JSON.stringify({chain}),
     });
-    const {data: apiResText} = await apiRes.json();
+    const apiResJson = await apiRes.json();
+    console.log(`apiResJson=${JSON.stringify(apiResJson)}`);
 
-    setResponseText(apiResText);
-
-    setFormState(2);
+    if (apiResJson.status === "success") {
+      setFormState(2);
+    } else {
+      setFormState(3);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -57,8 +60,8 @@ export default function SnapDeploy({chainOptions, chainInitialValue}) {
   };
 
   return (
-    <div className="SanpDeploy">
-      <h3>Deploy a Snapshot Service</h3>
+    <div className="LbRemove">
+      <h3>Remove Load-balancer</h3>
 
       {formState === 0 &&
       <Form
@@ -86,7 +89,6 @@ export default function SnapDeploy({chainOptions, chainInitialValue}) {
             options={chainOptions}
           />
         </Form.Item>
-
         <Form.Item wrapperCol={{offset: 8, span: 16}}>
           <Button type="primary" htmlType="submit">Submit</Button>
         </Form.Item>
@@ -103,7 +105,19 @@ export default function SnapDeploy({chainOptions, chainInitialValue}) {
       </Spin>
       }
 
-      {formState === 2 && <pre>{responseText}</pre>}
+      {formState === 2 && (
+        <Result
+          status="success"
+          title="Your request has been executed successfully!"
+        />
+      )}
+
+      {formState === 3 && (
+        <Result
+          status="warning"
+          title="There are some problems with your request."
+        />
+      )}
 
     </div>
   )

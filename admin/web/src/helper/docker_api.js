@@ -92,14 +92,207 @@ export const listRpcs = async () => {
 }
 
 export const listLoadBalancers = async () => {
-  const loadBalancerList = [];
+  let data = [];
 
-  const data = await dockerApiServices(`{"label":["cosmosia.service=lb"]}`);
-  for (const lb of data) {
-    const {Spec} = lb;
-    const {Name} = Spec;
-    loadBalancerList.push(Name);
+  if (process.env.NODE_ENV === "development") {
+    data = [
+      {
+        "ID": "0dlec0axi0nv3v8f6ayr16spq",
+        "Version": {
+          "Index": 1432302
+        },
+        "CreatedAt": "2023-06-18T11:15:52.392193163Z",
+        "UpdatedAt": "2023-06-18T11:15:52.392193163Z",
+        "Spec": {
+          "Name": "lb_whitewhale-testnet",
+          "Labels": {
+            "cosmosia.service": "lb"
+          },
+          "TaskTemplate": {
+            "ContainerSpec": {
+              "Image": "archlinux:latest@sha256:28cafcbd4df875971df45047bbbe80882e0cd7a8bfa02ff6bb4f702e0a3f87a6",
+              "Args": [
+                "/bin/bash",
+                "-c",
+                "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/run.sh > ~/run.sh &&    /bin/bash ~/run.sh rpc_whitewhale-testnet_0"
+              ],
+              "Init": false,
+              "DNSConfig": {},
+              "Isolation": "default",
+              "Sysctls": {
+                "net.ipv4.tcp_tw_reuse": "1"
+              }
+            },
+            "Resources": {
+              "Limits": {},
+              "Reservations": {}
+            },
+            "RestartPolicy": {
+              "Condition": "any",
+              "Delay": 5000000000,
+              "MaxAttempts": 0
+            },
+            "Placement": {
+              "Constraints": [
+                "node.labels.cosmosia.lb==true"
+              ],
+              "Platforms": [
+                {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              ]
+            },
+            "Networks": [
+            ],
+            "ForceUpdate": 0,
+            "Runtime": "container"
+          },
+          "Mode": {
+            "Replicated": {
+              "Replicas": 1
+            }
+          },
+          "EndpointSpec": {
+            "Mode": "dnsrr"
+          }
+        },
+        "Endpoint": {
+          "Spec": {}
+        }
+      },
+      {
+        "ID": "4eg7zicg35wpys5xdqo2pifzw",
+        "Version": {
+          "Index": 1429759
+        },
+        "CreatedAt": "2023-05-24T12:13:01.133519863Z",
+        "UpdatedAt": "2023-05-29T20:54:32.386017271Z",
+        "Spec": {
+          "Name": "lb_quasar",
+          "Labels": {
+            "cosmosia.service": "lb"
+          },
+          "TaskTemplate": {
+            "ContainerSpec": {
+              "Image": "archlinux:latest@sha256:275fb964508b7a2812f43a4dfa2cfa27cb06a4a453d72675270e2222b43f2a82",
+              "Args": [
+                "/bin/bash",
+                "-c",
+                "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/run.sh > ~/run.sh &&    /bin/bash ~/run.sh rpc_quasar_1"
+              ],
+              "Init": false,
+              "DNSConfig": {},
+              "Isolation": "default",
+              "Sysctls": {
+                "net.ipv4.tcp_tw_reuse": "1"
+              }
+            },
+            "Resources": {
+              "Limits": {},
+              "Reservations": {}
+            },
+            "RestartPolicy": {
+              "Condition": "any",
+              "Delay": 5000000000,
+              "MaxAttempts": 0
+            },
+            "Placement": {
+              "Constraints": [
+                "node.labels.cosmosia.lb==true"
+              ],
+              "Platforms": [
+                {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              ]
+            },
+            "Networks": [
+            ],
+            "ForceUpdate": 0,
+            "Runtime": "container"
+          },
+          "Mode": {
+            "Replicated": {
+              "Replicas": 1
+            }
+          },
+          "EndpointSpec": {
+            "Mode": "dnsrr"
+          }
+        },
+        "PreviousSpec": {
+          "Name": "lb_quasar",
+          "Labels": {},
+          "TaskTemplate": {
+            "ContainerSpec": {
+              "Image": "archlinux:latest@sha256:275fb964508b7a2812f43a4dfa2cfa27cb06a4a453d72675270e2222b43f2a82",
+              "Args": [
+                "/bin/bash",
+                "-c",
+                "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/run.sh > ~/run.sh &&    /bin/bash ~/run.sh rpc_quasar_1"
+              ],
+              "Init": false,
+              "DNSConfig": {},
+              "Isolation": "default",
+              "Sysctls": {
+                "net.ipv4.tcp_tw_reuse": "1"
+              }
+            },
+            "Resources": {
+              "Limits": {},
+              "Reservations": {}
+            },
+            "RestartPolicy": {
+              "Condition": "any",
+              "Delay": 5000000000,
+              "MaxAttempts": 0
+            },
+            "Placement": {
+              "Constraints": [
+                "node.labels.cosmosia.lb==true"
+              ],
+              "Platforms": [
+                {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              ]
+            },
+            "Networks": [
+            ],
+            "ForceUpdate": 0,
+            "Runtime": "container"
+          },
+          "Mode": {
+            "Replicated": {
+              "Replicas": 1
+            }
+          },
+          "EndpointSpec": {
+            "Mode": "dnsrr"
+          }
+        },
+        "Endpoint": {
+          "Spec": {}
+        }
+      }
+    ];
+  } else {
+    data = await dockerApiServices(`{"label":["cosmosia.service=lb"]}`);
   }
+
+  let loadBalancerList = [];
+  for (const lb of data) {
+    const {CreatedAt, Spec} = lb;
+    const {Name} = Spec;
+    loadBalancerList.push({
+      Name,
+      CreatedAt
+    });
+  }
+
   return loadBalancerList;
 }
 
