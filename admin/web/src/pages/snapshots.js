@@ -77,6 +77,12 @@ const SnapshotTable = (props) => {
                         <Link href={`/snap_deploy?chain=${chain_name}`}>ReDeploy</Link>
                       ),
                     },
+                    {
+                      key: 'snapshot_remove',
+                      label: (
+                        <Link href={`/snap_remove?chain=${chain_name}`}>Remove</Link>
+                      ),
+                    },
                   ],
                 }}
               >
