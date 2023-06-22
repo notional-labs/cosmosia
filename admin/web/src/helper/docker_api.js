@@ -285,9 +285,12 @@ export const listLoadBalancers = async () => {
 
   let loadBalancerList = [];
   for (const lb of data) {
-    const {Spec} = lb;
+    const {CreatedAt, Spec} = lb;
     const {Name} = Spec;
-    loadBalancerList.push(Name);
+    loadBalancerList.push({
+      Name,
+      CreatedAt
+    });
   }
 
   return loadBalancerList;
