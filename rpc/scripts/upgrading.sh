@@ -18,12 +18,12 @@ if [[ -z $chain_name ]]; then
   exit
 fi
 
-use_gvm=false
-# use gvm for cosmoshub for go1.18
-if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
-  source /root/.gvm/scripts/gvm
-  use_gvm=true
-fi
+#use_gvm=false
+## use gvm for cosmoshub for go1.18
+#if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
+#  source /root/.gvm/scripts/gvm
+#  use_gvm=true
+#fi
 
 ########################################################################################################################
 # functions
@@ -82,10 +82,10 @@ buid_chain () {
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
   fi
 
-  # copy binary from gvm to $HOME/go/bin/
-  if [ "$use_gvm" = true ]; then
-    cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
-  fi
+#  # copy binary from gvm to $HOME/go/bin/
+#  if [ "$use_gvm" = true ]; then
+#    cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
+#  fi
 }
 
 ########################################################################################################################
