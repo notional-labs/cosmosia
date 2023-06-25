@@ -3,6 +3,7 @@ upstream:
     api: "http://tasks.lb_evmos:8001"
     grpc: "tasks.lb_evmos:8003"
     eth: "http://tasks.lb_evmos:8004"
+    ethws: "ws://tasks.lb_evmos:8005"
     blocks: [362880]
   - rpc: "http://tasks.lb_evmos-archive-sub:8000"
     api: "http://tasks.lb_evmos-archive-sub:8001"

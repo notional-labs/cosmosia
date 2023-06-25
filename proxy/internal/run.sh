@@ -128,7 +128,7 @@ done
 # ###############################################################################
 # generate for subnode from COUNTER 432
 # ##########
-SERVICES_SUBNODE="osmosis juno cosmoshub"
+SERVICES_SUBNODE="osmosis juno cosmoshub evmos"
 COUNTER=432
 for service_name in $SERVICES_SUBNODE; do
   varname="token_$COUNTER"
@@ -182,6 +182,37 @@ EOT
         }
     }
 EOT
+
+  if [[ $service_name == evmos* ]]; then
+    COUNTER=$(( COUNTER + 1 ))
+    cat <<EOT >> /etc/nginx/endpoints.conf
+      # JSON-RPC
+      server {
+          listen 80;
+          listen 443 ssl http2;
+          server_name jsonrpc-${service_with_token}-sub.internalendpoints.$USE_DOMAIN_NAME;
+          $HEADER_CORS
+
+          # WS-JSON-RPC
+          location ~* ^/websocket/(.*) {
+              $HEADER_OPTIONS
+              $HEADER_WS
+
+              # fix Disconnected code 1006
+              proxy_read_timeout 86400;
+              proxy_send_timeout 86400;
+              keepalive_timeout  86400;
+
+              proxy_pass http://backend_wsjsonrpc_sub_${service_name}/\$1\$is_args\$args;
+          }
+
+          location ~* ^/(.*) {
+              $HEADER_OPTIONS
+              proxy_pass http://backend_jsonrpc_sub_${service_name}/\$1\$is_args\$args;
+          }
+      }
+EOT
+  fi
 
   COUNTER=$(( COUNTER + 1 ))
 done
