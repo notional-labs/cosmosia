@@ -82,6 +82,21 @@ for service_name in $SERVICES_SUBNODE; do
         server $lb_ip:9090;
     }
 EOT
+
+  if [[ $service_name == evmos* ]]; then
+      cat <<EOT >> $UPSTREAM_CONFIG_FILE_TMP
+    upstream backend_jsonrpc_sub_$service_name {
+        keepalive 16;
+        server $lb_ip:8545;
+    }
+
+    upstream backend_wsjsonrpc_sub_$service_name {
+        keepalive 16;
+        server $lb_ip:8546;
+    }
+EOT
+  fi
+
 done
 
 sleep 1
