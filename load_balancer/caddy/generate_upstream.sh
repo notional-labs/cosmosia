@@ -56,8 +56,8 @@ if [[ $rpc_service_name == rpc_evmos* ]]; then
     $jsonrpc_str
     health_uri      /healthcheck
     health_port     80
-    health_interval 30s
-    health_timeout  30s
+    health_interval 10s
+    health_timeout  5s
   }
 }
 
@@ -67,8 +67,8 @@ if [[ $rpc_service_name == rpc_evmos* ]]; then
     $ws_jsonrpc_str
     health_uri      /healthcheck
     health_port     80
-    health_interval 30s
-    health_timeout  30s
+    health_interval 10s
+    health_timeout  5s
   }
 }
 EOT
@@ -95,8 +95,8 @@ http://:8000 {
     $rpc_str
     health_uri      /healthcheck
     health_port     80
-    health_interval 30s
-    health_timeout  30s
+    health_interval 10s
+    health_timeout  5s
   }
 }
 
@@ -106,8 +106,8 @@ http://:8001 {
     $api_str
     health_uri      /healthcheck
     health_port     80
-    health_interval 30s
-    health_timeout  30s
+    health_interval 10s
+    health_timeout  5s
   }
 }
 
@@ -118,8 +118,8 @@ http://:8002 {
       $ws_str
       health_uri      /healthcheck
       health_port     80
-      health_interval 30s
-      health_timeout  30s
+      health_interval 10s
+      health_timeout  5s
   }
 }
 
