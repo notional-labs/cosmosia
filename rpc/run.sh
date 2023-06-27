@@ -117,9 +117,18 @@ supervisorctl start chain
 random_minute=$(( ${RANDOM} % 59 ))
 
 cat <<EOT > $HOME/restart_cronjob.sh
+# kill nginx to mark this node is down
+killall nginx
+
+# waiting time should be longer than lb health_interval (10s)
+sleep 15
+
 /usr/sbin/supervisorctl stop chain
 sleep 20
 /usr/sbin/supervisorctl start chain
+
+# start nginx
+/usr/sbin/nginx
 EOT
 
 #if [ $( echo "${chain_name}" | egrep -c "^(akash|bandchain|evmos|evmos-archive|evmos-testnet-archive|kava|provenance|persistent|quicksilver|regen|sei|terra|umee|kujira|stride|whitewhale|injective|sei-testnet)$" ) -ne 0 ]; then
