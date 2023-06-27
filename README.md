@@ -11,3 +11,7 @@ From v0.2.x we'll fix it by make it easier to spin up a new cluster, and manage 
 
 ### Docs
 See [Docs](https://notional-labs.github.io/cosmosia/#/)
+
+
+### Note
+Please contact Notional to get a licence.
