@@ -121,7 +121,7 @@ cat <<EOT > $HOME/restart_cronjob.sh
 killall nginx
 
 # waiting time should be longer than lb health_interval (10s)
-sleep 15
+sleep 30
 
 /usr/sbin/supervisorctl stop chain
 sleep 20
