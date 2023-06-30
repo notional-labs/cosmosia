@@ -106,6 +106,10 @@ if [[ $chain_name == "evmos-testnet-archive" ]]; then
 elif [[ $chain_name == "sei-testnet" ]]; then
   chain_id_arg="--chain-id=atlantic-2"
 fi
+elif [[ $chain_name == "sei" ]]; then
+  chain_id_arg="--chain-id=pacific-1"
+fi
+
 $HOME/go/bin/$daemon_name init $chain_id_arg test
 
 # backup $node_home/data/priv_validator_state.json as it is not included in snapshot from some providers.
