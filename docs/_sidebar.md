@@ -17,6 +17,7 @@
     - [Prepare](prepare.md)
     - [LVM](lvm.md)
     - [Service Placement](service_placement.md)
+    - [Geolocation](geolocation.md)
   - Monitoring Tools
     - [Grafana Dashboard](grafana.md)
   - Howto
