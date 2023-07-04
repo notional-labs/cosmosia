@@ -59,6 +59,16 @@ cat $TMP_CONFIG_FILE > $CONFIG_FILE
 screen -S caddy -dm /usr/sbin/caddy run --config $CONFIG_FILE
 sleep 5
 
+
+########################################################################################################################
+# cgi-script api
+pacman -S --noconfirm nginx spawn-fcgi fcgiwrap
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/nginx.conf" > /etc/nginx/nginx.conf
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/api_upstream.sh" > /usr/share/nginx/html/api_upstream.sh
+chmod +x /usr/share/nginx/html/api_upstream.sh
+spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
+/usr/sbin/nginx
+
 ########################################################################################################################
 echo "Done!"
 # loop forever for debugging only
