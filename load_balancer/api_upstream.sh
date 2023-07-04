@@ -35,6 +35,6 @@ if [ -f "$HOME/reload.sh" ]; then
 fi
 
 # for caddy
-if [ -f " $HOME/cron_update_upstream.sh" ]; then
+if [ -f "$HOME/cron_update_upstream.sh" ]; then
   source $HOME/cron_update_upstream.sh
 fi
