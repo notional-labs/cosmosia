@@ -30,11 +30,11 @@ echo "reloading..."
 sed -i -e "s/^rpc_service_name*=.*/rpc_service_name=\"${rpc_service_name}\"/" $HOME/env.sh
 
 # for haproxy
-if test -f " $HOME/reload.sh"; then
+if [ -f "$HOME/reload.sh" ]; then
   source $HOME/reload.sh
 fi
 
 # for caddy
-if test -f " $HOME/cron_update_upstream.sh"; then
+if [ -f " $HOME/cron_update_upstream.sh" ]; then
   source $HOME/cron_update_upstream.sh
 fi
