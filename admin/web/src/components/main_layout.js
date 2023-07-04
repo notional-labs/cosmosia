@@ -14,7 +14,8 @@ import {
   DatabaseOutlined,
   ApiOutlined,
   GlobalOutlined,
-  SettingOutlined
+  SettingOutlined,
+  EditOutlined
 } from '@ant-design/icons';
 import React from "react";
 const {Header, Content, Footer} = Layout;
@@ -38,6 +39,9 @@ const MainNav = () => {
           </Menu.Item>
           <Menu.Item key='lb_deploy' icon={<PlusCircleOutlined />}>
             <Link href='/lb_deploy'>Deploy</Link>
+          </Menu.Item>
+          <Menu.Item key='lb_update' icon={<EditOutlined />}>
+            <Link href='/lb_update'>Update</Link>
           </Menu.Item>
         </Menu.SubMenu>
         <Menu.SubMenu key='snapshots' title="Snapshots" icon={<FileSyncOutlined />}>
