@@ -79,7 +79,7 @@ cat <<EOT >> $HOME/start_chain.sh
 source $HOME/env.sh
 # fix supervisorctl creates a dbus-daemon process everytime starting chain
 killall dbus-daemon
-$HOME/go/bin/$daemon_name start --db_backend=pebbledb $start_flags
+$HOME/go/bin/$daemon_name start $start_flags
 EOT
 
 
