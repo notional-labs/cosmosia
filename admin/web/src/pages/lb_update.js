@@ -26,14 +26,23 @@ const getRpcServiceOptions = async () => {
   return rpcServiceOptions;
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({query}) {
   const chainOptions = await getChainOptions();
   const rpcServiceOptions = await getRpcServiceOptions();
 
-  return {props: {chainOptions, rpcServiceOptions}};
+
+  //////
+  // chainInitialValue
+  let {chain} = query;
+  if (chain === undefined) {
+    chain = "";
+  }
+  console.log(`chain=${chain}`);
+
+  return {props: {chainOptions, rpcServiceOptions, chainInitialValue: chain}};
 }
 
-export default function LbUpdate({chainOptions, rpcServiceOptions}) {
+export default function LbUpdate({chainOptions, rpcServiceOptions, chainInitialValue}) {
   const {data: session, status} = useSession();
 
   // formState: 0: init, 1: submitting, 2: ok, 3: failed.
@@ -97,7 +106,7 @@ export default function LbUpdate({chainOptions, rpcServiceOptions}) {
         labelCol={{span: 8}}
         wrapperCol={{span: 16}}
         style={{maxWidth: 600}}
-        initialValues={{}}
+        initialValues={{chain: chainInitialValue}}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"

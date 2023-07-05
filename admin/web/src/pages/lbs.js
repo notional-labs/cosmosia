@@ -48,9 +48,11 @@ const LoadBalancerTable = (props) => {
                   items: [
                     {
                       key: 'lb_remove',
-                      label: (
-                        <Link href={`/lb_remove?chain=${chain_name}`}>Remove</Link>
-                      ),
+                      label: (<Link href={`/lb_remove?chain=${chain_name}`}>Remove</Link>),
+                    },
+                    {
+                      key: 'lb_update',
+                      label: (<Link href={`/lb_update?chain=${chain_name}`}>Update</Link>),
                     },
                   ],
                 }}
