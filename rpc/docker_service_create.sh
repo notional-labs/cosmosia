@@ -98,10 +98,18 @@ data_version=$(find_current_data_version)
 
 rpc_service_name="rpc_${chain_name}_${data_version}"
 
-constraint="node.labels.cosmosia.rpc.pruned==true"
-if [ $( echo "${chain_name}" | egrep -c "archive" ) -ne 0 ]; then
-  # if archive node
-	constraint="node.labels.cosmosia.rpc.${chain_name}==true"
+# use override constraint if found
+override_constraint=$(docker node ls -f node.label=cosmosia.rpc.${chain_name}=true | tail -n +2 |awk '{print $2}')
+if [[ -z $override_constraint ]]; then
+  echo "No override_constraint found"
+  constraint="node.labels.cosmosia.rpc.pruned==true"
+  if [ $( echo "${chain_name}" | egrep -c "archive" ) -ne 0 ]; then
+    # if archive node
+    constraint="node.labels.cosmosia.rpc.${chain_name}==true"
+  fi
+else
+  echo "Found override_constraint=${override_constraint}"
+  constraint="node.labels.cosmosia.rpc.${chain_name}==true"
 fi
 
 echo "constraint=$constraint"
