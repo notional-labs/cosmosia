@@ -20,7 +20,7 @@ if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
 fi
 
 BLOCKCHAIN_TIME=$(curl --silent --max-time 3 "http://localhost/status" |jq -r .result.sync_info.latest_block_time)
-if [[ $chain_name == "sei-testnet" ]]; then
+if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-testnet)$" ) -ne 0 ]; then
   BLOCKCHAIN_TIME=$(curl --silent --max-time 3 "http://localhost/status" |jq -r .sync_info.latest_block_time)
 fi
 
