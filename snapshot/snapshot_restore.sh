@@ -192,7 +192,7 @@ if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
 fi
 
 # fix for sei
-if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-testnet)$" ) -ne 0 ]; then
+if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-testnet)$" ) -ne 0 ]; then
   sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
   sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
 fi

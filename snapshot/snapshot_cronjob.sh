@@ -41,7 +41,7 @@ catching_up=true
 while [[ "$catching_up" != "false" ]]; do
   sleep 60;
 
-  if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-testnet)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-testnet)$" ) -ne 0 ]; then
     catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .sync_info.catching_up)
   else
     catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
