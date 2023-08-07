@@ -9,6 +9,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --network notionalapi \
+  --network cosmosia \
   --constraint "node.labels.cosmosia.notionalapi==true" \
   --endpoint-mode dnsrr \
   --restart-condition any \
