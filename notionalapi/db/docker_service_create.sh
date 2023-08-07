@@ -12,7 +12,7 @@ docker service create \
   --replicas 1 \
   --network notionalapi \
   --label 'cosmosia.service=napidb' \
-  --constraint "node.labels.notionalapi==true" \
+  --constraint "node.labels.cosmosia.notionalapi==true" \
   --endpoint-mode dnsrr \
   --restart-condition none \
   rqlite/rqlite -on-disk=true
