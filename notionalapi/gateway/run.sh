@@ -15,7 +15,7 @@ loop_forever () {
 }
 
 pacman -Syu --noconfirm
-pacman -Sy --noconfirm go git screen
+pacman -Sy --noconfirm go git base-devel screen
 
 echo "#################################################################################################################"
 echo "install gateway"
