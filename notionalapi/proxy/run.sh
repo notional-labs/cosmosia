@@ -14,39 +14,12 @@ wget "http://tasks.web_config/config/notionalapi.com_privkey.pem" -O /etc/nginx/
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/public/nginx.conf > $HOME/nginx.conf.template
-cat $HOME/nginx.conf.template |envsubst '$USE_DOMAIN_NAME' > /etc/nginx/nginx.conf
-
-# generate index.html
-SERVICES=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
-
-get_links () {
-  for service_name in $SERVICES; do
-    echo "<p><a href=\"/${service_name}/\">$service_name</a></p>"
-  done
-}
-
-links=$(get_links)
-
-cat <<EOT > /usr/share/nginx/html/index.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cosmosia Snapshots</title>
-</head>
-
-<body>
-  <h3>Snapshots:</h3>
-  ${links}
-</body>
-</html>
-EOT
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/napi_proxy/notionalapi/proxy/nginx.conf > /etc/nginx/nginx.conf
 
 ########################################################################################################################
 
 # generate config for the first time
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/legacy/generate_upstream.sh" > $HOME/generate_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/napi_proxy/notionalapi/proxy/generate_upstream.sh" > $HOME/generate_upstream.sh
 sleep 1
 source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
