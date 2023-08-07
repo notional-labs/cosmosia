@@ -21,7 +21,7 @@ cd $HOME/notionalapi/backend
 # create .env file
 wget "http://tasks.web_config/config/notionalapi.backend.env" -O $HOME/notionalapi/backend/.env
 
-
+yarn
 screen -S server -dm yarn aggregator
 
 
