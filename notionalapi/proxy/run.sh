@@ -2,7 +2,7 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel wget dnsutils nginx cronie screen
 
 # write env vars to bash file, so that cronjobs or other scripts could know
-cat <<EOT >> $HOME/env.sh
+cat <<EOT > $HOME/env.sh
 CHAIN_REGISTRY_INI_URL="$CHAIN_REGISTRY_INI_URL"
 EOT
 
