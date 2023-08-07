@@ -43,6 +43,7 @@ docker service create \
   --replicas 1 \
   --constraint "node.labels.cosmosia.notionalapi==true" \
   --network $network \
+  --network notionalapi \
   --label 'cosmosia.service=napigw' \
   --endpoint-mode dnsrr \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
