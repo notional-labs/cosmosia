@@ -8,6 +8,7 @@ docker service rm $SERVICE_NAME
 
 docker service create \
   --name $SERVICE_NAME \
+  --hostname="{{.Service.Name}}.{{.Node.Hostname}}" \
   --replicas 1
   --network notionalapi \
   --label 'cosmosia.service=napidb' \
