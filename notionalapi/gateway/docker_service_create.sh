@@ -47,7 +47,7 @@ docker service create \
   --endpoint-mode dnsrr \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
-  --env-file ../env.sh \
+  --env-file ../../env.sh \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/napi_gw/notionalapi/gateway/run.sh > ~/run.sh && \
