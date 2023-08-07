@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm git yarn screen
+pacman -S --noconfirm git yarn screen wget
 
 
 # install nodejs
