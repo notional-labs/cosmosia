@@ -41,7 +41,7 @@ docker service rm $SERVICE_NAME
 docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
-  --constraint "node.labels.cosmosia.notionalapi==true" \
+  --constraint "node.labels.cosmosia.notionalapi.gw==true" \
   --network $network \
   --network notionalapi \
   --label 'cosmosia.service=napigw' \
