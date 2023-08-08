@@ -16,4 +16,4 @@ docker service create \
   --env-file ../../env.sh \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/napi_proxy/notionalapi/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/notionalapi/proxy/run.sh > ~/run.sh && /bin/bash ~/run.sh"
