@@ -571,3 +571,35 @@
 | API      | https://api-composable-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-composable-ia.cosmosia.notional.ventures/  |
 
+### 72. evmos-archive-sub3
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-evmos-archive-sub3-ia.cosmosia.notional.ventures/   |
+| API      | https://api-evmos-archive-sub3-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-evmos-archive-sub3-ia.cosmosia.notional.ventures/  |
+
+### 73. sei-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-sei-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-sei-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-sei-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 74. crescent
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-crescent-ia.cosmosia.notional.ventures/   |
+| API      | https://api-crescent-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-crescent-ia.cosmosia.notional.ventures/  |
+
+### 75. neutron
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-neutron-ia.cosmosia.notional.ventures/   |
+| API      | https://api-neutron-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-neutron-ia.cosmosia.notional.ventures/  |
+
