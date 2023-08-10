@@ -11,6 +11,7 @@ composable
 cosmoshub-archive-sub1
 cosmoshub-archive-sub
 cosmoshub
+crescent
 cryptoorgchain
 cyber
 dig-archive
@@ -32,6 +33,7 @@ kichain
 konstellation
 kujira
 mars
+neutron
 noble
 omniflixhub
 osmosis-testnet
