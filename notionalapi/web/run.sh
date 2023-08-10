@@ -12,7 +12,8 @@ nvm install v18.14.0
 yarn set version v18.14.0
 
 cd $HOME
-git clone --single-branch --branch main https://github.com/notional-labs/notionalapi
+gh_access_token="$(curl -s "http://tasks.web_config/config/gh_access_token")"
+git clone --single-branch --branch main "https://${gh_access_token}@github.com/notional-labs/notionalapi"
 
 ########################################################################################################################
 # web
