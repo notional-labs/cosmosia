@@ -7,6 +7,7 @@ docker service create \
   --replicas 1 \
   --network cosmosia \
   --network snapshot \
+  --network notionalapi \
   --constraint 'node.role==manager' \
   --endpoint-mode dnsrr \
   --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock \
