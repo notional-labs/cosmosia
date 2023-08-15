@@ -2,9 +2,9 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm base-devel wget dnsutils nginx cronie
 
 ########################################################################################################################
-# SSL for quicksilver.zone
-wget "http://tasks.web_config/config/quicksilver.zone-fullchain.pem" -O /etc/nginx/fullchain.pem
-wget "http://tasks.web_config/config/quicksilver.zone-privkey.pem" -O /etc/nginx/privkey.pem
+# SSL (fullchain.pem and privkey.pem files)
+wget "http://tasks.web_config/config/fullchain.pem" -O /etc/nginx/fullchain.pem
+wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 
 ########################################################################################################################
 # nginx
