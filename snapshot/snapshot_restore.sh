@@ -70,7 +70,11 @@ else
 fi
 
 go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
-go mod tidy
+if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|akash)$" ) -ne 0 ]; then
+  go mod tidy -compat=1.17
+else
+  go mod tidy
+fi
 
 if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
   sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
