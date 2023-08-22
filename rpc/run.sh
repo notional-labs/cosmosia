@@ -45,6 +45,11 @@ daemon_name="$daemon_name"
 node_home="$node_home"
 minimum_gas_prices="$minimum_gas_prices"
 start_flags="$start_flags"
+
+# fix agoric
+export NVM_DIR="\$HOME/.nvm"
+[ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 EOT
 
 pacman -Syu --noconfirm
