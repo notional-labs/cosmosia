@@ -207,10 +207,11 @@ fi
 if [[ $chain_name == "agoric" ]]; then
   # install nvm
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-  nvm install v18.17.1
-
   # to load nvm
   source $HOME/env.sh
+
+  # install node
+  nvm install v18.17.1
 
   # install yarn
   npm install --global yarn
