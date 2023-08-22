@@ -1,4 +1,5 @@
 SERVICES=$(cat <<-END
+agoric
 akash
 assetmantle
 axelar
@@ -8,6 +9,7 @@ celestia-testnet
 cheqd
 chihuahua
 composable
+composable-archive-sub
 cosmoshub-archive-sub1
 cosmoshub-archive-sub
 cosmoshub
