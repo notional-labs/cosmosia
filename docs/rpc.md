@@ -603,3 +603,26 @@
 | API      | https://api-neutron-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-neutron-ia.cosmosia.notional.ventures/  |
 
+### 76. agoric
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-agoric-ia.cosmosia.notional.ventures/   |
+| API      | https://api-agoric-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-agoric-ia.cosmosia.notional.ventures/  |
+
+### 77. composable-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-composable-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-composable-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-composable-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 78. coreum
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-coreum-ia.cosmosia.notional.ventures/   |
+| API      | https://api-coreum-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-coreum-ia.cosmosia.notional.ventures/  |
