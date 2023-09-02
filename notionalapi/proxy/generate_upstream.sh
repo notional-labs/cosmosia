@@ -22,6 +22,11 @@ for service_name in $SERVICES; do
         server $gw_ip:26657;
     }
 
+    upstream backend_wsrpc_$service_name {
+        keepalive 16;
+        server $gw_ip:26658;
+    }
+
     upstream backend_api_$service_name {
         keepalive 16;
         server $gw_ip:1317;
