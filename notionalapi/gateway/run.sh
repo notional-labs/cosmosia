@@ -32,6 +32,7 @@ cat <<EOT > $HOME/gateway.yaml
 aggrurl: "http://tasks.napiaggregator:8300/metering"
 dbconurl: "http://tasks.napidb_1:4001/"
 rpc: "http://tasks.lb_${chain_name}:8000"
+wsrpc: "ws://tasks.lb_${chain_name}:8000/websocket"
 api: "http://tasks.lb_${chain_name}:8001"
 grpc: "tasks.lb_${chain_name}:8003"
 eth: "http://tasks.lb_${chain_name}:8004"
