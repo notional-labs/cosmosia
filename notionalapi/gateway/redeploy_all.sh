@@ -1,6 +1,7 @@
 SERVICES=$(cat <<-END
 agoric
 akash
+archway
 assetmantle
 axelar
 bitcanna
