@@ -39,6 +39,7 @@ kujira
 mars
 neutron
 noble
+nois
 omniflixhub
 osmosis-testnet
 osmosis

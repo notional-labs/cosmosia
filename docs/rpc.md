@@ -634,3 +634,12 @@
 | RPC      | https://rpc-archway-ia.cosmosia.notional.ventures/   |
 | API      | https://api-archway-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-archway-ia.cosmosia.notional.ventures/  |
+
+### 80. nois
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-nois-ia.cosmosia.notional.ventures/   |
+| API      | https://api-nois-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-nois-ia.cosmosia.notional.ventures/  |
+
