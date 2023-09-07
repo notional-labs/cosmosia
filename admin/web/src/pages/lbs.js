@@ -3,16 +3,26 @@ import { listLoadBalancers } from '/src/helper/docker_api';
 import { Table, Dropdown } from 'antd';
 import { DownOutlined } from "@ant-design/icons";
 import Link from 'next/link';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export async function getServerSideProps() {
-  let lbList = [];
-  try {
-    lbList = await listLoadBalancers();
-  } catch (err) {
-    // do nothing
+export async function getServerSideProps({ req, res }) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      let lbList = [];
+      try {
+        lbList = await listLoadBalancers();
+      } catch (err) {
+        // do nothing
+      }
+
+      return {props: {lbList}};
+    }
   }
 
-  return {props: {lbList}};
+  return {props: {}};
 }
 
 const LoadBalancerTable = (props) => {

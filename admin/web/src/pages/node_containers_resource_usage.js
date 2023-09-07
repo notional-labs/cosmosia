@@ -2,24 +2,34 @@ import React, { useState } from 'react';
 import { listServersName } from "../helper/docker_api";
 import { Button, Form, Select, Spin, Alert, Radio } from 'antd';
 import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export const getServerSideProps = async ({query}) => {
-  // swarm_node
-  let {swarm_node} = query;
-  if (!swarm_node) {
-    swarm_node = "";
+export const getServerSideProps = async ({req, res, query}) => {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      // swarm_node
+      let {swarm_node} = query;
+      if (!swarm_node) {
+        swarm_node = "";
+      }
+      console.log(`[/node_containers_resource_usage.js] swarm_node=${swarm_node}`);
+
+      // serverOptions
+      const srvs = await listServersName();
+      const serverOptions = [];
+      for (const srv of srvs) {
+        const opt = {value: srv, label: srv};
+        serverOptions.push(opt);
+      }
+
+      return {props: {serverOptions, swarm_node}};
+    }
   }
-  console.log(`[/node_containers_resource_usage.js] swarm_node=${swarm_node}`);
 
-  // serverOptions
-  const srvs = await listServersName();
-  const serverOptions = [];
-  for (const srv of srvs) {
-    const opt = {value: srv, label: srv};
-    serverOptions.push(opt);
-  }
-
-  return {props: {serverOptions, swarm_node}};
+  return {props: {}};
 }
 
 export default ({serverOptions, swarm_node}) => {

@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { useSession } from "next-auth/react";
 import { Button, Form, InputNumber, Input, Spin, Alert } from "antd";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export async function getServerSideProps({query}) {
-  // swarm_node
-  const {swarm_node} = query;
-  console.log(`swarm_node=${swarm_node}`);
+export async function getServerSideProps({req, res, query}) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      // swarm_node
+      const {swarm_node} = query;
+      console.log(`swarm_node=${swarm_node}`);
 
-  return {props: {swarm_node}};
+      return {props: {swarm_node}};
+    }
+  }
+
+  return {props: {}};
 }
 
 export default function NodeLabelRemove({swarm_node}) {

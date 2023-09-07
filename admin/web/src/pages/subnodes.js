@@ -3,16 +3,26 @@ import { listSubnodes } from '/src/helper/docker_api';
 import { Dropdown, Table } from 'antd';
 import { DownOutlined } from "@ant-design/icons";
 import Link from 'next/link';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export async function getServerSideProps() {
-  let subnodeList = [];
-  try {
-    subnodeList = await listSubnodes();
-  } catch (err) {
-    // do nothing
+export async function getServerSideProps({ req, res }) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      let subnodeList = [];
+      try {
+        subnodeList = await listSubnodes();
+      } catch (err) {
+        // do nothing
+      }
+
+      return {props: {subnodeList}};
+    }
   }
 
-  return {props: {subnodeList}};
+  return {props: {}};
 }
 
 const SubnodeTable = (props) => {

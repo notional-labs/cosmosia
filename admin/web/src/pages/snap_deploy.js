@@ -2,25 +2,35 @@ import React, { useState } from 'react';
 import { Button, Form, Select, Spin, Alert } from 'antd';
 import { useSession } from "next-auth/react";
 import { getChainList } from '/src/helper/chain_registry';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export async function getServerSideProps({query}) {
-  const chainList = await getChainList();
+export async function getServerSideProps({req, res, query}) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      const chainList = await getChainList();
 
-  const chainOptions = [];
-  for (const chain of chainList) {
-    const opt = {value: chain, label: chain};
-    chainOptions.push(opt);
+      const chainOptions = [];
+      for (const chain of chainList) {
+        const opt = {value: chain, label: chain};
+        chainOptions.push(opt);
+      }
+
+      //////
+      // chainInitialValue
+      let {chain} = query;
+      if (chain === undefined) {
+        chain = "";
+      }
+      console.log(`chain=${chain}`);
+
+      return {props: {chainOptions, chainInitialValue: chain}};
+    }
   }
 
-  //////
-  // chainInitialValue
-  let {chain} = query;
-  if (chain === undefined) {
-    chain = "";
-  }
-  console.log(`chain=${chain}`);
-
-  return {props: {chainOptions, chainInitialValue: chain}};
+  return {props: {}};
 }
 
 export default function SnapDeploy({chainOptions, chainInitialValue}) {

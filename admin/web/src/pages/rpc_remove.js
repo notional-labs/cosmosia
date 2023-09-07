@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import { useSession } from "next-auth/react";
 import { Button, Form, InputNumber, Input, Spin, Alert } from "antd";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export async function getServerSideProps({query}) {
-  // rpc service name and replicas
-  const {id} = query;
+export async function getServerSideProps({req, res, query}) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      // rpc service name and replicas
+      const {id} = query;
 
-  console.log(`id=${id}`);
+      console.log(`id=${id}`);
 
-  return {props: {id}};
+      return {props: {id}};
+    }
+  }
+
+  return {props: {}};
 }
 
 export default function RpcRemove({id}) {

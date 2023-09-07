@@ -1,3 +1,5 @@
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "./api/auth/[...nextauth]"
 import { useSession } from "next-auth/react";
 import { getDockerConfigs } from '/src/helper/docker_api';
 import { Dropdown, Table, Popover, Button } from 'antd';
@@ -5,15 +7,17 @@ import { timeAgoFormat } from "../helper/utils";
 import Link from "next/link";
 import { DownOutlined, EyeOutlined } from "@ant-design/icons";
 
-export async function getServerSideProps() {
-  let configList = [];
-  try {
-    configList = await getDockerConfigs();
-  } catch (err) {
-    // do nothing
+export async function getServerSideProps({ req, res }) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const { user } = session;
+    if (user) {
+      let configList = await getDockerConfigs();
+      return {props: {configList}};
+    }
   }
 
-  return {props: {configList}};
+  return {props: {}};
 }
 
 const ConfigTable = (props) => {

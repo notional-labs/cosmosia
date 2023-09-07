@@ -4,45 +4,55 @@ import { getChainList } from "../helper/chain_registry";
 import Link from "next/link";
 import { GlobalOutlined } from "@ant-design/icons";
 import { getInternalProxySecretTokens } from "../helper/docker_api";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export async function getServerSideProps() {
-  const secretTokens = await getInternalProxySecretTokens();
-  const chainList = await getChainList();
+export async function getServerSideProps({req, res}) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      const secretTokens = await getInternalProxySecretTokens();
+      const chainList = await getChainList();
 
-  const endpoints = [];
+      const endpoints = [];
 
-  let counter = 0;
-  for (let i = 0; i < chainList.length; i++) {
-    const chain = chainList[i];
+      let counter = 0;
+      for (let i = 0; i < chainList.length; i++) {
+        const chain = chainList[i];
 
-    const domain = process.env.NEXT_PUBLIC_USE_DOMAIN_NAME;
+        const domain = process.env.NEXT_PUBLIC_USE_DOMAIN_NAME;
 
-    // public endpoints
-    const public_rpc = `https://rpc-${chain}-ia.cosmosia.${domain}/`;
-    const public_api = `https://api-${chain}-ia.cosmosia.${domain}/`;
-    const public_grpc = `grpc-${chain}-ia.cosmosia.${domain}:433`;
+        // public endpoints
+        const public_rpc = `https://rpc-${chain}-ia.cosmosia.${domain}/`;
+        const public_api = `https://api-${chain}-ia.cosmosia.${domain}/`;
+        const public_grpc = `grpc-${chain}-ia.cosmosia.${domain}:433`;
 
-    // internal endpoints
-    const internal_rpc = `https://rpc-${chain}-${secretTokens[counter]}-ie.internalendpoints.${domain}`;
-    counter++;
-    const internal_api = `https://api-${chain}-${secretTokens[counter]}-ie.internalendpoints.${domain}`;
-    counter++;
-    const internal_grpc = `grpc-${chain}-${secretTokens[counter]}-ie.internalendpoints.${domain}:433`;
-    counter++;
+        // internal endpoints
+        const internal_rpc = `https://rpc-${chain}-${secretTokens[counter]}-ie.internalendpoints.${domain}`;
+        counter++;
+        const internal_api = `https://api-${chain}-${secretTokens[counter]}-ie.internalendpoints.${domain}`;
+        counter++;
+        const internal_grpc = `grpc-${chain}-${secretTokens[counter]}-ie.internalendpoints.${domain}:433`;
+        counter++;
 
-    endpoints.push({
-      key: chain,
-      name: chain,
-      public_rpc,
-      public_api,
-      public_grpc,
-      internal_rpc,
-      internal_api,
-      internal_grpc,
-    });
+        endpoints.push({
+          key: chain,
+          name: chain,
+          public_rpc,
+          public_api,
+          public_grpc,
+          internal_rpc,
+          internal_api,
+          internal_grpc,
+        });
+      }
+
+      return {props: {endpoints}};
+    }
   }
 
-  return {props: {endpoints}};
+  return {props: {}};
 }
 
 const EndpointTable = (props) => {

@@ -2,17 +2,27 @@ import React, { useState } from 'react';
 import { Button, Form, Select, Spin, Alert } from 'antd';
 import { useSession } from "next-auth/react";
 import { getSubnodeList } from '/src/helper/chain_registry';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export async function getServerSideProps({query}) {
-  const subnodeList = await getSubnodeList();
+export async function getServerSideProps({req, res, query}) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      const subnodeList = await getSubnodeList();
 
-  const subnodeOptions = [];
-  for (const sn of subnodeList) {
-    const opt = {value: sn, label: sn};
-    subnodeOptions.push(opt);
+      const subnodeOptions = [];
+      for (const sn of subnodeList) {
+        const opt = {value: sn, label: sn};
+        subnodeOptions.push(opt);
+      }
+
+      return {props: {subnodeOptions}};
+    }
   }
 
-  return {props: {subnodeOptions}};
+  return {props: {}};
 }
 
 export default function SubnodeDeploy({subnodeOptions}) {

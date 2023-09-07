@@ -3,6 +3,8 @@ import { Button, Form, Select, Spin, Alert, Radio } from 'antd';
 import { useSession } from "next-auth/react";
 import { getChainList } from '/src/helper/chain_registry';
 import { listRpcs } from "../helper/docker_api";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 const getChainOptions = async () => {
   const chainList = await getChainList();
@@ -26,20 +28,28 @@ const getRpcServiceOptions = async () => {
   return rpcServiceOptions;
 }
 
-export async function getServerSideProps({query}) {
-  const chainOptions = await getChainOptions();
-  const rpcServiceOptions = await getRpcServiceOptions();
+export async function getServerSideProps({req, res, query}) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      const chainOptions = await getChainOptions();
+      const rpcServiceOptions = await getRpcServiceOptions();
 
 
-  //////
-  // chainInitialValue
-  let {chain} = query;
-  if (chain === undefined) {
-    chain = "";
+      //////
+      // chainInitialValue
+      let {chain} = query;
+      if (chain === undefined) {
+        chain = "";
+      }
+      console.log(`chain=${chain}`);
+
+      return {props: {chainOptions, rpcServiceOptions, chainInitialValue: chain}};
+    }
   }
-  console.log(`chain=${chain}`);
 
-  return {props: {chainOptions, rpcServiceOptions, chainInitialValue: chain}};
+  return {props: {}};
 }
 
 export default function LbUpdate({chainOptions, rpcServiceOptions, chainInitialValue}) {

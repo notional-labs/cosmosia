@@ -2,25 +2,35 @@ import React, { useState } from 'react';
 import { useSession } from "next-auth/react";
 import { Button, Form, Select, Spin, Alert, Result } from "antd";
 import { getSubnodeList } from '/src/helper/chain_registry';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export async function getServerSideProps({query}) {
-  const subnodeList = await getSubnodeList();
+export async function getServerSideProps({req, res, query}) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      const subnodeList = await getSubnodeList();
 
-  const subnodeOptions = [];
-  for (const sn of subnodeList) {
-    const opt = {value: sn, label: sn};
-    subnodeOptions.push(opt);
+      const subnodeOptions = [];
+      for (const sn of subnodeList) {
+        const opt = {value: sn, label: sn};
+        subnodeOptions.push(opt);
+      }
+
+      //////
+      // chainInitialValue
+      let {chain} = query;
+      if (chain === undefined) {
+        chain = "";
+      }
+      console.log(`chain=${chain}`);
+
+      return {props: {subnodeOptions, chainInitialValue: chain}};
+    }
   }
 
-  //////
-  // chainInitialValue
-  let {chain} = query;
-  if (chain === undefined) {
-    chain = "";
-  }
-  console.log(`chain=${chain}`);
-
-  return {props: {subnodeOptions, chainInitialValue: chain}};
+  return {props: {}};
 }
 
 export default function SubnodeRemove({chainOptions, chainInitialValue}) {

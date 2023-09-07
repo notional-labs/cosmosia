@@ -2,17 +2,27 @@ import React, { useState } from 'react';
 import { Button, Form, Select, Spin, Alert } from 'antd';
 import { useSession } from "next-auth/react";
 import { getChainList } from '/src/helper/chain_registry';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-export async function getServerSideProps() {
-  const chainList = await getChainList();
+export async function getServerSideProps({ req, res }) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      const chainList = await getChainList();
 
-  const chainOptions = [];
-  for (const chain of chainList) {
-    const opt = {value: chain, label: chain};
-    chainOptions.push(opt);
+      const chainOptions = [];
+      for (const chain of chainList) {
+        const opt = {value: chain, label: chain};
+        chainOptions.push(opt);
+      }
+
+      return {props: {chainOptions}};
+    }
   }
 
-  return {props: {chainOptions}};
+  return {props: {}};
 }
 
 export default function RpcDeploy({chainOptions}) {

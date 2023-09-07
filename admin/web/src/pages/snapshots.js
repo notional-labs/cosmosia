@@ -4,18 +4,28 @@ import { Dropdown, Table } from 'antd';
 import { DownOutlined, GlobalOutlined } from "@ant-design/icons";
 import Link from 'next/link';
 import { timeAgoFormat } from "../helper/utils";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 const domain = process.env.NEXT_PUBLIC_USE_DOMAIN_NAME;
 
-export async function getServerSideProps() {
-  let snapList = [];
-  try {
-    snapList = await listSnapshots();
-  } catch (err) {
-    // do nothing
+export async function getServerSideProps({req, res}) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      let snapList = [];
+      try {
+        snapList = await listSnapshots();
+      } catch (err) {
+        // do nothing
+      }
+
+      return {props: {snapList}};
+    }
   }
 
-  return {props: {snapList}};
+  return {props: {}};
 }
 
 const SnapshotTable = (props) => {

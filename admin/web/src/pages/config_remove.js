@@ -3,18 +3,28 @@ import { useSession } from "next-auth/react";
 import { Button, Form, InputNumber, Input, Spin, Alert, Result } from "antd";
 import { getDockerConfig } from "../helper/docker_api";
 import { base64UrlSafeDecode } from "../helper/utils";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 const { TextArea } = Input;
 
-export async function getServerSideProps({query}) {
-  const {id} = query;
+export async function getServerSideProps({req, res, query}) {
+  const session = await getServerSession(req, res, authOptions);
+  if (session) {
+    const {user} = session;
+    if (user) {
+      const {id} = query;
 
-  // get the config
-  const cfg = await getDockerConfig(id);
-  const {Spec} = cfg;
-  const {Name, Data} = Spec;
+      // get the config
+      const cfg = await getDockerConfig(id);
+      const {Spec} = cfg;
+      const {Name, Data} = Spec;
 
-  return {props: {id, name: Name, data: base64UrlSafeDecode(Data)}};
+      return {props: {id, name: Name, data: base64UrlSafeDecode(Data)}};
+    }
+  }
+
+  return {props: {}};
 }
 
 export default function ConfigRemove({id, name, data}) {
