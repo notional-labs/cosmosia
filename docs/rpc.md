@@ -626,3 +626,11 @@
 | RPC      | https://rpc-coreum-ia.cosmosia.notional.ventures/   |
 | API      | https://api-coreum-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-coreum-ia.cosmosia.notional.ventures/  |
+
+### 79. archway
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-archway-ia.cosmosia.notional.ventures/   |
+| API      | https://api-archway-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-archway-ia.cosmosia.notional.ventures/  |
