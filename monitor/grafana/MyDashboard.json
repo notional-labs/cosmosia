@@ -96,7 +96,7 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": false
         },
@@ -111,12 +111,10 @@
             "type": "prometheus",
             "uid": "P7CBE1186F0038668"
           },
-          "editorMode": "code",
           "exemplar": true,
           "expr": "rate(caddy_http_requests_total{server='srv0'}[5m]) or rate(haproxy_frontend_http_requests_total{proxy=\"fe_rpc\"}[5m])",
           "interval": "",
-          "legendFormat": "__auto",
-          "range": true,
+          "legendFormat": "{{instance}}_{{server}}",
           "refId": "A"
         }
       ],
@@ -191,7 +189,7 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": false
         },
@@ -285,7 +283,7 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": false
         },
@@ -379,7 +377,7 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": false
         },
@@ -473,7 +471,7 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": false
         },
