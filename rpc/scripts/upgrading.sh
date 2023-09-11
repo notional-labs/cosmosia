@@ -90,6 +90,21 @@ buid_chain () {
 #  if [ "$use_gvm" = true ]; then
 #    cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
 #  fi
+
+
+  # fix agoric
+  if [[ $chain_name == "agoric" ]]; then
+    cd $HOME/agoric-sdk
+    yarn install
+    yarn build
+
+    cd $HOME/agoric-sdk/packages/cosmic-swingset && make
+
+    cd $HOME/agoric-sdk/golang/cosmos
+    go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/agd ./cmd/agd
+    go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/ag-cosmos-helper ./cmd/helper
+    go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
+  fi
 }
 
 ########################################################################################################################
