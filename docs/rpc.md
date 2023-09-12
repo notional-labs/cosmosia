@@ -643,3 +643,10 @@
 | API      | https://api-nois-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-nois-ia.cosmosia.notional.ventures/  |
 
+### 81. dydx-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-dydx-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-dydx-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-dydx-testnet-ia.cosmosia.notional.ventures/  |

@@ -20,6 +20,7 @@ cryptoorgchain
 cyber
 dig-archive
 dig
+dydx-testnet
 emoney
 evmos-archive-sub1
 evmos-archive-sub2
