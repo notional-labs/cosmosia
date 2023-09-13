@@ -145,6 +145,9 @@ wget -O - "$URL" |pigz -dc |tar -xf -
 [ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
 
 sed -i -e "s/^iavl-disable-fastnode *=.*/iavl-disable-fastnode = false/" $node_home/config/app.toml
+if [[ $chain_name == "terra" ]]; then
+  sed -i -e "s/^iavl-disable-fastnode *=.*/iavl-disable-fastnode = true/" $node_home/config/app.toml
+fi
 
 # set minimum gas prices & rpc port...
 sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
