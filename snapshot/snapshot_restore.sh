@@ -187,6 +187,7 @@ sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.to
 ###
 sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
 sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/config/app.toml
+sed -i -e "s/^query_gas_limit *=.*/query_gas_limit = 10000000/" $node_home/config/app.toml
 
 echo "download genesis..."
 curl -Ls "${SNAPSHOT_BASE_URL}/genesis.json" > $node_home/config/genesis.json
