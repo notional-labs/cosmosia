@@ -13,7 +13,7 @@ docker service create \
   --network notionalapi \
   --constraint 'node.hostname==cosmosia21' \
   --endpoint-mode dnsrr \
-  --restart-condition any \
+  --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/napi/rabbitmq/notionalapi/rabbitmq/run.sh > ~/run.sh && /bin/bash ~/run.sh"
