@@ -16,4 +16,4 @@ docker service create \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/napi/rabbitmq/notionalapi/rabbitmq/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/notionalapi/rabbitmq/run.sh > ~/run.sh && /bin/bash ~/run.sh"
