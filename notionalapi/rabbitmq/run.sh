@@ -10,3 +10,8 @@ EOT
 
 # start rabbitmq-server
 screen -S rabbitmq -dm rabbitmq-server
+
+
+
+# loop forever for debugging only
+while true; do sleep 5; done
