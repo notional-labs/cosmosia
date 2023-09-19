@@ -2,10 +2,11 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm mariadb mariadb-clients screen
 
 # install
-mariadb-install-db --datadir=/var/lib/mysql
+mariadb-install-db --basedir=/usr --datadir=/var/lib/mysql
 
 # start
 screen -S mysql -dm /usr/bin/mysqld --user=root --datadir='/var/lib/mysql'
+
 
 
 # init
