@@ -5,6 +5,7 @@ pacman -S --noconfirm rabbitmq screen python python-pip
 # config rabbitmq
 cat <<EOT >> /etc/rabbitmq/rabbitmq.conf
 loopback_users = none
+cluster_name = napi-counter
 EOT
 
 rabbitmq-plugins enable rabbitmq_management
