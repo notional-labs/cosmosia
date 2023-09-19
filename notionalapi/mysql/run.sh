@@ -7,7 +7,14 @@ mariadb-install-db --basedir=/usr --datadir=/var/lib/mysql
 # start
 screen -S mysql -dm /usr/bin/mysqld --user=root --datadir='/var/lib/mysql'
 
-
+# wait for started
+is_started="0"
+while [[ "$is_started" != "1" ]]; do
+  sleep 5;
+  is_started=$(mysql -se "SELECT 1")
+  echo "is_started=$is_started"
+done
+echo "mysqld started"
 
 # init
 mysql --user=root mysql <<< cat <<EOT
