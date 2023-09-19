@@ -8,7 +8,6 @@ docker service rm $SERVICE_NAME
 docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
-  --publish mode=host,target=3306,published=3306 \
   --network notionalapi \
   --constraint 'node.hostname==cosmosia21' \
   --endpoint-mode dnsrr \
