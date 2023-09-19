@@ -14,4 +14,4 @@ docker service create \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "while true; do sleep 5; done"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/notionalapi/mysql/run.sh > ~/run.sh && /bin/bash ~/run.sh"
