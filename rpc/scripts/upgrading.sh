@@ -1,6 +1,25 @@
 # usage: ./upgrading.sh <new_version>
 # eg., ./upgrading.sh v6.0.1
 
+########################################################################################################################
+# make sure single instance running
+PIDFILE="$HOME/upgrading.sh.lock"
+function cleanup() {
+  rm -f $PIDFILE
+}
+
+if [ -f $PIDFILE ]; then
+   pid=$(cat $PIDFILE)
+   if kill -0 $pid 2>/dev/null; then
+      echo "Script is already running"
+      exit 1
+   fi
+fi
+
+echo $$ > $PIDFILE
+trap cleanup EXIT
+
+########################################################################################################################
 version_new="$1"
 
 if [[ -z $version_new ]]; then
