@@ -30,7 +30,9 @@ make install
 # config file
 cat <<EOT > $HOME/gateway.yaml
 aggrurl: "http://tasks.napiaggregator:8300/metering"
+mysqlsrc: "root:invalid@tcp(tasks.napi_mysql:3306)/db_apicount"
 dbconurl: "http://tasks.napidb_1:4001/"
+chain: "$chain_name"
 rpc: "http://tasks.lb_${chain_name}:8000"
 wsrpc: "ws://tasks.lb_${chain_name}:8000/websocket"
 api: "http://tasks.lb_${chain_name}:8001"
