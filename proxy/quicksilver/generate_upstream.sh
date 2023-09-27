@@ -1,4 +1,4 @@
-SERVICES="cosmoshub osmosis stargaze regen"
+SERVICES="cosmoshub osmosis stargaze regen juno akash evmos kichain injective umee kujira crescent mars axelar terra2"
 
 UPSTREAM_CONFIG_FILE="/etc/nginx/upstream.conf"
 UPSTREAM_CONFIG_FILE_TMP="/etc/nginx/upstream.conf.tmp"
@@ -17,6 +17,11 @@ for service_name in $SERVICES; do
       upstream backend_api_$service_name {
           keepalive 16;
           server $lb_ip:8001;
+      }
+
+      upstream backend_grpc_$service_name {
+          keepalive 16;
+          server $lb_ip:8003;
       }
 
 EOT

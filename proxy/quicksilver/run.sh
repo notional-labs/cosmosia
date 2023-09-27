@@ -3,12 +3,13 @@ pacman -S --noconfirm base-devel wget dnsutils nginx cronie
 
 ########################################################################################################################
 # SSL (fullchain.pem and privkey.pem files)
-wget "http://tasks.web_config/config/fullchain.pem" -O /etc/nginx/fullchain.pem
-wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
+wget "http://tasks.web_config/config/quicksilver.zone_fullchain.pem" -O /etc/nginx/fullchain.pem
+wget "http://tasks.web_config/config/quicksilver.zone_privkey.pem" -O /etc/nginx/privkey.pem
 
 ########################################################################################################################
 # nginx
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/notional/proxy/quicksilver/nginx.conf > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/notional/proxy/quicksilver/rename_chains.conf > /etc/nginx/rename_chains.conf
 
 ########################################################################################################################
 # generate config for the first time
