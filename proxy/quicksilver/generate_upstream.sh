@@ -1,4 +1,4 @@
-SERVICES="cosmoshub osmosis stargaze regen juno akash evmos kichain injective umee kujira crescent mars axelar terra2"
+SERVICES="quicksilver cosmoshub osmosis stargaze regen juno akash evmos kichain injective umee kujira crescent mars axelar terra2 sommelier"
 
 UPSTREAM_CONFIG_FILE="/etc/nginx/upstream.conf"
 UPSTREAM_CONFIG_FILE_TMP="/etc/nginx/upstream.conf.tmp"
