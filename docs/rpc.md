@@ -650,3 +650,11 @@
 | RPC      | https://rpc-dydx-testnet-ia.cosmosia.notional.ventures/   |
 | API      | https://api-dydx-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-dydx-testnet-ia.cosmosia.notional.ventures/  |
+
+### 82. sommelier
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-sommelier-ia.cosmosia.notional.ventures/   |
+| API      | https://api-sommelier-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-sommelier-ia.cosmosia.notional.ventures/  |
