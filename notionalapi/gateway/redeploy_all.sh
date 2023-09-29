@@ -51,6 +51,7 @@ regen
 sei-archive-sub
 sei
 sentinel
+sommelier
 stargaze
 starname
 stride
