@@ -146,6 +146,25 @@ snapshot_day="*"
 [[ -z $snapshot_prune ]] && snapshot_day=$(( ${snapshot_time_hour} % 6 ))
 echo "$snapshot_time_minute $snapshot_time_hour * * $snapshot_day root /usr/bin/flock -n /var/run/lock/snapshot_cronjob.lock /bin/bash $HOME/snapshot_cronjob.sh" > /etc/cron.d/cron_snapshot
 
+
+
+# restart cronjob
+cat <<EOT > $HOME/restart_cronjob.sh
+echo "Checking chain"
+status=\$(/usr/sbin/supervisorctl status chain 2>&1)
+echo "\$status"
+if [[ "\$status" == *RUNNING* ]]; then
+	echo "Restarting chain"
+	/usr/sbin/supervisorctl stop chain
+	sleep 60
+	/usr/sbin/supervisorctl start chain
+fi
+EOT
+
+echo "$snapshot_time_minute */7 * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
+
+
+
 # start crond
 crond
 
