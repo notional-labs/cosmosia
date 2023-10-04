@@ -658,3 +658,11 @@
 | RPC      | https://rpc-sommelier-ia.cosmosia.notional.ventures/   |
 | API      | https://api-sommelier-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-sommelier-ia.cosmosia.notional.ventures/  |
+
+### 83. sei-archive-sub1
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-sei-archive-sub1-ia.cosmosia.notional.ventures/   |
+| API      | https://api-sei-archive-sub1-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-sei-archive-sub1-ia.cosmosia.notional.ventures/  |
