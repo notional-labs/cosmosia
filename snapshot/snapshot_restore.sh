@@ -115,6 +115,8 @@ elif [[ $chain_name == "sei" ]]; then
   chain_id_arg="--chain-id=pacific-1"
 elif [[ $chain_name == "sei-archive-sub" ]]; then
   chain_id_arg="--chain-id=pacific-1"
+elif [[ $chain_name == "sei-archive-sub1" ]]; then
+  chain_id_arg="--chain-id=pacific-1"
 fi
 
 $HOME/go/bin/$daemon_name init $chain_id_arg test
