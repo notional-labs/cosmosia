@@ -76,6 +76,8 @@ buid_chain () {
     go mod edit -dropreplace github.com/tecbot/gorocksdb
   elif [[ $chain_name == "gravitybridge" ]]; then
     cd module
+  elif [[ $chain_name == "dydx-testnet" ]]; then
+    cd protocol
   fi
 
   go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
