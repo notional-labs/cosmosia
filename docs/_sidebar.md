@@ -26,4 +26,3 @@
   
 - Misc
   - [Uptime](https://status.notional.ventures/status/cosmosia)
-  - [Notional Validators](https://status.notional.ventures/status/validators)
