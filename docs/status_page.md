@@ -11,5 +11,5 @@ docker service create \
   --network cosmosia \
   --constraint 'node.hostname==cosmosia7' \
   --restart-condition any \
-  louislam/uptime-kuma:1
+  louislam/uptime-kuma:1.15.1
 ```
