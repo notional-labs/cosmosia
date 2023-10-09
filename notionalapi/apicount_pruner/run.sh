@@ -7,7 +7,7 @@ pacman -S --noconfirm mariadb mariadb-clients cronie
 
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/napi/apicount_pruner/notionalapi/apicount_pruner/prune_cronjob.sh" > $HOME/prune_cronjob.sh
 
-echo "0 0 * * * root /bin/bash $HOME/prune_cronjob.sh" > /etc/cron.d/cron_prune_apicount
+echo "0 0 * * * root /bin/bash $HOME/prune_cronjob.sh >> $HOME/cron.log" > /etc/cron.d/cron_prune_apicount
 
 crond
 
