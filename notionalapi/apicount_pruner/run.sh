@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm mariadb-clients cronie
+pacman -S --noconfirm mariadb mariadb-clients cronie
 
 
 ########################################################################################################################
