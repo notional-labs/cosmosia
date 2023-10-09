@@ -24,7 +24,7 @@ fi
 echo "Prunning data before ${threshold}"
 
 /usr/bin/mysql --host=tasks.napi_mysql --user=root --password=invalid --protocol=tcp db_apicount <<< cat <<EOT
-DELETE FROM db_apicount WHERE dt < ${threshold}
+DELETE FROM tbl_apicount WHERE dt < ${threshold}
 EOT
 
 
