@@ -706,3 +706,11 @@
 | RPC      | https://rpc-regen-testnet-ia.cosmosia.notional.ventures/   |
 | API      | https://api-regen-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-regen-testnet-ia.cosmosia.notional.ventures/  |
+
+### 89. injective-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-injective-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-injective-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-injective-testnet-ia.cosmosia.notional.ventures/  |
