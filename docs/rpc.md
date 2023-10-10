@@ -682,3 +682,11 @@
 | RPC      | https://rpc-stargaze-testnet-ia.cosmosia.notional.ventures/   |
 | API      | https://api-stargaze-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-stargaze-testnet-ia.cosmosia.notional.ventures/  |
+
+### 86. evmos-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-evmos-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-evmos-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-evmos-testnet-ia.cosmosia.notional.ventures/  |
