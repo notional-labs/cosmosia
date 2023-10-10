@@ -110,6 +110,8 @@ chain_id_arg=""
 if [[ $chain_name == "evmos-testnet-archive" ]]; then
   chain_id_arg="--chain-id=evmos_9000-4"
 elif [[ $chain_name == "sei-testnet" ]]; then
+  chain_id_arg="--chain-id=evmos_9000-4"
+elif [[ $chain_name == "sei-testnet" ]]; then
   chain_id_arg="--chain-id=atlantic-2"
 elif [[ $chain_name == "sei" ]]; then
   chain_id_arg="--chain-id=pacific-1"
