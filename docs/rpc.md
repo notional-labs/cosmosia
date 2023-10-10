@@ -690,3 +690,11 @@
 | RPC      | https://rpc-evmos-testnet-ia.cosmosia.notional.ventures/   |
 | API      | https://api-evmos-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-evmos-testnet-ia.cosmosia.notional.ventures/  |
+
+### 87. crescent-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-crescent-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-crescent-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-crescent-testnet-ia.cosmosia.notional.ventures/  |
