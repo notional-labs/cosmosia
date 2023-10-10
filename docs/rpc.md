@@ -698,3 +698,11 @@
 | RPC      | https://rpc-crescent-testnet-ia.cosmosia.notional.ventures/   |
 | API      | https://api-crescent-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-crescent-testnet-ia.cosmosia.notional.ventures/  |
+
+### 88. regen-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-regen-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-regen-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-regen-testnet-ia.cosmosia.notional.ventures/  |
