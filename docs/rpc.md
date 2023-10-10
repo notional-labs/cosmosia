@@ -666,3 +666,11 @@
 | RPC      | https://rpc-sei-archive-sub1-ia.cosmosia.notional.ventures/   |
 | API      | https://api-sei-archive-sub1-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-sei-archive-sub1-ia.cosmosia.notional.ventures/  |
+
+### 84. cosmoshub-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-cosmoshub-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-cosmoshub-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-cosmoshub-testnet-ia.cosmosia.notional.ventures/  |
