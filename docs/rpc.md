@@ -674,3 +674,11 @@
 | RPC      | https://rpc-cosmoshub-testnet-ia.cosmosia.notional.ventures/   |
 | API      | https://api-cosmoshub-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-cosmoshub-testnet-ia.cosmosia.notional.ventures/  |
+
+### 85. stargaze-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-stargaze-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-stargaze-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-stargaze-testnet-ia.cosmosia.notional.ventures/  |
