@@ -109,7 +109,7 @@ rm -rf $node_home/*
 chain_id_arg=""
 if [[ $chain_name == "evmos-testnet-archive" ]]; then
   chain_id_arg="--chain-id=evmos_9000-4"
-elif [[ $chain_name == "evmos_9000-testnet" ]]; then
+elif [[ $chain_name == "evmos-testnet" ]]; then
   chain_id_arg="--chain-id=evmos_9000-4"
 elif [[ $chain_name == "sei-testnet" ]]; then
   chain_id_arg="--chain-id=atlantic-2"
