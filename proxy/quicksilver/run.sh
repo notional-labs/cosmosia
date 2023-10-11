@@ -9,7 +9,8 @@ wget "http://tasks.web_config/config/quicksilver.zone_privkey.pem" -O /etc/nginx
 ########################################################################################################################
 # nginx
 curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/notional/proxy/quicksilver/nginx.conf > /etc/nginx/nginx.conf
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/notional/proxy/quicksilver/rename_chains.conf > /etc/nginx/rename_chains.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/notional/proxy/quicksilver/mainnets.conf > /etc/nginx/mainnets.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/notional/proxy/quicksilver/testnets.conf > /etc/nginx/testnets.conf
 
 ########################################################################################################################
 # generate config for the first time
