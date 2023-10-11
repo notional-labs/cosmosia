@@ -36,6 +36,12 @@ echo "config=$config"
 # load config
 eval "$(curl -s "$config" |sed 's/ = /=/g')"
 
+# fix injective close-source
+if [[ $git_repo == "https://github.com/InjectiveLabs/injective-core" ]]; then
+  gh_access_token="$(curl -s "http://tasks.web_config/config/gh_access_token")"
+  git_repo="https://${gh_access_token}@github.com/InjectiveLabs/injective-core"
+fi
+
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
 chain_name="$chain_name"

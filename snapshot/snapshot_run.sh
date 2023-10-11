@@ -3,8 +3,7 @@
 
 chain_name="$1"
 
-if [[ -z $chain_name ]]
-then
+if [[ -z $chain_name ]]; then
   echo "No chain_name. usage eg., ./snapshost_run.sh cosmoshub"
   loop_forever
 fi
@@ -46,6 +45,13 @@ eval "${str_snapshot_cfg}"
 
 # figure out IP of the snapshot_storage_node
 snapshot_storage_node_ip=$(curl -s "http://tasks.web_config/node_ip/${snapshot_storage_node}")
+
+# fix injective close-source
+if [[ $git_repo == "https://github.com/InjectiveLabs/injective-core" ]]; then
+  gh_access_token="$(curl -s "http://tasks.web_config/config/gh_access_token")"
+  git_repo="https://${gh_access_token}@github.com/InjectiveLabs/injective-core"
+fi
+
 
 # write chain info to bash file, so that cronjob could know
 cat <<EOT >> $HOME/env.sh
