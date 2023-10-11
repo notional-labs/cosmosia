@@ -714,3 +714,11 @@
 | RPC      | https://rpc-injective-testnet-ia.cosmosia.notional.ventures/   |
 | API      | https://api-injective-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-injective-testnet-ia.cosmosia.notional.ventures/  |
+
+### 90. terra2-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-terra2-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-terra2-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-terra2-testnet-ia.cosmosia.notional.ventures/  |
