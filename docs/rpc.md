@@ -722,3 +722,11 @@
 | RPC      | https://rpc-terra2-testnet-ia.cosmosia.notional.ventures/   |
 | API      | https://api-terra2-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-terra2-testnet-ia.cosmosia.notional.ventures/  |
+
+### 91. composable-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-composable-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-composable-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-composable-testnet-ia.cosmosia.notional.ventures/  |
