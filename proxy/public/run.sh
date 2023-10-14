@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel wget dnsutils nginx cronie screen
+pacman -S --noconfirm base-devel wget dnsutils nginx cronie screen logrotate
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
@@ -84,14 +84,16 @@ EOT
 sleep 1
 echo "*/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
 sleep 1
-crond
 
 ########################################################################################################################
 ## logrotate
-#sed -i -e "s/{.*/{\n\tdaily\n\trotate 2/" /etc/logrotate.d/nginx
-#sed -i -e "s/create.*/create 0644 root root/" /etc/logrotate.d/nginx
-
+sed -i -e "s/{.*/{\n\tdaily\n\trotate 2/" /etc/logrotate.d/nginx
+sed -i -e "s/create.*/create 0644 root root/" /etc/logrotate.d/nginx
+echo "0 0 * * * root logrotate /etc/logrotate.d/nginx" > /etc/cron.d/cron_logrotate
 ########################################################################################################################
+
+crond
+
 echo "Done!"
 # loop forever for debugging only
 while true; do sleep 5; done
