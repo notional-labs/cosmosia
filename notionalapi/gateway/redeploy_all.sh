@@ -11,6 +11,7 @@ cheqd
 chihuahua
 composable
 composable-archive-sub
+composable-testnet
 coreum
 cosmoshub-archive-sub1
 cosmoshub-archive-sub
