@@ -111,10 +111,12 @@
             "type": "prometheus",
             "uid": "P7CBE1186F0038668"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "rate(caddy_http_requests_total{server='srv0'}[5m]) or rate(haproxy_frontend_http_requests_total{proxy=\"fe_rpc\"}[5m])",
           "interval": "",
           "legendFormat": "{{instance}}_{{server}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -204,10 +206,12 @@
             "type": "prometheus",
             "uid": "P7CBE1186F0038668"
           },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "histogram_quantile(0.5, sum by (le) (rate(caddy_http_response_duration_seconds_bucket[5m]) or rate(haproxy_backend_response_time_average_seconds{proxy=\"be_rpc\"}[5m]) ))",
+          "expr": "histogram_quantile(0.5, sum by (job, le) (rate(caddy_http_response_duration_seconds_bucket{server=\"srv0\"}[5m]))) or sum by (job) (haproxy_backend_response_time_average_seconds{proxy='be_rpc'})",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A"
         }
       ],
