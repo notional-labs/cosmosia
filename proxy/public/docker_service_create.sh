@@ -9,7 +9,7 @@ docker service create \
   --publish mode=host,target=443,published=443 \
   --publish mode=host,target=9090,published=9090 \
   --network cosmosia \
-  --network snapshot \
+  --network notionalapi \
   --constraint 'node.hostname==cosmosia29' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
