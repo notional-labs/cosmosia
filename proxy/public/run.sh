@@ -14,7 +14,7 @@ wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/public-endpoint-gw/proxy/public/nginx.conf > $HOME/nginx.conf.template
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/public/nginx.conf > $HOME/nginx.conf.template
 wget "http://tasks.web_config/config/cosmosia.public-endpoints.xapikey" -O $HOME/cosmosia.public-endpoints.xapikey.txt
 
 XAPIKEY=$(cat $HOME/cosmosia.public-endpoints.xapikey.txt)
@@ -24,7 +24,7 @@ cat $HOME/nginx.conf.template |envsubst '$USE_DOMAIN_NAME,$COSMOSIA_PUBLIC_ENDPO
 ########################################################################################################################
 
 # generate config for the first time
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/public-endpoint-gw/proxy/public/generate_upstream.sh" > $HOME/generate_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/public/generate_upstream.sh" > $HOME/generate_upstream.sh
 sleep 1
 source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
