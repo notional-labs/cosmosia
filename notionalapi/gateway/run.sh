@@ -15,7 +15,7 @@ loop_forever () {
 }
 
 pacman -Syu --noconfirm
-pacman -Sy --noconfirm go git base-devel screen
+pacman -Sy --noconfirm go git base-devel screen cronie
 
 echo "#################################################################################################################"
 echo "install gateway"
@@ -48,4 +48,20 @@ EOT
 cd $HOME
 screen -S gateway -dm /root/go/bin/gateway start --conf=/root/gateway.yaml
 
+
+########################################################################################################################
+# cron
+random_hour=$(( ${RANDOM} % 24 ))
+random_minute=$(( ${RANDOM} % 60 ))
+
+cat <<EOT > $HOME/restart_cronjob.sh
+killall gateway
+sleep 5
+screen -S gateway -dm /root/go/bin/gateway start --conf=/root/gateway.yaml
+EOT
+
+echo "$random_minute $random_hour * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_gateway
+crond
+
+########################################################################################################################
 loop_forever
