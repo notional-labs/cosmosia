@@ -13,7 +13,7 @@ chain_list=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.
 
 cat <<EOT > $HOME/prometheus.yaml
 global:
-  scrape_interval: 15s # default is 1 minute
+  scrape_interval: 30s # default is 1 minute
 
 scrape_configs:
 EOT
