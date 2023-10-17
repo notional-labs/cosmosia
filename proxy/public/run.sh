@@ -14,39 +14,17 @@ wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 ########################################################################################################################
 # nginx
 
-curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/public/nginx.conf > $HOME/nginx.conf.template
-cat $HOME/nginx.conf.template |envsubst '$USE_DOMAIN_NAME' > /etc/nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/public-endpoint-gw/proxy/public/nginx.conf > $HOME/nginx.conf.template
+wget "http://tasks.web_config/config/cosmosia.public-endpoints.xapikey" -O $HOME/cosmosia.public-endpoints.xapikey.txt
 
-# generate index.html
-SERVICES=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
-
-get_links () {
-  for service_name in $SERVICES; do
-    echo "<p><a href=\"/${service_name}/\">$service_name</a></p>"
-  done
-}
-
-links=$(get_links)
-
-cat <<EOT > /usr/share/nginx/html/index.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cosmosia Snapshots</title>
-</head>
-
-<body>
-  <h3>Snapshots:</h3>
-  ${links}
-</body>
-</html>
-EOT
+XAPIKEY=$(cat $HOME/cosmosia.public-endpoints.xapikey.txt)
+export COSMOSIA_PUBLIC_ENDPOINTS_XAPIKEY="$XAPIKEY"
+cat $HOME/nginx.conf.template |envsubst '$USE_DOMAIN_NAME,$COSMOSIA_PUBLIC_ENDPOINTS_XAPIKEY' > /etc/nginx/nginx.conf
 
 ########################################################################################################################
 
 # generate config for the first time
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/legacy/generate_upstream.sh" > $HOME/generate_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/public-endpoint-gw/proxy/public/generate_upstream.sh" > $HOME/generate_upstream.sh
 sleep 1
 source $HOME/generate_upstream.sh
 echo "UPSTREAM_CONFIG_FILE=$UPSTREAM_CONFIG_FILE"
