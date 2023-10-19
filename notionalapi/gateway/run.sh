@@ -48,7 +48,10 @@ EOT
 cd $HOME
 
 cat <<EOT > $HOME/start.sh
-while true; do /root/go/bin/gateway start --conf=/root/gateway.yaml; done
+while true; do
+  /root/go/bin/gateway start --conf=/root/gateway.yaml
+  sleep 5;
+done
 EOT
 
 screen -S gateway -dm /bin/bash $HOME/start.sh
