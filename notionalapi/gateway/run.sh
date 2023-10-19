@@ -29,6 +29,7 @@ make install
 ########################################################################################################################
 # config file
 cat <<EOT > $HOME/gateway.yaml
+loglevel: "error"
 mode: ""
 pprof: ""
 aggrurl: "http://tasks.napiaggregator:8300/metering"
