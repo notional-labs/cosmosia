@@ -46,8 +46,12 @@ EOT
 ########################################################################################################################
 # run
 cd $HOME
-screen -S gateway -dm /root/go/bin/gateway start --conf=/root/gateway.yaml
 
+cat <<EOT > $HOME/start.sh
+while true; do /root/go/bin/gateway start --conf=/root/gateway.yaml; done
+EOT
+
+screen -S gateway -dm /bin/bash $HOME/start.sh
 
 ########################################################################################################################
 # cron
@@ -56,8 +60,6 @@ random_minute=$(( ${RANDOM} % 60 ))
 
 cat <<EOT > $HOME/restart_cronjob.sh
 killall gateway
-sleep 5
-screen -S gateway -dm /root/go/bin/gateway start --conf=/root/gateway.yaml
 EOT
 
 echo "$random_minute $random_hour * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_gateway
