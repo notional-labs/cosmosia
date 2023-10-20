@@ -134,6 +134,10 @@ stopasgroup=true
 killasgroup=true
 stderr_logfile=/var/log/chain.err.log
 stdout_logfile=/var/log/chain.out.log
+stderr_logfile_backups=10
+stdout_logfile_backups=10
+stderr_logfile_maxbytes=50MB
+stdout_logfile_maxbytes=50MB
 EOT
 
 supervisord
