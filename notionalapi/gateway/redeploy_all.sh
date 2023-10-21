@@ -37,6 +37,7 @@ injective-testnet
 injective
 irisnet
 ixo
+juno-archive-sub1
 juno
 kava
 kichain
