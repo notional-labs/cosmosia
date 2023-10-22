@@ -51,6 +51,7 @@ nois
 omniflixhub
 osmosis-testnet
 osmosis
+persitence-archive-sub
 persistent
 quasar
 quicksilver
