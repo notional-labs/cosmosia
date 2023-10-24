@@ -738,3 +738,11 @@
 | RPC      | https://rpc-persitence-archive-sub-ia.cosmosia.notional.ventures/   |
 | API      | https://api-persitence-archive-sub-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-persitence-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 93. neutron-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-neutron-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-neutron-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-neutron-archive-sub-ia.cosmosia.notional.ventures/  |

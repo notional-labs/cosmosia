@@ -45,6 +45,7 @@ kichain
 konstellation
 kujira
 mars
+neutron-archive-sub
 neutron
 noble
 nois
