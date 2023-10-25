@@ -118,6 +118,11 @@ elif [[ $chain_name == "agoric" ]]; then
   go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/agd ./cmd/agd
 #  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/ag-cosmos-helper ./cmd/helper
   go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
+
+#  mkdir -p "/root/go/bin"
+  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
+  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
+  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
 else
   go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
 fi
