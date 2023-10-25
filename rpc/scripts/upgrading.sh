@@ -105,18 +105,8 @@ buid_chain () {
   elif [[ $chain_name == "axelar" ]]; then
     axelard_version=${p_version##*v}
     go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version $opt_forcesync" -o /root/go/bin/$daemon_name ./cmd/axelard
-  else
-    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
-  fi
-
-#  # copy binary from gvm to $HOME/go/bin/
-#  if [ "$use_gvm" = true ]; then
-#    cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
-#  fi
-
-
-  # fix agoric
-  if [[ $chain_name == "agoric" ]]; then
+  elif [[ $chain_name == "agoric" ]]; then
+    # fix agoric
     cd $HOME/agoric-sdk
     yarn install
     yarn build
@@ -127,7 +117,15 @@ buid_chain () {
     go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/agd ./cmd/agd
 #    go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/ag-cosmos-helper ./cmd/helper
     go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
+  else
+    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
   fi
+
+#  # copy binary from gvm to $HOME/go/bin/
+#  if [ "$use_gvm" = true ]; then
+#    cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
+#  fi
+
 }
 
 ########################################################################################################################

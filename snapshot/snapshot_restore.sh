@@ -93,6 +93,31 @@ elif [ $( echo "${chain_name}" | egrep -c "^(injective|injective-testnet)$" ) -n
   sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/root.go
   sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/start.go
   go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
+elif [[ $chain_name == "agoric" ]]; then
+  # fix agoric
+
+  # install nvm
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+  # to load nvm
+  source $HOME/env.sh
+
+  # install node
+  nvm install v18.17.1
+
+  # install yarn
+  npm install --global yarn
+
+  # build
+  cd $HOME/agoric-sdk
+  yarn install
+  yarn build
+
+  cd $HOME/agoric-sdk/packages/cosmic-swingset && make
+
+  cd $HOME/agoric-sdk/golang/cosmos
+  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/agd ./cmd/agd
+#  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/ag-cosmos-helper ./cmd/helper
+  go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
 else
   go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
 fi
@@ -211,32 +236,4 @@ fi
 if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-testnet)$" ) -ne 0 ]; then
   sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
   sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
-fi
-
-
-# ################################################################################################################
-# fix agoric
-if [[ $chain_name == "agoric" ]]; then
-  # install nvm
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-  # to load nvm
-  source $HOME/env.sh
-
-  # install node
-  nvm install v18.17.1
-
-  # install yarn
-  npm install --global yarn
-
-  # build
-  cd $HOME/agoric-sdk
-  yarn install
-  yarn build
-
-  cd $HOME/agoric-sdk/packages/cosmic-swingset && make
-
-  cd $HOME/agoric-sdk/golang/cosmos
-  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/agd ./cmd/agd
-#  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/ag-cosmos-helper ./cmd/helper
-  go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
 fi
