@@ -78,6 +78,8 @@ buid_chain () {
     cd module
   elif [[ $chain_name == "dydx-testnet" ]]; then
     cd protocol
+  elif [[ $chain_name == "agoric" ]]; then
+    cd $HOME/agoric-sdk/golang/cosmos
   fi
 
   go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
@@ -123,7 +125,7 @@ buid_chain () {
 
     cd $HOME/agoric-sdk/golang/cosmos
     go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/agd ./cmd/agd
-    go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/ag-cosmos-helper ./cmd/helper
+#    go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/ag-cosmos-helper ./cmd/helper
     go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
   fi
 }
