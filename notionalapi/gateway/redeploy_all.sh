@@ -39,6 +39,7 @@ irisnet
 ixo
 juno-archive-sub1
 juno-archive-sub2
+juno-archive-sub
 juno
 kava
 kichain
