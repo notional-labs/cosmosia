@@ -99,7 +99,7 @@ cat <<EOT > $HOME/start_chain.sh
 source $HOME/env.sh
 # fix supervisorctl creates a dbus-daemon process everytime starting chain
 killall dbus-daemon
-$HOME/go/bin/$daemon_name start $start_flags
+$HOME/go/bin/$daemon_name start $start_flags 1>&2
 EOT
 
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_restore.sh" > $HOME/snapshot_restore.sh
