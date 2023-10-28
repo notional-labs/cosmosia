@@ -78,6 +78,9 @@ docker network create -d overlay --attachable snapshot
 # create an overlay network for agent service
 docker network create -d overlay --attachable agent
 
+# create an overlay network for subnode service
+docker network create -d overlay --attachable subnode
+
 # create 8 overlay networks for rpc services
 docker network create -d overlay --attachable net1
 docker network create -d overlay --attachable net2
