@@ -79,7 +79,7 @@ for service_name in $SERVICES_SUBNODE; do
 
     upstream backend_api_sub_$service_name {
         keepalive 16;
-        server $gw_ip:1337;
+        server $gw_ip:1317;
     }
 
     upstream backend_grpc_sub_$service_name {
