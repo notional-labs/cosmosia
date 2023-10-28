@@ -1,5 +1,6 @@
 # usage: ./run.sh chain_name
 # eg., ./run.sh cosmoshub
+# for subnode: eg., ./run.sh sub_cosmoshub
 
 chain_name="$1"
 
@@ -28,7 +29,28 @@ make install
 
 ########################################################################################################################
 # config file
-cat <<EOT > $HOME/gateway.yaml
+
+if [[ $chain_name == "sub*" ]]; then
+
+  cat <<EOT > $HOME/gateway.yaml
+loglevel: "error"
+mode: ""
+pprof: ""
+aggrurl: "http://tasks.napiaggregator:8300/metering"
+mysqlsrc: "root:invalid@tcp(tasks.napi_mysql:3306)/db_apicount"
+dbconurl: "http://tasks.napidb_1:4001/"
+chain: "$chain_name"
+rpc: "http://tasks.${chain_name}:26657"
+wsrpc: "ws://tasks.${chain_name}:26657/websocket"
+api: "http://tasks.${chain_name}:1317"
+grpc: "tasks.lb_${chain_name}:9090"
+eth: "http://tasks.${chain_name}:8545"
+ethws: "ws://tasks.${chain_name}:8546"
+EOT
+
+else
+
+  cat <<EOT > $HOME/gateway.yaml
 loglevel: "error"
 mode: ""
 pprof: ""
@@ -43,6 +65,8 @@ grpc: "tasks.lb_${chain_name}:8003"
 eth: "http://tasks.lb_${chain_name}:8004"
 ethws: "ws://tasks.lb_${chain_name}:8005"
 EOT
+
+fi
 
 ########################################################################################################################
 # run

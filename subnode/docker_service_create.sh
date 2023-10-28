@@ -33,7 +33,7 @@ docker service create \
   --name $subnode_service_name \
   --replicas 1 \
   --network $network \
-  --network cosmosia \
+  --network subnode \
   --label 'cosmosia.service=subnode' \
   --endpoint-mode dnsrr \
   --constraint 'node.labels.cosmosia.subnode==true' \

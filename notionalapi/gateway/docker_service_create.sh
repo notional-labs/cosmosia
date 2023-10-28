@@ -1,5 +1,6 @@
 # usage: ./docker_service_create.sh chain_name
 # eg., ./docker_service_create.sh cosmoshub
+# for subnode: eg., ./docker_service_create.sh sub_cosmoshub
 
 chain_name="$1"
 if [ -f "../../env.sh" ]; then
@@ -14,8 +15,14 @@ if [[ -z $chain_name ]]; then
   exit
 fi
 
-# to get the url to the config file
-eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
+
+net=""
+# check if subnode
+if [[ $chain_name == "sub*" ]]; then
+  net="subnode"
+else
+  # to get the url to the config file
+  eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -26,12 +33,13 @@ eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   }
   ')"
 
-echo "config=$config"
-# load config
-eval "$(curl -s "$config" |sed 's/ = /=/g')"
+  echo "config=$config"
+  # load config
+  eval "$(curl -s "$config" |sed 's/ = /=/g')"
+  net="$network"
+fi
 
-echo "network=$network"
-
+echo "net=$net"
 
 SERVICE_NAME="napigw_${chain_name}"
 
@@ -42,7 +50,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --constraint "node.labels.cosmosia.notionalapi.gw==true" \
-  --network $network \
+  --network $net \
   --network notionalapi \
   --label 'cosmosia.service=napigw' \
   --endpoint-mode dnsrr \
