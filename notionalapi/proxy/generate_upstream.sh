@@ -67,7 +67,7 @@ sleep 1
 ########################################################################################################################
 SERVICES_SUBNODE="cosmoshub evmos"
 for service_name in $SERVICES_SUBNODE; do
-  gw_ip=$(dig +short "tasks.sub_$service_name")
+  gw_ip=$(dig +short "tasks.napigw_sub_$service_name")
   if [[ -z "$gw_ip" ]]; then
     gw_ip="127.0.0.1"
   fi
