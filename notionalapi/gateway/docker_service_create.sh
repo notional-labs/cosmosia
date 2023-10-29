@@ -18,7 +18,7 @@ fi
 
 net=""
 # check if subnode
-if [[ $chain_name == "sub*" ]]; then
+if [[ $chain_name == sub_* ]]; then
   net="subnode"
 else
   # to get the url to the config file
