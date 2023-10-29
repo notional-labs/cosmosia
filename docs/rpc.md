@@ -746,3 +746,11 @@
 | RPC      | https://rpc-neutron-archive-sub-ia.cosmosia.notional.ventures/   |
 | API      | https://api-neutron-archive-sub-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-neutron-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 94. dydx
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-dydx-ia.cosmosia.notional.ventures/   |
+| API      | https://api-dydx-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-dydx-ia.cosmosia.notional.ventures/  |
