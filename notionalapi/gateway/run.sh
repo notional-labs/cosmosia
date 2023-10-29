@@ -30,7 +30,7 @@ make install
 ########################################################################################################################
 # config file
 
-if [[ $chain_name == "sub*" ]]; then
+if [[ $chain_name == sub_* ]]; then
 
   cat <<EOT > $HOME/gateway.yaml
 loglevel: "error"
