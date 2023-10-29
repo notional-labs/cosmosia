@@ -731,13 +731,13 @@
 | API      | https://api-composable-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-composable-testnet-ia.cosmosia.notional.ventures/  |
 
-### 92. persitence-archive-sub
+### 92. persistence-archive-sub
 
 | Protocol | Endpoint                                                |
 |----------|:--------------------------------------------------------|
-| RPC      | https://rpc-persitence-archive-sub-ia.cosmosia.notional.ventures/   |
-| API      | https://api-persitence-archive-sub-ia.cosmosia.notional.ventures/   |
-| GRPC     | https://grpc-persitence-archive-sub-ia.cosmosia.notional.ventures/  |
+| RPC      | https://rpc-persistence-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-persistence-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-persistence-archive-sub-ia.cosmosia.notional.ventures/  |
 
 ### 93. neutron-archive-sub
 
