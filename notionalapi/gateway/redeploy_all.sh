@@ -24,6 +24,7 @@ cyber
 dig-archive
 dig
 dydx-testnet
+dydx
 emoney
 evmos-archive-sub1
 evmos-archive-sub2
