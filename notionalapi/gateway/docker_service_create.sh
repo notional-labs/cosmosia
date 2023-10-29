@@ -19,7 +19,22 @@ fi
 net=""
 # check if subnode
 if [[ $chain_name == sub_* ]]; then
-  net="subnode"
+#  net="subnode"
+
+  subnode_name="${chain_name#sub_}"
+
+  eval "$(awk -v TARGET=$subnode_name -F ' = ' '
+  {
+    if ($0 ~ /^\[.*\]$/) {
+      gsub(/^\[|\]$/, "", $0)
+      SECTION=$0
+    } else if (($2 != "") && (SECTION==TARGET)) {
+      print $1 "=" $2
+    }
+  }
+  ' ../../data/subnode_registry.ini )"
+
+  net="$network"
 else
   # to get the url to the config file
   eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
