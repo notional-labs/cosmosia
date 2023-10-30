@@ -23,6 +23,7 @@ cryptoorgchain
 cyber
 dig-archive
 dig
+dydx-archive-sub
 dydx-testnet
 dydx
 emoney
