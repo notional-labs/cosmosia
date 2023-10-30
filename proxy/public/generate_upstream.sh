@@ -3,7 +3,72 @@ if [[ -z "$CHAIN_REGISTRY_INI_URL" ]]; then
   exit
 fi
 
-SERVICES=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
+# SERVICES=$(curl -s "$CHAIN_REGISTRY_INI_URL" |grep -E "\[.*\]" | sed 's/^\[\(.*\)\]$/\1/')
+SERVICES=$(cat <<-END
+agoric
+akash
+archway
+assetmantle
+axelar
+bitcanna
+bitsong
+celestia-testnet
+cheqd
+chihuahua
+composable
+composable-testnet
+coreum
+cosmoshub
+cosmoshub-testnet
+crescent-testnet
+crescent
+cryptoorgchain
+cyber
+dig
+dydx-testnet
+dydx
+emoney
+evmos
+evmos-testnet
+fetchhub
+gravitybridge
+injective-testnet
+injective
+irisnet
+ixo
+juno
+kava
+kichain
+konstellation
+kujira
+mars
+neutron
+noble
+nois
+omniflixhub
+osmosis-testnet
+osmosis
+persistent
+quasar
+quicksilver
+regen-testnet
+regen
+sei
+sentinel
+sommelier
+stargaze-testnet
+stargaze
+starname
+stride
+terra2-testnet
+terra2
+terra
+umee
+vidulum
+whitewhale-testnet
+whitewhale
+END
+)
 
 
 UPSTREAM_CONFIG_FILE="/etc/nginx/upstream.conf"
