@@ -25,6 +25,7 @@ crescent
 cryptoorgchain
 cyber
 dig
+dydx-archive-sub
 dydx-testnet
 dydx
 emoney

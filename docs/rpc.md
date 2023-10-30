@@ -3,6 +3,8 @@
 
 ## Notional Public Endpoints
 
+Note: archive nodes and subnodes endpoints are only available in NotionalApi, not available for public endpoints.
+
 ### 01. Cosmoshub
 
 | Protocol | Endpoint                                              |
@@ -754,3 +756,11 @@
 | RPC      | https://rpc-dydx-ia.cosmosia.notional.ventures/   |
 | API      | https://api-dydx-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-dydx-ia.cosmosia.notional.ventures/  |
+
+### 95. dydx-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-dydx-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-dydx-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-dydx-archive-sub-ia.cosmosia.notional.ventures/  |
