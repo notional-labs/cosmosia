@@ -134,7 +134,7 @@ Command executed on a docker swarm manager node. In this example, we will add `c
    git pull # Updated latest data
    bash docker_service_create.sh
    ```
-8. Update [uptime monitor](https://status.notional.ventures/status/cosmosia)
+8. Update [uptime monitor](https://status.notional.ventures/status/notionalapi)
 
       - Api Service
       - Snapshot Service

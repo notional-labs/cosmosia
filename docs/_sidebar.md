@@ -8,7 +8,7 @@
   - Snapshots
     - [Usage](snapshot_usage.md)
     - [PebbleDB Notes](pebbledb.md)
-  - [Service Status](https://status.notional.ventures/status/cosmosia)
+  - [Service Status](https://status.notional.ventures/status/notionalapi)
 
 - Admin
   - [Admin](admin.md)
