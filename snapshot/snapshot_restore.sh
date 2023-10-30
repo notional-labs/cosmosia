@@ -59,7 +59,7 @@ if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra|terra-archive|a
   go mod edit -dropreplace github.com/tecbot/gorocksdb
 elif [[ $chain_name == "gravitybridge" ]]; then
   cd module
-elif [ $( echo "${chain_name}" | egrep -c "^(dydx|dydx-testnet)$" ) -ne 0 ]; then
+elif [ $( echo "${chain_name}" | egrep -c "^(dydx|dydx-testnet|dydx-archive-sub)$" ) -ne 0 ]; then
   cd protocol
 elif [[ $chain_name == "agoric" ]]; then
   cd $HOME/agoric-sdk/golang/cosmos
