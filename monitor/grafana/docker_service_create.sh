@@ -16,6 +16,7 @@ docker service create \
   --name grafana \
   --replicas 1 \
   --network cosmosia \
+  --constraint 'node.hostname==cosmosia11' \
   --endpoint-mode dnsrr \
   --restart-condition any \
   --env-file ../../env.sh \
