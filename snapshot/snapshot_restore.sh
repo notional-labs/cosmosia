@@ -225,6 +225,8 @@ sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/conf
 sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/config/app.toml
 sed -i -e "s/^query_gas_limit *=.*/query_gas_limit = 10000000/" $node_home/config/app.toml
 
+sed -i -e "s/^discard_abci_responses *=.*/discard_abci_responses = false/" $node_home/config/config.toml
+
 echo "download genesis..."
 curl -Ls "${SNAPSHOT_BASE_URL}/genesis.json" > $node_home/config/genesis.json
 
