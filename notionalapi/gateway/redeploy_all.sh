@@ -53,6 +53,7 @@ neutron
 noble
 nois
 omniflixhub
+osmosis-archive-sub1
 osmosis-testnet
 osmosis
 persistence-archive-sub
