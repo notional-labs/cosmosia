@@ -29,8 +29,8 @@ dydx-archive-sub
 dydx-testnet
 dydx
 emoney
-evmos
 evmos-testnet
+evmos
 fetchhub
 gravitybridge
 injective-testnet
@@ -131,43 +131,40 @@ done
 
 sleep 1
 ########################################################################################################################
-# SERVICES_SUBNODE="cosmoshub evmos"
-# for service_name in $SERVICES_SUBNODE; do
-#   gw_ip=$(dig +short "tasks.sub_$service_name")
-#   if [[ -z "$gw_ip" ]]; then
-#     gw_ip="127.0.0.1"
-#   fi
-#   cat <<EOT >> $UPSTREAM_CONFIG_FILE_TMP
-#     upstream backend_rpc_sub_$service_name {
-#         keepalive 16;
-#         server $gw_ip:26657;
-#     }
-#
-#     upstream backend_api_sub_$service_name {
-#         keepalive 16;
-#         server $gw_ip:1317;
-#     }
-#
-#     upstream backend_grpc_sub_$service_name {
-#         keepalive 16;
-#         server $gw_ip:9090;
-#     }
-# EOT
-#
-#   if [[ $service_name == evmos* ]]; then
-#       cat <<EOT >> $UPSTREAM_CONFIG_FILE_TMP
-#     upstream backend_jsonrpc_sub_$service_name {
-#         keepalive 16;
-#         server $gw_ip:8545;
-#     }
-#
-#     upstream backend_wsjsonrpc_sub_$service_name {
-#         keepalive 16;
-#         server $gw_ip:8546;
-#     }
-# EOT
-#   fi
-#
-# done
+SERVICES_SUBNODE="cosmoshub evmos"
+for service_name in $SERVICES_SUBNODE; do
+  gw_ip=$(dig +short "tasks.napigw_sub_$service_name")
+  if [[ -z "$gw_ip" ]]; then
+    gw_ip="127.0.0.1"
+  fi
+  cat <<EOT >> $UPSTREAM_CONFIG_FILE_TMP
+    upstream backend_rpc_sub_$service_name {
+      keepalive 16;
+      server $gw_ip:26657;
+    }
+    upstream backend_api_sub_$service_name {
+       keepalive 16;
+       server $gw_ip:1317;
+    }
+    upstream backend_grpc_sub_$service_name {
+       keepalive 16;
+       server $gw_ip:9090;
+    }
+EOT
+
+  if [[ $service_name == evmos* ]]; then
+    cat <<EOT >> $UPSTREAM_CONFIG_FILE_TMP
+      upstream backend_jsonrpc_sub_$service_name {
+        keepalive 16;
+        server $gw_ip:8545;
+      }
+      upstream backend_wsjsonrpc_sub_$service_name {
+        keepalive 16;
+        server $gw_ip:8546;
+      }
+EOT
+  fi
+
+done
 
 sleep 1
