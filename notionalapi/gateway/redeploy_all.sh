@@ -7,6 +7,7 @@ axelar
 bitcanna
 bitsong
 celestia-testnet
+celestia
 cheqd
 chihuahua
 composable
