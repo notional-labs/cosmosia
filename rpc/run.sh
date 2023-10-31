@@ -70,7 +70,6 @@ source $HOME/snapshot_restore.sh
 if [ $( echo "${chain_name}" | egrep -c "^(osmosis)$" ) -ne 0 ]; then
   sed -i -e "s/^min-gas-price-for-high-gas-tx *=.*/min-gas-price-for-high-gas-tx = \".005\"/" $node_home/config/app.toml
   sed -i -e "s/^arbitrage-min-gas-fee *=.*/arbitrage-min-gas-fee = \".025\"/" $node_home/config/app.toml
-  arbitrage-min-gas-fee = ".005"
 fi
 
 # enable statesync for pruned rpc node only
