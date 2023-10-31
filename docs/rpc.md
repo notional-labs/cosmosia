@@ -764,3 +764,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-dydx-archive-sub-ia.cosmosia.notional.ventures/   |
 | API      | https://api-dydx-archive-sub-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-dydx-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 96. celestia
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-celestia-ia.cosmosia.notional.ventures/   |
+| API      | https://api-celestia-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-celestia-ia.cosmosia.notional.ventures/  |
