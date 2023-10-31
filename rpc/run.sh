@@ -67,6 +67,10 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 cd $HOME
 source $HOME/snapshot_restore.sh
 
+if [ $( echo "${chain_name}" | egrep -c "^(osmosis)$" ) -ne 0 ]; then
+  sed -i -e "s/^min-gas-price-for-high-gas-tx *=.*/min-gas-price-for-high-gas-tx = \".005\"/" $node_home/config/app.toml
+fi
+
 # enable statesync for pruned rpc node only
 if [ $( echo "${chain_name}" | egrep -c "archive" ) -eq 0 ]; then
   # except these chains (https://github.com/notional-labs/cosmosia/issues/297)
