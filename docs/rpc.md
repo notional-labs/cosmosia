@@ -780,3 +780,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-regen-archive-sub-ia.cosmosia.notional.ventures/   |
 | API      | https://api-regen-archive-sub-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-regen-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 98. odin
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-odin-ia.cosmosia.notional.ventures/   |
+| API      | https://api-odin-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-odin-ia.cosmosia.notional.ventures/  |
