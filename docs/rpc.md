@@ -772,3 +772,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-celestia-ia.cosmosia.notional.ventures/   |
 | API      | https://api-celestia-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-celestia-ia.cosmosia.notional.ventures/  |
+
+### 97. regen-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-regen-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-regen-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-regen-archive-sub-ia.cosmosia.notional.ventures/  |

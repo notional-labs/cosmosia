@@ -61,6 +61,7 @@ persistence-archive-sub
 persistent
 quasar
 quicksilver
+regen-archive-sub
 regen-testnet
 regen
 sei-archive-sub
