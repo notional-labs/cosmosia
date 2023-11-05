@@ -788,3 +788,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-odin-ia.cosmosia.notional.ventures/   |
 | API      | https://api-odin-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-odin-ia.cosmosia.notional.ventures/  |
+
+### 99. osmosis-archive-sub2
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-osmosis-archive-sub2-ia.cosmosia.notional.ventures/   |
+| API      | https://api-osmosis-archive-sub2-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-osmosis-archive-sub2-ia.cosmosia.notional.ventures/  |

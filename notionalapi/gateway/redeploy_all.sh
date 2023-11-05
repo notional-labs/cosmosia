@@ -56,6 +56,7 @@ nois
 odin
 omniflixhub
 osmosis-archive-sub1
+osmosis-archive-sub2
 osmosis-testnet
 osmosis
 persistence-archive-sub
