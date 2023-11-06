@@ -105,6 +105,11 @@ buid_chain () {
   elif [[ $chain_name == "axelar" ]]; then
     axelard_version=${p_version##*v}
     go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version $opt_forcesync" -o /root/go/bin/$daemon_name ./cmd/axelard
+  elif [ $( echo "${chain_name}" | egrep -c "^(injective|injective-testnet)$" ) -ne 0 ]; then
+    # fix for hard-coded using goleveldb
+    sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/root.go
+    sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/start.go
+    go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
   elif [[ $chain_name == "agoric" ]]; then
     # fix agoric
     cd $HOME/agoric-sdk
