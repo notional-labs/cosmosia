@@ -35,6 +35,7 @@ evmos-archive-sub
 evmos
 evmos-testnet
 fetchhub
+furya
 gravitybridge
 injective-testnet
 injective

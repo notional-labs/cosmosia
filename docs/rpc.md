@@ -796,3 +796,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-osmosis-archive-sub2-ia.cosmosia.notional.ventures/   |
 | API      | https://api-osmosis-archive-sub2-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-osmosis-archive-sub2-ia.cosmosia.notional.ventures/  |
+
+### 100. furya
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-furya-ia.cosmosia.notional.ventures/   |
+| API      | https://api-furya-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-furya-ia.cosmosia.notional.ventures/  |
