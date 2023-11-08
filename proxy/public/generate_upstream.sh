@@ -33,6 +33,7 @@ emoney
 evmos-testnet
 evmos
 fetchhub
+furya
 gravitybridge
 injective-testnet
 injective
