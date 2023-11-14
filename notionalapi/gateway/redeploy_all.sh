@@ -16,6 +16,7 @@ composable-testnet
 coreum
 cosmoshub1-archive-sub0
 cosmoshub2-archive-sub0
+cosmoshub3-archive-sub0
 cosmoshub-archive-sub1
 cosmoshub-archive-sub
 cosmoshub
