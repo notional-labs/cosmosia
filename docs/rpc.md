@@ -804,3 +804,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-furya-ia.cosmosia.notional.ventures/   |
 | API      | https://api-furya-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-furya-ia.cosmosia.notional.ventures/  |
+
+### 101. cosmoshub1-archive
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-cosmoshub1-archive-ia.cosmosia.notional.ventures/   |
+| API      | https://api-cosmoshub1-archive-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-cosmoshub1-archive-ia.cosmosia.notional.ventures/  |
