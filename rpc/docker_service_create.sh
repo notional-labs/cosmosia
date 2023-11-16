@@ -134,6 +134,11 @@ rpc_service_name="rpc_${chain_name}_${data_version}"
 constraint=$(get_docker_rpc_constraint)
 echo "constraint=$constraint"
 
+if [[ -z $constraint ]]; then
+  echo "No rpc constraint config for ${chain_name}"
+  exit
+fi
+
 # delete existing service
 docker service rm $rpc_service_name
 
