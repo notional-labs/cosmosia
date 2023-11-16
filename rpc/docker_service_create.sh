@@ -34,6 +34,25 @@ get_docker_snapshot_config () {
   echo $str_snapshot_cfg
 }
 
+get_docker_rpc_constraint () {
+  str_rpc_constraint=""
+
+  if [ -f /.dockerenv ]; then
+    # inside container
+    str_snapshot_cfg="$(curl -s "http://tasks.web_config/config/cosmosia.snapshot.${chain_name}" |sed 's/ = /=/g')"
+  else
+    # inside host
+
+    # figure out container id of agent
+    agent_id=$(docker ps -aqf "name=agent")
+
+    # execute command in agent container to get data version
+    str_rpc_constraint=$(docker exec $agent_id curl -s "http://tasks.web_config/config/cosmosia.rpc.${chain_name}" |sed 's/ = /=/g')
+  fi
+
+  echo $str_rpc_constraint
+}
+
 # to get the url to the config file
 eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
@@ -98,20 +117,21 @@ data_version=$(find_current_data_version)
 
 rpc_service_name="rpc_${chain_name}_${data_version}"
 
-# use override constraint if found
-override_constraint=$(docker node ls -f node.label=cosmosia.rpc.${chain_name}=true | tail -n +2 |awk '{print $2}')
-if [[ -z $override_constraint ]]; then
-  echo "No override_constraint found"
-  constraint="node.labels.cosmosia.rpc.pruned==true"
-  if [ $( echo "${chain_name}" | egrep -c "archive" ) -ne 0 ]; then
-    # if archive node
-    constraint="node.labels.cosmosia.rpc.${chain_name}==true"
-  fi
-else
-  echo "Found override_constraint=${override_constraint}"
-  constraint="node.labels.cosmosia.rpc.${chain_name}==true"
-fi
+## use override constraint if found
+#override_constraint=$(docker node ls -f node.label=cosmosia.rpc.${chain_name}=true | tail -n +2 |awk '{print $2}')
+#if [[ -z $override_constraint ]]; then
+#  echo "No override_constraint found"
+#  constraint="node.labels.cosmosia.rpc.pruned==true"
+#  if [ $( echo "${chain_name}" | egrep -c "archive" ) -ne 0 ]; then
+#    # if archive node
+#    constraint="node.labels.cosmosia.rpc.${chain_name}==true"
+#  fi
+#else
+#  echo "Found override_constraint=${override_constraint}"
+#  constraint="node.labels.cosmosia.rpc.${chain_name}==true"
+#fi
 
+constraint=$(get_docker_rpc_constraint)
 echo "constraint=$constraint"
 
 # delete existing service
