@@ -1,5 +1,4 @@
 SERVICES=$(cat <<-END
-agoric-archive-sub
 agoric
 akash
 archway
