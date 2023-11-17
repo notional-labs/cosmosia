@@ -828,3 +828,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-cosmoshub3-archive-sub0-ia.cosmosia.notional.ventures/   |
 | API      | https://api-cosmoshub3-archive-sub0-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-cosmoshub3-archive-sub0-ia.cosmosia.notional.ventures/  |
+
+### 104. agoric-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-agoric-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-agoric-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-agoric-archive-sub-ia.cosmosia.notional.ventures/  |
