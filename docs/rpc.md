@@ -836,3 +836,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-agoric-archive-sub-ia.cosmosia.notional.ventures/   |
 | API      | https://api-agoric-archive-sub-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-agoric-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 105. juno-archive-sub3
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-juno-archive-sub3-ia.cosmosia.notional.ventures/   |
+| API      | https://api-juno-archive-sub3-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-juno-archive-sub3-ia.cosmosia.notional.ventures/  |
