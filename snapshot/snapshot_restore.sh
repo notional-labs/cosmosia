@@ -244,6 +244,8 @@ curl -Ls "${SNAPSHOT_BASE_URL}/genesis.json" > $node_home/config/genesis.json
 echo "download addrbook..."
 curl -Lfso $node_home/config/addrbook.json "${SNAPSHOT_BASE_URL}/addrbook.json"
 
+sed -i -e "s/^adaptive-fee-enabled *=.*/adaptive-fee-enabled = \"true\"/" $node_home/config/app.toml
+
 # no seeds and persistent_peers for read-only subnode
 if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
   sed -i -e "s/^seeds *=.*/seeds = \"\"/" $node_home/config/config.toml
