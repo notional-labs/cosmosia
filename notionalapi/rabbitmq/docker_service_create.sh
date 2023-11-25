@@ -10,6 +10,7 @@ docker service create \
   --replicas 1 \
   --publish mode=host,target=15672,published=15672 \
   --publish mode=host,target=5672,published=5672 \
+  --network bignet \
   --network notionalapi \
   --constraint 'node.hostname==cosmosia21' \
   --endpoint-mode dnsrr \

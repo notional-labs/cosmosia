@@ -14,6 +14,7 @@ docker service rm admin
 docker service create \
   --name admin \
   --replicas 1 \
+  --network bignet \
   --network cosmosia \
   --network agent \
   --network net1 \

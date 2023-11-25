@@ -15,6 +15,7 @@ docker service rm grafana
 docker service create \
   --name grafana \
   --replicas 1 \
+  --network bignet \
   --network cosmosia \
   --network net1 \
   --network net2 \

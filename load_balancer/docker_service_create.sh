@@ -58,6 +58,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --constraint "node.labels.cosmosia.lb==true" \
+  --network bignet \
   --network $network \
   --label 'cosmosia.service=lb' \
   --endpoint-mode dnsrr \

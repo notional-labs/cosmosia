@@ -8,6 +8,7 @@ docker service rm $SERVICE_NAME
 docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
+  --network bignet \
   --network notionalapi \
   --constraint 'node.hostname==cosmosia21' \
   --endpoint-mode dnsrr \

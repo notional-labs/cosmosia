@@ -9,6 +9,7 @@ docker service create \
   --constraint "node.labels.cosmosia.proxy.legacy==true" \
   --endpoint-mode dnsrr \
   --publish mode=host,target=80,published=80 \
+  --network bignet \
   --network cosmosia \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
