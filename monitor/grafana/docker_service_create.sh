@@ -16,6 +16,14 @@ docker service create \
   --name grafana \
   --replicas 1 \
   --network cosmosia \
+  --network net1 \
+  --network net2 \
+  --network net3 \
+  --network net4 \
+  --network net5 \
+  --network net6 \
+  --network net7 \
+  --network net8 \
   --constraint 'node.hostname==cosmosia11' \
   --endpoint-mode dnsrr \
   --restart-condition any \
