@@ -146,6 +146,7 @@ docker service create \
   --name $rpc_service_name \
   --replicas 1 \
   --constraint $constraint \
+  --network bignet \
   --network $network \
   --label 'cosmosia.service=rpc' \
   --endpoint-mode dnsrr \

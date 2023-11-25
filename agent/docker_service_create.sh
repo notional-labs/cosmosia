@@ -4,6 +4,7 @@ docker service rm agent
 # create new service
 docker service create \
   --name agent \
+  --network bignet \
   --network snapshot \
   --mode global \
   --network agent \

@@ -67,6 +67,8 @@ systemctl restart docker
 
 
 ```console
+docker network create -d overlay --attachable --subnet=10.1.0.0/16 --gateway=10.1.0.1 bignet
+
 # https://github.com/notional-labs/cosmosia/issues/134
 
 # cosmosia overlay network used for loadbalance and proxy

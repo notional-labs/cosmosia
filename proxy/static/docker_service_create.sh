@@ -7,6 +7,7 @@ docker service create \
   --replicas 1 \
   --publish mode=host,target=80,published=80 \
   --publish mode=host,target=443,published=443 \
+  --network bignet \
   --network cosmosia \
   --network snapshot \
   --constraint 'node.hostname==cosmosia11' \

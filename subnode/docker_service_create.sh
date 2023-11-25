@@ -32,6 +32,7 @@ docker service rm $subnode_service_name
 docker service create \
   --name $subnode_service_name \
   --replicas 1 \
+  --network bignet \
   --network $network \
   --network subnode \
   --label 'cosmosia.service=subnode' \

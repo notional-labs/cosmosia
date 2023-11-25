@@ -89,6 +89,7 @@ docker service rm $SERVICE_NAME
 docker service create \
   --name $SERVICE_NAME \
   --replicas 1 $MOUNT_OPT \
+  --network bignet \
   --network $network \
   --network snapshot \
   --label 'cosmosia.service=snapshot' \

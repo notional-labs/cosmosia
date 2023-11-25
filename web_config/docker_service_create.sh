@@ -5,6 +5,7 @@ docker service rm web_config
 docker service create \
   --name web_config \
   --replicas 1 \
+  --network bignet \
   --network cosmosia \
   --network snapshot \
   --network notionalapi \

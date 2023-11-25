@@ -11,6 +11,7 @@ docker service create \
   --publish mode=host,target=80,published=11111 \
   --endpoint-mode dnsrr \
   --hostname="{{.Service.Name}}.{{.Node.Hostname}}" \
+  --network bignet \
   --network snapshot \
   --network net1 \
   --network net2 \
