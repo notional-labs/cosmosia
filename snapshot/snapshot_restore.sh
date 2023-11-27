@@ -252,6 +252,9 @@ if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
   sed -i -e "s/^persistent_peers *=.*/persistent_peers = \"\"/" $node_home/config/config.toml
 fi
 
+# fix for injective
+[ "$chain_name" == "injective" ] && sed -i '/^\[mempool]/,/^\[/{s/^size[[:space:]]*=.*/size = 200/}' $node_home/config/config.toml
+
 # fix for sei
 if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-testnet)$" ) -ne 0 ]; then
   sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
