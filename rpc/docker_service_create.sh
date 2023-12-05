@@ -114,7 +114,7 @@ find_current_data_version () {
 
 # get the data version from chain.json, service name is rpc_$chain_name_$version
 data_version=$(find_current_data_version)
-
+echo "data_version=$data_version"
 rpc_service_name="rpc_${chain_name}_${data_version}"
 
 ## use override constraint if found
