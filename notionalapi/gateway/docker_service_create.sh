@@ -71,7 +71,7 @@ docker service create \
   --label 'cosmosia.service=napigw' \
   --endpoint-mode dnsrr \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
-  --restart-condition none \
+  --restart-condition any \
   --env-file ../../env.sh \
   archlinux:latest \
   /bin/bash -c \
