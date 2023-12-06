@@ -25,7 +25,6 @@ cosmoshub-testnet
 crescent-testnet
 crescent
 cryptoorgchain
-cyber
 dig-archive
 dig
 dydx-archive-sub
