@@ -105,6 +105,9 @@ if [[ -z $snapshot_storage_node ]]; then
 else
   FILESIZE=$(ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node_ip} stat -c%s "/mnt/data/snapshots/${chain_name}/${TAR_FILENAME}")
 fi
+if [[ -z $FILESIZE ]]; then
+  FILESIZE=0
+fi
 
 # addrbook.json
 if [[ -z $snapshot_storage_node ]]; then
