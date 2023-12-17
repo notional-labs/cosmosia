@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: tool3/docsify-action@v1.0.3
         with:
           github_token: ${{ secrets.GP_TOKEN }}
