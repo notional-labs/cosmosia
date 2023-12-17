@@ -9,13 +9,20 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
+jobs:
+  docs:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: tool3/docsify-action@v1.0.3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Docsify
+        uses: tool3/docsify-action@v1.0.3
         with:
           github_token: ${{ secrets.GP_TOKEN }}
           dir: docs
