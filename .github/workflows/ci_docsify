@@ -18,3 +18,5 @@ jobs:
       - uses: tool3/docsify-action@v1.0.3
         with:
           github_token: ${{ secrets.GP_TOKEN }}
+          dir: docs
+          branch: main
