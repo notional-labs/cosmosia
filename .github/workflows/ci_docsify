@@ -1,0 +1,20 @@
+name: ci_docsify
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: tool3/docsify-action@v1.0.3
+        with:
+          github_token: ${{ secrets.GP_TOKEN }}
