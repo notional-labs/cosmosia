@@ -5,7 +5,7 @@
 - There are multiple relayer-hubs.
 - Each relayer-hub has:
     - a config file named `<relayerhub_name>_config.toml`. For example: [test_config.toml](test_config.toml)
-    - a `mnemonic` which used for all chains in this hub. The `mnemonic` is stored within Docker Swarm config.
+    - a `mnemonic` which used for all chains in this hub. The `mnemonic` is stored within Docker Swarm config. Named `cosmosia.relay.<relayerhub_name>.mnemonic.txt`, for example `cosmosia.relay.test.mnemonic.txt`.
 - Uptime monitor page: https://status-relayer.notional.ventures/status/ibc
 
 ### Relayer Hubs
