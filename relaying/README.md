@@ -4,7 +4,7 @@
 - First version is as simple as possible
 - There are multiple relayer-hubs.
 - Each relayer-hub has:
-    - a config file named `<relayerhub_name>_config.toml`. For example: [whitewhale_config.toml](whitewhale_config.toml)
+    - a config file named `<relayerhub_name>_config.toml`. For example: [test_config.toml](test_config.toml)
     - a `mnemonic` which used for all chains in this hub. The `mnemonic` is stored within Docker Swarm config.
 - Uptime monitor page: https://status-relayer.notional.ventures/status/ibc
 
