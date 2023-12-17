@@ -26,7 +26,7 @@ docker service create \
   --network net6 \
   --network net7 \
   --network net8 \
-  --constraint 'node.hostname==cosmosia33' \
+  --constraint "node.labels.cosmosia.relay==true" \
   --endpoint-mode dnsrr \
   --restart-condition none \
   archlinux:latest \
