@@ -8,7 +8,8 @@
   - Snapshots
     - [Usage](snapshot_usage.md)
     - [PebbleDB Notes](pebbledb.md)
-  - [Service Status](https://status.notional.ventures/status/notionalapi)
+  - [Rpc Status](https://status.notional.ventures/status/notionalapi)
+  - [Relay Status](https://status-relayer.notional.ventures/status/ibc)
 
 - Admin
   - [Admin](admin.md)
