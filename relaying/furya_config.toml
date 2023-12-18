@@ -42,8 +42,8 @@ buckets = 10
 [[chains]]
 id = "cosmoshub-4"
 type = "CosmosSdk"
-rpc_addr = "https://cosmoshub.rpc.stakin-nodes.com/"
-grpc_addr = "https://grpc-cosmoshub-ia.cosmosia.notional.ventures/"
+rpc_addr = "http://tasks.lb_cosmoshub:8000"
+grpc_addr = "http://tasks.lb_cosmoshub:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "cosmos"
@@ -64,7 +64,7 @@ sequential_batch_tx = false
 
 [chains.event_source]
 mode = "push"
-url = "wss://cosmoshub.rpc.stakin-nodes.com/websocket"
+url = "ws://tasks.lb_cosmoshub:8000/websocket"
 batch_delay = "500ms"
 
 [chains.trust_threshold]
@@ -104,8 +104,8 @@ derivation = "cosmos"
 [[chains]]
 id = "furya-1"
 type = "CosmosSdk"
-rpc_addr = "https://rpc.furya.xyz/"
-grpc_addr = "https://grpc.furya.xyz/"
+rpc_addr = "http://tasks.lb_furya:8000"
+grpc_addr = "http://tasks.lb_furya:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "furya"
@@ -126,7 +126,7 @@ sequential_batch_tx = false
 
 [chains.event_source]
 mode = "push"
-url = "wss://rpc.furya.xyz/websocket"
+url = "ws://tasks.lb_furya:8000/websocket"
 batch_delay = "500ms"
 
 [chains.trust_threshold]
@@ -162,8 +162,8 @@ derivation = "cosmos"
 [[chains]]
 id = "juno-1"
 type = "CosmosSdk"
-rpc_addr = "https://rpc-juno-01.stakeflow.io/"
-grpc_addr = "https://grpc-juno-ia.cosmosia.notional.ventures/"
+rpc_addr = "http://tasks.lb_juno:8000"
+grpc_addr = "http://tasks.lb_juno:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "juno"
@@ -184,7 +184,7 @@ sequential_batch_tx = false
 
 [chains.event_source]
 mode = "push"
-url = "wss://rpc-juno-01.stakeflow.io/websocket"
+url = "ws://tasks.lb_juno:8000/websocket"
 batch_delay = "500ms"
 
 [chains.trust_threshold]
@@ -232,8 +232,8 @@ derivation = "cosmos"
 [[chains]]
 id = "noble-1"
 type = "CosmosSdk"
-rpc_addr = "https://noble-rpc.polkachu.com/"
-grpc_addr = "https://noble-grpc.lavenderfive.com/"
+rpc_addr = "http://tasks.lb_noble:8000"
+grpc_addr = "http://tasks.lb_noble:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "noble"
@@ -254,7 +254,7 @@ sequential_batch_tx = false
 
 [chains.event_source]
 mode = "push"
-url = "wss://noble-rpc.polkachu.com/websocket"
+url = "ws://tasks.lb_noble:8000/websocket"
 batch_delay = "500ms"
 
 [chains.trust_threshold]
@@ -276,8 +276,8 @@ derivation = "cosmos"
 [[chains]]
 id = "osmosis-1"
 type = "CosmosSdk"
-rpc_addr = "https://osmosis-rpc.onivalidator.com/"
-grpc_addr = "https://grpc-osmosis-ia.cosmosia.notional.ventures/"
+rpc_addr = "http://tasks.lb_osmosis:8000"
+grpc_addr = "http://tasks.lb_osmosis:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "osmo"
@@ -298,7 +298,7 @@ sequential_batch_tx = false
 
 [chains.event_source]
 mode = "push"
-url = "wss://osmosis-rpc.onivalidator.com/websocket"
+url = "ws://tasks.lb_osmosis:8000/websocket"
 batch_delay = "500ms"
 
 [chains.trust_threshold]
@@ -338,8 +338,8 @@ derivation = "cosmos"
 [[chains]]
 id = "phoenix-1"
 type = "CosmosSdk"
-rpc_addr = "https://rpc-terra-01.stakeflow.io/"
-grpc_addr = "https://terra2-grpc.lavenderfive.com/"
+rpc_addr = "http://tasks.lb_terra2:8000"
+grpc_addr = "http://tasks.lb_terra2:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "terra"
@@ -360,7 +360,7 @@ sequential_batch_tx = false
 
 [chains.event_source]
 mode = "push"
-url = "wss://rpc-terra-01.stakeflow.io/websocket"
+url = "ws://tasks.lb_terra2:8000/websocket"
 batch_delay = "500ms"
 
 [chains.trust_threshold]
