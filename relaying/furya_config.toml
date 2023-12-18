@@ -78,22 +78,10 @@ denom = "uatom"
 [chains.packet_filter]
 policy = "allow"
 list = [
-    [
-    "transfer",
-    "channel-207",
-],
-    [
-    "transfer",
-    "channel-536",
-],
-    [
-    "transfer",
-    "channel-141",
-],
-    [
-    "transfer",
-    "channel-339",
-],
+    ["transfer", "channel-207"],
+    ["transfer", "channel-536"],
+    ["transfer", "channel-141"],
+    ["transfer", "channel-339"],
 ]
 
 [chains.packet_filter.min_fees]
@@ -140,18 +128,9 @@ denom = "ufury"
 [chains.packet_filter]
 policy = "allow"
 list = [
-    [
-    "transfer",
-    "channel-2",
-],
-    [
-    "transfer",
-    "channel-3",
-],
-    [
-    "transfer",
-    "channel-1",
-],
+    ["transfer", "channel-2"],
+    ["transfer", "channel-3"],
+    ["transfer", "channel-1"],
 ]
 
 [chains.packet_filter.min_fees]
@@ -198,30 +177,12 @@ denom = "ujuno"
 [chains.packet_filter]
 policy = "allow"
 list = [
-    [
-    "transfer",
-    "channel-1",
-],
-    [
-    "transfer",
-    "channel-417",
-],
-    [
-    "transfer",
-    "channel-224",
-],
-    [
-    "transfer",
-    "channel-0",
-],
-    [
-    "wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn",
-    "channel-47",
-],
-    [
-    "transfer",
-    "channel-86",
-],
+    ["transfer", "channel-1"],
+    ["transfer", "channel-417"],
+    ["transfer", "channel-224"],
+    ["transfer", "channel-0"],
+    ["wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn", "channel-47"],
+    ["transfer", "channel-86"],
 ]
 
 [chains.packet_filter.min_fees]
@@ -312,22 +273,10 @@ denom = "uosmo"
 [chains.packet_filter]
 policy = "allow"
 list = [
-    [
-    "transfer",
-    "channel-4",
-],
-    [
-    "transfer",
-    "channel-3",
-],
-    [
-    "transfer",
-    "channel-1",
-],
-    [
-    "transfer",
-    "channel-30",
-],
+    ["transfer", "channel-4"],
+    ["transfer", "channel-3"],
+    ["transfer", "channel-1"],
+    ["transfer", "channel-30"],
 ]
 
 [chains.packet_filter.min_fees]
@@ -374,38 +323,14 @@ denom = "uluna"
 [chains.packet_filter]
 policy = "allow"
 list = [
-    [
-    "transfer",
-    "channel-0",
-],
-    [
-    "transfer",
-    "channel-8690",
-],
-    [
-    "transfer",
-    "channel-42",
-],
-    [
-    "transfer",
-    "channel-169",
-],
-    [
-    "transfer",
-    "channel-750",
-],
-    [
-    "transfer",
-    "channel-251",
-],
-    [
-    "transfer",
-    "channel-559",
-],
-    [
-    "transfer",
-    "channel-341",
-],
+    ["transfer", "channel-0"],
+    ["transfer", "channel-8690"],
+    ["transfer", "channel-42"],
+    ["transfer", "channel-169"],
+    ["transfer", "channel-750"],
+    ["transfer", "channel-251"],
+    ["transfer", "channel-559"],
+    ["transfer", "channel-341"],
 ]
 
 [chains.packet_filter.min_fees]
