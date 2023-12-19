@@ -235,8 +235,9 @@ if [[ -n $git_repo ]]; then
 fi
 
 sed -i -e "s/^query_gas_limit *=.*/query_gas_limit = 10000000/" $node_home/config/app.toml
-sed -i -e "s/^discard_abci_responses *=.*/discard_abci_responses = false/" $node_home/config/config.toml
 sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $node_home/config/config.toml
+
+[ "$chain_name" == "celestia" ] && sed -i -e "s/^discard_abci_responses *=.*/discard_abci_responses = false/" $node_home/config/config.toml
 
 echo "download genesis..."
 curl -Ls "${SNAPSHOT_BASE_URL}/genesis.json" > $node_home/config/genesis.json
