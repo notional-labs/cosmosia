@@ -1,0 +1,8 @@
+# grafana/provisioning/dashboards/dashboard.yaml
+apiVersion: 1
+
+providers:
+  - name: 'Default'
+    folder: 'Services'
+    options:
+      path: /var/lib/grafana/dashboards

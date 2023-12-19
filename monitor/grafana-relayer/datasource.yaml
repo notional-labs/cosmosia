@@ -1,0 +1,8 @@
+# grafana/provisioning/datasources/datasource.yaml
+apiVersion: 1
+
+datasources:
+  - name: Caddy1
+    type: prometheus
+    access: proxy
+    url: http://localhost:9090
