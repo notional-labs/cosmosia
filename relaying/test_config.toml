@@ -21,12 +21,12 @@ clear_on_start = true
 tx_confirmation = false
 
 [rest]
-enabled = false
+enabled = true
 host = '127.0.0.1'
 port = 3000
 
 [telemetry]
-enabled = false
+enabled = true
 host = '127.0.0.1'
 port = 3001
 
