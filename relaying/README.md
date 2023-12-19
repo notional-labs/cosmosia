@@ -105,9 +105,9 @@
 
 | chain         | channel     |
 |:--------------|:------------|
-| osmosis       | channel-0   |
-| cosmoshub     | channel-1   |
 | axelar        | channel-2   |
+| cosmoshub     | channel-1   |
+| osmosis       | channel-0   |
 | terra2        | channel-3   |
 
 
