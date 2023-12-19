@@ -14,6 +14,6 @@ docker service create \
   --restart-condition any \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/493-relayer-dashboard/monitor/grafana-relayer/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/monitor/grafana-relayer/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 
