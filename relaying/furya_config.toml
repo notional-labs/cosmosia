@@ -39,6 +39,10 @@ start = 1000
 end = 30000
 buckets = 10
 
+[tracing_server]
+enabled = false
+port = 5555
+
 
 [[chains]]
 id = "furya-1"
@@ -289,19 +293,9 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_kujira:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.025
-denom = "ukuji"
+event_source = { mode = 'push', url = 'ws://tasks.lb_kujira:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.025, denom = 'ukuji' }
 
 [chains.packet_filter]
 policy = "allow"
@@ -314,6 +308,3 @@ list = [
 [chains.address_type]
 derivation = "cosmos"
 
-[tracing_server]
-enabled = false
-port = 5555
