@@ -1,5 +1,5 @@
 [global]
-log_level = "info"
+log_level = "error"
 
 [mode.clients]
 enabled = true
@@ -25,8 +25,8 @@ host = "127.0.0.1"
 port = 3000
 
 [telemetry]
-enabled = false
-host = "127.0.0.1"
+enabled = true
+host = '0.0.0.0'
 port = 3001
 
 [telemetry.buckets.latency_submitted]
@@ -47,7 +47,7 @@ grpc_addr = "http://tasks.lb_cosmoshub:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "cosmos"
-key_name = "cosmos"
+key_name = "cosmoshub"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 100000
@@ -61,19 +61,9 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_cosmoshub:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.025
-denom = "uatom"
+event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.025, denom = 'uatom' }
 
 [chains.packet_filter]
 policy = "allow"
@@ -97,7 +87,7 @@ grpc_addr = "http://tasks.lb_furya:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "furya"
-key_name = ""
+key_name = "furya"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 100000
@@ -111,19 +101,9 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_furya:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.25
-denom = "ufury"
+event_source = { mode = 'push', url = 'ws://tasks.lb_furya:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.25, denom = 'ufury' }
 
 [chains.packet_filter]
 policy = "allow"
@@ -160,19 +140,9 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_juno:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.1
-denom = "ujuno"
+event_source = { mode = 'push', url = 'ws://tasks.lb_juno:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.1, denom = 'ujuno' }
 
 [chains.packet_filter]
 policy = "allow"
@@ -198,7 +168,7 @@ grpc_addr = "http://tasks.lb_noble:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "noble"
-key_name = "noblekava"
+key_name = "noble"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 100000
@@ -212,19 +182,9 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_noble:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.1
-denom = "ustake"
+event_source = { mode = 'push', url = 'ws://tasks.lb_noble:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.1, denom = 'ustake' }
 
 [chains.packet_filter]
 policy = "allowall"
@@ -256,19 +216,9 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_osmosis:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.025
-denom = "uosmo"
+event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.025, denom = 'uosmo' }
 
 [chains.packet_filter]
 policy = "allow"
@@ -292,7 +242,7 @@ grpc_addr = "http://tasks.lb_terra2:8003"
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "terra"
-key_name = "noblekava"
+key_name = "terra2"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 100000
@@ -306,19 +256,9 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_terra2:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.015
-denom = "uluna"
+event_source = { mode = 'push', url = 'ws://tasks.lb_terra2:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.015, denom = 'uluna' }
 
 [chains.packet_filter]
 policy = "allow"
