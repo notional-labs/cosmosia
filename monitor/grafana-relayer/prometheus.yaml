@@ -8,3 +8,6 @@ scrape_configs:
   - job_name: furya
     static_configs:
       - targets: ['tasks.rl_furya:3001']
+  - job_name: coreum
+    static_configs:
+      - targets: ['tasks.rl_coreum:3001']
