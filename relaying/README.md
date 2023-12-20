@@ -49,14 +49,14 @@
 
 **furya hub**
 
-| chain         | channel     | counterparty |
-|:--------------|:------------|:-------------|
-| cosmoshub     | channel-5   | channel-747  |
-| juno          | channel-2   | channel-417  |
-| kujira        | channel-0   | channel-119  |
-| nobble        | channel-4   | channel-42   |
-| osmosis       | channel-3   | channel-8690 |
-| terra2        | channel-1   | channel-271  |
+| chain         | channel     | counterparty | status  |
+|:--------------|:------------|:-------------|---------|
+| cosmoshub     | channel-5   | channel-747  | expired |
+| juno          | channel-2   | channel-417  | expired |
+| kujira        | channel-0   | channel-119  | expired |
+| nobble        | channel-4   | channel-42   | expired |
+| osmosis       | channel-3   | channel-8690 | expired |
+| terra2        | channel-1   | channel-271  | expired |
 
 
 **kava hub**
