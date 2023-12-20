@@ -2,6 +2,9 @@ global:
   scrape_interval: 60s # default is 1 minute
 
 scrape_configs:
-  - job_name: rl_test
+  - job_name: test
     static_configs:
       - targets: ['tasks.rl_test:3001']
+  - job_name: furya
+    static_configs:
+      - targets: ['tasks.rl_furya:3001']
