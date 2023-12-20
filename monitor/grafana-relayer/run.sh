@@ -18,6 +18,10 @@ screen -S prometheus -dm /usr/sbin/prometheus --config.file=$HOME/prometheus.yam
 echo "Intalling grafana..."
 pacman -S --noconfirm grafana
 
+# install Dynamic Text plugin. See https://grafana.com/grafana/plugins/marcusolsson-dynamictext-panel/?tab=overview
+grafana cli plugins install marcusolsson-dynamictext-panel
+
+# config grafana
 mkdir -p /var/lib/grafana/conf/provisioning/datasources
 mkdir -p /var/lib/grafana/conf/provisioning/dashboards
 mkdir -p /var/lib/grafana/dashboards
