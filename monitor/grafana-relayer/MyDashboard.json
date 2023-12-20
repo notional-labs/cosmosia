@@ -46,8 +46,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
-        "w": 7,
+        "h": 14,
+        "w": 6,
         "x": 0,
         "y": 0
       },
@@ -117,10 +117,81 @@
         "overrides": []
       },
       "gridPos": {
+        "h": 22,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "wallet_balance{job=\"coreum\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Wallet Balances [coreum]",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P66E0988D1198AFE0"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
         "h": 6,
         "w": 6,
-        "x": 7,
-        "y": 0
+        "x": 0,
+        "y": 14
       },
       "id": 3,
       "options": {
