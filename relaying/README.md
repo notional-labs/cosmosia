@@ -49,11 +49,11 @@
 
 **furya hub**
 
-| chain         | channel     |
-|:--------------|:------------|
-| cosmoshub     | channel-5   |
-| kujira        | channel-4   |
-| osmosis       | channel-1   |
+| chain         | channel     | counterparty |
+|:--------------|:------------|:-------------|
+| cosmoshub     | channel-5   | channel-747  |
+| kujira        | channel-4   | channel-42   |
+| osmosis       | channel-1   | channel-271  |
 
 
 **kava hub**
