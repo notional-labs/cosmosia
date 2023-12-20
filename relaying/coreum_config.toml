@@ -4,7 +4,7 @@ log_level = 'error'
 [mode]
 
 [mode.clients]
-enabled = false
+enabled = true
 refresh = true
 misbehaviour = true
 
@@ -396,8 +396,8 @@ list = [
 [[chains]]
 id = "laozi-mainnet"
 type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_bandchain:8000'
-grpc_addr = 'http://tasks.lb_bandchain:8003'
+rpc_addr = 'http://rpc.laozi1.bandchain.org:80'
+grpc_addr = 'http://grpc-band-01.stakeflow.io:2502/'
 rpc_timeout = "20s"
 trusted_node = false
 account_prefix = "band"
@@ -416,7 +416,7 @@ trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_bandchain:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'push', url = 'ws://rpc.laozi1.bandchain.org:80/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'uband' }
 address_type = { derivation = 'cosmos' }
