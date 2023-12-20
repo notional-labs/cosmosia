@@ -29,17 +29,6 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -57,25 +46,29 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 24,
+        "h": 6,
+        "w": 6,
         "x": 0,
         "y": 0
       },
-      "id": 2,
+      "id": 3,
       "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
         },
-        "showHeader": true
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
       },
-      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -90,7 +83,6 @@
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
-          "interval": "",
           "legendFormat": "__auto",
           "range": false,
           "refId": "A",
@@ -98,79 +90,7 @@
         }
       ],
       "title": "Wallet Balances",
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "migaloo1t53wkmgjp5vksed2hw4e3625kq0jyas06w9shm",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 0,
-        "y": 9
-      },
-      "id": 1,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "wallet_balance{denom=\"uwhale\"}",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "whitewhale (uwhale)",
-      "type": "stat"
+      "type": "marcusolsson-dynamictext-panel"
     }
   ],
   "refresh": "",
