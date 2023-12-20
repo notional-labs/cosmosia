@@ -184,7 +184,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_noble:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'ustake' }
+gas_price = { price = 0.1, denom = 'uusdc' }
 
 [chains.packet_filter]
 policy = "allowall"
