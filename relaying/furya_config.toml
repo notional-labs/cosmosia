@@ -68,10 +68,7 @@ gas_price = { price = 0.025, denom = 'uatom' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-207"],
-    ["transfer", "channel-536"],
-    ["transfer", "channel-141"],
-    ["transfer", "channel-339"],
+    ["transfer", "channel-747"], # furya
 ]
 
 [chains.packet_filter.min_fees]
@@ -108,9 +105,12 @@ gas_price = { price = 0.25, denom = 'ufury' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-2"],
-    ["transfer", "channel-3"],
-    ["transfer", "channel-1"],
+    ["transfer", "channel-2"], # juno
+    ["transfer", "channel-3"], # osmosis
+    ["transfer", "channel-1"], # terra2
+    ["transfer", "channel-4"], # noble
+    ["transfer", "channel-5"], # cosmoshub
+    ["transfer", "channel-0"], # kujira
 ]
 
 [chains.packet_filter.min_fees]
@@ -147,12 +147,7 @@ gas_price = { price = 0.1, denom = 'ujuno' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-1"],
-    ["transfer", "channel-417"],
-    ["transfer", "channel-224"],
-    ["transfer", "channel-0"],
-    ["wasm.juno1v4887y83d6g28puzvt8cl0f3cdhd3y6y9mpysnsp3k8krdm7l6jqgm0rkn", "channel-47"],
-    ["transfer", "channel-86"],
+    ["transfer", "channel-119"], # furya
 ]
 
 [chains.packet_filter.min_fees]
@@ -187,7 +182,10 @@ trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.1, denom = 'uusdc' }
 
 [chains.packet_filter]
-policy = "allowall"
+policy = "allow"
+list = [
+    ["transfer", "channel-42"], # furya
+]
 
 [chains.packet_filter.min_fees]
 
@@ -260,14 +258,7 @@ gas_price = { price = 0.015, denom = 'uluna' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-0"],
-    ["transfer", "channel-8690"],
-    ["transfer", "channel-42"],
-    ["transfer", "channel-169"],
-    ["transfer", "channel-750"],
-    ["transfer", "channel-251"],
-    ["transfer", "channel-559"],
-    ["transfer", "channel-341"],
+    ["transfer", "channel-271"], # furya
 ]
 
 [chains.packet_filter.min_fees]
