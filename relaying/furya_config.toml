@@ -223,10 +223,7 @@ gas_price = { price = 0.025, denom = 'uosmo' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-4"], # persistence
-    ["transfer", "channel-3"], # persistence
-    ["transfer", "channel-1"], # akash
-    ["transfer", "channel-30"], # cosmoshub
+    ["transfer", "channel-271"], # furya
 ]
 
 [chains.packet_filter.min_fees]
