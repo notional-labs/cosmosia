@@ -52,8 +52,11 @@
 | chain         | channel     | counterparty |
 |:--------------|:------------|:-------------|
 | cosmoshub     | channel-5   | channel-747  |
-| kujira        | channel-4   | channel-42   |
-| osmosis       | channel-1   | channel-271  |
+| juno          | channel-2   | channel-417  |
+| kujira        | channel-0   | channel-119  |
+| nobble        | channel-4   | channel-42   |
+| osmosis       | channel-3   | channel-8690 |
+| terra2        | channel-1   | channel-271  |
 
 
 **kava hub**
