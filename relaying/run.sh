@@ -45,7 +45,7 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying
 curl -Ls "http://tasks.web_config/config/cosmosia.relay.${hubname}.mnemonic.txt" > $HOME/.hermes/mnemonic.txt
 
 
-chain_ids=$(cat $HOME/.hermes/config.toml |grep id |sed -e "s/id = //g" -e "s/'//g" -e 's/"//g')
+chain_ids=$(cat $HOME/.hermes/config.toml |grep "id = " |sed -e "s/id = //g" -e "s/'//g" -e 's/"//g')
 for chain_id in $chain_ids; do
   $HOME/.hermes/bin/hermes keys add --chain $chain_id --mnemonic-file $HOME/.hermes/mnemonic.txt
 done
