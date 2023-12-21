@@ -45,7 +45,7 @@
 | kujira        | channel-14  | channel-121  | expired  |
 | noble         | channel-13  | channel-47   | expired  |
 | osmosis       | channel-2   |              |          |
-| secret        | channel-12  | channel-92   | expired  |
+| secret        | channel-25  | channel-101   | expired  |
 
 
 **furya hub**

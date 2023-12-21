@@ -73,7 +73,9 @@ list = [
     ['transfer', 'channel-7'], # gravitybridge
     ['transfer', 'channel-11'], # kava
     ['transfer', 'channel-18'], # kava
-    ['transfer', 'channel-12'], # secret
+    # ['transfer', 'channel-12'], # secret
+    # ['transfer', 'channel-12'], # secret
+    ['transfer', 'channel-25'], # secret
     ['transfer', 'channel-13'], # noble
     ['transfer', 'channel-14'], # kujira
     ['transfer', 'channel-15'], # bandchain
@@ -323,7 +325,9 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-92'], # coreum
+    # ['transfer', 'channel-92'], # coreum
+    # ['transfer', 'channel-99'], # coreum
+    ['transfer', 'channel-101'], # coreum
 ]
 
 [[chains]]
