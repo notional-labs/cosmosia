@@ -71,15 +71,14 @@ list = [
     ['transfer', 'channel-6'], # axelar
     ['transfer', 'channel-8'], # evmos
     ['transfer', 'channel-7'], # gravitybridge
-    ['transfer', 'channel-11'], # kava
     ['transfer', 'channel-18'], # kava
     # ['transfer', 'channel-12'], # secret
     # ['transfer', 'channel-12'], # secret
     ['transfer', 'channel-25'], # secret
-    ['transfer', 'channel-13'], # noble
-    ['transfer', 'channel-14'], # kujira
-    ['transfer', 'channel-15'], # bandchain
-    ['transfer', 'channel-16'], # dydx
+    ['transfer', 'channel-19'], # noble
+    ['transfer', 'channel-17'], # kujira
+    ['transfer', 'channel-20'], # bandchain
+    ['transfer', 'channel-24'], # dydx
 ]
 
 [chains.packet_filter.min_fees]
@@ -288,8 +287,7 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-141'],
-    ['transfer', 'channel-142'],
+    ['transfer', 'channel-142'], # coreum
 ]
 
 [[chains]]
@@ -360,7 +358,7 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-47'], # coreum
+    ['transfer', 'channel-49'], # coreum
 ]
 
 [[chains]]
@@ -393,7 +391,7 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-121'],
+    ['transfer', 'channel-122'],
 ]
 
 [[chains]]
@@ -426,7 +424,7 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-158'],
+    ['transfer', 'channel-159'],
 ]
 
 [[chains]]
@@ -459,5 +457,5 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-12'], # coreum
+    ['transfer', 'channel-14'], # coreum
 ]
