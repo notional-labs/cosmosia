@@ -21,6 +21,9 @@ pacman -S --noconfirm grafana
 # install Dynamic Text plugin. See https://grafana.com/grafana/plugins/marcusolsson-dynamictext-panel/?tab=overview
 grafana cli plugins install marcusolsson-dynamictext-panel
 
+# install JSON API plugin. See https://grafana.com/grafana/plugins/marcusolsson-json-datasource/?tab=installation
+grafana cli plugins install marcusolsson-json-datasource
+
 # config grafana
 mkdir -p /var/lib/grafana/conf/provisioning/datasources
 mkdir -p /var/lib/grafana/conf/provisioning/dashboards
