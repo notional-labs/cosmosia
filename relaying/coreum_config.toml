@@ -220,7 +220,7 @@ address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-87'],
+    ['transfer', 'channel-87'], # coreum
 ]
 
 [[chains]]
@@ -253,7 +253,7 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-142'],
+    ['transfer', 'channel-142'], # coreum
 ]
 
 [[chains]]
@@ -356,7 +356,7 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-47'],
+    ['transfer', 'channel-47'], # coreum
 ]
 
 [[chains]]

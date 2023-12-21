@@ -38,12 +38,12 @@
 | bandchain     | channel-15  | channel-158  | expired |
 | cosmoshub     | channel-9   | channel-660  |         |
 | dydx          | channel-16  | channel-12   | expired |
-| evmos         | channel-8   |              |         |
-| gravitybridge | channel-7   |              |         |
+| evmos         | channel-8   | channel-87   | expired |
+| gravitybridge | channel-7   | channel-142  | expired |
 | kava          | channel-11  | channel-141  |         |
 | kava          | channel-18  | channel-142  |         |
 | kujira        | channel-14  | channel-121  | expired |
-| noble         | channel-13  |              |         |
+| noble         | channel-13  | channel-47   | expired |
 | osmosis       | channel-2   |              |         |
 | secret        | channel-12  | channel-92   | expired |
 
