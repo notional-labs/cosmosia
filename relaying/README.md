@@ -34,17 +34,18 @@
 
 | chain         | channel     | counterparty | status  |
 |:--------------|:------------|:-------------|:--------|
-| axelar        | channel-6   |              |         |
-| bandchain     | channel-15  |              |         |
-| cosmoshub     | channel-9   |              |         |
-| dydx          | channel-16  |              |         |
+| axelar        | channel-6   | channel-120  |         |
+| bandchain     | channel-15  | channel-158  | expired |
+| cosmoshub     | channel-9   | channel-660  |         |
+| dydx          | channel-16  | channel-12   | expired |
 | evmos         | channel-8   |              |         |
 | gravitybridge | channel-7   |              |         |
-| kava          | channel-18  |              |         |
-| kujira        | channel-14  |              |         |
+| kava          | channel-11  | channel-141  |         |
+| kava          | channel-18  | channel-142  |         |
+| kujira        | channel-14  | channel-121  | expired |
 | noble         | channel-13  |              |         |
 | osmosis       | channel-2   |              |         |
-| secret        | channel-12  |              |         |
+| secret        | channel-12  | channel-92   | expired |
 
 
 **furya hub**
