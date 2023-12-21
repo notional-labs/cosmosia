@@ -214,7 +214,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_evmos:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0075, denom = 'uaxl' }
+gas_price = { price = 0.0075, denom = 'aevmos' }
 address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
 
 [chains.packet_filter]
