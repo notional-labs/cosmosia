@@ -447,6 +447,107 @@
       ],
       "title": "Wallet Balances [test]",
       "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 24,
+        "w": 12,
+        "x": 0,
+        "y": 31
+      },
+      "id": 8,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "body": "",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.[*].chain_id"
+            },
+            {
+              "jsonPath": "$.[*].channel_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].counter_chain_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].latest_height",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].block_time",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].time_ago",
+              "language": "jsonpath",
+              "name": ""
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Last Client Update [coreum]",
+      "type": "table"
     }
   ],
   "refresh": "",

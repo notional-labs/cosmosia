@@ -6,3 +6,32 @@ datasources:
     type: prometheus
     access: proxy
     url: http://localhost:9090
+  - name: "JSON API"
+    uid: "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+    type: "marcusolsson-json-datasource"
+    typeLogoUrl: "/public/plugins/marcusolsson-json-datasource/img/logo.svg"
+    access: "proxy"
+    url: "https://status.notional.ventures/ibc_monitor/get_last_ibc_client_update"
+    user: ""
+    database: ""
+    basicAuth: false
+    basicAuthUser: ""
+    withCredentials: false
+    isDefault: false
+    jsonData
+      queryParams: "hermes_config_url=https%3A%2F%2Fraw.githubusercontent.com%2Fnotional-labs%2Fcosmosia%2Fmain%2Frelaying%2Fcoreum_config.toml"
+      timeout: 60
+    accessControl:
+      alert.instances.external:read: true
+      alert.instances.external:write: true
+      alert.notifications.external:read: true
+      alert.notifications.external:write: true
+      alert.rules.external:read: true
+      alert.rules.external:write: true
+      datasources.id:read: true
+      datasources:delete: true
+      datasources:query: true
+      datasources:read: true
+      datasources:write: true
+    }
+  }
