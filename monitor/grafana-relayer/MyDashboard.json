@@ -541,6 +541,12 @@
             }
           ],
           "method": "GET",
+          "params": [
+            [
+              "hermes_config_url",
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/coreum_config.toml"
+            ]
+          ],
           "queryParams": "",
           "refId": "A",
           "urlPath": ""
