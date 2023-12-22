@@ -19,7 +19,7 @@ datasources:
     withCredentials: false
     isDefault: false
     jsonData:
-      queryParams: "hermes_config_url=https%3A%2F%2Fraw.githubusercontent.com%2Fnotional-labs%2Fcosmosia%2Fmain%2Frelaying%2Fcoreum_config.toml"
+      queryParams: ""
       timeout: 60
     accessControl:
       alert.instances.external:read: true
