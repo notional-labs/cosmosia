@@ -111,12 +111,7 @@
               "name": ""
             },
             {
-              "jsonPath": "$.[*].latest_height",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].block_time",
+              "jsonPath": "$.[*].pending_packets",
               "language": "jsonpath",
               "name": ""
             },
