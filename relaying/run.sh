@@ -62,7 +62,7 @@ screen -S hermes -dm $HOME/.hermes/bin/hermes start
 ################################################################################################
 # cronjob to update client
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/cron_update_client.sh" > $HOME/cron_update_client.sh
-echo "0 */7 * * * root /bin/bash $HOME/cron_update_client.sh" > /etc/cron.d/cron_update_clien
+echo "0 */12 * * * root /bin/bash $HOME/cron_update_client.sh" > /etc/cron.d/cron_update_clien
 
 crond
 
