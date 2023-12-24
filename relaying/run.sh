@@ -67,7 +67,7 @@ files = /etc/supervisor.d/*.conf" >> /etc/supervisord.conf
 
 cat <<EOT > /etc/supervisor.d/hermes.conf
 [program:hermes]
-command=/root/.hermes/bin/hermes start
+command=/root/.hermes/bin/hermes start 1>&2
 autostart=false
 autorestart=false
 stopasgroup=true
