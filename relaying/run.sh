@@ -15,7 +15,7 @@ fi
 
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm git base-devel cronie screen wget jq
+pacman -S --noconfirm git base-devel python python-pip cronie screen wget jq
 
 # get hermes config
 eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
@@ -56,8 +56,35 @@ for chain_id in $chain_ids; do
   $HOME/.hermes/bin/hermes keys add --chain $chain_id --mnemonic-file $HOME/.hermes/mnemonic.txt
 done
 
-# start
-screen -S hermes -dm $HOME/.hermes/bin/hermes start
+########################################################################################################################
+# supervised
+pacman -Sy --noconfirm supervisor
+mkdir -p /etc/supervisor.d
+echo_supervisord_conf > /etc/supervisord.conf
+echo "[include]
+files = /etc/supervisor.d/*.conf" >> /etc/supervisord.conf
+
+
+cat <<EOT > /etc/supervisor.d/hermes.conf
+[program:hermes]
+command=/root/.hermes/bin/hermes start 1>&2
+autostart=false
+autorestart=false
+stopasgroup=true
+killasgroup=true
+stderr_logfile=/var/log/hermes.err.log
+stdout_logfile=/var/log/hermes.out.log
+stderr_logfile_backups=10
+stdout_logfile_backups=10
+stderr_logfile_maxbytes=50MB
+stdout_logfile_maxbytes=50MB
+EOT
+
+supervisord
+
+sleep 5
+echo "start hermes..."
+supervisorctl start hermes
 
 ################################################################################################
 # cronjob to update client
@@ -65,6 +92,5 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying
 echo "0 */12 * * * root /bin/bash $HOME/cron_update_client.sh" > /etc/cron.d/cron_update_clien
 
 crond
-
 ################################################################################################
 loop_forever
