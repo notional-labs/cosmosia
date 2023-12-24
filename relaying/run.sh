@@ -67,15 +67,15 @@ files = /etc/supervisor.d/*.conf" >> /etc/supervisord.conf
 
 cat <<EOT > /etc/supervisor.d/hermes.conf
 [program:hermes]
-command=/root/.hermes/bin/hermes start 1>&2
+command=/root/.hermes/bin/hermes start
 autostart=false
 autorestart=false
 stopasgroup=true
 killasgroup=true
 stderr_logfile=/var/log/hermes.err.log
 stdout_logfile=/var/log/hermes.out.log
-stderr_logfile_backups=10
-stdout_logfile_backups=10
+stderr_logfile_backups=3
+stdout_logfile_backups=3
 stderr_logfile_maxbytes=50MB
 stdout_logfile_maxbytes=50MB
 EOT
