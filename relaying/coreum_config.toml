@@ -53,6 +53,7 @@ trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
+compat_mode = '0.37'
 event_source = { mode = 'push', url = 'ws://tasks.lb_coreum:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0625, denom = 'ucore' }
@@ -107,6 +108,7 @@ trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
+compat_mode = '0.37'
 event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.003, denom = 'uosmo' }
@@ -143,6 +145,7 @@ trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
+compat_mode = '0.34'
 event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.01, denom = 'uatom' }
@@ -179,6 +182,7 @@ trusting_period = '112hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
+compat_mode = '0.34'
 event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0075, denom = 'uaxl' }
@@ -218,6 +222,7 @@ event_source = { mode = 'push', url = 'ws://tasks.lb_evmos:8000/websocket', batc
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0075, denom = 'aevmos' }
 address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
+compat_mode = '0.37'
 
 [chains.packet_filter]
 policy = "allow"
@@ -252,6 +257,7 @@ event_source = { mode = 'push', url = 'ws://tasks.lb_gravitybridge:8000/websocke
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'ugraviton' }
 address_type = { derivation = 'cosmos' }
+compat_mode = '0.34'
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -285,6 +291,7 @@ event_source = { mode = 'push', url = 'ws://tasks.lb_kava:8000/websocket', batch
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'ukava' }
 address_type = { derivation = 'cosmos' }
+compat_mode = '0.34'
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -321,6 +328,7 @@ event_source = { mode = 'push', url = 'wss://secret-4.api.trivium.network:26657/
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.1, denom = 'uscrt' }
 address_type = { derivation = 'cosmos' }
+compat_mode = '0.34'
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -356,6 +364,7 @@ event_source = { mode = 'push', url = 'ws://tasks.lb_noble:8000/websocket', batc
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0, denom = 'uusdc' }
 address_type = { derivation = 'cosmos' }
+compat_mode = '0.34'
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -389,6 +398,7 @@ event_source = { mode = 'push', url = 'ws://tasks.lb_kujira:8000/websocket', bat
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.01, denom = 'ukuji' }
 address_type = { derivation = 'cosmos' }
+compat_mode = '0.37'
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -422,6 +432,7 @@ event_source = { mode = 'push', url = 'ws://rpc.laozi1.bandchain.org:80/websocke
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'uband' }
 address_type = { derivation = 'cosmos' }
+compat_mode = '0.34'
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -455,6 +466,7 @@ event_source = { mode = 'push', url = 'ws://tasks.lb_dydx:8000/websocket', batch
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 12500000000, denom = 'adydx' }
 address_type = { derivation = 'cosmos' }
+compat_mode = '0.37'
 [chains.packet_filter]
 policy = "allow"
 list = [
