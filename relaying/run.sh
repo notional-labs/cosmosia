@@ -15,7 +15,7 @@ fi
 
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm git base-devel screen wget
+pacman -S --noconfirm git base-devel screen wget jq
 
 # get hermes config
 eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
@@ -33,6 +33,12 @@ if [[ -z $hermes_version ]]; then
   echo "No hermes_version!"
   loop_forever
 fi
+
+# write env vars to bash file, so that cronjobs or other scripts could know
+cat <<EOT >> $HOME/env.sh
+hermes_version="$hermes_version"
+hubname="$hubname"
+EOT
 
 
 # install hermes
@@ -53,5 +59,12 @@ done
 # start
 screen -S hermes -dm $HOME/.hermes/bin/hermes start
 
+################################################################################################
+# cronjob to update client
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/cron_update_client.sh" > $HOME/cron_update_client.sh
+echo "0 */7 * * * root /bin/bash $HOME/cron_update_client.sh" > /etc/cron.d/cron_update_clien
 
+crond
+
+################################################################################################
 loop_forever
