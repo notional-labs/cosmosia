@@ -87,7 +87,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.2.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "body": "",
@@ -122,6 +122,12 @@
             }
           ],
           "method": "GET",
+          "params": [
+            [
+              "hermes_config_url",
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/coreum_config.toml"
+            ]
+          ],
           "queryParams": "",
           "refId": "A",
           "urlPath": ""
@@ -310,8 +316,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -371,7 +376,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []
