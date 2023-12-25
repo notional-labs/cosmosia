@@ -59,7 +59,7 @@ list = [
     ['transfer', 'channel-87'],  # comdex-1
     ['transfer', 'channel-0'],   # cosmoshub
     ['transfer', 'channel-5'],   # crypto-org-chain-mainnet-1
-    ['transfer', 'channel-171'], # darchub
+    ['transfer', 'channel-171'], # konstellation (darchub)
     ['transfer', 'channel-144'], # gravity-bridge-3
     ['transfer', 'channel-6'],   # irishub-1
     ['transfer', 'channel-42'],  # juno
