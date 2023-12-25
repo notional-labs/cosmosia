@@ -164,7 +164,6 @@ account_prefix = "migaloo"
 key_name = "migaloo"
 key_store_type = "Test"
 store_prefix = "ibc"
-max_tx_size = 100000
 max_gas = 2000000
 gas_multiplier = 1
 max_msg_num = 30
@@ -302,7 +301,6 @@ account_prefix = "agoric"
 key_name = "agoric"
 key_store_type = "Test"
 store_prefix = "ibc"
-max_tx_size = 100000
 default_gas = 300000
 max_gas =  10000000
 gas_price = { price = 0.03, denom = 'ubld' }
@@ -338,7 +336,6 @@ account_prefix = "canto"
 key_name = "canto"
 key_store_type = "Test"
 store_prefix = "ibc"
-max_tx_size = 100000
 default_gas = 300000
 max_gas =  10000000
 gas_price = { price = 1000000000000 , denom = 'acanto' }
@@ -374,7 +371,6 @@ account_prefix = "cre"
 key_name = "crescent"
 key_store_type = "Test"
 store_prefix = "ibc"
-max_tx_size = 100000
 default_gas = 300000
 max_gas = 2000000
 gas_price = { price = 0.01, denom = 'ucre' }
