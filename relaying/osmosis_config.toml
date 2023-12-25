@@ -33,9 +33,9 @@ port = 3001
 
 [[chains]]
 id = 'osmosis-1'
-rpc_addr = 'http://tasks.lb_coreum:8000'
-grpc_addr = 'http://tasks.lb_coreum:8003'
-websocket_addr = 'ws://tasks.lb_coreum:8000/websocket'
+rpc_addr = 'http://tasks.lb_osmosis:8000'
+grpc_addr = 'http://tasks.lb_osmosis:8003'
+websocket_addr = 'ws://tasks.lb_osmosis:8000/websocket'
 rpc_timeout = '10s'
 account_prefix = 'osmo'
 key_name = 'osmosis'
@@ -50,32 +50,33 @@ memo_prefix = 'Relayed by Notional!'
 [chains.packet_filter]
 policy = 'allow'
 list = [
-    ['transfer', 'channel-0'],
-    ['transfer', 'channel-171'],
-    ['transfer', 'channel-1'],
-    ['transfer', 'channel-42'],
-    ['transfer', 'channel-47'],
-    ['transfer', 'channel-169'],
-    ['transfer', 'channel-2'],
-    ['transfer', 'channel-8'],
-    ['transfer','channel-51'],
-    ['transfer','channel-72'],
-    ['transfer', 'channel-208'],
-    ['transfer', 'channel-113'],
-    ['transfer', 'channel-87'],
-    ['transfer', 'channel-5'],
-    ['transfer', 'channel-144'],
-    ['transfer', 'channel-6'],
-    ['transfer', 'channel-143'],
-    ['transfer', 'channel-77'],
-    ['transfer', 'channel-557'],
-    ['transfer', 'channel-199'],
-    ['transfer', 'channel-75'],
-    ['transfer', 'channel-184'],
-    ['transfer', 'channel-326'],
-    ['transfer', 'channel-522'],
-    ['transfer', 'channel-688'],
-    ['transfer', 'channel-294'],
+    # sort by chain name
+    ['transfer', 'channel-1'],   # akash
+    ['transfer', 'channel-208'], # axelar-dojo-1
+    ['transfer','channel-51'],   # bitcanna-1
+    ['transfer', 'channel-113'], # chihuahua-1
+    ['transfer','channel-72'],   # columbus-5
+    ['transfer', 'channel-87'],  # comdex-1
+    ['transfer', 'channel-0'],   # cosmoshub
+    ['transfer', 'channel-5'],   # crypto-org-chain-mainnet-1
+    ['transfer', 'channel-171'], # darchub
+    ['transfer', 'channel-144'], # gravity-bridge-3
+    ['transfer', 'channel-6'],   # irishub-1
+    ['transfer', 'channel-42'],  # juno
+    ['transfer', 'channel-169'], # juno-1
+    ['transfer', 'channel-143'], # kava_2222-10
+    ['transfer', 'channel-77'],  # kichain-2
+    ['transfer', 'channel-557'], # mars-1
+    ['transfer', 'channel-199'], # omniflixhub-1
+    ['transfer', 'channel-522'], # quicksilver-2
+    ['transfer', 'channel-688'], # quasar-1
+    ['transfer', 'channel-8'],   # regen-1
+    ['transfer', 'channel-2'],   # sentinelhub-2
+    ['transfer', 'channel-47'],  # sifchain-1
+    ['transfer', 'channel-75'],  # stargaze-1
+    ['transfer', 'channel-326'], # stride-1
+    ['transfer', 'channel-184'], # umee-1
+    ['transfer', 'channel-294'], # ????
 ]
 
 [[chains]]
