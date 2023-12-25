@@ -1,5 +1,7 @@
 [global]
-log_level = "info"
+log_level = 'error'
+
+[mode]
 
 [mode.clients]
 enabled = true
@@ -14,40 +16,30 @@ enabled = false
 
 [mode.packets]
 enabled = true
-clear_interval = 100
+clear_interval = 20
 clear_on_start = true
 tx_confirmation = false
-auto_register_counterparty_payee = false
 
 [rest]
 enabled = false
-host = "127.0.0.1"
+host = '127.0.0.1'
 port = 3000
 
 [telemetry]
-enabled = false
-host = "127.0.0.1"
+enabled = true
+host = '0.0.0.0'
 port = 3001
-
-[telemetry.buckets.latency_submitted]
-start = 500
-end = 20000
-buckets = 10
-
-[telemetry.buckets.latency_confirmed]
-start = 1000
-end = 30000
-buckets = 10
 
 [[chains]]
 id = "pacific-1"
 type = "CosmosSdk"
-rpc_addr = "http://tasks.lb_sei:8000"
-grpc_addr = "http://tasks.lb_sei:8003"
-rpc_timeout = "10s"
+rpc_addr = 'http://tasks.lb_sei:8000'
+grpc_addr = 'http://tasks.lb_sei:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_sei:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
 trusted_node = false
 account_prefix = "sei"
-key_name = "sei-2"
+key_name = "sei"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 100000
@@ -58,73 +50,55 @@ max_tx_size = 180000
 max_grpc_decoding_size = 33554432
 clock_drift = "5s"
 max_block_time = "30s"
+trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
 compat_mode = '0.37'
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_sei:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.1
-denom = "usei"
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.1, denom = 'usei' }
+address_type = { derivation = 'cosmos' }
 
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-0"], # osmosis
-    ["transfer", "channel-1"], # cosmoshub
+    # sort by chain name
     ["transfer", "channel-2"], # axelar
+    ["transfer", "channel-1"], # cosmoshub
+    ["transfer", "channel-0"], # osmosis
     ["transfer", "channel-3"], # terra2
 ]
 
 [chains.packet_filter.min_fees]
 
-[chains.address_type]
-derivation = "cosmos"
-
 [[chains]]
 id = "axelar-dojo-1"
 type = "CosmosSdk"
-rpc_addr = "http://tasks.lb_axelar:8000"
-grpc_addr = "http://tasks.lb_axelar:8003"
-rpc_timeout = "10s"
+rpc_addr = 'http://tasks.lb_axelar:8000'
+grpc_addr = 'http://tasks.lb_axelar:8003'
+rpc_timeout = "15s"
 trusted_node = false
 account_prefix = "axelar"
 key_name = "axelar"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 100000
-max_gas = 400000
-gas_multiplier = 1.1
+max_gas = 4000000
+gas_multiplier = 2
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
-clock_drift = "5s"
-max_block_time = "30s"
+clock_drift = "50s"
+max_block_time = "10s"
+trusting_period = '112hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_axelar:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.007
-denom = "uaxl"
+compat_mode = '0.34'
+event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.0075, denom = 'uaxl' }
+address_type = { derivation = 'cosmos' }
 
 [chains.packet_filter]
 policy = "allow"
@@ -132,104 +106,75 @@ list = [
     ["transfer", "channel-103"], # sei
 ]
 
-[chains.packet_filter.min_fees]
-
-[chains.address_type]
-derivation = "cosmos"
-
 [[chains]]
 id = "cosmoshub-4"
 type = "CosmosSdk"
-rpc_addr = "http://tasks.lb_cosmoshub:8000"
-grpc_addr = "http://tasks.lb_cosmoshub:8003"
-rpc_timeout = "10s"
+rpc_addr = 'http://tasks.lb_cosmoshub:8000'
+grpc_addr = 'http://tasks.lb_cosmoshub:8003'
+rpc_timeout = "30s"
 trusted_node = false
 account_prefix = "cosmos"
-key_name = "cosmos"
+key_name = "cosmoshub"
 key_store_type = "Test"
 store_prefix = "ibc"
-default_gas = 100000
-max_gas = 400000
-gas_multiplier = 1.1
+default_gas = 180000
+max_gas = 2500000
+gas_multiplier = 2
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
-clock_drift = "5s"
-max_block_time = "30s"
+clock_drift = "1000s"
+max_block_time = "10s"
+trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_cosmoshub:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.025
-denom = "uatom"
+compat_mode = '0.34'
+event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.01, denom = 'uatom' }
+address_type = { derivation = 'cosmos' }
 
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-584"], # sei
+     ["transfer", "channel-584"], # sei
 ]
-
-[chains.packet_filter.min_fees]
-
-[chains.address_type]
-derivation = "cosmos"
 
 [[chains]]
 id = "osmosis-1"
 type = "CosmosSdk"
-rpc_addr = "http://tasks.lb_osmosis:8000"
-grpc_addr = "http://tasks.lb_osmosis:8003"
-rpc_timeout = "10s"
+rpc_addr = 'http://tasks.lb_osmosis:8000'
+grpc_addr = 'http://tasks.lb_osmosis:8003'
+rpc_timeout = "30s"
 trusted_node = false
 account_prefix = "osmo"
 key_name = "osmosis"
 key_store_type = "Test"
 store_prefix = "ibc"
-default_gas = 100000
-max_gas = 400000
-gas_multiplier = 1.1
+default_gas = 300000
+max_gas = 20000000
+gas_multiplier = 1.2
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
-clock_drift = "5s"
-max_block_time = "30s"
+clock_drift = "100s"
+max_block_time = "10s"
+trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_osmosis:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 0.025
-denom = "uosmo"
+compat_mode = '0.37'
+event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.003, denom = 'uosmo' }
+address_type = { derivation = 'cosmos' }
 
 [chains.packet_filter]
 policy = "allow"
 list = [
     ["transfer", "channel-782"], # sei
 ]
-
-[chains.packet_filter.min_fees]
-
-[chains.address_type]
-derivation = "cosmos"
 
 [[chains]]
 id = "phoenix-1"
@@ -238,7 +183,7 @@ rpc_addr = "http://tasks.lb_terra2:8000"
 grpc_addr = "http://tasks.lb_terra2:8003"
 rpc_timeout = "10s"
 trusted_node = false
-account_prefix = "terra2"
+account_prefix = "terra"
 key_name = "terra2"
 key_store_type = "Test"
 store_prefix = "ibc"
@@ -253,27 +198,12 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-
-[chains.event_source]
-mode = "push"
-url = "ws://tasks.lb_terra2:8000/websocket"
-batch_delay = "500ms"
-
-[chains.trust_threshold]
-numerator = "1"
-denominator = "3"
-
-[chains.gas_price]
-price = 28.325
-denom = "ulunc"
+event_source = { mode = 'push', url = 'ws://tasks.lb_terra2:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.015, denom = 'uluna' }
 
 [chains.packet_filter]
 policy = "allow"
 list = [
     ["transfer", "channel-158"], # sei
 ]
-
-[chains.packet_filter.min_fees]
-
-[chains.address_type]
-derivation = "cosmos"
