@@ -501,7 +501,7 @@ list = [
 ]
 
 [[chains]]
-id = "quicksilver-2
+id = "quicksilver-2"
 type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_quicksilver:8000"
 grpc_addr = "http://tasks.lb_quicksilver:8003"
