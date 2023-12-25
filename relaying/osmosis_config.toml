@@ -125,13 +125,7 @@ memo_prefix = 'Relayed by Notional!'
 [chains.packet_filter]
 policy = 'allow'
 list = [
-    ['transfer', 'channel-22'],
-    ['transfer', 'channel-30'],
-    ['transfer', 'channel-17'],
     ['transfer', 'channel-3'],
-    ['transfer', 'channel-7'],
-    ['transfer', 'channel-4'],
-    ['transfer', 'channel-36'],
 ]
 
 
@@ -208,16 +202,6 @@ memo_prefix = 'Relayed by Notional!'
 policy = 'allow'
 list = [
     ['transfer', 'channel-141'],
-    ['transfer', 'channel-232'],
-    ['transfer', 'channel-192'],
-    ['transfer', 'channel-207'],
-    ['transfer', 'channel-184'],
-    ['transfer', 'channel-292'],
-    ['transfer', 'channel-467'],
-    ['transfer', 'channel-223'],
-    ['transfer', 'channel-235'],
-    ['transfer', 'channel-204'],
-    ['transfer', 'channel-288'],
 ]
 
 [[chains]]
@@ -268,21 +252,6 @@ memo_prefix = 'Delegate Notional: build interchain expressway'
 policy = 'allow'
 list = [
     ['transfer', 'channel-0'],
-    ['transfer', 'channel-71'],
-    ['transfer', 'channel-47'],
-    ['transfer', 'channel-50'],
-    ['transfer', 'channel-53'],
-    ['transfer', 'channel-1'],
-    ['transfer', 'channel-5'],
-    ['transfer', 'channel-29'],
-    ['transfer', 'channel-15'],
-    ['transfer','channel-33'],
-    ['transfer','channel-29'],
-    ['transfer','channel-70'],
-    ['transfer', 'channel-58'],
-    ['transfer', 'channel-71'],
-    ['transfer', 'channel-81'],
-    ['transfer', 'channel-139'],
 ]
 
 [[chains]]
@@ -470,12 +439,7 @@ memo_prefix = 'Relayed by Notional!'
 [chains.packet_filter]
 policy = 'allow'
 list = [
-    ['transfer', 'channel-1'],
     ['transfer', 'channel-2'],
-    ['transfer', 'channel-3'],
-    ['transfer', 'channel-4'],
-    ['transfer', 'channel-5'],
-    ['transfer', 'channel-6'],
 ]
 
 [[chains]]
@@ -553,7 +517,6 @@ trust_threshold = { numerator = '1', denominator = '3' }
 policy = 'allow'
 list = [
     ['transfer', 'channel-0'],
-    ['transfer', 'channel-106'],
 ]
 
 [[chains]]
@@ -614,9 +577,5 @@ trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-    ['transfer', 'channel-57'],
     ['transfer', 'channel-0'],
-    ['transfer', 'channel-34'],
-    ['transfer', 'channel-1'],
-    ['transfer', 'channel-33'],
 ]
