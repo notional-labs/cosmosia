@@ -56,7 +56,7 @@ list = [
     ['transfer','channel-51'],   # bitcanna-1
     ['transfer', 'channel-113'], # chihuahua-1
     ['transfer','channel-72'],   # columbus-5
-    ['transfer', 'channel-87'],  # comdex-1
+#    ['transfer', 'channel-87'],  # comdex-1
     ['transfer', 'channel-0'],   # cosmoshub
     ['transfer', 'channel-5'],   # crypto-org-chain-mainnet-1
     ['transfer', 'channel-171'], # konstellation (darchub)
@@ -72,11 +72,11 @@ list = [
     ['transfer', 'channel-688'], # quasar-1
     ['transfer', 'channel-8'],   # regen-1
     ['transfer', 'channel-2'],   # sentinelhub-2
-    ['transfer', 'channel-47'],  # sifchain-1
+#    ['transfer', 'channel-47'],  # sifchain-1
     ['transfer', 'channel-75'],  # stargaze-1
     ['transfer', 'channel-326'], # stride-1
     ['transfer', 'channel-184'], # umee-1
-    ['transfer', 'channel-294'], # ????
+#    ['transfer', 'channel-294'], # ????
 ]
 
 
