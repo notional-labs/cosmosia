@@ -17,3 +17,6 @@ scrape_configs:
   - job_name: sei
     static_configs:
       - targets: ['tasks.rl_sei:3001']
+  - job_name: kava
+    static_configs:
+      - targets: ['tasks.rl_kava:3001']
