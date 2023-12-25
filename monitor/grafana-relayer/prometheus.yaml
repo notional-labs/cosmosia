@@ -11,3 +11,6 @@ scrape_configs:
   - job_name: coreum
     static_configs:
       - targets: ['tasks.rl_coreum:3001']
+  - job_name: whitewhale
+    static_configs:
+      - targets: ['tasks.rl_whitewhale:3001']
