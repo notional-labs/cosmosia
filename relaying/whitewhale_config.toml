@@ -62,15 +62,14 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    # sort by chain name
-    ['transfer', 'channel-10'],
-    ['transfer', 'channel-27'],
-    ['transfer', 'channel-22'],
-    ['transfer', 'channel-48'],
-    ['transfer', 'channel-49'],
-    ['transfer', 'channel-28'],
-    ['transfer', 'channel-53'],
-    ['transfer', 'channel-9']
+#    ['transfer', 'channel-28'], # axelar
+    ['transfer', 'channel-49'], # axelar
+    ['transfer', 'channel-53'], # axelar
+    ['transfer', 'channel-9'],  # axelar
+    ['transfer', 'channel-10'], # chihuahua
+    ['transfer', 'channel-27'], # neutron
+    ['transfer', 'channel-48'], # kava
+    ['transfer', 'channel-22'], # umee
 ]
 
 [[chains]]
