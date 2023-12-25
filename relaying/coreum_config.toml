@@ -62,24 +62,18 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    # ['transfer', 'channel-0'], # osmosis
-    # ['transfer', 'channel-1'], # osmosis
-    ['transfer', 'channel-2'], # osmosis
-    # ['transfer', 'channel-4'], # cosmoshub
-    # ['transfer', 'channel-5'], # cosmoshub
-    ['transfer', 'channel-9'], # cosmoshub
-    # ['transfer', 'channel-3'], # axelar
-    ['transfer', 'channel-6'], # axelar
-    ['transfer', 'channel-8'], # evmos
-    ['transfer', 'channel-7'], # gravitybridge
-    ['transfer', 'channel-18'], # kava
-    # ['transfer', 'channel-12'], # secret
-    # ['transfer', 'channel-12'], # secret
-    ['transfer', 'channel-25'], # secret
-    ['transfer', 'channel-19'], # noble
-    ['transfer', 'channel-17'], # kujira
+    # sort by chain name
+    ['transfer', 'channel-6'],  # axelar
     ['transfer', 'channel-20'], # bandchain
+    ['transfer', 'channel-9'],  # cosmoshub
     ['transfer', 'channel-24'], # dydx
+    ['transfer', 'channel-8'],  # evmos
+    ['transfer', 'channel-7'],  # gravitybridge
+    ['transfer', 'channel-18'], # kava
+    ['transfer', 'channel-17'], # kujira
+    ['transfer', 'channel-19'], # noble
+    ['transfer', 'channel-2'],  # osmosis
+    ['transfer', 'channel-25'], # secret
     ['transfer', 'channel-26'], # sei
 ]
 
@@ -117,8 +111,6 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    # ['transfer', 'channel-2169'], # coreum
-    # ['transfer', 'channel-2187'], # coreum
     ['transfer', 'channel-2188'], # coreum
 ]
 
@@ -154,8 +146,6 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    # ['transfer', 'channel-653'], # coreum
-    # ['transfer', 'channel-654'], # coreum
     ['transfer', 'channel-660'], # coreum
 ]
 
@@ -191,7 +181,6 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    # ['transfer', 'channel-119'], # coreum
     ['transfer', 'channel-120'], # coreum
 ]
 
@@ -303,9 +292,6 @@ id = "secret-4"
 type = "CosmosSdk"
 rpc_addr = 'https://secret-4.api.trivium.network:26657'
 grpc_addr = 'https://secretnetwork-grpc.lavenderfive.com:443'
-#rpc_addr = 'https://rpc-secret.whispernode.com:443'
-#grpc_addr = 'https://secretnetwork-grpc.lavenderfive.com:443'
-#websocket_addr = 'wss://rpc-secret.whispernode.com:443/websocket'
 rpc_timeout = "20s"
 trusted_node = false
 account_prefix = "secret"
@@ -332,8 +318,6 @@ compat_mode = '0.34'
 [chains.packet_filter]
 policy = "allow"
 list = [
-    # ['transfer', 'channel-92'], # coreum
-    # ['transfer', 'channel-99'], # coreum
     ['transfer', 'channel-101'], # coreum
 ]
 
