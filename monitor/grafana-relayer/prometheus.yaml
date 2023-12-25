@@ -23,3 +23,6 @@ scrape_configs:
   - job_name: composable
     static_configs:
       - targets: ['tasks.rl_composable:3001']
+  - job_name: osmosis
+    static_configs:
+      - targets: ['tasks.rl_osmosis:3001']

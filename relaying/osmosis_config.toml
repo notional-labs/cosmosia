@@ -1,0 +1,800 @@
+[global]
+log_level = 'error'
+
+[mode]
+
+[mode.clients]
+enabled = true
+refresh = true
+misbehaviour = true
+
+[mode.connections]
+enabled = false
+
+[mode.channels]
+enabled = false
+
+[mode.packets]
+enabled = true
+clear_interval = 20
+clear_on_start = true
+tx_confirmation = false
+
+[rest]
+enabled = false
+host = '127.0.0.1'
+port = 3000
+
+[telemetry]
+enabled = true
+host = '0.0.0.0'
+port = 3001
+
+
+[[chains]]
+id = 'osmosis-1'
+rpc_addr = 'http://tasks.lb_coreum:8000'
+grpc_addr = 'http://tasks.lb_coreum:8003'
+websocket_addr = 'ws://tasks.lb_coreum:8000/websocket'
+rpc_timeout = '10s'
+account_prefix = 'osmo'
+key_name = 'osmosis'
+store_prefix = 'ibc'
+max_gas = 20000000
+gas_price = { price = 0.003, denom = 'uosmo' }
+#gas_multiplier = 2
+clock_drift = '100s'
+trusting_period = '224hours'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Relayed by Notional!'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-0'],
+    ['transfer', 'channel-171'],
+    ['transfer', 'channel-1'],
+    ['transfer', 'channel-42'],
+    ['transfer', 'channel-47'],
+    ['transfer', 'channel-169'],
+    ['transfer', 'channel-2'],
+    ['transfer', 'channel-8'],
+    ['transfer','channel-51'],
+    ['transfer','channel-72'],
+    ['transfer', 'channel-208'],
+    ['transfer', 'channel-113'],
+    ['transfer', 'channel-87'],
+    ['transfer', 'channel-5'],
+    ['transfer', 'channel-144'],
+    ['transfer', 'channel-6'],
+    ['transfer', 'channel-143'],
+    ['transfer', 'channel-77'],
+    ['transfer', 'channel-557'],
+    ['transfer', 'channel-199'],
+    ['transfer', 'channel-75'],
+    ['transfer', 'channel-184'],
+    ['transfer', 'channel-326'],
+    ['transfer', 'channel-522'],
+    ['transfer', 'channel-688'],
+    ['transfer', 'channel-294'],
+]
+
+[[chains]]
+id = 'core-1'
+rpc_addr = 'http://tasks.lb_persistent:8000'
+grpc_addr = 'http://tasks.lb_persistent:8003'
+websocket_addr = 'ws://tasks.lb_persistent:8000/websocket'
+rpc_timeout = '10s'
+account_prefix = 'persistence'
+key_name = 'persistence'
+store_prefix = 'ibc'
+max_gas = 2000000
+max_tx_size = 180000
+gas_price = { price = 0.0025, denom = 'uxprt' }
+#gas_multiplier = 0.1
+clock_drift ='1000s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Relayed by Notional!'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-37'],
+    ['transfer', 'channel-26']
+]
+
+[[chains]]
+id = 'columbus-5'
+rpc_addr = 'http://tasks.lb_terra:8000'
+grpc_addr = 'http://tasks.lb_terra:8003'
+websocket_addr = 'ws://tasks.lb_terra:8000/websocket'
+rpc_timeout = '30s'
+account_prefix = 'terra'
+key_name = 'terra'
+max_tx_size = 2500000
+store_prefix = 'ibc'
+max_gas = 3000000
+gas_price = { price = 10, denom = 'uluna' }
+gas_multiplier = 2
+clock_drift ='1500s'
+trusting_period = '14days'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-7'],
+    ['transfer', 'channel-1']
+]
+
+[[chains]]
+id = 'regen-1'
+rpc_addr = 'http://tasks.lb_regen:8000'
+grpc_addr = 'http://tasks.lb_regen:8003'
+websocket_addr = 'ws://tasks.lb_regen:8000/websocket'
+rpc_timeout = '60s'
+account_prefix = 'regen'
+key_name = 'regen'
+store_prefix = 'ibc'
+max_tx_size = 100000
+max_gas = 2000000
+gas_price = { price = 0.007, denom = 'uregen' }
+gas_multiplier = 1
+clock_drift ='50s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Delegate Notional: build interchain expressway'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-1'],
+]
+
+[[chains]]
+id = 'pacific-1'
+rpc_addr = 'http://tasks.lb_sei:8000'
+grpc_addr = 'http://tasks.lb_sei:8003'
+websocket_addr = 'ws://tasks.lb_sei:8000/websocket'
+rpc_timeout = '20s'
+fee_granter = 'sei1z3r0ccsssnvuaheuakul58zlu65rngw7njrjcz'
+account_prefix = 'sei'
+key_name = 'sei-2'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.1, denom = 'usei' }
+gas_multiplier = 2
+#gas_adjustment = 2
+max_msg_num = 4
+#max_msg_num = 30
+max_tx_size = 2097152
+clock_drift = '5s'
+max_block_time = '30s'
+trusting_period = '14days'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '2', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [[
+    'wasm.sei1gjrrme22cyha4ht2xapn3f08zzw6z3d4uxx6fyy9zd5dyr3yxgzqqncdqn',
+    'channel-4',
+]]
+
+[[chains]]
+id = 'cosmoshub-4'
+rpc_addr = 'http://tasks.lb_cosmoshub:8000'
+grpc_addr = 'http://tasks.lb_cosmoshub:8003'
+websocket_addr = 'ws://tasks.lb_cosmoshub:8000/websocket'
+rpc_timeout = '30s'
+account_prefix = 'cosmos'
+key_name = 'cosmos'
+store_prefix = 'ibc'
+max_tx_size = 180000
+max_gas = 2500000
+gas_price = { price = 0.01, denom = 'uatom' }
+gas_multiplier = 2
+clock_drift = '1000s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Relayed by Notional!'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-141'],
+    ['transfer', 'channel-232'],
+    ['transfer', 'channel-192'],
+    ['transfer', 'channel-207'],
+    ['transfer', 'channel-184'],
+    ['transfer', 'channel-292'],
+    ['transfer', 'channel-467'],
+    ['transfer', 'channel-223'],
+    ['transfer', 'channel-235'],
+    ['transfer', 'channel-204'],
+    ['transfer', 'channel-288'],
+]
+
+[[chains]]
+id = 'juno-1'
+rpc_addr = 'http://tasks.lb_juno:8000'
+grpc_addr = 'http://tasks.lb_juno:8003'
+websocket_addr = 'ws://tasks.lb_juno:8000/websocket'
+rpc_timeout = '50s'
+account_prefix = 'juno'
+key_name = 'juno'
+store_prefix = 'ibc'
+max_tx_size = 180000
+max_gas = 2700000
+gas_price = { price = 0.08, denom = 'ujuno' }
+#gas_adjustment = 1
+clock_drift = '15s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Delegate Notional: build interchain expressway'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-0'],
+    ['transfer', 'channel-71'],
+    ['transfer', 'channel-47'],
+    ['transfer', 'channel-50'],
+    ['transfer', 'channel-53'],
+    ['transfer', 'channel-1'],
+    ['transfer', 'channel-5'],
+    ['transfer', 'channel-29'],
+    ['transfer', 'channel-15'],
+    ['transfer','channel-33'],
+    ['transfer','channel-29'],
+    ['transfer','channel-70'],
+    ['transfer', 'channel-58'],
+    ['transfer', 'channel-71'],
+    ['transfer', 'channel-81'],
+    ['transfer', 'channel-139'],
+]
+
+[[chains]]
+id = 'umee-1'
+rpc_addr = 'http://tasks.lb_umee:8000'
+grpc_addr = 'http://tasks.lb_umee:8003'
+websocket_addr = 'ws://tasks.lb_umee:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'umee'
+key_name = 'umee'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.1, denom = 'uumee' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '224hours'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-57'],
+    ['transfer', 'channel-0'],
+    ['transfer', 'channel-34'],
+    ['transfer', 'channel-1'],
+    ['transfer', 'channel-33'],
+]
+
+[[chains]]
+id = 'crescent-1'
+rpc_addr = 'http://tasks.lb_crescent:8000'
+grpc_addr = 'http://tasks.lb_crescent:8003'
+websocket_addr = 'ws://tasks.lb_crescent:8000/websocket'
+rpc_timeout = '40s'
+account_prefix = 'cre'
+key_name = ''
+store_prefix = 'ibc'
+max_gas = 2000000
+max_tx_size = 180000
+gas_price = { price = 0.01, denom = 'ucre' }
+#gas_multiplier = 2
+clock_drift ='15s'
+trusting_period = '224hours'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Relayed by Notional!'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-4'],
+    ['transfer', 'channel-3'],
+    ['transfer', 'channel-29'],
+]
+
+[[chains]]
+id = 'quicksilver-2'
+rpc_addr = 'http://tasks.lb_quicksilver:8000'
+grpc_addr = 'http://tasks.lb_quicksilver:8003'
+websocket_addr = 'ws://tasks.lb_quicksilver:8000/websocket'
+rpc_timeout = '40s'
+account_prefix = 'quick'
+key_name = 'quick'
+store_prefix = 'ibc'
+max_gas = 2000000
+max_tx_size = 180000
+gas_price = { price = 0.0004, denom = 'uqck' }
+#gas_multiplier = 2
+clock_drift ='15s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Relayed by Notional!'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-1'],
+    ['transfer', 'channel-2'],
+    ['transfer', 'channel-3'],
+    ['transfer', 'channel-4'],
+    ['transfer', 'channel-5'],
+    ['transfer', 'channel-6'],
+]
+
+[[chains]]
+id = 'axelar-dojo-1'
+rpc_timeout = '15s'
+rpc_addr = 'http://tasks.lb_axelar:8000'
+grpc_addr = 'http://tasks.lb_axelar:8003'
+websocket_addr = 'ws://tasks.lb_axelar:8000/websocket'
+account_prefix = 'axelar'
+key_name = 'axelar'
+store_prefix = 'ibc'
+max_gas = 4000000
+gas_price = { price = 0.0075, denom = 'uaxl' }
+clock_drift = '50s'
+trusting_period = '112hours'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Relayed by Notional!'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-22'],
+    ['transfer', 'channel-30'],
+    ['transfer', 'channel-17'],
+    ['transfer', 'channel-3'],
+    ['transfer', 'channel-7'],
+    ['transfer', 'channel-4'],
+    ['transfer', 'channel-36'],
+]
+
+[[chains]]
+id = 'migaloo-1'
+rpc_addr = 'http://tasks.lb_whitewhale:8000'
+grpc_addr = 'http://tasks.lb_whitewhale:8003'
+websocket_addr = 'ws://tasks.lb_whitewhale:8000/websocket'
+rpc_timeout = '15s'
+account_prefix = 'migaloo'
+fee_granter = 'migaloo1fpfg0max7kvpn40y3245qnpg7a5lefsd7ktemg'
+key_name = 'migaloo'
+store_prefix = 'ibc'
+max_gas = 10000000
+max_msg_num = 30
+max_tx_size = 3000000
+gas_price = { price = 0.25, denom = 'uwhale' }
+gas_multiplier = 2
+clock_drift = '31s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Relayed by Notional!'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-22']
+]
+
+[[chains]]
+id = 'evmos_9001-2'
+rpc_addr = 'http://tasks.lb_evmos:8000'
+grpc_addr = 'http://tasks.lb_evmos:8003'
+websocket_addr = 'ws://tasks.lb_evmos:8000/websocket'
+rpc_timeout = '30s'
+address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
+account_prefix = 'evmos'
+key_name = 'evmos'
+store_prefix = 'ibc'
+max_tx_size = 180000
+max_gas = 2500000
+gas_price = { price = 40000000000, denom = 'aevmos' }
+gas_multiplier = 2
+clock_drift = '40s'
+trusting_period = '224hours'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Relayed by Notional!'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-21'],
+]
+
+[[chains]]
+id = 'chihuahua-1'
+rpc_addr = 'http://tasks.lb_chihuahua:8000'
+grpc_addr = 'http://tasks.lb_chihuahua:8003'
+websocket_addr = 'ws://tasks.lb_chihuahua:8000/websocket'
+rpc_timeout = '15s'
+account_prefix = 'chihuahua'
+key_name = 'chihuahua'
+store_prefix = 'ibc'
+max_tx_size = 1000000
+default_gas = 100000000
+max_gas = 1000000000
+max_msg_num = 30
+gas_price = { price = 0.1, denom = 'uhuahua' }
+gas_multiplier = 2
+clock_drift ='34s'
+trusting_period = '224hours'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Relayed by Notional!'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-7'],
+]
+
+[[chains]]
+id = 'akashnet-2'
+rpc_addr = 'http://tasks.lb_akash:8000'
+grpc_addr = 'http://tasks.lb_akash:8003'
+websocket_addr = 'ws://tasks.lb_akash:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'akash'
+key_name = 'akash'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'uakt' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-9']
+]
+
+[[chains]]
+id = 'bitcanna-1'
+rpc_addr = 'http://tasks.lb_bitcanna:8000'
+grpc_addr = 'http://tasks.lb_bitcanna:8003'
+websocket_addr = 'ws://tasks.lb_bitcanna:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'bcna'
+key_name = 'bcna'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'ubcna' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '32hours'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-1'],
+]
+
+[[chains]]
+id = 'crypto-org-chain-mainnet-1'
+rpc_addr = 'http://tasks.lb_cryptoorgchain:8000'
+grpc_addr = 'http://tasks.lb_cryptoorgchain:8003'
+websocket_addr = 'ws://tasks.lb_cryptoorgchain:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'cro'
+key_name = 'cro'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'basecro' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '448hours'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-10'],
+]
+
+[[chains]]
+id = 'gravity-bridge-3'
+rpc_addr = 'http://tasks.lb_gravitybridge:8000'
+grpc_addr = 'http://tasks.lb_gravitybridge:8003'
+websocket_addr = 'ws://tasks.lb_gravitybridge:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'gravity'
+key_name = 'gravity'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'ugraviton' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '32hours'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-10'],
+]
+
+[[chains]]
+id = 'kava_2222-10'
+rpc_addr = 'http://tasks.lb_kava:8000'
+grpc_addr = 'http://tasks.lb_kava:8003'
+websocket_addr = 'ws://tasks.lb_kava:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'kava'
+key_name = 'kava'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'ukava' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-1'],
+]
+
+[[chains]]
+id = 'kichain-2'
+rpc_addr = 'http://tasks.lb_kichain:8000'
+grpc_addr = 'http://tasks.lb_kichain:8003'
+websocket_addr = 'ws://tasks.lb_kichain:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'ki'
+key_name = 'ki'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'uxki' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-19'],
+    ['transfer', 'channel-1'],
+    ['transfer', 'channel-8'],
+    ['transfer', 'channel-0'],
+]
+
+[[chains]]
+id = 'mars-1'
+rpc_addr = 'http://tasks.lb_mars:8000'
+grpc_addr = 'http://tasks.lb_mars:8003'
+websocket_addr = 'ws://tasks.lb_mars:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'mars'
+key_name = 'mars'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'umars' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-1'],
+]
+
+[[chains]]
+id = 'omniflixhub-1'
+rpc_addr = 'http://tasks.lb_omniflixhub:8000'
+grpc_addr = 'http://tasks.lb_omniflixhub:8003'
+websocket_addr = 'ws://tasks.lb_omniflixhub:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'omniflix'
+key_name = 'omniflix'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'uflix' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-1'],
+]
+
+[[chains]]
+id = 'quasar-1'
+rpc_addr = 'http://tasks.lb_quasar:8000'
+grpc_addr = 'http://tasks.lb_quasar:8003'
+websocket_addr = 'ws://tasks.lb_quasar:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'quasar'
+key_name = 'quasar'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'uqsr' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-1'],
+]
+
+[[chains]]
+id = 'sentinelhub-2'
+rpc_addr = 'http://tasks.lb_sentinel:8000'
+grpc_addr = 'http://tasks.lb_sentinel:8003'
+websocket_addr = 'ws://tasks.lb_sentinel:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'sent'
+key_name = 'sentinel'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'udvpn' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+['transfer', 'channel-0'],
+]
+
+[[chains]]
+id = 'stargaze-1'
+rpc_addr = 'http://tasks.lb_stargaze:8000'
+grpc_addr = 'http://tasks.lb_stargaze:8003'
+websocket_addr = 'ws://tasks.lb_stargaze:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'stars'
+key_name = 'stars'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas = 1000000
+gas_price = { price = 1, denom = 'ustars' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1000000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '224hours'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-0'],
+    ['transfer', 'channel-106'],
+]
+
+[[chains]]
+id = 'stride-1'
+rpc_addr = 'http://tasks.lb_stride:8000'
+grpc_addr = 'http://tasks.lb_stride:8003'
+websocket_addr = 'ws://tasks.lb_stride:8000/websocket'
+rpc_timeout = '20s'
+account_prefix = 'stride'
+key_name = 'stride'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'ustrd' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '224hours'
+memo_prefix = 'Relayed by Notional!'
+trust_threshold = { numerator = '1', denominator = '3' }
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-9'],
+    ['transfer', 'channel-5'],
+    ['transfer', 'channel-24'],
+    ['transfer', 'channel-19'],
+    ['transfer', 'channel-49'],
+    ['transfer', 'channel-29'],
+    ['transfer', 'channel-51'],
+]
+
+[[chains]]
+id = 'wormchain'
+rpc_addr = 'http://127.0.0.1:2011'
+websocket_addr = 'ws://127.0.0.1:2011/websocket'
+grpc_addr = 'http://127.0.0.1:2012'
+rpc_timeout = '10s'
+account_prefix = 'wormhole'
+key_name = 'wormhole'
+store_prefix = 'ibc'
+default_gas = 0
+max_gas = 10000000
+gas_multiplier = 1.2
+max_msg_num = 4
+max_tx_size = 2097152
+clock_drift = '45s'
+max_block_time = '30s'
+memo_prefix = 'Relayed by Notional!'
+sequential_batch_tx = false
+trust_threshold = { numerator = '2', denominator = '3' }
+trusting_period = '5days'
+gas_price = { price = 0, denom = 'utest' }
+address_type = { derivation = 'cosmos' }
+[chains.packet_filter]
+policy = 'allow'
+list = [[
+    'wasm.wormhole1wkwy0xh89ksdgj9hr347dyd2dw7zesmtrue6kfzyml4vdtz6e5ws2y050r',
+    'channel-0',
+]]
