@@ -35,7 +35,7 @@ port = 3001
 id = 'osmosis-1'
 rpc_addr = 'http://tasks.lb_osmosis:8000'
 grpc_addr = 'http://tasks.lb_osmosis:8003'
-websocket_addr = 'ws://tasks.lb_osmosis:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '10s'
 account_prefix = 'osmo'
 key_name = 'osmosis'
@@ -84,7 +84,7 @@ list = [
 id = 'akashnet-2'
 rpc_addr = 'http://tasks.lb_akash:8000'
 grpc_addr = 'http://tasks.lb_akash:8003'
-websocket_addr = 'ws://tasks.lb_akash:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_akash:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'akash'
 key_name = 'akash'
@@ -112,7 +112,7 @@ id = 'axelar-dojo-1'
 rpc_timeout = '15s'
 rpc_addr = 'http://tasks.lb_axelar:8000'
 grpc_addr = 'http://tasks.lb_axelar:8003'
-websocket_addr = 'ws://tasks.lb_axelar:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
 account_prefix = 'axelar'
 key_name = 'axelar'
 store_prefix = 'ibc'
@@ -139,7 +139,7 @@ list = [
 id = 'bitcanna-1'
 rpc_addr = 'http://tasks.lb_bitcanna:8000'
 grpc_addr = 'http://tasks.lb_bitcanna:8003'
-websocket_addr = 'ws://tasks.lb_bitcanna:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_bitcanna:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'bcna'
 key_name = 'bcna'
@@ -166,7 +166,7 @@ list = [
 id = 'chihuahua-1'
 rpc_addr = 'http://tasks.lb_chihuahua:8000'
 grpc_addr = 'http://tasks.lb_chihuahua:8003'
-websocket_addr = 'ws://tasks.lb_chihuahua:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_chihuahua:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '15s'
 account_prefix = 'chihuahua'
 key_name = 'chihuahua'
@@ -191,7 +191,7 @@ list = [
 id = 'cosmoshub-4'
 rpc_addr = 'http://tasks.lb_cosmoshub:8000'
 grpc_addr = 'http://tasks.lb_cosmoshub:8003'
-websocket_addr = 'ws://tasks.lb_cosmoshub:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '30s'
 account_prefix = 'cosmos'
 key_name = 'cosmos'
@@ -224,7 +224,7 @@ list = [
 id = 'crypto-org-chain-mainnet-1'
 rpc_addr = 'http://tasks.lb_cryptoorgchain:8000'
 grpc_addr = 'http://tasks.lb_cryptoorgchain:8003'
-websocket_addr = 'ws://tasks.lb_cryptoorgchain:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_cryptoorgchain:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'cro'
 key_name = 'cro'
@@ -251,7 +251,7 @@ list = [
 id = 'juno-1'
 rpc_addr = 'http://tasks.lb_juno:8000'
 grpc_addr = 'http://tasks.lb_juno:8003'
-websocket_addr = 'ws://tasks.lb_juno:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_juno:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '50s'
 account_prefix = 'juno'
 key_name = 'juno'
@@ -289,7 +289,7 @@ list = [
 id = 'gravity-bridge-3'
 rpc_addr = 'http://tasks.lb_gravitybridge:8000'
 grpc_addr = 'http://tasks.lb_gravitybridge:8003'
-websocket_addr = 'ws://tasks.lb_gravitybridge:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_gravitybridge:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'gravity'
 key_name = 'gravity'
@@ -316,7 +316,7 @@ list = [
 id = 'kava_2222-10'
 rpc_addr = 'http://tasks.lb_kava:8000'
 grpc_addr = 'http://tasks.lb_kava:8003'
-websocket_addr = 'ws://tasks.lb_kava:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_kava:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'kava'
 key_name = 'kava'
@@ -343,7 +343,7 @@ list = [
 id = 'kichain-2'
 rpc_addr = 'http://tasks.lb_kichain:8000'
 grpc_addr = 'http://tasks.lb_kichain:8003'
-websocket_addr = 'ws://tasks.lb_kichain:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_kichain:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'ki'
 key_name = 'ki'
@@ -373,7 +373,7 @@ list = [
 id = 'mars-1'
 rpc_addr = 'http://tasks.lb_mars:8000'
 grpc_addr = 'http://tasks.lb_mars:8003'
-websocket_addr = 'ws://tasks.lb_mars:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_mars:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'mars'
 key_name = 'mars'
@@ -400,7 +400,7 @@ list = [
 id = 'omniflixhub-1'
 rpc_addr = 'http://tasks.lb_omniflixhub:8000'
 grpc_addr = 'http://tasks.lb_omniflixhub:8003'
-websocket_addr = 'ws://tasks.lb_omniflixhub:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_omniflixhub:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'omniflix'
 key_name = 'omniflix'
@@ -427,7 +427,7 @@ list = [
 id = 'quasar-1'
 rpc_addr = 'http://tasks.lb_quasar:8000'
 grpc_addr = 'http://tasks.lb_quasar:8003'
-websocket_addr = 'ws://tasks.lb_quasar:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_quasar:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'quasar'
 key_name = 'quasar'
@@ -454,7 +454,7 @@ list = [
 id = 'quicksilver-2'
 rpc_addr = 'http://tasks.lb_quicksilver:8000'
 grpc_addr = 'http://tasks.lb_quicksilver:8003'
-websocket_addr = 'ws://tasks.lb_quicksilver:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_quicksilver:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '40s'
 account_prefix = 'quick'
 key_name = 'quick'
@@ -482,7 +482,7 @@ list = [
 id = 'regen-1'
 rpc_addr = 'http://tasks.lb_regen:8000'
 grpc_addr = 'http://tasks.lb_regen:8003'
-websocket_addr = 'ws://tasks.lb_regen:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_regen:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '60s'
 account_prefix = 'regen'
 key_name = 'regen'
@@ -505,7 +505,7 @@ list = [
 id = 'sentinelhub-2'
 rpc_addr = 'http://tasks.lb_sentinel:8000'
 grpc_addr = 'http://tasks.lb_sentinel:8003'
-websocket_addr = 'ws://tasks.lb_sentinel:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_sentinel:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'sent'
 key_name = 'sentinel'
@@ -532,7 +532,7 @@ list = [
 id = 'stargaze-1'
 rpc_addr = 'http://tasks.lb_stargaze:8000'
 grpc_addr = 'http://tasks.lb_stargaze:8003'
-websocket_addr = 'ws://tasks.lb_stargaze:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_stargaze:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'stars'
 key_name = 'stars'
@@ -560,7 +560,7 @@ list = [
 id = 'stride-1'
 rpc_addr = 'http://tasks.lb_stride:8000'
 grpc_addr = 'http://tasks.lb_stride:8003'
-websocket_addr = 'ws://tasks.lb_stride:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_stride:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'stride'
 key_name = 'stride'
@@ -594,7 +594,7 @@ list = [
 id = 'umee-1'
 rpc_addr = 'http://tasks.lb_umee:8000'
 grpc_addr = 'http://tasks.lb_umee:8003'
-websocket_addr = 'ws://tasks.lb_umee:8000/websocket'
+event_source = { mode = 'push', url = 'ws://tasks.lb_umee:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'umee'
 key_name = 'umee'
