@@ -28,6 +28,191 @@
         "x": 0,
         "y": 0
       },
+      "id": 28,
+      "title": "Injective",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 30,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.[*].chain_id"
+            },
+            {
+              "jsonPath": "$.[*].channel_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].counter_chain_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].pending_packets",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].time_ago",
+              "language": "jsonpath",
+              "name": ""
+            }
+          ],
+          "method": "GET",
+          "params": [
+            [
+              "hermes_config_url",
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/injective_config.toml"
+            ]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Last Client Update [osmosis]",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P66E0988D1198AFE0"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 29,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "wallet_balance{job=\"injective\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Wallet Balances [injective]",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
       "id": 25,
       "title": "Osmosis",
       "type": "row"
@@ -71,7 +256,7 @@
         "h": 34,
         "w": 12,
         "x": 0,
-        "y": 1
+        "y": 8
       },
       "id": 27,
       "options": {
@@ -163,7 +348,7 @@
         "h": 34,
         "w": 12,
         "x": 12,
-        "y": 1
+        "y": 8
       },
       "id": 26,
       "options": {
@@ -212,7 +397,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 42
       },
       "id": 22,
       "panels": [],
@@ -258,7 +443,7 @@
         "h": 29,
         "w": 12,
         "x": 0,
-        "y": 36
+        "y": 43
       },
       "id": 24,
       "options": {
@@ -350,7 +535,7 @@
         "h": 29,
         "w": 12,
         "x": 12,
-        "y": 36
+        "y": 43
       },
       "id": 23,
       "options": {
@@ -398,7 +583,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 65
+        "y": 72
       },
       "id": 19,
       "title": "Kava",
@@ -443,7 +628,7 @@
         "h": 17,
         "w": 12,
         "x": 0,
-        "y": 66
+        "y": 73
       },
       "id": 21,
       "options": {
@@ -535,7 +720,7 @@
         "h": 17,
         "w": 12,
         "x": 12,
-        "y": 66
+        "y": 73
       },
       "id": 20,
       "options": {
@@ -584,7 +769,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 83
+        "y": 90
       },
       "id": 16,
       "panels": [],
@@ -629,7 +814,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 84
+        "y": 91
       },
       "id": 18,
       "options": {
@@ -720,7 +905,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 84
+        "y": 91
       },
       "id": 17,
       "options": {
@@ -768,7 +953,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 96
+        "y": 103
       },
       "id": 13,
       "title": "Whitewhale",
@@ -812,7 +997,7 @@
         "h": 16,
         "w": 12,
         "x": 0,
-        "y": 97
+        "y": 104
       },
       "id": 15,
       "options": {
@@ -903,7 +1088,7 @@
         "h": 16,
         "w": 12,
         "x": 12,
-        "y": 97
+        "y": 104
       },
       "id": 14,
       "options": {
@@ -952,7 +1137,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 113
+        "y": 120
       },
       "id": 9,
       "panels": [],
@@ -996,7 +1181,7 @@
         "h": 26,
         "w": 12,
         "x": 0,
-        "y": 114
+        "y": 121
       },
       "id": 8,
       "options": {
@@ -1087,7 +1272,7 @@
         "h": 26,
         "w": 12,
         "x": 12,
-        "y": 114
+        "y": 121
       },
       "id": 5,
       "options": {
@@ -1136,7 +1321,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 140
+        "y": 147
       },
       "id": 10,
       "panels": [],
@@ -1180,7 +1365,7 @@
         "h": 14,
         "w": 12,
         "x": 0,
-        "y": 141
+        "y": 148
       },
       "id": 12,
       "options": {
@@ -1271,7 +1456,7 @@
         "h": 14,
         "w": 12,
         "x": 12,
-        "y": 141
+        "y": 148
       },
       "id": 4,
       "options": {
@@ -1320,7 +1505,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 155
+        "y": 162
       },
       "id": 11,
       "panels": [],
@@ -1354,7 +1539,7 @@
         "h": 6,
         "w": 12,
         "x": 0,
-        "y": 156
+        "y": 163
       },
       "id": 3,
       "options": {
