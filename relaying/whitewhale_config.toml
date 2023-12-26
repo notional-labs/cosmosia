@@ -246,7 +246,5 @@ address_type = { derivation = 'cosmos' }
 policy = "allow"
 list = [
     ['transfer', 'channel-112'],
-    ['transfer', 'channel-92'],
     ['transfer', 'channel-121'],
-    ['transfer', 'channel-66']
 ]
