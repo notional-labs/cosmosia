@@ -63,7 +63,7 @@ address_type = { derivation = 'cosmos' }
 policy = "allow"
 list = [
     # sort by chain name
-    ['transfer', 'channel-6'],  # neutron
+    ['transfer', 'channel-177'],  # neutron
 ]
 
 [chains.packet_filter.min_fees]
