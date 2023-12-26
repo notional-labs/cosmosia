@@ -61,48 +61,17 @@ compat_mode = '0.34'
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-129"],
-    ["transfer", "channel-137"],
-    ["transfer", "channel-139"],
-    ["transfer", "channel-136"],
-    ["transfer", "channel-140"],
-    ["transfer", "channel-1"],
-    ["transfer", "channel-0"],
+    # sort by chain name
+    ["transfer", "channel-140"], # celestia
+    ["transfer", "channel-0"],   # cosmoshub-4
+    ["transfer", "channel-137"], # dydx-mainnet-1
+    ["transfer", "channel-136"], # neutron-1
+    ["transfer", "channel-139"], # noble-1
+    ["transfer", "channel-1"],   # osmosis-1
+    ["transfer", "channel-129"], # phoenix-1 (terra2)
 ]
 
 [chains.packet_filter.min_fees]
-
-[[chains]]
-id = "injective-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_injective:8000'
-grpc_addr = 'http://tasks.lb_injective:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_injective:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = "20s"
-trusted_node = false
-account_prefix = "inj"
-key_name = "injective"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 100000
-max_gas = 4000000
-gas_multiplier = 1.1
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "5s"
-max_block_time = "30s"
-trusting_period = '14days'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 700000000.0, denom = 'inj' }
-#address_type = { derivation = 'cosmos' }
-address_type = { derivation = 'ethermint', proto_type = { pk_type = '/injective.crypto.v1beta1.ethsecp256k1.PubKey' } }
-compat_mode = '0.37'
-[chains.packet_filter]
-policy = "allowall" # check this!
 
 [[chains]]
 id = "celestia"

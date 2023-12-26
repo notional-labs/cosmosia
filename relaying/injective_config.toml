@@ -56,8 +56,9 @@ memo_prefix = ""
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 160000000, denom = 'inj' }
+gas_price = { price = 160000000.0, denom = 'inj' }
 address_type = { derivation = 'cosmos' }
+# address_type = { derivation = 'ethermint', proto_type = { pk_type = '/injective.crypto.v1beta1.ethsecp256k1.PubKey' } }
 
 [chains.packet_filter]
 policy = "allow"
