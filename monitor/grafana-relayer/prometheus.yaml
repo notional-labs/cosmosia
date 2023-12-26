@@ -26,3 +26,6 @@ scrape_configs:
   - job_name: osmosis
     static_configs:
       - targets: ['tasks.rl_osmosis:3001']
+  - job_name: injective
+    static_configs:
+      - targets: ['tasks.rl_injective:3001']
