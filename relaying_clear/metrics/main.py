@@ -8,8 +8,8 @@ from prometheus_client import Gauge, start_http_server
 
 def get_account_address(chain_id, keyname):
     result = ""
-    dir_path = f'/root/.hermes/keys/{chain_id}/keyring-test/{keyname}.json'
-    with open(dir_path) as json_file:
+    fpath = f'/root/.hermes/keys/{chain_id}/keyring-test/{keyname}.json'
+    with open(fpath) as json_file:
         json_obj = json.load(json_file)
         result = json_obj["account"]
 
@@ -31,7 +31,7 @@ def extract_result(str):
         balance_value = int(balance_subs[0])
         balance_denom = balance_subs[1]
 
-        subs = str.split("`", 1)
+        subs = str.split("`", 2)
         keyname = subs[1]
         res = {
             "keyname": keyname,
