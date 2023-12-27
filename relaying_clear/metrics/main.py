@@ -1,5 +1,30 @@
+import os
+import subprocess
 import time
 from prometheus_client import Gauge, start_http_server
+
+
+def get_subfolders_in_path():
+    # /root/.hermes/keys
+    subfolders = [f.name for f in os.scandir("/Users/tuanpa/Work/notional/cosmosia") if f.is_dir()]
+    return subfolders
+
+def extract_result(str):
+    res = None
+    # SUCCESS balance for key `migaloo`: 82731397 uwhale
+    if str.startswith("SUCCESS"):
+        subs = str.split(": ", 1)
+        res = subs[1]
+
+    return res
+
+def run_cmd():
+    """
+    # $HOME/.hermes/bin/hermes keys balance --chain migaloo-1
+    SUCCESS balance for key `migaloo`: 82731397 uwhale
+    """
+    result = subprocess.run(['ls', '-Y'], stdout=subprocess.PIPE)
+    print(result.stdout.decode('utf-8'))
 
 
 def metrics_server():
@@ -11,10 +36,13 @@ def metrics_server():
     # g_wallet_balance1 = Gauge('wallet_balance1', 'TYPE wallet_balance gauge', ["label1", "label2"])
 
     while True:
-        g_wallet_balance.labels(label1="value1", label2="value2").set(1.2)
+        g_wallet_balance.labels(label1="value1", label2="value2").set(1)
         g_wallet_balance.labels(label1="value3", label2="value4").set(3.4)
         time.sleep(60)
 
 
 if __name__ == '__main__':
-    metrics_server()
+    # metrics_server()
+    # run_cmd()
+    # print(extract_result("SUCCESS balance for key `migaloo`: 82731397 uwhale"))
+    get_subfolders_in_path()
