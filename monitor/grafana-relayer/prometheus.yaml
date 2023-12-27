@@ -5,6 +5,9 @@ scrape_configs:
   - job_name: test
     static_configs:
       - targets: ['tasks.rl_test:3001']
+  - job_name: test_clear
+    static_configs:
+      - targets: ['tasks.rlclear_test:8000']
   - job_name: furya
     static_configs:
       - targets: ['tasks.rl_furya:3001']
