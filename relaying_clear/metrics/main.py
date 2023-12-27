@@ -17,7 +17,7 @@ def extract_result(str):
         subs = str.split(": ", 1)
         res = subs[1]
 
-    return res
+    return res.strip()
 
 def run_cmd(cmd):
     """
