@@ -60,7 +60,7 @@ def metrics_server():
 
 
 if __name__ == '__main__':
-    # metrics_server()
+    metrics_server()
     # run_cmd()
     # print(extract_result("SUCCESS balance for key `migaloo`: 82731397 uwhale"))
 
