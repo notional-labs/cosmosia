@@ -69,7 +69,44 @@ list = [
     ['transfer', 'channel-10'], # chihuahua
     ['transfer', 'channel-27'], # neutron
     ['transfer', 'channel-48'], # kava
+    ['transfer', 'channel-69'], # stargaze-1
     ['transfer', 'channel-22'], # umee
+]
+
+[[chains]]
+id = "axelar-dojo-1"
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_axelar:8000'
+grpc_addr = 'http://tasks.lb_axelar:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "axelar"
+key_name = "axelar"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 1000000
+max_gas = 4000000
+gas_multiplier = 1.0
+max_msg_num = 30
+max_tx_size = 1800000
+max_grpc_decoding_size = 33554432
+clock_drift = "50s"
+max_block_time = "10s"
+trusting_period = '112hours'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.34'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.0075, denom = 'uaxl' }
+address_type = { derivation = 'cosmos' }
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+    ['transfer', 'channel-112'],
+    ['transfer', 'channel-121'],
 ]
 
 [[chains]]
@@ -214,37 +251,36 @@ list = [
 ]
 
 [[chains]]
-id = "axelar-dojo-1"
+id = "stargaze-1"
 type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_axelar:8000'
-grpc_addr = 'http://tasks.lb_axelar:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
+rpc_addr = 'http://tasks.lb_stargaze:8000'
+grpc_addr = 'http://tasks.lb_stargaze:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_stargaze:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = "30s"
 trusted_node = false
-account_prefix = "axelar"
-key_name = "axelar"
+account_prefix = "stars"
+key_name = "stargaze"
 key_store_type = "Test"
 store_prefix = "ibc"
-default_gas = 1000000
-max_gas = 4000000
-gas_multiplier = 1.0
+default_gas = 300000
+max_gas = 1000000
+gas_multiplier = 1.2
 max_msg_num = 30
-max_tx_size = 1800000
+max_tx_size = 1000000
 max_grpc_decoding_size = 33554432
-clock_drift = "50s"
+clock_drift = "15s"
 max_block_time = "10s"
-trusting_period = '112hours'
+trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-compat_mode = '0.34'
+compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0075, denom = 'uaxl' }
+gas_price = { price = 1, denom = 'ustars' }
 address_type = { derivation = 'cosmos' }
 
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-112'],
-    ['transfer', 'channel-121'],
+    ['transfer', 'channel-269'],
 ]
