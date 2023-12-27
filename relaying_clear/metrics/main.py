@@ -46,7 +46,7 @@ def metrics_server():
 
     while True:
         for chain_id in chain_ids:
-            print(f'processing ${chain_id}')
+            print(f'processing {chain_id}')
 
             txtout = run_cmd(f'/root/.hermes/bin/hermes keys balance --chain {chain_id}')
             balance = extract_result(txtout)
@@ -61,6 +61,7 @@ def metrics_server():
 
 if __name__ == '__main__':
     metrics_server()
-    # run_cmd()
-    # print(extract_result("SUCCESS balance for key `migaloo`: 82731397 uwhale"))
+    # chain_id = 'noble-1'
+    # args = shlex.split(f'/root/.hermes/bin/hermes keys balance --chain {chain_id}')
+    # print(args)
 
