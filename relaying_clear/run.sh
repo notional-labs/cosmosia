@@ -62,7 +62,7 @@ git clone --single-branch --branch main https://github.com/notional-labs/cosmosi
 cd cosmosia/relaying_clear/metrics
 
 pip install -r requirements.txt --break-system-packages
-screen -S web_config -dm /usr/sbin/python main.py
+screen -S metrics -dm /usr/sbin/python main.py
 
 ########################################################################################################################
 # cronjob
