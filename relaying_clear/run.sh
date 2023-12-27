@@ -40,7 +40,7 @@ hubname="$hubname"
 hermes_version="$hermes_version"
 EOT
 
-# install hermes
+# install hermes (but dont run it)
 cd $HOME
 mkdir -p $HOME/.hermes/bin
 wget -O - "https://github.com/informalsystems/hermes/releases/download/${hermes_version}/hermes-${hermes_version}-x86_64-unknown-linux-gnu.tar.gz" |tar -xz -C $HOME/.hermes/bin/
@@ -56,10 +56,19 @@ for chain_id in $chain_ids; do
 done
 
 ########################################################################################################################
+# run the metrics server (for reporting wallet balances)
+cd $HOME
+git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
+cd cosmosia/relaying_clear/metrics
+
+pip install -r requirements.txt --break-system-packages
+screen -S web_config -dm /usr/sbin/python main.py
+
+########################################################################################################################
 # cronjob
-#curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/515-relaying-add-relaying-clear-instance/relaying/cron_update_client.sh" > $HOME/cron_update_client.sh
-#echo "0 */12 * * * root /bin/bash $HOME/cron_update_client.sh" > /etc/cron.d/cron_update_clien
-#
-#crond
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/515-relaying-add-relaying-clear-instance/relaying_clear/cron_hermes_clear.sh" > $HOME/cron_hermes_clear.sh
+echo "0 */5 * * * root /bin/bash $HOME/cron_hermes_clear.sh" > /etc/cron.d/cron_hermes_clear
+
+crond
 ################################################################################################
 loop_forever
