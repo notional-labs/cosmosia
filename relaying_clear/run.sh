@@ -18,7 +18,7 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm git base-devel python python-pip cronie screen wget jq
 
 # get hermes config
-eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/515-relaying-add-relaying-clear-instance/relaying/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
+eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -46,7 +46,7 @@ mkdir -p $HOME/.hermes/bin
 wget -O - "https://github.com/informalsystems/hermes/releases/download/${hermes_version}/hermes-${hermes_version}-x86_64-unknown-linux-gnu.tar.gz" |tar -xz -C $HOME/.hermes/bin/
 
 # hermes config
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/515-relaying-add-relaying-clear-instance/relaying/${hubname}_config.toml" > $HOME/.hermes/config.toml
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/${hubname}_config.toml" > $HOME/.hermes/config.toml
 curl -Ls "http://tasks.web_config/config/cosmosia.relay_clear.${hubname}.mnemonic.txt" > $HOME/.hermes/mnemonic.txt
 
 
@@ -66,7 +66,7 @@ screen -S web_config -dm /usr/sbin/python main.py
 
 ########################################################################################################################
 # cronjob
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/515-relaying-add-relaying-clear-instance/relaying_clear/cron_hermes_clear.sh" > $HOME/cron_hermes_clear.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying_clear/cron_hermes_clear.sh" > $HOME/cron_hermes_clear.sh
 echo "0 */5 * * * root /bin/bash $HOME/cron_hermes_clear.sh" > /etc/cron.d/cron_hermes_clear
 
 crond

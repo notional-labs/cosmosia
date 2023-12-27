@@ -31,6 +31,6 @@ docker service create \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/515-relaying-add-relaying-clear-instance/relaying_clear/run.sh > ~/run.sh && /bin/bash ~/run.sh $hubname"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying_clear/run.sh > ~/run.sh && /bin/bash ~/run.sh $hubname"
 
 
