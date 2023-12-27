@@ -71,7 +71,7 @@
       },
       "gridPos": {
         "h": 29,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 1
       },
@@ -163,8 +163,8 @@
       },
       "gridPos": {
         "h": 29,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 1
       },
       "id": 23,
@@ -206,6 +206,77 @@
         }
       ],
       "title": "Wallet Balances [composable]",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P66E0988D1198AFE0"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 29,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "id": 37,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "wallet_balance{job=\"composable_clear\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Wallet Balances - Cron [composable]",
       "type": "marcusolsson-dynamictext-panel"
     },
     {
@@ -257,7 +328,7 @@
       },
       "gridPos": {
         "h": 26,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 31
       },
@@ -349,8 +420,8 @@
       },
       "gridPos": {
         "h": 26,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 31
       },
       "id": 5,
@@ -392,6 +463,77 @@
         }
       ],
       "title": "Wallet Balances [coreum]",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P66E0988D1198AFE0"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 26,
+        "w": 8,
+        "x": 16,
+        "y": 31
+      },
+      "id": 40,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "wallet_balance{job=\"coreum_clear\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Wallet Balances - Cron [coreum]",
       "type": "marcusolsson-dynamictext-panel"
     },
     {
@@ -443,7 +585,7 @@
       },
       "gridPos": {
         "h": 14,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 58
       },
@@ -535,8 +677,8 @@
       },
       "gridPos": {
         "h": 14,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 58
       },
       "id": 4,
@@ -578,6 +720,77 @@
         }
       ],
       "title": "Wallet Balances [furya]",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P66E0988D1198AFE0"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 8,
+        "x": 16,
+        "y": 58
+      },
+      "id": 39,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "wallet_balance{job=\"furya_clear\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Wallet Balances - Cron [furya]",
       "type": "marcusolsson-dynamictext-panel"
     },
     {
@@ -630,7 +843,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 73
       },
@@ -722,8 +935,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 73
       },
       "id": 29,
@@ -765,6 +978,77 @@
         }
       ],
       "title": "Wallet Balances [injective]",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P66E0988D1198AFE0"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 73
+      },
+      "id": 38,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "wallet_balance{job=\"injective_clear\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Wallet Balances - Cron [injective]",
       "type": "marcusolsson-dynamictext-panel"
     },
     {
@@ -817,7 +1101,7 @@
       },
       "gridPos": {
         "h": 17,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 80
       },
@@ -909,8 +1193,8 @@
       },
       "gridPos": {
         "h": 17,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 80
       },
       "id": 20,
@@ -952,6 +1236,77 @@
         }
       ],
       "title": "Wallet Balances [kava]",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P66E0988D1198AFE0"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 8,
+        "x": 16,
+        "y": 80
+      },
+      "id": 36,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "wallet_balance{job=\"kava_clear\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Wallet Balances - Cron [kava]",
       "type": "marcusolsson-dynamictext-panel"
     },
     {
@@ -1004,7 +1359,7 @@
       },
       "gridPos": {
         "h": 34,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 98
       },
@@ -1096,8 +1451,8 @@
       },
       "gridPos": {
         "h": 34,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 98
       },
       "id": 26,
@@ -1139,6 +1494,77 @@
         }
       ],
       "title": "Wallet Balances [osmosis]",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P66E0988D1198AFE0"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 34,
+        "w": 8,
+        "x": 16,
+        "y": 98
+      },
+      "id": 32,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "wallet_balance{job=\"osmosis_clear\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Wallet Balances - Cron [osmosis]",
       "type": "marcusolsson-dynamictext-panel"
     },
     {
@@ -1191,7 +1617,7 @@
       },
       "gridPos": {
         "h": 12,
-        "w": 12,
+        "w": 8,
         "x": 0,
         "y": 133
       },
@@ -1283,8 +1709,8 @@
       },
       "gridPos": {
         "h": 12,
-        "w": 12,
-        "x": 12,
+        "w": 8,
+        "x": 8,
         "y": 133
       },
       "id": 17,
@@ -1326,6 +1752,77 @@
         }
       ],
       "title": "Wallet Balances [sei]",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P66E0988D1198AFE0"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 8,
+        "x": 16,
+        "y": 133
+      },
+      "id": 35,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "everyRow": false,
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "styles": "",
+        "wrap": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "wallet_balance{job=\"sei_clear\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Wallet Balances - Cron [sei]",
       "type": "marcusolsson-dynamictext-panel"
     },
     {
@@ -1544,7 +2041,7 @@
         "x": 16,
         "y": 146
       },
-      "id": 32,
+      "id": 34,
       "options": {
         "afterRender": "",
         "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
