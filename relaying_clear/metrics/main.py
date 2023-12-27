@@ -26,7 +26,7 @@ def run_cmd(cmd):
     """
 
     args = shlex.split(cmd)
-    result = subprocess.run([args], stdout=subprocess.PIPE)
+    result = subprocess.run(args, stdout=subprocess.PIPE)
     txtout = result.stdout.decode('utf-8')
     print(txtout)
     return txtout
