@@ -28,8 +28,8 @@ def extract_result(str):
         subs = str.split(": ", 1)
         balance = subs[1].strip()
         balance_subs = balance.split(" ", 1)
-        balance_value = int(subs[0])
-        balance_denom = subs[1]
+        balance_value = int(balance_subs[0])
+        balance_denom = balance_subs[1]
 
         subs = str.split("`", 1)
         keyname = subs[1]
