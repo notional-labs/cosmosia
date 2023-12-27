@@ -34,7 +34,7 @@ def run_cmd(cmd):
 
 def metrics_server():
     chain_ids = get_subfolders_in_path('/root/.hermes/keys')
-    print(f'chain_ids=${chain_ids}')
+    print(f'chain_ids={chain_ids}')
 
 
     # Start up the server to expose the metrics.
