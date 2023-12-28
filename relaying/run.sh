@@ -97,11 +97,6 @@ sleep 5
 EOT
 echo "0 */7 * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
 
-
-# cronjob to update client
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/cron_update_client.sh" > $HOME/cron_update_client.sh
-echo "0 */12 * * * root /bin/bash $HOME/cron_update_client.sh" > /etc/cron.d/cron_update_client
-
 crond
 ################################################################################################
 loop_forever
