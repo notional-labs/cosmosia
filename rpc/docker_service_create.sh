@@ -117,6 +117,11 @@ data_version=$(find_current_data_version)
 echo "data_version=$data_version"
 rpc_service_name="rpc_${chain_name}_${data_version}"
 
+if [[ -z $data_version ]]; then
+  echo "No data_version for ${chain_name} found"
+  exit
+fi
+
 ## use override constraint if found
 #override_constraint=$(docker node ls -f node.label=cosmosia.rpc.${chain_name}=true | tail -n +2 |awk '{print $2}')
 #if [[ -z $override_constraint ]]; then
