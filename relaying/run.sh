@@ -15,7 +15,7 @@ fi
 
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm git base-devel python python-pip cronie screen wget jq
+pacman -S --noconfirm git base-devel python python-pip cronie screen wget jq unzip
 
 # get hermes config
 eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
@@ -85,6 +85,42 @@ supervisord
 sleep 5
 echo "start hermes..."
 supervisorctl start hermes
+
+
+################################################################################################
+# promtail
+
+# install promtail
+cd $HOME
+curl -O -L "https://github.com/grafana/loki/releases/download/v2.8.7/promtail-linux-amd64.zip"
+unzip "promtail-linux-amd64.zip"
+chmod a+x "promtail-linux-amd64"
+rm "promtail-linux-amd64.zip"
+
+
+# config promtail
+cat <<EOT >> $HOME/promtail_config.yaml
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://tasks.loki:3100/loki/api/v1/push
+
+scrape_configs:
+- job_name: system
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: hermes_${hubname}
+      __path__: /var/log/hermes.err.log
+EOT
+
+
 
 ################################################################################################
 # cron
