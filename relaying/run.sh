@@ -120,7 +120,8 @@ scrape_configs:
       __path__: /var/log/hermes.err.log
 EOT
 
-
+# run promtail
+screen -S promtail -dm $HOME/promtail-linux-amd64 -config.file=$HOME/promtail_config.yaml
 
 ################################################################################################
 # cron
