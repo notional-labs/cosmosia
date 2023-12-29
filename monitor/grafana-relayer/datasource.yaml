@@ -33,3 +33,9 @@ datasources:
       datasources:query: true
       datasources:read: true
       datasources:write: true
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://tasks.loki:3100/
+    jsonData:
+      maxLines: 100
