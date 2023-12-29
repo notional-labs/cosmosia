@@ -20,8 +20,8 @@ rm "promtail-linux-amd64.zip"
 
 # download configs
 cd $HOME
-wget "https://raw.githubusercontent.com/notional-labs/cosmosia/loki/monitor/loki/config.yaml"
-wget "https://raw.githubusercontent.com/notional-labs/cosmosia/loki/monitor/loki/promtail_config.yaml"
+wget "https://raw.githubusercontent.com/notional-labs/cosmosia/main/monitor/loki/config.yaml"
+wget "https://raw.githubusercontent.com/notional-labs/cosmosia/main/monitor/loki/promtail_config.yaml"
 
 # run loki
 screen -S loki -dm $HOME/loki-linux-amd64 -config.file=$HOME/config.yaml
