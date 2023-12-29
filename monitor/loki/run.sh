@@ -24,7 +24,10 @@ wget "https://raw.githubusercontent.com/notional-labs/cosmosia/loki/monitor/loki
 wget "https://raw.githubusercontent.com/notional-labs/cosmosia/loki/monitor/loki/promtail_config.yaml"
 
 # run loki
-screen -S loki -dm $HOME/loki-linux-amd64 -config.file=$HOME/loki-local-config.yaml
+screen -S loki -dm $HOME/loki-linux-amd64 -config.file=$HOME/config.yaml
+
+# run promtail
+screen -S promtail -dm $HOME/promtail-linux-amd64 -config.file=$HOME/promtail_config.yaml
 
 
 ###############################################################f#########################################################
