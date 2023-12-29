@@ -36,6 +36,6 @@ datasources:
   - name: Loki
     type: loki
     access: proxy
-    url: http://localhost:3100
+    url: http://tasks.loki:3100/
     jsonData:
       maxLines: 100
