@@ -19,8 +19,9 @@ chmod a+x "promtail-linux-amd64"
 rm "promtail-linux-amd64.zip"
 
 # download configs
-wget https://raw.githubusercontent.com/grafana/loki/v2.8.7/cmd/loki/loki-local-config.yaml
-wget https://raw.githubusercontent.com/grafana/loki/v2.8.7/clients/cmd/promtail/promtail-local-config.yaml
+cd $HOME
+wget "https://raw.githubusercontent.com/notional-labs/cosmosia/loki/monitor/loki/config.yaml"
+wget "https://raw.githubusercontent.com/notional-labs/cosmosia/loki/monitor/loki/promtail_config.yaml"
 
 # run loki
 screen -S loki -dm $HOME/loki-linux-amd64 -config.file=$HOME/loki-local-config.yaml
