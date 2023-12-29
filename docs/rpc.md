@@ -844,3 +844,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-juno-archive-sub3-ia.cosmosia.notional.ventures/   |
 | API      | https://api-juno-archive-sub3-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-juno-archive-sub3-ia.cosmosia.notional.ventures/  |
+
+### 106. sei-archive-sub2
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-sei-archive-sub2-ia.cosmosia.notional.ventures/   |
+| API      | https://api-sei-archive-sub2-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-sei-archive-sub2-ia.cosmosia.notional.ventures/  |
