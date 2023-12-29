@@ -280,12 +280,50 @@
       "type": "marcusolsson-dynamictext-panel"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 42,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{job=\"hermes_composable\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log [composable]",
+      "transparent": true,
+      "type": "logs"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 36
       },
       "id": 9,
       "panels": [],
@@ -330,7 +368,7 @@
         "h": 26,
         "w": 8,
         "x": 0,
-        "y": 31
+        "y": 37
       },
       "id": 8,
       "options": {
@@ -422,7 +460,7 @@
         "h": 26,
         "w": 8,
         "x": 8,
-        "y": 31
+        "y": 37
       },
       "id": 5,
       "options": {
@@ -493,7 +531,7 @@
         "h": 26,
         "w": 8,
         "x": 16,
-        "y": 31
+        "y": 37
       },
       "id": 40,
       "options": {
@@ -537,12 +575,50 @@
       "type": "marcusolsson-dynamictext-panel"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 63
+      },
+      "id": 41,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{job=\"hermes_coreum\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log [coreum]",
+      "transparent": true,
+      "type": "logs"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 69
       },
       "id": 10,
       "panels": [],
@@ -587,7 +663,7 @@
         "h": 14,
         "w": 8,
         "x": 0,
-        "y": 58
+        "y": 70
       },
       "id": 12,
       "options": {
@@ -679,7 +755,7 @@
         "h": 14,
         "w": 8,
         "x": 8,
-        "y": 58
+        "y": 70
       },
       "id": 4,
       "options": {
@@ -750,7 +826,7 @@
         "h": 14,
         "w": 8,
         "x": 16,
-        "y": 58
+        "y": 70
       },
       "id": 39,
       "options": {
@@ -794,12 +870,50 @@
       "type": "marcusolsson-dynamictext-panel"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 84
+      },
+      "id": 43,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{job=\"hermes_furya\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log [furya]",
+      "transparent": true,
+      "type": "logs"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 72
+        "y": 90
       },
       "id": 28,
       "panels": [],
@@ -845,7 +959,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 73
+        "y": 91
       },
       "id": 30,
       "options": {
@@ -937,7 +1051,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 73
+        "y": 91
       },
       "id": 29,
       "options": {
@@ -1008,7 +1122,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 73
+        "y": 91
       },
       "id": 38,
       "options": {
@@ -1052,12 +1166,50 @@
       "type": "marcusolsson-dynamictext-panel"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 97
+      },
+      "id": 44,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{job=\"hermes_injective\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log [injective]",
+      "transparent": true,
+      "type": "logs"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 79
+        "y": 103
       },
       "id": 19,
       "panels": [],
@@ -1103,7 +1255,7 @@
         "h": 17,
         "w": 8,
         "x": 0,
-        "y": 80
+        "y": 104
       },
       "id": 21,
       "options": {
@@ -1195,7 +1347,7 @@
         "h": 17,
         "w": 8,
         "x": 8,
-        "y": 80
+        "y": 104
       },
       "id": 20,
       "options": {
@@ -1266,7 +1418,7 @@
         "h": 17,
         "w": 8,
         "x": 16,
-        "y": 80
+        "y": 104
       },
       "id": 36,
       "options": {
@@ -1310,12 +1462,50 @@
       "type": "marcusolsson-dynamictext-panel"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 121
+      },
+      "id": 45,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{job=\"hermes_kava\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log [kava]",
+      "transparent": true,
+      "type": "logs"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 97
+        "y": 127
       },
       "id": 25,
       "panels": [],
@@ -1361,7 +1551,7 @@
         "h": 34,
         "w": 8,
         "x": 0,
-        "y": 98
+        "y": 128
       },
       "id": 27,
       "options": {
@@ -1453,7 +1643,7 @@
         "h": 34,
         "w": 8,
         "x": 8,
-        "y": 98
+        "y": 128
       },
       "id": 26,
       "options": {
@@ -1524,7 +1714,7 @@
         "h": 34,
         "w": 8,
         "x": 16,
-        "y": 98
+        "y": 128
       },
       "id": 32,
       "options": {
@@ -1568,12 +1758,50 @@
       "type": "marcusolsson-dynamictext-panel"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 162
+      },
+      "id": 46,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{job=\"hermes_osmosis\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log [osmosis]",
+      "transparent": true,
+      "type": "logs"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 132
+        "y": 168
       },
       "id": 16,
       "panels": [],
@@ -1619,7 +1847,7 @@
         "h": 12,
         "w": 8,
         "x": 0,
-        "y": 133
+        "y": 169
       },
       "id": 18,
       "options": {
@@ -1711,7 +1939,7 @@
         "h": 12,
         "w": 8,
         "x": 8,
-        "y": 133
+        "y": 169
       },
       "id": 17,
       "options": {
@@ -1782,7 +2010,7 @@
         "h": 12,
         "w": 8,
         "x": 16,
-        "y": 133
+        "y": 169
       },
       "id": 35,
       "options": {
@@ -1826,12 +2054,50 @@
       "type": "marcusolsson-dynamictext-panel"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 181
+      },
+      "id": 47,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{job=\"hermes_sei\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log [sei]",
+      "transparent": true,
+      "type": "logs"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 145
+        "y": 187
       },
       "id": 11,
       "panels": [],
@@ -1876,7 +2142,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 146
+        "y": 188
       },
       "id": 31,
       "options": {
@@ -1968,7 +2234,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 146
+        "y": 188
       },
       "id": 3,
       "options": {
@@ -2039,7 +2305,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 146
+        "y": 188
       },
       "id": 34,
       "options": {
@@ -2083,12 +2349,50 @@
       "type": "marcusolsson-dynamictext-panel"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 194
+      },
+      "id": 48,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{job=\"hermes_test\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log [test]",
+      "transparent": true,
+      "type": "logs"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 152
+        "y": 200
       },
       "id": 13,
       "panels": [],
@@ -2134,7 +2438,7 @@
         "h": 17,
         "w": 8,
         "x": 0,
-        "y": 153
+        "y": 201
       },
       "id": 15,
       "options": {
@@ -2226,7 +2530,7 @@
         "h": 17,
         "w": 8,
         "x": 8,
-        "y": 153
+        "y": 201
       },
       "id": 14,
       "options": {
@@ -2297,7 +2601,7 @@
         "h": 17,
         "w": 8,
         "x": 16,
-        "y": 153
+        "y": 201
       },
       "id": 33,
       "options": {
@@ -2339,6 +2643,44 @@
       ],
       "title": "Wallet Balances - Cron [whitewhale]",
       "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 218
+      },
+      "id": 49,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{job=\"hermes_whitewhale\"} |= ``",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log [whitewhale]",
+      "transparent": true,
+      "type": "logs"
     }
   ],
   "refresh": "",
