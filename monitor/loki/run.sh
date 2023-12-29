@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm wget unzip creen
+pacman -S --noconfirm wget unzip screen
 
 cd $HOME
 
