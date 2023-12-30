@@ -30,7 +30,6 @@ enabled = true
 host = '0.0.0.0'
 port = 3001
 
-
 [[chains]]
 id = 'osmosis-1'
 rpc_addr = 'http://tasks.lb_osmosis:8000'
@@ -46,17 +45,16 @@ gas_multiplier = 1.3
 clock_drift = '100s'
 trusting_period = '224hours'
 trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 [chains.packet_filter]
 policy = 'allow'
 list = [
-    # sort by chain name
-    ['transfer', 'channel-1'],   # akash
+    # sort by chain chain_id
+    ['transfer', 'channel-1'],   # akashnet-2
     ['transfer', 'channel-208'], # axelar-dojo-1
     ['transfer','channel-51'],   # bitcanna-1
     ['transfer', 'channel-113'], # chihuahua-1
     ['transfer','channel-72'],   # columbus-5
-#    ['transfer', 'channel-87'],  # comdex-1
     ['transfer', 'channel-0'],   # cosmoshub
     ['transfer', 'channel-5'],   # crypto-org-chain-mainnet-1
     ['transfer', 'channel-171'], # konstellation (darchub)
@@ -72,13 +70,10 @@ list = [
     ['transfer', 'channel-688'], # quasar-1
     ['transfer', 'channel-8'],   # regen-1
     ['transfer', 'channel-2'],   # sentinelhub-2
-#    ['transfer', 'channel-47'],  # sifchain-1
     ['transfer', 'channel-75'],  # stargaze-1
     ['transfer', 'channel-326'], # stride-1
     ['transfer', 'channel-184'], # umee-1
-#    ['transfer', 'channel-294'], # ????
 ]
-
 
 [[chains]]
 id = 'akashnet-2'
@@ -99,12 +94,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-9']
+    ['transfer', 'channel-9']
 ]
 
 [[chains]]
@@ -121,7 +116,7 @@ gas_price = { price = 0.0075, denom = 'uaxl' }
 clock_drift = '50s'
 trusting_period = '112hours'
 trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -148,12 +143,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '32hours'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-1'],
+    ['transfer', 'channel-1'],
 ]
 
 [[chains]]
@@ -174,11 +169,36 @@ gas_multiplier = 2
 clock_drift ='34s'
 trusting_period = '224hours'
 trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-7'],
+    ['transfer', 'channel-7'],
+]
+
+[[chains]]
+id = 'columbus-5'
+rpc_addr = 'http://tasks.lb_terra:8000'
+grpc_addr = 'http://tasks.lb_terra:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_terra:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '15s'
+account_prefix = 'terra'
+key_name = 'terra'
+store_prefix = 'ibc'
+max_tx_size = 1000000
+default_gas = 100000000
+max_gas = 1000000000
+max_msg_num = 30
+gas_price = { price = 0.1, denom = 'uluna' }
+gas_multiplier = 2
+clock_drift ='34s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = ''
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-1'],
 ]
 
 [[chains]]
@@ -197,7 +217,7 @@ gas_multiplier = 2
 clock_drift = '1000s'
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -223,12 +243,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '448hours'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-10'],
+    ['transfer', 'channel-10'],
 ]
 
 [[chains]]
@@ -273,12 +293,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '32hours'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-10'],
+    ['transfer', 'channel-10'],
 ]
 
 [[chains]]
@@ -300,12 +320,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-1'],
+    ['transfer', 'channel-1'],
 ]
 
 [[chains]]
@@ -327,14 +347,11 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-    ['transfer', 'channel-19'],
-    ['transfer', 'channel-1'],
-    ['transfer', 'channel-8'],
     ['transfer', 'channel-0'],
 ]
 
@@ -357,12 +374,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-1'],
+    ['transfer', 'channel-1'],
 ]
 
 [[chains]]
@@ -384,12 +401,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-1'],
+    ['transfer', 'channel-1'],
 ]
 
 [[chains]]
@@ -411,12 +428,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-1'],
+    ['transfer', 'channel-1'],
 ]
 
 [[chains]]
@@ -435,7 +452,7 @@ gas_price = { price = 0.0004, denom = 'uqck' }
 clock_drift ='15s'
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -484,12 +501,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-['transfer', 'channel-0'],
+    ['transfer', 'channel-0'],
 ]
 
 [[chains]]
@@ -511,7 +528,7 @@ max_tx_size = 1000000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '224hours'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
@@ -538,18 +555,12 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '224hours'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
 list = [
-    ['transfer', 'channel-9'],
     ['transfer', 'channel-5'],
-    ['transfer', 'channel-24'],
-    ['transfer', 'channel-19'],
-    ['transfer', 'channel-49'],
-    ['transfer', 'channel-29'],
-    ['transfer', 'channel-51'],
 ]
 
 
@@ -572,7 +583,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '224hours'
-memo_prefix = 'Relayed by Notional!'
+memo_prefix = ''
 trust_threshold = { numerator = '1', denominator = '3' }
 [chains.packet_filter]
 policy = 'allow'
