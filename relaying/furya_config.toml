@@ -4,7 +4,7 @@ log_level = "error"
 [mode.clients]
 enabled = true
 refresh = true
-misbehaviour = true
+misbehaviour = false
 
 [mode.connections]
 enabled = false
