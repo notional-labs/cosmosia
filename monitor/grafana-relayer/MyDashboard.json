@@ -308,7 +308,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_composable\"} |= ``",
+          "expr": "{job=\"hermes_composable\"} != `misbehaviour` != `websocket`",
           "queryType": "range",
           "refId": "A"
         }
@@ -603,7 +603,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_coreum\"} |= ``",
+          "expr": "{job=\"hermes_coreum\"} != `misbehaviour` != `websocket`",
           "queryType": "range",
           "refId": "A"
         }
@@ -898,7 +898,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_furya\"} |= ``",
+          "expr": "{job=\"hermes_furya\"} != `misbehaviour` != `websocket`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1194,7 +1194,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_injective\"} |= ``",
+          "expr": "{job=\"hermes_injective\"} != `misbehaviour` != `websocket`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1490,7 +1490,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_kava\"} |= ``",
+          "expr": "{job=\"hermes_kava\"} != `misbehaviour` != `websocket`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1535,7 +1535,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1626,7 +1627,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1696,7 +1698,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1783,7 +1786,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_osmosis\"} |= ``",
+          "expr": "{job=\"hermes_osmosis\"} != `misbehaviour` != `websocket`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1828,7 +1831,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1919,7 +1923,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1989,7 +1994,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2076,7 +2082,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_sei\"} |= ``",
+          "expr": "{job=\"hermes_sei\"} != `misbehaviour` != `websocket`",
           "queryType": "range",
           "refId": "A"
         }
@@ -2120,7 +2126,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2211,7 +2218,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2281,7 +2289,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2368,7 +2377,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_test\"} |= ``",
+          "expr": "{job=\"hermes_test\"} != `misbehaviour` != `websocket`",
           "queryType": "range",
           "refId": "A"
         }
@@ -2413,7 +2422,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2504,7 +2514,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2574,7 +2585,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2661,7 +2673,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_whitewhale\"} |= ``",
+          "expr": "{job=\"hermes_whitewhale\"} != `misbehaviour` != `websocket`",
           "queryType": "range",
           "refId": "A"
         }
