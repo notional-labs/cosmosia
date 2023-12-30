@@ -62,7 +62,6 @@ list = [
     ['transfer', 'channel-6'],   # irishub-1
     ['transfer', 'channel-42'],  # juno
     ['transfer', 'channel-169'], # juno-1
-    ['transfer', 'channel-143'], # kava_2222-10
     ['transfer', 'channel-77'],  # kichain-2
     ['transfer', 'channel-557'], # mars-1
     ['transfer', 'channel-199'], # omniflixhub-1
@@ -299,33 +298,6 @@ trust_threshold = { numerator = '1', denominator = '3' }
 policy = 'allow'
 list = [
     ['transfer', 'channel-10'],
-]
-
-[[chains]]
-id = 'kava_2222-10'
-rpc_addr = 'http://tasks.lb_kava:8000'
-grpc_addr = 'http://tasks.lb_kava:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_kava:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'kava'
-key_name = 'kava'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'ukava' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '14days'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
-[chains.packet_filter]
-policy = 'allow'
-list = [
-    ['transfer', 'channel-1'],
 ]
 
 [[chains]]
