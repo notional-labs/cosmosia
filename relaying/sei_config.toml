@@ -60,6 +60,7 @@ policy = "allow"
 list = [
     # sort by chain name
     ["transfer", "channel-2"], # axelar
+    ['transfer', 'channel-47'], # coreum (move from coreum hub to)
     ["transfer", "channel-1"], # cosmoshub
     ["transfer", "channel-0"], # osmosis
     ["transfer", "channel-3"], # terra2
@@ -94,6 +95,38 @@ address_type = { derivation = 'cosmos' }
 policy = "allow"
 list = [
     ["transfer", "channel-103"], # sei
+]
+
+
+[[chains]]
+id = "coreum-mainnet-1"
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_coreum:8000'
+grpc_addr = 'http://tasks.lb_coreum:8003'
+websocket_addr = 'ws://tasks.lb_coreum:8000/websocket'
+rpc_timeout = "30s"
+account_prefix = "core"
+key_name = "coreum"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 300000
+max_gas = 10000000
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 180000
+clock_drift = "40s"
+max_block_time = "10s"
+trusting_period = '32hours'
+memo_prefix = ""
+sequential_batch_tx = false
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.0625, denom = 'ucore' }
+address_type = { derivation = 'cosmos' }
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+    ['transfer', 'channel-26'], # sei
 ]
 
 [[chains]]
