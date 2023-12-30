@@ -63,92 +63,264 @@ address_type = { derivation = 'cosmos' }
 policy = "allow"
 list = [
     # sort by chain_id
-    ['transfer', 'channel-0'], # chihuahua-1
-    ['transfer', 'channel-3'], # osmosis-1
-    ['transfer', 'channel-4'], # cosmoshub-4
-    ['transfer', 'channel-5'], # stride-1
-    ['transfer', 'channel-6'], # stargaze-1
-    ['transfer', 'channel-7'], # evmos_9001-2
-    ['transfer', 'channel-8'], # juno-1
-    ['transfer', 'channel-9'], # quicksilver-2
+    ['transfer', 'channel-13'], # agoric-3
+    ['transfer', 'channel-0'],  # chihuahua-1
+    ['transfer', 'channel-4'],  # cosmoshub-4
     ['transfer', 'channel-11'], # crescent-1
     ['transfer', 'channel-12'], # canto_7700-1
-    ['transfer', 'channel-13'], # agoric-3
-    ['transfer', 'channel-14'], # secret-4
+    ['transfer', 'channel-7'],  # evmos_9001-2
+    ['transfer', 'channel-8'],  # juno-1
     ['transfer', 'channel-18'], # neutron-1
-    ['transfer', 'channel-17'], # osmosis-1
+    ['transfer', 'channel-3'],  # osmosis-1
+    ['transfer', 'channel-9'],  # quicksilver-2
+    ['transfer', 'channel-14'], # secret-4
+    ['transfer', 'channel-6'],  # stargaze-1
+    ['transfer', 'channel-5'],  # stride-1
     ['transfer', 'channel-20'], # umee-1
 ]
 
 [chains.packet_filter.min_fees]
 
 [[chains]]
-id = "umee-1"
+id = "agoric-3"
 type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_umee:8000'
-grpc_addr = 'http://tasks.lb_umee:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_umee:8000/websocket', batch_delay = '500ms' }
+rpc_addr = 'http://tasks.lb_regen:8000'
+grpc_addr = 'http://tasks.lb_regen:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_regen:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = "30s"
 trusted_node = false
-account_prefix = "umee"
-key_name = "umee"
+account_prefix = "agoric"
+key_name = "agoric"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas =  10000000
-gas_multiplier = 1.2
+gas_price = { price = 0.03, denom = 'ubld' }
+gas_multiplier = 1
 max_msg_num = 30
-max_tx_size = 2097152
+max_tx_size = 3000000
 max_grpc_decoding_size = 33554432
 clock_drift = "40s"
 max_block_time = "10s"
-trusting_period = '216hours'
+trusting_period = '336hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-compat_mode = '0.37'
+compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'uumee' }
 address_type = { derivation = 'cosmos' }
 
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-99'],
+    ['transfer', 'channel-55'],
 ]
 
 [[chains]]
-id = "injective-1"
+id = "chihuahua-1"
 type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_injective:8000'
-grpc_addr = 'http://tasks.lb_injective:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_injective:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = "20s"
+rpc_addr = 'http://tasks.lb_chihuahua:8000'
+grpc_addr = 'http://tasks.lb_chihuahua:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_chihuahua:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
 trusted_node = false
-account_prefix = "inj"
-key_name = "injective"
+account_prefix = "chihuahua"
+key_name = "chihuahua"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 100000000
+max_gas = 1000000000
+gas_multiplier = 2
+max_msg_num = 30
+max_tx_size = 1000000
+max_grpc_decoding_size = 33554432
+clock_drift = "15s"
+max_block_time = "10s"
+trusting_period = '14days'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.37'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.1, denom = 'uhuahua' }
+address_type = { derivation = 'cosmos' }
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+    ['transfer', 'channel-62'],
+]
+
+[[chains]]
+id = "cosmoshub-4"
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_cosmoshub:8000'
+grpc_addr = 'http://tasks.lb_cosmoshub:8003'
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "cosmos"
+key_name = "cosmoshub"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 180000
+max_gas = 2500000
+gas_multiplier = 2
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "1000s"
+max_block_time = "10s"
+trusting_period = '14days'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.34'
+event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.01, denom = 'uatom' }
+address_type = { derivation = 'cosmos' }
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+    ['transfer', 'channel-617'],
+]
+
+[[chains]]
+id = "crescent-1"
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_crescent:8000'
+grpc_addr = 'http://tasks.lb_crescent:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_crescent:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "cre"
+key_name = "crescent"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 300000
+max_gas = 2000000
+gas_price = { price = 0.01, denom = 'ucre' }
+gas_multiplier = 1
+max_msg_num = 30
+max_tx_size = 3000000
+max_grpc_decoding_size = 33554432
+clock_drift = "40s"
+max_block_time = "10s"
+trusting_period = '224hours'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.34'
+trust_threshold = { numerator = '1', denominator = '3' }
+address_type = { derivation = 'cosmos' }
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+    ['transfer', 'channel-64'],
+]
+
+[[chains]]
+id = "canto_7700-1"
+type = "CosmosSdk"
+rpc_addr = 'https://rpc.canto.silentvalidator.com'
+grpc_addr = 'http://canto-grpc.polkachu.com:15590'
+event_source = { mode = 'push', url = 'wss://rpc.canto.silentvalidator.com/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "canto"
+key_name = "canto"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 1000000000000 , denom = 'acanto' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 3000000
+max_grpc_decoding_size = 33554432
+clock_drift = "40s"
+max_block_time = "10s"
+trusting_period = '224hours'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.34'
+trust_threshold = { numerator = '1', denominator = '3' }
+address_type = { derivation = 'cosmos' }
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+    ['transfer', 'channel-55'],
+]
+
+[[chains]]
+id = "evmos_9001-2"
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_evmos:8000'
+grpc_addr = 'http://tasks.lb_evmos:8003'
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "evmos"
+key_name = "evmos"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 180000
+max_gas = 2500000
+gas_multiplier = 2
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "40s"
+max_block_time = "10s"
+trusting_period = '224hours'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+event_source = { mode = 'push', url = 'ws://tasks.lb_evmos:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.0075, denom = 'aevmos' }
+address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
+compat_mode = '0.37'
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+    ['transfer', 'channel-82'],
+]
+
+[[chains]]
+id = "juno-1"
+type = "CosmosSdk"
+rpc_addr = "http://tasks.lb_juno:8000"
+grpc_addr = "http://tasks.lb_juno:8003"
+event_source = { mode = 'push', url = 'ws://tasks.lb_juno:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "10s"
+trusted_node = false
+account_prefix = "juno"
+key_name = "juno"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 100000
-max_gas = 4000000
+max_gas = 400000
 gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
 clock_drift = "5s"
 max_block_time = "30s"
-trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 700000000.0, denom = 'inj' }
-#address_type = { derivation = 'cosmos' }
-address_type = { derivation = 'ethermint', proto_type = { pk_type = '/injective.crypto.v1beta1.ethsecp256k1.PubKey' } }
+gas_price = { price = 0.1, denom = 'ujuno' }
 compat_mode = '0.37'
 [chains.packet_filter]
-policy = 'allow'
+policy = "allow"
 list = [
+   ['transfer', 'channel-280']
 ]
 
 [[chains]]
@@ -188,144 +360,6 @@ list = [
 ]
 
 [[chains]]
-id = "secret-4"
-type = "CosmosSdk"
-rpc_addr = 'https://secret-4.api.trivium.network:26657'
-grpc_addr = 'https://secretnetwork-grpc.lavenderfive.com:443'
-rpc_timeout = "20s"
-trusted_node = false
-account_prefix = "secret"
-key_name = "secret"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '224hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-event_source = { mode = 'push', url = 'wss://secret-4.api.trivium.network:26657/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'uscrt' }
-address_type = { derivation = 'cosmos' }
-compat_mode = '0.34'
-[chains.packet_filter]
-policy = "allow"
-list = [
-]
-
-[[chains]]
-id = "agoric-3"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_regen:8000'
-grpc_addr = 'http://tasks.lb_regen:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_regen:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "agoric"
-key_name = "agoric"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.03, denom = 'ubld' }
-gas_multiplier = 1
-max_msg_num = 30
-max_tx_size = 3000000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '336hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.34'
-trust_threshold = { numerator = '1', denominator = '3' }
-address_type = { derivation = 'cosmos' }
-
-[chains.packet_filter]
-policy = "allow"
-list = [
-    ['transfer', 'channel-55'],
-]
-
-[[chains]]
-id = "canto_7700-1"
-type = "CosmosSdk"
-rpc_addr = 'https://rpc.canto.silentvalidator.com'
-grpc_addr = 'http://canto-grpc.polkachu.com:15590'
-event_source = { mode = 'push', url = 'wss://rpc.canto.silentvalidator.com/websocket', batch_delay = '500ms' }
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "canto"
-key_name = "canto"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 1000000000000 , denom = 'acanto' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 3000000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '224hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.34'
-trust_threshold = { numerator = '1', denominator = '3' }
-address_type = { derivation = 'cosmos' }
-
-[chains.packet_filter]
-policy = "allow"
-list = [
-    ['transfer', 'channel-55'],
-]
-
-[[chains]]
-id = "crescent-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_crescent:8000'
-grpc_addr = 'http://tasks.lb_crescent:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_crescent:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "cre"
-key_name = "crescent"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 2000000
-gas_price = { price = 0.01, denom = 'ucre' }
-gas_multiplier = 1
-max_msg_num = 30
-max_tx_size = 3000000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '224hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.34'
-trust_threshold = { numerator = '1', denominator = '3' }
-address_type = { derivation = 'cosmos' }
-
-[chains.packet_filter]
-policy = "allow"
-list = [
-    ['transfer', 'channel-64'],
-]
-
-[[chains]]
 id = "osmosis-1"
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_osmosis:8000'
@@ -358,73 +392,6 @@ address_type = { derivation = 'cosmos' }
 policy = "allow"
 list = [
     ['transfer', 'channel-1279']
-]
-
-[[chains]]
-id = "cosmoshub-4"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_cosmoshub:8000'
-grpc_addr = 'http://tasks.lb_cosmoshub:8003'
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "cosmos"
-key_name = "cosmoshub"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 180000
-max_gas = 2500000
-gas_multiplier = 2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "1000s"
-max_block_time = "10s"
-trusting_period = '14days'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.34'
-event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.01, denom = 'uatom' }
-address_type = { derivation = 'cosmos' }
-
-[chains.packet_filter]
-policy = "allow"
-list = [
-    ['transfer', 'channel-617'],
-]
-
-[[chains]]
-id = "juno-1"
-type = "CosmosSdk"
-rpc_addr = "http://tasks.lb_juno:8000"
-grpc_addr = "http://tasks.lb_juno:8003"
-event_source = { mode = 'push', url = 'ws://tasks.lb_juno:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = "10s"
-trusted_node = false
-account_prefix = "juno"
-key_name = "juno"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 100000
-max_gas = 400000
-gas_multiplier = 1.1
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "5s"
-max_block_time = "30s"
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'ujuno' }
-compat_mode = '0.37'
-[chains.packet_filter]
-policy = "allow"
-list = [
-   ['transfer', 'channel-280']
 ]
 
 [[chains]]
@@ -461,19 +428,19 @@ list = [
 ]
 
 [[chains]]
-id = "evmos_9001-2"
+id = "secret-4"
 type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_evmos:8000'
-grpc_addr = 'http://tasks.lb_evmos:8003'
-rpc_timeout = "30s"
+rpc_addr = 'https://secret-4.api.trivium.network:26657'
+grpc_addr = 'https://secretnetwork-grpc.lavenderfive.com:443'
+rpc_timeout = "20s"
 trusted_node = false
-account_prefix = "evmos"
-key_name = "evmos"
+account_prefix = "secret"
+key_name = "secret"
 key_store_type = "Test"
 store_prefix = "ibc"
-default_gas = 180000
-max_gas = 2500000
-gas_multiplier = 2
+default_gas = 300000
+max_gas = 10000000
+gas_multiplier = 1.2
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -483,51 +450,14 @@ trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_evmos:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'push', url = 'wss://secret-4.api.trivium.network:26657/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0075, denom = 'aevmos' }
-address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
-compat_mode = '0.37'
-
-[chains.packet_filter]
-policy = "allow"
-list = [
-    ['transfer', 'channel-82'],
-]
-
-[[chains]]
-id = "chihuahua-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_chihuahua:8000'
-grpc_addr = 'http://tasks.lb_chihuahua:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_chihuahua:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "chihuahua"
-key_name = "chihuahua"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 100000000
-max_gas = 1000000000
-gas_multiplier = 2
-max_msg_num = 30
-max_tx_size = 1000000
-max_grpc_decoding_size = 33554432
-clock_drift = "15s"
-max_block_time = "10s"
-trusting_period = '14days'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.37'
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'uhuahua' }
+gas_price = { price = 0.1, denom = 'uscrt' }
 address_type = { derivation = 'cosmos' }
-
+compat_mode = '0.34'
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-62'],
 ]
 
 [[chains]]
@@ -598,4 +528,39 @@ address_type = { derivation = 'cosmos' }
 policy = "allow"
 list = [
     ["transfer", "channel-5"],
+]
+
+[[chains]]
+id = "umee-1"
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_umee:8000'
+grpc_addr = 'http://tasks.lb_umee:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_umee:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "umee"
+key_name = "umee"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 300000
+max_gas =  10000000
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2097152
+max_grpc_decoding_size = 33554432
+clock_drift = "40s"
+max_block_time = "10s"
+trusting_period = '216hours'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.37'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.1, denom = 'uumee' }
+address_type = { derivation = 'cosmos' }
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+    ['transfer', 'channel-99'],
 ]
