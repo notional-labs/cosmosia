@@ -308,7 +308,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_composable\"} != `misbehaviour` != `websocket` != `packet messages are redundant`",
+          "expr": "{job=\"hermes_composable\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
@@ -603,7 +603,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_coreum\"} != `misbehaviour` != `websocket` != `packet messages are redundant`",
+          "expr": "{job=\"hermes_coreum\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
@@ -898,7 +898,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_furya\"} != `misbehaviour` != `websocket` != `packet messages are redundant`",
+          "expr": "{job=\"hermes_furya\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1194,7 +1194,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_injective\"} != `misbehaviour` != `websocket` != `packet messages are redundant`",
+          "expr": "{job=\"hermes_injective\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1490,7 +1490,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_kava\"} != `misbehaviour` != `websocket` != `packet messages are redundant`",
+          "expr": "{job=\"hermes_kava\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1786,7 +1786,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_osmosis\"} != `misbehaviour` != `websocket` != `packet messages are redundant`",
+          "expr": "{job=\"hermes_osmosis\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
@@ -2082,7 +2082,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_sei\"} != `misbehaviour` != `websocket` != `packet messages are redundant`",
+          "expr": "{job=\"hermes_sei\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
@@ -2377,7 +2377,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_test\"} != `misbehaviour` != `websocket` != `packet messages are redundant`",
+          "expr": "{job=\"hermes_test\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
@@ -2673,7 +2673,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_whitewhale\"} != `misbehaviour` != `websocket` != `packet messages are redundant`",
+          "expr": "{job=\"hermes_whitewhale\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
