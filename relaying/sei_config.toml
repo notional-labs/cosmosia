@@ -35,9 +35,8 @@ id = "pacific-1"
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_sei:8000'
 grpc_addr = 'http://tasks.lb_sei:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_sei:8000/websocket', batch_delay = '500ms' }
+websocket_addr = 'ws://tasks.lb_sei:8000/websocket'
 rpc_timeout = "30s"
-trusted_node = false
 account_prefix = "sei"
 key_name = "sei"
 key_store_type = "Test"
@@ -47,14 +46,11 @@ max_gas = 1000000
 gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
-max_grpc_decoding_size = 33554432
 clock_drift = "5s"
 max_block_time = "30s"
 trusting_period = '32hours'
-ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.1, denom = 'usei' }
 address_type = { derivation = 'cosmos' }
@@ -69,15 +65,13 @@ list = [
     ["transfer", "channel-3"], # terra2
 ]
 
-[chains.packet_filter.min_fees]
-
 [[chains]]
 id = "axelar-dojo-1"
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_axelar:8000'
 grpc_addr = 'http://tasks.lb_axelar:8003'
+websocket_addr = 'ws://tasks.lb_axelar:8000/websocket'
 rpc_timeout = "15s"
-trusted_node = false
 account_prefix = "axelar"
 key_name = "axelar"
 key_store_type = "Test"
@@ -87,15 +81,11 @@ max_gas = 8000000
 gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
-max_grpc_decoding_size = 33554432
 clock_drift = "50s"
 max_block_time = "10s"
 trusting_period = '112hours'
-ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-compat_mode = '0.34'
-event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0075, denom = 'uaxl' }
 address_type = { derivation = 'cosmos' }
@@ -111,8 +101,8 @@ id = "cosmoshub-4"
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_cosmoshub:8000'
 grpc_addr = 'http://tasks.lb_cosmoshub:8003'
+websocket_addr = 'ws://tasks.lb_cosmoshub:8000/websocket'
 rpc_timeout = "30s"
-trusted_node = false
 account_prefix = "cosmos"
 key_name = "cosmoshub"
 key_store_type = "Test"
@@ -122,15 +112,11 @@ max_gas = 2500000
 gas_multiplier = 2
 max_msg_num = 30
 max_tx_size = 180000
-max_grpc_decoding_size = 33554432
 clock_drift = "1000s"
 max_block_time = "10s"
 trusting_period = '14days'
-ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-compat_mode = '0.34'
-event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.01, denom = 'uatom' }
 address_type = { derivation = 'cosmos' }
@@ -146,8 +132,8 @@ id = "osmosis-1"
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_osmosis:8000'
 grpc_addr = 'http://tasks.lb_osmosis:8003'
+websocket_addr = 'ws://tasks.lb_osmosis:8000/websocket'
 rpc_timeout = "30s"
-trusted_node = false
 account_prefix = "osmo"
 key_name = "osmosis"
 key_store_type = "Test"
@@ -157,15 +143,11 @@ max_gas = 20000000
 gas_multiplier = 1.5
 max_msg_num = 30
 max_tx_size = 180000
-max_grpc_decoding_size = 33554432
 clock_drift = "100s"
 max_block_time = "10s"
 trusting_period = '224hours'
-ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-compat_mode = '0.37'
-event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.004, denom = 'uosmo' }
 address_type = { derivation = 'cosmos' }
@@ -181,8 +163,8 @@ id = "phoenix-1"
 type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_terra2:8000"
 grpc_addr = "http://tasks.lb_terra2:8003"
+websocket_addr = 'ws://tasks.lb_terra2:8000/websocket'
 rpc_timeout = "10s"
-trusted_node = false
 account_prefix = "terra"
 key_name = "terra2"
 key_store_type = "Test"
@@ -192,13 +174,10 @@ max_gas = 800000
 gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
-max_grpc_decoding_size = 33554432
 clock_drift = "5s"
 max_block_time = "30s"
-ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_terra2:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.015, denom = 'uluna' }
 
