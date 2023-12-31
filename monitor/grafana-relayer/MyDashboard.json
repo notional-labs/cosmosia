@@ -22,7 +22,7 @@
   "liveNow": false,
   "panels": [
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -30,1796 +30,1802 @@
         "y": 0
       },
       "id": 22,
-      "panels": [],
+      "panels": [
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 29,
+            "w": 8,
+            "x": 0,
+            "y": 2
+          },
+          "id": 24,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
+            {
+              "body": "",
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/composable_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": ""
+            }
+          ],
+          "title": "Last Client Update [composable]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 29,
+            "w": 8,
+            "x": 8,
+            "y": 2
+          },
+          "id": 23,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"composable\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances [composable]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 29,
+            "w": 8,
+            "x": 16,
+            "y": 2
+          },
+          "id": 37,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"composable_clear\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances - Cron [composable]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 31
+          },
+          "id": 42,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_composable\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [composable]",
+          "transparent": true,
+          "type": "logs"
+        }
+      ],
       "title": "Composable",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 29,
-        "w": 8,
+        "h": 1,
+        "w": 24,
         "x": 0,
         "y": 1
       },
-      "id": 24,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.2.3",
-      "targets": [
+      "id": 9,
+      "panels": [
         {
-          "body": "",
-          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 24,
+            "w": 8,
+            "x": 0,
+            "y": 3
+          },
+          "id": 8,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
             },
+            "showHeader": true
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
             {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
+              "body": "",
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/coreum_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": ""
             }
           ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/composable_config.toml"
-            ]
+          "title": "Last Client Update [coreum]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 24,
+            "w": 8,
+            "x": 8,
+            "y": 3
+          },
+          "id": 5,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"coreum\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
           ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": ""
-        }
-      ],
-      "title": "Last Client Update [composable]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "title": "Wallet Balances [coreum]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 29,
-        "w": 8,
-        "x": 8,
-        "y": 1
-      },
-      "id": 23,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P66E0988D1198AFE0"
           },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"composable\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances [composable]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
               }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 29,
-        "w": 8,
-        "x": 16,
-        "y": 1
-      },
-      "id": 37,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
+            },
+            "overrides": []
           },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"composable_clear\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances - Cron [composable]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 30
-      },
-      "id": 42,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
+          "gridPos": {
+            "h": 24,
+            "w": 8,
+            "x": 16,
+            "y": 3
+          },
+          "id": 40,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"coreum_clear\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances - Cron [coreum]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_composable\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 27
+          },
+          "id": 41,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_coreum\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [coreum]",
+          "transparent": true,
+          "type": "logs"
         }
       ],
-      "title": "Log [composable]",
-      "transparent": true,
-      "type": "logs"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 36
-      },
-      "id": 9,
-      "panels": [],
       "title": "Coreum",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 24,
-        "w": 8,
+        "h": 1,
+        "w": 24,
         "x": 0,
-        "y": 37
+        "y": 2
       },
-      "id": 8,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.2.3",
-      "targets": [
+      "id": 10,
+      "panels": [
         {
-          "body": "",
-          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 8,
+            "x": 0,
+            "y": 4
+          },
+          "id": 12,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
             },
+            "showHeader": true
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
             {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
+              "body": "",
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/furya_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": ""
             }
           ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/coreum_config.toml"
-            ]
+          "title": "Last Client Update [furya]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 8,
+            "x": 8,
+            "y": 4
+          },
+          "id": 4,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"furya\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
           ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": ""
-        }
-      ],
-      "title": "Last Client Update [coreum]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "title": "Wallet Balances [furya]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 24,
-        "w": 8,
-        "x": 8,
-        "y": 37
-      },
-      "id": 5,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P66E0988D1198AFE0"
           },
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"coreum\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances [coreum]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
               }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 24,
-        "w": 8,
-        "x": 16,
-        "y": 37
-      },
-      "id": 40,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
+            },
+            "overrides": []
           },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"coreum_clear\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances - Cron [coreum]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 61
-      },
-      "id": 41,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
+          "gridPos": {
+            "h": 14,
+            "w": 8,
+            "x": 16,
+            "y": 4
+          },
+          "id": 39,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"furya_clear\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances - Cron [furya]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_coreum\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 18
+          },
+          "id": 43,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_furya\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [furya]",
+          "transparent": true,
+          "type": "logs"
         }
       ],
-      "title": "Log [coreum]",
-      "transparent": true,
-      "type": "logs"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 67
-      },
-      "id": 10,
-      "panels": [],
       "title": "Furya",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 14,
-        "w": 8,
+        "h": 1,
+        "w": 24,
         "x": 0,
-        "y": 68
+        "y": 3
       },
-      "id": 12,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.2.3",
-      "targets": [
+      "id": 28,
+      "panels": [
         {
-          "body": "",
-          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 5
+          },
+          "id": 30,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
             },
+            "showHeader": true
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
             {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
+              "body": "",
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/injective_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": ""
             }
           ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/furya_config.toml"
-            ]
+          "title": "Last Client Update [injective]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 5
+          },
+          "id": 29,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"injective\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
           ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": ""
-        }
-      ],
-      "title": "Last Client Update [furya]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "title": "Wallet Balances [injective]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 14,
-        "w": 8,
-        "x": 8,
-        "y": 68
-      },
-      "id": 4,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P66E0988D1198AFE0"
           },
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"furya\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances [furya]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
               }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 14,
-        "w": 8,
-        "x": 16,
-        "y": 68
-      },
-      "id": 39,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
+            },
+            "overrides": []
           },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"furya_clear\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances - Cron [furya]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 82
-      },
-      "id": 43,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 5
+          },
+          "id": 38,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"injective_clear\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances - Cron [injective]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_furya\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 11
+          },
+          "id": 44,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_injective\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [injective]",
+          "transparent": true,
+          "type": "logs"
         }
       ],
-      "title": "Log [furya]",
-      "transparent": true,
-      "type": "logs"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 88
-      },
-      "id": 28,
-      "panels": [],
       "title": "Injective",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 6,
-        "w": 8,
+        "h": 1,
+        "w": 24,
         "x": 0,
-        "y": 89
+        "y": 4
       },
-      "id": 30,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.2.3",
-      "targets": [
+      "id": 19,
+      "panels": [
         {
-          "body": "",
-          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 17,
+            "w": 8,
+            "x": 0,
+            "y": 6
+          },
+          "id": 21,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
             },
+            "showHeader": true
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
             {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
+              "body": "",
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/kava_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": ""
             }
           ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/injective_config.toml"
-            ]
+          "title": "Last Client Update [kava]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 17,
+            "w": 8,
+            "x": 8,
+            "y": 6
+          },
+          "id": 20,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"kava\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
           ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": ""
-        }
-      ],
-      "title": "Last Client Update [injective]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "title": "Wallet Balances [kava]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 8,
-        "y": 89
-      },
-      "id": 29,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P66E0988D1198AFE0"
           },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"injective\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances [injective]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
               }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 16,
-        "y": 89
-      },
-      "id": 38,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
+            },
+            "overrides": []
           },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"injective_clear\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances - Cron [injective]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 95
-      },
-      "id": 44,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
+          "gridPos": {
+            "h": 17,
+            "w": 8,
+            "x": 16,
+            "y": 6
+          },
+          "id": 36,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"kava_clear\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances - Cron [kava]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_injective\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 23
+          },
+          "id": 45,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_kava\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [kava]",
+          "transparent": true,
+          "type": "logs"
         }
       ],
-      "title": "Log [injective]",
-      "transparent": true,
-      "type": "logs"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 101
-      },
-      "id": 19,
-      "panels": [],
       "title": "Kava",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 17,
-        "w": 8,
+        "h": 1,
+        "w": 24,
         "x": 0,
-        "y": 102
+        "y": 5
       },
-      "id": 21,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.2.3",
-      "targets": [
+      "id": 25,
+      "panels": [
         {
-          "body": "",
-          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 34,
+            "w": 8,
+            "x": 0,
+            "y": 7
+          },
+          "id": 27,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
             },
+            "showHeader": true
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
             {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
+              "body": "",
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/osmosis_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": ""
             }
           ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/kava_config.toml"
-            ]
+          "title": "Last Client Update [osmosis]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 34,
+            "w": 8,
+            "x": 8,
+            "y": 7
+          },
+          "id": 26,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"osmosis\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
           ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": ""
-        }
-      ],
-      "title": "Last Client Update [kava]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "title": "Wallet Balances [osmosis]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 17,
-        "w": 8,
-        "x": 8,
-        "y": 102
-      },
-      "id": 20,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P66E0988D1198AFE0"
           },
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"kava\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances [kava]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
               }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 17,
-        "w": 8,
-        "x": 16,
-        "y": 102
-      },
-      "id": 36,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
+            },
+            "overrides": []
           },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"kava_clear\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances - Cron [kava]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 119
-      },
-      "id": 45,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
+          "gridPos": {
+            "h": 34,
+            "w": 8,
+            "x": 16,
+            "y": 7
+          },
+          "id": 32,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"osmosis_clear\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances - Cron [osmosis]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_kava\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 41
+          },
+          "id": 46,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_osmosis\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [osmosis]",
+          "transparent": true,
+          "type": "logs"
         }
       ],
-      "title": "Log [kava]",
-      "transparent": true,
-      "type": "logs"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 125
-      },
-      "id": 25,
-      "panels": [],
       "title": "Osmosis",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 34,
-        "w": 8,
-        "x": 0,
-        "y": 126
-      },
-      "id": 27,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.2.3",
-      "targets": [
-        {
-          "body": "",
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "marcusolsson-json-datasource",
-            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-          },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
-            },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/osmosis_config.toml"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": ""
-        }
-      ],
-      "title": "Last Client Update [osmosis]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 34,
-        "w": 8,
-        "x": 8,
-        "y": 126
-      },
-      "id": 26,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"osmosis\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances [osmosis]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 34,
-        "w": 8,
-        "x": 16,
-        "y": 126
-      },
-      "id": 32,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"osmosis_clear\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances - Cron [osmosis]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 160
-      },
-      "id": 46,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
-          },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_osmosis\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Log [osmosis]",
-      "transparent": true,
-      "type": "logs"
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 166
+        "y": 6
       },
       "id": 16,
       "panels": [],
@@ -1865,7 +1871,7 @@
         "h": 12,
         "w": 8,
         "x": 0,
-        "y": 167
+        "y": 7
       },
       "id": 18,
       "options": {
@@ -1958,7 +1964,7 @@
         "h": 12,
         "w": 8,
         "x": 8,
-        "y": 167
+        "y": 7
       },
       "id": 17,
       "options": {
@@ -2030,7 +2036,7 @@
         "h": 12,
         "w": 8,
         "x": 16,
-        "y": 167
+        "y": 7
       },
       "id": 35,
       "options": {
@@ -2083,9 +2089,9 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 179
+        "y": 19
       },
-      "id": 47,
+      "id": 54,
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": false,
@@ -2118,11 +2124,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 185
+        "y": 25
       },
-      "id": 11,
+      "id": 50,
       "panels": [],
-      "title": "Test",
+      "title": "SeiLegacy",
       "type": "row"
     },
     {
@@ -2130,6 +2136,7 @@
         "type": "marcusolsson-json-datasource",
         "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2160,12 +2167,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 12,
         "w": 8,
         "x": 0,
-        "y": 186
+        "y": 26
       },
-      "id": 31,
+      "id": 51,
       "options": {
         "cellHeight": "sm",
         "footer": {
@@ -2216,7 +2223,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/test_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/seilegacy_config.toml"
             ]
           ],
           "queryParams": "",
@@ -2224,7 +2231,7 @@
           "urlPath": ""
         }
       ],
-      "title": "Last Client Update [test]",
+      "title": "Last Client Update [seilegacy]",
       "transparent": true,
       "type": "table"
     },
@@ -2253,12 +2260,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 12,
         "w": 8,
         "x": 8,
-        "y": 186
+        "y": 26
       },
-      "id": 3,
+      "id": 52,
       "options": {
         "afterRender": "",
         "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
@@ -2283,9 +2290,9 @@
             "uid": "P66E0988D1198AFE0"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "wallet_balance{job=\"test\"}",
+          "expr": "wallet_balance{job=\"seilegacy\"}",
           "format": "table",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -2296,7 +2303,7 @@
           "useBackend": false
         }
       ],
-      "title": "Wallet Balances [test]",
+      "title": "Wallet Balances [seilegacy]",
       "transparent": true,
       "type": "marcusolsson-dynamictext-panel"
     },
@@ -2325,12 +2332,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 12,
         "w": 8,
         "x": 16,
-        "y": 186
+        "y": 26
       },
-      "id": 34,
+      "id": 53,
       "options": {
         "afterRender": "",
         "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
@@ -2355,9 +2362,9 @@
             "uid": "P66E0988D1198AFE0"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "wallet_balance{job=\"test_clear\"}",
+          "expr": "wallet_balance{job=\"seilegacy_clear\"}",
           "format": "table",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -2368,7 +2375,7 @@
           "useBackend": false
         }
       ],
-      "title": "Wallet Balances - Cron [test]",
+      "title": "Wallet Balances - Cron [seilegacy]",
       "transparent": true,
       "type": "marcusolsson-dynamictext-panel"
     },
@@ -2381,9 +2388,9 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 192
+        "y": 38
       },
-      "id": 48,
+      "id": 47,
       "options": {
         "dedupStrategy": "none",
         "enableLogDetails": false,
@@ -2401,313 +2408,613 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_test\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+          "expr": "{job=\"hermes_seilegacy\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
           "queryType": "range",
           "refId": "A"
         }
       ],
-      "title": "Log [test]",
+      "title": "Log [seilegacy]",
       "transparent": true,
       "type": "logs"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 198
+        "y": 44
       },
-      "id": 13,
-      "panels": [],
-      "title": "Whitewhale",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 17,
-        "w": 8,
-        "x": 0,
-        "y": 199
-      },
-      "id": 15,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.2.3",
-      "targets": [
+      "id": 11,
+      "panels": [
         {
-          "body": "",
-          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 9
+          },
+          "id": 31,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
             },
+            "showHeader": true
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
             {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
+              "body": "",
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/test_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": ""
             }
           ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/whitewhale_config.toml"
-            ]
+          "title": "Last Client Update [test]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 9
+          },
+          "id": 3,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"test\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
           ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": ""
-        }
-      ],
-      "title": "Last Client Update [whitewhale]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "title": "Wallet Balances [test]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 17,
-        "w": 8,
-        "x": 8,
-        "y": 199
-      },
-      "id": 14,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P66E0988D1198AFE0"
           },
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"whitewhale\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances [whitewhale]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
               }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 17,
-        "w": 8,
-        "x": 16,
-        "y": 199
-      },
-      "id": 33,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "everyRow": false,
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "styles": "",
-        "wrap": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
+            },
+            "overrides": []
           },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"whitewhale_clear\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Wallet Balances - Cron [whitewhale]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 216
-      },
-      "id": 49,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 9
+          },
+          "id": 34,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"test_clear\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances - Cron [test]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_whitewhale\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 15
+          },
+          "id": 48,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_test\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [test]",
+          "transparent": true,
+          "type": "logs"
         }
       ],
-      "title": "Log [whitewhale]",
-      "transparent": true,
-      "type": "logs"
+      "title": "Test",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "id": 13,
+      "panels": [
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 17,
+            "w": 8,
+            "x": 0,
+            "y": 10
+          },
+          "id": 15,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
+            {
+              "body": "",
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/whitewhale_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": ""
+            }
+          ],
+          "title": "Last Client Update [whitewhale]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 17,
+            "w": 8,
+            "x": 8,
+            "y": 10
+          },
+          "id": 14,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"whitewhale\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances [whitewhale]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P66E0988D1198AFE0"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 17,
+            "w": 8,
+            "x": 16,
+            "y": 10
+          },
+          "id": 33,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "everyRow": false,
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "styles": "",
+            "wrap": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P66E0988D1198AFE0"
+              },
+              "disableTextWrap": false,
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "wallet_balance{job=\"whitewhale_clear\"}",
+              "format": "table",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A",
+              "useBackend": false
+            }
+          ],
+          "title": "Wallet Balances - Cron [whitewhale]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 27
+          },
+          "id": 49,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_whitewhale\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [whitewhale]",
+          "transparent": true,
+          "type": "logs"
+        }
+      ],
+      "title": "Whitewhale",
+      "type": "row"
     }
   ],
   "refresh": "",
