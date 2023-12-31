@@ -168,7 +168,6 @@ ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
 compat_mode = '0.34'
-event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.01, denom = 'uatom' }
 address_type = { derivation = 'cosmos' }
@@ -184,6 +183,7 @@ id = "osmosis-1"
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_osmosis:8000'
 grpc_addr = 'http://tasks.lb_osmosis:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = "30s"
 trusted_node = false
 account_prefix = "osmo"
@@ -203,7 +203,6 @@ ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
 compat_mode = '0.37'
-event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.004, denom = 'uosmo' }
 address_type = { derivation = 'cosmos' }
@@ -219,6 +218,7 @@ id = "phoenix-1"
 type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_terra2:8000"
 grpc_addr = "http://tasks.lb_terra2:8003"
+event_source = { mode = 'push', url = 'ws://tasks.lb_terra2:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "terra"
@@ -236,7 +236,6 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_terra2:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.015, denom = 'uluna' }
 
