@@ -101,6 +101,46 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c87",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a30",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
           }
         ]
       },
@@ -434,6 +474,46 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c80",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a2b",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
           }
         ]
       },
@@ -759,6 +839,46 @@
               "options": "pending_packets"
             },
             "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c75",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a36",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
               {
                 "id": "custom.cellOptions",
                 "value": {
@@ -1101,6 +1221,46 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c78",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a2b",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1427,6 +1587,46 @@
               "options": "pending_packets"
             },
             "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c7d",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a24",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
               {
                 "id": "custom.cellOptions",
                 "value": {
@@ -1770,6 +1970,46 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c85",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a2b",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
           }
         ]
       },
@@ -2096,6 +2336,46 @@
               "options": "pending_packets"
             },
             "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c80",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a26",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
               {
                 "id": "custom.cellOptions",
                 "value": {
@@ -2438,6 +2718,46 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c7d",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a33",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
           }
         ]
       },
@@ -2763,6 +3083,46 @@
               "options": "pending_packets"
             },
             "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c78",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a29",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
               {
                 "id": "custom.cellOptions",
                 "value": {
@@ -3097,6 +3457,46 @@
               "options": "pending_packets"
             },
             "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "result": {
+                        "color": "#f2495c80",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a26",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              },
               {
                 "id": "custom.cellOptions",
                 "value": {
