@@ -62,15 +62,14 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-#    ['transfer', 'channel-28'], # axelar
-    ['transfer', 'channel-49'], # axelar
-    ['transfer', 'channel-53'], # axelar
-    ['transfer', 'channel-9'],  # axelar
-    ['transfer', 'channel-10'], # chihuahua
-    ['transfer', 'channel-27'], # neutron
-    ['transfer', 'channel-48'], # kava
+    # sort by chain_id
+    ['transfer', 'channel-49'], # axelar-dojo-1
+    ['transfer', 'channel-53'], # axelar-dojo-1
+    ['transfer', 'channel-10'], # chihuahua-1
+    ['transfer', 'channel-27'], # neutron-1
+    ['transfer', 'channel-48'], # kava_2222-10
     ['transfer', 'channel-69'], # stargaze-1
-    ['transfer', 'channel-22'], # umee
+    ['transfer', 'channel-22'], # umee-1
 ]
 
 [[chains]]
@@ -181,41 +180,6 @@ list = [
 ]
 
 [[chains]]
-id = "umee-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_umee:8000'
-grpc_addr = 'http://tasks.lb_umee:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_umee:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "umee"
-key_name = "umee"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas =  10000000
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 2097152
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '216hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.37'
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'uumee' }
-address_type = { derivation = 'cosmos' }
-
-[chains.packet_filter]
-policy = "allow"
-list = [
-    ['transfer', 'channel-57'],
-]
-
-[[chains]]
 id = "kava_2222-10"
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_kava:8000'
@@ -283,4 +247,39 @@ address_type = { derivation = 'cosmos' }
 policy = "allow"
 list = [
     ['transfer', 'channel-269'],
+]
+
+[[chains]]
+id = "umee-1"
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_umee:8000'
+grpc_addr = 'http://tasks.lb_umee:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_umee:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "umee"
+key_name = "umee"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 300000
+max_gas =  10000000
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2097152
+max_grpc_decoding_size = 33554432
+clock_drift = "40s"
+max_block_time = "10s"
+trusting_period = '216hours'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.37'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.1, denom = 'uumee' }
+address_type = { derivation = 'cosmos' }
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+    ['transfer', 'channel-57'],
 ]
