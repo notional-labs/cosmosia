@@ -4,6 +4,7 @@ furya
 coreum
 whitewhale
 sei
+seilegacy
 kava
 composable
 osmosis

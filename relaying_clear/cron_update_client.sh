@@ -1,3 +1,22 @@
+########################################################################################################################
+# make sure single instance running
+PIDFILE="$HOME/cron_update_client.sh.lock"
+function cleanup() {
+  rm -f $PIDFILE
+}
+
+if [ -f $PIDFILE ]; then
+   pid=$(cat $PIDFILE)
+   if kill -0 $pid 2>/dev/null; then
+      echo "Script is already running"
+      exit 1
+   fi
+fi
+
+echo $$ > $PIDFILE
+trap cleanup EXIT
+
+########################################################################################################################
 source $HOME/env.sh
 
 # 12 hours
