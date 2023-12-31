@@ -167,7 +167,7 @@
       "targets": [
         {
           "body": "",
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -540,7 +540,7 @@
       "targets": [
         {
           "body": "",
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -913,7 +913,7 @@
       "targets": [
         {
           "body": "",
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -1287,7 +1287,7 @@
       "targets": [
         {
           "body": "",
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -1661,7 +1661,7 @@
       "targets": [
         {
           "body": "",
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -2036,7 +2036,7 @@
       "targets": [
         {
           "body": "",
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -2410,7 +2410,7 @@
       "targets": [
         {
           "body": "",
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -2784,7 +2784,7 @@
       "targets": [
         {
           "body": "",
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -3531,7 +3531,7 @@
       "targets": [
         {
           "body": "",
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
