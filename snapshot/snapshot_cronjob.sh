@@ -74,7 +74,12 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
     # no need to compact, pebble will auto-compact after starting the chain again in few mins.
     # Note that size after pruning is not smaller, however it'wll be compacted and smaller next time restarting
     pruned_app_name=$(echo $chain_name | cut -d "-" -f1)
-    $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$pruned_app_name --backend=pebbledb --blocks=362880 --versions=362880 --compact=true
+    if [ $( echo "${chain_name}" | egrep -c "pruned" ) -ne 0 ]; then
+      # if pruned node (not default)
+      $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$pruned_app_name --backend=pebbledb --blocks=1000 --versions=1000 --tx_index=false --compact=true
+    else
+      $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$pruned_app_name --backend=pebbledb --blocks=362880 --versions=362880 --compact=true
+    fi
 
     echo "After:"
     du -h
