@@ -40,25 +40,6 @@ get_docker_snapshot_config () {
   echo $str_snapshot_cfg
 }
 
-get_docker_val_constraint () {
-  str_val_constraint=""
-
-  if [ -f /.dockerenv ]; then
-    # inside container
-    str_snapshot_cfg="$(curl -s "http://tasks.web_config/config/cosmosia.snapshot.${chain_name}" |sed 's/ = /=/g')"
-  else
-    # inside host
-
-    # figure out container id of agent
-    agent_id=$(docker ps -aqf "name=agent")
-
-    # execute command in agent container to get data version
-    str_val_constraint=$(docker exec $agent_id curl -s "http://tasks.web_config/config/cosmosia.val.${chain_name}" |sed 's/ = /=/g')
-  fi
-
-  echo $str_val_constraint
-}
-
 # to get the url to the config file
 eval "$(curl -s "$CHAIN_REGISTRY_INI_URL" |awk -v TARGET=$chain_name -F ' = ' '
   {
@@ -85,13 +66,6 @@ echo "snapshot_storage_node=$snapshot_storage_node"
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 val_service_name="val_${chain_name}_${node_num}"
-constraint=$(get_docker_val_constraint)
-echo "constraint=$constraint"
-
-if [[ -z $constraint ]]; then
-  echo "No val constraint config for ${chain_name}"
-  exit
-fi
 
 # delete existing service
 docker service rm $val_service_name
@@ -99,7 +73,7 @@ docker service rm $val_service_name
 docker service create \
   --name $val_service_name \
   --replicas 1 \
-  --constraint $constraint \
+  --constraint "node.labels.cosmosia.val==true" \
   --network bignet \
   --network $network \
   --label 'cosmosia.service=val' \
