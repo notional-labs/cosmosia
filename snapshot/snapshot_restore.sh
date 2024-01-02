@@ -189,7 +189,7 @@ wget -O - "$URL" |pigz -dc |tar -xf -
 prunning_block="362880"
 if [ $( echo "${chain_name}" | egrep -c "pruned" ) -ne 0 ]; then
   # if pruned node (not default)
-  prunning_block="100"
+  prunning_block="1000"
 fi
 
 # restore priv_validator_state.json if it does not exist in the snapshot
