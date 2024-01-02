@@ -113,7 +113,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c87",
                         "index": 0
@@ -136,7 +136,6 @@
               {
                 "id": "custom.cellOptions",
                 "value": {
-                  "mode": "basic",
                   "type": "color-background"
                 }
               }
@@ -486,7 +485,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c80",
                         "index": 0
@@ -859,7 +858,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c75",
                         "index": 0
@@ -1233,7 +1232,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c78",
                         "index": 0
@@ -1607,7 +1606,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c7d",
                         "index": 0
@@ -1982,7 +1981,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c85",
                         "index": 0
@@ -2356,7 +2355,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c80",
                         "index": 0
@@ -2730,7 +2729,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c7d",
                         "index": 0
@@ -3103,7 +3102,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c78",
                         "index": 0
@@ -3477,7 +3476,7 @@
                 "value": [
                   {
                     "options": {
-                      "pattern": "^.*(month(s)|week(s)|day(s)) ago$",
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
                       "result": {
                         "color": "#f2495c80",
                         "index": 0
