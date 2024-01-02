@@ -67,10 +67,8 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 cd $HOME
 source $HOME/snapshot_restore.sh
 
-if [ $( echo "${chain_name}" | egrep -c "^(osmosis)$" ) -ne 0 ]; then
-  sed -i -e "s/^min-gas-price-for-high-gas-tx *=.*/min-gas-price-for-high-gas-tx = \".005\"/" $node_home/config/app.toml
-  sed -i -e "s/^arbitrage-min-gas-fee *=.*/arbitrage-min-gas-fee = \".025\"/" $node_home/config/app.toml
-fi
+# for remote signer
+sed -i -e 's/^priv_validator_laddr *=.*/priv_validator_laddr = "tcp:\/\/0.0.0.0:23859"/' $node_home/config/config.toml
 
 # disable statesync
 sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 0/" $node_home/config/app.toml
@@ -92,7 +90,8 @@ killall dbus-daemon
 $HOME/go/bin/$daemon_name start $start_flags 1>&2
 EOT
 
-
+#startsecs=60
+#startretries=1000
 cat <<EOT > /etc/supervisor.d/chain.conf
 [program:chain]
 command=/bin/bash /root/start_chain.sh
