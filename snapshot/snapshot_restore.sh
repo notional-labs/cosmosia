@@ -186,6 +186,12 @@ fi
 echo "download and extract the snapshot to current path..."
 wget -O - "$URL" |pigz -dc |tar -xf -
 
+prunning_block="362880"
+if [ $( echo "${chain_name}" | egrep -c "pruned" ) -ne 0 ]; then
+  # if pruned node (not default)
+  prunning_block="100"
+fi
+
 # restore priv_validator_state.json if it does not exist in the snapshot
 [ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
 
@@ -214,7 +220,7 @@ sed -i '/^\[grpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:9090"/}' $
 
 sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
 if [[ $snapshot_prune == "cosmos-pruner" ]]; then
-  sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"362880\"/" $node_home/config/app.toml
+  sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"${prunning_block}\"/" $node_home/config/app.toml
   sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
   sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/config/app.toml
 else
@@ -236,9 +242,14 @@ if [[ -n $git_repo ]]; then
   sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/config/app.toml
 fi
 
-sed -i -e "s/^query_gas_limit *=.*/query_gas_limit = 10000000/" $node_home/config/app.toml
-sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $node_home/config/config.toml
+if [ $( echo "${chain_name}" | egrep -c "pruned" ) -ne 0 ]; then
+  # if pruned node (not default)
+  sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
+else
+  sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $node_home/config/config.toml
+fi
 
+sed -i -e "s/^query_gas_limit *=.*/query_gas_limit = 10000000/" $node_home/config/app.toml
 sed -i -e "s/^discard_abci_responses *=.*/discard_abci_responses = false/" $node_home/config/config.toml
 
 echo "download genesis..."
