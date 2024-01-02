@@ -261,6 +261,11 @@ curl -Lfso $node_home/config/addrbook.json "${SNAPSHOT_BASE_URL}/addrbook.json"
 
 sed -i -e "s/^adaptive-fee-enabled *=.*/adaptive-fee-enabled = \"true\"/" $node_home/config/app.toml
 
+if [[ $chain_name == osmosis* ]]; then
+  sed -i -e "s/^min-gas-price-for-high-gas-tx *=.*/min-gas-price-for-high-gas-tx = \".005\"/" $node_home/config/app.toml
+  sed -i -e "s/^arbitrage-min-gas-fee *=.*/arbitrage-min-gas-fee = \".025\"/" $node_home/config/app.toml
+fi
+
 # no seeds and persistent_peers for read-only subnode
 if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
   sed -i -e "s/^seeds *=.*/seeds = \"\"/" $node_home/config/config.toml
@@ -275,3 +280,4 @@ if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-archive-sub1|
   sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
   sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
 fi
+
