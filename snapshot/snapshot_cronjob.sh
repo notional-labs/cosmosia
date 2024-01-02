@@ -76,7 +76,8 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
     pruned_app_name=$(echo $chain_name | cut -d "-" -f1)
     if [ $( echo "${chain_name}" | egrep -c "pruned" ) -ne 0 ]; then
       # if pruned node (not default), then do nothing
-#      $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$pruned_app_name --backend=pebbledb --blocks=1000 --versions=1000 --tx_index=false --compact=true
+      # $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$pruned_app_name --backend=pebbledb --blocks=1000 --versions=1000 --tx_index=false --compact=true
+      echo "cosmos-pruner....pruned node, do nothing"
     else
       $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$pruned_app_name --backend=pebbledb --blocks=362880 --versions=362880 --compact=true
     fi
