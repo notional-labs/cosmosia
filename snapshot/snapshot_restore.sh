@@ -245,6 +245,7 @@ fi
 if [ $( echo "${chain_name}" | egrep -c "pruned" ) -ne 0 ]; then
   # if pruned node (not default)
   sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
+  sed -i -e "s/^min-retain-blocks *=.*/min-retain-blocks = 1000/" $node_home/config/app.toml
 else
   sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $node_home/config/config.toml
 fi
