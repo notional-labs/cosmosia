@@ -120,7 +120,8 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/data
 chmod +x /usr/share/nginx/html/healthcheck.sh
 chmod +x /usr/share/nginx/html/data_size.sh
 spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
-/usr/sbin/nginx
+# run nginx with screen to avoid log to docker
+screen -S nginx -dm /usr/sbin/nginx -g "daemon off;"
 
 echo "#################################################################################################################"
 echo "start chain..."
