@@ -68,8 +68,8 @@ cd $HOME
 source $HOME/snapshot_restore.sh
 
 # for remote signer
-# sed -i -e 's/^priv_validator_laddr *=.*/priv_validator_laddr = ""/' $node_home/config/config.toml
-sed -i -e 's/^priv_validator_laddr *=.*/priv_validator_laddr = "tcp:\/\/0.0.0.0:23859"/' $node_home/config/config.toml
+sed -i -e 's/^priv_validator_laddr *=.*/priv_validator_laddr = ""/' $node_home/config/config.toml
+# sed -i -e 's/^priv_validator_laddr *=.*/priv_validator_laddr = "tcp:\/\/0.0.0.0:23859"/' $node_home/config/config.toml
 
 # disable statesync
 sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 0/" $node_home/config/app.toml
