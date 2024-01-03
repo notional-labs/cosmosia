@@ -8,6 +8,7 @@ docker service create \
   --name $SERVICE_NAME \
   --replicas 1 \
   --publish mode=host,target=80,published=80 \
+  --publish mode=host,target=5000,published=5000 \
   --publish mode=host,target=5001,published=5001 \
   --publish mode=host,target=5002,published=5002 \
   --publish mode=host,target=5003,published=5003 \
