@@ -58,7 +58,9 @@ export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 EOT
 
+pacman-key --init
 pacman -Syu --noconfirm
+pacman -Sy --noconfirm archlinux-keyring
 pacman -Sy --noconfirm go git base-devel wget pigz jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils screen
 
 ########################################################################################################################
