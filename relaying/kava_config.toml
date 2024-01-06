@@ -68,7 +68,7 @@ list = [
     ["transfer", "channel-136"], # neutron-1
     ["transfer", "channel-139"], # noble-1
     ["transfer", "channel-1"],   # osmosis-1
-    ["transfer", "channel-129"], # phoenix-1 (terra2)
+    ["transfer", "channel-138"], # phoenix-1 (terra2)
 ]
 
 [chains.packet_filter.min_fees]
@@ -241,7 +241,7 @@ gas_price = { price = 0.015, denom = 'uluna' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-216"],
+    ["transfer", "channel-272"],
 ]
 
 [[chains]]
