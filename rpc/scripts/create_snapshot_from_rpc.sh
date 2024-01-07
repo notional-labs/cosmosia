@@ -48,5 +48,6 @@ EOT
 
 
 scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "$HOME/chain.json" "root@${remote_ip}:/mnt/data/snapshots/${chain_name}/"
-
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${remote_ip} "cd /mnt/data/snapshots/${chain_name}/ && rm \$(ls *.tar.gz |sort |head -n -2)"
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${node_home}/config/genesis.json" "root@${remote_ip}:/mnt/data/snapshots/${chain_name}/"
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${node_home}/config/addrbook.json" "root@${remote_ip}:/mnt/data/snapshots/${chain_name}/"
