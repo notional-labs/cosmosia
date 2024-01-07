@@ -11,7 +11,7 @@ fi
 mkdir -p $HOME/.ssh
 curl -Ls http://tasks.web_config/config/cosmosia.id_rsa.pub > $HOME/.ssh/id_rsa.pub
 curl -Ls http://tasks.web_config/config/cosmosia.id_rsa > $HOME/.ssh/id_rsa
-
+chmod -R 700 ~/.ssh
 
 pacman -Sy --noconfirm openssh pigz
 
