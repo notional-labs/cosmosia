@@ -1,6 +1,8 @@
 # usage: ./create_snapshot_from_rpc.sh <remote_ip>
 # eg., ./create_snapshot_from_rpc.sh 37.27.68.154
 
+remote_ip="$1"
+
 if [[ -z $remote_ip ]]; then
   echo "No remote_ip. Exit"
   exit
