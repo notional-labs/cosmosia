@@ -36,12 +36,6 @@ if [[ -z $FILESIZE ]]; then
   FILESIZE=0
 fi
 
-# chain.json file
-node="$snapshot_storage_node"
-if [[ -z $node ]]; then
-  node="$snapshot_node"
-fi
-
 cat <<EOT > $HOME/chain.json
 {
     "snapshot_url": "http://${remote_ip}:11111/$chain_name/$TAR_FILENAME",
