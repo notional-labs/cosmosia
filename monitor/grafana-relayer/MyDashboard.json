@@ -589,8 +589,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "P66E0988D1198AFE0"
+        "type": "marcusolsson-json-datasource",
+        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
       },
       "description": "",
       "fieldConfig": {
@@ -620,7 +620,7 @@
       "id": 5,
       "options": {
         "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain}}, relayer-hub: {{job}}\n    </td>\n    <td>\n      <font size=\"+2\">{{Value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
         "defaultContent": "The query didn't return any results.",
         "editor": {
           "format": "auto",
@@ -633,27 +633,65 @@
         "helpers": "",
         "renderMode": "allRows",
         "styles": "",
-        "wrap": true
+        "wrap": false
       },
       "pluginVersion": "4.3.0",
       "targets": [
         {
+          "cacheDurationSeconds": 300,
           "datasource": {
-            "type": "prometheus",
-            "uid": "P66E0988D1198AFE0"
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "wallet_balance{job=\"coreum\"}",
-          "format": "table",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
+          "fields": [
+            {
+              "jsonPath": "$.[*].account"
+            },
+            {
+              "jsonPath": "$.[*].chain_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].denom",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].message",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].need_refill",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].refill_threshold",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].value",
+              "language": "jsonpath",
+              "name": ""
+            }
+          ],
+          "method": "GET",
+          "params": [
+            [
+              "relayer_hub_name",
+              "coreum"
+            ],
+            [
+              "process",
+              "main"
+            ]
+          ],
+          "queryParams": "",
           "refId": "A",
-          "useBackend": false
+          "urlPath": "/get_wallet_balance"
         }
       ],
       "title": "Wallet Balances [coreum]",
@@ -1958,8 +1996,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent",
-                "value": null
+                "color": "transparent"
               }
             ]
           }
@@ -2103,8 +2140,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2176,8 +2212,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2334,8 +2369,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent",
-                "value": null
+                "color": "transparent"
               }
             ]
           }
@@ -2479,8 +2513,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2552,8 +2585,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2710,8 +2742,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent",
-                "value": null
+                "color": "transparent"
               }
             ]
           }
@@ -2855,8 +2886,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2928,8 +2958,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3085,8 +3114,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent",
-                "value": null
+                "color": "transparent"
               }
             ]
           }
@@ -3230,8 +3258,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3303,8 +3330,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3461,8 +3487,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent",
-                "value": null
+                "color": "transparent"
               }
             ]
           }
@@ -3606,8 +3631,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3679,8 +3703,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
