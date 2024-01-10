@@ -205,7 +205,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [composable]",
@@ -253,13 +253,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -325,13 +326,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -578,7 +580,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [coreum]",
@@ -626,13 +628,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -698,13 +701,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -951,7 +955,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [furya]",
@@ -999,13 +1003,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -1071,13 +1076,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -1325,7 +1331,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [injective]",
@@ -1373,13 +1379,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -1445,13 +1452,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -1699,7 +1707,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [kava]",
@@ -1747,13 +1755,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -1819,13 +1828,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -2074,7 +2084,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [osmosis]",
@@ -2122,13 +2132,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -2194,13 +2205,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -2448,7 +2460,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [sei]",
@@ -2496,13 +2508,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -2568,13 +2581,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -2822,7 +2836,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [seilegacy]",
@@ -2870,13 +2884,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -2942,13 +2957,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -3195,7 +3211,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [test]",
@@ -3243,13 +3259,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -3315,13 +3332,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -3569,7 +3587,7 @@
           ],
           "queryParams": "",
           "refId": "A",
-          "urlPath": ""
+          "urlPath": "/get_last_ibc_client_update"
         }
       ],
       "title": "Last Client Update [whitewhale]",
@@ -3617,13 +3635,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
@@ -3689,13 +3708,14 @@
           "language": "markdown"
         },
         "editors": [],
-        "everyRow": false,
         "externalScripts": [],
         "externalStyles": [],
         "helpers": "",
+        "renderMode": "allRows",
         "styles": "",
         "wrap": true
       },
+      "pluginVersion": "4.3.0",
       "targets": [
         {
           "datasource": {
