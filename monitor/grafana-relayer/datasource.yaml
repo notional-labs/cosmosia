@@ -11,7 +11,7 @@ datasources:
     type: "marcusolsson-json-datasource"
     typeLogoUrl: "/public/plugins/marcusolsson-json-datasource/img/logo.svg"
     access: "proxy"
-    url: "https://status.notional.ventures/ibc_monitor/get_last_ibc_client_update"
+    url: "https://status.notional.ventures/ibc_monitor/"
     user: ""
     database: ""
     basicAuth: false
