@@ -97,6 +97,8 @@ buid_chain () {
     go mod tidy
   fi
 
+  go work use
+
   if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
     sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
@@ -149,19 +151,20 @@ echo "step 1"
 supervisorctl stop chain
 sleep 5;
 
-rm "/var/log/chain.err.log"
+echo "" > /var/log/chain.err.log
 
 ##################
 # 2. build an run old version with "-X github.com/tendermint/tm-db.ForceSync=1"
 echo "step 2"
 buid_chain "$version" "true"
 sleep 5;
-supervisorctl start chain
+supervisorctl start chain &
 
 ##################
 # 3. watch for "panic: UPGRADE" OR "6:21PM ERR UPGRADE" in /var/log/chain.err.log
 echo "step 3"
 tail -f /var/log/chain.err.log |sed '/UPGRADE\(.*\)NEEDED/ q'
+wait
 sleep 5;
 ##################
 # 4. stop chain & build and run new version
