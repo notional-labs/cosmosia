@@ -2,7 +2,7 @@
 
 Open solution to build a reliable infrastructure for cosmos/tendermint based chains ( see [background](https://github.com/cosmos/chain-registry/issues/214) ):
 
-Cosmosia has been used in production for Notional for more than one year.
+Cosmosia has been used in production for Notional for more than one year. Its all-in-one system: rpc, load-balancer, snapshot, ibc-relaying, and validating.
 
 ![web-admin.png](./docs/web-admin.png)
 
