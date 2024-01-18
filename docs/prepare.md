@@ -30,7 +30,7 @@ docker swarm update --task-history-limit 0
 {
   "log-driver": "json-file",
   "log-opts": {
-    "max-size": "10m",
+    "max-size": "50m",
     "max-file": "3"
   }
 }
