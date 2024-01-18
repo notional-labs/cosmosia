@@ -34,6 +34,7 @@ emoney
 evmos-archive-sub1
 evmos-archive-sub2
 evmos-archive-sub3
+evmos-archive-sub4
 evmos-archive-sub
 evmos
 evmos-testnet

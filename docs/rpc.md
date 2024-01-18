@@ -852,3 +852,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-sei-archive-sub2-ia.cosmosia.notional.ventures/   |
 | API      | https://api-sei-archive-sub2-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-sei-archive-sub2-ia.cosmosia.notional.ventures/  |
+
+### 107. evmos-archive-sub4
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-evmos-archive-sub4-ia.cosmosia.notional.ventures/   |
+| API      | https://api-evmos-archive-sub4-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-evmos-archive-sub4-ia.cosmosia.notional.ventures/  |
