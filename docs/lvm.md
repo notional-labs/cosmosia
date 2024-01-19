@@ -43,7 +43,7 @@ Add `"data-root": "/mnt/data/docker"` to `/etc/docker/daemon.json`:
   "data-root": "/mnt/data/docker",
   "log-driver": "json-file",
   "log-opts": {
-    "max-size": "10m",
+    "max-size": "50m",
     "max-file": "3"
   }
 }
