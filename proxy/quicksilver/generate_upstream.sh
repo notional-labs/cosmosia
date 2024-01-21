@@ -1,4 +1,4 @@
-SERVICES="quicksilver cosmoshub osmosis stargaze regen juno akash evmos kichain injective umee kujira crescent mars axelar terra2 sommelier composable cosmoshub-testnet stargaze-testnet evmos-testnet crescent-testnet regen-testnet terra2-testnet injective-testnet composable-testnet"
+SERVICES="quicksilver cosmoshub osmosis stargaze regen juno akash evmos kichain injective umee kujira crescent mars axelar terra2 sommelier composable dydx cosmoshub-testnet stargaze-testnet evmos-testnet crescent-testnet regen-testnet terra2-testnet injective-testnet composable-testnet dydx-testnet-4"
 
 UPSTREAM_CONFIG_FILE="/etc/nginx/upstream.conf"
 UPSTREAM_CONFIG_FILE_TMP="/etc/nginx/upstream.conf.tmp"
