@@ -69,7 +69,7 @@ list = [
     ['transfer', 'channel-27'], # neutron-1
     ['transfer', 'channel-48'], # kava_2222-10
     ['transfer', 'channel-69'], # stargaze-1
-    ['transfer', 'channel-22'], # umee-1
+    ['transfer', 'channel-56'], # umee-1
 ]
 
 [[chains]]
@@ -281,5 +281,5 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-57'],
+    ['transfer', 'channel-104'],
 ]
