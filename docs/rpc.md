@@ -405,13 +405,13 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | API      | https://api-quicksilver-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-quicksilver-ia.cosmosia.notional.ventures/ |
 
-### 51. quicksilver-archive
+### 51. quicksilver-archive-sub
 
 | Protocol | Endpoint                                                |
 |----------|:--------------------------------------------------------|
-| RPC      | https://rpc-quicksilver-archive-ia.cosmosia.notional.ventures/  |
-| API      | https://api-quicksilver-archive-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-quicksilver-archive-ia.cosmosia.notional.ventures/ |
+| RPC      | https://rpc-quicksilver-archive-sub-ia.cosmosia.notional.ventures/  |
+| API      | https://api-quicksilver-archive-sub-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-quicksilver-archive-sub-ia.cosmosia.notional.ventures/ |
 
 ### 52. terra-archive
 
