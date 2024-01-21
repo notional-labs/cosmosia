@@ -278,7 +278,7 @@ fi
 [ "$chain_name" == "injective" ] && sed -i '/^\[mempool]/,/^\[/{s/^size[[:space:]]*=.*/size = 200/}' $node_home/config/config.toml
 
 # fix for sei
-if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-archive-sub1|sei-archive-sub2|sei-testnet)$" ) -ne 0 ]; then
+if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-archive-sub1|sei-archive-sub2|sei-archive-sub3|sei-testnet)$" ) -ne 0 ]; then
   sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
   sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
 fi
