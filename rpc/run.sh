@@ -100,6 +100,9 @@ killall dbus-daemon
 $HOME/go/bin/$daemon_name start $start_flags 1>&2
 EOT
 
+# add this /etc/supervisor.d/chain.conf to have long logs
+# stderr_logfile_maxbytes=1GB
+# stderr_logfile_backups=100
 
 cat <<EOT > /etc/supervisor.d/chain.conf
 [program:chain]
