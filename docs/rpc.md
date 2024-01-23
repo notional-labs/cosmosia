@@ -860,3 +860,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-evmos-archive-sub4-ia.cosmosia.notional.ventures/   |
 | API      | https://api-evmos-archive-sub4-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-evmos-archive-sub4-ia.cosmosia.notional.ventures/  |
+
+### 108. neutron-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-neutron-testnet-ia.cosmosia.notional.ventures/   |
+| API      | https://api-neutron-testnet-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-neutron-testnet-ia.cosmosia.notional.ventures/  |
