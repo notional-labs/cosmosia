@@ -56,6 +56,7 @@ konstellation
 kujira
 mars
 neutron-archive-sub
+neutron-testnet
 neutron
 noble
 nois
