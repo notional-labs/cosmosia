@@ -16,7 +16,7 @@ Example: Upgrading sifchain
 # step1
 git reset --hard
 git checkout v0.14.0
-go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 go mod tidy
 
 # for cometbft
@@ -31,7 +31,7 @@ $HOME/go/bin/sifnoded start --db_backend=pebbledb
 # step 2
 git reset --hard
 git checkout v0.15.0
-go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 go mod tidy
 
 # for cometbft

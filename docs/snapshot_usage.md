@@ -15,7 +15,7 @@ wget -O - "$URL" |tar -xzf -
 
 ### Build with PebbleDB backend
 ```console
-go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 go mod tidy
 
 # for cometbft
@@ -58,7 +58,7 @@ go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.
 **cyber | provenance**
 ```console
 go mod tidy -compat=1.17
-go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 go mod tidy
 go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
 ```
@@ -66,7 +66,7 @@ go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.
 **emoney**
 ```console
 sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
-go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 go mod tidy
 go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
 ```
@@ -75,7 +75,7 @@ go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.
 ```console
 # $daemon_name is starnamed or sifnoded
 
-go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 go mod tidy
 go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
 ```
@@ -85,7 +85,7 @@ go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.
 # version is v0.26.0
 axelard_version=${version##*v}
 
-go mod edit -replace github.com/tendermint/tm-db=github.com/baabeetaa/tm-db@pebble
+go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 go mod tidy
 go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version" -o /root/go/bin/axelard ./cmd/axelard
 ```
