@@ -33,6 +33,11 @@ const MainNav = () => {
             <Link href='/rpc_deploy'>Deploy</Link>
           </Menu.Item>
         </Menu.SubMenu>
+        <Menu.SubMenu key='vals' title="Vals" icon={<CloudServerOutlined />}>
+          <Menu.Item key='val_monitor' icon={<DesktopOutlined />}>
+            <Link href='/vals'>Monitor</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
         <Menu.SubMenu key='lbs' title="Load Balancers" icon={<CloudServerOutlined />}>
           <Menu.Item key='lb_list' icon={<PartitionOutlined />}>
             <Link href='/lbs'>List</Link>
