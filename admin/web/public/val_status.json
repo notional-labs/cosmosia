@@ -1,0 +1,32 @@
+[
+  {
+    "chain": "osmosis",
+    "nodes": [
+      {
+        "node": "val_osmosis-pruned_1",
+        "status": "200",
+        "data_size": "70G"
+      },
+      {
+        "node": "val_osmosis-pruned_2",
+        "status": "200",
+        "data_size": "70G"
+      }
+    ]
+  },
+  {
+    "chain": "osmosis-testnet",
+    "nodes": [
+      {
+        "node": "val_osmosis-testnet-pruned_1",
+        "status": "200",
+        "data_size": "51G"
+      },
+      {
+        "node": "val_osmosis-testnet-pruned_2",
+        "status": "200",
+        "data_size": "51G"
+      }
+    ]
+  }
+]

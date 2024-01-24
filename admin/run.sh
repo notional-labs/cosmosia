@@ -45,6 +45,7 @@ screen -S server -dm yarn start
 ########################################################################################################################
 # cron
 echo "*/1 * * * * root /bin/bash $HOME/cosmosia/admin/cronjob_get_status.sh" > /etc/cron.d/cron_get_status
+echo "*/1 * * * * root /bin/bash $HOME/cosmosia/admin/cronjob_get_val_status.sh" > /etc/cron.d/cronjob_get_val_status
 #echo "*/5 * * * * root /bin/bash $HOME/cosmosia/admin/cronjob_get_snapshot_size.sh" > /etc/cron.d/cron_get_snapshot_size
 
 # start crond
