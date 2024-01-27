@@ -66,6 +66,7 @@ snapshot_node="$snapshot_node"
 snapshot_storage_node="$snapshot_storage_node"
 snapshot_storage_node_ip="$snapshot_storage_node_ip"
 snapshot_prune="$snapshot_prune"
+db_backend="$db_backend"
 
 # fix agoric
 export NVM_DIR="\$HOME/.nvm"
