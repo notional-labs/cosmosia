@@ -47,21 +47,21 @@ if [[ -z $git_repo ]]; then
   wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
   chmod +x "${GOBIN}/${daemon_name}"
 else
+  if [[ $chain_name == "sentinel" ]]; then
+    # sentinel requires custom build
+    mkdir -p $HOME/go/src/github.com/sentinel-official
+    cd $HOME/go/src/github.com/sentinel-official
+  fi
+
+  echo "curren path: $PWD"
+
+  # git clone $git_repo $chain_name
+  # cd $chain_name
+  git clone --single-branch --branch $version $git_repo
+  repo_name=$(basename $git_repo |cut -d. -f1)
+  cd $repo_name
+
   if [[ $db_backend == "pebbledb" ]]; then
-    if [[ $chain_name == "sentinel" ]]; then
-      # sentinel requires custom build
-      mkdir -p $HOME/go/src/github.com/sentinel-official
-      cd $HOME/go/src/github.com/sentinel-official
-    fi
-
-    echo "curren path: $PWD"
-
-    # git clone $git_repo $chain_name
-    # cd $chain_name
-    git clone --single-branch --branch $version $git_repo
-    repo_name=$(basename $git_repo |cut -d. -f1)
-    cd $repo_name
-
     if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra|terra-archive|assetmantle)$" ) -ne 0 ]; then
       go mod edit -dropreplace github.com/tecbot/gorocksdb
     elif [[ $chain_name == "gravitybridge" ]]; then
