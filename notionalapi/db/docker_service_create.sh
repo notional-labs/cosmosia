@@ -24,4 +24,4 @@ docker service create \
   --constraint "node.labels.cosmosia.notionalapi.db==true" \
   --endpoint-mode dnsrr \
   --restart-condition none \
-  rqlite/rqlite -on-disk=true -bootstrap-expect 3 -join http://tasks.napidb_1:4001,http://tasks.napidb_2:4001,http://tasks.napidb_3:4001
+  rqlite/rqlite:7.21.4 -on-disk=true -bootstrap-expect 3 -join http://tasks.napidb_1:4001,http://tasks.napidb_2:4001,http://tasks.napidb_3:4001
