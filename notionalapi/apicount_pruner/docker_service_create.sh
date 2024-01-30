@@ -10,6 +10,7 @@ docker service create \
   --replicas 1 \
   --network bignet \
   --network notionalapi \
+  --constraint 'node.hostname==cosmosia21' \
   --endpoint-mode dnsrr \
   --restart-condition none \
   archlinux:latest \
