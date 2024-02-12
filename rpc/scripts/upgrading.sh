@@ -124,6 +124,8 @@ buid_chain () {
     go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/agd ./cmd/agd
 #    go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/ag-cosmos-helper ./cmd/helper
     go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
+  elif [ $( echo "${chain_name}" | egrep -c "^(osmosis)$" ) -ne 0 ]; then
+    GOWORK=off go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
   else
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
   fi
