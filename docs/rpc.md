@@ -868,3 +868,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-neutron-testnet-ia.cosmosia.notional.ventures/   |
 | API      | https://api-neutron-testnet-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-neutron-testnet-ia.cosmosia.notional.ventures/  |
+
+### 109. quicksilver-archive-sub
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-quicksilver-archive-sub-ia.cosmosia.notional.ventures/   |
+| API      | https://api-quicksilver-archive-sub-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-quicksilver-archive-sub-ia.cosmosia.notional.ventures/  |

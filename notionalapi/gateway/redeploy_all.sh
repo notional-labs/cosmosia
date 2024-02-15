@@ -70,6 +70,7 @@ osmosis
 persistence-archive-sub
 persistent
 quasar
+quicksilver-archive-sub
 quicksilver
 regen-archive-sub
 regen-testnet
