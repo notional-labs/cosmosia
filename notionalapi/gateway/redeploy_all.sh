@@ -78,6 +78,7 @@ regen
 sei-archive-sub
 sei-archive-sub1
 sei-archive-sub2
+sei-archive-sub3
 sei
 sentinel
 sommelier
