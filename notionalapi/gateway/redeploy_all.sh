@@ -93,6 +93,7 @@ umee
 vidulum
 whitewhale-testnet
 whitewhale
+wormhole
 END
 )
 

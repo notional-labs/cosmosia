@@ -884,3 +884,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-sei-archive-sub3-ia.cosmosia.notional.ventures/   |
 | API      | https://api-sei-archive-sub3-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-sei-archive-sub3-ia.cosmosia.notional.ventures/  |
+
+### 111. wormhole
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-wormhole-ia.cosmosia.notional.ventures/   |
+| API      | https://api-wormhole-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-wormhole-ia.cosmosia.notional.ventures/  |
