@@ -145,7 +145,12 @@ else
     #  cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
     #fi
   else
-    make install
+    if [[ $chain_name == "wormhole" ]]; then
+      cd $HOME/wormhole/wormchain
+      go install ./...
+    else
+      make install
+    fi
   fi
 fi
 
