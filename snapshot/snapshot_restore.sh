@@ -70,6 +70,8 @@ else
       cd protocol
     elif [[ $chain_name == "agoric" ]]; then
       cd $HOME/agoric-sdk/golang/cosmos
+    elif [[ $chain_name == "wormhole" ]]; then
+      cd $HOME/wormhole/wormchain
     fi
 
     go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
