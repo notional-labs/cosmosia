@@ -37,6 +37,11 @@ if [[ -z $chain_name ]]; then
   exit
 fi
 
+if [[ $db_backend != "pebbledb" ]]; then
+  echo "use this script for pebbledb only. Exit!"
+  exit
+fi
+
 #use_gvm=false
 ## use gvm for cosmoshub for go1.18
 #if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
