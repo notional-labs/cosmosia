@@ -265,9 +265,9 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 
 | Protocol | Endpoint                                               |
 |----------|:-------------------------------------------------------|
-| RPC      | https://rpc-persistent-ia.cosmosia.notional.ventures/  |
-| API      | https://api-persistent-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-persistent-ia.cosmosia.notional.ventures/ |
+| RPC      | https://rpc-persistence-ia.cosmosia.notional.ventures/  |
+| API      | https://api-persistence-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-persistence-ia.cosmosia.notional.ventures/ |
 
 ### 34. Crypto.org
 
