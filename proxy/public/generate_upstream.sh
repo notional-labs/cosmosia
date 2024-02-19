@@ -52,7 +52,7 @@ odin
 omniflixhub
 osmosis-testnet
 osmosis
-persistent
+persistence
 quasar
 quicksilver
 regen-testnet

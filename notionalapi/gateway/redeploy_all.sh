@@ -68,7 +68,7 @@ osmosis-archive-sub
 osmosis-testnet
 osmosis
 persistence-archive-sub
-persistent
+persistence
 quasar
 quicksilver-archive-sub
 quicksilver
