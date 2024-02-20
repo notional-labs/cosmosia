@@ -1,5 +1,24 @@
 echo "snapshot_cronjob..."
 
+opt_nosync=false
+
+OPTSTRING=":n"
+# n: no sync, default is false
+
+while getopts ${OPTSTRING} opt; do
+  case ${opt} in
+    n)
+      echo "no-sync Option -n was triggered."
+      opt_nosync=true
+      ;;
+    ?)
+      echo "Invalid option: -${OPTARG}."
+      exit 1
+      ;;
+  esac
+done
+
+
 source $HOME/env.sh
 
 # functions
@@ -34,21 +53,24 @@ get_next_version () {
 data_version=$(find_current_data_version)
 
 ##############
-echo "wait till chain get synched..."
-supervisorctl start chain
+echo "opt_nosync = $opt_nosync"
+if [ "$opt_nosync" = false ] ; then
+  echo "wait till chain get synched..."
+  supervisorctl start chain
 
-catching_up=true
-while [[ "$catching_up" != "false" ]]; do
-  sleep 60;
+  catching_up=true
+  while [[ "$catching_up" != "false" ]]; do
+    sleep 60;
 
-  if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-testnet)$" ) -ne 0 ]; then
-    catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .sync_info.catching_up)
-  else
-    catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
-  fi
+    if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-testnet)$" ) -ne 0 ]; then
+      catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .sync_info.catching_up)
+    else
+      catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
+    fi
 
-  echo "catching_up=$catching_up"
-done
+    echo "catching_up=$catching_up"
+  done
+fi
 
 ##############
 echo "OK, chain get synched"
