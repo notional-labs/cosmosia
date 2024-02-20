@@ -77,7 +77,7 @@ if [[ -z $go_version ]]; then
   pacman -Sy --noconfirm go
 else
   echo "installing go version ${go_version}"
-  wget -O - "https://go.dev/dl/${$go_version}.linux-amd64.tar.gz" |pigz -dc |tar -xf - -C /usr/lib/
+  wget -O - "https://go.dev/dl/${go_version}.linux-amd64.tar.gz" |pigz -dc |tar -xf - -C /usr/lib/
 fi
 
 export GOPATH="$HOME/go"
