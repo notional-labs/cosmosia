@@ -67,12 +67,16 @@ snapshot_storage_node="$snapshot_storage_node"
 snapshot_storage_node_ip="$snapshot_storage_node_ip"
 snapshot_prune="$snapshot_prune"
 db_backend="$db_backend"
+EOT
 
+if [ $( echo "${chain_name}" | egrep -c "agoric" ) -eq 0 ]; then
+  cat <<EOT >> $HOME/env.sh
 # fix agoric
 export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 EOT
+fi
 
 if [[ -z $version ]]; then
   echo "No version found, exit!"
