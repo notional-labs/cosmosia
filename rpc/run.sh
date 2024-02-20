@@ -51,12 +51,17 @@ daemon_name="$daemon_name"
 node_home="$node_home"
 minimum_gas_prices="$minimum_gas_prices"
 start_flags="$start_flags"
+db_backend="$db_backend"
+EOT
 
+if [ $( echo "${chain_name}" | egrep -c "agoric" ) -eq 0 ]; then
+  cat <<EOT >> $HOME/env.sh
 # fix agoric
 export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 EOT
+fi
 
 pacman-key --init
 pacman -Syu --noconfirm
