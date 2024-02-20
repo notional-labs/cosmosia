@@ -7,6 +7,7 @@ assetmantle
 axelar
 bitcanna
 bitsong
+celestia-archive-sub
 celestia-testnet
 celestia
 cheqd
