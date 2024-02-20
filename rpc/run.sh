@@ -78,6 +78,8 @@ if [[ -z $go_version ]]; then
 else
   echo "installing go version ${go_version}"
   wget -O - "https://go.dev/dl/${go_version}.linux-amd64.tar.gz" |pigz -dc |tar -xf - -C /usr/lib/
+  ln -s /usr/lib/go/bin/go /usr/sbin/go
+  ln -s /usr/lib/go/bin/gofmt /usr/sbin/gofmt
 fi
 
 export GOPATH="$HOME/go"
