@@ -37,7 +37,7 @@ if [[ -z $chain_name ]]; then
   exit
 fi
 
-if [[ $db_backend != "pebbledb" ]]; then
+if [[ $db_backend == "goleveldb" ]]; then
   echo "use this script for pebbledb only. Exit!"
   exit
 fi
