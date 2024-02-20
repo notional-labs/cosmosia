@@ -5,24 +5,6 @@ source $HOME/env.sh
 echo "#################################################################################################################"
 echo "build from source:"
 
-export GOPATH="$HOME/go"
-export GOROOT="/usr/lib/go"
-export GOBIN="${GOPATH}/bin"
-export PATH="${PATH}:${GOROOT}/bin:${GOBIN}"
-export GOROOT_BOOTSTRAP=$GOROOT
-
-mkdir -p $GOBIN
-
-#use_gvm=false
-## use gvm for cosmoshub for go1.18
-#if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
-#  bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-#  source /root/.gvm/scripts/gvm
-#  gvm install go1.18.10
-#  gvm use go1.18.10 --default
-#  use_gvm=true
-#fi
-
 cd $HOME
 
 # 1. build the snapshot base url

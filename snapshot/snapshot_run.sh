@@ -67,6 +67,7 @@ snapshot_storage_node="$snapshot_storage_node"
 snapshot_storage_node_ip="$snapshot_storage_node_ip"
 snapshot_prune="$snapshot_prune"
 db_backend="$db_backend"
+go_version="$go_version"
 EOT
 
 if [ $( echo "${chain_name}" | egrep -c "agoric" ) -eq 0 ]; then
@@ -85,7 +86,37 @@ fi
 
 cd $HOME
 pacman -Syu --noconfirm
-pacman -Sy --noconfirm go git base-devel wget pigz jq dnsutils inetutils python python-pip cronie spawn-fcgi fcgiwrap openssh
+pacman -Sy --noconfirm git base-devel wget pigz jq dnsutils inetutils python python-pip cronie spawn-fcgi fcgiwrap openssh
+
+echo "#################################################################################################################"
+echo "install go..."
+
+if [[ -z $go_version ]]; then
+  echo "No go version defined, install with package manager"
+  pacman -Sy --noconfirm go
+else
+  echo "installing go version ${go_version}"
+  wget -O - "https://go.dev/dl/${$go_version}.linux-amd64.tar.gz" |pigz -dc |tar -xf - -C /usr/lib/
+fi
+
+export GOPATH="$HOME/go"
+export GOROOT="/usr/lib/go"
+export GOBIN="${GOPATH}/bin"
+export PATH="${PATH}:${GOROOT}/bin:${GOBIN}"
+export GOROOT_BOOTSTRAP=$GOROOT
+
+mkdir -p $GOBIN
+
+#use_gvm=false
+## use gvm for cosmoshub for go1.18
+#if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
+#  bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+#  source /root/.gvm/scripts/gvm
+#  gvm install go1.18.10
+#  gvm use go1.18.10 --default
+#  use_gvm=true
+#fi
+
 
 echo "#################################################################################################################"
 echo "openssh..."
