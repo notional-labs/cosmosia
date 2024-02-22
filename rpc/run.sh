@@ -68,6 +68,7 @@ pacman-key --init
 pacman -Syu --noconfirm
 pacman -Sy --noconfirm archlinux-keyring
 pacman -Sy --noconfirm git base-devel wget pigz jq python python-pip cronie nginx spawn-fcgi fcgiwrap dnsutils inetutils screen
+pacman -Syu --noconfirm
 
 echo "#################################################################################################################"
 echo "install go..."
