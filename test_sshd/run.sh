@@ -17,8 +17,8 @@ ssh-keygen -A
 
 # append cosmosia pubkey to authorized_keys
 mkdir -p $HOME/.ssh
-curl -Ls http://tasks.web_config/config/cosmosia.id_rsa > $HOME/.ssh/authorized_keys
-chmod 600 /root/.ssh/authorized_keys
+curl -Ls http://tasks.web_config/config/cosmosia.id_rsa.pub > $HOME/.ssh/authorized_keys
+chmod 600 $HOME/.ssh/authorized_keys
 
 # start sshd
 screen -S sshd -dm /usr/bin/sshd -D
