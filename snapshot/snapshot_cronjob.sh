@@ -59,6 +59,7 @@ if [ "$opt_nosync" = false ] ; then
   supervisorctl start chain
 
   catching_up=true
+  counter=1
   while [[ "$catching_up" != "false" ]]; do
     sleep 60;
 
@@ -68,7 +69,16 @@ if [ "$opt_nosync" = false ] ; then
       catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
     fi
 
-    echo "catching_up=$catching_up"
+    echo "catching_up=${catching_up}, counter=${counter}"
+
+    # restart node every hour to avoid OOM
+    counter=$(( ${counter} + 1 ))
+    if (( counter > 60 )); then
+      supervisorctl stop chain
+      sleep 60
+      supervisorctl start chain
+      counter=1
+    fi
   done
 fi
 
