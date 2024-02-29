@@ -63,7 +63,7 @@ if [ "$opt_nosync" = false ] ; then
   while [[ "$catching_up" != "false" ]]; do
     sleep 60;
 
-    if  (echo "${chain_name}" | grep -q -E "^(sei|sei-archive-sub|sei-testnet)$" ); then
+    if [ $( echo "${chain_name}" | grep -cE "^(sei|sei-archive-sub|sei-testnet)$" ) -ne 0 ]; then
       catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .sync_info.catching_up)
     else
       catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
