@@ -58,15 +58,29 @@ if [ "$opt_nosync" = false ] ; then
   echo "wait till chain get synched..."
   supervisorctl start chain
 
+  THRESHOLD_TIME=120
   catching_up=true
   counter=1
   while [[ "$catching_up" != "false" ]]; do
     sleep 60;
 
+    BLOCKCHAIN_TIME=$(curl --silent --max-time 3 "http://localhost:26657/status" |jq -r .result.sync_info.latest_block_time)
     if [ $( echo "${chain_name}" | grep -cE "^(sei|sei-archive-sub|sei-testnet)$" ) -ne 0 ]; then
-      catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .sync_info.catching_up)
-    else
-      catching_up=$(curl --silent "http://localhost:26657/status" |jq -r .result.sync_info.catching_up)
+      BLOCKCHAIN_TIME=$(curl --silent --max-time 3 "http://localhost:26657/status" |jq -r .sync_info.latest_block_time)
+    fi
+
+    if [[ "${BLOCKCHAIN_TIME}" != "null" ]]; then
+      if [[ ! -z "$BLOCKCHAIN_TIME" ]]; then
+        BLOCKCHAIN_SECS=`date -d $BLOCKCHAIN_TIME +%s`
+        CURRENT_SECS=`date +%s`
+
+        # if within $THRESHOLD_TIME seconds of current time, call it synced
+        BLOCK_AGE=$((${CURRENT_SECS} - ${BLOCKCHAIN_SECS}))
+
+        if [[ ${BLOCK_AGE} -le ${THRESHOLD_TIME} ]]; then
+          catching_up="false"
+        fi
+      fi
     fi
 
     echo "catching_up=${catching_up}, counter=${counter}"
