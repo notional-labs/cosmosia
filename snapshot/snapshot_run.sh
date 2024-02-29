@@ -70,7 +70,7 @@ db_backend="$db_backend"
 go_version="$go_version"
 EOT
 
-if [ $( echo "${chain_name}" | egrep -c "agoric" ) -eq 0 ]; then
+if [ $( echo "${chain_name}" |grep -cE "agoric" ) -eq 0 ]; then
   cat <<EOT >> $HOME/env.sh
 # fix agoric
 export NVM_DIR="\$HOME/.nvm"
@@ -112,7 +112,7 @@ mkdir -p $GOBIN
 
 #use_gvm=false
 ## use gvm for cosmoshub for go1.18
-#if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
+#if [ $( echo "${chain_name}" |grep -cE "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
 #  bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 #  source /root/.gvm/scripts/gvm
 #  gvm install go1.18.10

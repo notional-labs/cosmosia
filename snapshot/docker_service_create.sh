@@ -69,7 +69,7 @@ override_constraint=$(docker node ls -f node.label=cosmosia.snapshot.${chain_nam
 if [[ -z $override_constraint ]]; then
   echo "No override_constraint found"
   constraint="node.hostname==$HOST"
-  if [ $( echo "${chain_name}" | egrep -c "archive" ) -eq 0 ]; then
+  if [ $( echo "${chain_name}" |grep -cE "archive" ) -eq 0 ]; then
     # if pruned node, place on node with cosmosia.snapshot.pruned label, see https://github.com/notional-labs/cosmosia/issues/375
     constraint="node.labels.cosmosia.snapshot.pruned==true"
   fi

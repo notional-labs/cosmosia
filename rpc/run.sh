@@ -55,7 +55,7 @@ db_backend="$db_backend"
 go_version="$go_version"
 EOT
 
-if [ $( echo "${chain_name}" | egrep -c "agoric" ) -eq 0 ]; then
+if [ $( echo "${chain_name}" | grep -cE "agoric" ) -eq 0 ]; then
   cat <<EOT >> $HOME/env.sh
 # fix agoric
 export NVM_DIR="\$HOME/.nvm"
@@ -93,7 +93,7 @@ mkdir -p $GOBIN
 
 #use_gvm=false
 ## use gvm for cosmoshub for go1.18
-#if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
+#if [ $( echo "${chain_name}" |grep -cE "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
 #  bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 #  source /root/.gvm/scripts/gvm
 #  gvm install go1.18.10
@@ -107,15 +107,15 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot
 cd $HOME
 source $HOME/snapshot_restore.sh
 
-if [ $( echo "${chain_name}" | egrep -c "^(osmosis)$" ) -ne 0 ]; then
+if [ $( echo "${chain_name}" | grep -cE "^(osmosis)$" ) -ne 0 ]; then
   sed -i -e "s/^min-gas-price-for-high-gas-tx *=.*/min-gas-price-for-high-gas-tx = \".005\"/" $node_home/config/app.toml
   sed -i -e "s/^arbitrage-min-gas-fee *=.*/arbitrage-min-gas-fee = \".025\"/" $node_home/config/app.toml
 fi
 
 # enable statesync for pruned rpc node only
-if [ $( echo "${chain_name}" | egrep -c "archive" ) -eq 0 ]; then
+if [ $( echo "${chain_name}" | grep -cE "archive" ) -eq 0 ]; then
   # except these chains (https://github.com/notional-labs/cosmosia/issues/297)
-  if [ $( echo "${chain_name}" | egrep -c "^(irisnet)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" |grep -cE "^(irisnet)$" ) -ne 0 ]; then
     sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 14400/" $node_home/config/app.toml
     sed -i -e "s/^snapshot-keep-recent *=.*/snapshot-keep-recent = 2/" $node_home/config/app.toml
   fi
@@ -191,7 +191,7 @@ sleep 20
 /usr/sbin/nginx
 EOT
 
-#if [ $( echo "${chain_name}" | egrep -c "^(akash|bandchain|evmos|evmos-archive|evmos-testnet-archive|kava|provenance|persistent|quicksilver|regen|sei|terra|umee|kujira|stride|whitewhale|injective|sei-testnet)$" ) -ne 0 ]; then
+#if [ $( echo "${chain_name}" |grep -cE "^(akash|bandchain|evmos|evmos-archive|evmos-testnet-archive|kava|provenance|persistent|quicksilver|regen|sei|terra|umee|kujira|stride|whitewhale|injective|sei-testnet)$" ) -ne 0 ]; then
 echo "$random_minute */7 * * * root /bin/bash $HOME/restart_cronjob.sh" > /etc/cron.d/cron_restart_chain
 
 crond

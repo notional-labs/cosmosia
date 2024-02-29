@@ -44,7 +44,7 @@ fi
 
 #use_gvm=false
 ## use gvm for cosmoshub for go1.18
-#if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
+#if [ $( echo "${chain_name}" |grep -cE "^(cosmoshub|cosmoshub-archive-sub)$" ) -ne 0 ]; then
 #  source /root/.gvm/scripts/gvm
 #  use_gvm=true
 #fi
@@ -77,11 +77,11 @@ buid_chain () {
 
   git checkout "$p_version"
 
-  if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra|assetmantle)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" |grep -cE "^(cosmoshub|cheqd|terra|assetmantle)$" ) -ne 0 ]; then
     go mod edit -dropreplace github.com/tecbot/gorocksdb
   elif [[ $chain_name == "gravitybridge" ]]; then
     cd module
-  elif [ $( echo "${chain_name}" | egrep -c "^(dydx|dydx-testnet|dydx-archive-sub)$" ) -ne 0 ]; then
+  elif [ $( echo "${chain_name}" |grep -cE "^(dydx|dydx-testnet|dydx-archive-sub)$" ) -ne 0 ]; then
     cd protocol
   elif [[ $chain_name == "agoric" ]]; then
     cd $HOME/agoric-sdk/golang/cosmos
@@ -89,14 +89,14 @@ buid_chain () {
 
   go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 
-  if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|furya)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" |grep -cE "^(cyber|provenance|furya)$" ) -ne 0 ]; then
     go mod tidy -compat=1.17
   else
     go mod tidy
   fi
 
   go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
-  if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|furya)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" |grep -cE "^(cyber|provenance|furya)$" ) -ne 0 ]; then
     go mod tidy -compat=1.17
   else
     go mod tidy
@@ -104,15 +104,15 @@ buid_chain () {
 
   go work use
 
-  if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" |grep -cE "^(emoney)$" ) -ne 0 ]; then
     sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
-  elif [ $( echo "${chain_name}" | egrep -c "^(starname|sifchain)$" ) -ne 0 ]; then
+  elif [ $( echo "${chain_name}" |grep -cE "^(starname|sifchain)$" ) -ne 0 ]; then
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./cmd/$daemon_name
   elif [[ $chain_name == "axelar" ]]; then
     axelard_version=${p_version##*v}
     go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version $opt_forcesync" -o /root/go/bin/$daemon_name ./cmd/axelard
-  elif [ $( echo "${chain_name}" | egrep -c "^(injective|injective-testnet)$" ) -ne 0 ]; then
+  elif [ $( echo "${chain_name}" |grep -cE "^(injective|injective-testnet)$" ) -ne 0 ]; then
     # fix for hard-coded using goleveldb
     sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/root.go
     sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/start.go
@@ -129,7 +129,7 @@ buid_chain () {
     go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/agd ./cmd/agd
 #    go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/ag-cosmos-helper ./cmd/helper
     go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
-  elif [ $( echo "${chain_name}" | egrep -c "^(osmosis)$" ) -ne 0 ]; then
+  elif [ $( echo "${chain_name}" |grep -cE "^(osmosis)$" ) -ne 0 ]; then
     GOWORK=off go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
   else
     go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...

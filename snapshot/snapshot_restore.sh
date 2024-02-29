@@ -44,11 +44,11 @@ else
   cd $repo_name
 
   if [[ $db_backend == "pebbledb" ]]; then
-    if [ $( echo "${chain_name}" | egrep -c "^(cosmoshub|cheqd|terra|terra-archive|assetmantle)$" ) -ne 0 ]; then
+    if [ $( echo "${chain_name}" |grep -cE "^(cosmoshub|cheqd|terra|terra-archive|assetmantle)$" ) -ne 0 ]; then
       go mod edit -dropreplace github.com/tecbot/gorocksdb
     elif [[ $chain_name == "gravitybridge" ]]; then
       cd module
-    elif [ $( echo "${chain_name}" | egrep -c "^(dydx|dydx-testnet|dydx-archive-sub)$" ) -ne 0 ]; then
+    elif [ $( echo "${chain_name}" |grep -cE "^(dydx|dydx-testnet|dydx-archive-sub)$" ) -ne 0 ]; then
       cd protocol
     elif [[ $chain_name == "agoric" ]]; then
       cd $HOME/agoric-sdk/golang/cosmos
@@ -58,14 +58,14 @@ else
 
     go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 
-    if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|furya)$" ) -ne 0 ]; then
+    if [ $( echo "${chain_name}" |grep -cE "^(cyber|provenance|furya)$" ) -ne 0 ]; then
       go mod tidy -compat=1.17
     else
       go mod tidy
     fi
 
     go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
-    if [ $( echo "${chain_name}" | egrep -c "^(cyber|provenance|furya)$" ) -ne 0 ]; then
+    if [ $( echo "${chain_name}" |grep -cE "^(cyber|provenance|furya)$" ) -ne 0 ]; then
       go mod tidy -compat=1.17
     else
       go mod tidy
@@ -73,15 +73,15 @@ else
 
     go work use
 
-    if [ $( echo "${chain_name}" | egrep -c "^(emoney)$" ) -ne 0 ]; then
+    if [ $( echo "${chain_name}" |grep -cE "^(emoney)$" ) -ne 0 ]; then
       sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
       go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
-    elif [ $( echo "${chain_name}" | egrep -c "^(starname|sifchain)$" ) -ne 0 ]; then
+    elif [ $( echo "${chain_name}" |grep -cE "^(starname|sifchain)$" ) -ne 0 ]; then
       go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
     elif [[ $chain_name == "axelar" ]]; then
       axelard_version=${version##*v}
       go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version" -o /root/go/bin/$daemon_name ./cmd/axelard
-    elif [ $( echo "${chain_name}" | egrep -c "^(injective|injective-testnet)$" ) -ne 0 ]; then
+    elif [ $( echo "${chain_name}" |grep -cE "^(injective|injective-testnet)$" ) -ne 0 ]; then
       # fix for hard-coded using goleveldb
       sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/root.go
       sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/start.go
@@ -116,7 +116,7 @@ else
     #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
     #  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
     #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
-    elif [ $( echo "${chain_name}" | egrep -c "^(osmosis)$" ) -ne 0 ]; then
+    elif [ $( echo "${chain_name}" |grep -cE "^(osmosis)$" ) -ne 0 ]; then
       GOWORK=off go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
     else
       go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
@@ -151,7 +151,7 @@ elif [[ $chain_name == "sei-testnet" ]]; then
   chain_id_arg="--chain-id=atlantic-2"
 elif [[ $chain_name == "sei" ]]; then
   chain_id_arg="--chain-id=pacific-1"
-elif [ $( echo "${chain_name}" | egrep -c "sei-archive-sub" ) -ne 0 ]; then
+elif [ $( echo "${chain_name}" |grep -cE "sei-archive-sub" ) -ne 0 ]; then
 	chain_id_arg="--chain-id=pacific-1"
 fi
 
@@ -180,7 +180,7 @@ echo "download and extract the snapshot to current path..."
 wget -O - "$URL" |pigz -dc |tar -xf -
 
 prunning_block="362880"
-if [ $( echo "${chain_name}" | egrep -c "pruned" ) -ne 0 ]; then
+if [ $( echo "${chain_name}" |grep -cE "pruned" ) -ne 0 ]; then
   # if pruned node (not default)
   prunning_block="1000"
 fi
@@ -238,7 +238,7 @@ if [[ $db_backend == "pebbledb" ]]; then
   sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
 fi
 
-if [ $( echo "${chain_name}" | egrep -c "pruned" ) -ne 0 ]; then
+if [ $( echo "${chain_name}" |grep -cE "pruned" ) -ne 0 ]; then
   # if pruned node (not default)
   sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
   sed -i -e "s/^min-retain-blocks *=.*/min-retain-blocks = 1000/" $node_home/config/app.toml
@@ -272,7 +272,7 @@ fi
 [ "$chain_name" == "injective" ] && sed -i '/^\[mempool]/,/^\[/{s/^size[[:space:]]*=.*/size = 200/}' $node_home/config/config.toml
 
 # fix for sei
-if [ $( echo "${chain_name}" | egrep -c "^(sei|sei-archive-sub|sei-archive-sub1|sei-archive-sub2|sei-archive-sub3|sei-testnet)$" ) -ne 0 ]; then
+if [ $( echo "${chain_name}" |grep -cE "^(sei|sei-archive-sub|sei-archive-sub1|sei-archive-sub2|sei-archive-sub3|sei-testnet)$" ) -ne 0 ]; then
   sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
 fi
 

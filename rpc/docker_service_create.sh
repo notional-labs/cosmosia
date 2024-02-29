@@ -127,7 +127,7 @@ fi
 #if [[ -z $override_constraint ]]; then
 #  echo "No override_constraint found"
 #  constraint="node.labels.cosmosia.rpc.pruned==true"
-#  if [ $( echo "${chain_name}" | egrep -c "archive" ) -ne 0 ]; then
+#  if [ $( echo "${chain_name}" |grep -cE "archive" ) -ne 0 ]; then
 #    # if archive node
 #    constraint="node.labels.cosmosia.rpc.${chain_name}==true"
 #  fi
