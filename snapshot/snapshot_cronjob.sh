@@ -103,6 +103,10 @@ echo "data_version=$data_version"
 supervisorctl stop chain
 sleep 60
 
+echo "Synchronize cached writes to persistent storage"
+sync $node_home/data
+sleep 30
+
 echo "#################################################################################################################"
 echo "pruning..."
 echo "snapshot_prune=$snapshot_prune"
