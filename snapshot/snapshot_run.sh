@@ -15,6 +15,13 @@ fi
 
 if [ -f "$HOME/env.sh" ]; then
   echo "Start existing container..."
+
+  cd $HOME
+  source $HOME/env.sh
+
+  supervisord
+  crond
+
   loop_forever
 fi
 
