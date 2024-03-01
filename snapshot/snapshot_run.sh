@@ -1,24 +1,24 @@
 # usage: ./snapshost_run.sh chain_name
 # eg., ./snapshost_run.sh cosmoshub
 
-chain_name="$1"
+loop_forever () {
+  echo "loop forever for debugging only"
+  while true; do sleep 5; done
+}
 
-if [ -f "$HOME/env.sh" ]; then
-    echo "Start existing container..."
-    loop_forever
-fi
+chain_name="$1"
 
 if [[ -z $chain_name ]]; then
   echo "No chain_name. usage eg., ./snapshost_run.sh cosmoshub"
   loop_forever
 fi
 
-# functions
-loop_forever () {
-  echo "loop forever for debugging only"
-  while true; do sleep 5; done
-}
+if [ -f "$HOME/env.sh" ]; then
+  echo "Start existing container..."
+  loop_forever
+fi
 
+# functions
 get_docker_snapshot_config () {
   str_snapshot_cfg="$(curl -s "http://tasks.web_config/config/cosmosia.snapshot.${chain_name}" |sed 's/ = /=/g')"
   echo $str_snapshot_cfg
