@@ -25,9 +25,8 @@ echo "SNAPSHOT_BASE_URL=$SNAPSHOT_BASE_URL"
 
 # empty $git_repo means closed source and need downloading the binaries instead of building from source
 if [[ -z $git_repo ]]; then
-  BINARY_URL="${SNAPSHOT_BASE_URL}/releases/${version}/${daemon_name}"
-  wget "${BINARY_URL}" -O "${GOBIN}/${daemon_name}"
-  chmod +x "${GOBIN}/${daemon_name}"
+  INSTALL_URL="${SNAPSHOT_BASE_URL}/releases/${version}/install.sh"
+  curl -o- $INSTALL_URL |bash
 else
   if [[ $chain_name == "sentinel" ]]; then
     # sentinel requires custom build
