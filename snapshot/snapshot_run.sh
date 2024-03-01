@@ -3,6 +3,11 @@
 
 chain_name="$1"
 
+if [ -f "$HOME/env.sh" ]; then
+    echo "Start existing container..."
+    loop_forever
+fi
+
 if [[ -z $chain_name ]]; then
   echo "No chain_name. usage eg., ./snapshost_run.sh cosmoshub"
   loop_forever
