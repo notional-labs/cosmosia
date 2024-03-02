@@ -1,6 +1,12 @@
 # usage: ./run.sh chain_name
 # eg., ./run.sh cosmoshub
 
+# functions
+loop_forever () {
+  echo "loop forever for debugging only"
+  while true; do sleep 5; done
+}
+
 chain_name="$1"
 rpc_service_name="$2"
 
@@ -11,11 +17,24 @@ fi
 
 [[ -z $rpc_service_name ]] && rpc_service_name="$chain_name"
 
-# functions
-loop_forever () {
-  echo "loop forever for debugging only"
-  while true; do sleep 5; done
-}
+if [ -f "$HOME/env.sh" ]; then
+  echo "Start existing container..."
+
+  cd $HOME
+  source $HOME/env.sh
+
+  supervisord
+  sleep 10
+  supervisorctl start chain
+
+  # run nginx with screen to avoid log to docker
+  screen -S nginx -dm /usr/sbin/nginx -g "daemon off;"
+
+  crond
+
+  loop_forever
+fi
+
 
 echo "#################################################################################################################"
 echo "read chain info:"
