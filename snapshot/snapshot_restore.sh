@@ -26,7 +26,7 @@ echo "SNAPSHOT_BASE_URL=$SNAPSHOT_BASE_URL"
 # empty $git_repo means closed source and need downloading the binaries instead of building from source
 if [[ -z $git_repo ]]; then
   INSTALL_URL="${SNAPSHOT_BASE_URL}/releases/${version}/install.sh"
-  curl -o- $INSTALL_URL |bash
+  curl -L -o- $INSTALL_URL |bash
 else
   if [[ $chain_name == "sentinel" ]]; then
     # sentinel requires custom build
