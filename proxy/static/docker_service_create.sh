@@ -10,7 +10,7 @@ docker service create \
   --network bignet \
   --network cosmosia \
   --network snapshot \
-  --constraint 'node.hostname==cosmosia11' \
+  --constraint 'node.hostname==cosmosia23' \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
   --restart-condition none \
   --env-file ../../env.sh \

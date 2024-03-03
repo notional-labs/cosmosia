@@ -25,7 +25,7 @@ docker service create \
   --network net6 \
   --network net7 \
   --network net8 \
-  --constraint 'node.hostname==cosmosia11' \
+  --constraint 'node.hostname==cosmosia23' \
   --endpoint-mode dnsrr \
   --restart-condition any \
   --env-file ../../env.sh \
