@@ -27,6 +27,7 @@ if [ -f "$HOME/env.sh" ]; then
   sleep 10
   supervisorctl start chain
 
+  spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
   # run nginx with screen to avoid log to docker
   screen -S nginx -dm /usr/sbin/nginx -g "daemon off;"
 
