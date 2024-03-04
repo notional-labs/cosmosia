@@ -73,7 +73,7 @@ gas_price = { price = 0.25, denom = 'ufury' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-2"], # juno
+    ["transfer", "channel-7"], # juno
     ["transfer", "channel-6"], # osmosis
     ["transfer", "channel-1"], # terra2
     ["transfer", "channel-4"], # noble
@@ -149,7 +149,7 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ["transfer", "channel-417"], # furya
+    ["transfer", "channel-524"], # furya
 ]
 
 [[chains]]
