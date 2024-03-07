@@ -115,7 +115,7 @@ else
     #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
     #  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
     #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
-    elif [ $( echo "${chain_name}" |grep -cE "^(osmosis|osmosis-testnet|osmosis-testnet-pruned)$" ) -ne 0 ]; then
+    elif [ $( echo "${chain_name}" |grep -cE "^(osmosis|osmosis-archive-sub|osmosis-testnet|osmosis-testnet-pruned)$" ) -ne 0 ]; then
       GOWORK=off go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
     else
       go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
