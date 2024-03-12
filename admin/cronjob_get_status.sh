@@ -1,4 +1,23 @@
 
+########################################################################################################################
+# make sure single instance running
+PIDFILE="$HOME/cronjob_get_status.sh.lock"
+function cleanup() {
+  rm -f $PIDFILE
+}
+
+if [ -f $PIDFILE ]; then
+   pid=$(cat $PIDFILE)
+   if kill -0 $pid 2>/dev/null; then
+      echo "Script is already running"
+      exit 1
+   fi
+fi
+
+echo $$ > $PIDFILE
+trap cleanup EXIT
+########################################################################################################################
+
 cd $HOME/cosmosia/admin
 
 rpc_service_verions=$(curl -sG -XGET http://tasks.web_config:2375/services --data-urlencode 'filters={"label":["cosmosia.service=rpc"]}' |jq -r '.[].Spec.Name')
