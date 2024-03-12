@@ -82,7 +82,7 @@ db_backend="$db_backend"
 go_version="$go_version"
 EOT
 
-if [ $( echo "${chain_name}" |grep -cE "agoric" ) -eq 0 ]; then
+if [ $( echo "${chain_name}" |grep -cE "agoric" ) -ne 0 ]; then
   cat <<EOT >> $HOME/env.sh
 # fix agoric
 export NVM_DIR="\$HOME/.nvm"
