@@ -28,110 +28,114 @@ if [[ -z $git_repo ]]; then
   INSTALL_URL="${SNAPSHOT_BASE_URL}/releases/${version}/install.sh"
   curl -L -o- $INSTALL_URL |bash
 else
-  if [[ $chain_name == "sentinel" ]]; then
-    # sentinel requires custom build
-    mkdir -p $HOME/go/src/github.com/sentinel-official
-    cd $HOME/go/src/github.com/sentinel-official
-  fi
-
-  echo "curren path: $PWD"
-
-  # git clone $git_repo $chain_name
-  # cd $chain_name
-  git clone --single-branch --branch $version $git_repo
-  repo_name=$(basename $git_repo |cut -d. -f1)
-  cd $repo_name
-
-  if [[ $db_backend == "pebbledb" ]]; then
-    if [ $( echo "${chain_name}" |grep -cE "^(cosmoshub|cheqd|terra|terra-archive|assetmantle)$" ) -ne 0 ]; then
-      go mod edit -dropreplace github.com/tecbot/gorocksdb
-    elif [[ $chain_name == "gravitybridge" ]]; then
-      cd module
-    elif [ $( echo "${chain_name}" |grep -cE "^(dydx|dydx-testnet|dydx-archive-sub)$" ) -ne 0 ]; then
-      cd protocol
-    elif [[ $chain_name == "agoric" ]]; then
-      cd $HOME/agoric-sdk/golang/cosmos
-    elif [[ $chain_name == "wormhole" ]]; then
-      cd $HOME/wormhole/wormchain
+  if [[ -z $build_script ]]; then
+    if [[ $chain_name == "sentinel" ]]; then
+      # sentinel requires custom build
+      mkdir -p $HOME/go/src/github.com/sentinel-official
+      cd $HOME/go/src/github.com/sentinel-official
     fi
 
-    go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
+    echo "curren path: $PWD"
 
-    if [ $( echo "${chain_name}" |grep -cE "^(cyber|provenance|furya)$" ) -ne 0 ]; then
-      go mod tidy -compat=1.17
+    # git clone $git_repo $chain_name
+    # cd $chain_name
+    git clone --single-branch --branch $version $git_repo
+    repo_name=$(basename $git_repo |cut -d. -f1)
+    cd $repo_name
+
+    if [[ $db_backend == "pebbledb" ]]; then
+      if [ $( echo "${chain_name}" |grep -cE "^(cosmoshub|cheqd|terra|terra-archive|assetmantle)$" ) -ne 0 ]; then
+        go mod edit -dropreplace github.com/tecbot/gorocksdb
+      elif [[ $chain_name == "gravitybridge" ]]; then
+        cd module
+      elif [ $( echo "${chain_name}" |grep -cE "^(dydx|dydx-testnet|dydx-archive-sub)$" ) -ne 0 ]; then
+        cd protocol
+      elif [[ $chain_name == "agoric" ]]; then
+        cd $HOME/agoric-sdk/golang/cosmos
+      elif [[ $chain_name == "wormhole" ]]; then
+        cd $HOME/wormhole/wormchain
+      fi
+
+      go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
+
+      if [ $( echo "${chain_name}" |grep -cE "^(cyber|provenance|furya)$" ) -ne 0 ]; then
+        go mod tidy -compat=1.17
+      else
+        go mod tidy
+      fi
+
+      go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
+      if [ $( echo "${chain_name}" |grep -cE "^(cyber|provenance|furya)$" ) -ne 0 ]; then
+        go mod tidy -compat=1.17
+      else
+        go mod tidy
+      fi
+
+      go work use
+
+      if [ $( echo "${chain_name}" |grep -cE "^(emoney)$" ) -ne 0 ]; then
+        sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
+        go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
+      elif [ $( echo "${chain_name}" |grep -cE "^(starname|sifchain)$" ) -ne 0 ]; then
+        go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
+      elif [[ $chain_name == "axelar" ]]; then
+        axelard_version=${version##*v}
+        go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version -X github.com/cosmos/cosmos-sdk/version.Name=axelar -X github.com/cosmos/cosmos-sdk/version.AppName=axelard -X github.com/CosmWasm/wasmd/x/wasm/types/MaxWasmSize=3145728 -X github.com/axelarnetwork/axelar-core/x/axelarnet/exported.NativeAsset=uaxl -X github.com/axelarnetwork/axelar-core/app.WasmEnabled=true -X github.com/axelarnetwork/axelar-core/app.IBCWasmHooksEnabled=false -X github.com/axelarnetwork/axelar-core/app.WasmCapabilities="iterator,staking,stargate,cosmwasm_1_3"" -trimpath -o /root/go/bin/$daemon_name ./cmd/axelard
+      elif [ $( echo "${chain_name}" |grep -cE "^(injective|injective-testnet)$" ) -ne 0 ]; then
+        # fix for hard-coded using goleveldb
+        sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/root.go
+        sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/start.go
+        go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
+      elif [[ $chain_name == "agoric" ]]; then
+        # fix agoric
+
+        # install nvm
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+        # to load nvm
+        source $HOME/env.sh
+
+        # install node
+        nvm install v18.17.1
+
+        # install yarn
+        npm install --global yarn
+
+        # build
+        cd $HOME/agoric-sdk
+        yarn install
+        yarn build
+
+        cd $HOME/agoric-sdk/packages/cosmic-swingset && make
+
+        cd $HOME/agoric-sdk/golang/cosmos
+        go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/agd ./cmd/agd
+      #  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/ag-cosmos-helper ./cmd/helper
+        go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
+
+      #  mkdir -p "/root/go/bin"
+      #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
+      #  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
+      #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
+      elif [ $( echo "${chain_name}" |grep -cE "^(osmosis|osmosis-archive-sub|osmosis-testnet|osmosis-testnet-pruned)$" ) -ne 0 ]; then
+        GOWORK=off go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
+      else
+        go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
+      fi
+
+      ## copy binary from gvm to $HOME/go/bin/
+      #if [ "$use_gvm" = true ]; then
+      #  cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
+      #fi
     else
-      go mod tidy
+      if [[ $chain_name == "wormhole" ]]; then
+        cd $HOME/wormhole/wormchain
+        go install ./...
+      else
+        make install
+      fi
     fi
-
-    go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
-    if [ $( echo "${chain_name}" |grep -cE "^(cyber|provenance|furya)$" ) -ne 0 ]; then
-      go mod tidy -compat=1.17
-    else
-      go mod tidy
-    fi
-
-    go work use
-
-    if [ $( echo "${chain_name}" |grep -cE "^(emoney)$" ) -ne 0 ]; then
-      sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
-      go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/e-money/cosmos-sdk/types.DBBackend=pebbledb -X github.com/tendermint/tm-db.ForceSync=1" ./...
-    elif [ $( echo "${chain_name}" |grep -cE "^(starname|sifchain)$" ) -ne 0 ]; then
-      go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./cmd/$daemon_name
-    elif [[ $chain_name == "axelar" ]]; then
-      axelard_version=${version##*v}
-      go build -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb -X github.com/cosmos/cosmos-sdk/version.Version=$axelard_version -X github.com/cosmos/cosmos-sdk/version.Name=axelar -X github.com/cosmos/cosmos-sdk/version.AppName=axelard -X github.com/CosmWasm/wasmd/x/wasm/types/MaxWasmSize=3145728 -X github.com/axelarnetwork/axelar-core/x/axelarnet/exported.NativeAsset=uaxl -X github.com/axelarnetwork/axelar-core/app.WasmEnabled=true -X github.com/axelarnetwork/axelar-core/app.IBCWasmHooksEnabled=false -X github.com/axelarnetwork/axelar-core/app.WasmCapabilities="iterator,staking,stargate,cosmwasm_1_3"" -trimpath -o /root/go/bin/$daemon_name ./cmd/axelard
-    elif [ $( echo "${chain_name}" |grep -cE "^(injective|injective-testnet)$" ) -ne 0 ]; then
-      # fix for hard-coded using goleveldb
-      sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/root.go
-      sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/start.go
-      go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
-    elif [[ $chain_name == "agoric" ]]; then
-      # fix agoric
-
-      # install nvm
-      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-      # to load nvm
-      source $HOME/env.sh
-
-      # install node
-      nvm install v18.17.1
-
-      # install yarn
-      npm install --global yarn
-
-      # build
-      cd $HOME/agoric-sdk
-      yarn install
-      yarn build
-
-      cd $HOME/agoric-sdk/packages/cosmic-swingset && make
-
-      cd $HOME/agoric-sdk/golang/cosmos
-      go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/agd ./cmd/agd
-    #  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/ag-cosmos-helper ./cmd/helper
-      go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
-
-    #  mkdir -p "/root/go/bin"
-    #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
-    #  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
-    #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
-    elif [ $( echo "${chain_name}" |grep -cE "^(osmosis|osmosis-archive-sub|osmosis-testnet|osmosis-testnet-pruned)$" ) -ne 0 ]; then
-      GOWORK=off go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
-    else
-      go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
-    fi
-
-    ## copy binary from gvm to $HOME/go/bin/
-    #if [ "$use_gvm" = true ]; then
-    #  cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
-    #fi
   else
-    if [[ $chain_name == "wormhole" ]]; then
-      cd $HOME/wormhole/wormchain
-      go install ./...
-    else
-      make install
-    fi
+    source <(curl -Ls -o- "$build_script")
   fi
 fi
 

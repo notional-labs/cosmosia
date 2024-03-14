@@ -73,6 +73,7 @@ minimum_gas_prices="$minimum_gas_prices"
 start_flags="$start_flags"
 db_backend="$db_backend"
 go_version="$go_version"
+build_script="$build_script"
 EOT
 
 if [ $( echo "${chain_name}" | grep -cE "agoric" ) -ne 0 ]; then

@@ -80,6 +80,7 @@ snapshot_storage_node_ip="$snapshot_storage_node_ip"
 snapshot_prune="$snapshot_prune"
 db_backend="$db_backend"
 go_version="$go_version"
+build_script="$build_script"
 EOT
 
 if [ $( echo "${chain_name}" |grep -cE "agoric" ) -ne 0 ]; then
