@@ -29,12 +29,6 @@ if [[ -z $git_repo ]]; then
   curl -L -o- $INSTALL_URL |bash
 else
   if [[ -z $build_script ]]; then
-    if [[ $chain_name == "sentinel" ]]; then
-      # sentinel requires custom build
-      mkdir -p $HOME/go/src/github.com/sentinel-official
-      cd $HOME/go/src/github.com/sentinel-official
-    fi
-
     echo "curren path: $PWD"
 
     # git clone $git_repo $chain_name
