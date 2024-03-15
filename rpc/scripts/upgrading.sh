@@ -56,6 +56,7 @@ fi
 # eg: buid_chain v1.2.3 true
 # copy from snapshot_restore.sh
 buid_chain () {
+  upgrading="true"
   p_version="$1"
   p_isforcesync="$2"
   if [[ -z $build_script ]]; then
