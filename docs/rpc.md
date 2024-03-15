@@ -908,3 +908,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-cosmoshub-testnet2-ia.cosmosia.notional.ventures/   |
 | API      | https://api-cosmoshub-testnet2-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-cosmoshub-testnet2-ia.cosmosia.notional.ventures/  |
+
+### 114. kujira-testnet
+
+| Protocol | Endpoint                                           |
+|----------|:---------------------------------------------------|
+| RPC      | https://rpc-kujira-testnet-ia.cosmosia.notional.ventures/  |
+| API      | https://api-kujira-testnet-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-kujira-testnet-ia.cosmosia.notional.ventures/ |
