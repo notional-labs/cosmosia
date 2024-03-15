@@ -55,6 +55,7 @@ juno
 kava
 kichain
 konstellation
+kujira-testnet
 kujira
 mars
 neutron-archive-sub
