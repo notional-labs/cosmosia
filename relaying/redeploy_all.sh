@@ -1,14 +1,14 @@
 SERVICES=$(cat <<-END
-test
-furya
+composable
 coreum
-whitewhale
+furya
+injective
+kava
+osmosis
 sei
 seilegacy
-kava
-composable
-osmosis
-injective
+test
+whitewhale
 END
 )
 
