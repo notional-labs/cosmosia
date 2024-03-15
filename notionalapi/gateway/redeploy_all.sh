@@ -23,6 +23,7 @@ cosmoshub-archive-sub1
 cosmoshub-archive-sub
 cosmoshub
 cosmoshub-testnet
+cosmoshub-testnet2
 crescent-testnet
 crescent
 cryptoorgchain
