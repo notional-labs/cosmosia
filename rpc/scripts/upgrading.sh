@@ -64,12 +64,6 @@ buid_chain () {
       opt_forcesync="-X github.com/tendermint/tm-db.ForceSync=1 -X github.com/cometbft/cometbft-db.ForceSync=1"
     fi
 
-    if [[ $chain_name == "sentinel" ]]; then
-      # sentinel requires custom build
-      mkdir -p $HOME/go/src/github.com/sentinel-official
-      cd $HOME/go/src/github.com/sentinel-official
-    fi
-
     repo_name=$(basename $git_repo |cut -d. -f1)
     cd $repo_name
     git reset --hard
