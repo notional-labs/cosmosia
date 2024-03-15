@@ -1,10 +1,7 @@
 cd $HOME
 
 if [[ -z $upgrading ]]; then
-  # if not exist
-  if [ ! -d $HOME/agoric-sdk ]; then
-    git clone --single-branch --branch $version $git_repo
-  fi
+  git clone --single-branch --branch $version $git_repo
   repo_name=$(basename $git_repo |cut -d. -f1)
   cd $repo_name
 else

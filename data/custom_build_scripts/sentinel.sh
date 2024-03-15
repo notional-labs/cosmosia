@@ -1,10 +1,19 @@
 cd $HOME
+
 mkdir -p $HOME/go/src/github.com/sentinel-official
 cd $HOME/go/src/github.com/sentinel-official
 
-git clone --single-branch --branch $version $git_repo
-repo_name=$(basename $git_repo |cut -d. -f1)
-cd $repo_name
+if [[ -z $upgrading ]]; then
+  repo_name=$(basename $git_repo |cut -d. -f1)
+  cd $repo_name
+else
+  git clone --single-branch --branch $version $git_repo
+  repo_name=$(basename $git_repo |cut -d. -f1)
+  cd $repo_name
+  git reset --hard
+  git fetch --all --tags
+  git checkout "$p_version"
+fi
 
 go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
 go mod tidy
