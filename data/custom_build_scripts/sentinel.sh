@@ -4,12 +4,13 @@ mkdir -p $HOME/go/src/github.com/sentinel-official
 cd $HOME/go/src/github.com/sentinel-official
 
 if [[ -z $upgrading ]]; then
-  repo_name=$(basename $git_repo |cut -d. -f1)
-  cd $repo_name
-else
   git clone --single-branch --branch $version $git_repo
   repo_name=$(basename $git_repo |cut -d. -f1)
   cd $repo_name
+else
+  repo_name=$(basename $git_repo |cut -d. -f1)
+  cd $repo_name
+
   git reset --hard
   git fetch --all --tags
   git checkout "$p_version"
