@@ -900,3 +900,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-celestia-archive-sub-ia.cosmosia.notional.ventures/   |
 | API      | https://api-celestia-archive-sub-ia.cosmosia.notional.ventures/   |
 | GRPC     | https://grpc-celestia-archive-sub-ia.cosmosia.notional.ventures/  |
+
+### 113. cosmoshub-testnet2
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-cosmoshub-testnet2-ia.cosmosia.notional.ventures/   |
+| API      | https://api-cosmoshub-testnet2-ia.cosmosia.notional.ventures/   |
+| GRPC     | https://grpc-cosmoshub-testnet2-ia.cosmosia.notional.ventures/  |
