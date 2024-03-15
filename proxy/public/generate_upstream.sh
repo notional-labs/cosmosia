@@ -21,6 +21,7 @@ composable-testnet
 coreum
 cosmoshub
 cosmoshub-testnet
+cosmoshub-testnet2
 crescent-testnet
 crescent
 cryptoorgchain
