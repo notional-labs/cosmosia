@@ -864,3 +864,323 @@ address_type = { derivation = 'cosmos' }
 compat_mode = '0.34'
 EOT
 )
+
+# akashnet-2
+export INC_AKASHNET_2=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_akash:8000'
+grpc_addr = 'http://tasks.lb_akash:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_akash:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '20s'
+account_prefix = 'akash'
+key_name = 'akash'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'uakt' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = ''
+trust_threshold = { numerator = '1', denominator = '3' }
+EOT
+)
+
+# bitcanna-1
+export INC_BITCANNA_1=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_bitcanna:8000'
+grpc_addr = 'http://tasks.lb_bitcanna:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_bitcanna:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '20s'
+account_prefix = 'bcna'
+key_name = 'bcna'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'ubcna' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '32hours'
+memo_prefix = ''
+trust_threshold = { numerator = '1', denominator = '3' }
+EOT
+)
+
+# columbus-5
+export INC_COLUMBUS_5=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_terra:8000'
+grpc_addr = 'http://tasks.lb_terra:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_terra:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '15s'
+account_prefix = 'terra'
+key_name = 'terra'
+store_prefix = 'ibc'
+max_tx_size = 1000000
+default_gas = 100000000
+max_gas = 1000000000
+max_msg_num = 30
+gas_price = { price = 0.1, denom = 'uluna' }
+gas_multiplier = 2
+clock_drift ='34s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = ''
+EOT
+)
+
+# crypto-org-chain-mainnet-1
+export INC_CRYPTO_ORG_CHAIN_MAINNET_1=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_cryptoorgchain:8000'
+grpc_addr = 'http://tasks.lb_cryptoorgchain:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_cryptoorgchain:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '20s'
+account_prefix = 'cro'
+key_name = 'cro'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'basecro' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '448hours'
+memo_prefix = ''
+trust_threshold = { numerator = '1', denominator = '3' }
+EOT
+)
+
+# kichain-2
+export INC_KICHAIN_2=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_kichain:8000'
+grpc_addr = 'http://tasks.lb_kichain:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_kichain:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '20s'
+account_prefix = 'ki'
+key_name = 'ki'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'uxki' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = ''
+trust_threshold = { numerator = '1', denominator = '3' }
+EOT
+)
+
+# mars-1
+export INC_MARS_1=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_mars:8000'
+grpc_addr = 'http://tasks.lb_mars:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_mars:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '20s'
+account_prefix = 'mars'
+key_name = 'mars'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'umars' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = ''
+trust_threshold = { numerator = '1', denominator = '3' }
+EOT
+)
+
+# omniflixhub-1
+export INC_OMNIFLIXHUB_1=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_omniflixhub:8000'
+grpc_addr = 'http://tasks.lb_omniflixhub:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_omniflixhub:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '20s'
+account_prefix = 'omniflix'
+key_name = 'omniflix'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'uflix' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = ''
+trust_threshold = { numerator = '1', denominator = '3' }
+EOT
+)
+
+# pirin-1
+export INC_PIRIN_1=$(cat <<-EOT
+rpc_addr = 'https://pirin-cl.nolus.network:26657'
+grpc_addr = 'https://pirin-cl.nolus.network:9090'
+event_source = { mode = 'push', url = 'wss://pirin-cl.nolus.network:26657/websocket', batch_delay = '500ms' }
+rpc_timeout = '20s'
+account_prefix = 'nolus'
+key_name = 'nolus'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'unls' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = ''
+trust_threshold = { numerator = '1', denominator = '3' }
+EOT
+)
+
+# quasar-1
+export INC_QUASAR_1=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_quasar:8000'
+grpc_addr = 'http://tasks.lb_quasar:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_quasar:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '20s'
+account_prefix = 'quasar'
+key_name = 'quasar'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'uqsr' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = ''
+trust_threshold = { numerator = '1', denominator = '3' }
+EOT
+)
+
+# regen-1
+export INC_REGEN_1=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_regen:8000'
+grpc_addr = 'http://tasks.lb_regen:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_regen:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '60s'
+account_prefix = 'regen'
+key_name = 'regen'
+store_prefix = 'ibc'
+max_tx_size = 100000
+max_gas = 2000000
+gas_price = { price = 0.007, denom = 'uregen' }
+gas_multiplier = 1
+clock_drift ='50s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'Delegate Notional: build interchain expressway'
+EOT
+)
+
+# sentinelhub-2
+export INC_SENTINELHUB_2=$(cat <<-EOT
+rpc_addr = 'http://tasks.lb_sentinel:8000'
+grpc_addr = 'http://tasks.lb_sentinel:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_sentinel:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = '20s'
+account_prefix = 'sent'
+key_name = 'sentinel'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas =  10000000
+gas_price = { price = 0.0025, denom = 'udvpn' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '40s'
+max_block_time = '10s'
+trusting_period = '14days'
+memo_prefix = ''
+trust_threshold = { numerator = '1', denominator = '3' }
+EOT
+)
+
+# pacific-1
+export INC_PACIFIC_1=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_sei:8000'
+grpc_addr = 'http://tasks.lb_sei:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_sei:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "sei"
+key_name = "sei"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 100000
+max_gas = 4000000
+gas_multiplier = 1.1
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+trusting_period = '32hours'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.37'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.1, denom = 'usei' }
+address_type = { derivation = 'cosmos' }
+EOT
+)
+
+# migaloo-1
+export INC_MIGALOO_1=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_whitewhale:8000'
+grpc_addr = 'http://tasks.lb_whitewhale:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_whitewhale:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "migaloo"
+key_name = "migaloo"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 1000000
+max_gas = 5000000
+gas_multiplier = 2
+max_msg_num = 30
+max_tx_size = 3000000
+max_grpc_decoding_size = 33554432
+clock_drift = "500s"
+max_block_time = "10s"
+trusting_period = '336hours'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.34'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.4, denom = 'uwhale' }
+address_type = { derivation = 'cosmos' }
+EOT
+)

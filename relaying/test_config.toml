@@ -1,94 +1,20 @@
-[global]
-log_level = 'error'
-
-[mode]
-
-[mode.clients]
-enabled = true
-refresh = true
-misbehaviour = false
-
-[mode.connections]
-enabled = false
-
-[mode.channels]
-enabled = false
-
-[mode.packets]
-enabled = true
-clear_interval = 0
-clear_on_start = true
-tx_confirmation = false
-
-[rest]
-enabled = true
-host = '127.0.0.1'
-port = 3000
-
-[telemetry]
-enabled = true
-host = '0.0.0.0'
-port = 3001
+${INC_GLOBAL}
 
 [[chains]]
 id = 'migaloo-1'
-type = 'CosmosSdk'
-rpc_addr = 'http://tasks.lb_whitewhale:8000'
-event_source = { mode = 'push', url = 'ws://tasks.lb_whitewhale:8000/websocket', batch_delay = '500ms' }
-grpc_addr = 'http://tasks.lb_whitewhale:8003'
-rpc_timeout = '10s'
-account_prefix = 'migaloo'
-key_name = 'migaloo'
-store_prefix = 'ibc'
-default_gas = 120000
-max_gas = 400000
-gas_multiplier = 1.1
-max_msg_num = 30
-max_tx_size = 2097152
-clock_drift = '5s'
-max_block_time = '30s'
-memo_prefix = 'Cosmosia'
-sequential_batch_tx = false
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.25, denom = 'uwhale' }
-
+${INC_MIGALOO_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
  ['transfer', 'channel-60'], # noble
 ]
 
-[chains.address_type]
-derivation = 'cosmos'
-
 [[chains]]
 id = 'noble-1'
-type = 'CosmosSdk'
-rpc_addr = 'http://tasks.lb_noble:8000'
-event_source = { mode = 'push', url = 'ws://tasks.lb_noble:8000/websocket', batch_delay = '500ms' }
-grpc_addr = 'http://tasks.lb_noble:8003'
-rpc_timeout = '10s'
-account_prefix = 'noble'
-key_name = 'noble'
-key_store_type = 'Test'
-store_prefix = 'ibc'
-default_gas = 120000
-max_gas = 400000
-gas_multiplier = 1.1
-max_msg_num = 30
-max_tx_size = 2097152
-clock_drift = '5s'
-max_block_time = '30s'
-memo_prefix = ''
-sequential_batch_tx = false
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0001, denom = 'uusdc' }
-
+${INC_NOBLE_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
  ['transfer','channel-14'], # migaloo
 ]
 
-[chains.address_type]
-derivation = 'cosmos'

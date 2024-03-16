@@ -1,51 +1,8 @@
-[global]
-log_level = 'error'
-
-[mode]
-
-[mode.clients]
-enabled = true
-refresh = true
-misbehaviour = false
-
-[mode.connections]
-enabled = false
-
-[mode.channels]
-enabled = false
-
-[mode.packets]
-enabled = true
-clear_interval = 0
-clear_on_start = true
-tx_confirmation = false
-
-[rest]
-enabled = false
-host = '127.0.0.1'
-port = 3000
-
-[telemetry]
-enabled = true
-host = '0.0.0.0'
-port = 3001
+${INC_GLOBAL}
 
 [[chains]]
 id = 'osmosis-1'
-rpc_addr = 'http://tasks.lb_osmosis:8000'
-grpc_addr = 'http://tasks.lb_osmosis:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '10s'
-account_prefix = 'osmo'
-key_name = 'osmosis'
-store_prefix = 'ibc'
-max_gas = 20000000
-gas_price = { price = 0.0025, denom = 'uosmo' }
-gas_multiplier = 1.1
-clock_drift = '100s'
-trusting_period = '224hours'
-trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = ''
+${INC_OSMOSIS_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -77,25 +34,7 @@ list = [
 
 [[chains]]
 id = 'akashnet-2'
-rpc_addr = 'http://tasks.lb_akash:8000'
-grpc_addr = 'http://tasks.lb_akash:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_akash:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'akash'
-key_name = 'akash'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'uakt' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '14days'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_AKASHNET_2}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -104,47 +43,16 @@ list = [
 
 [[chains]]
 id = 'axelar-dojo-1'
-rpc_timeout = '15s'
-rpc_addr = 'http://tasks.lb_axelar:8000'
-grpc_addr = 'http://tasks.lb_axelar:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
-account_prefix = 'axelar'
-key_name = 'axelar'
-store_prefix = 'ibc'
-max_gas = 4000000
-gas_price = { price = 0.0075, denom = 'uaxl' }
-clock_drift = '50s'
-trusting_period = '112hours'
-trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = ''
+${INC_AXELAR_DOJO_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
     ['transfer', 'channel-3'],
 ]
 
-
 [[chains]]
 id = 'bitcanna-1'
-rpc_addr = 'http://tasks.lb_bitcanna:8000'
-grpc_addr = 'http://tasks.lb_bitcanna:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_bitcanna:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'bcna'
-key_name = 'bcna'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'ubcna' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '32hours'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_BITCANNA_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -153,23 +61,7 @@ list = [
 
 [[chains]]
 id = 'chihuahua-1'
-rpc_addr = 'http://tasks.lb_chihuahua:8000'
-grpc_addr = 'http://tasks.lb_chihuahua:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_chihuahua:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '15s'
-account_prefix = 'chihuahua'
-key_name = 'chihuahua'
-store_prefix = 'ibc'
-max_tx_size = 1000000
-default_gas = 100000000
-max_gas = 1000000000
-max_msg_num = 30
-gas_price = { price = 0.1, denom = 'uhuahua' }
-gas_multiplier = 2
-clock_drift ='34s'
-trusting_period = '224hours'
-trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = ''
+${INC_CHIHUAHUA_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -178,23 +70,7 @@ list = [
 
 [[chains]]
 id = 'columbus-5'
-rpc_addr = 'http://tasks.lb_terra:8000'
-grpc_addr = 'http://tasks.lb_terra:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_terra:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '15s'
-account_prefix = 'terra'
-key_name = 'terra'
-store_prefix = 'ibc'
-max_tx_size = 1000000
-default_gas = 100000000
-max_gas = 1000000000
-max_msg_num = 30
-gas_price = { price = 0.1, denom = 'uluna' }
-gas_multiplier = 2
-clock_drift ='34s'
-trusting_period = '14days'
-trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = ''
+${INC_COLUMBUS_5}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -203,21 +79,7 @@ list = [
 
 [[chains]]
 id = 'cosmoshub-4'
-rpc_addr = 'http://tasks.lb_cosmoshub:8000'
-grpc_addr = 'http://tasks.lb_cosmoshub:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '30s'
-account_prefix = 'cosmos'
-key_name = 'cosmos'
-store_prefix = 'ibc'
-max_tx_size = 180000
-max_gas = 2500000
-gas_price = { price = 0.01, denom = 'uatom' }
-gas_multiplier = 2
-clock_drift = '1000s'
-trusting_period = '14days'
-trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = ''
+${INC_COSMOSHUB_4}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -226,25 +88,7 @@ list = [
 
 [[chains]]
 id = 'crypto-org-chain-mainnet-1'
-rpc_addr = 'http://tasks.lb_cryptoorgchain:8000'
-grpc_addr = 'http://tasks.lb_cryptoorgchain:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_cryptoorgchain:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'cro'
-key_name = 'cro'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'basecro' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '448hours'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_CRYPTO_ORG_CHAIN_MAINNET_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -253,21 +97,7 @@ list = [
 
 [[chains]]
 id = 'juno-1'
-rpc_addr = 'http://tasks.lb_juno:8000'
-grpc_addr = 'http://tasks.lb_juno:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_juno:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '50s'
-account_prefix = 'juno'
-key_name = 'juno'
-store_prefix = 'ibc'
-max_tx_size = 180000
-max_gas = 2700000
-gas_price = { price = 0.08, denom = 'ujuno' }
-#gas_adjustment = 1
-clock_drift = '15s'
-trusting_period = '14days'
-trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = 'Delegate Notional: build interchain expressway'
+${INC_JUNO_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -276,25 +106,7 @@ list = [
 
 [[chains]]
 id = 'gravity-bridge-3'
-rpc_addr = 'http://tasks.lb_gravitybridge:8000'
-grpc_addr = 'http://tasks.lb_gravitybridge:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_gravitybridge:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'gravity'
-key_name = 'gravity'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'ugraviton' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '32hours'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_GRAVITY_BRIDGE_3}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -303,25 +115,7 @@ list = [
 
 [[chains]]
 id = 'kichain-2'
-rpc_addr = 'http://tasks.lb_kichain:8000'
-grpc_addr = 'http://tasks.lb_kichain:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_kichain:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'ki'
-key_name = 'ki'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'uxki' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '14days'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_KICHAIN_2}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -330,25 +124,7 @@ list = [
 
 [[chains]]
 id = 'mars-1'
-rpc_addr = 'http://tasks.lb_mars:8000'
-grpc_addr = 'http://tasks.lb_mars:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_mars:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'mars'
-key_name = 'mars'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'umars' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '14days'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_MARS_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -357,25 +133,7 @@ list = [
 
 [[chains]]
 id = 'omniflixhub-1'
-rpc_addr = 'http://tasks.lb_omniflixhub:8000'
-grpc_addr = 'http://tasks.lb_omniflixhub:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_omniflixhub:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'omniflix'
-key_name = 'omniflix'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'uflix' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '14days'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_OMNIFLIXHUB_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -384,25 +142,7 @@ list = [
 
 [[chains]]
 id = 'pirin-1'
-rpc_addr = 'https://pirin-cl.nolus.network:26657'
-grpc_addr = 'https://pirin-cl.nolus.network:9090'
-event_source = { mode = 'push', url = 'wss://pirin-cl.nolus.network:26657/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'nolus'
-key_name = 'nolus'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'unls' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '14days'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_PIRIN_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -411,25 +151,7 @@ list = [
 
 [[chains]]
 id = 'quasar-1'
-rpc_addr = 'http://tasks.lb_quasar:8000'
-grpc_addr = 'http://tasks.lb_quasar:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_quasar:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'quasar'
-key_name = 'quasar'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'uqsr' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '14days'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_QUASAR_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -438,21 +160,7 @@ list = [
 
 [[chains]]
 id = 'quicksilver-2'
-rpc_addr = 'http://tasks.lb_quicksilver:8000'
-grpc_addr = 'http://tasks.lb_quicksilver:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_quicksilver:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '40s'
-account_prefix = 'quick'
-key_name = 'quick'
-store_prefix = 'ibc'
-max_gas = 2000000
-max_tx_size = 180000
-gas_price = { price = 0.0004, denom = 'uqck' }
-#gas_multiplier = 2
-clock_drift ='15s'
-trusting_period = '14days'
-trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = ''
+${INC_QUICKSILVER_2}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -461,21 +169,7 @@ list = [
 
 [[chains]]
 id = 'regen-1'
-rpc_addr = 'http://tasks.lb_regen:8000'
-grpc_addr = 'http://tasks.lb_regen:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_regen:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '60s'
-account_prefix = 'regen'
-key_name = 'regen'
-store_prefix = 'ibc'
-max_tx_size = 100000
-max_gas = 2000000
-gas_price = { price = 0.007, denom = 'uregen' }
-gas_multiplier = 1
-clock_drift ='50s'
-trusting_period = '14days'
-trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = 'Delegate Notional: build interchain expressway'
+${INC_REGEN_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -484,25 +178,7 @@ list = [
 
 [[chains]]
 id = 'sentinelhub-2'
-rpc_addr = 'http://tasks.lb_sentinel:8000'
-grpc_addr = 'http://tasks.lb_sentinel:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_sentinel:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'sent'
-key_name = 'sentinel'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'udvpn' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '14days'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_SENTINELHUB_2}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -511,26 +187,7 @@ list = [
 
 [[chains]]
 id = 'stargaze-1'
-rpc_addr = 'http://tasks.lb_stargaze:8000'
-grpc_addr = 'http://tasks.lb_stargaze:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_stargaze:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'stars'
-key_name = 'stars'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas = 1000000
-gas_price = { price = 1, denom = 'ustars' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1000000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '224hours'
-memo_prefix = ''
-compat_mode = '0.34'
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_STARGAZE_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -539,25 +196,7 @@ list = [
 
 [[chains]]
 id = 'stride-1'
-rpc_addr = 'http://tasks.lb_stride:8000'
-grpc_addr = 'http://tasks.lb_stride:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_stride:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'stride'
-key_name = 'stride'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'ustrd' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '224hours'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_STRIDE_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
@@ -567,25 +206,7 @@ list = [
 
 [[chains]]
 id = 'umee-1'
-rpc_addr = 'http://tasks.lb_umee:8000'
-grpc_addr = 'http://tasks.lb_umee:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_umee:8000/websocket', batch_delay = '500ms' }
-rpc_timeout = '20s'
-account_prefix = 'umee'
-key_name = 'umee'
-address_type = { derivation = 'cosmos' }
-store_prefix = 'ibc'
-default_gas = 300000
-max_gas =  10000000
-gas_price = { price = 0.1, denom = 'uumee' }
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 1800000
-clock_drift = '40s'
-max_block_time = '10s'
-trusting_period = '224hours'
-memo_prefix = ''
-trust_threshold = { numerator = '1', denominator = '3' }
+${INC_UMEE_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
