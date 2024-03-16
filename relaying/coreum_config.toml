@@ -1,64 +1,8 @@
-[global]
-log_level = 'error'
-
-[mode]
-
-[mode.clients]
-enabled = true
-refresh = true
-misbehaviour = false
-
-[mode.connections]
-enabled = false
-
-[mode.channels]
-enabled = false
-
-[mode.packets]
-enabled = true
-clear_interval = 0
-clear_on_start = true
-tx_confirmation = false
-
-[rest]
-enabled = false
-host = '127.0.0.1'
-port = 3000
-
-[telemetry]
-enabled = true
-host = '0.0.0.0'
-port = 3001
+${INC_GLOBAL}
 
 [[chains]]
 id = "coreum-mainnet-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_coreum:8000'
-grpc_addr = 'http://tasks.lb_coreum:8003'
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "core"
-key_name = "coreum"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.1
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '32hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.37'
-event_source = { mode = 'push', url = 'ws://tasks.lb_coreum:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.03125, denom = 'ucore' }
-address_type = { derivation = 'cosmos' }
-
+${INC_COREUM_MAINNET_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -76,37 +20,9 @@ list = [
     ['transfer', 'channel-25'], # secret
 ]
 
-[chains.packet_filter.min_fees]
-
 [[chains]]
 id = "osmosis-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_osmosis:8000'
-grpc_addr = 'http://tasks.lb_osmosis:8003'
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "osmo"
-key_name = "osmosis"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 20000000
-gas_multiplier = 1.1
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "100s"
-max_block_time = "10s"
-trusting_period = '224hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.37'
-event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0025, denom = 'uosmo' }
-address_type = { derivation = 'cosmos' }
-
+${INC_OSMOSIS_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -115,33 +31,7 @@ list = [
 
 [[chains]]
 id = "cosmoshub-4"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_cosmoshub:8000'
-grpc_addr = 'http://tasks.lb_cosmoshub:8003'
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "cosmos"
-key_name = "cosmoshub"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 180000
-max_gas = 2500000
-gas_multiplier = 2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "1000s"
-max_block_time = "10s"
-trusting_period = '14days'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.34'
-event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.01, denom = 'uatom' }
-address_type = { derivation = 'cosmos' }
-
+${INC_COSMOSHUB_4}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -150,33 +40,7 @@ list = [
 
 [[chains]]
 id = "axelar-dojo-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_axelar:8000'
-grpc_addr = 'http://tasks.lb_axelar:8003'
-rpc_timeout = "15s"
-trusted_node = false
-account_prefix = "axelar"
-key_name = "axelar"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 100000
-max_gas = 4000000
-gas_multiplier = 1.1
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "50s"
-max_block_time = "10s"
-trusting_period = '112hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-compat_mode = '0.34'
-event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0075, denom = 'uaxl' }
-address_type = { derivation = 'cosmos' }
-
+${INC_AXELAR_DOJO_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -185,33 +49,7 @@ list = [
 
 [[chains]]
 id = "evmos_9001-2"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_evmos:8000'
-grpc_addr = 'http://tasks.lb_evmos:8003'
-rpc_timeout = "30s"
-trusted_node = false
-account_prefix = "evmos"
-key_name = "evmos"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 180000
-max_gas = 2500000
-gas_multiplier = 2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '224hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_evmos:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0075, denom = 'aevmos' }
-address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
-compat_mode = '0.37'
-
+${INC_EVMOS_9001_2}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -220,32 +58,7 @@ list = [
 
 [[chains]]
 id = "gravity-bridge-3"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_gravitybridge:8000'
-grpc_addr = 'http://tasks.lb_gravitybridge:8003'
-rpc_timeout = "20s"
-trusted_node = false
-account_prefix = "gravity"
-key_name = "gravitybridge"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '32hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_gravitybridge:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0025, denom = 'ugraviton' }
-address_type = { derivation = 'cosmos' }
-compat_mode = '0.34'
+${INC_GRAVITY_BRIDGE_3}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -254,32 +67,7 @@ list = [
 
 [[chains]]
 id = "kava_2222-10"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_kava:8000'
-grpc_addr = 'http://tasks.lb_kava:8003'
-rpc_timeout = "20s"
-trusted_node = false
-account_prefix = "kava"
-key_name = "kava"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '14days'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_kava:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0025, denom = 'ukava' }
-address_type = { derivation = 'cosmos' }
-compat_mode = '0.34'
+${INC_KAVA_2222_10}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -288,32 +76,7 @@ list = [
 
 [[chains]]
 id = "secret-4"
-type = "CosmosSdk"
-rpc_addr = 'https://secret-4.api.trivium.network:26657'
-grpc_addr = 'https://secretnetwork-grpc.lavenderfive.com:443'
-rpc_timeout = "20s"
-trusted_node = false
-account_prefix = "secret"
-key_name = "secret"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '224hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-event_source = { mode = 'push', url = 'wss://secret-4.api.trivium.network:26657/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'uscrt' }
-address_type = { derivation = 'cosmos' }
-compat_mode = '0.34'
+${INC_SECRET_4}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -322,32 +85,7 @@ list = [
 
 [[chains]]
 id = "noble-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_noble:8000'
-grpc_addr = 'http://tasks.lb_noble:8003'
-rpc_timeout = "20s"
-trusted_node = false
-account_prefix = "noble"
-key_name = "noble"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '14days'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_noble:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0, denom = 'uusdc' }
-address_type = { derivation = 'cosmos' }
-compat_mode = '0.34'
+${INC_NOBLE_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -356,32 +94,7 @@ list = [
 
 [[chains]]
 id = "kaiyo-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_kujira:8000'
-grpc_addr = 'http://tasks.lb_kujira:8003'
-rpc_timeout = "20s"
-trusted_node = false
-account_prefix = "kujira"
-key_name = "noble"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '14days'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_kujira:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.01, denom = 'ukuji' }
-address_type = { derivation = 'cosmos' }
-compat_mode = '0.37'
+${INC_KAIYO_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -390,32 +103,7 @@ list = [
 
 [[chains]]
 id = "laozi-mainnet"
-type = "CosmosSdk"
-rpc_addr = 'http://rpc.laozi1.bandchain.org:80'
-grpc_addr = 'http://grpc-band-01.stakeflow.io:2502/'
-rpc_timeout = "20s"
-trusted_node = false
-account_prefix = "band"
-key_name = "bandchain"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '32hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://rpc.laozi1.bandchain.org:80/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0025, denom = 'uband' }
-address_type = { derivation = 'cosmos' }
-compat_mode = '0.34'
+${INC_LAOZI_MAINNET}
 [chains.packet_filter]
 policy = "allow"
 list = [
@@ -424,32 +112,7 @@ list = [
 
 [[chains]]
 id = "dydx-mainnet-1"
-type = "CosmosSdk"
-rpc_addr = 'http://tasks.lb_dydx:8000'
-grpc_addr = 'http://tasks.lb_dydx:8003'
-rpc_timeout = "20s"
-trusted_node = false
-account_prefix = "dydx"
-key_name = "dydx"
-key_store_type = "Test"
-store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.2
-max_msg_num = 30
-max_tx_size = 180000
-max_grpc_decoding_size = 33554432
-clock_drift = "40s"
-max_block_time = "10s"
-trusting_period = '32hours'
-ccv_consumer_chain = false
-memo_prefix = ""
-sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_dydx:8000/websocket', batch_delay = '500ms' }
-trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 12500000000, denom = 'adydx' }
-address_type = { derivation = 'cosmos' }
-compat_mode = '0.37'
+${INC_DYDX_MAINNET_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
