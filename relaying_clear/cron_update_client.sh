@@ -20,8 +20,7 @@ trap cleanup EXIT
 source $HOME/env.sh
 
 # 12 hours
-THRESHOLD_TIME=43200
-
+DEFAULT_THRESHOLD_TIME=43200
 URL="https://status.notional.ventures/ibc_monitor/get_last_ibc_client_update?hermes_config_url=https%3A%2F%2Fraw.githubusercontent.com%2Fnotional-labs%2Fcosmosia%2Fmain%2Frelaying%2F${hubname}_config.toml"
 items=$(curl -s "$URL" |jq -c -r '.[]')
 
@@ -38,8 +37,16 @@ echo "$items" | while IFS= read -r item ; do
     BLOCKCHAIN_SECS=`date -d $block_time +%s`
     CURRENT_SECS=`date +%s`
     BLOCK_AGE=$((${CURRENT_SECS} - ${BLOCKCHAIN_SECS}))
-    if [[ ${BLOCK_AGE} -gt ${THRESHOLD_TIME} ]]; then
-      echo "chain_id=$chain_id, channel_id=$channel_id, block_time=$block_time block_time is more than $THRESHOLD_TIME seconds ago => update client."
+
+    threshold_time=DEFAULT_THRESHOLD_TIME
+
+    if [ $( echo "${chain_id}" | grep -cE "^(axelar-dojo-1)$" ) -ne 0 ]; then
+      # 1 hour
+      threshold_time=3600
+    fi
+
+    if [[ ${BLOCK_AGE} -gt ${threshold_time} ]]; then
+      echo "chain_id=$chain_id, channel_id=$channel_id, block_time=$block_time block_time is more than $threshold_time seconds ago => update client."
       $HOME/.hermes/bin/hermes update client --host-chain $chain_id --client $client_id
     fi
   fi
