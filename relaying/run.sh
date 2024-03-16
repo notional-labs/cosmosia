@@ -47,8 +47,10 @@ mkdir -p $HOME/.hermes/bin
 wget -O - "https://github.com/informalsystems/hermes/releases/download/${hermes_version}/hermes-${hermes_version}-x86_64-unknown-linux-gnu.tar.gz" |tar -xz -C $HOME/.hermes/bin/
 
 # hermes config
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/${hubname}_config.toml" > $HOME/.hermes/config.toml
 curl -Ls "http://tasks.web_config/config/cosmosia.relay.${hubname}.mnemonic.txt" > $HOME/.hermes/mnemonic.txt
+source <(curl -Ls -o- "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/chains.sh")
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/${hubname}_config.toml" > $HOME/.hermes/config.toml.template
+envsubst < $HOME/.hermes/config.toml.template > $HOME/.hermes/config.toml
 
 
 chain_ids=$(cat $HOME/.hermes/config.toml |grep "id = " |sed -e "s/id = //g" -e "s/'//g" -e 's/"//g')
