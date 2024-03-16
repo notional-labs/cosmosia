@@ -916,3 +916,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-kujira-testnet-ia.cosmosia.notional.ventures/  |
 | API      | https://api-kujira-testnet-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-kujira-testnet-ia.cosmosia.notional.ventures/ |
+
+### 115. quicksilver-archive-sub1
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-quicksilver-archive-sub1-ia.cosmosia.notional.ventures/  |
+| API      | https://api-quicksilver-archive-sub1-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-quicksilver-archive-sub1-ia.cosmosia.notional.ventures/ |
