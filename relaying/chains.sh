@@ -79,7 +79,7 @@ store_prefix = "ibc"
 default_gas = 300000
 max_gas =  10000000
 gas_price = { price = 0.03, denom = 'ubld' }
-gas_multiplier = 1
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 3000000
 max_grpc_decoding_size = 33554432
@@ -139,7 +139,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 180000
 max_gas = 2500000
-gas_multiplier = 2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -152,7 +152,7 @@ sequential_batch_tx = false
 compat_mode = '0.34'
 event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.01, denom = 'uatom' }
+gas_price = { price = 0.005, denom = 'uatom' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
@@ -172,7 +172,7 @@ store_prefix = "ibc"
 default_gas = 300000
 max_gas = 2000000
 gas_price = { price = 0.01, denom = 'ucre' }
-gas_multiplier = 1
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 3000000
 max_grpc_decoding_size = 33554432
@@ -203,7 +203,7 @@ store_prefix = "ibc"
 default_gas = 300000
 max_gas =  10000000
 gas_price = { price = 1000000000000 , denom = 'acanto' }
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 3000000
 max_grpc_decoding_size = 33554432
@@ -274,7 +274,7 @@ ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'ujuno' }
+gas_price = { price = 0.075, denom = 'ujuno' }
 compat_mode = '0.37'
 EOT
 )
@@ -293,7 +293,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 1000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 20
 max_tx_size = 2097152
 max_grpc_decoding_size = 33554432
@@ -306,7 +306,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.6, denom = 'untrn' }
+gas_price = { price = 0.0053, denom = 'untrn' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
@@ -367,7 +367,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0004, denom = 'uqck' }
+gas_price = { price = 0.0001, denom = 'uqck' }
 compat_mode = '0.37'
 EOT
 )
@@ -385,7 +385,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 10000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -397,7 +397,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'wss://secret-4.api.trivium.network:26657/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'uscrt' }
+gas_price = { price = 0.05, denom = 'uscrt' }
 address_type = { derivation = 'cosmos' }
 compat_mode = '0.34'
 EOT
@@ -417,7 +417,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 1000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1000000
 max_grpc_decoding_size = 33554432
@@ -448,7 +448,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 400000
 max_gas = 40000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1000000
 max_grpc_decoding_size = 33554432
@@ -460,7 +460,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.005, denom = 'ustrd' }
+gas_price = { price = 0.0005, denom = 'ustrd' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
@@ -479,7 +479,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas =  10000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 2097152
 max_grpc_decoding_size = 33554432
@@ -553,7 +553,7 @@ sequential_batch_tx = false
 compat_mode = '0.34'
 event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0075, denom = 'uaxl' }
+gas_price = { price = 0.007, denom = 'uaxl' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
@@ -571,7 +571,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 10000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -633,7 +633,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 10000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -645,7 +645,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_noble:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0, denom = 'uusdc' }
+gas_price = { price = 0.1, denom = 'uusdc' }
 address_type = { derivation = 'cosmos' }
 compat_mode = '0.34'
 EOT
@@ -664,7 +664,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 10000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -676,7 +676,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_kujira:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.01, denom = 'ukuji' }
+gas_price = { price = 0.0034, denom = 'ukuji' }
 address_type = { derivation = 'cosmos' }
 compat_mode = '0.37'
 EOT
@@ -695,7 +695,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 10000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -726,7 +726,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 10000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -757,7 +757,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 180000
 max_gas = 2500000
-gas_multiplier = 2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -816,7 +816,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 10000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -848,7 +848,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 1000000
 max_gas = 4000000
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -859,7 +859,7 @@ ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'utia' }
+gas_price = { price = 0.002, denom = 'utia' }
 address_type = { derivation = 'cosmos' }
 compat_mode = '0.34'
 EOT
@@ -878,7 +878,7 @@ store_prefix = 'ibc'
 default_gas = 300000
 max_gas =  10000000
 gas_price = { price = 0.0025, denom = 'uakt' }
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '40s'
@@ -901,8 +901,8 @@ address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
 default_gas = 300000
 max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'ubcna' }
-gas_multiplier = 1.2
+gas_price = { price = 0.001, denom = 'ubcna' }
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '40s'
@@ -926,8 +926,8 @@ max_tx_size = 1000000
 default_gas = 100000000
 max_gas = 1000000000
 max_msg_num = 30
-gas_price = { price = 0.1, denom = 'uluna' }
-gas_multiplier = 2
+gas_price = { price = 28.325, denom = 'uluna' }
+gas_multiplier = 1.1
 clock_drift ='34s'
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -947,8 +947,8 @@ address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
 default_gas = 300000
 max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'basecro' }
-gas_multiplier = 1.2
+gas_price = { price = 0.025, denom = 'basecro' }
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '40s'
@@ -971,8 +971,8 @@ address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
 default_gas = 300000
 max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'uxki' }
-gas_multiplier = 1.2
+gas_price = { price = 0.025, denom = 'uxki' }
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '40s'
@@ -996,7 +996,7 @@ store_prefix = 'ibc'
 default_gas = 300000
 max_gas =  10000000
 gas_price = { price = 0.0025, denom = 'umars' }
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '40s'
@@ -1019,8 +1019,8 @@ address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
 default_gas = 300000
 max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'uflix' }
-gas_multiplier = 1.2
+gas_price = { price = 0.001, denom = 'uflix' }
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '40s'
@@ -1044,7 +1044,7 @@ store_prefix = 'ibc'
 default_gas = 300000
 max_gas =  10000000
 gas_price = { price = 0.0025, denom = 'unls' }
-gas_multiplier = 1.2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '40s'
@@ -1067,8 +1067,8 @@ address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
 default_gas = 300000
 max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'uqsr' }
-gas_multiplier = 1.2
+gas_price = { price = 0.01, denom = 'uqsr' }
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '40s'
@@ -1090,8 +1090,8 @@ key_name = 'regen'
 store_prefix = 'ibc'
 max_tx_size = 100000
 max_gas = 2000000
-gas_price = { price = 0.007, denom = 'uregen' }
-gas_multiplier = 1
+gas_price = { price = 0.015, denom = 'uregen' }
+gas_multiplier = 1.1
 clock_drift ='50s'
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -1111,8 +1111,8 @@ address_type = { derivation = 'cosmos' }
 store_prefix = 'ibc'
 default_gas = 300000
 max_gas =  10000000
-gas_price = { price = 0.0025, denom = 'udvpn' }
-gas_multiplier = 1.2
+gas_price = { price = 0.1, denom = 'udvpn' }
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '40s'
@@ -1149,7 +1149,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'usei' }
+gas_price = { price = 0.02, denom = 'usei' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
@@ -1168,7 +1168,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 1000000
 max_gas = 5000000
-gas_multiplier = 2
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 3000000
 max_grpc_decoding_size = 33554432
@@ -1180,7 +1180,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.4, denom = 'uwhale' }
+gas_price = { price = 0.25, denom = 'uwhale' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
