@@ -292,7 +292,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
 max_gas = 20000000
-gas_multiplier = 1.5
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -305,7 +305,7 @@ sequential_batch_tx = false
 compat_mode = '0.37'
 event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.004, denom = 'uosmo' }
+gas_price = { price = 0.0025, denom = 'uosmo' }
 address_type = { derivation = 'cosmos' }
 
 [chains.packet_filter]
