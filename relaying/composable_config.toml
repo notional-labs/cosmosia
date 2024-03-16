@@ -253,7 +253,7 @@ address_type = { derivation = 'cosmos' }
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-55'],
+    ['transfer', 'channel-23'],
 ]
 
 [[chains]]
