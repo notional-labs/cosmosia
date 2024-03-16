@@ -801,3 +801,35 @@ gas_price = { price = 0.015, denom = 'uluna' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
+
+# injective-1
+export INC_INJECTIVE_1=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_injective:8000'
+grpc_addr = 'http://tasks.lb_injective:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_injective:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "inj"
+key_name = "injective"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 300000
+max_gas = 10000000
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "40s"
+max_block_time = "10s"
+trusting_period = '14days'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+compat_mode = '0.37'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 160000000.0, denom = 'inj' }
+address_type = { derivation = 'cosmos' }
+# address_type = { derivation = 'ethermint', proto_type = { pk_type = '/injective.crypto.v1beta1.ethsecp256k1.PubKey' } }
+EOT
+)
