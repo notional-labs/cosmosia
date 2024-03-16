@@ -594,15 +594,16 @@ export INC_KAVA_2222_10=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_kava:8000'
 grpc_addr = 'http://tasks.lb_kava:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_kava:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = "20s"
 trusted_node = false
 account_prefix = "kava"
 key_name = "kava"
 key_store_type = "Test"
 store_prefix = "ibc"
-default_gas = 300000
-max_gas = 10000000
-gas_multiplier = 1.2
+default_gas = 100000
+max_gas = 4000000
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -612,9 +613,8 @@ trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = ""
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_kava:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0025, denom = 'ukava' }
+gas_price = { price = 0.001, denom = 'ukava' }
 address_type = { derivation = 'cosmos' }
 compat_mode = '0.34'
 EOT
@@ -831,5 +831,36 @@ trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 160000000.0, denom = 'inj' }
 address_type = { derivation = 'cosmos' }
 # address_type = { derivation = 'ethermint', proto_type = { pk_type = '/injective.crypto.v1beta1.ethsecp256k1.PubKey' } }
+EOT
+)
+
+# celestia
+export INC_CELESTIA=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_celestia:8000'
+grpc_addr = 'http://tasks.lb_celestia:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_celestia:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "20s"
+trusted_node = false
+account_prefix = "celestia"
+key_name = "celestia"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 1000000
+max_gas = 4000000
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+trusting_period = '14days'
+ccv_consumer_chain = false
+memo_prefix = ""
+sequential_batch_tx = false
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.1, denom = 'utia' }
+address_type = { derivation = 'cosmos' }
+compat_mode = '0.34'
 EOT
 )
