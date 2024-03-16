@@ -460,7 +460,7 @@ memo_prefix = ""
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0005, denom = 'ustrd' }
+gas_price = { price = 0.001, denom = 'ustrd' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
