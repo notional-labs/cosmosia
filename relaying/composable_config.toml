@@ -458,6 +458,7 @@ compat_mode = '0.34'
 [chains.packet_filter]
 policy = "allow"
 list = [
+    ['transfer', 'channel-80'],
 ]
 
 [[chains]]
