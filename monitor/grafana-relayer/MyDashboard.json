@@ -200,7 +200,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/composable_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/composable_config.toml"
             ]
           ],
           "queryParams": "",
@@ -651,7 +651,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/coreum_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/coreum_config.toml"
             ]
           ],
           "queryParams": "",
@@ -1102,7 +1102,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/furya_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/furya_config.toml"
             ]
           ],
           "queryParams": "",
@@ -1554,7 +1554,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/injective_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/injective_config.toml"
             ]
           ],
           "queryParams": "",
@@ -2006,7 +2006,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/kava_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/kava_config.toml"
             ]
           ],
           "queryParams": "",
@@ -2459,7 +2459,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/osmosis_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/osmosis_config.toml"
             ]
           ],
           "queryParams": "",
@@ -2911,7 +2911,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/sei_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/sei_config.toml"
             ]
           ],
           "queryParams": "",
@@ -3363,7 +3363,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/seilegacy_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/seilegacy_config.toml"
             ]
           ],
           "queryParams": "",
@@ -3814,7 +3814,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/test_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/test_config.toml"
             ]
           ],
           "queryParams": "",
@@ -4266,7 +4266,7 @@
           "params": [
             [
               "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/whitewhale_config.toml"
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/whitewhale_config.toml"
             ]
           ],
           "queryParams": "",
