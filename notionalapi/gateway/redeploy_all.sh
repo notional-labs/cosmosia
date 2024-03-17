@@ -32,6 +32,7 @@ dig
 dydx-archive-sub
 dydx-testnet
 dydx
+dymension
 emoney
 evmos-archive-sub1
 evmos-archive-sub2
