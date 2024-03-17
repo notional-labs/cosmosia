@@ -18,7 +18,7 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm git base-devel python python-pip cronie screen wget jq
 
 # get hermes config
-eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
+eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -47,8 +47,8 @@ wget -O - "https://github.com/informalsystems/hermes/releases/download/${hermes_
 
 # hermes config
 curl -Ls "http://tasks.web_config/config/cosmosia.relay.${hubname}.mnemonic.txt" > $HOME/.hermes/mnemonic.txt
-source <(curl -Ls -o- "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/chains.sh")
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/${hubname}_config.toml" > $HOME/.hermes/config.toml.template
+source <(curl -Ls -o- "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/chains.sh")
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/${hubname}_config.toml" > $HOME/.hermes/config.toml.template
 envsubst < $HOME/.hermes/config.toml.template > $HOME/.hermes/config.toml
 
 
@@ -61,7 +61,7 @@ done
 # run the metrics server (for reporting wallet balances)
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
-cd cosmosia/relaying_clear/metrics
+cd cosmosia/relay/cron/metrics
 
 pip install -r requirements.txt --break-system-packages
 screen -S metrics -dm /usr/sbin/python main.py
@@ -70,11 +70,11 @@ screen -S metrics -dm /usr/sbin/python main.py
 # cronjob
 
 # cronjob clear packets
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying_clear/cron_hermes_clear.sh" > $HOME/cron_hermes_clear.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/cron/cron_hermes_clear.sh" > $HOME/cron_hermes_clear.sh
 echo "*/5 * * * * root /bin/bash $HOME/cron_hermes_clear.sh" > /etc/cron.d/cron_hermes_clear
 
 # cronjob to update client
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying_clear/cron_update_client.sh" > $HOME/cron_update_client.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/cron/cron_update_client.sh" > $HOME/cron_update_client.sh
 
 echo "0 */1 * * * root /bin/bash $HOME/cron_update_client.sh" > /etc/cron.d/cron_update_client
 

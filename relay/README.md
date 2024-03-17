@@ -1,4 +1,4 @@
-# relaying
+# relay
 
 ### Design
 - First version is as simple as possible

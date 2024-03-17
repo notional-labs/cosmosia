@@ -18,7 +18,7 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm git base-devel python python-pip cronie screen wget jq unzip
 
 # get hermes config
-eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
+eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
   {
     if ($0 ~ /^\[.*\]$/) {
       gsub(/^\[|\]$/, "", $0)
@@ -48,8 +48,8 @@ wget -O - "https://github.com/informalsystems/hermes/releases/download/${hermes_
 
 # hermes config
 curl -Ls "http://tasks.web_config/config/cosmosia.relay.${hubname}.mnemonic.txt" > $HOME/.hermes/mnemonic.txt
-source <(curl -Ls -o- "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/chains.sh")
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/${hubname}_config.toml" > $HOME/.hermes/config.toml.template
+source <(curl -Ls -o- "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/chains.sh")
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/${hubname}_config.toml" > $HOME/.hermes/config.toml.template
 envsubst < $HOME/.hermes/config.toml.template > $HOME/.hermes/config.toml
 
 

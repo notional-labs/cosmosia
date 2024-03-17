@@ -31,6 +31,6 @@ docker service create \
   --restart-condition none \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/relaying/run.sh > ~/run.sh && /bin/bash ~/run.sh $hubname"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/main/run.sh > ~/run.sh && /bin/bash ~/run.sh $hubname"
 
 

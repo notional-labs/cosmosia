@@ -21,7 +21,7 @@ source $HOME/env.sh
 
 # 12 hours
 DEFAULT_THRESHOLD_TIME=43200
-URL="https://status.notional.ventures/ibc_monitor/get_last_ibc_client_update?hermes_config_url=https%3A%2F%2Fraw.githubusercontent.com%2Fnotional-labs%2Fcosmosia%2Fmain%2Frelaying%2F${hubname}_config.toml"
+URL="https://status.notional.ventures/ibc_monitor/get_last_ibc_client_update?hermes_config_url=https%3A%2F%2Fraw.githubusercontent.com%2Fnotional-labs%2Fcosmosia%2Fmain%2Frelay%2F${hubname}_config.toml"
 items=$(curl -s "$URL" |jq -c -r '.[]')
 
 echo "$items" | while IFS= read -r item ; do
