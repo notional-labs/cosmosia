@@ -924,3 +924,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-quicksilver-archive-sub1-ia.cosmosia.notional.ventures/  |
 | API      | https://api-quicksilver-archive-sub1-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-quicksilver-archive-sub1-ia.cosmosia.notional.ventures/ |
+
+### 116. dymension
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-dymension-ia.cosmosia.notional.ventures/  |
+| API      | https://api-dymension-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-dymension-ia.cosmosia.notional.ventures/ |
