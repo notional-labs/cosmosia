@@ -57,6 +57,11 @@ const MainNav = () => {
             <Link href='/snap_deploy'>Deploy</Link>
           </Menu.Item>
         </Menu.SubMenu>
+        <Menu.SubMenu key='relays' title="Relays" icon={<FileSyncOutlined />}>
+          <Menu.Item key='relays_refill' icon={<FileOutlined />}>
+            <Link href='https://relayrefiller.notional.ventures/' rel="noopener noreferrer" target="_blank">Relay Refiller</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
         <Menu.SubMenu key='servers' title="Servers" icon={<ClusterOutlined />}>
           <Menu.Item key='server_list' icon={<ClusterOutlined />}>
             <Link href='/servers'>Swarm Nodes</Link>
