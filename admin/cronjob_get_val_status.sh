@@ -20,7 +20,7 @@ trap cleanup EXIT
 cd $HOME/cosmosia/admin
 
 # define list of service we want to monitor here
-chains="osmosis osmosis-testnet"
+chains="osmosis osmosis-testnet dymension"
 
 # each service has 2 val nodes for HA
 chains_str=""
