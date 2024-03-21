@@ -44,8 +44,6 @@ else
         cd module
       elif [ $( echo "${chain_name}" |grep -cE "^(dydx|dydx-testnet|dydx-archive-sub)$" ) -ne 0 ]; then
         cd protocol
-      elif [[ $chain_name == "agoric" ]]; then
-        cd $HOME/agoric-sdk/golang/cosmos
       fi
 
       go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
@@ -78,36 +76,6 @@ else
         sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/root.go
         sed -i 's/NewGoLevelDB/NewPebbleDB/g' ./cmd/injectived/start.go
         go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
-      elif [[ $chain_name == "agoric" ]]; then
-        # fix agoric
-
-        # install nvm
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-        # to load nvm
-        source $HOME/env.sh
-
-        # install node
-        nvm install v18.17.1
-
-        # install yarn
-        npm install --global yarn
-
-        # build
-        cd $HOME/agoric-sdk
-        yarn install
-        yarn build
-
-        cd $HOME/agoric-sdk/packages/cosmic-swingset && make
-
-        cd $HOME/agoric-sdk/golang/cosmos
-        go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/agd ./cmd/agd
-      #  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/ag-cosmos-helper ./cmd/helper
-        go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
-
-      #  mkdir -p "/root/go/bin"
-      #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
-      #  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
-      #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
       elif [ $( echo "${chain_name}" |grep -cE "^(osmosis|osmosis-archive-sub|osmosis-testnet|osmosis-testnet-pruned)$" ) -ne 0 ]; then
         GOWORK=off go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
       else
