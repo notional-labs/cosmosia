@@ -42,38 +42,13 @@ echo "node_home=$node_home"
 cd $node_home
 
 TAR_FILENAME="data_$(date +%Y%m%d_%T |sed 's/://g').tar.gz"
-TAR_FILE_PATH="/snapshot/$TAR_FILENAME"
 
 # snapshot file includes ALL dirs in $node_home excluding config dir
 included_dirs=$(ls -d * |grep -v config| tr '\n' ' ')
 
-if [[ -z $snapshot_storage_node ]]; then
-  tar -cvf - $included_dirs |pigz --best -p8 > $TAR_FILE_PATH
-else
-  tar -cvf - $included_dirs |pigz --best -p8 |ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node_ip} "cat > /mnt/data/snapshots/${chain_name}/${TAR_FILENAME}"
-fi
+tar -cvf - $included_dirs |pigz --best -p8 |ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node_ip} "cat > /mnt/data/snapshots/${chain_name}/${TAR_FILENAME}"
 
-FILESIZE=0
-if [[ -z $snapshot_storage_node ]]; then
-  FILESIZE=$(stat -c%s "$TAR_FILE_PATH")
-else
-  FILESIZE=$(ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node_ip} stat -c%s "/mnt/data/snapshots/${chain_name}/${TAR_FILENAME}")
-fi
-
-# addrbook.json
-if [[ -z $snapshot_storage_node ]]; then
-  cp $node_home/config/addrbook.json /snapshot/
-else
-  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${node_home}/config/addrbook.json" "root@${snapshot_storage_node_ip}:/mnt/data/snapshots/${chain_name}/"
-fi
-
-
-# chain.json file
-node="$snapshot_storage_node"
-if [[ -z $node ]]; then
-  node="$snapshot_node"
-fi
-
+FILESIZE=$(ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_storage_node_ip} stat -c%s "/mnt/data/snapshots/${chain_name}/${TAR_FILENAME}")
 cat <<EOT > $HOME/chain.json
 {
     "snapshot_url": "http://${snapshot_storage_node_ip}:11111/$chain_name/$TAR_FILENAME",
@@ -82,8 +57,5 @@ cat <<EOT > $HOME/chain.json
 }
 EOT
 
-if [[ -z $snapshot_storage_node ]]; then
-  cp $HOME/chain.json /snapshot/
-else
-  scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "$HOME/chain.json" "root@${snapshot_storage_node_ip}:/mnt/data/snapshots/${chain_name}/"
-fi
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "$HOME/chain.json" "root@${snapshot_storage_node_ip}:/mnt/data/snapshots/${chain_name}/"
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${node_home}/config/addrbook.json" "root@${snapshot_storage_node_ip}:/mnt/data/snapshots/${chain_name}/"
