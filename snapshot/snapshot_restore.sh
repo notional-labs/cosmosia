@@ -46,8 +46,6 @@ else
         cd protocol
       elif [[ $chain_name == "agoric" ]]; then
         cd $HOME/agoric-sdk/golang/cosmos
-      elif [[ $chain_name == "wormhole" ]]; then
-        cd $HOME/wormhole/wormchain
       fi
 
       go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
@@ -121,12 +119,7 @@ else
       #  cp /root/.gvm/pkgsets/go1.18.10/global/bin/$daemon_name /root/go/bin/
       #fi
     else
-      if [[ $chain_name == "wormhole" ]]; then
-        cd $HOME/wormhole/wormchain
-        go install ./...
-      else
-        make install
-      fi
+      make install
     fi
   else
     source <(curl -Ls -o- "$build_script")
