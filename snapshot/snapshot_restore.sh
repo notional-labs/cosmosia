@@ -61,7 +61,7 @@ else
         go mod tidy
       fi
 
-      go work use
+      # go work use
 
       if [ $( echo "${chain_name}" |grep -cE "^(emoney)$" ) -ne 0 ]; then
         sed -i 's/db.NewGoLevelDB/sdk.NewLevelDB/g' app.go
