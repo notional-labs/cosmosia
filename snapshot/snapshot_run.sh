@@ -97,6 +97,12 @@ if [[ -z $version ]]; then
   loop_forever
 fi
 
+
+# create a soft link to /node_data volume
+mkdir -p $node_home
+ln -s $node_home /node_data
+
+
 cd $HOME
 pacman -Syu --noconfirm
 pacman -Sy --noconfirm git base-devel wget pigz jq dnsutils inetutils python python-pip cronie spawn-fcgi fcgiwrap openssh
@@ -166,7 +172,14 @@ make install
 ########################################################################################################################
 # restore snapshot
 cd $HOME
-source $HOME/snapshot_restore.sh
+
+if [ -z "$(ls -A $node_home)" ]; then
+   echo "data folder is empty, restoring from snapshot"
+   source $HOME/snapshot_restore.sh
+else
+   echo "data folder is Not Empty. Skip restoring...."
+fi
+
 
 ########################################################################################################################
 # supervised

@@ -55,16 +55,11 @@ echo "str_snapshot_cfg=${str_snapshot_cfg}"
 eval "${str_snapshot_cfg}"
 echo "network=$network"
 
-HOST="$snapshot_node"
+#HOST="$snapshot_node"
 MOUNT_SRC="/mnt/data/snapshots/$chain_name"
 SERVICE_NAME="snapshot_$chain_name"
-MOUNT_OPT=""
-if [[ -z $snapshot_storage_node ]]; then
-  MOUNT_OPT="--mount type=bind,source=$MOUNT_SRC,destination=/snapshot"
-fi
 
-
-constraint="node.hostname==$HOST"
+constraint="node.hostname==$snapshot_node"
 
 ## use override constraint if found
 #override_constraint=$(docker node ls -f node.label=cosmosia.snapshot.${chain_name}=true | tail -n +2 |awk '{print $2}')
@@ -79,6 +74,16 @@ constraint="node.hostname==$HOST"
 #  echo "Found override_constraint=${override_constraint}"
 #  constraint="node.labels.cosmosia.snapshot.${chain_name}==true"
 #fi
+
+# for chain data
+MOUNT_OPT="--mount type=bind,source=$MOUNT_SRC,destination=/node_data"
+
+# figure out IP of the remote host
+agent_id=$(docker ps -aqf "name=agent")
+snapshot_node_ip=$(docker exec $agent_id curl -s "http://tasks.web_config:2375/nodes/${snapshot_node}" |jq -r ".Status.Addr")
+
+# make sure folder exist on remote host before mounting
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "mkdir -p /mnt/data/snapshots/${chain_name}"
 
 echo "constraint= ${constraint}"
 echo "SERVICE_NAME=$SERVICE_NAME"
