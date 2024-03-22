@@ -1,4 +1,5 @@
 # This is common file used for rpc and snapshot services
+# note: using $skip_snapshot_restore var on on parent script
 
 source $HOME/env.sh
 
@@ -81,140 +82,141 @@ fi
 echo "#################################################################################################################"
 echo "download snapshot:"
 
-# delete node home
-rm -rf $node_home/*
+if [[ -z $skip_snapshot_restore ]]; then
+  # delete node home
+  rm -rf $node_home/*
 
-chain_id_arg=""
-if [[ $chain_name == "evmos-testnet-archive" ]]; then
-  chain_id_arg="--chain-id=evmos_9000-4"
-elif [[ $chain_name == "evmos-testnet" ]]; then
-  chain_id_arg="--chain-id=evmos_9000-4"
-elif [[ $chain_name == "sei-testnet" ]]; then
-  chain_id_arg="--chain-id=atlantic-2"
-elif [[ $chain_name == "sei" ]]; then
-  chain_id_arg="--chain-id=pacific-1"
-elif [ $( echo "${chain_name}" |grep -cE "sei-archive-sub" ) -ne 0 ]; then
-	chain_id_arg="--chain-id=pacific-1"
-fi
+  chain_id_arg=""
+  if [[ $chain_name == "evmos-testnet-archive" ]]; then
+    chain_id_arg="--chain-id=evmos_9000-4"
+  elif [[ $chain_name == "evmos-testnet" ]]; then
+    chain_id_arg="--chain-id=evmos_9000-4"
+  elif [[ $chain_name == "sei-testnet" ]]; then
+    chain_id_arg="--chain-id=atlantic-2"
+  elif [[ $chain_name == "sei" ]]; then
+    chain_id_arg="--chain-id=pacific-1"
+  elif [ $( echo "${chain_name}" |grep -cE "sei-archive-sub" ) -ne 0 ]; then
+    chain_id_arg="--chain-id=pacific-1"
+  fi
 
-$HOME/go/bin/$daemon_name init $chain_id_arg test
+  $HOME/go/bin/$daemon_name init $chain_id_arg test
 
-# backup $node_home/data/priv_validator_state.json as it is not included in snapshot from some providers.
-mv $node_home/data/priv_validator_state.json $node_home/config/
+  # backup $node_home/data/priv_validator_state.json as it is not included in snapshot from some providers.
+  mv $node_home/data/priv_validator_state.json $node_home/config/
 
-# delete the data folder
-rm -rf $node_home/data/*
+  # delete the data folder
+  rm -rf $node_home/data/*
 
-cd $node_home
+  cd $node_home
 
-URL="${SNAPSHOT_BASE_URL}/chain.json"
-URL=`curl -Ls $URL |jq -r '.snapshot_url'`
-URL="${SNAPSHOT_BASE_URL}/${URL##*/}"
-echo "URL=$URL"
+  URL="${SNAPSHOT_BASE_URL}/chain.json"
+  URL=`curl -Ls $URL |jq -r '.snapshot_url'`
+  URL="${SNAPSHOT_BASE_URL}/${URL##*/}"
+  echo "URL=$URL"
 
 
-if [[ -z $URL ]]; then
-  echo "URL to download snapshot is empty. Pls fix it!"
-  loop_forever
-fi
+  if [[ -z $URL ]]; then
+    echo "URL to download snapshot is empty. Pls fix it!"
+    loop_forever
+  fi
 
-echo "download and extract the snapshot to current path..."
-wget -O - "$URL" |pigz -dc |tar -xf -
+  echo "download and extract the snapshot to current path..."
+  wget -O - "$URL" |pigz -dc |tar -xf -
 
-prunning_block="362880"
-if [ $( echo "${chain_name}" |grep -cE "pruned" ) -ne 0 ]; then
-  # if pruned node (not default)
-  prunning_block="1000"
-fi
+  prunning_block="362880"
+  if [ $( echo "${chain_name}" |grep -cE "pruned" ) -ne 0 ]; then
+    # if pruned node (not default)
+    prunning_block="1000"
+  fi
 
-# restore priv_validator_state.json if it does not exist in the snapshot
-[ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
+  # restore priv_validator_state.json if it does not exist in the snapshot
+  [ ! -f $node_home/data/priv_validator_state.json ] && mv $node_home/config/priv_validator_state.json $node_home/data/
 
-sed -i -e "s/^iavl-disable-fastnode *=.*/iavl-disable-fastnode = false/" $node_home/config/app.toml
-if [[ $chain_name == "terra" ]]; then
-  sed -i -e "s/^iavl-disable-fastnode *=.*/iavl-disable-fastnode = true/" $node_home/config/app.toml
-fi
+  sed -i -e "s/^iavl-disable-fastnode *=.*/iavl-disable-fastnode = false/" $node_home/config/app.toml
+  if [[ $chain_name == "terra" ]]; then
+    sed -i -e "s/^iavl-disable-fastnode *=.*/iavl-disable-fastnode = true/" $node_home/config/app.toml
+  fi
 
-# set minimum gas prices & rpc port...
-sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
-sed -i '/^\[api]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
-sed -i '/^\[grpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:9090"/}' $node_home/config/app.toml
+  # set minimum gas prices & rpc port...
+  sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$minimum_gas_prices\"/" $node_home/config/app.toml
+  sed -i '/^\[api]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
+  sed -i '/^\[grpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:9090"/}' $node_home/config/app.toml
 
-#if [[ $chain_name == "injective" ]]; then
-  sed -i '/^\[api]/,/^\[/{s/^address[[:space:]]*=.*/address = "tcp:\/\/0.0.0.0:1317"/}' $node_home/config/app.toml
-  sed -i '/^\[evm-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
-  sed -i '/^\[evm-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
-#fi
+  #if [[ $chain_name == "injective" ]]; then
+    sed -i '/^\[api]/,/^\[/{s/^address[[:space:]]*=.*/address = "tcp:\/\/0.0.0.0:1317"/}' $node_home/config/app.toml
+    sed -i '/^\[evm-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
+    sed -i '/^\[evm-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
+  #fi
 
-#if [[ $chain_name == evmos* ]]; then
-  sed -i '/^\[grpc]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
-  sed -i '/^\[json-rpc]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
-  sed -i '/^\[json-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
-  sed -i '/^\[json-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
-#fi
+  #if [[ $chain_name == evmos* ]]; then
+    sed -i '/^\[grpc]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
+    sed -i '/^\[json-rpc]/,/^\[/{s/^enable[[:space:]]*=.*/enable = true/}' $node_home/config/app.toml
+    sed -i '/^\[json-rpc]/,/^\[/{s/^address[[:space:]]*=.*/address = "0.0.0.0:8545"/}' $node_home/config/app.toml
+    sed -i '/^\[json-rpc]/,/^\[/{s/^ws-address[[:space:]]*=.*/ws-address = "0.0.0.0:8546"/}' $node_home/config/app.toml
+  #fi
 
-sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
-if [[ $snapshot_prune == "cosmos-pruner" ]]; then
-  sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"${prunning_block}\"/" $node_home/config/app.toml
-  sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
-  sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/config/app.toml
-else
-   sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $node_home/config/app.toml
-fi
-sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 0/" $node_home/config/app.toml
+  sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $node_home/config/app.toml
+  if [[ $snapshot_prune == "cosmos-pruner" ]]; then
+    sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"${prunning_block}\"/" $node_home/config/app.toml
+    sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
+    sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/config/app.toml
+  else
+     sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $node_home/config/app.toml
+  fi
+  sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 0/" $node_home/config/app.toml
 
-# https://github.com/notional-labs/cosmosia/issues/24
-[ "$chain_name" != "kava" ] && sed -i -e "s/^swagger *=.*/swagger = true/" $node_home/config/app.toml
+  # https://github.com/notional-labs/cosmosia/issues/24
+  [ "$chain_name" != "kava" ] && sed -i -e "s/^swagger *=.*/swagger = true/" $node_home/config/app.toml
 
-sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
-sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 200/" $node_home/config/config.toml
-sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_home/config/config.toml
-sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
+  sed -i '/^\[rpc]/,/^\[/{s/^laddr[[:space:]]*=.*/laddr = "tcp:\/\/0.0.0.0:26657"/}' $node_home/config/config.toml
+  sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = 200/" $node_home/config/config.toml
+  sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = 200/" $node_home/config/config.toml
+  sed -i -e "s/^log_level *=.*/log_level = \"error\"/" $node_home/config/config.toml
 
-# if $git_repo is not empty
-if [[ $db_backend == "pebbledb" ]]; then
-  sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
-  sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/config/app.toml
+  # if $git_repo is not empty
+  if [[ $db_backend == "pebbledb" ]]; then
+    sed -i -e "s/^db_backend *=.*/db_backend = \"pebbledb\"/" $node_home/config/config.toml
+    sed -i -e "s/^app-db-backend *=.*/app-db-backend = \"pebbledb\"/" $node_home/config/app.toml
+
+    # fix for sei
+    sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
+  fi
+
+  if [ $( echo "${chain_name}" |grep -cE "pruned" ) -ne 0 ]; then
+    # if pruned node (not default)
+    sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
+    sed -i -e "s/^min-retain-blocks *=.*/min-retain-blocks = 1000/" $node_home/config/app.toml
+  else
+    sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $node_home/config/config.toml
+  fi
+
+  sed -i -e "s/^query_gas_limit *=.*/query_gas_limit = 10000000/" $node_home/config/app.toml
+  sed -i -e "s/^discard_abci_responses *=.*/discard_abci_responses = false/" $node_home/config/config.toml
+
+  echo "download genesis..."
+  curl -Ls "${SNAPSHOT_BASE_URL}/genesis.json" > $node_home/config/genesis.json
+
+  echo "download addrbook..."
+  curl -Lfso $node_home/config/addrbook.json "${SNAPSHOT_BASE_URL}/addrbook.json"
+
+  sed -i -e "s/^adaptive-fee-enabled *=.*/adaptive-fee-enabled = \"true\"/" $node_home/config/app.toml
+
+  if [[ $chain_name == osmosis* ]]; then
+    sed -i -e "s/^min-gas-price-for-high-gas-tx *=.*/min-gas-price-for-high-gas-tx = \".005\"/" $node_home/config/app.toml
+    sed -i -e "s/^arbitrage-min-gas-fee *=.*/arbitrage-min-gas-fee = \".025\"/" $node_home/config/app.toml
+  fi
+
+  # no seeds and persistent_peers for read-only subnode
+  if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
+    sed -i -e "s/^seeds *=.*/seeds = \"\"/" $node_home/config/config.toml
+    sed -i -e "s/^persistent_peers *=.*/persistent_peers = \"\"/" $node_home/config/config.toml
+  fi
+
+  # fix for injective
+  [ "$chain_name" == "injective" ] && sed -i '/^\[mempool]/,/^\[/{s/^size[[:space:]]*=.*/size = 200/}' $node_home/config/config.toml
 
   # fix for sei
-  sed -i -e "s/^db-backend *=.*/db-backend = \"pebbledb\"/" $node_home/config/config.toml
+  if [ $( echo "${chain_name}" |grep -cE "^(sei|sei-archive-sub|sei-archive-sub1|sei-archive-sub2|sei-archive-sub3|sei-testnet)$" ) -ne 0 ]; then
+    sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
+  fi
 fi
-
-if [ $( echo "${chain_name}" |grep -cE "pruned" ) -ne 0 ]; then
-  # if pruned node (not default)
-  sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
-  sed -i -e "s/^min-retain-blocks *=.*/min-retain-blocks = 1000/" $node_home/config/app.toml
-else
-  sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $node_home/config/config.toml
-fi
-
-sed -i -e "s/^query_gas_limit *=.*/query_gas_limit = 10000000/" $node_home/config/app.toml
-sed -i -e "s/^discard_abci_responses *=.*/discard_abci_responses = false/" $node_home/config/config.toml
-
-echo "download genesis..."
-curl -Ls "${SNAPSHOT_BASE_URL}/genesis.json" > $node_home/config/genesis.json
-
-echo "download addrbook..."
-curl -Lfso $node_home/config/addrbook.json "${SNAPSHOT_BASE_URL}/addrbook.json"
-
-sed -i -e "s/^adaptive-fee-enabled *=.*/adaptive-fee-enabled = \"true\"/" $node_home/config/app.toml
-
-if [[ $chain_name == osmosis* ]]; then
-  sed -i -e "s/^min-gas-price-for-high-gas-tx *=.*/min-gas-price-for-high-gas-tx = \".005\"/" $node_home/config/app.toml
-  sed -i -e "s/^arbitrage-min-gas-fee *=.*/arbitrage-min-gas-fee = \".025\"/" $node_home/config/app.toml
-fi
-
-# no seeds and persistent_peers for read-only subnode
-if [[ $chain_name == *-sub* ]] && [[ $chain_name != *-sub ]]; then
-  sed -i -e "s/^seeds *=.*/seeds = \"\"/" $node_home/config/config.toml
-  sed -i -e "s/^persistent_peers *=.*/persistent_peers = \"\"/" $node_home/config/config.toml
-fi
-
-# fix for injective
-[ "$chain_name" == "injective" ] && sed -i '/^\[mempool]/,/^\[/{s/^size[[:space:]]*=.*/size = 200/}' $node_home/config/config.toml
-
-# fix for sei
-if [ $( echo "${chain_name}" |grep -cE "^(sei|sei-archive-sub|sei-archive-sub1|sei-archive-sub2|sei-archive-sub3|sei-testnet)$" ) -ne 0 ]; then
-  sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
-fi
-

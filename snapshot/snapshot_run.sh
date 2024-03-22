@@ -175,9 +175,12 @@ cd $HOME
 
 if [ -z "$(ls -A $node_home)" ]; then
    echo "data folder is empty, restoring from snapshot"
+   skip_snapshot_restore=""
    source $HOME/snapshot_restore.sh
 else
    echo "data folder is Not Empty. Skip restoring...."
+   skip_snapshot_restore="true"
+   source $HOME/snapshot_restore.sh
 fi
 
 
