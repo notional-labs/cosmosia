@@ -64,19 +64,21 @@ if [[ -z $snapshot_storage_node ]]; then
 fi
 
 
-# use override constraint if found
-override_constraint=$(docker node ls -f node.label=cosmosia.snapshot.${chain_name}=true | tail -n +2 |awk '{print $2}')
-if [[ -z $override_constraint ]]; then
-  echo "No override_constraint found"
-  constraint="node.hostname==$HOST"
-  if [ $( echo "${chain_name}" |grep -cE "archive" ) -eq 0 ]; then
-    # if pruned node, place on node with cosmosia.snapshot.pruned label, see https://github.com/notional-labs/cosmosia/issues/375
-    constraint="node.labels.cosmosia.snapshot.pruned==true"
-  fi
-else
-  echo "Found override_constraint=${override_constraint}"
-  constraint="node.labels.cosmosia.snapshot.${chain_name}==true"
-fi
+constraint="node.hostname==$HOST"
+
+## use override constraint if found
+#override_constraint=$(docker node ls -f node.label=cosmosia.snapshot.${chain_name}=true | tail -n +2 |awk '{print $2}')
+#if [[ -z $override_constraint ]]; then
+#  echo "No override_constraint found"
+#  constraint="node.hostname==$HOST"
+#  if [ $( echo "${chain_name}" |grep -cE "archive" ) -eq 0 ]; then
+#    # if pruned node, place on node with cosmosia.snapshot.pruned label, see https://github.com/notional-labs/cosmosia/issues/375
+#    constraint="node.labels.cosmosia.snapshot.pruned==true"
+#  fi
+#else
+#  echo "Found override_constraint=${override_constraint}"
+#  constraint="node.labels.cosmosia.snapshot.${chain_name}==true"
+#fi
 
 echo "constraint= ${constraint}"
 echo "SERVICE_NAME=$SERVICE_NAME"
@@ -85,6 +87,9 @@ echo "MOUNT_OPT=$MOUNT_OPT"
 
 # delete existing service
 docker service rm $SERVICE_NAME
+
+echo "sleep 20s..."
+sleep 30
 
 docker service create \
   --name $SERVICE_NAME \
