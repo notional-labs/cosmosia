@@ -98,9 +98,9 @@ if [[ -z $version ]]; then
 fi
 
 
-# create a soft link to /node_data volume
-mkdir -p $node_home
-ln -s /node_data $node_home
+## create a soft link to /node_data volume
+#mkdir -p $node_home
+#ln -s /node_data $node_home
 
 
 cd $HOME

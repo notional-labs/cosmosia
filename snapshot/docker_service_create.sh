@@ -76,7 +76,8 @@ constraint="node.hostname==$snapshot_node"
 #fi
 
 # for chain data
-MOUNT_OPT="--mount type=bind,source=$MOUNT_SRC,destination=/node_data"
+# MOUNT_OPT="--mount type=bind,source=$MOUNT_SRC,destination=/node_data"
+MOUNT_OPT="--mount type=bind,source=$MOUNT_SRC,destination=$node_home"
 
 # figure out IP of the remote host
 agent_id=$(docker ps -aqf "name=agent")
