@@ -56,7 +56,7 @@ eval "${str_snapshot_cfg}"
 echo "network=$network"
 
 #HOST="$snapshot_node"
-MOUNT_SRC="/mnt/data/snapshots/$chain_name"
+MOUNT_SRC="/mnt/data/rpc/$chain_name"
 SERVICE_NAME="snapshot_$chain_name"
 
 constraint="node.hostname==$snapshot_node"
@@ -84,7 +84,7 @@ agent_id=$(docker ps -aqf "name=agent")
 snapshot_node_ip=$(docker exec $agent_id curl -s "http://tasks.web_config:2375/nodes/${snapshot_node}" |jq -r ".Status.Addr")
 
 # make sure folder exist on remote host before mounting
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "mkdir -p /mnt/data/snapshots/${chain_name}"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "mkdir -p /mnt/data/rpc/${chain_name}"
 
 echo "constraint= ${constraint}"
 echo "SERVICE_NAME=$SERVICE_NAME"
