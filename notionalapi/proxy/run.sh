@@ -8,8 +8,8 @@ EOT
 
 ########################################################################################################################
 # SSL (fullchain.pem and privkey.pem files)
-wget "http://tasks.web_config/config/notionalapi.com_fullchain.pem" -O /etc/nginx/fullchain.pem
-wget "http://tasks.web_config/config/notionalapi.com_privkey.pem" -O /etc/nginx/privkey.pem
+wget "http://tasks.web_config/config/notionalapi.net_fullchain.pem" -O /etc/nginx/fullchain.pem
+wget "http://tasks.web_config/config/notionalapi.net_privkey.pem" -O /etc/nginx/privkey.pem
 
 ########################################################################################################################
 # nginx
