@@ -389,13 +389,13 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | API      | https://api-osmosis-archive-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-osmosis-archive-ia.cosmosia.notional.ventures/ |
 
-### 49. Cosmoshub Archive
+### 49. cosmoshub-archive-sub2
 
 | Protocol | Endpoint                                              |
 |----------|:------------------------------------------------------|
-| RPC      | https://rpc-cosmoshub-archive-ia.cosmosia.notional.ventures/  |
-| API      | https://api-cosmoshub-archive-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-cosmoshub-archive-ia.cosmosia.notional.ventures/ |
+| RPC      | https://rpc-cosmoshub-archive-sub2-ia.cosmosia.notional.ventures/  |
+| API      | https://api-cosmoshub-archive-sub2-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-cosmoshub-archive-sub2-ia.cosmosia.notional.ventures/ |
 
 ### 50. Quicksilver
 
