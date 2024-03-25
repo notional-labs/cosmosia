@@ -932,3 +932,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-dymension-ia.cosmosia.notional.ventures/  |
 | API      | https://api-dymension-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-dymension-ia.cosmosia.notional.ventures/ |
+
+### 117. nolus
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-nolus-ia.cosmosia.notional.ventures/  |
+| API      | https://api-nolus-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-nolus-ia.cosmosia.notional.ventures/ |
