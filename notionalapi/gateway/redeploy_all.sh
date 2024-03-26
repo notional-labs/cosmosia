@@ -64,6 +64,7 @@ neutron-archive-sub
 neutron-testnet
 neutron
 noble
+nolus
 nois
 odin
 omniflixhub
