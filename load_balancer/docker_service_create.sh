@@ -63,7 +63,7 @@ docker service create \
   --label 'cosmosia.service=lb' \
   --endpoint-mode dnsrr \
   --sysctl 'net.ipv4.tcp_tw_reuse=1' \
-  --restart-condition none \
+  --restart-condition any \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/${lb_type}/run.sh > ~/run.sh && \
