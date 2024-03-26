@@ -17,6 +17,10 @@ echo "root hard nofile 500000" >> /etc/security/limits.conf
 echo "root soft nofile 500000" >> /etc/security/limits.conf
 echo "* hard nofile  500000" >> /etc/security/limits.conf
 echo "* soft nofile 500000" >> /etc/security/limits.conf
+
+# disable password auth
+sed -i '/^\#PasswordAuthentication*=.*/address = "PasswordAuthentication = no"/}' /etc/ssh/sshd_config
+systemctl restart sshd
 ```
 
 Settings
