@@ -1,5 +1,5 @@
-# usage: ./docker_service_create.sh chain_name
-# eg., ./docker_service_create.sh cosmoshub
+# usage: ./docker_service_create.sh chain_name node_num
+# eg., ./docker_service_create.sh cosmoshub 1
 
 chain_name="$1"
 if [ -f "../env.sh" ]; then
@@ -10,7 +10,12 @@ else
 fi
 
 if [[ -z $chain_name ]]; then
-  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub"
+  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub 1"
+  exit
+fi
+
+if [[ -z $node_num ]]; then
+  echo "No node_num. usage eg., ./docker_service_create.sh cosmoshub 1"
   exit
 fi
 
@@ -79,62 +84,7 @@ echo "snapshot_storage_node=$snapshot_storage_node"
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 
-# functions
-find_current_data_version () {
-  ver=0
-
-  if [[ -z $USE_SNAPSHOT_PROXY_URL ]]; then
-    # use internal snapshot proxy
-
-    # 1. figure out the snapshot node
-    node="$snapshot_storage_node"
-    if [[ -z $node ]]; then
-      node="$snapshot_node"
-    fi
-
-    if [ -f /.dockerenv ]; then
-      # inside container
-      ver=$(curl -Ls "http://proxysnapshot.${node}:11111/${chain_name}/chain.json" |jq -r '.data_version // 0')
-    else
-      # inside host
-
-      # figure out container id of agent
-      agent_id=$(docker ps -aqf "name=agent")
-
-      # execute command in agent container to get data version
-      ver=$(docker exec $agent_id curl -Ls "http://proxysnapshot.${node}:11111/${chain_name}/chain.json" |jq -r '.data_version // 0')
-    fi
-  else
-    # use public snapshot proxy
-    ver=$(curl -Ls "${USE_SNAPSHOT_PROXY_URL}/${chain_name}/chain.json" |jq -r '.data_version // 0')
-  fi
-
-  echo $ver
-}
-
-# get the data version from chain.json, service name is rpc_$chain_name_$version
-data_version=$(find_current_data_version)
-echo "data_version=$data_version"
-rpc_service_name="rpc_${chain_name}_${data_version}"
-
-if [[ -z $data_version ]]; then
-  echo "No data_version for ${chain_name} found"
-  exit
-fi
-
-## use override constraint if found
-#override_constraint=$(docker node ls -f node.label=cosmosia.rpc.${chain_name}=true | tail -n +2 |awk '{print $2}')
-#if [[ -z $override_constraint ]]; then
-#  echo "No override_constraint found"
-#  constraint="node.labels.cosmosia.rpc.pruned==true"
-#  if [ $( echo "${chain_name}" |grep -cE "archive" ) -ne 0 ]; then
-#    # if archive node
-#    constraint="node.labels.cosmosia.rpc.${chain_name}==true"
-#  fi
-#else
-#  echo "Found override_constraint=${override_constraint}"
-#  constraint="node.labels.cosmosia.rpc.${chain_name}==true"
-#fi
+rpc_service_name="rpc_${chain_name}_${node_num}"
 
 constraint=$(get_docker_rpc_constraint)
 echo "constraint=$constraint"
