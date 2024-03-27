@@ -97,7 +97,8 @@ rpc_config=$(get_docker_rpc_config)
 echo "rpc_config=${rpc_config}"
 eval "${rpc_config}"
 var_rpc_node="node_${node_num}"
-echo "rpc_node=${!var_rpc_node}"
+rpc_node=${!var_rpc_node}
+echo "rpc_node=${rpc_node}"
 
 # figure out IP of the remote host
 agent_id=$(docker ps -aqf "name=agent")
