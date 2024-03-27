@@ -23,16 +23,16 @@ source $HOME/env.sh
 ########################################################################################################################
 # haproxy
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/haproxy.cfg" > $HOME/haproxy.cfg
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/haproxy.cfg" > $HOME/haproxy.cfg
 
 # enable eth for needed chains by appending haproxy.eth.cfg to haproxy.cfg
 if [[ $rpc_service_name == rpc_evmos* ]]; then
-  curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/haproxy.eth.cfg" >> $HOME/haproxy.cfg
+  curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/haproxy.eth.cfg" >> $HOME/haproxy.cfg
 fi
 
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/start.sh" > $HOME/start.sh
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/haproxy/reload.sh" > $HOME/reload.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/start.sh" > $HOME/start.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/reload.sh" > $HOME/reload.sh
 
 source $HOME/reload.sh
 
@@ -42,8 +42,8 @@ source $HOME/reload.sh
 ########################################################################################################################
 # cgi-script api
 pacman -S --noconfirm nginx spawn-fcgi fcgiwrap
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/nginx.conf" > /etc/nginx/nginx.conf
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/load_balancer/api_upstream.sh" > /usr/share/nginx/html/api_upstream.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/nginx.conf" > /etc/nginx/nginx.conf
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/api_upstream.sh" > /usr/share/nginx/html/api_upstream.sh
 chmod +x /usr/share/nginx/html/api_upstream.sh
 spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
 /usr/sbin/nginx
