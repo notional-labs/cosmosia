@@ -2,6 +2,7 @@
 # eg., ./docker_service_create.sh cosmoshub 1
 
 chain_name="$1"
+node_num="$2"
 if [ -f "../env.sh" ]; then
   source ../env.sh
 else
@@ -39,7 +40,7 @@ get_docker_snapshot_config () {
   echo $str_snapshot_cfg
 }
 
-get_docker_rpc_constraint () {
+get_docker_rpc_config () {
   str_rpc_constraint=""
 
   if [ -f /.dockerenv ]; then
@@ -84,9 +85,25 @@ echo "snapshot_storage_node=$snapshot_storage_node"
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 
+######
+
 rpc_service_name="rpc_${chain_name}_${node_num}"
 
-constraint=$(get_docker_rpc_constraint)
+rpc_config=$(get_docker_rpc_config)
+#  example config:
+#  node_1 = "cosmosia52"
+#  node_2 = "cosmosia54"
+
+echo "rpc_config=${rpc_config}"
+eval "${rpc_config}"
+echo "node_1=$node_1"
+
+exit
+
+
+
+
+
 echo "constraint=$constraint"
 
 if [[ -z $constraint ]]; then
