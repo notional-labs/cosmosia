@@ -1,10 +1,16 @@
-# usage: ./run.sh rpc_service_name
-# eg., ./run.sh rpc_cosmoshub_3
+# usage: ./run.sh chain_name scale
+# eg., ./run.sh cosmoshub 2
 
-rpc_service_name="$1"
-echo "rpc_service_name=$rpc_service_name"
-if [[ -z $rpc_service_name ]]; then
-  echo "No rpc_service_name"
+chain_name="$1"
+scale="$2"
+echo "chain_name=$chain_name, scale=$scale"
+if [[ -z $chain_name ]]; then
+  echo "No chain_name. Exit"
+  exit
+fi
+
+if [[ -z $scale ]]; then
+  echo "No scale. Exit"
   exit
 fi
 
@@ -15,10 +21,40 @@ pacman -S --noconfirm base-devel jq dnsutils python haproxy screen wget cronie
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
-rpc_service_name="$rpc_service_name"
+CONFIG_FILE="$HOME/haproxy.cfg"
+TMP_CONFIG_FILE="$HOME/haproxy.cfg.tmp"
+chain_name="$chain_name"
+scale=$scale
 EOT
 
 source $HOME/env.sh
+
+########################################################################################################################
+# cron
+
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/generate_upstream.sh" > $HOME/generate_upstream.sh
+
+cat <<'EOT' >  $HOME/cron_update_upstream.sh
+source $HOME/env.sh
+source $HOME/generate_upstream.sh $chain_name $scale
+
+if cmp -s "$CONFIG_FILE" "$TMP_CONFIG_FILE"; then
+  # the same => do nothing
+  echo "no config change, do nothing..."
+else
+  # different
+
+  # show the diff
+  diff -c "$CONFIG_FILE" "$TMP_CONFIG_FILE"
+
+  echo "found config changes, updating..."
+  cat "$TMP_CONFIG_FILE" > "$CONFIG_FILE"
+  /usr/sbin/caddy reload --config $CONFIG_FILE
+fi
+EOT
+
+echo "*/5 * * * * root /bin/bash $HOME/cron_update_upstream.sh" > /etc/cron.d/cron_update_upstream
+crond
 
 ########################################################################################################################
 # haproxy
@@ -26,7 +62,7 @@ source $HOME/env.sh
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/haproxy.cfg" > $HOME/haproxy.cfg
 
 # enable eth for needed chains by appending haproxy.eth.cfg to haproxy.cfg
-if [[ $rpc_service_name == rpc_evmos* ]]; then
+if [[ $chain_name == evmos* ]]; then
   curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/haproxy.eth.cfg" >> $HOME/haproxy.cfg
 fi
 
@@ -35,9 +71,6 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/reload.sh" > $HOME/reload.sh
 
 source $HOME/reload.sh
-
-########################################################################################################################
-# cron
 
 ########################################################################################################################
 # cgi-script api

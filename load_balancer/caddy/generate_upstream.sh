@@ -73,7 +73,7 @@ fi
 
 
 JSONRPC_CONFIG=""
-if [[ $rpc_service_name == rpc_evmos* ]]; then
+if [[ $chain_name == evmos* ]]; then
   JSONRPC_CONFIG=$( cat <<EOT
 #JSON-RPC
 :8004 {
