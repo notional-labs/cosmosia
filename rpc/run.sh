@@ -126,7 +126,16 @@ mkdir -p $GOBIN
 # restore snapshot
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/snapshot/snapshot_restore.sh" > $HOME/snapshot_restore.sh
 cd $HOME
-source $HOME/snapshot_restore.sh
+
+if [ -z "$(ls -A $node_home)" ]; then
+   echo "data folder is empty, restoring from snapshot"
+   skip_snapshot_restore=""
+   source $HOME/snapshot_restore.sh
+else
+   echo "data folder is Not Empty. Skip restoring...."
+   skip_snapshot_restore="true"
+   source $HOME/snapshot_restore.sh
+fi
 
 if [ $( echo "${chain_name}" | grep -cE "^(osmosis)$" ) -ne 0 ]; then
   sed -i -e "s/^min-gas-price-for-high-gas-tx *=.*/min-gas-price-for-high-gas-tx = \".005\"/" $node_home/config/app.toml
