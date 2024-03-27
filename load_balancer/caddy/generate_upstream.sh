@@ -30,7 +30,7 @@ while [[ node_num -le scale ]]; do
 #  echo "ip of $rpc_node is $ip"
 
   if [[ ! -z $new_ips ]]; then
-    new_ips="$new_ips "
+    new_ips="${new_ips}\n"
   fi
   new_ips="${new_ips}${ip}"
 

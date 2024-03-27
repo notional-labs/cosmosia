@@ -24,7 +24,7 @@ cat <<EOT >> $HOME/env.sh
 CONFIG_FILE="/etc/caddy/Caddyfile"
 TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
 chain_name="$chain_name"
-scale="$scale"
+scale=$scale
 EOT
 
 source $HOME/env.sh
