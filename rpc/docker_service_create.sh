@@ -96,8 +96,8 @@ rpc_config=$(get_docker_rpc_config)
 
 echo "rpc_config=${rpc_config}"
 eval "${rpc_config}"
-eval "rpc_node=\$\{node_${node_num}\}"
-echo "rpc_node=$rpc_node"
+var_rpc_node="node_${node_num}"
+echo "rpc_node=${!var_rpc_node}"
 
 exit
 
