@@ -99,12 +99,17 @@ eval "${rpc_config}"
 var_rpc_node="node_${node_num}"
 echo "rpc_node=${!var_rpc_node}"
 
-exit
+# figure out IP of the remote host
+agent_id=$(docker ps -aqf "name=agent")
+rpc_node_ip=$(docker exec $agent_id curl -s "http://tasks.web_config:2375/nodes/${rpc_node}" |jq -r ".Status.Addr")
+echo "rpc_node_ip=${rpc_node_ip}"
 
+# make sure folder exist on remote host before mounting
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${rpc_node_ip} "mkdir -p /mnt/data/rpc/${chain_name}_${node_num}"
 
+MOUNT_OPT="--mount type=bind,source=/mnt/data/rpc/${chain_name}_${node_num},destination=$node_home"
 
-
-
+constraint="node.hostname==$rpc_node"
 echo "constraint=$constraint"
 
 if [[ -z $constraint ]]; then
@@ -115,9 +120,12 @@ fi
 # delete existing service
 docker service rm $rpc_service_name
 
+echo "sleep 30s...."
+sleep 30
+
 docker service create \
   --name $rpc_service_name \
-  --replicas 1 \
+  --replicas 1 $MOUNT_OPT \
   --constraint $constraint \
   --network bignet \
   --network $network \
