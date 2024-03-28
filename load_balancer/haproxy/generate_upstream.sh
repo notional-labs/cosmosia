@@ -51,6 +51,7 @@ if [[ -z "$new_ips" ]]; then
     jsonrpc_str="    server  s1 $default_node:8545 check port 80 inter 10s weight 1"
     ws_jsonrpc_str="    server  s1 $default_node:8546 check port 80 inter 10s weight 1"
 else
+  node_num=1
   while read -r ip_addr || [[ -n $ip_addr ]]; do
       if [[ ! -z $rpc_str ]]; then
         rpc_str="${rpc_str}"$'\n'
@@ -59,11 +60,13 @@ else
         jsonrpc_str="${rpc_str}"$'\n'
         ws_jsonrpc_str="${ws_jsonrpc_str}"$'\n'
       fi
-      rpc_str="$rpc_str    server  s1 $ip_addr:26657 check port 80 inter 10s weight 1"
-      api_str="$api_str    server  s1 $ip_addr:1317 check port 80 inter 10s weight 1"
-      grpc_str="$grpc_str    server  s1 $ip_addr:9090 proto h2 check port 80 inter 10s weight 1"
-      jsonrpc_str="$jsonrpc_str    server  s1 $ip_addr:8545 check port 80 inter 10s weight 1"
-      ws_jsonrpc_str="$ws_jsonrpc_str    server  s1 $ip_addr:8546 check port 80 inter 10s weight 1"
+      rpc_str="$rpc_str    server  s${node_num} $ip_addr:26657 check port 80 inter 10s weight 1"
+      api_str="$api_str    server  s${node_num} $ip_addr:1317 check port 80 inter 10s weight 1"
+      grpc_str="$grpc_str    server  s${node_num} $ip_addr:9090 proto h2 check port 80 inter 10s weight 1"
+      jsonrpc_str="$jsonrpc_str    server  s${node_num} $ip_addr:8545 check port 80 inter 10s weight 1"
+      ws_jsonrpc_str="$ws_jsonrpc_str    server  s${node_num} $ip_addr:8546 check port 80 inter 10s weight 1"
+
+      ((node_num++));
   done < <(echo "$new_ips")
 fi
 
