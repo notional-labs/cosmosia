@@ -21,7 +21,7 @@ OPTSTRING=":d"
 
 while getopts ${OPTSTRING} opt; do
   case ${opt} in
-    n)
+    d)
       echo "opt_clear_data Option -d was triggered."
       opt_clear_data=true
       ;;
