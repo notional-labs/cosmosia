@@ -101,7 +101,7 @@ backend be_eth
     option httpchk
     http-check connect proto h1
     http-check send meth GET  uri /healthcheck
-    $jsonrpc_str
+$jsonrpc_str
 
 
 backend be_ethws
@@ -110,7 +110,7 @@ backend be_ethws
     option httpchk
     http-check connect proto h1
     http-check send meth GET  uri /healthcheck
-    $ws_jsonrpc_str
+$ws_jsonrpc_str
 EOT
   )
 fi
@@ -189,13 +189,13 @@ frontend  fe_grpc
     default_backend   be_grpc
 
 
-#backend be_rpc
+backend be_rpc
     mode        http
     balance     roundrobin
     option httpchk
     http-check connect proto h1
     http-check send meth GET  uri /healthcheck
-    $rpc_str
+$rpc_str
 
 backend be_api
     mode        http
@@ -203,7 +203,7 @@ backend be_api
     option httpchk
     http-check connect proto h1
     http-check send meth GET  uri /healthcheck
-    $api_str
+$api_str
 
 
 backend be_grpc
