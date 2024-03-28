@@ -89,7 +89,7 @@ snapshot_node_ip=$(docker exec $agent_id curl -s "http://tasks.web_config:2375/n
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "mkdir -p /mnt/data/rpc/${chain_name}"
 
 echo "opt_clear_data = $opt_clear_data"
-if [ "$opt_clear_data" = false ] ; then
+if [ "$opt_clear_data" = true ] ; then
   ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "rm -rf /mnt/data/rpc/${chain_name}/*"
 fi
 
