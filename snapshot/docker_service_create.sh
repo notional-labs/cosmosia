@@ -91,11 +91,6 @@ snapshot_node_ip=$(docker exec $agent_id curl -s "http://tasks.web_config:2375/n
 # make sure folder exist on remote host before mounting
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "mkdir -p /mnt/data/rpc/${chain_name}"
 
-echo "opt_clear_data = $opt_clear_data"
-if [ "$opt_clear_data" = true ] ; then
-  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "rm -rf /mnt/data/rpc/${chain_name}/*"
-fi
-
 echo "constraint= ${constraint}"
 echo "SERVICE_NAME=$SERVICE_NAME"
 echo "MOUNT_OPT=$MOUNT_OPT"
@@ -105,7 +100,14 @@ echo "MOUNT_OPT=$MOUNT_OPT"
 docker service rm $SERVICE_NAME
 
 echo "sleep 20s..."
-sleep 30
+sleep 20
+
+echo "opt_clear_data = $opt_clear_data"
+if [ "$opt_clear_data" = true ] ; then
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "rm -rf /mnt/data/rpc/${chain_name}/*"
+fi
+
+sleep 5
 
 docker service create \
   --name $SERVICE_NAME \
