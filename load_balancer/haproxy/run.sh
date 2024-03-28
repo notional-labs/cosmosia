@@ -49,7 +49,7 @@ else
 
   echo "found config changes, updating..."
   cat "$TMP_CONFIG_FILE" > "$CONFIG_FILE"
-  /usr/sbin/caddy reload --config $CONFIG_FILE
+  source $HOME/reload.sh
 fi
 EOT
 
@@ -59,13 +59,8 @@ crond
 ########################################################################################################################
 # haproxy
 
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/haproxy.cfg" > $HOME/haproxy.cfg
-
-# enable eth for needed chains by appending haproxy.eth.cfg to haproxy.cfg
-if [[ $chain_name == evmos* ]]; then
-  curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/haproxy.eth.cfg" >> $HOME/haproxy.cfg
-fi
-
+# generate new config file and copy to $CONFIG_FILE
+source $HOME/cron_update_upstream.sh
 
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/start.sh" > $HOME/start.sh
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/573-rpc-store-chain-data-on-mount-volume/load_balancer/haproxy/reload.sh" > $HOME/reload.sh
