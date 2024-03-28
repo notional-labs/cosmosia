@@ -1,7 +1,8 @@
-# usage: ./docker_service_create.sh chain_name
-# eg., ./docker_service_create.sh cosmoshub
+# usage: ./docker_service_create.sh chain_name node_num
+# eg., ./docker_service_create.sh cosmoshub 1
 
 chain_name="$1"
+node_num="$2"
 if [ -f "../env.sh" ]; then
   source ../env.sh
 else
@@ -10,7 +11,12 @@ else
 fi
 
 if [[ -z $chain_name ]]; then
-  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub"
+  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub 1"
+  exit
+fi
+
+if [[ -z $node_num ]]; then
+  echo "No node_num. usage eg., ./docker_service_create.sh cosmoshub 1"
   exit
 fi
 
@@ -34,7 +40,7 @@ get_docker_snapshot_config () {
   echo $str_snapshot_cfg
 }
 
-get_docker_rpc_constraint () {
+get_docker_rpc_config () {
   str_rpc_constraint=""
 
   if [ -f /.dockerenv ]; then
@@ -79,64 +85,32 @@ echo "snapshot_storage_node=$snapshot_storage_node"
 
 git_branch=$(git symbolic-ref --short -q HEAD)
 
-# functions
-find_current_data_version () {
-  ver=0
+######
 
-  if [[ -z $USE_SNAPSHOT_PROXY_URL ]]; then
-    # use internal snapshot proxy
+rpc_service_name="rpc_${chain_name}_${node_num}"
 
-    # 1. figure out the snapshot node
-    node="$snapshot_storage_node"
-    if [[ -z $node ]]; then
-      node="$snapshot_node"
-    fi
+rpc_config=$(get_docker_rpc_config)
+#  example config:
+#  node_1 = "cosmosia52"
+#  node_2 = "cosmosia54"
 
-    if [ -f /.dockerenv ]; then
-      # inside container
-      ver=$(curl -Ls "http://proxysnapshot.${node}:11111/${chain_name}/chain.json" |jq -r '.data_version // 0')
-    else
-      # inside host
+echo "rpc_config=${rpc_config}"
+eval "${rpc_config}"
+var_rpc_node="node_${node_num}"
+rpc_node=${!var_rpc_node}
+echo "rpc_node=${rpc_node}"
 
-      # figure out container id of agent
-      agent_id=$(docker ps -aqf "name=agent")
+# figure out IP of the remote host
+agent_id=$(docker ps -aqf "name=agent")
+rpc_node_ip=$(docker exec $agent_id curl -s "http://tasks.web_config:2375/nodes/${rpc_node}" |jq -r ".Status.Addr")
+echo "rpc_node_ip=${rpc_node_ip}"
 
-      # execute command in agent container to get data version
-      ver=$(docker exec $agent_id curl -Ls "http://proxysnapshot.${node}:11111/${chain_name}/chain.json" |jq -r '.data_version // 0')
-    fi
-  else
-    # use public snapshot proxy
-    ver=$(curl -Ls "${USE_SNAPSHOT_PROXY_URL}/${chain_name}/chain.json" |jq -r '.data_version // 0')
-  fi
+# make sure folder exist on remote host before mounting
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${rpc_node_ip} "mkdir -p /mnt/data/rpc/${chain_name}_${node_num}"
 
-  echo $ver
-}
+MOUNT_OPT="--mount type=bind,source=/mnt/data/rpc/${chain_name}_${node_num},destination=$node_home"
 
-# get the data version from chain.json, service name is rpc_$chain_name_$version
-data_version=$(find_current_data_version)
-echo "data_version=$data_version"
-rpc_service_name="rpc_${chain_name}_${data_version}"
-
-if [[ -z $data_version ]]; then
-  echo "No data_version for ${chain_name} found"
-  exit
-fi
-
-## use override constraint if found
-#override_constraint=$(docker node ls -f node.label=cosmosia.rpc.${chain_name}=true | tail -n +2 |awk '{print $2}')
-#if [[ -z $override_constraint ]]; then
-#  echo "No override_constraint found"
-#  constraint="node.labels.cosmosia.rpc.pruned==true"
-#  if [ $( echo "${chain_name}" |grep -cE "archive" ) -ne 0 ]; then
-#    # if archive node
-#    constraint="node.labels.cosmosia.rpc.${chain_name}==true"
-#  fi
-#else
-#  echo "Found override_constraint=${override_constraint}"
-#  constraint="node.labels.cosmosia.rpc.${chain_name}==true"
-#fi
-
-constraint=$(get_docker_rpc_constraint)
+constraint="node.hostname==$rpc_node"
 echo "constraint=$constraint"
 
 if [[ -z $constraint ]]; then
@@ -147,9 +121,12 @@ fi
 # delete existing service
 docker service rm $rpc_service_name
 
+echo "sleep 30s...."
+sleep 30
+
 docker service create \
   --name $rpc_service_name \
-  --replicas 1 \
+  --replicas 1 $MOUNT_OPT \
   --constraint $constraint \
   --network bignet \
   --network $network \

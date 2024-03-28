@@ -1,18 +1,43 @@
-# usage: ./generate_upstream.sh rpc_service_name
-# eg., ./generate_upstream.sh rpc_cosmoshub_0
+# usage: ./generate_upstream.sh chain_name scale
+# eg., ./generate_upstream.sh cosmoshub 2
 
-rpc_service_name="$1"
-echo "rpc_service_name=$rpc_service_name"
-if [[ -z $rpc_service_name ]]; then
-  echo "No rpc_service_name. usage eg., ./generate_upstream.sh rpc_cosmoshub_0"
+chain_name="$1"
+scale=$2
+echo "chain_name=$chain_name, scale=$scale"
+if [[ -z $chain_name ]]; then
+  echo "No chain_name. usage eg., ./generate_upstream.sh cosmoshub 2"
+  exit
+fi
+
+if [[ -z $scale ]]; then
+  echo "No scale. usage eg., ./generate_upstream.sh cosmoshub 2"
   exit
 fi
 
 CONFIG_FILE="/etc/caddy/Caddyfile"
 TMP_CONFIG_FILE="/etc/caddy/Caddyfile.tmp"
 
-# use dig to figure out IPs of service
-new_ips=$(dig +short "tasks.$rpc_service_name" |sort)
+default_node="tasks.${chain_name}_1"
+
+# figure out IPs of services
+#new_ips=$(dig +short "tasks.$rpc_service_name" |sort)
+
+new_ips=""
+node_num=1
+while [[ node_num -le scale ]]; do
+  rpc_node="tasks.rpc_${chain_name}_${node_num}"
+  ip=$(dig +short "$rpc_node")
+#  echo "ip of $rpc_node is $ip"
+
+  if [[ ! -z $new_ips ]]; then
+    new_ips="${new_ips}"$'\n'
+  fi
+  new_ips="${new_ips}${ip}"
+
+  ((node_num++));
+done
+
+#echo "$new_ips"
 
 rpc_str=""
 api_str=""
@@ -21,12 +46,12 @@ grpc_str=""
 jsonrpc_str=""
 ws_jsonrpc_str=""
 if [[ -z "$new_ips" ]]; then
-    rpc_str="to http://$rpc_service_name:26657"
-    api_str="to http://$rpc_service_name:1317"
-    ws_str="to http://$rpc_service_name:26657"
-    grpc_str="to http://$rpc_service_name:9090"
-    jsonrpc_str="to http://$rpc_service_name:8545"
-    ws_jsonrpc_str="to http://$rpc_service_name:8546"
+    rpc_str="to http://$default_node:26657"
+    api_str="to http://$default_node:1317"
+    ws_str="to http://$default_node:26657"
+    grpc_str="to http://$default_node:9090"
+    jsonrpc_str="to http://$default_node:8545"
+    ws_jsonrpc_str="to http://$default_node:8546"
 else
   while read -r ip_addr || [[ -n $ip_addr ]]; do
       if [[ -z "$rpc_str" ]]; then
@@ -48,7 +73,7 @@ fi
 
 
 JSONRPC_CONFIG=""
-if [[ $rpc_service_name == rpc_evmos* ]]; then
+if [[ $chain_name == evmos* ]]; then
   JSONRPC_CONFIG=$( cat <<EOT
 #JSON-RPC
 :8004 {
