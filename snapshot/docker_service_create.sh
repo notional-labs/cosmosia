@@ -1,19 +1,6 @@
 # usage: ./docker_service_create.sh chain_name [-d]
 # eg., ./docker_service_create.sh cosmoshub
 
-chain_name="$1"
-if [ -f "../env.sh" ]; then
-  source ../env.sh
-else
-    echo "../env.sh file does not exist."
-    exit
-fi
-
-if [[ -z $chain_name ]]; then
-  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub [-d]"
-  exit
-fi
-
 opt_clear_data=false
 
 OPTSTRING=":d"
@@ -31,6 +18,19 @@ while getopts ${OPTSTRING} opt; do
       ;;
   esac
 done
+
+chain_name="$1"
+if [ -f "../env.sh" ]; then
+  source ../env.sh
+else
+    echo "../env.sh file does not exist."
+    exit
+fi
+
+if [[ -z $chain_name ]]; then
+  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub [-d]"
+  exit
+fi
 
 # functions
 get_docker_snapshot_config () {
