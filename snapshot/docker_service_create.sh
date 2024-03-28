@@ -1,4 +1,4 @@
-# usage: ./docker_service_create.sh chain_name
+# usage: ./docker_service_create.sh chain_name [-d]
 # eg., ./docker_service_create.sh cosmoshub
 
 chain_name="$1"
@@ -10,9 +10,27 @@ else
 fi
 
 if [[ -z $chain_name ]]; then
-  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub"
+  echo "No chain_name. usage eg., ./docker_service_create.sh cosmoshub [-d]"
   exit
 fi
+
+opt_clear_data=false
+
+OPTSTRING=":d"
+# d: delete existing data, default is false
+
+while getopts ${OPTSTRING} opt; do
+  case ${opt} in
+    n)
+      echo "opt_clear_data Option -d was triggered."
+      opt_clear_data=true
+      ;;
+    ?)
+      echo "Invalid option: -${OPTARG}."
+      exit 1
+      ;;
+  esac
+done
 
 # functions
 get_docker_snapshot_config () {
@@ -58,25 +76,9 @@ echo "network=$network"
 #HOST="$snapshot_node"
 MOUNT_SRC="/mnt/data/rpc/$chain_name"
 SERVICE_NAME="snapshot_$chain_name"
-
 constraint="node.hostname==$snapshot_node"
 
-## use override constraint if found
-#override_constraint=$(docker node ls -f node.label=cosmosia.snapshot.${chain_name}=true | tail -n +2 |awk '{print $2}')
-#if [[ -z $override_constraint ]]; then
-#  echo "No override_constraint found"
-#  constraint="node.hostname==$HOST"
-#  if [ $( echo "${chain_name}" |grep -cE "archive" ) -eq 0 ]; then
-#    # if pruned node, place on node with cosmosia.snapshot.pruned label, see https://github.com/notional-labs/cosmosia/issues/375
-#    constraint="node.labels.cosmosia.snapshot.pruned==true"
-#  fi
-#else
-#  echo "Found override_constraint=${override_constraint}"
-#  constraint="node.labels.cosmosia.snapshot.${chain_name}==true"
-#fi
-
 # for chain data
-# MOUNT_OPT="--mount type=bind,source=$MOUNT_SRC,destination=/node_data"
 MOUNT_OPT="--mount type=bind,source=$MOUNT_SRC,destination=$node_home"
 
 # figure out IP of the remote host
@@ -85,6 +87,11 @@ snapshot_node_ip=$(docker exec $agent_id curl -s "http://tasks.web_config:2375/n
 
 # make sure folder exist on remote host before mounting
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "mkdir -p /mnt/data/rpc/${chain_name}"
+
+echo "opt_clear_data = $opt_clear_data"
+if [ "$opt_clear_data" = false ] ; then
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${snapshot_node_ip} "rm -rf /mnt/data/rpc/${chain_name}/*"
+fi
 
 echo "constraint= ${constraint}"
 echo "SERVICE_NAME=$SERVICE_NAME"
