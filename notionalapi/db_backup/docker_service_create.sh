@@ -1,3 +1,4 @@
+#!/bin/bash
 
 SERVICE_NAME="napi_dbbackup"
 
@@ -15,4 +16,4 @@ docker service create \
   --mount type=bind,source=/mnt/data/napi_dbbackup,destination=/data \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/notionalapi/db_backup/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/notionalapi/db_backup/run.sh > ~/run.sh and /bin/bash ~/run.sh"
