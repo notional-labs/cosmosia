@@ -2,7 +2,7 @@
 pacman -Syu --noconfirm
 pacman -S --noconfirm cronie
 
-cd $HOME
+cd "$HOME" || exit
 
 #############################################################################
 # install (no need to install)
