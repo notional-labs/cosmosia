@@ -15,7 +15,7 @@ cd "$HOME" || exit
 
 #########
 # setup cronjob
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/notionalapi/db_backup/backup.sh" > $HOME/backup.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/notionalapi/db_backup/backup.sh" > "$HOME"/backup.sh
 
 echo "0 */12 * * * root /bin/bash $HOME/backup.sh" > /etc/cron.d/cron_backup
 
