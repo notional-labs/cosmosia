@@ -1,5 +1,5 @@
-# napi_dbbackup
+# NAPI Database Backup Service
 
-A service to backup notionalapi db twice a day. Data is stored on `/mnt/data/napi_dbbackup`.
+A service to back up the NotionalAPI database twice a day. Data is stored in `/mnt/data/napi_dbbackup`.
 
-Requires to created `/mnt/data/napi_dbbackup` on host.
+Requires creating the `/mnt/data/napi_dbbackup` directory on the host.
