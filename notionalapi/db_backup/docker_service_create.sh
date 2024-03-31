@@ -5,6 +5,9 @@ SERVICE_NAME="napi_dbbackup"
 # delete existing service
 docker service rm $SERVICE_NAME
 
+echo "sleep 10s..."
+sleep 10
+
 # create new service
 docker service create \
   --name $SERVICE_NAME \
