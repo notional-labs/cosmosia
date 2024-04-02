@@ -18,6 +18,8 @@ curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/notional
 
 echo "0 0 * * * root /bin/bash $HOME/backup.sh" > /etc/cron.d/cron_backup
 
+# start crond
+crond
 
 # loop forever
 while true; do sleep 5; done
