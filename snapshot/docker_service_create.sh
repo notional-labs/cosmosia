@@ -1,5 +1,6 @@
 # usage: ./docker_service_create.sh chain_name [-d]
 # eg., ./docker_service_create.sh cosmoshub
+# use -d to clear old data
 
 chain_name="$1"
 

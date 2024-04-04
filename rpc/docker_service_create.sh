@@ -1,5 +1,6 @@
-# usage: ./docker_service_create.sh chain_name node_num
+# usage: ./docker_service_create.sh chain_name node_num [-d]
 # eg., ./docker_service_create.sh cosmoshub 1
+# use -d to clear old data
 
 chain_name="$1"
 node_num="$2"
@@ -19,6 +20,27 @@ if [[ -z $node_num ]]; then
   echo "No node_num. usage eg., ./docker_service_create.sh cosmoshub 1"
   exit
 fi
+
+# note: have to call shift to fix the issue that getopts doesn't work there are both params ($1) and the options
+shift 2
+opt_clear_data=false
+
+
+OPTSTRING=":d"
+# d: delete existing data, default is false
+
+while getopts ${OPTSTRING} opt; do
+  case ${opt} in
+    d)
+      echo "opt_clear_data Option -d was triggered."
+      opt_clear_data=true
+      ;;
+    ?)
+      echo "Invalid option: -${OPTARG}."
+      exit 1
+      ;;
+  esac
+done
 
 # functions
 get_docker_snapshot_config () {
@@ -123,6 +145,13 @@ docker service rm $rpc_service_name
 
 echo "sleep 30s...."
 sleep 30
+
+echo "opt_clear_data = $opt_clear_data"
+if [ "$opt_clear_data" = true ] ; then
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${rpc_node_ip} "rm -rf /mnt/data/rpc/${chain_name}_${node_num}/*"
+fi
+
+sleep 5
 
 docker service create \
   --name $rpc_service_name \
