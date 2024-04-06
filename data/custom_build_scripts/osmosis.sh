@@ -12,10 +12,8 @@ else
   git checkout "$p_version"
 fi
 
-go work use
-
-go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@v0.11.0
-go mod tidy
 go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
 go mod tidy
-GOWORK=off go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" ./...
+go mod edit -replace github.com/cosmos/cosmos-db=github.com/notional-labs/cosmos-db@v1.0.0-139b9ba
+go mod tidy
+go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
