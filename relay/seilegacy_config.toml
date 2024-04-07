@@ -49,7 +49,7 @@ max_tx_size = 180000
 clock_drift = "5s"
 max_block_time = "30s"
 trusting_period = '32hours'
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.1, denom = 'usei' }
@@ -85,7 +85,7 @@ max_tx_size = 180000
 clock_drift = "50s"
 max_block_time = "10s"
 trusting_period = '112hours'
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0075, denom = 'uaxl' }
@@ -117,7 +117,7 @@ max_tx_size = 180000
 clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '32hours'
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0625, denom = 'ucore' }
@@ -148,7 +148,7 @@ max_tx_size = 180000
 clock_drift = "1000s"
 max_block_time = "10s"
 trusting_period = '14days'
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.01, denom = 'uatom' }
@@ -179,7 +179,7 @@ max_tx_size = 180000
 clock_drift = "100s"
 max_block_time = "10s"
 trusting_period = '224hours'
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'uosmo' }
@@ -209,7 +209,7 @@ max_msg_num = 30
 max_tx_size = 180000
 clock_drift = "5s"
 max_block_time = "30s"
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.015, denom = 'uluna' }

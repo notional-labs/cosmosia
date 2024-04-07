@@ -59,7 +59,7 @@ max_grpc_decoding_size = 33554432
 clock_drift = "45s"
 max_block_time = "30s"
 ccv_consumer_chain = false
-memo_prefix = "By Quang Vinh from Notional"
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'wss://tncnt-eu-wormchain-main-01.rpc.p2p.world/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '2', denominator = '3' }
@@ -93,7 +93,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
-memo_prefix = "By Quang Vinh from Notional"
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_evmos:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }

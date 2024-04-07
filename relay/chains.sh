@@ -55,7 +55,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -87,7 +87,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '336hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -117,7 +117,7 @@ clock_drift = "15s"
 max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -147,7 +147,7 @@ clock_drift = "1000s"
 max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
 event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
@@ -180,7 +180,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -211,7 +211,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -240,7 +240,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_evmos:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -271,7 +271,7 @@ max_grpc_decoding_size = 33554432
 clock_drift = "5s"
 max_block_time = "30s"
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.075, denom = 'ujuno' }
@@ -302,7 +302,7 @@ max_block_time = "10s"
 trusting_period = '13days'
 ccv_consumer_chain = false
 #ccv_consumer_chain = true
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -333,7 +333,7 @@ clock_drift = "100s"
 max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -363,7 +363,7 @@ max_grpc_decoding_size = 33554432
 clock_drift = "5s"
 max_block_time = "30s"
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -393,7 +393,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'wss://secret-4.api.trivium.network:26657/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -425,7 +425,7 @@ clock_drift = "15s"
 max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -456,7 +456,7 @@ clock_drift = "15s"
 max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -487,7 +487,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '216hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -517,7 +517,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 event_source = { mode = 'push', url = 'ws://tasks.lb_coreum:8000/websocket', batch_delay = '500ms' }
@@ -548,7 +548,7 @@ clock_drift = "50s"
 max_block_time = "10s"
 trusting_period = '112hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
 event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
@@ -579,7 +579,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_gravitybridge:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -611,7 +611,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.001, denom = 'ukava' }
@@ -641,7 +641,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_noble:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -672,7 +672,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_kujira:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -703,7 +703,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://rpc.laozi1.bandchain.org:80/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -734,7 +734,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_dydx:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -764,7 +764,7 @@ max_grpc_decoding_size = 33554432
 clock_drift = "5s"
 max_block_time = "30s"
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_furya:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -793,7 +793,7 @@ max_grpc_decoding_size = 33554432
 clock_drift = "5s"
 max_block_time = "30s"
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 event_source = { mode = 'push', url = 'ws://tasks.lb_terra2:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -824,7 +824,7 @@ clock_drift = "40s"
 max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -856,7 +856,7 @@ clock_drift = "5s"
 max_block_time = "30s"
 trusting_period = '14days'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.002, denom = 'utia' }
@@ -884,7 +884,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 trust_threshold = { numerator = '1', denominator = '3' }
 EOT
 )
@@ -908,7 +908,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '32hours'
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 trust_threshold = { numerator = '1', denominator = '3' }
 EOT
 )
@@ -931,7 +931,7 @@ gas_multiplier = 1.1
 clock_drift ='34s'
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 EOT
 )
 
@@ -954,7 +954,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '448hours'
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 trust_threshold = { numerator = '1', denominator = '3' }
 EOT
 )
@@ -978,7 +978,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 trust_threshold = { numerator = '1', denominator = '3' }
 EOT
 )
@@ -1002,7 +1002,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 trust_threshold = { numerator = '1', denominator = '3' }
 EOT
 )
@@ -1026,7 +1026,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 trust_threshold = { numerator = '1', denominator = '3' }
 EOT
 )
@@ -1050,7 +1050,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 trust_threshold = { numerator = '1', denominator = '3' }
 EOT
 )
@@ -1074,7 +1074,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 trust_threshold = { numerator = '1', denominator = '3' }
 EOT
 )
@@ -1095,7 +1095,7 @@ gas_multiplier = 1.1
 clock_drift ='50s'
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
-memo_prefix = 'Delegate Notional: build interchain expressway'
+memo_prefix = 'relayed by Notional.Ventures'
 EOT
 )
 
@@ -1118,7 +1118,7 @@ max_tx_size = 1800000
 clock_drift = '40s'
 max_block_time = '10s'
 trusting_period = '14days'
-memo_prefix = ''
+memo_prefix = 'relayed by Notional.Ventures'
 trust_threshold = { numerator = '1', denominator = '3' }
 EOT
 )
@@ -1145,7 +1145,7 @@ clock_drift = "5s"
 max_block_time = "30s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
@@ -1176,7 +1176,7 @@ clock_drift = "500s"
 max_block_time = "10s"
 trusting_period = '336hours'
 ccv_consumer_chain = false
-memo_prefix = ""
+memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
