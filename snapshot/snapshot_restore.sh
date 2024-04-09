@@ -204,6 +204,7 @@ if [[ -z $skip_snapshot_restore ]]; then
   if [[ $chain_name == osmosis* ]]; then
     sed -i -e "s/^min-gas-price-for-high-gas-tx *=.*/min-gas-price-for-high-gas-tx = \".005\"/" $node_home/config/app.toml
     sed -i -e "s/^arbitrage-min-gas-fee *=.*/arbitrage-min-gas-fee = \".025\"/" $node_home/config/app.toml
+    sed -i -e "s/^iavl-fastnode-module-whitelist *=.*/iavl-fastnode-module-whitelist = []/" $node_home/config/app.toml
   fi
 
   # no seeds and persistent_peers for read-only subnode
