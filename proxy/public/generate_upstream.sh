@@ -60,6 +60,7 @@ quasar
 quicksilver
 regen-testnet
 regen
+saga
 sei
 sentinel
 sommelier
