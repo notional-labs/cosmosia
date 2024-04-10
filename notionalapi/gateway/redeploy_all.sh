@@ -81,6 +81,7 @@ quicksilver
 regen-archive-sub
 regen-testnet
 regen
+saga
 sei-archive-sub
 sei-archive-sub1
 sei-archive-sub2
