@@ -357,13 +357,13 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | API      | https://api-osmosis-testnet-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-osmosis-testnet-ia.cosmosia.notional.ventures/ |
 
-### 45. evmos-archive
+### 45. saga
 
 | Protocol | Endpoint                                                    |
 |----------|:------------------------------------------------------------|
-| RPC      | https://rpc-evmos-archive-ia.cosmosia.notional.ventures/  |
-| API      | https://api-evmos-archive-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-evmos-archive-ia.cosmosia.notional.ventures/ |
+| RPC      | https://rpc-saga-ia.cosmosia.notional.ventures/  |
+| API      | https://api-saga-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-saga-ia.cosmosia.notional.ventures/ |
 
 ### 46. Stride
 
