@@ -1,5 +1,5 @@
 pacman -Syu --noconfirm
-pacman -S --noconfirm git yarn screen wget
+pacman -S --noconfirm git screen wget
 
 
 # install nodejs
@@ -8,8 +8,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 nvm install v18.14.0
-
-yarn set version v18.14.0
+npm install --global yarn
 
 cd $HOME
 gh_access_token="$(curl -s "http://tasks.web_config/config/gh_access_token")"
@@ -23,7 +22,16 @@ cd $HOME/notionalapi/backend
 wget "http://tasks.web_config/config/notionalapi.backend.env" -O $HOME/notionalapi/backend/.env
 
 yarn
-screen -S server -dm yarn aggregator
+
+cat <<EOT > $HOME/start.sh
+cd $HOME/notionalapi/backend
+while true; do
+  yarn aggregator
+  sleep 5;
+done
+EOT
+
+screen -S server -dm /bin/bash $HOME/start.sh
 
 
 # loop forever for debugging only
