@@ -70,6 +70,7 @@ odin
 omniflixhub
 osmosis-archive-sub1
 osmosis-archive-sub2
+osmosis-archive-sub3
 osmosis-archive-sub
 osmosis-testnet
 osmosis

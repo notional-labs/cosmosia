@@ -381,13 +381,13 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | API      | https://api-dig-archive-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-dig-archive-ia.cosmosia.notional.ventures/ |
 
-### 48. Osmosis Archive
+### 48. osmosis-archive-sub3
 
 | Protocol | Endpoint                                                    |
 |----------|:------------------------------------------------------------|
-| RPC      | https://rpc-osmosis-archive-ia.cosmosia.notional.ventures/  |
-| API      | https://api-osmosis-archive-ia.cosmosia.notional.ventures/  |
-| GRPC     | https://grpc-osmosis-archive-ia.cosmosia.notional.ventures/ |
+| RPC      | https://rpc-osmosis-archive-sub3-ia.cosmosia.notional.ventures/  |
+| API      | https://api-osmosis-archive-sub3-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-osmosis-archive-sub3-ia.cosmosia.notional.ventures/ |
 
 ### 49. cosmoshub-archive-sub2
 
