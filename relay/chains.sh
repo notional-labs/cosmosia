@@ -1033,9 +1033,9 @@ EOT
 
 # pirin-1
 export INC_PIRIN_1=$(cat <<-EOT
-rpc_addr = 'https://pirin-cl.nolus.network:26657'
-grpc_addr = 'https://pirin-cl.nolus.network:9090'
-event_source = { mode = 'push', url = 'wss://pirin-cl.nolus.network:26657/websocket', batch_delay = '500ms' }
+rpc_addr = 'http://tasks.lb_nolus:8000'
+grpc_addr = 'http://tasks.lb_nolus:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_nolus:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = '20s'
 account_prefix = 'nolus'
 key_name = 'nolus'
