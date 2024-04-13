@@ -51,6 +51,7 @@ mars
 neutron
 noble
 nois
+nolus
 odin
 omniflixhub
 osmosis-testnet
