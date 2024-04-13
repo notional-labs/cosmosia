@@ -6,7 +6,11 @@ upstream:
   - rpc: "http://tasks.lb_osmosis-archive-sub:8000"
     api: "http://tasks.lb_osmosis-archive-sub:8001"
     grpc: "tasks.lb_osmosis-archive-sub:8003"
-    blocks: [11527577,0]
+    blocks: [14830291,0]
+  - rpc: "http://tasks.lb_osmosis-archive-sub3:8000"
+    api: "http://tasks.lb_osmosis-archive-sub3:8001"
+    grpc: "tasks.lb_osmosis-archive-sub3:8003"
+    blocks: [11527577,14830290]
   - rpc: "http://tasks.lb_osmosis-archive-sub2:8000"
     api: "http://tasks.lb_osmosis-archive-sub2:8001"
     grpc: "tasks.lb_osmosis-archive-sub2:8003"
