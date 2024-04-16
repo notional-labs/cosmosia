@@ -1,3 +1,4 @@
+import * as _ from 'underscore';
 import { useSession } from "next-auth/react";
 import { listServers } from '/src/helper/docker_api';
 import { Table, Tag, Progress, Dropdown } from 'antd';
@@ -172,6 +173,13 @@ const ServerTable = (props) => {
               }}>{tag}</Tag>)}
             </>
           ),
+          filters: [
+            {text: 'cosmosia.rpc.pruned', value: 'cosmosia.rpc.pruned'},
+            {text: 'cosmosia.snapshot.pruned', value: 'cosmosia.snapshot.pruned'},
+            {text: 'cosmosia.storage', value: 'cosmosia.storage'},
+            {text: 'cosmosia.lb', value: 'cosmosia.lb'},
+          ],
+          onFilter: (value, record) => _.contains(record.Tags, value),
         },
         {
           title: 'Action',
