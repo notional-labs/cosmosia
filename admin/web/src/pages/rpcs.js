@@ -92,12 +92,29 @@ export default () => {
   useEffect(() => {
     const load_data = async () => {
       const response = await fetch(`/rpc_status.json`);
-      const data = await response.json();
-      data.sort((a, b) => {
-        return (a.service < b.service) ? -1 : (a.service > b.service) ? 1 : 0;
+      const dataTmp = await response.json();
+      dataTmp.sort((a, b) => {
+        return (a.hostname < b.hostname) ? -1 : (a.hostname > b.hostname) ? 1 : 0;
       });
 
-      setData(data);
+      let services = {}
+      for (const item of dataTmp) {
+        const service_name = item.hostname.split('.')[0];
+        const chain_name = service_name.split('_')[1];
+
+        if (_.has(services, chain_name)) {
+          services[chain_name]['containers'].push(item)
+        } else {
+          services[chain_name] = {service: chain_name, containers: [item]}
+        }
+      }
+
+      let services2 = []
+      Object.keys(services).forEach(key => {
+        services2.push(services[key]);
+      });
+
+      setData(services2);
     };
 
     load_data().catch(console.error);

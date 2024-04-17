@@ -1,7 +1,8 @@
 
 ########################################################################################################################
 # make sure single instance running
-PIDFILE="$HOME/cronjob_get_status.sh.lock"
+#PIDFILE="$HOME/cronjob_get_status.sh.lock"
+PIDFILE="$HOME/test.sh.lock"
 function cleanup() {
   rm -f $PIDFILE
 }
@@ -28,7 +29,6 @@ service_str=""
 for service_name in $RPC_SERVICES; do
   ips=$(dig +short "tasks.$service_name" |sort)
 
-  tmp_str=""
   while read -r ip_addr || [[ -n $ip_addr ]]; do
     status_code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 3 --max-time 3 "http://$ip_addr/healthcheck")
     data_size=$(curl -s --connect-timeout 3 --max-time 3 "http://$ip_addr/data_size" |jq -r .data_size)
@@ -36,19 +36,15 @@ for service_name in $RPC_SERVICES; do
     # figure out hostname of container
     hostname=$(dig +short -x $ip_addr)
 
-    if [[ ! -z "$tmp_str" ]]; then
-      tmp_str="$tmp_str,"$'\n'
+    if [[ ! -z "$service_str" ]]; then
+      service_str="$service_str,"$'\n'
     fi
-    tmp_str="$tmp_str""    { \"ip\": \"$ip_addr\", \"hostname\": \"$hostname\", \"status\": \"$status_code\", \"data_size\": \"$data_size\" }"
+    service_str="$service_str""    { \"ip\": \"$ip_addr\", \"hostname\": \"$hostname\", \"status\": \"$status_code\", \"data_size\": \"$data_size\" }"
 
   done < <(echo "$ips")
-
-  if [[ ! -z "$service_str" ]]; then
-    service_str="$service_str,"$'\n'
-  fi
-  service_str="$service_str { \"service\": \"$service_name\", \"containers\": [ $tmp_str ] }"
 
   sleep 0.5
 done
 
-echo "[ $service_str ]" > ./web/public/rpc_status.json
+# echo "[ $service_str ]" > ./web/public/rpc_status.json
+echo "[ $service_str ]" > $HOME/rpc_status.json
