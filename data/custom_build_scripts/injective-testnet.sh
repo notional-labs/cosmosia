@@ -1,7 +1,7 @@
 cd $HOME
 
 if [[ -z $upgrading ]]; then
-  pacman -Sy unzip
+  pacman -Sy --noconfirm unzip
   wget "https://github.com/InjectiveLabs/testnet/releases/download/${version}/linux-amd64.zip"
   unzip linux-amd64.zip
   mv injectived peggo $HOME/go/bin
