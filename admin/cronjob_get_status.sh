@@ -1,8 +1,7 @@
 
 ########################################################################################################################
 # make sure single instance running
-#PIDFILE="$HOME/cronjob_get_status.sh.lock"
-PIDFILE="$HOME/test.sh.lock"
+PIDFILE="$HOME/cronjob_get_status.sh.lock"
 function cleanup() {
   rm -f $PIDFILE
 }
@@ -46,5 +45,4 @@ for service_name in $RPC_SERVICES; do
   sleep 0.5
 done
 
-# echo "[ $service_str ]" > ./web/public/rpc_status.json
-echo "[ $service_str ]" > $HOME/rpc_status.json
+echo "[ $service_str ]" > ./web/public/rpc_status.json
