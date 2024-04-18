@@ -220,4 +220,10 @@ if [[ -z $skip_snapshot_restore ]]; then
   if [ $( echo "${chain_name}" |grep -cE "^(sei|sei-archive-sub|sei-archive-sub1|sei-archive-sub2|sei-archive-sub3|sei-testnet)$" ) -ne 0 ]; then
     sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
   fi
+
+  # fix for babylon-testnet
+  if [ $( echo "${chain_name}" |grep -cE "^(babylon-testnet)$" ) -ne 0 ]; then
+    sed -i -e "s/^iavl-cache-size *=.*/iavl-cache-size = 0/" $node_home/config/app.toml
+    sed -i -e "s/^network *=.*/network = \"signet\"/" $node_home/config/app.toml
+  fi
 fi
