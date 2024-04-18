@@ -940,3 +940,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-nolus-ia.cosmosia.notional.ventures/  |
 | API      | https://api-nolus-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-nolus-ia.cosmosia.notional.ventures/ |
+
+### 117. babylon-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-babylon-testnet-ia.cosmosia.notional.ventures/  |
+| API      | https://api-babylon-testnet-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-babylon-testnet-ia.cosmosia.notional.ventures/ |

@@ -10,6 +10,7 @@ akash
 archway
 assetmantle
 axelar
+babylon-testnet
 bitcanna
 bitsong
 celestia-testnet
