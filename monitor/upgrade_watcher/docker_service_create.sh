@@ -23,6 +23,6 @@ docker service create \
   --env-file ../../env.sh \
   archlinux:latest \
   /bin/bash -c \
-  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/605-add-upgrade-watcher/monitor/upgrade_watcher/run.sh > ~/run.sh && /bin/bash ~/run.sh"
+  "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/monitor/upgrade_watcher/run.sh > ~/run.sh && /bin/bash ~/run.sh"
 
 
