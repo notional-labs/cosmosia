@@ -8,8 +8,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 nvm install v18.14.0
-
-yarn set version v18.14.0
+npm install --global yarn
 
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/upgrade-watcher
