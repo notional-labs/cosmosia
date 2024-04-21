@@ -17,7 +17,7 @@ docker service create \
   --replicas 1 \
   --network bignet \
   --constraint 'node.hostname==cosmosia11' \
-  --mount type=bind,source=/mnt/data/upgrade_watcher,destination=/data
+  --mount type=bind,source=/mnt/data/upgrade_watcher,destination=/data \
   --endpoint-mode dnsrr \
   --restart-condition any \
   --env-file ../../env.sh \
