@@ -32,6 +32,9 @@ const MainNav = () => {
           <Menu.Item key='rpc_deploy' icon={<PlusCircleOutlined />}>
             <Link href='/rpc_deploy'>Deploy</Link>
           </Menu.Item>
+          <Menu.Item key='upgrade_watcher' icon={<FileOutlined />}>
+            <Link href='https://upgrade-watcher.notional.ventures/' rel="noopener noreferrer" target="_blank">Upgrade Watcher</Link>
+          </Menu.Item>
         </Menu.SubMenu>
         <Menu.SubMenu key='vals' title="Vals" icon={<CloudServerOutlined />}>
           <Menu.Item key='val_monitor' icon={<DesktopOutlined />}>
