@@ -62,3 +62,9 @@ scrape_configs:
   - job_name: injective_clear
     static_configs:
       - targets: ['tasks.rlclear_injective:8000']
+  - job_name: composable-testnet
+    static_configs:
+      - targets: ['tasks.rl_composable-testnet:3001']
+  - job_name: composable-testnet_clear
+    static_configs:
+      - targets: ['tasks.rlclear_composable-testnet:8000']
