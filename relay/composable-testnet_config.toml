@@ -7,7 +7,7 @@ ${INC_BANKSY_TESTNET_5}
 policy = "allow"
 list = [
     # sort by chain_id
-    ['transfer', 'channel-999'], # osmo-test-5
+    ['transfer', 'channel-44'], # osmo-test-5
 ]
 
 [chains.packet_filter.min_fees]
@@ -18,5 +18,5 @@ ${INC_OSMO_TEST_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-999'],
+    ['transfer', 'channel-7758'],
 ]
