@@ -1213,3 +1213,69 @@ gas_price = { price = 0.25, denom = 'uwhale' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
+
+
+#################
+# TESTNETS
+
+# banksy-testnet-5
+export INC_BANKSY_TESTNET_5=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_composable-testnet:8000'
+grpc_addr = 'http://tasks.lb_composable-testnet:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_composable-testnet:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "centauri"
+key_name = "composable-testnet"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 600000
+max_gas =  10000000
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "40s"
+max_block_time = "10s"
+trusting_period = '14days'
+ccv_consumer_chain = false
+memo_prefix = "relayed by Notional.Ventures"
+sequential_batch_tx = false
+compat_mode = '0.37'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 1, denom = 'ppica' }
+address_type = { derivation = 'cosmos' }
+EOT
+)
+
+# osmo-test-5
+export INC_OSMO_TEST_1=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_osmosis-testnet:8000'
+grpc_addr = 'http://tasks.lb_osmosis-testnet:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis-testnet:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "osmo"
+key_name = "osmosis-testnet"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 400000
+max_gas = 25000000
+gas_multiplier = 1.3
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "100s"
+max_block_time = "10s"
+trusting_period = '224hours'
+ccv_consumer_chain = false
+memo_prefix = "relayed by Notional.Ventures"
+sequential_batch_tx = false
+compat_mode = '0.37'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.0025, denom = 'uosmo' }
+address_type = { derivation = 'cosmos' }
+EOT
+)
