@@ -303,7 +303,7 @@ ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0001, darc = 'udarc' }
+gas_price = { price = 0.0001, denom = 'udarc' }
 compat_mode = '0.34'
 EOT
 )
