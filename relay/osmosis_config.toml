@@ -14,7 +14,7 @@ list = [
     ['transfer','channel-72'],   # columbus-5
     ['transfer', 'channel-0'],   # cosmoshub
     ['transfer', 'channel-5'],   # crypto-org-chain-mainnet-1
-    ['transfer', 'channel-171'], # konstellation (darchub)
+    ['transfer', 'channel-171'], # darchub (konstellation)
     ['transfer', 'channel-144'], # gravity-bridge-3
     ['transfer', 'channel-6'],   # irishub-1
     ['transfer', 'channel-42'],  # juno
@@ -93,6 +93,15 @@ ${INC_CRYPTO_ORG_CHAIN_MAINNET_1}
 policy = 'allow'
 list = [
     ['transfer', 'channel-10'],
+]
+
+[[chains]]
+id = 'darchub'
+${INC_DARCHHB}
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-0'],
 ]
 
 [[chains]]

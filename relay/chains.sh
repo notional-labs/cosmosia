@@ -45,7 +45,7 @@ account_prefix = "centauri"
 key_name = "composable"
 key_store_type = "Test"
 store_prefix = "ibc"
-default_gas = 400000
+default_gas = 600000
 max_gas =  10000000
 gas_multiplier = 1.2
 max_msg_num = 30
@@ -275,6 +275,35 @@ memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.075, denom = 'ujuno' }
+compat_mode = '0.37'
+EOT
+)
+
+# darchub
+export INC_DARCHHB=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = "http://tasks.lb_konstellation:8000"
+grpc_addr = "http://tasks.lb_konstellation:8003"
+event_source = { mode = 'push', url = 'ws://tasks.lb_konstellation:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "10s"
+trusted_node = false
+account_prefix = "darc"
+key_name = "darchub"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 100000
+max_gas = 400000
+gas_multiplier = 1.1
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "relayed by Notional.Ventures"
+sequential_batch_tx = false
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.0001, darc = 'udarc' }
 compat_mode = '0.37'
 EOT
 )
