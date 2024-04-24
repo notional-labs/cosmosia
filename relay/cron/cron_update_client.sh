@@ -40,8 +40,13 @@ echo "$items" | while IFS= read -r item ; do
 
     threshold_time=DEFAULT_THRESHOLD_TIME
 
+    # 1 hour for axelar
     if [ $( echo "${chain_id}" | grep -cE "^(axelar-dojo-1)$" ) -ne 0 ] || [ $( echo "${counter_chain_id}" | grep -cE "^(axelar-dojo-1)$" ) -ne 0 ] ; then
-      # 1 hour
+      threshold_time=3600
+    fi
+
+    # 1 hour for testnet
+    if [ $( echo "${chain_id}" | grep -cE "(testnet)" ) -ne 0 ] || [ $( echo "${counter_chain_id}" | grep -cE "(testnet)" ) -ne 0 ] ; then
       threshold_time=3600
     fi
 
