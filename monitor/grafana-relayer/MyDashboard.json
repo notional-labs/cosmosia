@@ -84,8 +84,7 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -163,7 +162,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "body": "",
@@ -264,7 +263,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -474,12 +473,464 @@
       "type": "logs"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 36
+      },
+      "id": 74,
+      "panels": [
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "from": 1,
+                    "result": {
+                      "color": "#fade2a3d",
+                      "index": 0
+                    },
+                    "to": 4
+                  },
+                  "type": "range"
+                },
+                {
+                  "options": {
+                    "from": 5,
+                    "result": {
+                      "color": "#f2495c7a",
+                      "index": 1
+                    },
+                    "to": 9999
+                  },
+                  "type": "range"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "transparent",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "pending_packets"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "time_ago"
+                },
+                "properties": [
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
+                          "result": {
+                            "color": "#f2495c78",
+                            "index": 0
+                          }
+                        },
+                        "type": "regex"
+                      },
+                      {
+                        "options": {
+                          "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                          "result": {
+                            "color": "#fade2a29",
+                            "index": 1
+                          }
+                        },
+                        "type": "regex"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 2
+          },
+          "id": 75,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.4.2",
+          "targets": [
+            {
+              "body": "",
+              "cacheDurationSeconds": 60,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/composable-testnet_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_last_ibc_client_update"
+            }
+          ],
+          "title": "Last Client Update [composable-testnet]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 2
+          },
+          "id": 76,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
+            {
+              "cacheDurationSeconds": 60,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "composable-testnet"
+                ],
+                [
+                  "process",
+                  "main"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
+            }
+          ],
+          "title": "Wallet Balances  [composable-testnet]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 2
+          },
+          "id": 77,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
+            {
+              "cacheDurationSeconds": 60,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "composable-testnet"
+                ],
+                [
+                  "process",
+                  "cron"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
+            }
+          ],
+          "title": "Wallet Balances - Cron [composable-testnet]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 8
+          },
+          "id": 78,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_composable-testnet\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [composable-testnet]",
+          "transparent": true,
+          "type": "logs"
+        }
+      ],
+      "title": "composable-testnet",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 37
       },
       "id": 9,
       "panels": [],
@@ -535,8 +986,7 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -600,7 +1050,7 @@
         "h": 24,
         "w": 8,
         "x": 0,
-        "y": 37
+        "y": 38
       },
       "id": 8,
       "options": {
@@ -615,7 +1065,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "body": "",
@@ -693,7 +1143,7 @@
         "h": 24,
         "w": 8,
         "x": 8,
-        "y": 37
+        "y": 38
       },
       "id": 5,
       "options": {
@@ -716,7 +1166,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -804,7 +1254,7 @@
         "h": 24,
         "w": 8,
         "x": 16,
-        "y": 37
+        "y": 38
       },
       "id": 55,
       "options": {
@@ -827,7 +1277,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -896,7 +1346,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 61
+        "y": 62
       },
       "id": 41,
       "options": {
@@ -931,7 +1381,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 68
       },
       "id": 10,
       "panels": [],
@@ -987,8 +1437,7 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -1052,7 +1501,7 @@
         "h": 14,
         "w": 8,
         "x": 0,
-        "y": 68
+        "y": 69
       },
       "id": 12,
       "options": {
@@ -1067,7 +1516,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "body": "",
@@ -1145,7 +1594,7 @@
         "h": 14,
         "w": 8,
         "x": 8,
-        "y": 68
+        "y": 69
       },
       "id": 56,
       "options": {
@@ -1168,7 +1617,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -1256,7 +1705,7 @@
         "h": 14,
         "w": 8,
         "x": 16,
-        "y": 68
+        "y": 69
       },
       "id": 57,
       "options": {
@@ -1279,7 +1728,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -1348,7 +1797,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 82
+        "y": 83
       },
       "id": 43,
       "options": {
@@ -1378,457 +1827,457 @@
       "type": "logs"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 88
+        "y": 89
       },
       "id": 28,
-      "panels": [],
-      "title": "Injective ✔️",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
+      "panels": [
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [
-            {
-              "options": {
-                "from": 1,
-                "result": {
-                  "color": "#fade2a3d",
-                  "index": 0
-                },
-                "to": 4
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
               },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 5,
-                "result": {
-                  "color": "#f2495c7a",
-                  "index": 1
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
                 },
-                "to": 9999
+                "inspect": false
               },
-              "type": "range"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              }
-            ]
-          },
-          "unitScale": true
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pending_packets"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time_ago"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
-                      "result": {
-                        "color": "#f2495c78",
-                        "index": 0
-                      }
+              "mappings": [
+                {
+                  "options": {
+                    "from": 1,
+                    "result": {
+                      "color": "#fade2a3d",
+                      "index": 0
                     },
-                    "type": "regex"
+                    "to": 4
                   },
-                  {
-                    "options": {
-                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
-                      "result": {
-                        "color": "#fade2a2b",
-                        "index": 1
-                      }
+                  "type": "range"
+                },
+                {
+                  "options": {
+                    "from": 5,
+                    "result": {
+                      "color": "#f2495c7a",
+                      "index": 1
                     },
-                    "type": "regex"
+                    "to": 9999
+                  },
+                  "type": "range"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "transparent",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "pending_packets"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
                   }
                 ]
               },
               {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
+                "matcher": {
+                  "id": "byName",
+                  "options": "time_ago"
+                },
+                "properties": [
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
+                          "result": {
+                            "color": "#f2495c78",
+                            "index": 0
+                          }
+                        },
+                        "type": "regex"
+                      },
+                      {
+                        "options": {
+                          "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                          "result": {
+                            "color": "#fade2a2b",
+                            "index": 1
+                          }
+                        },
+                        "type": "regex"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 5
+          },
+          "id": 30,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.4.2",
+          "targets": [
+            {
+              "body": "",
+              "cacheDurationSeconds": 60,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
                 }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 0,
-        "y": 89
-      },
-      "id": 30,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/injective_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_last_ibc_client_update"
+            }
           ],
-          "show": false
+          "title": "Last Client Update [injective]",
+          "transparent": true,
+          "type": "table"
         },
-        "showHeader": true
-      },
-      "pluginVersion": "10.3.1",
-      "targets": [
         {
-          "body": "",
-          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 5
+          },
+          "id": 58,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
             },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
             {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/injective_config.toml"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_last_ibc_client_update"
-        }
-      ],
-      "title": "Last Client Update [injective]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "injective"
+                ],
+                [
+                  "process",
+                  "main"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
+            }
+          ],
+          "title": "Wallet Balances [injective]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 8,
-        "y": 89
-      },
-      "id": 58,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "renderMode": "allRows",
-        "styles": "",
-        "wrap": false
-      },
-      "pluginVersion": "4.5.0",
-      "targets": [
         {
-          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].account"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].chain_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 5
+          },
+          "id": 59,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
             },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
             {
-              "jsonPath": "$.[*].denom",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].message",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].need_refill",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].refill_threshold",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].value",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "relayer_hub_name",
-              "injective"
-            ],
-            [
-              "process",
-              "main"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_wallet_balance"
-        }
-      ],
-      "title": "Wallet Balances [injective]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 16,
-        "y": 89
-      },
-      "id": 59,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "renderMode": "allRows",
-        "styles": "",
-        "wrap": false
-      },
-      "pluginVersion": "4.5.0",
-      "targets": [
-        {
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "marcusolsson-json-datasource",
-            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-          },
-          "fields": [
-            {
-              "jsonPath": "$.[*].account"
-            },
-            {
-              "jsonPath": "$.[*].chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].denom",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].message",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].need_refill",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].refill_threshold",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].value",
-              "language": "jsonpath",
-              "name": ""
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "injective"
+                ],
+                [
+                  "process",
+                  "cron"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
             }
           ],
-          "method": "GET",
-          "params": [
-            [
-              "relayer_hub_name",
-              "injective"
-            ],
-            [
-              "process",
-              "cron"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_wallet_balance"
-        }
-      ],
-      "title": "Wallet Balances - Cron [injective]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 95
-      },
-      "id": 44,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
+          "title": "Wallet Balances - Cron [injective]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_injective\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 11
+          },
+          "id": 44,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_injective\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [injective]",
+          "transparent": true,
+          "type": "logs"
         }
       ],
-      "title": "Log [injective]",
-      "transparent": true,
-      "type": "logs"
+      "title": "Injective ✔️",
+      "type": "row"
     },
     {
       "collapsed": false,
@@ -1836,7 +2285,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 101
+        "y": 90
       },
       "id": 19,
       "panels": [],
@@ -1893,8 +2342,7 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -1958,7 +2406,7 @@
         "h": 17,
         "w": 8,
         "x": 0,
-        "y": 102
+        "y": 91
       },
       "id": 21,
       "options": {
@@ -1973,7 +2421,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "body": "",
@@ -2051,7 +2499,7 @@
         "h": 16,
         "w": 8,
         "x": 8,
-        "y": 102
+        "y": 91
       },
       "id": 63,
       "options": {
@@ -2074,7 +2522,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -2162,7 +2610,7 @@
         "h": 15,
         "w": 7,
         "x": 16,
-        "y": 102
+        "y": 91
       },
       "id": 62,
       "options": {
@@ -2185,7 +2633,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -2254,7 +2702,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 119
+        "y": 108
       },
       "id": 45,
       "options": {
@@ -2289,7 +2737,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 125
+        "y": 114
       },
       "id": 25,
       "panels": [],
@@ -2347,8 +2795,7 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -2412,7 +2859,7 @@
         "h": 35,
         "w": 8,
         "x": 0,
-        "y": 126
+        "y": 115
       },
       "id": 27,
       "options": {
@@ -2427,7 +2874,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "body": "",
@@ -2505,7 +2952,7 @@
         "h": 35,
         "w": 8,
         "x": 8,
-        "y": 126
+        "y": 115
       },
       "id": 64,
       "options": {
@@ -2528,7 +2975,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -2616,7 +3063,7 @@
         "h": 35,
         "w": 8,
         "x": 16,
-        "y": 126
+        "y": 115
       },
       "id": 65,
       "options": {
@@ -2639,7 +3086,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -2708,7 +3155,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 161
+        "y": 150
       },
       "id": 46,
       "options": {
@@ -2738,1370 +3185,1370 @@
       "type": "logs"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 167
+        "y": 156
       },
       "id": 16,
-      "panels": [],
+      "panels": [
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "from": 1,
+                    "result": {
+                      "color": "#fade2a3d",
+                      "index": 0
+                    },
+                    "to": 4
+                  },
+                  "type": "range"
+                },
+                {
+                  "options": {
+                    "from": 5,
+                    "result": {
+                      "color": "#f2495c7a",
+                      "index": 1
+                    },
+                    "to": 9999
+                  },
+                  "type": "range"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "transparent",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "pending_packets"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "time_ago"
+                },
+                "properties": [
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
+                          "result": {
+                            "color": "#f2495c80",
+                            "index": 0
+                          }
+                        },
+                        "type": "regex"
+                      },
+                      {
+                        "options": {
+                          "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                          "result": {
+                            "color": "#fade2a26",
+                            "index": 1
+                          }
+                        },
+                        "type": "regex"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 8,
+            "x": 0,
+            "y": 8
+          },
+          "id": 18,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.4.2",
+          "targets": [
+            {
+              "body": "",
+              "cacheDurationSeconds": 60,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/sei_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_last_ibc_client_update"
+            }
+          ],
+          "title": "Last Client Update [sei]",
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 8,
+            "x": 8,
+            "y": 8
+          },
+          "id": 66,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
+            {
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "sei"
+                ],
+                [
+                  "process",
+                  "main"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
+            }
+          ],
+          "title": "Wallet Balances [sei]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 8,
+            "x": 16,
+            "y": 8
+          },
+          "id": 67,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
+            },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
+            {
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "sei"
+                ],
+                [
+                  "process",
+                  "cron"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
+            }
+          ],
+          "title": "Wallet Balances - Cron [sei]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 21
+          },
+          "id": 54,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_sei\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [sei]",
+          "transparent": true,
+          "type": "logs"
+        }
+      ],
       "title": "Sei ✔️",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 157
       },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
+      "id": 50,
+      "panels": [
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [
-            {
-              "options": {
-                "from": 1,
-                "result": {
-                  "color": "#fade2a3d",
-                  "index": 0
-                },
-                "to": 4
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
               },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 5,
-                "result": {
-                  "color": "#f2495c7a",
-                  "index": 1
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
                 },
-                "to": 9999
+                "inspect": false
               },
-              "type": "range"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              }
-            ]
-          },
-          "unitScale": true
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pending_packets"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time_ago"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
-                      "result": {
-                        "color": "#f2495c80",
-                        "index": 0
-                      }
+              "mappings": [
+                {
+                  "options": {
+                    "from": 1,
+                    "result": {
+                      "color": "#fade2a3d",
+                      "index": 0
                     },
-                    "type": "regex"
+                    "to": 4
                   },
-                  {
-                    "options": {
-                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
-                      "result": {
-                        "color": "#fade2a26",
-                        "index": 1
-                      }
+                  "type": "range"
+                },
+                {
+                  "options": {
+                    "from": 5,
+                    "result": {
+                      "color": "#f2495c7a",
+                      "index": 1
                     },
-                    "type": "regex"
+                    "to": 9999
+                  },
+                  "type": "range"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "transparent",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "pending_packets"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
                   }
                 ]
               },
               {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
+                "matcher": {
+                  "id": "byName",
+                  "options": "time_ago"
+                },
+                "properties": [
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
+                          "result": {
+                            "color": "#f2495c7d",
+                            "index": 0
+                          }
+                        },
+                        "type": "regex"
+                      },
+                      {
+                        "options": {
+                          "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                          "result": {
+                            "color": "#fade2a33",
+                            "index": 1
+                          }
+                        },
+                        "type": "regex"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 8,
+            "x": 0,
+            "y": 8
+          },
+          "id": 51,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.4.2",
+          "targets": [
+            {
+              "body": "",
+              "cacheDurationSeconds": 60,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
                 }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 8,
-        "x": 0,
-        "y": 168
-      },
-      "id": 18,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/seilegacy_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_last_ibc_client_update"
+            }
           ],
-          "show": false
+          "title": "Last Client Update [seilegacy]",
+          "transparent": true,
+          "type": "table"
         },
-        "showHeader": true
-      },
-      "pluginVersion": "10.3.1",
-      "targets": [
         {
-          "body": "",
-          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 8,
+            "x": 8,
+            "y": 8
+          },
+          "id": 68,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
             },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
             {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/sei_config.toml"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_last_ibc_client_update"
-        }
-      ],
-      "title": "Last Client Update [sei]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "seilegacy"
+                ],
+                [
+                  "process",
+                  "main"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
+            }
+          ],
+          "title": "Wallet Balances  [seilegacy]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 13,
-        "w": 8,
-        "x": 8,
-        "y": 168
-      },
-      "id": 66,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "renderMode": "allRows",
-        "styles": "",
-        "wrap": false
-      },
-      "pluginVersion": "4.5.0",
-      "targets": [
         {
-          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].account"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].chain_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 8,
+            "x": 16,
+            "y": 8
+          },
+          "id": 69,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
             },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
             {
-              "jsonPath": "$.[*].denom",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].message",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].need_refill",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].refill_threshold",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].value",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "relayer_hub_name",
-              "sei"
-            ],
-            [
-              "process",
-              "main"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_wallet_balance"
-        }
-      ],
-      "title": "Wallet Balances [sei]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 13,
-        "w": 8,
-        "x": 16,
-        "y": 168
-      },
-      "id": 67,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "renderMode": "allRows",
-        "styles": "",
-        "wrap": false
-      },
-      "pluginVersion": "4.5.0",
-      "targets": [
-        {
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "marcusolsson-json-datasource",
-            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-          },
-          "fields": [
-            {
-              "jsonPath": "$.[*].account"
-            },
-            {
-              "jsonPath": "$.[*].chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].denom",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].message",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].need_refill",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].refill_threshold",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].value",
-              "language": "jsonpath",
-              "name": ""
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "seilegacy"
+                ],
+                [
+                  "process",
+                  "cron"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
             }
           ],
-          "method": "GET",
-          "params": [
-            [
-              "relayer_hub_name",
-              "sei"
-            ],
-            [
-              "process",
-              "cron"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_wallet_balance"
-        }
-      ],
-      "title": "Wallet Balances - Cron [sei]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 181
-      },
-      "id": 54,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
+          "title": "Wallet Balances - Cron [seilegacy]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_sei\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 20
+          },
+          "id": 47,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_seilegacy\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [seilegacy]",
+          "transparent": true,
+          "type": "logs"
         }
       ],
-      "title": "Log [sei]",
-      "transparent": true,
-      "type": "logs"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 187
-      },
-      "id": 50,
-      "panels": [],
       "title": "SeiLegacy ✔️",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 158
       },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
+      "id": 11,
+      "panels": [
+        {
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [
-            {
-              "options": {
-                "from": 1,
-                "result": {
-                  "color": "#fade2a3d",
-                  "index": 0
-                },
-                "to": 4
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
               },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 5,
-                "result": {
-                  "color": "#f2495c7a",
-                  "index": 1
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
                 },
-                "to": 9999
+                "inspect": false
               },
-              "type": "range"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              }
-            ]
-          },
-          "unitScale": true
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pending_packets"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time_ago"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
-                      "result": {
-                        "color": "#f2495c7d",
-                        "index": 0
-                      }
+              "mappings": [
+                {
+                  "options": {
+                    "from": 1,
+                    "result": {
+                      "color": "#fade2a3d",
+                      "index": 0
                     },
-                    "type": "regex"
+                    "to": 4
                   },
-                  {
-                    "options": {
-                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
-                      "result": {
-                        "color": "#fade2a33",
-                        "index": 1
-                      }
+                  "type": "range"
+                },
+                {
+                  "options": {
+                    "from": 5,
+                    "result": {
+                      "color": "#f2495c7a",
+                      "index": 1
                     },
-                    "type": "regex"
+                    "to": 9999
+                  },
+                  "type": "range"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "transparent",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "pending_packets"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
                   }
                 ]
               },
               {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
+                "matcher": {
+                  "id": "byName",
+                  "options": "time_ago"
+                },
+                "properties": [
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
+                          "result": {
+                            "color": "#f2495c78",
+                            "index": 0
+                          }
+                        },
+                        "type": "regex"
+                      },
+                      {
+                        "options": {
+                          "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                          "result": {
+                            "color": "#fade2a29",
+                            "index": 1
+                          }
+                        },
+                        "type": "regex"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 10
+          },
+          "id": 31,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.4.2",
+          "targets": [
+            {
+              "body": "",
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+              },
+              "fields": [
+                {
+                  "jsonPath": "$.[*].chain_id"
+                },
+                {
+                  "jsonPath": "$.[*].channel_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].counter_chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].pending_packets",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].time_ago",
+                  "language": "jsonpath",
+                  "name": ""
                 }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 8,
-        "x": 0,
-        "y": 188
-      },
-      "id": 51,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "hermes_config_url",
+                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/test_config.toml"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_last_ibc_client_update"
+            }
           ],
-          "show": false
+          "title": "Last Client Update [test]",
+          "transparent": true,
+          "type": "table"
         },
-        "showHeader": true
-      },
-      "pluginVersion": "10.3.1",
-      "targets": [
         {
-          "body": "",
-          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 10
+          },
+          "id": 70,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
             },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
             {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/seilegacy_config.toml"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_last_ibc_client_update"
-        }
-      ],
-      "title": "Last Client Update [seilegacy]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "test"
+                ],
+                [
+                  "process",
+                  "main"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
+            }
+          ],
+          "title": "Wallet Balances  [test]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 8,
-        "x": 8,
-        "y": 188
-      },
-      "id": 68,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "renderMode": "allRows",
-        "styles": "",
-        "wrap": false
-      },
-      "pluginVersion": "4.5.0",
-      "targets": [
         {
-          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "fields": [
-            {
-              "jsonPath": "$.[*].account"
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
             },
-            {
-              "jsonPath": "$.[*].chain_id",
-              "language": "jsonpath",
-              "name": ""
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 10
+          },
+          "id": 71,
+          "options": {
+            "afterRender": "",
+            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+            "defaultContent": "The query didn't return any results.",
+            "editor": {
+              "format": "auto",
+              "height": 200,
+              "language": "markdown"
             },
+            "editors": [],
+            "externalScripts": [],
+            "externalStyles": [],
+            "helpers": "",
+            "renderMode": "allRows",
+            "styles": "",
+            "wrap": false
+          },
+          "pluginVersion": "4.5.0",
+          "targets": [
             {
-              "jsonPath": "$.[*].denom",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].message",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].need_refill",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].refill_threshold",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].value",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "relayer_hub_name",
-              "seilegacy"
-            ],
-            [
-              "process",
-              "main"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_wallet_balance"
-        }
-      ],
-      "title": "Wallet Balances  [seilegacy]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+              "cacheDurationSeconds": 300,
+              "datasource": {
+                "type": "marcusolsson-json-datasource",
+                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
               },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 8,
-        "x": 16,
-        "y": 188
-      },
-      "id": 69,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "renderMode": "allRows",
-        "styles": "",
-        "wrap": false
-      },
-      "pluginVersion": "4.5.0",
-      "targets": [
-        {
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "marcusolsson-json-datasource",
-            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-          },
-          "fields": [
-            {
-              "jsonPath": "$.[*].account"
-            },
-            {
-              "jsonPath": "$.[*].chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].denom",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].message",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].need_refill",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].refill_threshold",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].value",
-              "language": "jsonpath",
-              "name": ""
+              "fields": [
+                {
+                  "jsonPath": "$.[*].account"
+                },
+                {
+                  "jsonPath": "$.[*].chain_id",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].denom",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].message",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].need_refill",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].refill_threshold",
+                  "language": "jsonpath",
+                  "name": ""
+                },
+                {
+                  "jsonPath": "$.[*].value",
+                  "language": "jsonpath",
+                  "name": ""
+                }
+              ],
+              "method": "GET",
+              "params": [
+                [
+                  "relayer_hub_name",
+                  "test"
+                ],
+                [
+                  "process",
+                  "cron"
+                ]
+              ],
+              "queryParams": "",
+              "refId": "A",
+              "urlPath": "/get_wallet_balance"
             }
           ],
-          "method": "GET",
-          "params": [
-            [
-              "relayer_hub_name",
-              "seilegacy"
-            ],
-            [
-              "process",
-              "cron"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_wallet_balance"
-        }
-      ],
-      "title": "Wallet Balances - Cron [seilegacy]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 200
-      },
-      "id": 47,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
+          "title": "Wallet Balances - Cron [test]",
+          "transparent": true,
+          "type": "marcusolsson-dynamictext-panel"
+        },
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_seilegacy\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 16
+          },
+          "id": 48,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{job=\"hermes_test\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log [test]",
+          "transparent": true,
+          "type": "logs"
         }
       ],
-      "title": "Log [seilegacy]",
-      "transparent": true,
-      "type": "logs"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 206
-      },
-      "id": 11,
-      "panels": [],
       "title": "Test ✔️",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [
-            {
-              "options": {
-                "from": 1,
-                "result": {
-                  "color": "#fade2a3d",
-                  "index": 0
-                },
-                "to": 4
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 5,
-                "result": {
-                  "color": "#f2495c7a",
-                  "index": 1
-                },
-                "to": 9999
-              },
-              "type": "range"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              }
-            ]
-          },
-          "unitScale": true
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pending_packets"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time_ago"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
-                      "result": {
-                        "color": "#f2495c78",
-                        "index": 0
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
-                      "result": {
-                        "color": "#fade2a29",
-                        "index": 1
-                      }
-                    },
-                    "type": "regex"
-                  }
-                ]
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 0,
-        "y": 207
-      },
-      "id": 31,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.3.1",
-      "targets": [
-        {
-          "body": "",
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "marcusolsson-json-datasource",
-            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-          },
-          "fields": [
-            {
-              "jsonPath": "$.[*].chain_id"
-            },
-            {
-              "jsonPath": "$.[*].channel_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].counter_chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].pending_packets",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].time_ago",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "hermes_config_url",
-              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/test_config.toml"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_last_ibc_client_update"
-        }
-      ],
-      "title": "Last Client Update [test]",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 8,
-        "y": 207
-      },
-      "id": 70,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "renderMode": "allRows",
-        "styles": "",
-        "wrap": false
-      },
-      "pluginVersion": "4.5.0",
-      "targets": [
-        {
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "marcusolsson-json-datasource",
-            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-          },
-          "fields": [
-            {
-              "jsonPath": "$.[*].account"
-            },
-            {
-              "jsonPath": "$.[*].chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].denom",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].message",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].need_refill",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].refill_threshold",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].value",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "relayer_hub_name",
-              "test"
-            ],
-            [
-              "process",
-              "main"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_wallet_balance"
-        }
-      ],
-      "title": "Wallet Balances  [test]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 16,
-        "y": 207
-      },
-      "id": 71,
-      "options": {
-        "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-        "defaultContent": "The query didn't return any results.",
-        "editor": {
-          "format": "auto",
-          "height": 200,
-          "language": "markdown"
-        },
-        "editors": [],
-        "externalScripts": [],
-        "externalStyles": [],
-        "helpers": "",
-        "renderMode": "allRows",
-        "styles": "",
-        "wrap": false
-      },
-      "pluginVersion": "4.5.0",
-      "targets": [
-        {
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "marcusolsson-json-datasource",
-            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-          },
-          "fields": [
-            {
-              "jsonPath": "$.[*].account"
-            },
-            {
-              "jsonPath": "$.[*].chain_id",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].denom",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].message",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].need_refill",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].refill_threshold",
-              "language": "jsonpath",
-              "name": ""
-            },
-            {
-              "jsonPath": "$.[*].value",
-              "language": "jsonpath",
-              "name": ""
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "relayer_hub_name",
-              "test"
-            ],
-            [
-              "process",
-              "cron"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/get_wallet_balance"
-        }
-      ],
-      "title": "Wallet Balances - Cron [test]",
-      "transparent": true,
-      "type": "marcusolsson-dynamictext-panel"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 213
-      },
-      "id": 48,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": false,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
-          },
-          "editorMode": "code",
-          "expr": "{job=\"hermes_test\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Log [test]",
-      "transparent": true,
-      "type": "logs"
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 219
+        "y": 159
       },
       "id": 13,
       "panels": [],
@@ -4158,8 +4605,7 @@
                 "value": null
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": [
           {
@@ -4223,7 +4669,7 @@
         "h": 17,
         "w": 8,
         "x": 0,
-        "y": 220
+        "y": 160
       },
       "id": 15,
       "options": {
@@ -4238,7 +4684,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "body": "",
@@ -4316,7 +4762,7 @@
         "h": 16,
         "w": 8,
         "x": 8,
-        "y": 220
+        "y": 160
       },
       "id": 72,
       "options": {
@@ -4339,7 +4785,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -4427,7 +4873,7 @@
         "h": 16,
         "w": 8,
         "x": 16,
-        "y": 220
+        "y": 160
       },
       "id": 73,
       "options": {
@@ -4450,7 +4896,7 @@
       "pluginVersion": "4.5.0",
       "targets": [
         {
-          "cacheDurationSeconds": 300,
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
@@ -4519,7 +4965,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 237
+        "y": 177
       },
       "id": 49,
       "options": {
