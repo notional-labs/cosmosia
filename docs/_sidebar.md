@@ -9,6 +9,7 @@
     - [Usage](snapshot_usage.md)
     - [PebbleDB Notes](pebbledb.md)
   - [Rpc Status](https://status.notional.ventures/status/notionalapi)
+  - [Upgrade Watcher](https://upgrade-watcher.notional.ventures/)
   - [Relay Status](https://status-relayer.notional.ventures/status/ibc)
 
 - Admin
