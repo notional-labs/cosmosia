@@ -33,7 +33,12 @@ for service_name in $RPC_SERVICES; do
     data_size=$(curl -s --connect-timeout 3 --max-time 3 "http://$ip_addr/data_size" |jq -r .data_size)
 
     # figure out hostname of container
-    hostname=$(dig +short -x $ip_addr)
+    # hostname=$(dig +short -x $ip_addr)
+    hostname="${service_name}"
+
+    if [[ ! -z "$service_str" ]]; then
+      service_str="$service_str,"$'\n'
+    fi
 
     if [[ ! -z "$service_str" ]]; then
       service_str="$service_str,"$'\n'
