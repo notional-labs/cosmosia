@@ -39,10 +39,6 @@ for service_name in $RPC_SERVICES; do
     if [[ ! -z "$service_str" ]]; then
       service_str="$service_str,"$'\n'
     fi
-
-    if [[ ! -z "$service_str" ]]; then
-      service_str="$service_str,"$'\n'
-    fi
     service_str="$service_str""    { \"ip\": \"$ip_addr\", \"hostname\": \"$hostname\", \"status\": \"$status_code\", \"data_size\": \"$data_size\" }"
 
   done < <(echo "$ips")
