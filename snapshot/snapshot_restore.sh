@@ -221,6 +221,12 @@ if [[ -z $skip_snapshot_restore ]]; then
     sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
   fi
 
+  # fix for seidb
+  if [ $( echo "${chain_name}" |grep -cE "^(sei)$" ) -ne 0 ]; then
+    sed -i -e "s/^sc-enable *=.*/sc-enable = true/" $node_home/config/app.toml
+    sed -i -e "s/^ss-enable *=.*/ss-enable = true/" $node_home/config/app.toml
+  fi
+
   # fix for babylon-testnet
   if [ $( echo "${chain_name}" |grep -cE "^(babylon-testnet)$" ) -ne 0 ]; then
     sed -i -e "s/^iavl-cache-size *=.*/iavl-cache-size = 0/" $node_home/config/app.toml
