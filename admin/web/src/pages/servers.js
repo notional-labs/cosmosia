@@ -176,8 +176,11 @@ const ServerTable = (props) => {
           filters: [
             {text: 'cosmosia.rpc.pruned', value: 'cosmosia.rpc.pruned'},
             {text: 'cosmosia.snapshot.pruned', value: 'cosmosia.snapshot.pruned'},
+            {text: 'cosmosia.rpc.archive', value: 'cosmosia.rpc.archive'},
+            {text: 'cosmosia.snapshot.archive', value: 'cosmosia.snapshot.archive'},
             {text: 'cosmosia.storage', value: 'cosmosia.storage'},
             {text: 'cosmosia.lb', value: 'cosmosia.lb'},
+            {text: 'cosmosia.proxy', value: 'cosmosia.proxy'},
           ],
           onFilter: (value, record) => _.contains(record.Tags, value),
         },
