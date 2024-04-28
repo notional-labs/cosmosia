@@ -948,3 +948,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-babylon-testnet-ia.cosmosia.notional.ventures/  |
 | API      | https://api-babylon-testnet-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-babylon-testnet-ia.cosmosia.notional.ventures/ |
+
+### 118. sei-archive-sub4
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-sei-archive-sub4-ia.cosmosia.notional.ventures/  |
+| API      | https://api-sei-archive-sub4-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-sei-archive-sub4-ia.cosmosia.notional.ventures/ |

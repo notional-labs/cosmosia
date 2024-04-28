@@ -217,7 +217,7 @@ if [[ -z $skip_snapshot_restore ]]; then
   [ "$chain_name" == "injective" ] && sed -i '/^\[mempool]/,/^\[/{s/^size[[:space:]]*=.*/size = 200/}' $node_home/config/config.toml
 
   # fix for sei
-  if [ $( echo "${chain_name}" |grep -cE "^(sei|sei-archive-sub|sei-archive-sub1|sei-archive-sub2|sei-archive-sub3|sei-testnet)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" |grep -cE "^(sei|sei-archive-sub|sei-archive-sub1|sei-archive-sub2|sei-archive-sub3|sei-archive-sub4|sei-testnet)$" ) -ne 0 ]; then
     sed -i -e "s/^log-level *=.*/log-level = \"error\"/" $node_home/config/config.toml
   fi
 
