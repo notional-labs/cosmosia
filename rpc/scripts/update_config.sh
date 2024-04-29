@@ -74,13 +74,13 @@ get_docker_snapshot_config () {
 str_snapshot_cfg="$(curl -s "http://tasks.web_config/config/cosmosia.snapshot.${chain_name}" |sed 's/ = /=/g')"
 echo $str_snapshot_cfg
 
+# fetch snapshot configuration
+echo "str_snapshot_cfg=${str_snapshot_cfg}"
+eval "${str_snapshot_cfg}"
+
 # figure out IP of the snapshot_storage_node
 snapshot_storage_node_ip=$(curl -s "http://tasks.web_config/node_ip/${snapshot_storage_node}")
 
-# fetch snapshot configuration
-str_snapshot_cfg=$(get_docker_snapshot_config)
-echo "str_snapshot_cfg=${str_snapshot_cfg}"
-eval "${str_snapshot_cfg}"
 }
 
 update_rpc_env () {
@@ -116,7 +116,7 @@ fi
 update_snapshot_env () {
 
 # backup old env vars
-mv $HOME/env.sh env.$STAMP.sh
+mv $HOME/env.sh $HOME/.backup/env.$STAMP.sh
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
