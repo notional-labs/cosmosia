@@ -198,7 +198,7 @@ create_backup_folder_if_not_exist
 activate_old_env
 get_latest_env
 get_docker_snapshot_config 
-update_rpc_env
+update_snapshot_env
 check_chain_status
 update_start_chain_script
 }
