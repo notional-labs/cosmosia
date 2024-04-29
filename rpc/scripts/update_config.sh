@@ -7,10 +7,24 @@ export OPTION=$1
 # SET BASIC FUNCTIONS
 ########################################################################################################################
 
+# activate old env vars
+activate_old_env () {
+
+if [ -f $HOME/env.sh ]
+then
+  source $HOME/env.sh
+elif 
+  echo "env.sh does not exist."
+  echo "Please check again."
+  exit
+fi
+
+}
+
 # fetch new chain configuration
 get_latest_env () {
-
-# activate old env vars
+	
+# print read chain info
 echo "read chain info:"
 
 # to get the url to the config file
@@ -141,12 +155,14 @@ sleep 5
 ################################################################################
 ########################################
 update_rpc_config () {
+activate_old_env
 get_latest_env
 update_rpc_env
 update_start_script
 }
 
 update_snapshot_config () {
+activate_old_env
 get_latest_env
 get_docker_snapshot_config 
 update_rpc_env
