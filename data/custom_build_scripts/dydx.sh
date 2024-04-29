@@ -13,6 +13,8 @@ else
 fi
 
 cd protocol
+go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
+go mod tidy
 go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
 go mod tidy
 go mod edit -replace github.com/cosmos/cosmos-db=github.com/notional-labs/cosmos-db@v1.0.0-139b9ba
