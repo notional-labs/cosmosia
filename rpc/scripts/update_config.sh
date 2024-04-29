@@ -156,7 +156,7 @@ echo "$status"
 if   [[ "$status" == *EXITED* ]]; then
    continue
 elif [[ "$status" == *RUNNING* ]]; then
-   continue
+   supervisorctl stop chain
 fi
 
 # stop chain before update start script
