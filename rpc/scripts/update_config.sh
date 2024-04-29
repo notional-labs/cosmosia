@@ -23,7 +23,7 @@ activate_old_env () {
 if [ -f $HOME/env.sh ]
 then
   source $HOME/env.sh
-elif 
+else
   echo "env.sh does not exist."
   echo "Please check again."
   exit
