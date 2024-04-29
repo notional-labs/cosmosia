@@ -11,6 +11,13 @@ STAMP=`date +"%s-%A-%d-%B-%Y-@-%Hh%Mm%Ss"`
 ########################################################################################################################
 
 # create new backup folder if not exist
+check_chain_status () {
+
+status=$(/usr/sbin/supervisorctl status chain 2>&1)
+
+}
+
+# create new backup folder if not exist
 create_backup_folder_if_not_exist () {
 
 mkdir -p $HOME/.backup
@@ -140,7 +147,17 @@ fi
 
 }
 
-update_start_script () {
+update_start_chain_script () {
+
+# get chain status
+check_chain_status
+
+echo "$status"
+if   [[ "$status" == *EXITED* ]]; then
+   continue
+elif [[ "$status" == *RUNNING* ]]; then
+   continue
+fi
 
 # stop chain before update start script
 supervisorctl stop chain
@@ -158,8 +175,13 @@ $HOME/go/bin/$daemon_name start $start_flags 1>&2
 EOT
 
 # start chain after update start script
-supervisorctl stop chain
-sleep 5
+echo "$status"
+if   [[ "$status" == *EXITED* ]]; then
+   continue
+elif [[ "$status" == *RUNNING* ]]; then
+   supervisorctl start chain
+   sleep 5
+fi
 
 }
 
@@ -171,7 +193,7 @@ create_backup_folder_if_not_exist
 activate_old_env
 get_latest_env
 update_rpc_env
-update_start_script
+update_start_chain_script
 }
 
 update_snapshot_config () {
@@ -180,7 +202,7 @@ activate_old_env
 get_latest_env
 get_docker_snapshot_config 
 update_rpc_env
-update_start_script
+update_start_chain_script
 }
 
 # SWITCH CASE PROCESS ARGUMENT AS OPTION
