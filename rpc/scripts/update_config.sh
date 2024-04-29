@@ -4,8 +4,18 @@
 ########################################################################################################################
 export OPTION=$1
 
+# Timestamp (sortable AND readable)
+STAMP=`date +"%s-%A-%d-%B-%Y-@-%Hh%Mm%Ss"`
+
 # SET BASIC FUNCTIONS
 ########################################################################################################################
+
+# create new backup folder if not exist
+create_backup_folder_if_not_exist () {
+
+mkdir -p $HOME/.backup
+
+}
 
 # activate old env vars
 activate_old_env () {
@@ -67,8 +77,9 @@ eval "${str_snapshot_cfg}"
 }
 
 update_rpc_env () {
-# remove old env vars
-rm $HOME/env.sh
+
+# backup old env vars
+mv $HOME/env.sh $HOME/.backup/env.$STAMP.sh
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
@@ -96,8 +107,9 @@ fi
 }
 
 update_snapshot_env () {
-# remove old env vars
-rm $HOME/env.sh
+
+# backup old env vars
+mv $HOME/env.sh env.$STAMP.sh
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
@@ -134,8 +146,8 @@ update_start_script () {
 supervisorctl stop chain
 sleep 5
 
-# remove old start chain script
-rm $HOME/start_chain.sh
+# backup old start chain script
+mv $HOME/start_chain.sh $HOME/.backup/start_chain.$STAMP.sh
 
 # start_chain.sh script
 cat <<EOT >> $HOME/start_chain.sh
@@ -155,6 +167,7 @@ sleep 5
 ################################################################################
 ########################################
 update_rpc_config () {
+create_backup_folder_if_not_exist
 activate_old_env
 get_latest_env
 update_rpc_env
@@ -162,6 +175,7 @@ update_start_script
 }
 
 update_snapshot_config () {
+create_backup_folder_if_not_exist
 activate_old_env
 get_latest_env
 get_docker_snapshot_config 
