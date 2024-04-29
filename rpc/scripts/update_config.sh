@@ -10,7 +10,7 @@ STAMP=`date +"%s-%A-%d-%B-%Y-@-%Hh%Mm%Ss"`
 # SET BASIC FUNCTIONS
 ########################################################################################################################
 
-# create new backup folder if not exist
+# check chain status
 check_chain_status () {
 
 status=$(/usr/sbin/supervisorctl status chain 2>&1)
@@ -149,19 +149,15 @@ fi
 
 update_start_chain_script () {
 
-# get chain status
-check_chain_status
-
+# stop chain before update start chain script
 echo "$status"
-if   [[ "$status" == *EXITED* ]]; then
-   continue
-elif [[ "$status" == *RUNNING* ]]; then
+if   [[ "$status" == *RUNNING* ]]; then
    supervisorctl stop chain
+   sleep 5
+else
+   continue
 fi
 
-# stop chain before update start script
-supervisorctl stop chain
-sleep 5
 
 # backup old start chain script
 mv $HOME/start_chain.sh $HOME/.backup/start_chain.$STAMP.sh
@@ -174,13 +170,13 @@ killall dbus-daemon
 $HOME/go/bin/$daemon_name start $start_flags 1>&2
 EOT
 
-# start chain after update start script
+# start chain after update start chain script
 echo "$status"
-if   [[ "$status" == *EXITED* ]]; then
-   continue
-elif [[ "$status" == *RUNNING* ]]; then
+if   [[ "$status" == *RUNNING* ]]; then
    supervisorctl start chain
    sleep 5
+else
+   continue
 fi
 
 }
@@ -193,6 +189,7 @@ create_backup_folder_if_not_exist
 activate_old_env
 get_latest_env
 update_rpc_env
+check_chain_status
 update_start_chain_script
 }
 
@@ -202,6 +199,7 @@ activate_old_env
 get_latest_env
 get_docker_snapshot_config 
 update_rpc_env
+check_chain_status
 update_start_chain_script
 }
 
