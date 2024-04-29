@@ -161,7 +161,12 @@ if [[ -z $skip_snapshot_restore ]]; then
     sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"/" $node_home/config/app.toml
     sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"100\"/" $node_home/config/app.toml
   else
-     sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $node_home/config/app.toml
+    sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $node_home/config/app.toml
+
+    # fix for seidb
+    if [ $( echo "${chain_name}" |grep -cE "^(sei-archive-sub)$" ) -ne 0 ]; then
+      sed -i -e "s/^ss-keep-recent *=.*/ss-keep-recent = 0/" $node_home/config/app.toml
+    fi
   fi
   sed -i -e "s/^snapshot-interval *=.*/snapshot-interval = 0/" $node_home/config/app.toml
 
@@ -222,7 +227,7 @@ if [[ -z $skip_snapshot_restore ]]; then
   fi
 
   # fix for seidb
-  if [ $( echo "${chain_name}" |grep -cE "^(sei)$" ) -ne 0 ]; then
+  if [ $( echo "${chain_name}" |grep -cE "^(sei|sei-archive-sub)$" ) -ne 0 ]; then
     sed -i -e "s/^sc-enable *=.*/sc-enable = true/" $node_home/config/app.toml
     sed -i -e "s/^ss-enable *=.*/ss-enable = true/" $node_home/config/app.toml
   fi
