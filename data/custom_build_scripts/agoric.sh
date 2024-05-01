@@ -35,10 +35,10 @@ if [[ -z $upgrading ]]; then
   #  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/ag-cosmos-helper ./cmd/helper
   go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
 
-  #  mkdir -p "/root/go/bin"
-  #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
-  #  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
-  #  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
+  mkdir -p "/root/go/bin"
+  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
+  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
+  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
 else
   repo_name=$(basename $git_repo |cut -d. -f1)
   cd $repo_name
