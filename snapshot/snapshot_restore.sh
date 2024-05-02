@@ -190,10 +190,20 @@ if [[ -z $skip_snapshot_restore ]]; then
   if [ $( echo "${chain_name}" |grep -cE "pruned" ) -ne 0 ]; then
     # if pruned node (not default)
     sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $node_home/config/config.toml
-    sed -i -e "s/^min-retain-blocks *=.*/min-retain-blocks = 1000/" $node_home/config/app.toml
   else
     sed -i -e "s/^indexer *=.*/indexer = \"kv\"/" $node_home/config/config.toml
   fi
+
+  # min-retain-blocks
+  min_retain_blocks="0"
+  if [ $( echo "${chain_name}" |grep -cE "pruned" ) -ne 0 ]; then
+    min_retain_blocks="1000"
+  elif [ $( echo "${chain_name}" |grep -cE "archive" ) -ne 0 ]; then
+    min_retain_blocks="0"
+  else
+    min_retain_blocks="362880"
+  fi
+  sed -i -e "s/^min-retain-blocks *=.*/min-retain-blocks = ${min_retain_blocks}/" $node_home/config/app.toml
 
   sed -i -e "s/^query_gas_limit *=.*/query_gas_limit = 10000000/" $node_home/config/app.toml
   sed -i -e "s/^discard_abci_responses *=.*/discard_abci_responses = false/" $node_home/config/config.toml
