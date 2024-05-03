@@ -12,7 +12,7 @@ npm install --global yarn
 
 cd $HOME
 gh_access_token="$(curl -s "http://tasks.web_config/config/gh_access_token")"
-git clone --single-branch --branch main "https://${gh_access_token}@github.com/notional-labs/notionalapi"
+git clone --single-branch --branch v0.3.x "https://${gh_access_token}@github.com/notional-labs/notionalapi"
 
 ########################################################################################################################
 # web
