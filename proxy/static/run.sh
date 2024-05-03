@@ -11,7 +11,6 @@ wget "http://tasks.web_config/config/privkey.pem" -O /etc/nginx/privkey.pem
 wget "http://tasks.web_config/config/cosmosia.proxy.snapshot.htpasswd" -O /etc/nginx/.htpasswd
 
 curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/static/nginx.conf" > $HOME/nginx.conf.template
-curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/proxy/static/nginx.conf" > $HOME/nginx.conf.template
 cat $HOME/nginx.conf.template |envsubst '$USE_DOMAIN_NAME' > /etc/nginx/nginx.conf
 
 # generate index.html
