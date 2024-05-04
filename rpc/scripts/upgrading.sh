@@ -131,7 +131,7 @@ fi
 
 ##################
 # 1. stop chain & delete /var/log/chain.err.log
-echo "step 1"
+echo "step 1: clean old logs"
 supervisorctl stop chain
 sleep 5;
 
@@ -139,20 +139,20 @@ echo "" > /var/log/chain.err.log
 
 ##################
 # 2. build an run old version with "-X github.com/tendermint/tm-db.ForceSync=1"
-echo "step 2"
+echo "step 2: build old binary"
 buid_chain "$version" "true"
 sleep 5;
 supervisorctl start chain &
 
 ##################
 # 3. watch for "panic: UPGRADE" OR "6:21PM ERR UPGRADE" in /var/log/chain.err.log
-echo "step 3"
+echo "step 3: wait until see UPGRADE from logs"
 tail -f /var/log/chain.err.log |sed '/UPGRADE\(.*\)NEEDED/ q'
 wait
 sleep 5;
 ##################
 # 4. stop chain & build and run new version
-echo "step 4"
+echo "step 4: build new binary"
 supervisorctl stop chain
 sleep 5;
 buid_chain "$version_new" "false"
@@ -161,7 +161,7 @@ supervisorctl start chain
 sleep 5;
 ##################
 # 5. check synced
-echo "step 5"
+echo "step 5: synchronization checking"
 
 catching_up="true"
 while [[ "$catching_up" != "false" ]]; do
