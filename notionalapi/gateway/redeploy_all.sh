@@ -36,6 +36,7 @@ dydx-testnet
 dydx
 dymension
 emoney
+eve-testnet
 evmos-archive-sub1
 evmos-archive-sub2
 evmos-archive-sub3

@@ -33,6 +33,7 @@ dydx-testnet
 dydx
 dymension
 emoney
+eve-testnet
 evmos-testnet
 evmos
 fetchhub
