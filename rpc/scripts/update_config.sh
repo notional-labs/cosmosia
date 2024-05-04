@@ -15,12 +15,16 @@ check_chain_status () {
 
 status=$(/usr/sbin/supervisorctl status chain 2>&1)
 
+echo "chain is $status"
+
 }
 
 # create new backup folder if not exist
 create_backup_folder_if_not_exist () {
 
 mkdir -p $HOME/.backup
+
+echo "lolder is created"
 
 }
 
@@ -35,6 +39,8 @@ else
   echo "Please check again."
   exit
 fi
+
+echo "old env activated"
 
 }
 
@@ -67,6 +73,8 @@ if [[ $git_repo == "https://github.com/InjectiveLabs/injective-core" ]]; then
   git_repo="https://${gh_access_token}@github.com/InjectiveLabs/injective-core"
 fi
 
+echo "got chain information"
+
 }
 
 # get snapshot config functions
@@ -80,6 +88,8 @@ eval "${str_snapshot_cfg}"
 
 # figure out IP of the snapshot_storage_node
 snapshot_storage_node_ip=$(curl -s "http://tasks.web_config/node_ip/${snapshot_storage_node}")
+
+echo "got snapshot config"
 
 }
 
@@ -110,6 +120,8 @@ export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 EOT
 fi
+
+echo "rpc env updated"
 
 }
 
@@ -145,6 +157,8 @@ export NVM_DIR="\$HOME/.nvm"
 EOT
 fi
 
+echo "snapshot env updated"
+
 }
 
 update_start_chain_script () {
@@ -178,6 +192,8 @@ if   [[ "$status" == *RUNNING* ]]; then
 else
    continue
 fi
+
+echo "chain script updated"
 
 }
 
@@ -215,7 +231,8 @@ case $OPTION in
     update_snapshot_config
     ;;
   *)
-    echo "Incorrect option. Only in [ 1: rpc, 2: snapshot ]"
+    echo "Incorrect option."
+    echo "Only support [ 1: rpc, 2: snapshot ]"
     echo "Eg: ./update_config 1"
     echo "Eg: curl -Ls -o- https://raw.githubusercontent.com/notional-labs/cosmosia/main/rpc/scripts/update_config.sh | bash -s -- 1"
     ;;
