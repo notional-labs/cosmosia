@@ -941,7 +941,7 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | API      | https://api-nolus-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-nolus-ia.cosmosia.notional.ventures/ |
 
-### 117. babylon-testnet
+### 118. babylon-testnet
 
 | Protocol | Endpoint                                                |
 |----------|:--------------------------------------------------------|
@@ -949,7 +949,7 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | API      | https://api-babylon-testnet-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-babylon-testnet-ia.cosmosia.notional.ventures/ |
 
-### 118. sei-archive-sub4
+### 119. sei-archive-sub4
 
 | Protocol | Endpoint                                                |
 |----------|:--------------------------------------------------------|
@@ -957,7 +957,7 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | API      | https://api-sei-archive-sub4-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-sei-archive-sub4-ia.cosmosia.notional.ventures/ |
 
-### 119. eve-testnet
+### 120. eve-testnet
 
 | Protocol | Endpoint                                                |
 |----------|:--------------------------------------------------------|
