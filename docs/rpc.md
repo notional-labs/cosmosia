@@ -956,3 +956,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-sei-archive-sub4-ia.cosmosia.notional.ventures/  |
 | API      | https://api-sei-archive-sub4-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-sei-archive-sub4-ia.cosmosia.notional.ventures/ |
+
+### 119. eve-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-eve-testnet-ia.cosmosia.notional.ventures/  |
+| API      | https://api-eve-testnet-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-eve-testnet-ia.cosmosia.notional.ventures/ |
