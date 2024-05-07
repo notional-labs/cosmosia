@@ -2,6 +2,26 @@
 # eg., ./upgrading.sh v6.0.1
 
 ########################################################################################################################
+# set color code
+black='\033[0;30m'
+red='\033[0;31m'
+green='\033[0;32m'
+orange='\033[0;33m'
+blue='\033[0;34m'
+purple='\033[0;35m'
+cyan='\033[0;36m'
+gray='\033[0;37m'
+gray2='\033[1;30m'
+red2='\033[1;31m'
+green2='\033[1;32m'
+yellow='\033[1;33m'
+blue2='\033[1;34m'
+purple2='\033[1;35m'
+cyan2='\033[1;36m'
+white='\033[1;37m'
+nc='\033[0m' # No Color
+
+########################################################################################################################
 # make sure single instance running
 PIDFILE="$HOME/upgrading.sh.lock"
 function cleanup() {
@@ -131,7 +151,7 @@ fi
 
 ##################
 # 1. stop chain & delete /var/log/chain.err.log
-echo "step 1: clean old logs"
+echo "${green}step 1:${nc} ${yellow}clean old logs${nc}"
 supervisorctl stop chain
 sleep 5;
 
@@ -139,20 +159,20 @@ echo "" > /var/log/chain.err.log
 
 ##################
 # 2. build an run old version with "-X github.com/tendermint/tm-db.ForceSync=1"
-echo "step 2: build old binary"
+echo "${green}step 2:${nc} ${yellow}build & run old binary${nc}"
 buid_chain "$version" "true"
 sleep 5;
 supervisorctl start chain &
 
 ##################
 # 3. watch for "panic: UPGRADE" OR "6:21PM ERR UPGRADE" in /var/log/chain.err.log
-echo "step 3: wait until see UPGRADE from logs"
+echo "${green}step 3:${nc} ${yellow}wait until see${nc} UPGRADE from logs"
 tail -f /var/log/chain.err.log |sed '/UPGRADE\(.*\)NEEDED/ q'
 wait
 sleep 5;
 ##################
 # 4. stop chain & build and run new version
-echo "step 4: build new binary"
+echo "${green}step 4:${nc} ${yellow}build & run new binary${nc}"
 supervisorctl stop chain
 sleep 5;
 buid_chain "$version_new" "false"
@@ -161,7 +181,7 @@ supervisorctl start chain
 sleep 5;
 ##################
 # 5. check synced
-echo "step 5: synchronization checking"
+echo "${green}step 5:${nc} ${yellow}synchronization checking"${nc}
 
 catching_up="true"
 while [[ "$catching_up" != "false" ]]; do
@@ -171,4 +191,4 @@ while [[ "$catching_up" != "false" ]]; do
 done
 
 ##############
-echo "synched"
+echo "${cyan}synched${nc}"
