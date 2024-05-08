@@ -151,7 +151,7 @@ fi
 
 ##################
 # 1. stop chain & delete /var/log/chain.err.log
-echo "${green}step 1:${nc} ${yellow}clean old logs${nc}"
+echo -e "${green}step 1:${nc} ${yellow}clean old logs${nc}"
 supervisorctl stop chain
 sleep 5;
 
@@ -159,20 +159,20 @@ echo "" > /var/log/chain.err.log
 
 ##################
 # 2. build an run old version with "-X github.com/tendermint/tm-db.ForceSync=1"
-echo "${green}step 2:${nc} ${yellow}build & run old binary${nc}"
+echo -e "${green}step 2:${nc} ${yellow}build & run old binary${nc}"
 buid_chain "$version" "true"
 sleep 5;
 supervisorctl start chain &
 
 ##################
 # 3. watch for "panic: UPGRADE" OR "6:21PM ERR UPGRADE" in /var/log/chain.err.log
-echo "${green}step 3:${nc} ${yellow}wait until see UPGRADE from logs${nc}"
+echo -e "${green}step 3:${nc} ${yellow}wait until see UPGRADE from logs${nc}"
 tail -f /var/log/chain.err.log |sed '/UPGRADE\(.*\)NEEDED/ q'
 wait
 sleep 5;
 ##################
 # 4. stop chain & build and run new version
-echo "${green}step 4:${nc} ${yellow}build & run new binary${nc}"
+echo -e "${green}step 4:${nc} ${yellow}build & run new binary${nc}"
 supervisorctl stop chain
 sleep 5;
 buid_chain "$version_new" "false"
@@ -181,7 +181,7 @@ supervisorctl start chain
 sleep 5;
 ##################
 # 5. check synced
-echo "${green}step 5:${nc} ${yellow}synchronization checking${nc}"
+echo -e "${green}step 5:${nc} ${yellow}synchronization checking${nc}"
 
 catching_up="true"
 while [[ "$catching_up" != "false" ]]; do
@@ -191,4 +191,4 @@ while [[ "$catching_up" != "false" ]]; do
 done
 
 ##############
-echo "${cyan}synched${nc}"
+echo -e "${cyan}synched${nc}"
