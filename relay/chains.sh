@@ -41,7 +41,7 @@ grpc_addr = 'http://tasks.lb_composable:8003'
 event_source = { mode = 'push', url = 'ws://tasks.lb_composable:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = "30s"
 trusted_node = false
-account_prefix = "centauri"
+account_prefix = "pica"
 key_name = "composable"
 key_store_type = "Test"
 store_prefix = "ibc"
