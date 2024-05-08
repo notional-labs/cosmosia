@@ -166,7 +166,7 @@ supervisorctl start chain &
 
 ##################
 # 3. watch for "panic: UPGRADE" OR "6:21PM ERR UPGRADE" in /var/log/chain.err.log
-echo "${green}step 3:${nc} ${yellow}wait until see${nc} UPGRADE from logs"
+echo "${green}step 3:${nc} ${yellow}wait until see UPGRADE from logs${nc}"
 tail -f /var/log/chain.err.log |sed '/UPGRADE\(.*\)NEEDED/ q'
 wait
 sleep 5;
@@ -181,7 +181,7 @@ supervisorctl start chain
 sleep 5;
 ##################
 # 5. check synced
-echo "${green}step 5:${nc} ${yellow}synchronization checking"${nc}
+echo "${green}step 5:${nc} ${yellow}synchronization checking${nc}"
 
 catching_up="true"
 while [[ "$catching_up" != "false" ]]; do
