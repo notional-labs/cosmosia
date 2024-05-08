@@ -159,7 +159,7 @@ echo "" > /var/log/chain.err.log
 
 ##################
 # 2. build an run old version with "-X github.com/tendermint/tm-db.ForceSync=1"
-echo -e "${green}step 2:${nc} ${yellow}build & run old binary${nc}"
+echo -e "${green}step 2:${nc} ${yellow}build & run old binary [${nc} ${red}$version${nc} ${yellow}]${nc}"
 buid_chain "$version" "true"
 sleep 5;
 supervisorctl start chain &
@@ -172,7 +172,7 @@ wait
 sleep 5;
 ##################
 # 4. stop chain & build and run new version
-echo -e "${green}step 4:${nc} ${yellow}build & run new binary${nc}"
+echo -e "${green}step 4:${nc} ${yellow}build & run new binary [${nc} ${blue}$version_new${nc} ${yellow}]${nc}"
 supervisorctl stop chain
 sleep 5;
 buid_chain "$version_new" "false"
