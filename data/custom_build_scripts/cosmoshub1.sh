@@ -1,0 +1,7 @@
+cd $HOME
+
+BINARY_URL="http://95.216.19.36:11111/cosmoshub1-archive-sub0/releases/v0.33.0/gaiad"
+BINARY_PATH="${HOME/go/bin}/gaiad"
+
+wget "${BINARY_URL}" -O "${BINARY_PATH}"
+chmod +x "${BINARY_PATH}"
