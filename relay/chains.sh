@@ -355,6 +355,7 @@ store_prefix = "ibc"
 default_gas = 400000
 max_gas = 25000000
 gas_multiplier = 1.3
+dynamic_gas_price = { enabled = true, multiplier = 1.2, max = 0.6 }
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
