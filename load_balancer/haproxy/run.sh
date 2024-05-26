@@ -1,17 +1,22 @@
 # usage: ./run.sh chain_name scale
 # eg., ./run.sh cosmoshub 2
 
+loop_forever () {
+  echo "loop forever for debugging only"
+  while true; do sleep 5; done
+}
+
 chain_name="$1"
 scale="$2"
 echo "chain_name=$chain_name, scale=$scale"
 if [[ -z $chain_name ]]; then
   echo "No chain_name. Exit"
-  exit
+  loop_forever
 fi
 
 if [[ -z $scale ]]; then
   echo "No scale. Exit"
-  exit
+  loop_forever
 fi
 
 cd $HOME
@@ -79,6 +84,6 @@ spawn-fcgi -s /var/run/fcgiwrap.socket -M 766 /usr/sbin/fcgiwrap
 
 ########################################################################################################################
 echo "Done!"
-# loop forever for debugging only
-while true; do sleep 5; done
+
+loop_forever
 
