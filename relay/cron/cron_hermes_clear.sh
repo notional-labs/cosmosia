@@ -1,3 +1,23 @@
+########################################################################################################################
+# make sure single instance running
+PIDFILE="$HOME/cron_hermes_clear.sh.lock"
+function cleanup() {
+  rm -f $PIDFILE
+}
+
+if [ -f $PIDFILE ]; then
+   pid=$(cat $PIDFILE)
+   if kill -0 $pid 2>/dev/null; then
+      echo "Script is already running"
+      exit 1
+   fi
+fi
+
+echo $$ > $PIDFILE
+trap cleanup EXIT
+########################################################################################################################
+
+
 source $HOME/env.sh
 
 URL="https://status.notional.ventures/ibc_monitor/get_last_ibc_client_update?hermes_config_url=https%3A%2F%2Fraw.githubusercontent.com%2Fnotional-labs%2Fcosmosia%2Fmain%2Frelay%2F${hubname}_config.toml"
