@@ -130,7 +130,7 @@ random_minute=$(( ${RANDOM} % 59 ))
 
 cat <<EOT > $HOME/restart_cronjob.sh
 /usr/sbin/supervisorctl stop chain
-sleep 20
+sleep 10
 /usr/sbin/supervisorctl start chain
 EOT
 
