@@ -123,6 +123,16 @@ list = [
 ]
 
 [[chains]]
+id = 'irishub-1'
+${INC_IRISHUB_1}
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-3'],
+]
+
+
+[[chains]]
 id = 'kichain-2'
 ${INC_KICHAIN_2}
 [chains.packet_filter]

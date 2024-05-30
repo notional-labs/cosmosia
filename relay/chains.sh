@@ -308,6 +308,35 @@ compat_mode = '0.34'
 EOT
 )
 
+# irishub-1
+export INC_IRISHUB_1=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = "http://tasks.irisnet:8000"
+grpc_addr = "http://tasks.irisnet:8003"
+event_source = { mode = 'push', url = 'ws://tasks.irisnet:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "10s"
+trusted_node = false
+account_prefix = "iaa"
+key_name = "irisnet"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 100000
+max_gas = 400000
+gas_multiplier = 1.1
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "relayed by Notional.Ventures"
+sequential_batch_tx = false
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.2, denom = 'uiris' }
+compat_mode = '0.37'
+EOT
+)
+
 # neutron-1
 export INC_NEUTRON_1=$(cat <<-EOT
 type = "CosmosSdk"
