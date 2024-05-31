@@ -17,7 +17,7 @@ list = [
     ['transfer', 'channel-18'], # neutron-1
     ['transfer', 'channel-3'],  # osmosis-1
     ['transfer', 'channel-9'],  # quicksilver-2
-    ['transfer', 'channel-14'], # secret-4
+#    ['transfer', 'channel-14'], # secret-4
     ['transfer', 'channel-6'],  # stargaze-1
     ['transfer', 'channel-5'],  # stride-1
     ['transfer', 'channel-20'], # umee-1
@@ -115,14 +115,14 @@ list = [
    ['transfer', 'channel-94']
 ]
 
-[[chains]]
-id = "secret-4"
-${INC_SECRET_4}
-[chains.packet_filter]
-policy = "allow"
-list = [
-    ['transfer', 'channel-80'],
-]
+#[[chains]]
+#id = "secret-4"
+#${INC_SECRET_4}
+#[chains.packet_filter]
+#policy = "allow"
+#list = [
+#    ['transfer', 'channel-80'],
+#]
 
 [[chains]]
 id = "stargaze-1"
