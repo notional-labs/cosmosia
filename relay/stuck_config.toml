@@ -1,0 +1,21 @@
+${INC_GLOBAL}
+
+[[chains]]
+id = 'osmosis-1'
+${INC_OSMOSIS_1}
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    # sort by chain chain_id
+    ['transfer', 'channel-557'], # mars-1
+]
+
+[[chains]]
+id = 'mars-1'
+${INC_MARS_1}
+[chains.packet_filter]
+policy = 'allow'
+list = [
+    ['transfer', 'channel-1'],
+]
+

@@ -20,7 +20,7 @@ list = [
     ['transfer', 'channel-42'],  # juno
     ['transfer', 'channel-169'], # juno-1
     ['transfer', 'channel-77'],  # kichain-2
-    ['transfer', 'channel-557'], # mars-1
+#    ['transfer', 'channel-557'], # mars-1 (channel-1), moved to stuck
     ['transfer', 'channel-199'], # omniflixhub-1
     ['transfer', 'channel-783'], # pirin-1 (nolus)
     ['transfer', 'channel-522'], # quicksilver-2
@@ -139,15 +139,6 @@ ${INC_KICHAIN_2}
 policy = 'allow'
 list = [
     ['transfer', 'channel-0'],
-]
-
-[[chains]]
-id = 'mars-1'
-${INC_MARS_1}
-[chains.packet_filter]
-policy = 'allow'
-list = [
-    ['transfer', 'channel-1'],
 ]
 
 [[chains]]
