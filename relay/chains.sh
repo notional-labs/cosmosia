@@ -311,9 +311,9 @@ EOT
 # irishub-1
 export INC_IRISHUB_1=$(cat <<-EOT
 type = "CosmosSdk"
-rpc_addr = "http://tasks.irisnet:8000"
-grpc_addr = "http://tasks.irisnet:8003"
-event_source = { mode = 'push', url = 'ws://tasks.irisnet:8000/websocket', batch_delay = '500ms' }
+rpc_addr = "http://tasks.lb_irisnet:8000"
+grpc_addr = "http://tasks.lb_irisnet:8003"
+event_source = { mode = 'push', url = 'ws://tasks.lb_irisnet:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = "10s"
 trusted_node = false
 account_prefix = "iaa"
