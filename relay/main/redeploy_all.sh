@@ -4,9 +4,6 @@ coreum
 furya
 injective
 kava
-osmosis
-sei
-seilegacy
 test
 whitewhale
 END
