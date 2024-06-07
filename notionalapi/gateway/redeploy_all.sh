@@ -100,7 +100,6 @@ terra2-testnet
 terra2
 terra
 umee
-vidulum
 whitewhale-testnet
 whitewhale
 wormhole
