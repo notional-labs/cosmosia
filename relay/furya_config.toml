@@ -7,8 +7,6 @@ ${INC_FURYA_1}
 policy = "allow"
 list = [
     ["transfer", "channel-7"], # juno
-    ["transfer", "channel-6"], # osmosis
-    ["transfer", "channel-1"], # terra2
     ["transfer", "channel-4"], # noble
     ["transfer", "channel-5"], # cosmoshub
     ["transfer", "channel-0"], # kujira
@@ -39,24 +37,6 @@ ${INC_NOBLE_1}
 policy = "allow"
 list = [
     ["transfer", "channel-42"], # furya
-]
-
-[[chains]]
-id = "osmosis-1"
-${INC_OSMOSIS_1}
-[chains.packet_filter]
-policy = "allow"
-list = [
-    ["transfer", "channel-19194"], # furya
-]
-
-[[chains]]
-id = "phoenix-1"
-${INC_PHOENIX_1}
-[chains.packet_filter]
-policy = "allow"
-list = [
-    ["transfer", "channel-271"], # furya
 ]
 
 [[chains]]
