@@ -7,8 +7,8 @@ ${INC_NARWHAL_2}
 policy = "allow"
 list = [
     # sort by chain_id
-#    ['transfer', 'channel-1'], # osmo-test-5
-#    ['transfer', 'channel-2'], # theta-testnet-001
+    ['transfer', 'channel-10'], # osmo-test-5
+    ['transfer', 'channel-9'], # theta-testnet-001
 ]
 
 [chains.packet_filter.min_fees]
@@ -19,7 +19,7 @@ ${INC_OSMO_TEST_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
-#    ['transfer', 'channel-1'],
+    ['transfer', 'channel-8164'],
 ]
 
 [[chains]]
@@ -28,5 +28,5 @@ ${INC_THETA_TESTNET_001}
 [chains.packet_filter]
 policy = "allow"
 list = [
-#    ['transfer', 'channel-1'],
+    ['transfer', 'channel-4248'],
 ]
