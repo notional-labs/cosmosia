@@ -1295,6 +1295,7 @@ store_prefix = "ibc"
 default_gas = 400000
 max_gas = 25000000
 gas_multiplier = 1.3
+dynamic_gas_price = { enabled = true, multiplier = 1.2, max = 0.6 }
 max_msg_num = 30
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
@@ -1307,6 +1308,69 @@ sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'uosmo' }
+address_type = { derivation = 'cosmos' }
+EOT
+)
+
+# cosmoshub-testnet2
+export INC_THETA_TESTNET_001=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_cosmoshub-testnet2:8000'
+grpc_addr = 'http://tasks.lb_cosmoshub-testnet2:8003'
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "cosmos"
+key_name = "cosmoshub-testnet2"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 200000
+max_gas = 2500000
+gas_multiplier = 1.1
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "1000s"
+max_block_time = "10s"
+trusting_period = '32hours'
+ccv_consumer_chain = false
+memo_prefix = "relayed by Notional.Ventures"
+sequential_batch_tx = false
+compat_mode = '0.34'
+event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub-testnet2:8000/websocket', batch_delay = '500ms' }
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.005, denom = 'uatom' }
+address_type = { derivation = 'cosmos' }
+EOT
+)
+
+
+# narwhal-2
+export INC_NARWHAL_2=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_whitewhale-testnet:8000'
+grpc_addr = 'http://tasks.lb_whitewhale-testnet:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_whitewhale-testnet:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "migaloo"
+key_name = "whitewhale-testnet"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 1000000
+max_gas = 5000000
+gas_multiplier = 1.1
+max_msg_num = 30
+max_tx_size = 3000000
+max_grpc_decoding_size = 33554432
+clock_drift = "500s"
+max_block_time = "10s"
+trusting_period = '16hours'
+ccv_consumer_chain = false
+memo_prefix = "relayed by Notional.Ventures"
+sequential_batch_tx = false
+compat_mode = '0.34'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.25, denom = 'uwhale' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
