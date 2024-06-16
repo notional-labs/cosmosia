@@ -68,3 +68,9 @@ scrape_configs:
   - job_name: composable-testnet_clear
     static_configs:
       - targets: ['tasks.rlclear_composable-testnet:8000']
+  - job_name: whitewhale-testnet
+    static_configs:
+      - targets: ['tasks.rl_whitewhale-testnet:3001']
+  - job_name: whitewhale-testnet_clear
+    static_configs:
+      - targets: ['tasks.rlclear_whitewhale-testnet:8000']
