@@ -22,10 +22,20 @@ cd $HOME/notionalapi/web
 # create .env file
 wget "http://tasks.web_config/config/notionalapi.web.env" -O $HOME/notionalapi/web/.env
 
-
 yarn && yarn build
-
 screen -S server -dm yarn start
+
+########################################################################################################################
+# deposit_watcher
+cd $HOME/notionalapi/web
+
+screen -S server -dm yarn deposit_watcher
+
+########################################################################################################################
+# pool-spending
+cd $HOME/notionalapi/web
+
+screen -S server -dm yarn pool-spending
 
 
 # loop forever for debugging only
