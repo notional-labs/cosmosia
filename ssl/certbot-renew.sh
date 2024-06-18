@@ -136,6 +136,9 @@ echo "Install pip and certbot dns cloudflare package"
 install_binary_if_not_exist pip install_pip_binary
 install_package_if_not_exist certbot-dns-cloudflare install_certbot_dns_cloudflare
 
+# Remove certbot renew folder if exist
+rm -rf $CERTBOT_DIR
+
 # Write credentials to file
 echo "Write credential to file"
 cat << EOF | sudo tee -a $CREDENTIAL_PATH
