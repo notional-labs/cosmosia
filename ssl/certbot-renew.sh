@@ -27,6 +27,10 @@ nc='\033[0m' # No Color
 CONTAINER_NAME=$1
 DOMAIN=$2
 
+# Basic variables for server ssh authentication
+USERNAME="root"
+HOST="cosmos2"
+
 # Basic variables for certbot
 CREDENTIAL_PATH="./cloudflare.ini"
 CERTBOT_DIR="/tmp/certbot"
