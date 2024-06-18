@@ -59,9 +59,9 @@ CERTBOT_SERVER="https://acme-v02.api.letsencrypt.org/directory"
 # Get configs
 agent_id=$(docker ps -aqf "name=agent")
 # DOMAINS=$(docker exec $agent_id curl -s "http://tasks.web_config/config/cloudflare.domains")
+DOMAINS=$(docker exec $agent_id curl -s "http://tasks.web_config/config/cloudflare.$DOMAIN.domains")
 EMAILS=$(docker exec $agent_id curl -s "http://tasks.web_config/config/cloudflare.$DOMAIN.emails")
 CREDENTIAL=$(docker exec $agent_id curl -s "http://tasks.web_config/config/cloudflare.$DOMAIN.credential")
-DOMAINS="*.${DOMAIN}"
 
 # install binary if not exist
 install_binary_if_not_exist () {
@@ -198,5 +198,5 @@ docker exec $CONTAINER_ID cp /etc/nginx/fullchain.pem /etc/nginx/$TIMESTAMP/full
 echo "Reload and restart nginx proxy"
 docker exec $CONTAINER_ID wget "http://tasks.web_config/config/${DOMAIN}_fullchain.pem" -O /etc/nginx/fullchain.pem
 docker exec $CONTAINER_ID wget "http://tasks.web_config/config/${DOMAIN}_privkey.pem" -O /etc/nginx/privkey.pem
-docker exec $CONTAINER_ID sleep 3
 docker exec $CONTAINER_ID /usr/sbin/nginx -s reload
+docker exec $CONTAINER_ID sleep 3
