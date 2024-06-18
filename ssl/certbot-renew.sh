@@ -162,6 +162,9 @@ echo "Remove old config for privkey and fullchain"
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config rm ${PRIVKEY_CONFIG}"
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config rm ${FULLCHAIN_CONFIG}"
 
+# Create folder if not exist on manager node
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "mkdir -p ${CERTBOT_DIR}/live/${DOMAIN}"
+
 # Copy certificates to manager server
 echo "Copy certificates to manager server"
 scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${CERTBOT_DIR}/live/${DOMAIN}/privkey.pem" "${USERNAME}@${HOST}:${CERTBOT_DIR}/live/${DOMAIN}/privkey.pem"
