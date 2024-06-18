@@ -96,8 +96,6 @@ obtain_certs () {
     --dns-cloudflare-credentials $CREDENTIAL_PATH \
     --dns-cloudflare-propagation-seconds 60 \
     --domains $DOMAINS \
-    --key-type rsa \
-    --rsa-key-size 2048 \
     --logs-dir $CERTBOT_DIR \
     --config-dir $CERTBOT_DIR \
     --work-dir $CERTBOT_DIR \
