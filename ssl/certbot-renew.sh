@@ -27,6 +27,22 @@ nc='\033[0m' # No Color
 CONTAINER_NAME=$1
 DOMAIN=$2
 
+# check for container name
+if [ -z "${CONTAINER_NAME}" ]; then
+  echo "missing container name"
+  echo "Usage: ./certbot-renew.sh container_name domain_name"
+  echo "Eg: ./certbot-renew.sh napi_proxy notionalapi.net"
+  exit
+fi
+
+# check for domain name
+if [ -z "${DOMAIN}" ]; then
+  echo "missing domain name"
+  echo "Usage: ./certbot-renew.sh container_name domain_name"
+  echo "Eg: ./certbot-renew.sh napi_proxy notionalapi.net"
+  exit
+fi
+
 # Basic variables for server ssh authentication
 USERNAME="root"
 HOST="cosmos2"
