@@ -150,20 +150,24 @@ obtain_certs $DOMAINS $EMAILS $CERTBOT_DIR $CERTBOT_SERVER $CREDENTIAL_PATH
 echo "Remove credential after obtain certificate"
 rm -rf $CREDENTIAL_PATH
 
+# Define docker swarm config
+PRIVKEY_CONFIG="${DOMAIN}_privkey.pem"
+FULLCHAIN_CONFIG="${DOMAIN}_fullchain.pem"
+
 # Remove old certificate configs
 echo "Remove old config for privkey and fullchain"
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config rm ${PRIVKEY_CONFIG}"
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config rm ${FULLCHAIN_CONFIG}"
 
-# Get file content
-echo "Get data from new privkey and fullchain"
-PRIVKEY_CONTENT=$(< ${CERTBOT_DIR}/${DOMAINS}/privkey.pem)
-FULLCHAIN_CONTENT=$(< ${CERTBOT_DIR}/${DOMAINS}/fullchain.pem)
+# Copy certificates to manager server
+echo "Copy certificates to manager server"
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${CERTBOT_DIR}/${DOMAIN}/privkey.pem" "${USERNAME}@${HOST}:${CERTBOT_DIR}/${DOMAIN}/privkey.pem"
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${CERTBOT_DIR}/${DOMAIN}/fullchain.pem" "${USERNAME}@${HOST}:${CERTBOT_DIR}/${DOMAIN}/fullchain.pem"
 
 # Create new certificate configs
 echo "Create new config for new certificate"
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config create ${FULLCHAIN_CONFIG} ${FULLCHAIN_CONTENT}"
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config create ${PRIVKEY_CONFIG} ${PRIVKEY_CONTENT}"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${PRIVKEY_CONFIG} ${CERTBOT_DIR}/privkey.pem"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${FULLCHAIN_CONFIG} ${CERTBOT_DIR}/fullchain.pem"
 
 # Get current timestamp
 echo "Get current timestamp"
