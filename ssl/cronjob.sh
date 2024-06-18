@@ -45,7 +45,7 @@ echo "Task is running at $(date)"
 NEXT_RUN_DATE=$(date -d "30 days" "+%Y-%m-%d %H:%M:%S")
 
 # Convert next run date to cron format
-NEXT_RUN_CRON=$(date -d "$NEXT_RUN_DATE" "+%M %H %d %m *")
+NEXT_RUN_CRON=$(date -d "$NEXT_RUN_DATE" "+%M %H %d * *")
 
 # Schedule the next run
 (crontab -l ; echo "$NEXT_RUN_CRON /bin/sh $HOME/cron/certbot-renew.sh $CONTAINER_NAME $DOMAIN") | crontab -
