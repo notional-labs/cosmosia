@@ -6,6 +6,22 @@
 CONTAINER_NAME=$1
 DOMAIN=$2
 
+# check for container name
+if [ -z "${CONTAINER_NAME}" ]; then
+  echo "missing container name"
+  echo "Usage: ./cronjob.sh container_name domain_name"
+  echo "Eg: ./cronjob.sh napi_proxy notionalapi.net"
+  exit
+fi
+
+# check for domain name
+if [ -z "${DOMAIN}" ]; then
+  echo "missing domain name"
+  echo "Usage: ./cronjob.sh container_name domain_name"
+  echo "Eg: ./cronjob.sh napi_proxy notionalapi.net"
+  exit
+fi
+
 # Install cronnie on archlinux
 pacman -Syyu --noconfirm
 pacman -Sy cronie --noconfirm
