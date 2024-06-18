@@ -1,0 +1,34 @@
+#!/bin/bash
+
+####################################################################################################
+# VARIABLES
+####################################################################################################
+CONTAINER_NAME=$1
+DOMAIN=$2
+
+# Install cronnie on archlinux
+pacman -Syyu --noconfirm
+pacman -Sy cronie --noconfirm
+
+# Enable cronnie on archlinux
+sudo systemctl enable cronie
+sudo systemctl start cronie
+
+# Add new cronjob
+rm -rf $HOME/cron/*
+mkdir -p $HOME/cron
+cp -f ./certbot-renew.sh $HOME/cron/certbot-renew
+
+# Your task here
+echo "Task is running at $(date)"
+
+# Calculate the next run date (30 days from now)
+NEXT_RUN_DATE=$(date -d "30 days" "+%Y-%m-%d %H:%M:%S")
+
+# Convert next run date to cron format
+NEXT_RUN_CRON=$(date -d "$NEXT_RUN_DATE" "+%M %H %d %m *")
+
+# Schedule the next run
+(crontab -l ; echo "$NEXT_RUN_CRON /bin/sh $HOME/cron/certbot-renew.sh $CONTAINER_NAME $DOMAIN") | crontab -
+
+echo "Next run scheduled for $NEXT_RUN_DATE"
