@@ -92,7 +92,6 @@ obtain_certs () {
 
   certbot certonly \
     --dns-cloudflare \
-    --dry-run \
     --dns-cloudflare-credentials $CREDENTIAL_PATH \
     --dns-cloudflare-propagation-seconds 60 \
     --domains $DOMAINS \
