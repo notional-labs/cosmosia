@@ -164,13 +164,13 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST 
 
 # Copy certificates to manager server
 echo "Copy certificates to manager server"
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${CERTBOT_DIR}/${DOMAIN}/privkey.pem" "${USERNAME}@${HOST}:${CERTBOT_DIR}/${DOMAIN}/privkey.pem"
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${CERTBOT_DIR}/${DOMAIN}/fullchain.pem" "${USERNAME}@${HOST}:${CERTBOT_DIR}/${DOMAIN}/fullchain.pem"
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${CERTBOT_DIR}/live/${DOMAIN}/privkey.pem" "${USERNAME}@${HOST}:${CERTBOT_DIR}/live/${DOMAIN}/privkey.pem"
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${CERTBOT_DIR}/live/${DOMAIN}/fullchain.pem" "${USERNAME}@${HOST}:${CERTBOT_DIR}/live/${DOMAIN}/fullchain.pem"
 
 # Create new certificate configs
 echo "Create new config for new certificate"
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${PRIVKEY_CONFIG} ${CERTBOT_DIR}/${DOMAIN}/privkey.pem"
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${FULLCHAIN_CONFIG} ${CERTBOT_DIR}/${DOMAIN}/fullchain.pem"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${PRIVKEY_CONFIG} ${CERTBOT_DIR}/live/${DOMAIN}/privkey.pem"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${FULLCHAIN_CONFIG} ${CERTBOT_DIR}/live/${DOMAIN}/fullchain.pem"
 
 # Get current timestamp
 echo "Get current timestamp"
