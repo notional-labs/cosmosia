@@ -125,12 +125,16 @@ obtain_certs $DOMAINS $EMAILS $CERTBOT_DIR $CERTBOT_SERVER $CREDENTIAL_PATH
 rm -rf $CREDENTIAL_PATH
 
 # Remove old certificate configs
-docker config rm $PRIVKEY_CONFIG
-docker config rm $FULLCHAIN_CONFIG
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config rm ${PRIVKEY_CONFIG}"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config rm ${FULLCHAIN_CONFIG}"
+
+# Get file content
+PRIVKEY_CONTENT=$(< ${CERTBOT_DIR}/${DOMAINS}/privkey.pem)
+FULLCHAIN_CONTENT=$(< ${CERTBOT_DIR}/${DOMAINS}/fullchain.pem)
 
 # Create new certificate configs
-docker config create $PRIVKEY_CONFIG $CERTBOT_DIR/${DOMAINS}/privkey.pem
-docker config create $FULLCHAIN_CONFIG $CERTBOT_DIR/${DOMAINS}.ventures/fullchain.pem
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config create ${FULLCHAIN_CONFIG} ${FULLCHAIN_CONTENT}"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config create ${PRIVKEY_CONFIG} ${PRIVKEY_CONTENT}"
 
 # Get current timestamp
 TIMESTAMP=`date +"%s-%A-%d-%B-%Y-@-%Hh%Mm%Ss"`
