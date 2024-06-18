@@ -27,8 +27,8 @@ pacman -Syyu --noconfirm
 pacman -Sy cronie --noconfirm
 
 # Enable cronnie on archlinux
-sudo systemctl enable cronie
-sudo systemctl start cronie
+systemctl enable cronie
+systemctl start cronie
 
 # Add new cronjob
 rm -rf $HOME/cron/*
