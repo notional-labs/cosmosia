@@ -33,7 +33,7 @@ systemctl start cronie
 # Add new cronjob
 rm -rf $HOME/cron/*
 mkdir -p $HOME/cron
-cp -f ./certbot-renew.sh $HOME/cron/certbot-renew
+cp -f ./certbot-renew.sh $HOME/cron/certbot-renew.sh
 
 # Your task here
 echo "Task is running at $(date)"
