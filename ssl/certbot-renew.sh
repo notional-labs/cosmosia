@@ -132,46 +132,57 @@ obtain_certs () {
 pacman -Sy sudo --noconfirm
 
 # Install pip and certbot dns cloudflare
+echo "Install pip and certbot dns cloudflare package"
 install_binary_if_not_exist pip install_pip_binary
 install_package_if_not_exist certbot-dns-cloudflare install_certbot_dns_cloudflare
 
 # Write credentials to file
+echo "Write credential to file"
 cat << EOF | sudo tee -a $CREDENTIAL_PATH
 $CREDENTIAL
 EOF
 
 # Obtain certifications
+echo "Obtaining certificates..."
 obtain_certs $DOMAINS $EMAILS $CERTBOT_DIR $CERTBOT_SERVER $CREDENTIAL_PATH
 
 # Remove credential after obtain certs
+echo "Remove credential after obtain certificate"
 rm -rf $CREDENTIAL_PATH
 
 # Remove old certificate configs
+echo "Remove old config for privkey and fullchain"
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config rm ${PRIVKEY_CONFIG}"
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config rm ${FULLCHAIN_CONFIG}"
 
 # Get file content
+echo "Get data from new privkey and fullchain"
 PRIVKEY_CONTENT=$(< ${CERTBOT_DIR}/${DOMAINS}/privkey.pem)
 FULLCHAIN_CONTENT=$(< ${CERTBOT_DIR}/${DOMAINS}/fullchain.pem)
 
 # Create new certificate configs
+echo "Create new config for new certificate"
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config create ${FULLCHAIN_CONFIG} ${FULLCHAIN_CONTENT}"
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $USERNAME@$HOST "docker config create ${PRIVKEY_CONFIG} ${PRIVKEY_CONTENT}"
 
 # Get current timestamp
+echo "Get current timestamp"
 TIMESTAMP=`date +"%s-%A-%d-%B-%Y-@-%Hh%Mm%Ss"`
 
 # Get container id
+echo "Get container id"
 export SERVICE=$CONTAINER_NAME
 CONTAINER_ID=$(docker ps -a | grep $SERVICE | grep -E "$SERVICE." | awk '{print $1}')
 docker exec $CONTAINER_ID ls
 
 # Backup old certifications
+echo "Backup old privkey inside container"
 docker exec $CONTAINER_ID mkdir -p /etc/nginx/$TIMESTAMP
 docker exec $CONTAINER_ID cp /etc/nginx/privkey.pem /etc/nginx/$TIMESTAMP/privkey.pem
 docker exec $CONTAINER_ID cp /etc/nginx/fullchain.pem /etc/nginx/$TIMESTAMP/fullchain.pem
 
 # Update nginx proxy
+echo "Reload and restart nginx proxy"
 docker exec $CONTAINER_ID wget "http://tasks.web_config/config/${DOMAINS}_fullchain.pem" -O /etc/nginx/fullchain.pem
 docker exec $CONTAINER_ID wget "http://tasks.web_config/config/${DOMAINS}_privkey.pem" -O /etc/nginx/privkey.pem
 docker exec $CONTAINER_ID sleep 3

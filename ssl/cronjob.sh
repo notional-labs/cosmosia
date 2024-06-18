@@ -7,6 +7,7 @@ CONTAINER_NAME=$1
 DOMAIN=$2
 
 # check for container name
+echo "Checking variables"
 if [ -z "${CONTAINER_NAME}" ]; then
   echo "missing container name"
   echo "Usage: ./cronjob.sh container_name domain_name"
@@ -23,6 +24,7 @@ if [ -z "${DOMAIN}" ]; then
 fi
 
 # Install cronnie on archlinux
+echo "Install cron"
 pacman -Syyu --noconfirm
 pacman -Sy cronie --noconfirm
 
@@ -31,6 +33,7 @@ systemctl enable cronie
 systemctl start cronie
 
 # Add new cronjob
+echo "Replace old with new script"
 rm -rf $HOME/cron/*
 mkdir -p $HOME/cron
 cp -f ./certbot-renew.sh $HOME/cron/certbot-renew.sh
