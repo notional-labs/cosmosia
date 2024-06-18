@@ -142,6 +142,9 @@ cat << EOF | sudo tee -a $CREDENTIAL_PATH
 $CREDENTIAL
 EOF
 
+# Change credential mode
+chmod 400 $CREDENTIAL_PATH
+
 # Obtain certifications
 echo "Obtaining certificates..."
 obtain_certs $DOMAINS $EMAILS $CERTBOT_DIR $CERTBOT_SERVER $CREDENTIAL_PATH
@@ -166,8 +169,8 @@ scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -prq "${CERTBOT_
 
 # Create new certificate configs
 echo "Create new config for new certificate"
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${PRIVKEY_CONFIG} ${CERTBOT_DIR}/privkey.pem"
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${FULLCHAIN_CONFIG} ${CERTBOT_DIR}/fullchain.pem"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${PRIVKEY_CONFIG} ${CERTBOT_DIR}/${DOMAIN}/privkey.pem"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USERNAME}@${HOST} "docker config create ${FULLCHAIN_CONFIG} ${CERTBOT_DIR}/${DOMAIN}/fullchain.pem"
 
 # Get current timestamp
 echo "Get current timestamp"
@@ -187,7 +190,7 @@ docker exec $CONTAINER_ID cp /etc/nginx/fullchain.pem /etc/nginx/$TIMESTAMP/full
 
 # Update nginx proxy
 echo "Reload and restart nginx proxy"
-docker exec $CONTAINER_ID wget "http://tasks.web_config/config/${DOMAINS}_fullchain.pem" -O /etc/nginx/fullchain.pem
-docker exec $CONTAINER_ID wget "http://tasks.web_config/config/${DOMAINS}_privkey.pem" -O /etc/nginx/privkey.pem
+docker exec $CONTAINER_ID wget "http://tasks.web_config/config/${DOMAIN}_fullchain.pem" -O /etc/nginx/fullchain.pem
+docker exec $CONTAINER_ID wget "http://tasks.web_config/config/${DOMAIN}_privkey.pem" -O /etc/nginx/privkey.pem
 docker exec $CONTAINER_ID sleep 3
 docker exec $CONTAINER_ID /usr/sbin/nginx -s reload
