@@ -112,6 +112,8 @@ obtain_certs () {
 ####################################################################################################
 # IMPLEMENTATION
 ####################################################################################################
+# Install sudo
+pacman -Sy sudo --noconfirm
 
 # Install pip and certbot dns cloudflare
 install_binary_if_not_exist pip install_pip_binary
