@@ -127,19 +127,6 @@ agent_id=$(docker ps -aqf "name=agent")
 rpc_node_ip=$(docker exec $agent_id curl -s "http://tasks.web_config:2375/nodes/${rpc_node}" |jq -r ".Status.Addr")
 echo "rpc_node_ip=${rpc_node_ip}"
 
-# make sure folder exist on remote host before mounting
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${rpc_node_ip} "mkdir -p /mnt/data/rpc/${chain_name}_${node_num}"
-
-MOUNT_OPT="--mount type=bind,source=/mnt/data/rpc/${chain_name}_${node_num},destination=$node_home"
-
-constraint="node.hostname==$rpc_node"
-echo "constraint=$constraint"
-
-if [[ -z $constraint ]]; then
-  echo "No rpc constraint config for ${chain_name}"
-  exit
-fi
-
 # delete existing service
 docker service rm $rpc_service_name
 
