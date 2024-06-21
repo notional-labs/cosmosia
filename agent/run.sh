@@ -1,4 +1,7 @@
 
+pacman-key --init
+pacman -Syu --noconfirm
+pacman -Sy --noconfirm archlinux-keyring
 pacman -Syu --noconfirm
 pacman -Sy --noconfirm nginx spawn-fcgi fcgiwrap screen docker
 
