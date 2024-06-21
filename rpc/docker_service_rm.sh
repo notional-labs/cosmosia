@@ -135,6 +135,6 @@ sleep 30
 
 echo "opt_clear_data = $opt_clear_data"
 if [ "$opt_clear_data" = true ] ; then
-  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${rpc_node_ip} "rm -rf /mnt/data/rpc/${chain_name}_${node_num}/*"
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${rpc_node_ip} "rm -rf /mnt/data/rpc/${chain_name}_${node_num}"
 fi
 
