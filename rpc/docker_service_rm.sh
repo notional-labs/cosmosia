@@ -1,5 +1,5 @@
 # usage: ./docker_service_rm.sh chain_name node_num [-d]
-# eg., ./docker_service_create.sh cosmoshub 1
+# eg., ./docker_service_rm.sh cosmoshub 1
 # use -d to delete data
 
 chain_name="$1"
