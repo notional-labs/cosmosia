@@ -1238,7 +1238,7 @@ trusting_period = '336hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-compat_mode = '0.34'
+compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.25, denom = 'uwhale' }
 address_type = { derivation = 'cosmos' }
