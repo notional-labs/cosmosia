@@ -20,6 +20,7 @@ list = [
 ]
 
 [[chains]]
+id = "cosmoshub-4"
 ${INC_COSMOSHUB_4}
 [chains.packet_filter]
 policy = "allow"
