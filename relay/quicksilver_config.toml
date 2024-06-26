@@ -1,0 +1,149 @@
+${INC_GLOBAL}
+
+[[chains]]
+id = "quicksilver-2"
+${INC_QUICKSILVER_2}
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-0'],
+      ['transfer', 'channel-1'], ## cosmos
+      ['transfer', 'channel-2'], ## osmosis
+      ['transfer', 'channel-17'], ## regen
+      #['transfer','channel-52'], ##secret
+      ['transfer','channel-86'], #juno
+      ['transfer','channel-101'], #somm
+      ['transfer','channel-164'], #dydx
+      ['transfer','channel-170'], #saga
+      ['transfer','channel-171'], #arch
+      ['icacontroller-*', '*']
+]
+
+[[chains]]
+${INC_COSMOSHUB_4}
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-467'],
+      ['icahost', 'channel-529'],
+      ['icahost', 'channel-531'],
+      ['icahost', 'channel-530'],
+      ['icahost', 'channel-832'],
+]
+
+[[chains]]
+id = "juno-1"
+${INC_JUNO_1}
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-272'],
+      ['icahost', 'channel-531'],
+      ['icahost', 'channel-277'], ## deposit
+      ['icahost', 'channel-274'], ## withdrawal
+      ['icahost', 'channel-482'], ## perform
+]
+
+[[chains]]
+id = "osmosis-1"
+${INC_OSMOSIS_1}
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-522'],
+      ['icahost', 'channel-701'], ## deposit
+      ['icahost', 'channel-698'], ## withdrawal
+      ['icahost', 'channel-700'], ## performance
+      ['icahost', 'channel-17604'],
+]
+
+[[chains]]
+id = 'regen-1'
+${INC_REGEN_1}
+[chains.packet_filter]
+policy = 'allow'
+list = [
+      ['transfer', 'channel-62'],
+      ['icahost', 'channel-163'], ## delegate
+      ['icahost', 'channel-65'], ## deposit
+      ['icahost', 'channel-63'], ## withdrawal
+      ['icahost', 'channel-64'], ## performance
+]
+
+[[chains]]
+id = 'sommelier-3'
+${INC_SOMMELIER_3}
+[chains.packet_filter]
+policy = 'allow'
+list = [
+        ['transfer', 'channel-59'],
+        ['icahost', 'channel-78'], ## delegate
+        ['icahost', 'channel-60'], ## deposit
+        ['icahost', 'channel-61'], ## withdrawal
+        ['icahost', 'channel-62'], ## performance
+]
+
+[[chains]]
+id = 'stargaze-3'
+${INC_STARGAZE_1}
+[chains.packet_filter]
+policy = 'allow'
+list = [
+      ['transfer', 'channel-124'],
+      ['icahost', 'channel-196'], ## delegate
+      ['icahost', 'channel-126'], ## deposit
+      ['icahost', 'channel-129'], ## withdrawal
+      ['icahost', 'channel-130'], ## performance
+]
+
+[[chains]]
+id = "dydx-mainnet-1"
+${INC_DYDX_MAINNET_1}
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-32'],
+      ['icahost', 'channel-35'], ## delegate
+      ['icahost', 'channel-33'], ## deposit
+      ['icahost', 'channel-34'], ## withdrawal
+      ['icahost', 'channel-36'], ## performance
+]
+
+[[chains]]
+id = "ssc-1"
+${INC_SSC_1}
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-18'],
+      ['icahost', 'channel-19'], ## delegate
+      ['icahost', 'channel-22'], ## deposit
+      ['icahost', 'channel-20'], ## withdrawal
+      ['icahost', 'channel-21'], ## performance
+]
+
+[[chains]]
+id = "archway-1"
+${INC_ARCHWAY_1}
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-132'],
+#      ['icahost', 'channel-19'], ## delegate
+#      ['icahost', 'channel-22'], ## deposit
+#      ['icahost', 'channel-20'], ## withdrawal
+#      ['icahost', 'channel-21'], ## performance
+]
+
+[[chains]]
+id = "agoric-3"
+${INC_AGORIC_3}
+[chains.packet_filter]
+policy = "allow"
+list = [
+#      ['transfer', 'channel-18'],
+#      ['icahost', 'channel-19'], ## delegate
+#      ['icahost', 'channel-22'], ## deposit
+#      ['icahost', 'channel-20'], ## withdrawal
+#      ['icahost', 'channel-21'], ## performance
+]

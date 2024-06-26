@@ -33,6 +33,38 @@ port = 3001
 EOT
 )
 
+
+# archway-1
+export INC_ARCHWAY_1=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_archway:8000'
+grpc_addr = 'http://tasks.lb_archway:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_archway:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "archway"
+key_name = "archway"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 600000
+max_gas =  10000000
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "40s"
+max_block_time = "10s"
+trusting_period = '14days'
+ccv_consumer_chain = false
+memo_prefix = "relayed by Notional.Ventures"
+sequential_batch_tx = false
+compat_mode = '0.37'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 140000000000.0, denom = 'aarch' }
+address_type = { derivation = 'cosmos' }
+EOT
+)
+
 # centauri-1
 export INC_CENTAURI_1=$(cat <<-EOT
 type = "CosmosSdk"
@@ -431,6 +463,38 @@ compat_mode = '0.37'
 EOT
 )
 
+
+# ssc-1
+export INC_SSC_1=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_saga:8000'
+grpc_addr = 'http://tasks.lb_saga:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_saga:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "saga"
+key_name = "saga"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 300000
+max_gas = 1000000
+gas_multiplier = 1.1
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "15s"
+max_block_time = "10s"
+trusting_period = '14days'
+ccv_consumer_chain = false
+memo_prefix = "relayed by Notional.Ventures"
+sequential_batch_tx = false
+compat_mode = '0.37'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 0.015, denom = 'usaga' }
+address_type = { derivation = 'cosmos' }
+EOT
+)
+
 # secret-4
 export INC_SECRET_4=$(cat <<-EOT
 type = "CosmosSdk"
@@ -459,6 +523,37 @@ trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.05, denom = 'uscrt' }
 address_type = { derivation = 'cosmos' }
 compat_mode = '0.34'
+EOT
+)
+
+# sommelier-3
+export INC_SOMMELIER_3=$(cat <<-EOT
+type = "CosmosSdk"
+rpc_addr = 'http://tasks.lb_sommelier:8000'
+grpc_addr = 'http://tasks.lb_sommelier:8003'
+event_source = { mode = 'push', url = 'ws://tasks.lb_sommelier:8000/websocket', batch_delay = '500ms' }
+rpc_timeout = "30s"
+trusted_node = false
+account_prefix = "somm"
+key_name = "sommelier"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 300000
+max_gas = 1000000
+gas_multiplier = 1.1
+max_msg_num = 30
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "15s"
+max_block_time = "10s"
+trusting_period = '18days'
+ccv_consumer_chain = false
+memo_prefix = "relayed by Notional.Ventures"
+sequential_batch_tx = false
+compat_mode = '0.34'
+trust_threshold = { numerator = '1', denominator = '3' }
+gas_price = { price = 1, denom = 'usomm' }
+address_type = { derivation = 'cosmos' }
 EOT
 )
 
