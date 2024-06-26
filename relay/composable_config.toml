@@ -11,7 +11,7 @@ list = [
     ['transfer', 'channel-0'],  # chihuahua-1
     ['transfer', 'channel-4'],  # cosmoshub-4
     ['transfer', 'channel-11'], # crescent-1
-    ['transfer', 'channel-12'], # canto_7700-1
+    ['transfer', 'channel-74'], # canto_7700-1
     ['transfer', 'channel-7'],  # evmos_9001-2
     ['transfer', 'channel-8'],  # juno-1
     ['transfer', 'channel-18'], # neutron-1
@@ -67,7 +67,7 @@ ${INC_CANTO_7700_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-23'],
+    ['transfer', 'channel-31'],
 ]
 
 [[chains]]
