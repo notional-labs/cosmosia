@@ -223,9 +223,9 @@ EOT
 # canto_7700-1
 export INC_CANTO_7700_1=$(cat <<-EOT
 type = "CosmosSdk"
-rpc_addr = 'https://rpc.canto.silentvalidator.com'
-grpc_addr = 'http://canto-grpc.polkachu.com:15590'
-event_source = { mode = 'push', url = 'wss://rpc.canto.silentvalidator.com/websocket', batch_delay = '500ms' }
+rpc_addr = 'https://canto.gravitychain.io:26657'
+grpc_addr = 'http://canto.gravitychain.io:9090'
+event_source = { mode = 'push', url = 'wss://canto.gravitychain.io:26657/websocket', batch_delay = '500ms' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "canto"
