@@ -26,18 +26,6 @@ scrape_configs:
   - job_name: whitewhale_clear
     static_configs:
       - targets: ['tasks.rlclear_whitewhale:8000']
-  - job_name: sei
-    static_configs:
-      - targets: ['tasks.rl_sei:3001']
-  - job_name: sei_clear
-    static_configs:
-      - targets: ['tasks.rlclear_sei:8000']
-  - job_name: seilegacy
-    static_configs:
-      - targets: ['tasks.rl_seilegacy:3001']
-  - job_name: seilegacy_clear
-    static_configs:
-      - targets: ['tasks.rlclear_seilegacy:8000']
   - job_name: kava
     static_configs:
       - targets: ['tasks.rl_kava:3001']
@@ -50,18 +38,6 @@ scrape_configs:
   - job_name: composable_clear
     static_configs:
       - targets: ['tasks.rlclear_composable:8000']
-  - job_name: osmosis
-    static_configs:
-      - targets: ['tasks.rl_osmosis:3001']
-  - job_name: osmosis_clear
-    static_configs:
-      - targets: ['tasks.rlclear_osmosis:8000']
-  - job_name: injective
-    static_configs:
-      - targets: ['tasks.rl_injective:3001']
-  - job_name: injective_clear
-    static_configs:
-      - targets: ['tasks.rlclear_injective:8000']
   - job_name: composable-testnet
     static_configs:
       - targets: ['tasks.rl_composable-testnet:3001']
