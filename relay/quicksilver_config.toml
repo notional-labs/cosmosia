@@ -6,7 +6,7 @@ ${INC_QUICKSILVER_2}
 [chains.packet_filter]
 policy = "allow"
 list = [
-      ['transfer', 'channel-0'],
+      ['transfer', 'channel-0'], ## stargaze
       ['transfer', 'channel-1'], ## cosmos
       ['transfer', 'channel-2'], ## osmosis
       ['transfer', 'channel-17'], ## regen
