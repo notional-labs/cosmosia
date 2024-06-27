@@ -442,7 +442,7 @@ event_source = { mode = 'push', url = 'ws://tasks.lb_quicksilver:8000/websocket'
 rpc_timeout = "10s"
 trusted_node = true
 account_prefix = "quicksilver"
-key_name = "juno"
+key_name = "quicksilver"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 100000
@@ -813,7 +813,7 @@ grpc_addr = 'http://tasks.lb_kujira:8003'
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "kujira"
-key_name = "noble"
+key_name = "kujira"
 key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 300000
