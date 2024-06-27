@@ -63,7 +63,7 @@
       "id": 80,
       "options": {
         "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 10)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
         "defaultContent": "The query didn't return any results.",
         "editor": {
           "format": "auto",
@@ -439,7 +439,7 @@
       "id": 84,
       "options": {
         "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 10)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
         "defaultContent": "The query didn't return any results.",
         "editor": {
           "format": "auto",
@@ -814,7 +814,7 @@
       "id": 85,
       "options": {
         "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 10)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
         "defaultContent": "The query didn't return any results.",
         "editor": {
           "format": "auto",
@@ -1189,7 +1189,7 @@
       "id": 86,
       "options": {
         "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 10)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
         "defaultContent": "The query didn't return any results.",
         "editor": {
           "format": "auto",
@@ -1564,7 +1564,7 @@
       "id": 87,
       "options": {
         "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 10)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
         "defaultContent": "The query didn't return any results.",
         "editor": {
           "format": "auto",
@@ -2388,7 +2388,7 @@
       "id": 88,
       "options": {
         "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 10)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
         "defaultContent": "The query didn't return any results.",
         "editor": {
           "format": "auto",
@@ -2763,7 +2763,7 @@
       "id": 89,
       "options": {
         "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 10)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
         "defaultContent": "The query didn't return any results.",
         "editor": {
           "format": "auto",
@@ -3104,8 +3104,8 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
-    "to": "now"
+    "from": "2024-06-27T06:00:42.493Z",
+    "to": "2024-06-27T18:00:42.495Z"
   },
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
