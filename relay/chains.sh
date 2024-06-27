@@ -441,7 +441,7 @@ grpc_addr = "http://tasks.lb_quicksilver:8003"
 event_source = { mode = 'push', url = 'ws://tasks.lb_quicksilver:8000/websocket', batch_delay = '500ms' }
 rpc_timeout = "10s"
 trusted_node = true
-account_prefix = "quicksilver"
+account_prefix = "quick"
 key_name = "quicksilver"
 key_store_type = "Test"
 store_prefix = "ibc"
