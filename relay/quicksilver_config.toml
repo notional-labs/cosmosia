@@ -85,7 +85,7 @@ list = [
 ]
 
 [[chains]]
-id = 'stargaze-3'
+id = 'stargaze-1'
 ${INC_STARGAZE_1}
 [chains.packet_filter]
 policy = 'allow'
