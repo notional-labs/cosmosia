@@ -1,0 +1,639 @@
+[global]
+log_level = "debug"
+
+[mode.clients]
+enabled = true
+refresh = true
+misbehaviour = true
+
+[mode.connections]
+enabled = true
+
+[mode.channels]
+enabled = true
+
+[mode.packets]
+enabled = true
+clear_interval = 100
+clear_on_start = true
+tx_confirmation = true
+auto_register_counterparty_payee = false
+
+[rest]
+enabled = false
+host = "127.0.0.1"
+port = 3000
+
+[telemetry]
+enabled = true
+host = "0.0.0.0"
+port = 3001
+
+#[telemetry.buckets.latency_submitted]
+#start = 500
+#end = 20000
+#buckets = 10
+
+#[telemetry.buckets.latency_confirmed]
+#start = 1000
+#end = 30000
+#buckets = 10
+
+[[chains]]
+id = "cosmoshub-4"
+type = "CosmosSdk"
+#rpc_addr = "https://rpc-cosmoshub-ia.cosmosia.notional.ventures/"
+#grpc_addr = "https://grpc-cosmoshub-ia.cosmosia.notional.ventures/"
+#rpc_addr = "https://rpc-cosmoshub-j2nfbupdbmvlxv2k-ie.internalendpoints.notional.ventures:443"
+#grpc_addr = "https://grpc-cosmoshub-6yyrvrxsdr2uapxv-ie.internalendpoints.notional.ventures:443"
+rpc_addr = "https://rpc.cosmoshub-4.quicksilver.zone:443"
+grpc_addr = "https://grpc.cosmoshub-4.quicksilver.zone:443"
+#grpc_addr = "http://cosmoshub-grpc.lavenderfive.com:443"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "cosmos"
+key_name = "quick2"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 200000
+max_gas = 100000000
+gas_multiplier = 1.25
+max_msg_num = 10
+max_tx_size = 1800000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+compat_mode = '0.37'
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 0.01
+denom = "uatom"
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-467'],
+      ['icahost', 'channel-529'],
+      ['icahost', 'channel-531'],
+      ['icahost', 'channel-530'],
+      ['icahost', 'channel-832'],
+]
+
+[chains.packet_filter.min_fees]
+
+[chains.address_type]
+derivation = "cosmos"
+
+[[chains]]
+id = "juno-1"
+type = "CosmosSdk"
+#rpc_addr = "https://rpc-juno-babcbncrvr7wc2bq-ie.internalendpoints.notional.ventures"
+#grpc_addr = "https://grpc-juno-tejdkcrqrdd2wbqt-ie.internalendpoints.notional.ventures"
+#rpc_addr = "https://rpc-archive.junonetwork.io:443"
+rpc_addr = "https://rpc.juno-1.quicksilver.zone:443"
+grpc_addr = "https://grpc.juno-1.quicksilver.zone:443"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "juno"
+key_name = "quick2"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 500000
+max_gas = 15000000
+gas_multiplier = 1.2
+max_msg_num = 5
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 0.1
+denom = "ujuno"
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-272'],
+      ['icahost', 'channel-531'],
+      ['icahost', 'channel-277'], ## deposit
+      ['icahost', 'channel-274'], ## withdrawal
+      ['icahost', 'channel-482'], ## perform
+]
+
+[chains.packet_filter.min_fees]
+
+[chains.address_type]
+derivation = "cosmos"
+
+[[chains]]
+id = "osmosis-1"
+type = "CosmosSdk"
+#rpc_addr = "https://rpc-osmosis-ia.cosmosia.notional.ventures/"
+#grpc_addr = "https://grpc-osmosis-ia.cosmosia.notional.ventures/"
+#rpc_addr = "https://rpc-osmosis-k5paa8zasfwqehxa-ie.internalendpoints.notional.ventures"
+#grpc_addr = "https://grpc-osmosis-qrcveqaqddwf6vrl-ie.internalendpoints.notional.ventures"
+rpc_addr = "https://rpc.osmosis-1.quicksilver.zone"
+grpc_addr = "https://grpc.osmosis-1.quicksilver.zone"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "osmo"
+key_name = "quick2"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 500000
+max_gas = 60000000
+gas_multiplier = 1.25
+max_msg_num = 10
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+compat_mode = '0.37'
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 0.025
+denom = "uosmo"
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-522'],
+      ['icahost', 'channel-701'], ## deposit
+      ['icahost', 'channel-698'], ## withdrawal
+      ['icahost', 'channel-700'], ## performance
+      ['icahost', 'channel-17604'],
+]
+
+[chains.packet_filter.min_fees]
+
+[chains.address_type]
+derivation = "cosmos"
+
+[[chains]]
+id = "quicksilver-2"
+type = "CosmosSdk"
+#rpc_addr = "http://joe.quicksilver.zone:26657"
+#grpc_addr = "http://joe.quicksilver.zone:9090"
+#rpc_addr = "https://rpc-quicksilver-dtdv8lf9yywnma2y-ie.internalendpoints.notional.ventures"
+#grpc_addr = "https://grpc-quicksilver-rn8hxrsnkvw6ybvb-ie.internalendpoints.notional.ventures"
+#grpc_addr = "https://quicksilver-grpc.lavenderfive.com:443"
+rpc_addr = "https://rpc.quicksilver.zone:443"
+grpc_addr = "https://grpc.quicksilver.zone:443"
+#rpc_addr = "http://joe.quicksilver.zone:26657"
+#grpc_addr = "http://joe.quicksilver.zone:9090"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "quick"
+key_name = "quick2"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 600000
+max_gas = 150000000
+gas_multiplier = 1.35
+max_msg_num = 3
+max_tx_size = 1800000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 0.0001
+denom = "uqck"
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-0'],
+      ['transfer', 'channel-1'], ## cosmos
+      ['transfer', 'channel-2'], ## osmosis
+      ['transfer', 'channel-17'], ## regen
+      #['transfer','channel-52'], ##secret
+      ['transfer','channel-86'], #juno
+      ['transfer','channel-101'], #somm
+      ['transfer','channel-164'], #dydx
+      ['transfer','channel-170'], #saga
+      ['transfer','channel-171'], #arch
+      ['icacontroller-*', '*']
+]
+
+[chains.packet_filter.min_fees]
+
+[chains.address_type]
+derivation = "cosmos"
+
+[[chains]]
+id = "regen-1"
+type = "CosmosSdk"
+rpc_addr = "https://rpc-regen-zfwhvzqhfymmwky7-ie.internalendpoints.notional.ventures"
+grpc_addr = "https://grpc-regen-udjrdxjyr88kfvrr-ie.internalendpoints.notional.ventures"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "regen"
+key_name = "quick2"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 500000
+max_gas = 40000000
+gas_multiplier = 1.1
+max_msg_num = 10
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 0.025
+denom = "uregen"
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-62'],
+      ['icahost', 'channel-163'], ## delegate
+      ['icahost', 'channel-65'], ## deposit
+      ['icahost', 'channel-63'], ## withdrawal
+      ['icahost', 'channel-64'], ## performance
+]
+
+[chains.packet_filter.min_fees]
+
+[chains.address_type]
+derivation = "cosmos"
+
+#[[chains]]
+#id = "secret-4"
+#type = "CosmosSdk"
+#rpc_addr = "https://secretnetwork-rpc.highstakes.ch:26657/"
+#grpc_addr = "https://secretnetwork-grpc.lavenderfive.com/"
+#rpc_addr = 'https://secret-4.api.trivium.network:26657'
+#grpc_addr = 'https://secretnetwork-mainnet-grpc.autostake.com:9090'
+#rpc_timeout = "10s"
+#trusted_node = true
+#account_prefix = "secret"
+#key_name = "secret"
+#key_store_type = "Test"
+#store_prefix = "ibc"
+#default_gas = 500000
+#max_gas = 400000
+#gas_multiplier = 1.1
+#max_msg_num = 10
+#max_tx_size = 180000
+#max_grpc_decoding_size = 33554432
+#clock_drift = "5s"
+#max_block_time = "30s"
+#ccv_consumer_chain = false
+#memo_prefix = "Relayed By Notional"
+#sequential_batch_tx = true
+
+#[chains.event_source]
+#mode = "pull"
+
+#[chains.trust_threshold]
+#numerator = "1"
+#denominator = "3"
+
+#[chains.gas_price]
+#price = 0.1
+#denom = "uscrt"
+
+#[chains.packet_filter]
+#policy = "allow"
+#list = [
+#        ['transfer', 'channel-65'],
+        #['icahost', 'channel-760'], ## delegate
+        #['icahost', 'channel-701'], ## deposit
+        #['icahost', 'channel-698'], ## withdrawal
+        #['icahost', 'channel-700'], ## performance
+#]
+
+#[chains.packet_filter.min_fees]
+
+#[chains.address_type]
+#derivation = "cosmos"
+
+[[chains]]
+id = "sommelier-3"
+type = "CosmosSdk"
+rpc_addr = "https://rpc.sommelier-3.quicksilver.zone:443"
+grpc_addr = "https://grpc.sommelier-3.quicksilver.zone:443"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "somm"
+key_name = "quick2"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 500000
+max_gas = 150000000
+gas_multiplier = 1.1
+max_msg_num = 10
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 0.0001
+denom = "usomm"
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+        ['transfer', 'channel-59'],
+        ['icahost', 'channel-78'], ## delegate
+        ['icahost', 'channel-60'], ## deposit
+        ['icahost', 'channel-61'], ## withdrawal
+        ['icahost', 'channel-62'], ## performance
+]
+
+[chains.packet_filter.min_fees]
+
+[chains.address_type]
+derivation = "cosmos"
+
+[[chains]]
+id = "stargaze-1"
+type = "CosmosSdk"
+#rpc_addr = "https://rpc-stargaze-c7rfwhgjeeczbglw-ie.internalendpoints.notional.ventures"
+#grpc_addr = "https://grpc-stargaze-nfaga4e4mfkdbmfx-ie.internalendpoints.notional.ventures"
+rpc_addr = "https://rpc.stargaze-1.quicksilver.zone:443"
+grpc_addr = "https://grpc.stargaze-1.quicksilver.zone:443"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "stars"
+key_name = "quick2"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 500000
+max_gas = 75000000
+gas_multiplier = 1.1
+max_msg_num = 5
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 1.000
+denom = "ustars"
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-124'],
+      ['icahost', 'channel-196'], ## delegate
+      ['icahost', 'channel-126'], ## deposit
+      ['icahost', 'channel-129'], ## withdrawal
+      ['icahost', 'channel-130'], ## performance
+]
+
+[chains.packet_filter.min_fees]
+
+[chains.address_type]
+derivation = "cosmos"
+
+[[chains]]
+id = "dydx-mainnet-1"
+type = "CosmosSdk"
+
+#rpc_addr = "https://rpc.dydx-mainnet-1.quicksilver.zone:443"
+#grpc_addr = "https://grpc.dydx-mainnet-1.quicksilver.zone:443"
+rpc_addr = "https://dydx-mainnet-full-rpc.public.blastapi.io:443"
+grpc_addr = "https://dydx-mainnet-full-grpc.public.blastapi.io:443"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "dydx"
+key_name = "dydx"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 500000
+max_gas = 40000000
+gas_multiplier = 1.2
+max_msg_num = 10
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+#price = 0.015
+#denom = "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
+price = 12500000000.0
+denom = "adydx"
+
+[chains.packet_filter]
+policy = "allow"
+list = [
+      ['transfer', 'channel-32'],
+      ['icahost', 'channel-35'], ## delegate
+      ['icahost', 'channel-33'], ## deposit
+      ['icahost', 'channel-34'], ## withdrawal
+      ['icahost', 'channel-36'], ## performance
+]
+
+
+[[chains]]
+id = "ssc-1"
+type = "CosmosSdk"
+
+rpc_addr = "https://rpc.ssc-1.quicksilver.zone:443"
+grpc_addr = "https://grpc.ssc-1.quicksilver.zone:443"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "saga"
+key_name = "saga"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 500000
+max_gas = 40000000
+gas_multiplier = 1.2
+max_msg_num = 10
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 0.015
+denom = "usaga"
+list = [
+      ['transfer', 'channel-18'],
+      ['icahost', 'channel-19'], ## delegate
+      ['icahost', 'channel-22'], ## deposit
+      ['icahost', 'channel-20'], ## withdrawal
+      ['icahost', 'channel-21'], ## performance
+]
+
+[[chains]]
+id = "archway-1"
+type = "CosmosSdk"
+
+rpc_addr = "https://rpc.archway-1.quicksilver.zone:443"
+grpc_addr = "https://grpc.archway-1.quicksilver.zone:443"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "archway"
+key_name = "arch"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 500000
+max_gas = 40000000
+gas_multiplier = 1.2
+max_msg_num = 10
+max_tx_size = 180000
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 140000000000.0
+denom = "aarch"
+list = [
+      ['transfer', 'channel-132'],
+#      ['icahost', 'channel-19'], ## delegate
+#      ['icahost', 'channel-22'], ## deposit
+#      ['icahost', 'channel-20'], ## withdrawal
+#      ['icahost', 'channel-21'], ## performance
+]
+
+[[chains]]
+id = "agoric-3"
+type = "CosmosSdk"
+
+rpc_addr = "https://rpc.agoric-3.quicksilver.zone:443"
+grpc_addr = "https://grpc.agoric-3.quicksilver.zone:443"
+rpc_timeout = "10s"
+trusted_node = true
+account_prefix = "agoric"
+key_name = "agoric"
+key_store_type = "Test"
+store_prefix = "ibc"
+default_gas = 500000
+max_gas = 120000000
+gas_multiplier = 1.2
+max_msg_num = 10
+max_tx_size = 5242880
+max_grpc_decoding_size = 33554432
+clock_drift = "5s"
+max_block_time = "30s"
+ccv_consumer_chain = false
+memo_prefix = "Relayed By Notional"
+sequential_batch_tx = true
+
+[chains.event_source]
+mode = "pull"
+
+[chains.trust_threshold]
+numerator = "1"
+denominator = "3"
+
+[chains.gas_price]
+price = 0.03
+denom = "ubld"
+#list = [
+#      ['transfer', 'channel-18'],
+#      ['icahost', 'channel-19'], ## delegate
+#      ['icahost', 'channel-22'], ## deposit
+#      ['icahost', 'channel-20'], ## withdrawal
+#      ['icahost', 'channel-21'], ## performance
+#]
