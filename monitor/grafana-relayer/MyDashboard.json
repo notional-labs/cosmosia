@@ -42,40 +42,6 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [
-            {
-              "options": {
-                "from": 1,
-                "result": {
-                  "color": "#fade2a3d",
-                  "index": 0
-                },
-                "to": 4
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 5,
-                "result": {
-                  "color": "#f2495c7a",
-                  "index": 1
-                },
-                "to": 9999
-              },
-              "type": "range"
-            }
-          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -86,62 +52,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pending_packets"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time_ago"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
-                      "result": {
-                        "color": "#f2495c87",
-                        "index": 0
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
-                      "result": {
-                        "color": "#fade2a30",
-                        "index": 1
-                      }
-                    },
-                    "type": "regex"
-                  }
-                ]
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-background"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 29,
@@ -151,18 +62,21 @@
       },
       "id": 80,
       "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "language": "markdown"
         },
-        "showHeader": true
+        "editors": [],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "allRows",
+        "styles": "",
+        "wrap": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "5.0.0",
       "targets": [
         {
           "body": "",
@@ -194,6 +108,11 @@
               "jsonPath": "$.[*].time_ago",
               "language": "jsonpath",
               "name": ""
+            },
+            {
+              "jsonPath": "$.[*].client_id",
+              "language": "jsonpath",
+              "name": ""
             }
           ],
           "method": "GET",
@@ -210,7 +129,7 @@
       ],
       "title": "Last Client Update [quicksilver]",
       "transparent": true,
-      "type": "table"
+      "type": "marcusolsson-dynamictext-panel"
     },
     {
       "datasource": {
