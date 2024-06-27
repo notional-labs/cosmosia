@@ -63,7 +63,7 @@
       "id": 80,
       "options": {
         "afterRender": "",
-        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 43200)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
         "defaultContent": "The query didn't return any results.",
         "editor": {
           "format": "auto",
@@ -111,6 +111,11 @@
             },
             {
               "jsonPath": "$.[*].client_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].seconds_ago",
               "language": "jsonpath",
               "name": ""
             }
@@ -413,40 +418,6 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [
-            {
-              "options": {
-                "from": 1,
-                "result": {
-                  "color": "#fade2a3d",
-                  "index": 0
-                },
-                "to": 4
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 5,
-                "result": {
-                  "color": "#f2495c7a",
-                  "index": 1
-                },
-                "to": 9999
-              },
-              "type": "range"
-            }
-          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -457,62 +428,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pending_packets"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time_ago"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
-                      "result": {
-                        "color": "#f2495c87",
-                        "index": 0
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
-                      "result": {
-                        "color": "#fade2a30",
-                        "index": 1
-                      }
-                    },
-                    "type": "regex"
-                  }
-                ]
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-background"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 29,
@@ -520,20 +436,23 @@
         "x": 0,
         "y": 37
       },
-      "id": 24,
+      "id": 84,
       "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 43200)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "language": "markdown"
         },
-        "showHeader": true
+        "editors": [],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "allRows",
+        "styles": "",
+        "wrap": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "5.0.0",
       "targets": [
         {
           "body": "",
@@ -565,6 +484,16 @@
               "jsonPath": "$.[*].time_ago",
               "language": "jsonpath",
               "name": ""
+            },
+            {
+              "jsonPath": "$.[*].client_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].seconds_ago",
+              "language": "jsonpath",
+              "name": ""
             }
           ],
           "method": "GET",
@@ -579,9 +508,9 @@
           "urlPath": "/get_last_ibc_client_update"
         }
       ],
-      "title": "Last Client Update [composable]",
+      "title": "Last Client Update [quicksilver]",
       "transparent": true,
-      "type": "table"
+      "type": "marcusolsson-dynamictext-panel"
     },
     {
       "datasource": {
@@ -861,42 +790,9 @@
         "type": "marcusolsson-json-datasource",
         "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [
-            {
-              "options": {
-                "from": 1,
-                "result": {
-                  "color": "#fade2a3d",
-                  "index": 0
-                },
-                "to": 4
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 5,
-                "result": {
-                  "color": "#f2495c7a",
-                  "index": 1
-                },
-                "to": 9999
-              },
-              "type": "range"
-            }
-          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -907,84 +803,31 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pending_packets"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "time_ago"
-            },
-            "properties": [
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
-                      "result": {
-                        "color": "#f2495c80",
-                        "index": 0
-                      }
-                    },
-                    "type": "regex"
-                  },
-                  {
-                    "options": {
-                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
-                      "result": {
-                        "color": "#fade2a2b",
-                        "index": 1
-                      }
-                    },
-                    "type": "regex"
-                  }
-                ]
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "color-background"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
-        "h": 24,
+        "h": 29,
         "w": 8,
         "x": 0,
         "y": 73
       },
-      "id": 8,
+      "id": 85,
       "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 43200)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 0)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "language": "markdown"
         },
-        "showHeader": true
+        "editors": [],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "allRows",
+        "styles": "",
+        "wrap": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "5.0.0",
       "targets": [
         {
           "body": "",
@@ -1016,6 +859,16 @@
               "jsonPath": "$.[*].time_ago",
               "language": "jsonpath",
               "name": ""
+            },
+            {
+              "jsonPath": "$.[*].client_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].seconds_ago",
+              "language": "jsonpath",
+              "name": ""
             }
           ],
           "method": "GET",
@@ -1030,9 +883,9 @@
           "urlPath": "/get_last_ibc_client_update"
         }
       ],
-      "title": "Last Client Update [coreum]",
+      "title": "Last Client Update [quicksilver]",
       "transparent": true,
-      "type": "table"
+      "type": "marcusolsson-dynamictext-panel"
     },
     {
       "datasource": {
@@ -1265,7 +1118,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 97
+        "y": 102
       },
       "id": 41,
       "options": {
@@ -1300,7 +1153,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 103
+        "y": 108
       },
       "id": 10,
       "panels": [],
@@ -1420,7 +1273,7 @@
         "h": 14,
         "w": 8,
         "x": 0,
-        "y": 104
+        "y": 109
       },
       "id": 12,
       "options": {
@@ -1513,7 +1366,7 @@
         "h": 14,
         "w": 8,
         "x": 8,
-        "y": 104
+        "y": 109
       },
       "id": 56,
       "options": {
@@ -1624,7 +1477,7 @@
         "h": 14,
         "w": 8,
         "x": 16,
-        "y": 104
+        "y": 109
       },
       "id": 57,
       "options": {
@@ -1716,7 +1569,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 118
+        "y": 123
       },
       "id": 43,
       "options": {
@@ -1751,7 +1604,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 124
+        "y": 129
       },
       "id": 19,
       "panels": [],
@@ -1872,7 +1725,7 @@
         "h": 17,
         "w": 8,
         "x": 0,
-        "y": 125
+        "y": 130
       },
       "id": 21,
       "options": {
@@ -1965,7 +1818,7 @@
         "h": 16,
         "w": 8,
         "x": 8,
-        "y": 125
+        "y": 130
       },
       "id": 63,
       "options": {
@@ -2076,7 +1929,7 @@
         "h": 15,
         "w": 7,
         "x": 16,
-        "y": 125
+        "y": 130
       },
       "id": 62,
       "options": {
@@ -2168,7 +2021,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 142
+        "y": 147
       },
       "id": 45,
       "options": {
@@ -2203,7 +2056,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 148
+        "y": 153
       },
       "id": 11,
       "panels": [
@@ -2652,7 +2505,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 149
+        "y": 154
       },
       "id": 13,
       "panels": [],
@@ -2773,7 +2626,7 @@
         "h": 17,
         "w": 8,
         "x": 0,
-        "y": 150
+        "y": 155
       },
       "id": 15,
       "options": {
@@ -2866,7 +2719,7 @@
         "h": 16,
         "w": 8,
         "x": 8,
-        "y": 150
+        "y": 155
       },
       "id": 72,
       "options": {
@@ -2977,7 +2830,7 @@
         "h": 16,
         "w": 8,
         "x": 16,
-        "y": 150
+        "y": 155
       },
       "id": 73,
       "options": {
@@ -3069,7 +2922,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 167
+        "y": 172
       },
       "id": 49,
       "options": {
@@ -3104,7 +2957,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 173
+        "y": 178
       },
       "id": 74,
       "panels": [],
@@ -3225,7 +3078,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 174
+        "y": 179
       },
       "id": 75,
       "options": {
@@ -3318,7 +3171,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 174
+        "y": 179
       },
       "id": 76,
       "options": {
@@ -3429,7 +3282,7 @@
         "h": 8,
         "w": 7,
         "x": 16,
-        "y": 174
+        "y": 179
       },
       "id": 77,
       "options": {
@@ -3521,7 +3374,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 182
+        "y": 187
       },
       "id": 78,
       "options": {
