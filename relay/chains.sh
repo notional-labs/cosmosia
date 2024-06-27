@@ -459,7 +459,7 @@ sequential_batch_tx = false
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0001, denom = 'uqck' }
-compat_mode = '0.37'
+compat_mode = '0.34'
 EOT
 )
 
