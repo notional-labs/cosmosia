@@ -1243,14 +1243,17 @@ rpc_timeout = '60s'
 account_prefix = 'regen'
 key_name = 'regen'
 store_prefix = 'ibc'
-max_tx_size = 100000
+default_gas = 300000
 max_gas = 2000000
 gas_price = { price = 0.015, denom = 'uregen' }
 gas_multiplier = 1.1
+max_msg_num = 10
+max_tx_size = 100000
 clock_drift ='50s'
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
 memo_prefix = 'relayed by Notional.Ventures'
+compat_mode = '0.34'
 EOT
 )
 
