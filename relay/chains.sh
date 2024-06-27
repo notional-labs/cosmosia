@@ -768,7 +768,7 @@ ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.001, denom = 'ukava' }
+gas_price = { price = 0.05, denom = 'ukava' }
 address_type = { derivation = 'cosmos' }
 compat_mode = '0.34'
 EOT
