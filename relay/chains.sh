@@ -247,7 +247,7 @@ memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
-address_type = { derivation = 'cosmos' }
+address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
 EOT
 )
 
