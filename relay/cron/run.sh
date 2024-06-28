@@ -56,7 +56,9 @@ chain_ids=$(cat $HOME/.hermes/config.toml |grep "id = " |sed -e "s/id = //g" -e 
 for chain_id in $chain_ids; do
   hd_path="m/44'/118'/0'/0/0" # default
   if [ $( echo "${chain_id}" | grep -cE "^(canto_7700-1)$" ) -ne 0 ]; then
-    hd_path="m/44'/60'/0'/0/0"  # evm
+    hd_path="m/44'/60'/0'/0/0"  # canto
+  elif [ $( echo "${chain_id}" | grep -cE "^(kava_2222-10)$" ) -ne 0 ]; then
+    hd_path="m/44'/459'/0'/0/0"  # kava
   fi
   $HOME/.hermes/bin/hermes keys add --hd-path "${hd_path}" --chain $chain_id --mnemonic-file $HOME/.hermes/mnemonic.txt
 done
