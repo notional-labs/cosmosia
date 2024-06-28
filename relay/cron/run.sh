@@ -58,7 +58,7 @@ for chain_id in $chain_ids; do
   if [ $( echo "${chain_id}" | grep -cE "^(canto_7700-1)$" ) -ne 0 ]; then
     hd_path="m/44'/60'/0'/0/0"  # evm
   fi
-  $HOME/.hermes/bin/hermes keys add -hd-path "hd_path" --chain $chain_id --mnemonic-file $HOME/.hermes/mnemonic.txt
+  $HOME/.hermes/bin/hermes keys add -hd-path "${hd_path}" --chain $chain_id --mnemonic-file $HOME/.hermes/mnemonic.txt
 done
 
 ########################################################################################################################
