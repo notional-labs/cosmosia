@@ -31,7 +31,8 @@ echo "$items" | while IFS= read -r item ; do
   counter_chain_id=$(echo $item |jq -r .counter_chain_id)
   latest_height=$(echo $item |jq -r .latest_height)
   time_ago=$(echo $item |jq -r .time_ago)
+  port=$(echo "$item" |jq -r .port)
 
   echo "hermes clear packets ${chain_id}/${channel_id}"
-  $HOME/.hermes/bin/hermes clear packets --chain $chain_id --port transfer --channel $channel_id
+  $HOME/.hermes/bin/hermes clear packets --chain $chain_id --port $port --channel $channel_id
 done
