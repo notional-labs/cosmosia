@@ -58,7 +58,7 @@ max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 140000000000.0, denom = 'aarch' }
@@ -90,7 +90,7 @@ max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 1, denom = 'ppica' }
@@ -123,7 +123,7 @@ max_block_time = "10s"
 trusting_period = '336hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
 address_type = { derivation = 'cosmos' }
@@ -154,7 +154,7 @@ max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.1, denom = 'uhuahua' }
@@ -175,10 +175,10 @@ account_prefix = "cosmos"
 key_name = "cosmoshub"
 key_store_type = "Test"
 store_prefix = "ibc"
-default_gas = 200000
+default_gas = 250000
 max_gas = 2500000
 gas_multiplier = 1.1
-max_msg_num = 10
+max_msg_num = 3
 max_tx_size = 180000
 max_grpc_decoding_size = 33554432
 clock_drift = "1000s"
@@ -186,7 +186,7 @@ max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.01, denom = 'uatom' }
@@ -219,7 +219,7 @@ max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
 address_type = { derivation = 'cosmos' }
@@ -251,7 +251,7 @@ max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
 address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
@@ -282,7 +282,7 @@ max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0075, denom = 'aevmos' }
 address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
@@ -313,7 +313,7 @@ clock_drift = "5s"
 max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.075, denom = 'ujuno' }
 compat_mode = '0.37'
@@ -343,7 +343,7 @@ clock_drift = "5s"
 max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0001, denom = 'udarc' }
 compat_mode = '0.34'
@@ -373,7 +373,7 @@ clock_drift = "5s"
 max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.2, denom = 'uiris' }
 compat_mode = '0.37'
@@ -405,7 +405,7 @@ trusting_period = '13days'
 ccv_consumer_chain = false
 #ccv_consumer_chain = true
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0053, denom = 'untrn' }
@@ -438,7 +438,7 @@ max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.005, denom = 'uosmo' }
@@ -469,7 +469,7 @@ clock_drift = "5s"
 max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trusting_period = '14days'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0001, denom = 'uqck' }
@@ -502,7 +502,7 @@ max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.015, denom = 'usaga' }
@@ -534,7 +534,7 @@ max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.05, denom = 'uscrt' }
 address_type = { derivation = 'cosmos' }
@@ -566,7 +566,7 @@ max_block_time = "10s"
 trusting_period = '18days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 1, denom = 'usomm' }
@@ -598,7 +598,7 @@ max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 1, denom = 'ustars' }
@@ -630,7 +630,7 @@ max_block_time = "10s"
 trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0005, denom = 'ustrd' }
@@ -662,7 +662,7 @@ max_block_time = "10s"
 trusting_period = '216hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.1, denom = 'uumee' }
@@ -694,7 +694,7 @@ max_block_time = "10s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0625, denom = 'ucore' }
@@ -726,7 +726,7 @@ max_block_time = "10s"
 trusting_period = '112hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.34'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.007, denom = 'uaxl' }
@@ -758,7 +758,7 @@ max_block_time = "10s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'ugraviton' }
 address_type = { derivation = 'cosmos' }
@@ -790,7 +790,7 @@ max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.05, denom = 'ukava' }
 address_type = { derivation = 'cosmos' }
@@ -822,7 +822,7 @@ max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.1, denom = 'uusdc' }
 address_type = { derivation = 'cosmos' }
@@ -854,7 +854,7 @@ max_block_time = "10s"
 trusting_period = '10days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0034, denom = 'ukuji' }
 address_type = { derivation = 'cosmos' }
@@ -886,7 +886,7 @@ max_block_time = "10s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'uband' }
 address_type = { derivation = 'cosmos' }
@@ -918,7 +918,7 @@ max_block_time = "10s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 12500000000, denom = 'adydx' }
 address_type = { derivation = 'cosmos' }
@@ -950,7 +950,7 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 trusting_period = '14days'
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.25, denom = 'ufury' }
 address_type = { derivation = 'cosmos' }
@@ -980,7 +980,7 @@ clock_drift = "5s"
 max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.015, denom = 'uluna' }
 address_type = { derivation = 'cosmos' }
@@ -1011,7 +1011,7 @@ max_block_time = "10s"
 trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 160000000.0, denom = 'inj' }
@@ -1044,7 +1044,7 @@ max_block_time = "30s"
 trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.002, denom = 'utia' }
 address_type = { derivation = 'cosmos' }
@@ -1348,7 +1348,7 @@ max_block_time = "30s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.02, denom = 'usei' }
@@ -1380,7 +1380,7 @@ max_block_time = "10s"
 trusting_period = '336hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.25, denom = 'uwhale' }
@@ -1416,7 +1416,7 @@ max_block_time = "10s"
 trusting_period = '16hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 1, denom = 'ppica' }
@@ -1449,7 +1449,7 @@ max_block_time = "10s"
 trusting_period = '80hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'uosmo' }
@@ -1481,7 +1481,7 @@ max_block_time = "10s"
 trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.005, denom = 'uatom' }
@@ -1514,7 +1514,7 @@ max_block_time = "10s"
 trusting_period = '16hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
-sequential_batch_tx = false
+sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.25, denom = 'uwhale' }
