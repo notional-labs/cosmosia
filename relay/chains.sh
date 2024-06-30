@@ -415,7 +415,7 @@ key_store_type = "Test"
 store_prefix = "ibc"
 default_gas = 600000
 max_gas = 25000000
-gas_multiplier = 1.3
+gas_multiplier = 1.2
 dynamic_gas_price = { enabled = true, multiplier = 1.2, max = 0.6 }
 max_msg_num = 10
 max_tx_size = 180000
@@ -428,7 +428,7 @@ memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.0025, denom = 'uosmo' }
+gas_price = { price = 0.005, denom = 'uosmo' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
