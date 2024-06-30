@@ -40,7 +40,7 @@ list = [
     ['transfer', 'channel-49'], # axelar-dojo-1
     ['transfer', 'channel-53'], # axelar-dojo-1
     ['transfer', 'channel-10'], # chihuahua-1
-    ['transfer', 'channel-27'], # neutron-1
+#    ['transfer', 'channel-27'], # neutron-1
     ['transfer', 'channel-48'], # kava_2222-10
     ['transfer', 'channel-69'], # stargaze-1
     ['transfer', 'channel-56'], # umee-1
@@ -72,7 +72,7 @@ ${INC_NEUTRON_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
-    ['transfer', 'channel-4'],
+#    ['transfer', 'channel-4'],
 ]
 
 [[chains]]
