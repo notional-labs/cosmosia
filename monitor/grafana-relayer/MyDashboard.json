@@ -388,7 +388,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_quicksilver\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+          "expr": "{job=\"hermes_quicksilver\"} != `-32603`",
           "queryType": "range",
           "refId": "A"
         }
@@ -763,7 +763,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_composable\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+          "expr": "{job=\"hermes_composable\"} != `-32603`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1138,7 +1138,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_coreum\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+          "expr": "{job=\"hermes_coreum\"} != `-32603`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1513,7 +1513,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_furya\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+          "expr": "{job=\"hermes_furya\"} != `-32603`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1888,7 +1888,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_kava\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+          "expr": "{job=\"hermes_kava\"} != `-32603`",
           "queryType": "range",
           "refId": "A"
         }
@@ -2715,7 +2715,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_whitewhale\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+          "expr": "{job=\"hermes_whitewhale\"} != `-32603`",
           "queryType": "range",
           "refId": "A"
         }
@@ -3107,7 +3107,7 @@
     "list": []
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-6h",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
