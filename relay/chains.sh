@@ -168,7 +168,7 @@ type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_cosmoshub:8000'
 grpc_addr = 'http://tasks.lb_cosmoshub:8003'
 # event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'pull', interval = '2s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "cosmos"
@@ -296,7 +296,7 @@ type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_juno:8000"
 grpc_addr = "http://tasks.lb_juno:8003"
 # event_source = { mode = 'push', url = 'ws://tasks.lb_juno:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'pull', interval = '2s' }
 rpc_timeout = "10s"
 trusted_node = true
 account_prefix = "juno"
@@ -419,7 +419,7 @@ type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_osmosis:8000'
 grpc_addr = 'http://tasks.lb_osmosis:8003'
 # event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'pull', interval = '2s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "osmo"
@@ -452,7 +452,7 @@ type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_quicksilver:8000"
 grpc_addr = "http://tasks.lb_quicksilver:8003"
 # event_source = { mode = 'push', url = 'ws://tasks.lb_quicksilver:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'pull', interval = '2s' }
 rpc_timeout = "10s"
 trusted_node = true
 account_prefix = "quick"
@@ -484,7 +484,7 @@ type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_saga:8000'
 grpc_addr = 'http://tasks.lb_saga:8003'
 # event_source = { mode = 'push', url = 'ws://tasks.lb_saga:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'pull', interval = '2s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "saga"
@@ -548,7 +548,7 @@ type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_sommelier:8000'
 grpc_addr = 'http://tasks.lb_sommelier:8003'
 # event_source = { mode = 'push', url = 'ws://tasks.lb_sommelier:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'pull', interval = '2s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "somm"
@@ -580,7 +580,7 @@ type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_stargaze:8000'
 grpc_addr = 'http://tasks.lb_stargaze:8003'
 # event_source = { mode = 'push', url = 'ws://tasks.lb_stargaze:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'pull', interval = '2s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "stars"
@@ -900,7 +900,7 @@ type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_dydx:8000'
 grpc_addr = 'http://tasks.lb_dydx:8003'
 # event_source = { mode = 'push', url = 'ws://tasks.lb_dydx:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'pull', interval = '2s' }
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "dydx"
@@ -1280,7 +1280,7 @@ export INC_REGEN_1=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_regen:8000'
 grpc_addr = 'http://tasks.lb_regen:8003'
 # event_source = { mode = 'push', url = 'ws://tasks.lb_regen:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'pull', interval = '2s' }
 rpc_timeout = '60s'
 account_prefix = 'regen'
 key_name = 'regen'
