@@ -26,6 +26,8 @@ items=$(curl -s "$URL" |jq -c -r '.[]')
 
 TESTNETS="(testnet|narwhal-2|osmo-test-5|theta-testnet-001)"
 
+UPDATED_CLIENTS=""
+
 echo "$items" | while IFS= read -r item ; do
   chain_id=$(echo "$item" |jq -r .chain_id)
   client_id=$(echo $item |jq -r .client_id)
@@ -54,7 +56,14 @@ echo "$items" | while IFS= read -r item ; do
 
     if [[ ${BLOCK_AGE} -gt ${threshold_time} ]]; then
       echo "chain_id=$chain_id, channel_id=$channel_id, block_time=$block_time block_time is more than $threshold_time seconds ago => update client."
+
+      if [ $( echo $UPDATED_CLIENTS | grep -c "(${chain_id}/${client_id})" ) -ne 0 ]; then
+        # dont update client again
+        continue
+      fi
+
       $HOME/.hermes/bin/hermes update client --host-chain $chain_id --client $client_id
+      UPDATED_CLIENTS="${UPDATED_CLIENTS}(${chain_id}/${client_id})"
     fi
   fi
 done
