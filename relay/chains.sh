@@ -135,8 +135,8 @@ export INC_CHIHUAHUA_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_chihuahua:8000'
 grpc_addr = 'http://tasks.lb_chihuahua:8003'
-# event_source = { mode = 'push', url = 'ws://tasks.lb_chihuahua:8000/websocket', batch_delay = '500ms' }
-event_source = { mode = 'pull', interval = '1s' }
+event_source = { mode = 'push', url = 'ws://tasks.lb_chihuahua:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "chihuahua"
