@@ -184,7 +184,7 @@ sequential_batch_tx = false
 compat_mode = '0.34'
 event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.005, denom = 'uatom' }
+gas_price = { price = 0.01, denom = 'uatom' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
