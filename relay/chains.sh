@@ -39,7 +39,8 @@ export INC_ARCHWAY_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_archway:8000'
 grpc_addr = 'http://tasks.lb_archway:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_archway:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_archway:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "archway"
@@ -70,7 +71,8 @@ export INC_CENTAURI_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_composable:8000'
 grpc_addr = 'http://tasks.lb_composable:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_composable:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_composable:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "pica"
@@ -101,7 +103,8 @@ export INC_AGORIC_3=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_agoric:8000'
 grpc_addr = 'http://tasks.lb_agoric:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_agoric:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_agoric:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "agoric"
@@ -132,7 +135,8 @@ export INC_CHIHUAHUA_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_chihuahua:8000'
 grpc_addr = 'http://tasks.lb_chihuahua:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_chihuahua:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_chihuahua:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "chihuahua"
@@ -163,6 +167,8 @@ export INC_COSMOSHUB_4=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_cosmoshub:8000'
 grpc_addr = 'http://tasks.lb_cosmoshub:8003'
+# event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "cosmos"
@@ -182,7 +188,6 @@ ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
-event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.01, denom = 'uatom' }
 address_type = { derivation = 'cosmos' }
@@ -194,7 +199,8 @@ export INC_CRESCENT_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_crescent:8000'
 grpc_addr = 'http://tasks.lb_crescent:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_crescent:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_crescent:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "cre"
@@ -225,7 +231,8 @@ export INC_CANTO_7700_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'https://canto.gravitychain.io:26657'
 grpc_addr = 'https://canto.gravitychain.io:9090'
-event_source = { mode = 'push', url = 'wss://canto.gravitychain.io:26657/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'wss://canto.gravitychain.io:26657/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "canto"
@@ -256,6 +263,8 @@ export INC_EVMOS_9001_2=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_evmos:8000'
 grpc_addr = 'http://tasks.lb_evmos:8003'
+# event_source = { mode = 'push', url = 'ws://tasks.lb_evmos:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "evmos"
@@ -274,7 +283,6 @@ trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_evmos:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0075, denom = 'aevmos' }
 address_type = { derivation = 'ethermint', proto_type = { pk_type = '/ethermint.crypto.v1.ethsecp256k1.PubKey' } }
@@ -287,7 +295,8 @@ export INC_JUNO_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_juno:8000"
 grpc_addr = "http://tasks.lb_juno:8003"
-event_source = { mode = 'push', url = 'ws://tasks.lb_juno:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_juno:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "10s"
 trusted_node = true
 account_prefix = "juno"
@@ -316,7 +325,8 @@ export INC_DARCHHB=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_konstellation:8000"
 grpc_addr = "http://tasks.lb_konstellation:8003"
-event_source = { mode = 'push', url = 'ws://tasks.lb_konstellation:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_konstellation:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "10s"
 trusted_node = true
 account_prefix = "darc"
@@ -345,7 +355,8 @@ export INC_IRISHUB_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_irisnet:8000"
 grpc_addr = "http://tasks.lb_irisnet:8003"
-event_source = { mode = 'push', url = 'ws://tasks.lb_irisnet:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_irisnet:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "10s"
 trusted_node = true
 account_prefix = "iaa"
@@ -374,7 +385,8 @@ export INC_NEUTRON_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_neutron:8000'
 grpc_addr = 'http://tasks.lb_neutron:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_neutron:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_neutron:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "neutron"
@@ -406,7 +418,8 @@ export INC_OSMOSIS_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_osmosis:8000'
 grpc_addr = 'http://tasks.lb_osmosis:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "osmo"
@@ -438,7 +451,8 @@ export INC_QUICKSILVER_2=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_quicksilver:8000"
 grpc_addr = "http://tasks.lb_quicksilver:8003"
-event_source = { mode = 'push', url = 'ws://tasks.lb_quicksilver:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_quicksilver:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "10s"
 trusted_node = true
 account_prefix = "quick"
@@ -469,7 +483,8 @@ export INC_SSC_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_saga:8000'
 grpc_addr = 'http://tasks.lb_saga:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_saga:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_saga:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "saga"
@@ -500,6 +515,8 @@ export INC_SECRET_4=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'https://secret-4.api.trivium.network:26657'
 grpc_addr = 'https://secretnetwork-grpc.lavenderfive.com:443'
+# event_source = { mode = 'push', url = 'wss://secret-4.api.trivium.network:26657/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "secret"
@@ -518,7 +535,6 @@ trusting_period = '224hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'wss://secret-4.api.trivium.network:26657/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.05, denom = 'uscrt' }
 address_type = { derivation = 'cosmos' }
@@ -531,7 +547,8 @@ export INC_SOMMELIER_3=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_sommelier:8000'
 grpc_addr = 'http://tasks.lb_sommelier:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_sommelier:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_sommelier:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "somm"
@@ -562,7 +579,8 @@ export INC_STARGAZE_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_stargaze:8000'
 grpc_addr = 'http://tasks.lb_stargaze:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_stargaze:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_stargaze:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "stars"
@@ -593,7 +611,8 @@ export INC_STRIDE_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_stride:8000'
 grpc_addr = 'http://tasks.lb_stride:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_stride:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_stride:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "stride"
@@ -624,7 +643,8 @@ export INC_UMEE_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_umee:8000'
 grpc_addr = 'http://tasks.lb_umee:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_umee:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_umee:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "umee"
@@ -655,6 +675,8 @@ export INC_COREUM_MAINNET_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_coreum:8000'
 grpc_addr = 'http://tasks.lb_coreum:8003'
+# event_source = { mode = 'push', url = 'ws://tasks.lb_coreum:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "core"
@@ -674,7 +696,6 @@ ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
-event_source = { mode = 'push', url = 'ws://tasks.lb_coreum:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0625, denom = 'ucore' }
 address_type = { derivation = 'cosmos' }
@@ -686,6 +707,8 @@ export INC_AXELAR_DOJO_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_axelar:8000'
 grpc_addr = 'http://tasks.lb_axelar:8003'
+# event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "15s"
 trusted_node = true
 account_prefix = "axelar"
@@ -705,7 +728,6 @@ ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.34'
-event_source = { mode = 'push', url = 'ws://tasks.lb_axelar:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.007, denom = 'uaxl' }
 address_type = { derivation = 'cosmos' }
@@ -717,6 +739,8 @@ export INC_GRAVITY_BRIDGE_3=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_gravitybridge:8000'
 grpc_addr = 'http://tasks.lb_gravitybridge:8003'
+# event_source = { mode = 'push', url = 'ws://tasks.lb_gravitybridge:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "gravity"
@@ -735,7 +759,6 @@ trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_gravitybridge:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'ugraviton' }
 address_type = { derivation = 'cosmos' }
@@ -748,7 +771,8 @@ export INC_KAVA_2222_10=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_kava:8000'
 grpc_addr = 'http://tasks.lb_kava:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_kava:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_kava:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "kava"
@@ -779,6 +803,8 @@ export INC_NOBLE_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_noble:8000'
 grpc_addr = 'http://tasks.lb_noble:8003'
+# event_source = { mode = 'push', url = 'ws://tasks.lb_noble:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "noble"
@@ -797,7 +823,6 @@ trusting_period = '14days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_noble:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.1, denom = 'uusdc' }
 address_type = { derivation = 'cosmos' }
@@ -810,6 +835,8 @@ export INC_KAIYO_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_kujira:8000'
 grpc_addr = 'http://tasks.lb_kujira:8003'
+# event_source = { mode = 'push', url = 'ws://tasks.lb_kujira:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "kujira"
@@ -828,7 +855,6 @@ trusting_period = '10days'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_kujira:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0034, denom = 'ukuji' }
 address_type = { derivation = 'cosmos' }
@@ -841,6 +867,8 @@ export INC_LAOZI_MAINNET=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://rpc.laozi1.bandchain.org:80'
 grpc_addr = 'http://grpc-band-01.stakeflow.io:2502/'
+# event_source = { mode = 'push', url = 'ws://rpc.laozi1.bandchain.org:80/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "band"
@@ -859,7 +887,6 @@ trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://rpc.laozi1.bandchain.org:80/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.0025, denom = 'uband' }
 address_type = { derivation = 'cosmos' }
@@ -872,6 +899,8 @@ export INC_DYDX_MAINNET_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_dydx:8000'
 grpc_addr = 'http://tasks.lb_dydx:8003'
+# event_source = { mode = 'push', url = 'ws://tasks.lb_dydx:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "dydx"
@@ -890,7 +919,6 @@ trusting_period = '32hours'
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_dydx:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 12500000000, denom = 'adydx' }
 address_type = { derivation = 'cosmos' }
@@ -903,6 +931,8 @@ export INC_FURYA_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_furya:8000"
 grpc_addr = "http://tasks.lb_furya:8003"
+# event_source = { mode = 'push', url = 'ws://tasks.lb_furya:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "10s"
 trusted_node = true
 account_prefix = "furya"
@@ -921,7 +951,6 @@ ccv_consumer_chain = false
 trusting_period = '14days'
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_furya:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.25, denom = 'ufury' }
 address_type = { derivation = 'cosmos' }
@@ -933,6 +962,8 @@ export INC_PHOENIX_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = "http://tasks.lb_terra2:8000"
 grpc_addr = "http://tasks.lb_terra2:8003"
+# event_source = { mode = 'push', url = 'ws://tasks.lb_terra2:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "10s"
 trusted_node = true
 account_prefix = "terra"
@@ -950,7 +981,6 @@ max_block_time = "30s"
 ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
-event_source = { mode = 'push', url = 'ws://tasks.lb_terra2:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.015, denom = 'uluna' }
 address_type = { derivation = 'cosmos' }
@@ -962,7 +992,8 @@ export INC_INJECTIVE_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_injective:8000'
 grpc_addr = 'http://tasks.lb_injective:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_injective:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_injective:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "inj"
@@ -994,7 +1025,8 @@ export INC_CELESTIA=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_celestia:8000'
 grpc_addr = 'http://tasks.lb_celestia:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_celestia:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_celestia:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "20s"
 trusted_node = true
 account_prefix = "celestia"
@@ -1024,7 +1056,8 @@ EOT
 export INC_AKASHNET_2=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_akash:8000'
 grpc_addr = 'http://tasks.lb_akash:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_akash:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_akash:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '20s'
 account_prefix = 'akash'
 key_name = 'akash'
@@ -1048,7 +1081,8 @@ EOT
 export INC_BITCANNA_1=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_bitcanna:8000'
 grpc_addr = 'http://tasks.lb_bitcanna:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_bitcanna:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_bitcanna:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '20s'
 account_prefix = 'bcna'
 key_name = 'bcna'
@@ -1072,7 +1106,8 @@ EOT
 export INC_COLUMBUS_5=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_terra:8000'
 grpc_addr = 'http://tasks.lb_terra:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_terra:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_terra:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '15s'
 account_prefix = 'terra'
 key_name = 'terra'
@@ -1094,7 +1129,8 @@ EOT
 export INC_CRYPTO_ORG_CHAIN_MAINNET_1=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_cryptoorgchain:8000'
 grpc_addr = 'http://tasks.lb_cryptoorgchain:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_cryptoorgchain:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_cryptoorgchain:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '20s'
 account_prefix = 'cro'
 key_name = 'cro'
@@ -1118,7 +1154,8 @@ EOT
 export INC_KICHAIN_2=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_kichain:8000'
 grpc_addr = 'http://tasks.lb_kichain:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_kichain:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_kichain:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '20s'
 account_prefix = 'ki'
 key_name = 'ki'
@@ -1142,7 +1179,8 @@ EOT
 export INC_MARS_1=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_mars:8000'
 grpc_addr = 'http://tasks.lb_mars:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_mars:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_mars:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '20s'
 account_prefix = 'mars'
 key_name = 'mars'
@@ -1166,7 +1204,8 @@ EOT
 export INC_OMNIFLIXHUB_1=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_omniflixhub:8000'
 grpc_addr = 'http://tasks.lb_omniflixhub:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_omniflixhub:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_omniflixhub:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '20s'
 account_prefix = 'omniflix'
 key_name = 'omniflix'
@@ -1190,7 +1229,8 @@ EOT
 export INC_PIRIN_1=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_nolus:8000'
 grpc_addr = 'http://tasks.lb_nolus:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_nolus:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_nolus:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '20s'
 account_prefix = 'nolus'
 key_name = 'nolus'
@@ -1214,7 +1254,8 @@ EOT
 export INC_QUASAR_1=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_quasar:8000'
 grpc_addr = 'http://tasks.lb_quasar:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_quasar:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_quasar:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '20s'
 account_prefix = 'quasar'
 key_name = 'quasar'
@@ -1238,7 +1279,8 @@ EOT
 export INC_REGEN_1=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_regen:8000'
 grpc_addr = 'http://tasks.lb_regen:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_regen:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_regen:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '60s'
 account_prefix = 'regen'
 key_name = 'regen'
@@ -1261,7 +1303,8 @@ EOT
 export INC_SENTINELHUB_2=$(cat <<-EOT
 rpc_addr = 'http://tasks.lb_sentinel:8000'
 grpc_addr = 'http://tasks.lb_sentinel:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_sentinel:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_sentinel:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = '20s'
 account_prefix = 'sent'
 key_name = 'sentinel'
@@ -1286,7 +1329,8 @@ export INC_PACIFIC_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_sei:8000'
 grpc_addr = 'http://tasks.lb_sei:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_sei:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_sei:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "sei"
@@ -1317,7 +1361,8 @@ export INC_MIGALOO_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_whitewhale:8000'
 grpc_addr = 'http://tasks.lb_whitewhale:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_whitewhale:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_whitewhale:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "migaloo"
@@ -1352,7 +1397,8 @@ export INC_BANKSY_TESTNET_5=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_composable-testnet:8000'
 grpc_addr = 'http://tasks.lb_composable-testnet:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_composable-testnet:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_composable-testnet:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "pica"
@@ -1383,7 +1429,8 @@ export INC_OSMO_TEST_1=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_osmosis-testnet:8000'
 grpc_addr = 'http://tasks.lb_osmosis-testnet:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis-testnet:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_osmosis-testnet:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "osmo"
@@ -1415,6 +1462,8 @@ export INC_THETA_TESTNET_001=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_cosmoshub-testnet2:8000'
 grpc_addr = 'http://tasks.lb_cosmoshub-testnet2:8003'
+# event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub-testnet2:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "cosmos"
@@ -1434,7 +1483,6 @@ ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = false
 compat_mode = '0.37'
-event_source = { mode = 'push', url = 'ws://tasks.lb_cosmoshub-testnet2:8000/websocket', batch_delay = '500ms' }
 trust_threshold = { numerator = '1', denominator = '3' }
 gas_price = { price = 0.005, denom = 'uatom' }
 address_type = { derivation = 'cosmos' }
@@ -1447,7 +1495,8 @@ export INC_NARWHAL_2=$(cat <<-EOT
 type = "CosmosSdk"
 rpc_addr = 'http://tasks.lb_whitewhale-testnet:8000'
 grpc_addr = 'http://tasks.lb_whitewhale-testnet:8003'
-event_source = { mode = 'push', url = 'ws://tasks.lb_whitewhale-testnet:8000/websocket', batch_delay = '500ms' }
+# event_source = { mode = 'push', url = 'ws://tasks.lb_whitewhale-testnet:8000/websocket', batch_delay = '500ms' }
+event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
 trusted_node = true
 account_prefix = "migaloo"
