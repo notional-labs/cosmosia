@@ -4,8 +4,10 @@ coreum
 furya
 injective
 kava
+quicksilver
 test
 whitewhale
+whitewhale-testnet
 END
 )
 
