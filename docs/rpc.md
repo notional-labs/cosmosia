@@ -964,3 +964,12 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | RPC      | https://rpc-eve-testnet-ia.cosmosia.notional.ventures/  |
 | API      | https://api-eve-testnet-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-eve-testnet-ia.cosmosia.notional.ventures/ |
+
+### 121. canto
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-canto-ia.cosmosia.notional.ventures/  |
+| API      | https://api-canto-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-canto-ia.cosmosia.notional.ventures/ |
+
