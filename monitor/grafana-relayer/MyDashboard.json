@@ -388,7 +388,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_quicksilver\"} != `-32603`",
+          "expr": "{job=\"hermes_quicksilver\"} != `-32603` != `packet messages are redundant`",
           "queryType": "range",
           "refId": "A"
         }
@@ -763,7 +763,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_composable\"} != `-32603`",
+          "expr": "{job=\"hermes_composable\"} != `-32603` != `packet messages are redundant`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1138,7 +1138,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_coreum\"} != `-32603`",
+          "expr": "{job=\"hermes_coreum\"} != `-32603` != `packet messages are redundant`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1513,7 +1513,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_furya\"} != `-32603`",
+          "expr": "{job=\"hermes_furya\"} != `-32603` != `packet messages are redundant`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1888,7 +1888,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_kava\"} != `-32603`",
+          "expr": "{job=\"hermes_kava\"} != `-32603` != `packet messages are redundant`",
           "queryType": "range",
           "refId": "A"
         }
@@ -1898,7 +1898,7 @@
       "type": "logs"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1906,448 +1906,447 @@
         "y": 88
       },
       "id": 11,
-      "panels": [
-        {
-          "datasource": {
-            "type": "marcusolsson-json-datasource",
-            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      "panels": [],
+      "title": "Test ✔️",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "auto",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "inspect": false
-              },
-              "mappings": [
-                {
-                  "options": {
-                    "from": 1,
-                    "result": {
-                      "color": "#fade2a3d",
-                      "index": 0
-                    },
-                    "to": 4
-                  },
-                  "type": "range"
-                },
-                {
-                  "options": {
-                    "from": 5,
-                    "result": {
-                      "color": "#f2495c7a",
-                      "index": 1
-                    },
-                    "to": 9999
-                  },
-                  "type": "range"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "transparent",
-                    "value": null
-                  }
-                ]
-              }
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
             },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "pending_packets"
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "from": 1,
+                "result": {
+                  "color": "#fade2a3d",
+                  "index": 0
                 },
-                "properties": [
-                  {
-                    "id": "custom.cellOptions",
-                    "value": {
-                      "mode": "basic",
-                      "type": "color-background"
-                    }
-                  }
-                ]
+                "to": 4
               },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "time_ago"
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5,
+                "result": {
+                  "color": "#f2495c7a",
+                  "index": 1
                 },
-                "properties": [
-                  {
-                    "id": "mappings",
-                    "value": [
-                      {
-                        "options": {
-                          "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
-                          "result": {
-                            "color": "#f2495c78",
-                            "index": 0
-                          }
-                        },
-                        "type": "regex"
-                      },
-                      {
-                        "options": {
-                          "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
-                          "result": {
-                            "color": "#fade2a29",
-                            "index": 1
-                          }
-                        },
-                        "type": "regex"
-                      }
-                    ]
-                  },
-                  {
-                    "id": "custom.cellOptions",
-                    "value": {
-                      "mode": "basic",
-                      "type": "color-background"
-                    }
-                  }
-                ]
+                "to": 9999
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "pending_packets"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
               }
             ]
           },
-          "gridPos": {
-            "h": 6,
-            "w": 8,
-            "x": 0,
-            "y": 89
-          },
-          "id": 31,
-          "options": {
-            "cellHeight": "sm",
-            "footer": {
-              "countRows": false,
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_ago"
             },
-            "showHeader": true
-          },
-          "pluginVersion": "11.0.0",
-          "targets": [
-            {
-              "body": "",
-              "cacheDurationSeconds": 300,
-              "datasource": {
-                "type": "marcusolsson-json-datasource",
-                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-              },
-              "fields": [
-                {
-                  "jsonPath": "$.[*].chain_id"
-                },
-                {
-                  "jsonPath": "$.[*].channel_id",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].counter_chain_id",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].pending_packets",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].time_ago",
-                  "language": "jsonpath",
-                  "name": ""
-                }
-              ],
-              "method": "GET",
-              "params": [
-                [
-                  "hermes_config_url",
-                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/test_config.toml"
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "^.*(month(s)?|week(s)?|day(s)?) ago$",
+                      "result": {
+                        "color": "#f2495c78",
+                        "index": 0
+                      }
+                    },
+                    "type": "regex"
+                  },
+                  {
+                    "options": {
+                      "pattern": "^(1(7|8|9)|2[0-9]) hours ago$",
+                      "result": {
+                        "color": "#fade2a29",
+                        "index": 1
+                      }
+                    },
+                    "type": "regex"
+                  }
                 ]
-              ],
-              "queryParams": "",
-              "refId": "A",
-              "urlPath": "/get_last_ibc_client_update"
-            }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 89
+      },
+      "id": 31,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
           ],
-          "title": "Last Client Update [test]",
-          "transparent": true,
-          "type": "table"
+          "show": false
         },
+        "showHeader": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
         {
+          "body": "",
+          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 8,
-            "x": 8,
-            "y": 89
-          },
-          "id": 70,
-          "options": {
-            "afterRender": "",
-            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-            "defaultContent": "The query didn't return any results.",
-            "editor": {
-              "format": "auto",
-              "height": 200,
-              "language": "markdown"
-            },
-            "editors": [],
-            "externalScripts": [],
-            "externalStyles": [],
-            "helpers": "",
-            "renderMode": "allRows",
-            "styles": "",
-            "wrap": false
-          },
-          "pluginVersion": "5.0.0",
-          "targets": [
+          "fields": [
             {
-              "cacheDurationSeconds": 300,
-              "datasource": {
-                "type": "marcusolsson-json-datasource",
-                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-              },
-              "fields": [
-                {
-                  "jsonPath": "$.[*].account"
-                },
-                {
-                  "jsonPath": "$.[*].chain_id",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].denom",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].message",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].need_refill",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].refill_threshold",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].value",
-                  "language": "jsonpath",
-                  "name": ""
-                }
-              ],
-              "method": "GET",
-              "params": [
-                [
-                  "relayer_hub_name",
-                  "test"
-                ],
-                [
-                  "process",
-                  "main"
-                ]
-              ],
-              "queryParams": "",
-              "refId": "A",
-              "urlPath": "/get_wallet_balance"
+              "jsonPath": "$.[*].chain_id"
+            },
+            {
+              "jsonPath": "$.[*].channel_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].counter_chain_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].pending_packets",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].time_ago",
+              "language": "jsonpath",
+              "name": ""
             }
           ],
-          "title": "Wallet Balances  [test]",
-          "transparent": true,
-          "type": "marcusolsson-dynamictext-panel"
+          "method": "GET",
+          "params": [
+            [
+              "hermes_config_url",
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/test_config.toml"
+            ]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/get_last_ibc_client_update"
+        }
+      ],
+      "title": "Last Client Update [test]",
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 89
+      },
+      "id": 70,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "allRows",
+        "styles": "",
+        "wrap": false
+      },
+      "pluginVersion": "5.0.0",
+      "targets": [
         {
+          "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 8,
-            "x": 16,
-            "y": 89
-          },
-          "id": 71,
-          "options": {
-            "afterRender": "",
-            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-            "defaultContent": "The query didn't return any results.",
-            "editor": {
-              "format": "auto",
-              "height": 200,
-              "language": "markdown"
-            },
-            "editors": [],
-            "externalScripts": [],
-            "externalStyles": [],
-            "helpers": "",
-            "renderMode": "allRows",
-            "styles": "",
-            "wrap": false
-          },
-          "pluginVersion": "5.0.0",
-          "targets": [
+          "fields": [
             {
-              "cacheDurationSeconds": 300,
-              "datasource": {
-                "type": "marcusolsson-json-datasource",
-                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-              },
-              "fields": [
-                {
-                  "jsonPath": "$.[*].account"
-                },
-                {
-                  "jsonPath": "$.[*].chain_id",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].denom",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].message",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].need_refill",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].refill_threshold",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].value",
-                  "language": "jsonpath",
-                  "name": ""
-                }
-              ],
-              "method": "GET",
-              "params": [
-                [
-                  "relayer_hub_name",
-                  "test"
-                ],
-                [
-                  "process",
-                  "cron"
-                ]
-              ],
-              "queryParams": "",
-              "refId": "A",
-              "urlPath": "/get_wallet_balance"
+              "jsonPath": "$.[*].account"
+            },
+            {
+              "jsonPath": "$.[*].chain_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].denom",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].message",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].need_refill",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].refill_threshold",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].value",
+              "language": "jsonpath",
+              "name": ""
             }
           ],
-          "title": "Wallet Balances - Cron [test]",
-          "transparent": true,
-          "type": "marcusolsson-dynamictext-panel"
+          "method": "GET",
+          "params": [
+            [
+              "relayer_hub_name",
+              "test"
+            ],
+            [
+              "process",
+              "main"
+            ]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/get_wallet_balance"
+        }
+      ],
+      "title": "Wallet Balances  [test]",
+      "transparent": true,
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 89
+      },
+      "id": 71,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>\n      <font size=\"+1\">{{account}}</font><br>\n      chain: {{chain_id}}\n    </td>\n    <td>\n      <font size=\"+2\">{{value}}</font> \n      {{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "allRows",
+        "styles": "",
+        "wrap": false
+      },
+      "pluginVersion": "5.0.0",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.[*].account"
+            },
+            {
+              "jsonPath": "$.[*].chain_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].denom",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].message",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].need_refill",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].refill_threshold",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].value",
+              "language": "jsonpath",
+              "name": ""
+            }
+          ],
+          "method": "GET",
+          "params": [
+            [
+              "relayer_hub_name",
+              "test"
+            ],
+            [
+              "process",
+              "cron"
+            ]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/get_wallet_balance"
+        }
+      ],
+      "title": "Wallet Balances - Cron [test]",
+      "transparent": true,
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 95
+      },
+      "id": 48,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "gridPos": {
-            "h": 6,
-            "w": 24,
-            "x": 0,
-            "y": 95
-          },
-          "id": 48,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": false,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": true
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P8E80F9AEF21F6940"
-              },
-              "editorMode": "code",
-              "expr": "{job=\"hermes_test\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-              "queryType": "range",
-              "refId": "A"
-            }
-          ],
-          "title": "Log [test]",
-          "transparent": true,
-          "type": "logs"
+          "editorMode": "code",
+          "expr": "{job=\"hermes_test\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+          "queryType": "range",
+          "refId": "A"
         }
       ],
-      "title": "Test ✔️",
-      "type": "row"
+      "title": "Log [test]",
+      "transparent": true,
+      "type": "logs"
     },
     {
       "collapsed": false,
@@ -2355,7 +2354,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 89
+        "y": 101
       },
       "id": 13,
       "panels": [],
@@ -2386,7 +2385,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 90
+        "y": 102
       },
       "id": 88,
       "options": {
@@ -2492,7 +2491,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 90
+        "y": 102
       },
       "id": 72,
       "options": {
@@ -2603,7 +2602,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 90
+        "y": 102
       },
       "id": 73,
       "options": {
@@ -2695,7 +2694,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 98
+        "y": 110
       },
       "id": 49,
       "options": {
@@ -2715,7 +2714,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{job=\"hermes_whitewhale\"} != `-32603`",
+          "expr": "{job=\"hermes_whitewhale\"} != `-32603` != `packet messages are redundant`",
           "queryType": "range",
           "refId": "A"
         }
@@ -2725,380 +2724,379 @@
       "type": "logs"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 104
+        "y": 116
       },
       "id": 74,
-      "panels": [
+      "panels": [],
+      "title": "whitewhale-testnet",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 0,
+        "y": 117
+      },
+      "id": 89,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 10)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "language": "markdown"
+        },
+        "editors": [],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "allRows",
+        "styles": "",
+        "wrap": true
+      },
+      "pluginVersion": "5.0.0",
+      "targets": [
         {
+          "body": "",
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "transparent",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 8,
-            "x": 0,
-            "y": 105
-          },
-          "id": 89,
-          "options": {
-            "afterRender": "",
-            "content": "<table>\n  <tr>\n    <th>channel_id</th>\n    <th>pending_packets</th>\n    <th>time</th>\n    <th>counter_chain_id</th>\n  </tr>\n  {{#each data}}\n  <tr\n{{#if (gt seconds_ago 86400)}} style=\"background-color: #CD6155\" \n{{else if (gt pending_packets 10)}} style=\"background-color: #CD6155\" \n{{else if (gt seconds_ago 57600)}} style=\"background-color: #D4AC0D\" \n{{else if (gt pending_packets 5)}} style=\"background-color: #D4AC0D\" \n{{else}}\n{{/if}}\n>\n    <td>{{chain_id}}/{{client_id}}/{{channel_id}}</td>\n    <td style=\"text-align: right\">{{pending_packets}}</td>\n    <td>{{time_ago}}</td>\n    <td>{{counter_chain_id}}</td>\n  </tr>\n  {{/each}}\n</table>",
-            "defaultContent": "The query didn't return any results.",
-            "editor": {
-              "format": "auto",
-              "language": "markdown"
-            },
-            "editors": [],
-            "externalStyles": [],
-            "helpers": "",
-            "renderMode": "allRows",
-            "styles": "",
-            "wrap": true
-          },
-          "pluginVersion": "5.0.0",
-          "targets": [
+          "fields": [
             {
-              "body": "",
-              "cacheDurationSeconds": 60,
-              "datasource": {
-                "type": "marcusolsson-json-datasource",
-                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-              },
-              "fields": [
-                {
-                  "jsonPath": "$.[*].chain_id"
-                },
-                {
-                  "jsonPath": "$.[*].channel_id",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].counter_chain_id",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].pending_packets",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].time_ago",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].client_id",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].seconds_ago",
-                  "language": "jsonpath",
-                  "name": ""
-                }
-              ],
-              "method": "GET",
-              "params": [
-                [
-                  "hermes_config_url",
-                  "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/whitewhale-testnet_config.toml"
-                ]
-              ],
-              "queryParams": "",
-              "refId": "A",
-              "urlPath": "/get_last_ibc_client_update"
+              "jsonPath": "$.[*].chain_id"
+            },
+            {
+              "jsonPath": "$.[*].channel_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].counter_chain_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].pending_packets",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].time_ago",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].client_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].seconds_ago",
+              "language": "jsonpath",
+              "name": ""
             }
           ],
-          "title": "Last Client Update [whitewhale-testnet]",
-          "transparent": true,
-          "type": "marcusolsson-dynamictext-panel"
+          "method": "GET",
+          "params": [
+            [
+              "hermes_config_url",
+              "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/whitewhale-testnet_config.toml"
+            ]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/get_last_ibc_client_update"
+        }
+      ],
+      "title": "Last Client Update [whitewhale-testnet]",
+      "transparent": true,
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 8,
+        "y": 117
+      },
+      "id": 76,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>{{account}}/{{chain_id}}</td>\n    <td>{{value}}{{denom}}</td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "allRows",
+        "styles": "",
+        "wrap": false
+      },
+      "pluginVersion": "5.0.0",
+      "targets": [
         {
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 8,
-            "x": 8,
-            "y": 105
-          },
-          "id": 76,
-          "options": {
-            "afterRender": "",
-            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>{{account}}/{{chain_id}}</td>\n    <td>{{value}}{{denom}}</td>\n  </tr>\n  {{/each}}\n</table>",
-            "defaultContent": "The query didn't return any results.",
-            "editor": {
-              "format": "auto",
-              "height": 200,
-              "language": "markdown"
-            },
-            "editors": [],
-            "externalScripts": [],
-            "externalStyles": [],
-            "helpers": "",
-            "renderMode": "allRows",
-            "styles": "",
-            "wrap": false
-          },
-          "pluginVersion": "5.0.0",
-          "targets": [
+          "fields": [
             {
-              "cacheDurationSeconds": 60,
-              "datasource": {
-                "type": "marcusolsson-json-datasource",
-                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-              },
-              "fields": [
-                {
-                  "jsonPath": "$.[*].account"
-                },
-                {
-                  "jsonPath": "$.[*].chain_id",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].denom",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].message",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].need_refill",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].refill_threshold",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].value",
-                  "language": "jsonpath",
-                  "name": ""
-                }
-              ],
-              "method": "GET",
-              "params": [
-                [
-                  "relayer_hub_name",
-                  "whitewhale-testnet"
-                ],
-                [
-                  "process",
-                  "main"
-                ]
-              ],
-              "queryParams": "",
-              "refId": "A",
-              "urlPath": "/get_wallet_balance"
+              "jsonPath": "$.[*].account"
+            },
+            {
+              "jsonPath": "$.[*].chain_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].denom",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].message",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].need_refill",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].refill_threshold",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].value",
+              "language": "jsonpath",
+              "name": ""
             }
           ],
-          "title": "Wallet Balances [whitewhale-testnet]",
-          "transparent": true,
-          "type": "marcusolsson-dynamictext-panel"
+          "method": "GET",
+          "params": [
+            [
+              "relayer_hub_name",
+              "whitewhale-testnet"
+            ],
+            [
+              "process",
+              "main"
+            ]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/get_wallet_balance"
+        }
+      ],
+      "title": "Wallet Balances [whitewhale-testnet]",
+      "transparent": true,
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 117
+      },
+      "id": 77,
+      "options": {
+        "afterRender": "",
+        "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>{{account}}/{{chain_id}}</td>\n    <td>{{value}}{{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "height": 200,
+          "language": "markdown"
+        },
+        "editors": [],
+        "externalScripts": [],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "allRows",
+        "styles": "",
+        "wrap": false
+      },
+      "pluginVersion": "5.0.0",
+      "targets": [
         {
+          "cacheDurationSeconds": 60,
           "datasource": {
             "type": "marcusolsson-json-datasource",
             "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
           },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 8,
-            "x": 16,
-            "y": 105
-          },
-          "id": 77,
-          "options": {
-            "afterRender": "",
-            "content": "<table>\n  <tr>\n    <th>account</th>\n    <th>balance</th>\n  </tr>\n  {{#each data}}\n  <tr {{#if (eq need_refill true)}} style=\"background-color: rgba(242, 73, 92, 0.49)\" {{/if}} >\n    <td>{{account}}/{{chain_id}}</td>\n    <td>{{value}}{{denom}}\n    </td>\n  </tr>\n  {{/each}}\n</table>",
-            "defaultContent": "The query didn't return any results.",
-            "editor": {
-              "format": "auto",
-              "height": 200,
-              "language": "markdown"
-            },
-            "editors": [],
-            "externalScripts": [],
-            "externalStyles": [],
-            "helpers": "",
-            "renderMode": "allRows",
-            "styles": "",
-            "wrap": false
-          },
-          "pluginVersion": "5.0.0",
-          "targets": [
+          "fields": [
             {
-              "cacheDurationSeconds": 60,
-              "datasource": {
-                "type": "marcusolsson-json-datasource",
-                "uid": "d953f0e3-52c2-4a12-9d06-66301e0fbb00"
-              },
-              "fields": [
-                {
-                  "jsonPath": "$.[*].account"
-                },
-                {
-                  "jsonPath": "$.[*].chain_id",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].denom",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].message",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].need_refill",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].refill_threshold",
-                  "language": "jsonpath",
-                  "name": ""
-                },
-                {
-                  "jsonPath": "$.[*].value",
-                  "language": "jsonpath",
-                  "name": ""
-                }
-              ],
-              "method": "GET",
-              "params": [
-                [
-                  "relayer_hub_name",
-                  "whitewhale-testnet"
-                ],
-                [
-                  "process",
-                  "cron"
-                ]
-              ],
-              "queryParams": "",
-              "refId": "A",
-              "urlPath": "/get_wallet_balance"
+              "jsonPath": "$.[*].account"
+            },
+            {
+              "jsonPath": "$.[*].chain_id",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].denom",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].message",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].need_refill",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].refill_threshold",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.[*].value",
+              "language": "jsonpath",
+              "name": ""
             }
           ],
-          "title": "Wallet Balances - Cron [whitewhale-testnet]",
-          "transparent": true,
-          "type": "marcusolsson-dynamictext-panel"
-        },
+          "method": "GET",
+          "params": [
+            [
+              "relayer_hub_name",
+              "whitewhale-testnet"
+            ],
+            [
+              "process",
+              "cron"
+            ]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/get_wallet_balance"
+        }
+      ],
+      "title": "Wallet Balances - Cron [whitewhale-testnet]",
+      "transparent": true,
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 122
+      },
+      "id": 78,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": false,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
         {
           "datasource": {
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "gridPos": {
-            "h": 6,
-            "w": 24,
-            "x": 0,
-            "y": 110
-          },
-          "id": 78,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": false,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": true
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P8E80F9AEF21F6940"
-              },
-              "editorMode": "code",
-              "expr": "{job=\"hermes_whitewhale-testnet\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
-              "queryType": "range",
-              "refId": "A"
-            }
-          ],
-          "title": "Log [whitewhale-testnet]",
-          "transparent": true,
-          "type": "logs"
+          "editorMode": "code",
+          "expr": "{job=\"hermes_whitewhale-testnet\"} != `misbehaviour` != `websocket` != `packet messages are redundant` != `missing chain config`",
+          "queryType": "range",
+          "refId": "A"
         }
       ],
-      "title": "whitewhale-testnet",
-      "type": "row"
+      "title": "Log [whitewhale-testnet]",
+      "transparent": true,
+      "type": "logs"
     }
   ],
   "schemaVersion": 39,
