@@ -127,6 +127,10 @@ if [[ $snapshot_prune == "cosmos-pruner" ]]; then
       # $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$pruned_app_name --backend=pebbledb --blocks=1000 --versions=1000 --tx_index=false --compact=true
       echo "cosmos-pruner....pruned node, do nothing"
     else
+      if [ "$pruned_app_name" = "osmosis" ]; then
+         $HOME/go/bin/$daemon_name prune --pruning-keep-recent 362880 --app-db-backend 'pebbledb'
+      fi
+
       $HOME/go/bin/cosmos-pruner prune $node_home/data --app=$pruned_app_name --backend=$db_backend --blocks=362880 --versions=362880 --compact=true
     fi
   fi
