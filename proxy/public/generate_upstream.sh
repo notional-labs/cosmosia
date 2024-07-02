@@ -7,6 +7,7 @@ fi
 SERVICES=$(cat <<-END
 composable
 composable-testnet
+eve-testnet
 quicksilver
 whitewhale-testnet
 whitewhale
