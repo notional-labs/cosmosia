@@ -824,7 +824,7 @@ ccv_consumer_chain = false
 memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = true
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.1, denom = 'uusdc' }
+gas_price = { price = 0.01, denom = 'uusdc' }
 address_type = { derivation = 'cosmos' }
 compat_mode = '0.34'
 EOT
