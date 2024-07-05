@@ -67,7 +67,7 @@ done
 # run the metrics server (for reporting wallet balances)
 cd $HOME
 git clone --single-branch --branch main https://github.com/notional-labs/cosmosia
-cd cosmosia/relay/cron/metrics
+cd cosmosia/relay/metrics
 
 pip install -r requirements.txt --break-system-packages
 screen -S metrics -dm /usr/sbin/python main.py
