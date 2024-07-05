@@ -76,13 +76,16 @@ screen -S metrics -dm /usr/sbin/python main.py
 # cronjob
 
 # cronjob clear packets
-curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/cron/cron_hermes_clear.sh" > $HOME/cron_hermes_clear.sh
-echo "*/5 * * * * root /bin/bash $HOME/cron_hermes_clear.sh" > /etc/cron.d/cron_hermes_clear
+#curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/cron/cron_hermes_clear.sh" > $HOME/cron_hermes_clear.sh
+#echo "*/5 * * * * root /bin/bash $HOME/cron_hermes_clear.sh" > /etc/cron.d/cron_hermes_clear
+# use bash script instead
+screen -S clear -dm /bin/bash $HOME/cron_hermes_clear.sh
+
 
 # cronjob to update client
 curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/cron/cron_update_client.sh" > $HOME/cron_update_client.sh
-
 echo "0 */1 * * * root /bin/bash $HOME/cron_update_client.sh" > /etc/cron.d/cron_update_client
+
 
 crond
 ################################################################################################
