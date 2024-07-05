@@ -76,7 +76,7 @@ screen -S metrics -dm /usr/sbin/python main.py
 # cronjob
 
 # cronjob clear packets
-#curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/cron/cron_hermes_clear.sh" > $HOME/cron_hermes_clear.sh
+curl -Ls "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/cron/cron_hermes_clear.sh" > $HOME/cron_hermes_clear.sh
 #echo "*/5 * * * * root /bin/bash $HOME/cron_hermes_clear.sh" > /etc/cron.d/cron_hermes_clear
 # use bash script instead
 screen -S clear -dm /bin/bash $HOME/cron_hermes_clear.sh
