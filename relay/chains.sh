@@ -10,14 +10,14 @@ refresh = true
 misbehaviour = false
 
 [mode.connections]
-enabled = false
+enabled = true
 
 [mode.channels]
-enabled = false
+enabled = true
 
 [mode.packets]
 enabled = true
-clear_interval = 0
+clear_interval = 100
 clear_on_start = true
 tx_confirmation = false
 
