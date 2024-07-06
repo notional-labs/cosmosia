@@ -1,0 +1,51 @@
+global:
+    api-listen-addr: :5183
+    timeout: 10s
+    memo: ""
+    light-cache-size: 20
+    log-level: info
+    ics20-memo-limit: 0
+    max-receiver-size: 0
+chains:
+    composable:
+        type: cosmos
+        value:
+            key: default
+            chain-id: centauri-1
+            rpc-addr: http://tasks.lb_composable:8000/
+            account-prefix: pica
+            keyring-backend: test
+            gas-adjustment: 1.2
+            gas-prices: 1ppica
+            debug: true
+            timeout: 20s
+            output-format: json
+            sign-mode: direct
+    stargaze:
+        type: cosmos
+        value:
+            key: default
+            chain-id: stargaze-1
+            rpc-addr: http://tasks.lb_stargaze:8000
+            account-prefix: stars
+            keyring-backend: test
+            gas-adjustment: 1.2
+            gas-prices: 1ustars
+            debug: true
+            timeout: 20s
+            output-format: json
+            sign-mode: direct
+paths:
+    stargaze-composable:
+        src:
+            chain-id: stargaze-1
+            client-id: 07-tendermint-279
+            connection-id: connection-207
+        dst:
+            chain-id: centauri-1
+            client-id: 07-tendermint-25
+            connection-id: connection-13
+        src-channel-filter:
+            rule: allowlist
+            channel-list:
+                - channel-184
