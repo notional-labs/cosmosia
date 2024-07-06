@@ -27,6 +27,7 @@ chains:
             key: default
             chain-id: stargaze-1
             rpc-addr: http://tasks.lb_stargaze:8000/
+#            rpc-addr: http://195.201.81.249:13757/
             account-prefix: stars
             keyring-backend: test
             gas-adjustment: 1.2
