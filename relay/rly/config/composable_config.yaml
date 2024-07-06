@@ -26,11 +26,25 @@ chains:
         value:
             key: default
             chain-id: stargaze-1
-            rpc-addr: http://tasks.lb_stargaze:8000
+            rpc-addr: http://tasks.lb_stargaze:8000/
             account-prefix: stars
             keyring-backend: test
             gas-adjustment: 1.2
             gas-prices: 1ustars
+            debug: true
+            timeout: 20s
+            output-format: json
+            sign-mode: direct
+    osmosis:
+        type: cosmos
+        value:
+            key: default
+            chain-id: osmosis-1
+            rpc-addr: http://tasks.lb_osmosis:8000/
+            account-prefix: osmo
+            keyring-backend: test
+            gas-adjustment: 1.2
+            gas-prices: 0.005uosmo
             debug: true
             timeout: 20s
             output-format: json
@@ -49,3 +63,16 @@ paths:
             rule: allowlist
             channel-list:
                 - channel-184
+    osmosis-composable:
+        src:
+            chain-id: osmosis-1
+            client-id: 07-tendermint-2846
+            connection-id: connection-2358
+        dst:
+            chain-id: centauri-1
+            client-id: 07-tendermint-6
+            connection-id: connection-6
+        src-channel-filter:
+            rule: allowlist
+            channel-list:
+                - channel-1279
