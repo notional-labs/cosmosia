@@ -28,7 +28,7 @@ docker service create \
   --network net8 \
   --constraint "node.labels.cosmosia.relay==true" \
   --endpoint-mode dnsrr \
-  --restart-condition none \
+  --restart-condition any \
   archlinux:latest \
   /bin/bash -c \
   "curl -s https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/main/run.sh > ~/run.sh && /bin/bash ~/run.sh $hubname"
