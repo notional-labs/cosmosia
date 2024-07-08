@@ -16,6 +16,7 @@ fi
 
 pacman -Syu --noconfirm
 pacman -S --noconfirm git base-devel python python-pip cronie screen wget jq
+pacman -Syu --noconfirm
 
 # get hermes config
 eval "$(curl -s "https://raw.githubusercontent.com/notional-labs/cosmosia/main/relay/relayerhubs_registry.ini" |awk -v TARGET=$hubname -F ' = ' '
