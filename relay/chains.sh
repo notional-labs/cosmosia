@@ -189,7 +189,7 @@ memo_prefix = "relayed by Notional.Ventures"
 sequential_batch_tx = true
 compat_mode = '0.37'
 trust_threshold = { numerator = '1', denominator = '3' }
-gas_price = { price = 0.01, denom = 'uatom' }
+gas_price = { price = 0.005, denom = 'uatom' }
 address_type = { derivation = 'cosmos' }
 EOT
 )
