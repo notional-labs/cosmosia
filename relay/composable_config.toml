@@ -107,6 +107,8 @@ policy = "allow"
 list = [
     ['transfer', 'channel-1279']
 ]
+[chains.excluded_sequences]
+    channel-1279 = [22891, 23147, 23148, 23149, 32367, 39833, 50012, 50015, 50198, 51813]
 
 [[chains]]
 id = "quicksilver-2"
@@ -125,6 +127,8 @@ policy = "allow"
 list = [
     ['transfer', 'channel-184'],
 ]
+[chains.excluded_sequences]
+    channel-184 = [175]
 
 [[chains]]
 id = "stride-1"
