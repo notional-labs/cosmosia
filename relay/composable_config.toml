@@ -8,7 +8,7 @@ policy = "allow"
 list = [
     # sort by chain_id
     ['transfer', 'channel-13'], # agoric-3
-    ['transfer', 'channel-0'],  # chihuahua-1
+#    ['transfer', 'channel-0'],  # chihuahua-1 (expired)
     ['transfer', 'channel-4'],  # cosmoshub-4
     ['transfer', 'channel-11'], # crescent-1
     ['transfer', 'channel-74'], # canto_7700-1/channel-31
