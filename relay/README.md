@@ -30,3 +30,10 @@ $HOME/.hermes/bin/hermes create channel --order unordered --a-chain narwhal-2 --
 ```
 $HOME/.hermes/bin/hermes update client --host-chain narwhal-2 --client 07-tendermint-15
 ``` 
+
+
+### Debugging stuck packet
+
+```
+http://localhost:26657/status/tx_search?query="send_packet.packet_sequence='175' AND send_packet.packet_src_channel='channel-184' AND send_packet.packet_src_port='transfer' AND send_packet.packet_dst_channel='channel-6' AND send_packet.packet_dst_port='transfer'"
+```
