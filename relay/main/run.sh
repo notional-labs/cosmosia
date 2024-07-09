@@ -13,9 +13,10 @@ if [[ -z $hubname ]]; then
   loop_forever
 fi
 
-
+pacman-key --init
 pacman -Syu --noconfirm
-pacman -S --noconfirm git base-devel python python-pip cronie screen wget jq unzip
+pacman -Sy --noconfirm archlinux-keyring
+pacman -Sy --noconfirm git base-devel python python-pip cronie screen wget jq unzip
 pacman -Syu --noconfirm
 
 # get hermes config
