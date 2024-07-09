@@ -16,6 +16,7 @@ fi
 pacman-key --init
 pacman -Syu --noconfirm
 pacman -Sy --noconfirm archlinux-keyring
+pacman -Syu --noconfirm
 pacman -Sy --noconfirm git base-devel python python-pip cronie screen wget jq unzip
 pacman -Syu --noconfirm
 
