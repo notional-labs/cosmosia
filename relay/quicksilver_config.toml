@@ -12,9 +12,9 @@ list = [
       ['transfer', 'channel-17'], ## regen
       #['transfer','channel-52'], ##secret
       ['transfer','channel-86'], #juno
-#      ['transfer','channel-101'], #somm (expired)
+      ['transfer','channel-101'], #somm (expired)
       ['transfer','channel-164'], #dydx
-#      ['transfer','channel-170'], #saga (expired)
+      ['transfer','channel-170'], #saga (expired)
       ['transfer','channel-171'], #arch
 #      ['icacontroller-*', '*']
       ['icacontroller-cosmoshub-4.deposit','channel-12'], # cosmos
