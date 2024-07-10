@@ -1,5 +1,8 @@
+pacman-key --init
 pacman -Syu --noconfirm
-pacman -S --noconfirm base-devel wget dnsutils nginx cronie screen logrotate
+pacman -Sy --noconfirm archlinux-keyring
+pacman -Syu --noconfirm
+pacman -Sy --noconfirm base-devel wget dnsutils nginx cronie screen logrotate
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT > $HOME/env.sh
