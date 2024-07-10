@@ -77,7 +77,8 @@ for service_name in $SERVICES; do
     # RPC
     server {
         listen 80;
-        listen 443 ssl http2;
+        listen 443 ssl;
+        http2 on;
         server_name rpc-${service_with_token}-ie.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
         location ~* ^/(.*) {
@@ -95,7 +96,8 @@ EOT
     # REST/API
     server {
         listen 80;
-        listen 443 ssl http2;
+        listen 443 ssl;
+        http2 on;
         server_name api-${service_with_token}-ie.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
         location ~* ^/(.*) {
@@ -112,8 +114,9 @@ EOT
   cat <<EOT >> /etc/nginx/endpoints.conf
     # gRPC
     server {
-        listen 9090 http2;
-        listen 443 ssl http2;
+        listen 9090;
+        listen 443 ssl;
+        http2 on;
         server_name grpc-${service_with_token}-ie.internalendpoints.$USE_DOMAIN_NAME;
 
         location / {
@@ -138,7 +141,8 @@ for service_name in $SERVICES_SUBNODE; do
     # RPC
     server {
         listen 80;
-        listen 443 ssl http2;
+        listen 443 ssl;
+        http2 on;
         server_name rpc-${service_with_token}-sub.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
         location ~* ^/(.*) {
@@ -156,7 +160,8 @@ EOT
     # REST/API
     server {
         listen 80;
-        listen 443 ssl http2;
+        listen 443 ssl;
+        http2 on;
         server_name api-${service_with_token}-sub.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
         location ~* ^/(.*) {
@@ -173,8 +178,9 @@ EOT
   cat <<EOT >> /etc/nginx/endpoints.conf
     # gRPC
     server {
-        listen 9090 http2;
-        listen 443 ssl http2;
+        listen 9090;
+        listen 443 ssl;
+        http2 on;
         server_name grpc-${service_with_token}-sub.internalendpoints.$USE_DOMAIN_NAME;
 
         location / {
@@ -189,7 +195,8 @@ EOT
       # JSON-RPC
       server {
           listen 80;
-          listen 443 ssl http2;
+          listen 443 ssl;
+          http2 on;
           server_name jsonrpc-${service_with_token}-sub.internalendpoints.$USE_DOMAIN_NAME;
           $HEADER_CORS
 
@@ -232,7 +239,8 @@ for service_name in $SERVICES_JSONRPC; do
     # JSON-RPC
     server {
         listen 80;
-        listen 443 ssl http2;
+        listen 443 ssl;
+        http2 on;
         server_name jsonrpc-${service_with_token}-ie.internalendpoints.$USE_DOMAIN_NAME;
         $HEADER_CORS
 
