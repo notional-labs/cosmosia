@@ -178,9 +178,9 @@ ${INC_AGORIC_3}
 [chains.packet_filter]
 policy = "allow"
 list = [
-#      ['transfer', 'channel-18'],
-#      ['icahost', 'channel-19'], ## delegate
-#      ['icahost', 'channel-22'], ## deposit
-#      ['icahost', 'channel-20'], ## withdrawal
-#      ['icahost', 'channel-21'], ## performance
+      ['transfer', 'channel-18'], # transfer
+      ['icahost', 'channel-19'], ## delegate
+      ['icahost', 'channel-22'], ## deposit
+      ['icahost', 'channel-20'], ## withdrawal
+      ['icahost', 'channel-21'], ## performance
 ]
