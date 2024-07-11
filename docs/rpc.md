@@ -973,3 +973,11 @@ Note: archive nodes and subnodes endpoints are only available in NotionalApi, no
 | API      | https://api-canto-ia.cosmosia.notional.ventures/  |
 | GRPC     | https://grpc-canto-ia.cosmosia.notional.ventures/ |
 
+### 122. quicksilver-testnet
+
+| Protocol | Endpoint                                                |
+|----------|:--------------------------------------------------------|
+| RPC      | https://rpc-quicksilver-testnet-ia.cosmosia.notional.ventures/  |
+| API      | https://api-quicksilver-testnet-ia.cosmosia.notional.ventures/  |
+| GRPC     | https://grpc-quicksilver-testnet-ia.cosmosia.notional.ventures/ |
+
