@@ -167,10 +167,10 @@ ${INC_ARCHWAY_1}
 policy = "allow"
 list = [
       ['transfer', 'channel-132'], # transfer
-      ['icahost', 'channel-19'], ## delegate
-      ['icahost', 'channel-22'], ## deposit
-      ['icahost', 'channel-20'], ## withdrawal
-      ['icahost', 'channel-21'], ## performance
+#      ['icahost', 'channel-19'], ## delegate
+#      ['icahost', 'channel-22'], ## deposit
+#      ['icahost', 'channel-20'], ## withdrawal
+#      ['icahost', 'channel-21'], ## performance
 ]
 
 [[chains]]
