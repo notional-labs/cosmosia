@@ -21,6 +21,13 @@ Bech32 Acc: canto18hlp03s0z6xe7zhw90te6nwmy33rvmw48k8aqr
 
 ### Useful commands
 
+#### query
+```
+/root/.hermes/bin/hermes query channel end --chain quicksilver-2 --channel channel-177 --port icacontroller-agoric-3.deposit
+/root/.hermes/bin/hermes query connection end --chain quicksilver-2 --connection connection-60
+/root/.hermes/bin/hermes query client state --chain quicksilver-2 --client 07-tendermint-84
+```
+
 #### create channel 
 ```
 $HOME/.hermes/bin/hermes create channel --order unordered --a-chain narwhal-2 --b-chain theta-testnet-001 --a-port  transfer --b-port transfer --new-client-connection
