@@ -16,6 +16,7 @@ list = [
       ['transfer','channel-164'], #dydx
       ['transfer','channel-170'], #saga
       ['transfer','channel-171'], #arch
+      ['transfer','channel-125'], #agoric/transfer
 #      ['icacontroller-*', '*']
       ['icacontroller-cosmoshub-4.deposit','channel-12'], # cosmos
       ['icacontroller-cosmoshub-4.withdrawal','channel-13'], # cosmos
@@ -178,9 +179,9 @@ ${INC_AGORIC_3}
 [chains.packet_filter]
 policy = "allow"
 list = [
-      ['transfer', 'channel-18'], # transfer
-      ['icahost', 'channel-19'], ## delegate
-      ['icahost', 'channel-22'], ## deposit
-      ['icahost', 'channel-20'], ## withdrawal
-      ['icahost', 'channel-21'], ## performance
+      ['transfer', 'channel-68'], # transfer
+      ['icahost', 'channel-94'], ## delegate
+      ['icahost', 'channel-91'], ## deposit
+      ['icahost', 'channel-92'], ## withdrawal
+      ['icahost', 'channel-93'], ## performance
 ]
