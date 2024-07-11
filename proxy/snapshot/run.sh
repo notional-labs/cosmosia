@@ -5,8 +5,11 @@ loop_forever () {
 }
 
 cd $HOME
+pacman-key --init
 pacman -Syu --noconfirm
+pacman -Sy --noconfirm archlinux-keyring
 pacman -Sy --noconfirm nginx
+pacman -Syu --noconfirm
 
 echo "#################################################################################################################"
 echo "nginx..."
