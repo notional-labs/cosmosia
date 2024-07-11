@@ -21,8 +21,11 @@ fi
 
 cd $HOME
 
+pacman-key --init
 pacman -Syu --noconfirm
+pacman -Sy --noconfirm archlinux-keyring
 pacman -S --noconfirm base-devel jq dnsutils python caddy screen wget cronie
+pacman -Syu --noconfirm
 
 # write env vars to bash file, so that cronjobs or other scripts could know
 cat <<EOT >> $HOME/env.sh
