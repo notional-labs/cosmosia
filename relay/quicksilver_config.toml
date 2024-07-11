@@ -12,9 +12,9 @@ list = [
       ['transfer', 'channel-17'], ## regen
       #['transfer','channel-52'], ##secret
       ['transfer','channel-86'], #juno
-      ['transfer','channel-101'], #somm (expired)
+      ['transfer','channel-101'], #somm
       ['transfer','channel-164'], #dydx
-      ['transfer','channel-170'], #saga (expired)
+      ['transfer','channel-170'], #saga
       ['transfer','channel-171'], #arch
 #      ['icacontroller-*', '*']
       ['icacontroller-cosmoshub-4.deposit','channel-12'], # cosmos
@@ -29,18 +29,18 @@ list = [
       ['icacontroller-agoric-3.withdrawal','channel-178'], # agoric
       ['icacontroller-agoric-3.performance','channel-179'], # agoric
       ['icacontroller-agoric-3.delegate','channel-180'], # agoric
-#      ['icacontroller-ssc-1.deposit','channel-173'], # saga (expired)
-#      ['icacontroller-ssc-1.withdrawal','channel-174'], # saga (expired)
-#      ['icacontroller-ssc-1.performance','channel-175'], # saga (expired)
-#      ['icacontroller-ssc-1.delegate','channel-176'], # saga (expired)
+      ['icacontroller-ssc-1.deposit','channel-173'], # saga
+      ['icacontroller-ssc-1.withdrawal','channel-174'], # saga
+      ['icacontroller-ssc-1.performance','channel-175'], # saga
+      ['icacontroller-ssc-1.delegate','channel-176'], # saga
       ['icacontroller-osmosis-1.deposit','channel-25'], # osmosis
       ['icacontroller-osmosis-1.withdrawal','channel-26'], # osmosis
       ['icacontroller-osmosis-1.performance','channel-27'], # osmosis
       ['icacontroller-osmosis-1.delegate','channel-160'], # osmosis
-#      ['icacontroller-sommelier-3.deposit','channel-103'], # sommelier (expired)
-#      ['icacontroller-sommelier-3.withdrawal','channel-104'], # sommelier (expired)
-#      ['icacontroller-sommelier-3.performance','channel-105'], # sommelier (expired)
-#      ['icacontroller-sommelier-3.delegate','channel-120'], # sommelier (expired)
+      ['icacontroller-sommelier-3.deposit','channel-103'], # sommelier
+      ['icacontroller-sommelier-3.withdrawal','channel-104'], # sommelier
+      ['icacontroller-sommelier-3.performance','channel-105'], # sommelier
+      ['icacontroller-sommelier-3.delegate','channel-120'], # sommelier
       ['icacontroller-stargaze-1.deposit','channel-3'], # stargaze
       ['icacontroller-stargaze-1.withdrawal','channel-4'], # stargaze
       ['icacontroller-stargaze-1.performance','channel-5'], # stargaze
@@ -113,11 +113,11 @@ ${INC_SOMMELIER_3}
 [chains.packet_filter]
 policy = 'allow'
 list = [
-#        ['transfer', 'channel-59'], # (expired)
-#        ['icahost', 'channel-78'], ## delegate (expired)
-#        ['icahost', 'channel-60'], ## deposit (expired)
-#        ['icahost', 'channel-61'], ## withdrawal (expired)
-#        ['icahost', 'channel-62'], ## performance (expired)
+        ['transfer', 'channel-59'], # transfer
+        ['icahost', 'channel-78'], ## delegate
+        ['icahost', 'channel-60'], ## deposit
+        ['icahost', 'channel-61'], ## withdrawal
+        ['icahost', 'channel-62'], ## performance
 ]
 
 [[chains]]
@@ -126,7 +126,7 @@ ${INC_STARGAZE_1}
 [chains.packet_filter]
 policy = 'allow'
 list = [
-      ['transfer', 'channel-124'],
+      ['transfer', 'channel-124'], # transfer
       ['icahost', 'channel-196'], ## delegate
       ['icahost', 'channel-126'], ## deposit
       ['icahost', 'channel-129'], ## withdrawal
@@ -152,11 +152,11 @@ ${INC_SSC_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
-#      ['transfer', 'channel-18'], # (expired)
-#      ['icahost', 'channel-19'], ## delegate (expired)
-#      ['icahost', 'channel-22'], ## deposit (expired)
-#      ['icahost', 'channel-20'], ## withdrawal (expired)
-#      ['icahost', 'channel-21'], ## performance (expired)
+      ['transfer', 'channel-18'], # transfer
+      ['icahost', 'channel-19'], ## delegate
+      ['icahost', 'channel-22'], ## deposit
+      ['icahost', 'channel-20'], ## withdrawal
+      ['icahost', 'channel-21'], ## performance
 ]
 
 [[chains]]
@@ -165,11 +165,11 @@ ${INC_ARCHWAY_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
-      ['transfer', 'channel-132'],
-#      ['icahost', 'channel-19'], ## delegate
-#      ['icahost', 'channel-22'], ## deposit
-#      ['icahost', 'channel-20'], ## withdrawal
-#      ['icahost', 'channel-21'], ## performance
+      ['transfer', 'channel-132'], # transfer
+      ['icahost', 'channel-19'], ## delegate
+      ['icahost', 'channel-22'], ## deposit
+      ['icahost', 'channel-20'], ## withdrawal
+      ['icahost', 'channel-21'], ## performance
 ]
 
 [[chains]]
