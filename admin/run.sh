@@ -1,5 +1,8 @@
+pacman-key --init
 pacman -Syu --noconfirm
+pacman -Sy --noconfirm archlinux-keyring
 pacman -S --noconfirm base-devel jq dnsutils git yarn cronie screen python docker
+pacman -Syu --noconfirm
 
 
 # install nodejs
