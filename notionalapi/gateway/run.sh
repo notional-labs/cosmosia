@@ -15,8 +15,11 @@ loop_forever () {
   while true; do sleep 5; done
 }
 
+pacman-key --init
 pacman -Syu --noconfirm
+pacman -Sy --noconfirm archlinux-keyring
 pacman -Sy --noconfirm go git base-devel screen cronie
+pacman -Syu --noconfirm
 
 echo "#################################################################################################################"
 echo "install gateway"
