@@ -5,10 +5,12 @@ STAMP=`date +"%s-%A-%d-%B-%Y-@-%Hh%Mm%Ss"`
 
 # declare api key
 API_KEY=$1
+RANGE=$2
 
 # check arguments
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <API_KEY>"
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <API_KEY> <RANGE>"
+    echo "Eg: $0 fg5zzn9m30v5nlinig08iroi67hjy4te 10"
     exit 1
 fi
 
@@ -123,7 +125,7 @@ for CHAIN in ${CHAINS}; do
 
   BLOCK_HEIGHT=$(curl -Ls -o- https://r-${CHAIN}--${API_KEY}.gw.notionalapi.net/status | jq -r '.result.sync_info.latest_block_height')
 
-  get_block_time ${BLOCK_HEIGHT} ${CHAIN} ${API_KEY} 10
+  get_block_time ${BLOCK_HEIGHT} ${CHAIN} ${API_KEY} ${RANGE}
 
   UNBONDING_TIME=$(curl -Ls -o- https://a-${CHAIN}--${API_KEY}.gw.notionalapi.net/cosmos/staking/v1beta1/params | jq '.params.unbonding_time' | sed 's/"//g' | sed 's/s//g')
   # BLOCK_TIME=$(floor "${BLOCK_TIME}")
