@@ -5,12 +5,12 @@ STAMP=`date +"%s-%A-%d-%B-%Y-@-%Hh%Mm%Ss"`
 
 # declare api key
 API_KEY=$1
-RANGE=$2
+SCOPE=$2
 
 # check arguments
 if [ $# -ne 2 ]; then
-    echo "Usage: $0 <API_KEY> <RANGE>"
-    echo "Eg: $0 fg5zzn9m30v5nlinig08iroi67hjy4te 10"
+    echo "Usage: $0 <API_KEY> <SCOPE>"
+    echo "Eg: $0 fg5zzn9m30v5nlinig08iroi67hjy4te 10000"
     exit 1
 fi
 
@@ -78,8 +78,9 @@ get_timestamp () {
 local CHAIN=$1
 local API_KEY=$2
 local CURRENT_BLOCK_HEIGHT=$3
+local SCOPE=$4
 
-PREVIOUS_BLOCK_HEIGHT=$((CURRENT_BLOCK_HEIGHT - 1 ))
+PREVIOUS_BLOCK_HEIGHT=$((CURRENT_BLOCK_HEIGHT - SCOPE))
 
 FIRST_TIMESTAMP=$(curl -Ls -o- https://r-${CHAIN}--${API_KEY}.gw.notionalapi.net/block?height=${CURRENT_BLOCK_HEIGHT} | jq '.result.block.header.time')
 SECOND_TIMESTAMP=$(curl -Ls -o- https://r-${CHAIN}--${API_KEY}.gw.notionalapi.net/block?height=${PREVIOUS_BLOCK_HEIGHT} | jq '.result.block.header.time')
@@ -102,21 +103,22 @@ local CHAIN=$2
 local API_KEY=$3
 local RANGE=$4
 local FIX_RANGE=$4
+local SCOPE=$5
 
 while [[ ${RANGE} -gt 0 ]]; do
-  get_timestamp ${CHAIN} ${API_KEY} ${CURRENT_BLOCK_HEIGHT}
+  get_timestamp ${CHAIN} ${API_KEY} ${CURRENT_BLOCK_HEIGHT} ${SCOPE}
   sum_up ${BLOCK_TIME}
   CURRENT_BLOCK_HEIGHT=$((CURRENT_BLOCK_HEIGHT - 1))
   RANGE=$((RANGE - 1))
 done
 
-BLOCK_TIME=$(echo "scale=2; ${SUM} / ${FIX_RANGE}" | bc)
+BLOCK_TIME=$(echo "scale=2; ${SUM} / ${SCOPE}" | bc)
 
 }
 
 # write table header
-echo "| Chain_name| Blocks                                                  |" >> ${STAMP}.txt
-echo "|-----------|:--------------------------------------------------------|" >> ${STAMP}.txt
+echo "| Chain_name| Blocks           |  Block time                          |" >> ${STAMP}.txt
+echo "|-----------|:-----------------|:-------------------------------------|" >> ${STAMP}.txt
 
 # loop print out blocks
 for CHAIN in ${CHAINS}; do
@@ -125,14 +127,14 @@ for CHAIN in ${CHAINS}; do
 
   BLOCK_HEIGHT=$(curl -Ls -o- https://r-${CHAIN}--${API_KEY}.gw.notionalapi.net/status | jq -r '.result.sync_info.latest_block_height')
 
-  get_block_time ${BLOCK_HEIGHT} ${CHAIN} ${API_KEY} ${RANGE}
+  get_block_time ${BLOCK_HEIGHT} ${CHAIN} ${API_KEY} 1 10000
 
   UNBONDING_TIME=$(curl -Ls -o- https://a-${CHAIN}--${API_KEY}.gw.notionalapi.net/cosmos/staking/v1beta1/params | jq '.params.unbonding_time' | sed 's/"//g' | sed 's/s//g')
   # BLOCK_TIME=$(floor "${BLOCK_TIME}")
   # BLOCKS=$(echo "scale=2; ${BLOCK_HEIGHT} / ${BLOCK_TIME}" | bc)
 
   BLOCKS=$(echo "scale=2; ${UNBONDING_TIME} / ${BLOCK_TIME} / 100 * 115" | bc)
-  echo "| ${CHAIN}      | ${BLOCKS}                   |" >> ${STAMP}.txt
+  echo "| ${CHAIN}      | ${BLOCKS}   | ${BLOCK_TIME}        |" >> ${STAMP}.txt
   # echo "${CHAIN} | block time | blocks: ${BLOCK_TIME} | ${BLOCKS}" >> ${STAMP}.txt
 
   ) &
