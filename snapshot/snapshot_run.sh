@@ -104,7 +104,9 @@ fi
 
 
 cd $HOME
+pacman-key --init
 pacman -Syu --noconfirm
+pacman -Sy --noconfirm archlinux-keyring
 pacman -Sy --noconfirm git base-devel wget pigz jq dnsutils inetutils python python-pip cronie spawn-fcgi fcgiwrap openssh
 pacman -Syu --noconfirm
 
