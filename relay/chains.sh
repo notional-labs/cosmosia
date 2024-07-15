@@ -229,8 +229,10 @@ EOT
 # canto_7700-1
 export INC_CANTO_7700_1=$(cat <<-EOT
 type = "CosmosSdk"
-rpc_addr = 'https://canto.gravitychain.io:26657'
-grpc_addr = 'https://canto.gravitychain.io:9090'
+#rpc_addr = 'https://canto.gravitychain.io:26657'
+#grpc_addr = 'https://canto.gravitychain.io:9090'
+rpc_addr = 'http://tasks.lb_canto:8000'
+grpc_addr = 'http://tasks.lb_canto:8003'
 # event_source = { mode = 'push', url = 'wss://canto.gravitychain.io:26657/websocket', batch_delay = '500ms' }
 event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "30s"
