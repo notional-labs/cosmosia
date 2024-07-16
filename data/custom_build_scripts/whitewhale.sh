@@ -16,6 +16,7 @@ cd $HOME
 cd $HOME
 git clone https://github.com/White-Whale-Defi-Platform/migaloo-chain
 cd migaloo-chain
-git checkout f5b51641c07e7637dc1a9d38477c2a543bcf47aa
+
+git checkout ${p_version}
 
 go install -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" ./...
