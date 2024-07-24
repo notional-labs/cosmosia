@@ -17,7 +17,7 @@ if [[ -z $upgrading ]]; then
   source $HOME/env.sh
 
   # install node
-  nvm install v18.17.1
+  nvm install v18.18.0
 
   # to load nvm
   source $HOME/env.sh
