@@ -515,9 +515,9 @@ EOT
 # secret-4
 export INC_SECRET_4=$(cat <<-EOT
 type = "CosmosSdk"
-rpc_addr = 'https://secret-4.api.trivium.network:26657'
-grpc_addr = 'https://secretnetwork-grpc.lavenderfive.com:443'
-event_source = { mode = 'push', url = 'wss://secret-4.api.trivium.network:26657/websocket', batch_delay = '500ms' }
+rpc_addr = 'https://rpc.mainnet.secretsaturn.net:443'
+grpc_addr = 'http://secretnetwork-mainnet-grpc.autostake.com:9090'
+event_source = { mode = 'push', url = 'wss://rpc.mainnet.secretsaturn.net:443/websocket', batch_delay = '500ms' }
 # event_source = { mode = 'pull', interval = '1s' }
 rpc_timeout = "20s"
 trusted_node = true
