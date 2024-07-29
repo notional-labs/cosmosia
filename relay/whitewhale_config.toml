@@ -37,7 +37,7 @@ ${INC_MIGALOO_1}
 policy = "allow"
 list = [
     # sort by chain_id
-#    ['transfer', 'channel-0'], # archway-1
+    ['transfer', 'channel-135'], # archway-1
     ['transfer', 'channel-49'], # axelar-dojo-1
     ['transfer', 'channel-53'], # axelar-dojo-1
     ['transfer', 'channel-10'], # chihuahua-1
@@ -54,7 +54,7 @@ ${INC_ARCHWAY_1}
 [chains.packet_filter]
 policy = "allow"
 list = [
-#      ['transfer', 'channel-0'],
+      ['transfer', 'channel-160'],
 ]
 
 [[chains]]
