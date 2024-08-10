@@ -16,7 +16,7 @@ docker service create \
   --name upgrade_watcher \
   --replicas 1 \
   --network bignet \
-  --constraint 'node.hostname==cosmosia11' \
+  --constraint 'node.hostname==cosmosia1' \
   --mount type=bind,source=/mnt/data/upgrade_watcher,destination=/data \
   --endpoint-mode dnsrr \
   --restart-condition any \
