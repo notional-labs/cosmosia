@@ -28,20 +28,22 @@ if [[ -z $upgrading ]]; then
 
   # build
   cd $HOME/agoric-sdk
-  yarn install
-  yarn build
+  git clean -xdf && git submodule foreach --recursive git clean -xdf
+  ./bin/agd build
+#  yarn install
+#  yarn build
+#
+#  cd $HOME/agoric-sdk/packages/cosmic-swingset && make
+#
+#  cd $HOME/agoric-sdk/golang/cosmos
+#  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/agd ./cmd/agd
+#  #  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/ag-cosmos-helper ./cmd/helper
+#  go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
 
-  cd $HOME/agoric-sdk/packages/cosmic-swingset && make
-
-  cd $HOME/agoric-sdk/golang/cosmos
-  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/agd ./cmd/agd
-  #  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/ag-cosmos-helper ./cmd/helper
-  go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
-
-#  mkdir -p "/root/go/bin"
-#  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
-#  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
-#  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
+  mkdir -p "/root/go/bin"
+  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/ag-chain-cosmos"
+  ln -sf "/root/agoric-sdk/packages/cosmic-swingset/bin/ag-nchainz" "/root/go/bin/"
+  ln -sf "/root/agoric-sdk/bin/agd" "/root/go/bin/agd"
 else
   repo_name=$(basename $git_repo |cut -d. -f1)
   cd $repo_name
@@ -50,20 +52,23 @@ else
   git checkout "$p_version"
 
 
-  cd $HOME/agoric-sdk/golang/cosmos
-  go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
-  go mod tidy
-  go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
-  go mod tidy
+#  cd $HOME/agoric-sdk/golang/cosmos
+#  go mod edit -replace github.com/tendermint/tm-db=github.com/notional-labs/tm-db@pebble
+#  go mod tidy
+#  go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
+#  go mod tidy
 
   cd $HOME/agoric-sdk
-  yarn install
-  yarn build
+  git clean -xdf && git submodule foreach --recursive git clean -xdf
+  ./bin/agd build
 
-  cd $HOME/agoric-sdk/packages/cosmic-swingset && make
-
-  cd $HOME/agoric-sdk/golang/cosmos
-  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/agd ./cmd/agd
-  # go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/ag-cosmos-helper ./cmd/helper
-  go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
+#  yarn install
+#  yarn build
+#
+#  cd $HOME/agoric-sdk/packages/cosmic-swingset && make
+#
+#  cd $HOME/agoric-sdk/golang/cosmos
+#  go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/agd ./cmd/agd
+#  # go build -buildmode=exe -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/ag-cosmos-helper ./cmd/helper
+#  go build -buildmode=c-shared -tags pebbledb -ldflags "-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbledb $opt_forcesync" -o build/libagcosmosdaemon.so ./cmd/libdaemon/main.go
 fi
