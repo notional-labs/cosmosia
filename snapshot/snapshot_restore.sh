@@ -247,4 +247,9 @@ if [[ -z $skip_snapshot_restore ]]; then
     sed -i -e "s/^iavl-cache-size *=.*/iavl-cache-size = 0/" $node_home/config/app.toml
     sed -i -e "s/^network *=.*/network = \"signet\"/" $node_home/config/app.toml
   fi
+
+#  # fix for agoric (when using external snapshot)
+#  if [ $( echo "${chain_name}" |grep -cE "^(agoric)$" ) -ne 0 ]; then
+#    sed -i -e "s/^iavl-disable-fastnode *=.*/iavl-disable-fastnode = true/" $node_home/config/app.toml
+#  fi
 fi
