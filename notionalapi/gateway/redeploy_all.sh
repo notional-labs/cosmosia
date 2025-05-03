@@ -5,6 +5,7 @@ akash
 archway
 assetmantle
 axelar
+babylon
 babylon-testnet
 bitcanna
 bitsong
